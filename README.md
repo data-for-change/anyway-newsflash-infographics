@@ -80,11 +80,12 @@ Branching system:
 *development* - anything else <br>
 A standard procedure for working on an issue would be to:
 1. `git pull development`
-2. create new branch from `development` , like: `refactor(137)-making-pie-chart-generic-component`
-3. work - commit - repeat
-4. push branch and open PR to `development`.
-5. get a code review approval / reject
-6. after approval, merge your PR
+2. Create new branch from `development` , like: `refactor(137)-making-pie-chart-generic-component`
+3. Work - commit - repeat
+4. Push branch and open PR to `development`.
+5. Get a code review approval / reject
+6. After approval, merge your PR
+7. Delete your branch after merge
 
 ## Available Scripts
 
