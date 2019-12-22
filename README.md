@@ -1,4 +1,90 @@
+# ANYWAY: Newsflash InfoGraphics
+## About this project
+## Want to help?
+Want to file a bug, contribute some code, or improve documentation? Excellent! Please follow these steps
+### First thing first
+* Join our [Slack Channel](https://app.slack.com/client/T02G85W3A/CLWT1CLDQ). contact Yuval or Atalya to get invitation.
+* Optional: installing [ZenHub]() would make it easier to look at our project [board]().
+
+### Diving in
+* For improving documentation:
+    - see issues marked as [documentation]() and contact Yuval for guidance
+    - This is a [good summary](https://medium.com/@kvosswinkel/coding-like-a-journalist-ee52360a16bc) for things to keep in mind when writing technical docs
+* For feature development, bug fixing etc:
+    - Read the [Technical Overview]() and [Project directory structure]() sections 
+    - Contact one of the project's leaders, which can help you getting into things easily
+    - Select one of the issues marked as [good first issue]()
+    - Read [Contribution Guidelines]() before start working on an issue
+* If you have any question - feel free to contact Yuval or Atalya from AnyWAY Project
+
+### Technical Overview
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+It is following [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) guidelines with the following changes:
+* There are no "Organisms" components.
+* Atoms and Molecules are not state-aware (do not know MobX store exist)
+* Templates and Pages are state-aware
+* Molecules may contain other Molecules or Atoms. Atoms does not contain other Atoms.
+
+2rd Party libraries included:
+* [React Router](https://reacttraining.com/react-router/web/guides/quick-start)
+* [MobX](https://mobx.js.org/) - using [react-mobx-lite](https://github.com/mobxjs/mobx-react-lite) with [hooks](https://mobx-react.js.org/libraries)
+* [axios](https://github.com/axios/axios)
+* [Storybook](https://storybook.js.org/)
+* [Material-UI](https://material-ui.com/)
+
+### Project directory structure
+```
+.
++-- assets          // images, icons, audio atc.
++-- components      // internal components (anything other than page component)
+|   +-- atoms
+|   +-- molecules
+|   +-- organisms
+|   +-- templates
++-- hooks           // common reusable hooks 
++-- models          // typescript interfaces and classes
++-- pages           // page components
++-- services        // REST API, websocket, storage ect.
++-- store           // MobX stores
++-- style           // css-in-js code and wrappers
+|   +-- _globals.ts // sizes, colors etc. - can be divided as project grow
+|   +-- theme.ts
++-- utils
++-- App.tsx
++-- index.html
++-- index.css      // global styles (like fonts or reset/normalize css code)
+```
+
+### Contribution Guidelines
+Branch naming convention is as following
+```
+TYPE(ISSUE_ID)-DESCRIPTION
+
+examples:
+feat(113)-add-newsflash-location-on-map
+fix(114)-newsflash-location-not-accurate
+```
+When `TYPE` can be:
+* **feat** - is a new feature
+* **doc** - documentation only changes
+* **cicd** - changes related to CI/CD system
+* **fix** - a bug fix
+* **refactor** -  code change that neither fixes a bug nor adds a feature
+
+**All PRs must include commit message with the changes description!**
+
+Branching system:
+*master* - used for production <br>
+*development* - anything else <br>
+A standard procedure for working on an issue would be to:
+1. `git pull development`
+2. create new branch from `development` , like: `refactor(137)-making-pie-chart-generic-component`
+3. work - commit - repeat
+4. push branch and open PR to `development`.
+5. get a code review approval / reject
+6. after approval, merge your PR
 
 ## Available Scripts
 
@@ -27,18 +113,5 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### `npm run sb`
+Run [storybook](https://storybook.js.org/docs/configurations/cli-options/#for-start-storybook) locally.
