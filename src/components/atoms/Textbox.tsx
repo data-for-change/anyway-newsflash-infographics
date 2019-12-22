@@ -6,11 +6,11 @@ interface IProps {
 }
 
 export const Textbox: FunctionComponent<IProps> = ({value = '', onChange}) => {
-
+  
   const changFn = (e: any) => {
     onChange(e);
   };
-
+  
   return (
     <input value={value} onChange={changFn}/>
   );

@@ -1,6 +1,5 @@
 const defaultThemeOptions /*: ThemeOptions*/ = {
-  palette: {
-  },
+  palette: {},
 };
 
-export { defaultThemeOptions };
+export {defaultThemeOptions};
