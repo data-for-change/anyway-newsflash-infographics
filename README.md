@@ -87,6 +87,12 @@ A standard procedure for working on an issue would be to:
 6. After approval, merge your PR
 7. Delete your branch after merge
 
+### About bundle size
+Since [Create React App](https://github.com/facebook/create-react-app) uses webpack under the hood,
+You can safely use [named imports](https://stackoverflow.com/questions/36795819/when-should-i-use-curly-braces-for-es6-import/36796281#36796281)
+when working with [Material UI components](https://material-ui.com/guides/minimizing-bundle-size/#how-to-reduce-the-bundle-size).
+
+
 ## Available Scripts
 
 In the project directory, you can run:

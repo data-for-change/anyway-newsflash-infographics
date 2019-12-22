@@ -1,39 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+
 import {HomePage} from './pages/HomePage';
+import {SideBar} from './components/templates/SideBar';
+import {AppBar} from './components/templates/AppBar';
+import {Box, CssBaseline} from '@material-ui/core';
 
 const App: React.FC = () => {
-  const styles = {
-    logo: {
-      height: '15vh'
-    }
-  };
-
   return (
     <Router>
-      <div>
-        <header>
-          <img src={logo} alt="logo" style={styles.logo}/>
-          <ul>
-            <li>
-              <Link to="/todo">To do Page</Link>
-            </li>
-            <li>
-              <Link to="/users">Users Page</Link>
-            </li>
-            <li>
-              <a href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-                Learn React
-              </a>
-            </li>
-          </ul>
-          <hr/>
-        </header>
-        <Switch>
-          <Route path="/" component={HomePage}/>
-        </Switch>
-      </div>
+      <CssBaseline/>
+      <Box display="flex" flexDirection="column" height="100%">
+        <AppBar/>
+        <Box display="flex" flexGrow={1}>
+          <Box flexGrow={1}>
+            <SideBar/>
+          </Box>
+          <Box flexGrow={2}>
+            <Switch>
+              <Route path="/" component={HomePage}/>
+            </Switch>
+          </Box>
+        </Box>
+      </Box>
     </Router>
   );
 };

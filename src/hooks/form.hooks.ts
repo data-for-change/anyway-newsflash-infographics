@@ -1,6 +1,6 @@
 import {ChangeEvent, useState} from 'react';
 
-export function useInput(initialValue  = '', callback?: Function) {
+export function useInput(initialValue = '', callback?: Function) {
   const [value, setValue] = useState(initialValue);
   const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setValue(e.target.value);
@@ -21,7 +21,7 @@ export function useDynamicInput(initialValue = '', callback?: Function) {
   return {onChange, value}
 }
 
-export function useCheckbox(initialValue  = false, callback?: Function) {
+export function useCheckbox(initialValue = false, callback?: Function) {
   const [checked, setChecked] = useState(initialValue);
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setChecked(e.target.checked);
