@@ -3,7 +3,9 @@ import React, {FunctionComponent} from 'react';
 export enum TextType {
   PAGE_TITLE,
   CONTENT_TITLE,
-  CONTENT
+  CONTENT,
+  NEWS_FLASH_TITLE,
+  NEWS_FLASH_CONTENT
 }
 
 interface IProps {
@@ -19,6 +21,12 @@ export const Text: FunctionComponent<IProps> = ({type, children}) => {
       return (<h2>{children}</h2>);
     
     case TextType.CONTENT:
-      return (<p>{children}</p>)
+      return (<p>{children}</p>);
+  
+    case TextType.NEWS_FLASH_TITLE:
+      return (<p>{children}</p>);
+  
+    case TextType.NEWS_FLASH_CONTENT:
+      return (<p>{children}</p>);
   }
 };

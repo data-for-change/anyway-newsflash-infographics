@@ -4,17 +4,18 @@
 Want to file a bug, contribute some code, or improve documentation? Excellent! Please follow these steps
 ### First thing first
 * Join our [Slack Channel](https://app.slack.com/client/T02G85W3A/CLWT1CLDQ). contact Yuval or Atalya to get invitation.
-* Optional: installing [ZenHub]() would make it easier to look at our project [board]().
+* Optional: installing [ZenHub](https://www.zenhub.com/) would make it easier to look at our project [board](https://github.com/hasadna/anyway-newsflash-infographics#workspaces/anyway-5e00f3aa79454c5108bf2370/).
 
 ### Diving in
 * For improving documentation:
     - see issues marked as [documentation]() and contact Yuval for guidance
     - This is a [good summary](https://medium.com/@kvosswinkel/coding-like-a-journalist-ee52360a16bc) for things to keep in mind when writing technical docs
 * For feature development, bug fixing etc:
-    - Read the [Technical Overview]() and [Project directory structure]() sections 
+    - Read the [Technical Overview](https://github.com/hasadna/anyway-newsflash-infographics#technical-overview) 
+    and [Project directory structure](https://github.com/hasadna/anyway-newsflash-infographics#project-directory-structure) sections 
     - Contact one of the project's leaders, which can help you getting into things easily
     - Select one of the issues marked as [good first issue]()
-    - Read [Contribution Guidelines]() before start working on an issue
+    - Read [Contribution Guidelines](https://github.com/hasadna/anyway-newsflash-infographics#contribution-guidelines) before start working on an issue
 * If you have any question - feel free to contact Yuval or Atalya from AnyWAY Project
 
 ### Technical Overview
@@ -33,6 +34,7 @@ It is following [Atomic Design](https://bradfrost.com/blog/post/atomic-web-desig
 * [axios](https://github.com/axios/axios)
 * [Storybook](https://storybook.js.org/)
 * [Material-UI](https://material-ui.com/)
+* [React-Vis](https://uber.github.io/react-vis/) - Graphs Data Visualization Components
 
 ### Project directory structure
 ```
