@@ -1,5 +1,5 @@
 import React from 'react'
-import { VictoryPie, VictoryContainer } from 'victory'
+import { VictoryContainer, VictoryBar } from 'victory'
 
 interface Idata {
     angle?: number,
@@ -14,7 +14,7 @@ interface Idata {
     y?: number
 }
 
-export const PieChartView = () => {
+export const BarChartView = () => {
     const data: Idata[] = [
         { quarter: 'Car', earnings: 13000 },
         { quarter: 'Pedestrian', earnings: 16500 },
@@ -25,18 +25,12 @@ export const PieChartView = () => {
     ]
     return (
         <React.Fragment>
-            <VictoryPie data={data} x='quarter' y='earnings'
-                style={{
-                    labels: {
-                        fontSize: 8, fill: "black"
-                    }
-                }}
-                labelRadius={60}
-                innerRadius={20}
-                padding={50}
-                width={200} height={200}
-                colorScale={"qualitative"}
-                containerComponent={<VictoryContainer responsive={true} />}
+            <VictoryBar
+                data={data}
+                x='quarter' y='earnings'
+                style={{ data: { fill: "#c43a31" } }}
+                barRatio={1}
+                containerComponent={ <VictoryContainer responsive={true} /> }
             />
         </React.Fragment>
     )

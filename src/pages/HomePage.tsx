@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { Box } from '@material-ui/core';
 import { WidgetContainer } from '../components/atoms/Widget.container';
 import { PieChartView } from '../components/molecule/PieChartView'
+import { BarChartView } from '../components/molecule/BarChartView'
 
 interface IProps {
 }
@@ -32,6 +33,10 @@ export const HomePage: FunctionComponent<IProps> = () => {
           <h5>PieChartWidget</h5>
           <p>PieChartWidget(template) is an aware widget - it can fetch data from the store</p>
           <p>PieChartWidget contain an un-aware component called PieChartView(molecule) </p>
+        </WidgetContainer>
+        <WidgetContainer>
+          <p>Some Text</p>
+          <BarChartView />
         </WidgetContainer>
       </Box>
     </Box>
