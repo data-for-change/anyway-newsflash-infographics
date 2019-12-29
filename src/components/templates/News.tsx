@@ -6,8 +6,7 @@ const News: React.FC = () => {
     return (<div>
         {newsApiDummy.map((news) => {
             return <div>
-                <Text type={TextType.NEWS_FLASH_TITLE} children={news.source}/>
-                <Text type={TextType.NEWS_FLASH_TITLE} children={news.date}/>
+                <Text type={TextType.NEWS_FLASH_TITLE} children={news.date + ', ' + news.source }/>
                 <Text type={TextType.NEWS_FLASH_CONTENT} children={news.title}/>
             </div>
         })}
