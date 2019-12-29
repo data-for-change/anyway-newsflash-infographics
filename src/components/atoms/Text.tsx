@@ -5,7 +5,8 @@ export enum TextType {
   CONTENT_TITLE,
   CONTENT,
   NEWS_FLASH_TITLE,
-  NEWS_FLASH_CONTENT
+  NEWS_FLASH_CONTENT,
+  NEWS_FLASH_DATETIME
 }
 
 interface IProps {
@@ -24,9 +25,11 @@ export const Text: FunctionComponent<IProps> = ({type, children}) => {
       return (<p>{children}</p>);
   
     case TextType.NEWS_FLASH_TITLE:
-      return (<p>{children}</p>);
+      return (<h2>{children}</h2>);
   
     case TextType.NEWS_FLASH_CONTENT:
       return (<p>{children}</p>);
+    case TextType.NEWS_FLASH_DATETIME:
+      return <p><time>{children}</time></p>
   }
 };

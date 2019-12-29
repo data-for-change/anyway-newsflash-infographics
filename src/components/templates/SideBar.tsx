@@ -1,6 +1,6 @@
 import React, {FunctionComponent} from 'react';
 import {Box} from '@material-ui/core';
-
+import  News from './News';
 interface IProps {
 }
 
@@ -9,10 +9,10 @@ export const SideBar: FunctionComponent<IProps> = () => {
   const devStyles = {
     border: '2px dashed blue'
   };
-  
-  return(
-    <Box style={devStyles} height="100%">
-      Sidebar
-    </Box>
+
+  return (
+      <Box style={devStyles} height="100%">
+        {News}
+      </Box>
   );
 };
