@@ -11,11 +11,8 @@ export const WidgetContainer: FunctionComponent<IProps> = ({ children }) => {
         borderRadius: 15
     }
     return (
-        <React.Fragment>
-            <Card style={devStyles} >
-                {children}
-            </Card>
-        </React.Fragment>
+        <Card style={devStyles} >
+            {children}
+        </Card>
     )
-
 }

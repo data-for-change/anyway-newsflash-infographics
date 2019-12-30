@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Box } from '@material-ui/core';
-import { WidgetContainer } from '../components/atoms/Widget.container';
+import { WidgetContainer } from '../components/atoms/WidgetContainer';
 import { PieChartView } from '../components/molecule/PieChartView'
 import { BarChartView } from '../components/molecule/BarChartView'
 
