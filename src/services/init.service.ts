@@ -7,9 +7,9 @@ export function initService(): Promise<any> {
     fetchDefaultWidgets(),
     /* add promises here */
   ];
-  // @ts-ignore
+
   return Promise.all(promiseArray)
-    .then((promiseCollection: Array<Promise<any>>) => ({
+    .then((promiseCollection) => ({
       // return object - resolved data from all promises
       newsFlashCollection: promiseCollection[0],
       widget: promiseCollection[1],
