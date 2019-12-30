@@ -4,7 +4,7 @@ import { Card } from '@material-ui/core';
 interface IProps {
 
 }
-export const WidgetContainer: FunctionComponent<IProps> = ({ children }) => {
+export const AnyWayCard: FunctionComponent<IProps> = ({ children }) => {
     const devStyles = {
         padding: 20,
         margin: 10,
