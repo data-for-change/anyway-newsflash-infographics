@@ -1,7 +1,9 @@
 // dummy - replace with real model interface
-export interface INewFlash {
-  userId: number,
+export interface INewsFlash {
   id: number,
+  lat: number,
+  lon: number,
   title: string,
-  completed: boolean
+  source: string,
+  date: Date
 }
