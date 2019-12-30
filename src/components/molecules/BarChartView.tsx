@@ -9,7 +9,7 @@ interface Idata {
 }
 const barChartViewStyle = { data: { fill: "#c43a31" } }
 
-export const BarChartView = () => {
+const BarChartView = () => {
     const data: Idata[] = [
         { quarter: 'Car', earnings: 13000 },
         { quarter: 'Pedestrian', earnings: 16500 },
@@ -29,3 +29,4 @@ export const BarChartView = () => {
     )
 
 }
+export default BarChartView
