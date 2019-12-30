@@ -35,5 +35,5 @@ export const PieChartView = () => {
             containerComponent={<VictoryContainer responsive={true} />}
         />
     )
-
 }
+export default PieChartView

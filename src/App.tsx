@@ -16,11 +16,9 @@ const App: React.FC = () => {
           <Box flexGrow={1}>
             <SideBar/>
           </Box>
-          <Box flexGrow={2}>
             <Switch>
               <Route path="/" component={HomePage}/>
             </Switch>
-          </Box>
         </Box>
       </Box>
     </Router>
