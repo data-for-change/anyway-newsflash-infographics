@@ -3,6 +3,7 @@ import { Box } from '@material-ui/core';
 import { AnyWayCard } from '../components/atoms/AnyWayCard';
 import { PieChartView } from '../components/molecules/PieChartView'
 import { BarChartView } from '../components/molecules/BarChartView'
+import LocationMap from '../components/molecules/LocationMap'
 
 interface IProps {
 }
@@ -12,6 +13,7 @@ export const HomePage: FunctionComponent<IProps> = () => {
   const devStyles = {
     border: '2px dashed gray',
     direction: 'ltr' as 'ltr',
+    flex: 1,
     padding: 20
   }
 
@@ -37,6 +39,9 @@ export const HomePage: FunctionComponent<IProps> = () => {
         <AnyWayCard>
           <p>Some Text</p>
           <BarChartView />
+        </AnyWayCard>
+        <AnyWayCard>
+          <LocationMap marker={{ lat: 32.0853, lng: 34.7818 }} />
         </AnyWayCard>
       </Box>
     </Box>

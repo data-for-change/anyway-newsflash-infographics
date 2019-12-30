@@ -8,7 +8,8 @@ export const AnyWayCard: FunctionComponent<IProps> = ({ children }) => {
     const devStyles = {
         padding: 20,
         margin: 10,
-        borderRadius: 15
+        borderRadius: 15,
+        flex: 1
     }
     return (
         <Card style={devStyles} >
