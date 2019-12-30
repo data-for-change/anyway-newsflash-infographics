@@ -1,6 +1,6 @@
 // https://mobx.js.org/best/store.html#combining-multiple-stores
 import {action, observable} from 'mobx';
-import {INewFlash} from '../models/NewFlash';
+import {INewsFlash} from '../models/NewFlash';
 import {initService} from '../services/init.service';
 
 export default class RootStore {
@@ -9,7 +9,7 @@ export default class RootStore {
   appInitialized = false;
   
   @observable graphsData: any = {};
-  @observable newsFlashCollection: Array<INewFlash> = [];
+  @observable newsFlashCollection: Array<INewsFlash> = [];
   
   constructor() {
     // init app data

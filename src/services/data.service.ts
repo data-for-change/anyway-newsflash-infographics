@@ -1,6 +1,6 @@
-import {INewFlash} from '../models/NewFlash';
+import {INewsFlash} from '../models/NewFlash';
 import {mockHTTPCall, NewsFlashCollectionData} from './mocks/mock.service';
 
-export function fetchNews(): Promise<Array<INewFlash>> {
-  return mockHTTPCall<Array<INewFlash>>(NewsFlashCollectionData) ;
+export function fetchNews(): Promise<Array<INewsFlash>> {
+  return mockHTTPCall<Array<INewsFlash>>(NewsFlashCollectionData) ;
 }
