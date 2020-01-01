@@ -1,5 +1,5 @@
 import React, {FunctionComponent} from 'react';
-import {Box} from '@material-ui/core';
+import Typography from "@material-ui/core/Typography";
 
 export enum TextType {
   PAGE_TITLE,
@@ -26,10 +26,10 @@ export const Text: FunctionComponent<IProps> = ({type, children}) => {
       return (<p>{children}</p>);
   
     case TextType.NEWS_FLASH_TITLE:
-      return (<Box fontWeight={'bold'}>{children}</Box>);
+      return (<Typography>{children}</Typography>);
   
     case TextType.NEWS_FLASH_CONTENT:
-      return (<Box component='p' fontWeight='bold' color='#6495ed'>{children}</Box>);
+      return (<Typography>{children}</Typography>);
     case TextType.NEWS_FLASH_DATETIME:
       return <p><time>{children}</time></p>
   }

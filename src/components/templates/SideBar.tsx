@@ -1,6 +1,7 @@
 import React, {FunctionComponent} from 'react';
 import {Box} from '@material-ui/core';
 import  News from './News';
+import {NewsFlashFilterPanel} from "../atoms/NewsFlahsFilterPanel";
 interface IProps {
 }
 
@@ -12,7 +13,8 @@ export const SideBar: FunctionComponent<IProps> = () => {
 
   return (
       <Box style={devStyles} height="100%">
-        {News}
+          <NewsFlashFilterPanel/>
+        <News/>
       </Box>
   );
 };
