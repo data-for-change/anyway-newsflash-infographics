@@ -13,7 +13,7 @@ export const SideBar: FunctionComponent<IProps> = () => {
 
   return (
       <Box style={devStyles} height="100%">
-          <NewsFlashFilterPanel/>
+          <NewsFlashFilterPanel />
         <News/>
       </Box>
   );
