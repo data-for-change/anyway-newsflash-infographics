@@ -2,14 +2,15 @@
 import {action, observable} from 'mobx';
 import {INewsFlash} from '../models/NewFlash';
 import {initService} from '../services/init.service';
+import {IWidgetData} from '../models/WidgetData';
 
 export default class RootStore {
   [key: string]: any;  // Declaring an index signature
   
   appInitialized = false;
   
-  @observable graphsData: any = {};
   @observable newsFlashCollection: Array<INewsFlash> = [];
+  @observable widgets: Array<IWidgetData> = [];
   
   constructor() {
     // init app data
@@ -31,7 +32,7 @@ export default class RootStore {
   }
   
   @action
-  selectNewsFlash(id: number): void {
+  selectNewsFlash(/*id: number*/): void {
     // steps:
     // 1 - get data from data.service
     // 2 - save data to graphsData
