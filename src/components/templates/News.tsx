@@ -8,7 +8,7 @@ const News: React.FC = () => {
         {newsApiDummy.map((news) => {
             const date :Date = new Date(news.date);
             return <Box border ={1} borderColor='#6495ed'>
-                <Text  type={TextType.NEWS_FLASH_TITLE} children={date.toLocaleDateString() + ',' + date.toLocaleDateString()+ ', ' + news.source }/>
+                <Text  type={TextType.NEWS_FLASH_TITLE} children={date.toLocaleDateString()+ ', ' + news.source }/>
                 <Text type={TextType.NEWS_FLASH_CONTENT} children={news.title}/>
             </Box>
         })}
