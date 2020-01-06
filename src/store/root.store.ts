@@ -12,10 +12,10 @@ export default class RootStore {
   @observable newsFlashCollection: Array<INewsFlash> = [];
   @observable widgets: Array<IWidgetData> = [];
   
-  constructor() {
+    constructor() {
     // init app data
-    initService()
-      .then((initData) => {
+     initService()
+      .then( (initData) => {
         this.safeInitialization('newsFlashCollection', initData.newsFlashCollection);
         // additional Initialization steps can be added here
         this.appInitialized = true;
