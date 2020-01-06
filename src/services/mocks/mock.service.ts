@@ -1,8 +1,10 @@
-import NewsFlashCollectionData from './newsFlash.mock.data';
+import newsFlashCollectionData from './newsFlash.mock.data';
+import defaultWidgetsCollectionData from './widgetsData.mock.data';
 
 export {
-  // ad more mock data
-  NewsFlashCollectionData
+  newsFlashCollectionData,
+  defaultWidgetsCollectionData,
+  // add more mock data here
 };
 
 export function mockHTTPCall<T>(mockData: T): Promise<T> {
