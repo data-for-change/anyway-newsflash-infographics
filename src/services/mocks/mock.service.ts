@@ -8,7 +8,7 @@ export {
 };
 
 export function mockHTTPCall<T>(mockData: T): Promise<T> {
-  return new Promise(function(resolve) {
+   return new Promise(function(resolve) {
     setTimeout(function() {
       resolve(mockData);
     }, 200);
