@@ -1,7 +1,6 @@
 import React from 'react';
 import ynetLogo from  '../../assets/Ynet_website_logo.svg';
 import wallaLogo from  '../../assets/walla-logo.svg';
-import madaLogo from  '../../assets/Mada_logo.svg';
 import {Box, makeStyles} from '@material-ui/core';
 import Button from "@material-ui/core/Button";
 
@@ -34,10 +33,6 @@ export const NewsFlashFilterPanel : React.FC = ()=>{
             <Button className={classes.button} onClick={() => {
             }}>
                 <img className={classes.image} src={wallaLogo} alt="Walla"/>
-            </Button>
-            <Button className={classes.button} onClick={() => {
-            }}>
-                <img className={classes.image} src={madaLogo} alt="Magen David Adom"/>
             </Button>
         </Box>
     )
