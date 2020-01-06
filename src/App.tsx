@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {HomePage} from './pages/HomePage';
 import {SideBar} from './components/templates/SideBar';
 import {AppBar} from './components/templates/AppBar';
+import {Footer} from './components/templates/Footer';
 import {Box, CssBaseline} from '@material-ui/core';
 
 const App: React.FC = () => {
@@ -20,6 +21,7 @@ const App: React.FC = () => {
               <Route path="/" component={HomePage}/>
             </Switch>
         </Box>
+        <Footer/>
       </Box>
     </Router>
   );
