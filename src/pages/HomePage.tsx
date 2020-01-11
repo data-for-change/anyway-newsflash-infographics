@@ -5,6 +5,8 @@ import AnyWayGrid from '../components/atoms/AnyWayGrid'
 import PieChartView  from '../components/molecules/PieChartView'
 import BarChartView  from '../components/molecules/BarChartView'
 import LocationMap from '../components/molecules/LocationMap';
+import AnyWayGridFilterMenu from '../components/atoms/AnyWayGridFilterMenu'
+
 
 interface IProps {
 }
@@ -13,6 +15,7 @@ export const HomePage: FunctionComponent<IProps> = () => {
 
   return (
       <AnyWayGrid>
+        <AnyWayGridFilterMenu />
         <Grid item lg={4} xl={4}>
         <AnyWayCard>
           <h5>HeatMapWidget</h5>
