@@ -1,9 +1,11 @@
-import React from 'react';
-import {action} from '@storybook/addon-actions';
-import {Button} from './Button';
+import React from 'react'
+import { action } from '@storybook/addon-actions'
+import Button from './Button'
 
 export default {
-  title: 'Buttons',
-};
+    title: 'Buttons'
+}
 
-export const ButtonPrimary = () => <Button onClick={action('clicked')}>Button Primary</Button>;
+export const ButtonPrimary = () => (
+    <Button onClick={action('clicked')}>Button Primary</Button>
+)
