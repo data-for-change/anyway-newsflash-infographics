@@ -25,8 +25,7 @@ const App: React.FC = () => {
           </Box>
         </Box>
         <Footer/>
-      </Box>
-    </Router>
+      </Router>
     </StoreContext.Provider>
   );
 };
