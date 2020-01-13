@@ -2,12 +2,12 @@ import React from 'react'
 import { VictoryContainer, VictoryBar } from 'victory'
 
 interface Idata {
-    quarter?: string,
-    earnings?: number,
-    x?: number,
+    quarter?: string
+    earnings?: number
+    x?: number
     y?: number
 }
-const barChartViewStyle = { data: { fill: "#c43a31" } }
+const barChartViewStyle = { data: { fill: '#c43a31' } }
 
 const BarChartView = () => {
     const data: Idata[] = [
@@ -21,12 +21,12 @@ const BarChartView = () => {
     return (
         <VictoryBar
             data={data}
-            x='quarter' y='earnings'
-            style={ barChartViewStyle }
+            x='quarter'
+            y='earnings'
+            style={barChartViewStyle}
             barRatio={1}
             containerComponent={<VictoryContainer responsive={true} />}
         />
     )
-
 }
 export default BarChartView
