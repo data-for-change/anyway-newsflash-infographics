@@ -58,72 +58,62 @@ const AnyWayGridFilterMenu: FunctionComponent<IProps> = ({ children }) => {
     };
     return  <div style={devStyles} >
               <span style={{display : "inline-block", width : "100%"}}>
-              <span style={{position: "absolute"}}>
+              <span style={{position: "absolute", marginTop : "-15px"}}>
                 <Button onClick={handleTimeRangeClick}>
                   <Tooltip title ={'בחר טווח זמנים'}>
                     <CalendarTodayIcon/>
                   </Tooltip>
                 </Button>
-                <FormControl className={classes.formControl} style={{marginTop: "-20px"}}>
+                <FormControl className={classes.formControl} style={{marginTop: "-20px",  display : timeRangeActive ? "None" : "inline-block" }}>
                   <InputLabel id="demo-simple-select-label"> זמן אחורה</InputLabel>
                   <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={timeBack}
                   onChange={handleChange}
-
                   >
-                  <MenuItem value={3}>3 חודשים</MenuItem>
-                  <MenuItem value={6}>חצי שנה</MenuItem>
-                  <MenuItem value={12}>שנה</MenuItem>
-                  <MenuItem value={60}>5 שנים</MenuItem>
-
+                    <MenuItem value={3}>3 חודשים</MenuItem>
+                    <MenuItem value={6}>חצי שנה</MenuItem>
+                    <MenuItem value={12}>שנה</MenuItem>
+                    <MenuItem value={60}>5 שנים</MenuItem>
                   </Select>
-
                   </FormControl>
                   </span>
-
-                  <span style={{display : timeRangeActive ? "inline-block" : "None" , marginRight: "10px", float: "left", marginLeft: "56%", marginTop: "-36px"}}>
-                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <Grid container justify="space-around" style={{float: "left", width : "150px",display:"inline-block"}}>
-                      <KeyboardDatePicker
-                        disableToolbar
-                        variant="inline"
-                        format="MM/dd/yyyy"
-                        margin="normal"
-                        id="date-picker-inline"
-                        label="החל מתאריך"
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                        KeyboardButtonProps={{
-                          'aria-label': 'change date',
-                        }}
-                      />
-                      </Grid>
-                      <Grid container justify="space-around"style={{float: "left", width : "150px",display:"inline-block", marginLeft: "10px"}}>
-                      <KeyboardDatePicker
-                        disableToolbar
-                        variant="inline"
-                        format="MM/dd/yyyy"
-                        margin="normal"
-                        id="date-picker-inline"
-                        label="עד תאריך"
-                        value={selectedDateEnd}
-                        onChange={handleDateChange}
-                        KeyboardButtonProps={{
-                          'aria-label': 'change date',
-                        }}
-                      />
-                      </Grid>
-                </MuiPickersUtilsProvider>
-
-
-
-                    
-                  </span>
-                
-      
-                  </span>
+                  <span style={{display : timeRangeActive ? "inline-block" : "None" , float: "right", marginRight: "5%", marginTop: "-36px"}}>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                      <Grid container justify="space-around" style={{float: "left", width : "150px",display:"inline-block"}}>
+                        <KeyboardDatePicker
+                          disableToolbar
+                          variant="inline"
+                          format="MM/dd/yyyy"
+                          margin="normal"
+                          id="date-picker-inline"
+                          label="החל מתאריך"
+                          value={selectedDate}
+                          onChange={handleDateChange}
+                          KeyboardButtonProps={{
+                            'aria-label': 'change date',
+                          }}
+                        />
+                        </Grid>
+                        <Grid container justify="space-around"style={{float: "left", width : "150px",display:"inline-block", marginLeft: "10px"}}>
+                        <KeyboardDatePicker
+                          disableToolbar
+                          variant="inline"
+                          format="MM/dd/yyyy"
+                          margin="normal"
+                          id="date-picker-inline"
+                          label="עד תאריך"
+                          value={selectedDateEnd}
+                          onChange={handleDateChange}
+                          KeyboardButtonProps={{
+                            'aria-label': 'change date',
+                          }}
+                        />
+                        </Grid>
+                  </MuiPickersUtilsProvider>
+                  </span>            
+                </span>
             </div>
 }
 export default AnyWayGridFilterMenu

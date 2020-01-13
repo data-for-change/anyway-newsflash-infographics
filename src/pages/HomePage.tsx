@@ -5,7 +5,7 @@ import AnyWayGrid from '../components/atoms/AnyWayGrid'
 import PieChartView  from '../components/molecules/PieChartView'
 import BarChartView  from '../components/molecules/BarChartView'
 import LocationMap from '../components/molecules/LocationMap';
-import AnyWayGridFilterMenu from '../components/atoms/AnyWayGridFilterMenu'
+import AnyWayGridFilterMenu from '../components/templates/AnyWayGridFilterMenu'
 
 
 interface IProps {
