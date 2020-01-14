@@ -2,14 +2,15 @@ import React from 'react'
 import { VictoryPie, VictoryContainer } from 'victory'
 
 interface Idata {
-    quarter?: string,
-    earnings?: number,
-    x?: number,
+    quarter?: string
+    earnings?: number
+    x?: number
     y?: number
 }
 const pieChartViewStyle = {
     labels: {
-        fontSize: 8, fill: "black"
+        fontSize: 8,
+        fill: 'black'
     }
 }
 
@@ -25,13 +26,15 @@ export const PieChartView = () => {
     return (
         <VictoryPie
             data={data}
-            x='quarter' y='earnings'
+            x='quarter'
+            y='earnings'
             style={pieChartViewStyle}
             labelRadius={60}
             innerRadius={20}
             padding={50}
-            width={200} height={200}
-            colorScale="red"
+            width={200}
+            height={200}
+            colorScale='red'
             containerComponent={<VictoryContainer responsive={true} />}
         />
     )
