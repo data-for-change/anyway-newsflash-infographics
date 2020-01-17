@@ -1,10 +1,12 @@
 import React, {FunctionComponent} from 'react';
-import {Button} from "@material-ui/core";
+import {Button, ButtonProps} from "@material-ui/core";
+
 
 interface IProps {
-  onClick: () => any,
+    onClick: () => any,
+    buttonProps: ButtonProps
 }
 
-export const AnyWayButton: FunctionComponent<IProps> = ({onClick, children}) => (
-  <Button onClick={onClick}>{children}</Button>
+export const AnyWayButton: FunctionComponent<IProps> = ({onClick, children, buttonProps}) => (
+    <Button {...buttonProps} onClick={onClick}>{children}</Button>
 );
