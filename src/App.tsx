@@ -23,8 +23,9 @@ const App: React.FC = () => {
               <Route path="/" component={HomePage}/>
             </Switch>
           </Box>
+          <Footer/>
         </Box>
-        <Footer/>
+       
       </Router>
     </StoreContext.Provider>
   );
