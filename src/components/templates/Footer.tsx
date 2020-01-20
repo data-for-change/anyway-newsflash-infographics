@@ -1,22 +1,39 @@
 import React, { FunctionComponent } from 'react';
+import logoHasdna from '../../assets/hasadna.png';
+import { makeStyles } from '@material-ui/core/styles';
+import {Link} from 'react-router-dom';
 
 interface IProps {
 }
+const useStyles = makeStyles({
+  logo: {
+    height: '30px'
+  },
+  footer : {
+    bottom: '0',
+    width: '100%',
+    display: 'flex',
+    padding: '15px',      
+  },
+  footerLink:{
+    padding :'5px 10px',
+    color: '#08c',
+    textDecoration:"none",
+    "&:hover": {
+      textDecoration:"underline",
+    },
+  },
+});
 
 export const Footer: FunctionComponent<IProps> = () => {
-  // remove when no longer required
-  const copyright = {
-    color: 'gray'
-  };
-  const footer = {
-    padding: '15px',
-  };
-
+  const classes = useStyles();
   return (
-    <footer style={footer}>
-      <div style={copyright}>
-        <span > על אתר זה חל רשיון שימוש  CC BY-SA 4.0</span>
-      </div>
+    <footer className={classes.footer}>
+      <a href="https://www.hasadna.org.il/" target="_blank" rel="noopener noreferrer">
+       <img src={logoHasdna} alt="logo-hasadna" className={classes.logo}/>
+      </a>
+      <Link className={classes.footerLink} to="/todo">אודות</Link>
+      <Link className={classes.footerLink}  to="/todo">תודות</Link>
     </footer>
   );
 };
