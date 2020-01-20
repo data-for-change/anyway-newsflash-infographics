@@ -15,3 +15,4 @@ export const Textbox: FunctionComponent<IProps> = ({value = '', onChange}) => {
     <input value={value} onChange={changFn}/>
   );
 };
+export default Textbox;

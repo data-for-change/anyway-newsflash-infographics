@@ -12,7 +12,7 @@ interface IProps {
   type: TextType
 }
 
-export const Text: FunctionComponent<IProps> = ({type, children}) => {
+const Text: FunctionComponent<IProps> = ({type, children}) => {
   switch (type) {
     case TextType.PAGE_TITLE:
       return (<h1>{children}</h1>);
@@ -30,3 +30,5 @@ export const Text: FunctionComponent<IProps> = ({type, children}) => {
       return (<p>{children}</p>);
   }
 };
+
+export default Text;
