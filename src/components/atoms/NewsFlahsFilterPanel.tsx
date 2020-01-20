@@ -20,13 +20,16 @@ export const NewsFlashFilterPanel : React.FC = ()=>{
             boxShadow: '1px 1px 1px 1px #888888'
         },
         container:{
-            height:'7%'
+            height:'7%',
+            display:'flex',
+            flexDirection:'row',
+            justifyContent:'space-evenly'
         }
     });
     const classes = useStyles();
     return (
         // will be convert to filterButtonsMap instead of code duplicate for the filter button
-        <Box className={classes.container} display='flex' flexDirection='row' justifyContent='space-evenly'>
+        <Box className={classes.container}>
             <Button className={classes.button} onClick={() => {}}>
                 <img className={classes.image} src={ynetLogo} alt="Ynet"/>
             </Button>
