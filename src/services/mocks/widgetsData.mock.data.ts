@@ -1,20 +1,10 @@
-import {WidgetType} from '../../models/WidgetData';
+// import { WidgetType } from '../../models/WidgetData'
 
 export default [
-  {
-    "type": "heatMap" as WidgetType,
-    "meta": {
-      "tags": ['tag1'],
-      "categories": ['cat1']
-    },
-    "data": {}
-  },
-  {
-    "type": "heatMap" as WidgetType,
-    "meta": {
-      "tags": ['tag1', 'tag2'],
-      "categories": ['cat1', 'cat2']
-    },
-    "data": {}
-  },
+    { quarter: 'Car', earnings: 13000 },
+    { quarter: 'Pedestrian', earnings: 16500 },
+    { quarter: 'Cyclist', earnings: 14250 },
+    { quarter: 'Public Transport', earnings: 19000 },
+    { quarter: 'Train', earnings: 19000 },
+    { quarter: 'Light Train', earnings: 19000 }
 ]
