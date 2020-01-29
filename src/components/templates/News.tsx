@@ -1,6 +1,6 @@
 import React from 'react';
 import {newsApiDummy} from '../../assets/news-api-dummy';
-import {Text, TextType} from '../atoms/Text';
+import {Text, TextType} from '../atoms';
 import {Box} from "@material-ui/core";
 
 const News: React.FC = () => {
