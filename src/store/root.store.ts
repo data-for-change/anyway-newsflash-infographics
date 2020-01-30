@@ -1,38 +1,40 @@
 // https://mobx.js.org/best/store.html#combining-multiple-stores
-import { action, observable } from 'mobx'
+import { action,observable } from 'mobx'
 import { initService } from '../services/init.service'
 import { INewsFlash } from '../models/NewFlash'
 import { IWidgetData } from '../models/WidgetData'
 
 export default class RootStore {
-    [key: string]: any // Declaring an index signature
+    [ key: string ]: any // Declaring an index signature
 
     appInitialized = false
 
     @observable newsFlashCollection: Array<INewsFlash> = []
-    @observable widgets: Array<IWidgetData> = []
+    @observable newsFlashWidgetsData: IWidgetData = []
+    @observable newsFlashWidgetsMetaData: any = {}
 
-    constructor() {
+    constructor () {
         // init app data
-        initService().then(initData => {
-            this.safeInitialization('newsFlashCollection', initData.newsFlashCollection)
-            this.safeInitialization('widgets', initData.widget)
+        initService().then( initData => {
+            this.safeInitialization( 'newsFlashCollection',initData.newsFlashCollection )
+            this.safeInitialization( 'newsFlashWidgetsData',initData.newsFlashWidgetsData.widgets )
+            // console.log( this.newsFlashWidgetsData )
             // additional Initialization steps can be added here
             this.appInitialized = true
-        })
+        } )
     }
 
     // prop is a property on RootStore to be initialized, like: this.suggestions
-    safeInitialization(prop: string, valueToCheck: Array<any>) {
-        if (Array.isArray(valueToCheck)) {
-            this[prop] = valueToCheck
+    safeInitialization ( prop: string,valueToCheck: any ) {
+        if ( Array.isArray( valueToCheck ) ) {
+            this[ prop ] = valueToCheck
         } else {
-            console.warn(`Property [${prop}] was not initialized. Invalid value (${valueToCheck})`)
+            console.warn( `Property [${ prop }] was not initialized. Invalid value (${ valueToCheck })` )
         }
     }
 
     @action
-    selectNewsFlash(/*id: number*/): void {
+    selectNewsFlash (/*id: number*/ ): void {
         // steps:
         // 1 - get data from data.service
         // 2 - save data to graphsData

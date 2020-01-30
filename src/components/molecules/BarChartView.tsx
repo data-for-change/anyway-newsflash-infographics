@@ -1,25 +1,32 @@
-import React, { FunctionComponent } from 'react'
-import { VictoryContainer, VictoryBar, VictoryChart, VictoryLabel } from 'victory'
+import React,{ FunctionComponent } from 'react'
+import { VictoryContainer,VictoryBar,VictoryChart,VictoryLabel } from 'victory'
 
 interface IProps {
     data: barChartDataType[]
 }
 export type barChartDataType = {
-    x: string
-    y: number
+    accident_year: number
+    count: number
 }
-const BarChartView: FunctionComponent<IProps> = ({ data }) => {
+const BarChartView: FunctionComponent<IProps> = ( { data } ) => {
     const barChartViewStyle = { data: { fill: '#c43a31' } }
 
     return (
-        <VictoryChart domain={{ x: [0.5, 5], y: [10000, 20000] }}>
+        <VictoryChart  >
             <VictoryBar
-                data={data}
-                style={barChartViewStyle}
-                barRatio={1}
-                containerComponent={<VictoryContainer responsive={true} />}
-                labelComponent={<VictoryLabel textAnchor='start' />}
+                data={ data }
+                x='accident_year'
+                y='count'
+                style={ barChartViewStyle }
+                barRatio={ 1 }
+                containerComponent={ <VictoryContainer responsive={ true } /> }
+                labelComponent={ <VictoryLabel textAnchor='start' /> }
+                // labelComponent={ <VictoryLabel dy={ 30 } /> }
                 alignment='start'
+                animate={ {
+                    duration: 2000,
+                    onLoad: { duration: 1000 }
+                } }
             />
         </VictoryChart>
     )
