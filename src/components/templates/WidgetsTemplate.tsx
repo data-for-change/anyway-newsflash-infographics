@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React,{ FunctionComponent } from 'react'
 
 import { useStore } from '../../store/storeConfig'
 import RootStore from '../../store/root.store'
@@ -10,56 +10,37 @@ import PieChartView from '../molecules/PieChartView'
 import BarChartView from '../molecules/BarChartView'
 import LocationMap from '../molecules/LocationMap'
 
-import { pieChartDataType } from '../molecules/PieChartView'
-import { barChartDataType } from '../molecules/BarChartView'
-import { IWidgetData } from '../../models/WidgetData'
+interface IProps { }
 
-interface IProps {}
+const WidgetsTemplate: FunctionComponent<IProps> = ( ...widgetsData: any ) => {
 
-const WidgetsTemplate: FunctionComponent<IProps> = observer((...props: any) => {
-    const { pieChartData, barChartData } = props[0]
+    const widgets = Object.entries( widgetsData[ 0 ] ).map( ( widget: any ) => {
+        const name = Object.entries( widget[ 1 ] )[ 0 ][ 1 ]
+        const data = Object.entries( widget[ 1 ] )[ 1 ][ 1 ]
+        const meta = Object.entries( widget[ 1 ] )[ 2 ][ 1 ]
+        return [ name,data,meta ]
+    } )
     return (
         <AnyWayGrid>
-            <AnyWayCard>
-                <h5>HeatMapWidget</h5>
-                <p>HeatMapWidget(template) is an aware widget - it can fetch data from the store</p>
-                <p>HeatMapWidget contain an un-aware component called HeatMapView(molecule) </p>
-            </AnyWayCard>
-            <AnyWayCard>
-                <p>Some Text</p>
-                <PieChartView data={pieChartData} />
-            </AnyWayCard>
-            <AnyWayCard>
-                <h5>PieChartWidget</h5>
-                <p>
-                    PieChartWidget(template) is an aware widget - it can fetch data from the store
-                </p>
-                <p>PieChartWidget contain an un-aware component called PieChartView(molecule) </p>
-            </AnyWayCard>
-            <AnyWayCard>
-                <p>Some Text</p>
-                <BarChartView data={barChartData} />
-            </AnyWayCard>
-            <AnyWayCard>
-                <LocationMap marker={{ lat: 32.0853, lng: 34.7818 }} />
-            </AnyWayCard>
-            <AnyWayCard>
-                <p>Some Text</p>
-                <BarChartView data={barChartData} />
-            </AnyWayCard>
+            { widgets.map( ( widget: any ) => {
+                const [ name,data ] = widget
+                return (
+                    <>
+                        <AnyWayCard key={ name }>
+                            { name === 'most_severe_accidents' ? ( <LocationMap key={ name } marker={ { lat: 32.0853,lng: 34.7818 } } /> ) : null }
+                            { name === 'accident_count_by_severity' ? ( <div key={ name }>Text</div> ) : null }
+                            { name === 'accident_count_by_accident_type' ? ( <PieChartView key={ name } data={ data } /> ) : null }
+                            { name === 'accident_count_by_accident_year' ? ( <BarChartView key={ name } data={ data } /> ) : null }
+                        </AnyWayCard>
+                    </>
+                )
+            } ) }
         </AnyWayGrid>
     )
-})
-const WidgetsTemplateStore: FunctionComponent<IProps> = observer(() => {
+}
+const WidgetsTemplateStore: FunctionComponent<IProps> = observer( () => {
     const store: RootStore = useStore()
-    const widgetsData: IWidgetData[] = store.widgets
-    const pieChartData: pieChartDataType[] = []
-    const barChartData: barChartDataType[] = []
-    widgetsData.forEach((widget: any) => {
-        pieChartData.push({ x: widget.quarter, y: widget.earnings })
-        barChartData.push({ x: widget.quarter, y: widget.earnings })
-    })
-    const props: any = { pieChartData, barChartData }
-    return <WidgetsTemplate {...props} />
-})
+    const widgetsData: any = store.newsFlashWidgetsData
+    return <WidgetsTemplate { ...widgetsData } />
+} )
 export default WidgetsTemplateStore

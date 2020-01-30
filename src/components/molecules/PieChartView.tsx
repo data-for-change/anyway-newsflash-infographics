@@ -1,14 +1,14 @@
-import React, { FunctionComponent } from 'react'
-import { VictoryPie, VictoryContainer } from 'victory'
+import React,{ FunctionComponent } from 'react'
+import { VictoryPie,VictoryContainer } from 'victory'
 
 interface IProps {
     data: pieChartDataType[]
 }
 export type pieChartDataType = {
-    x: string
-    y: number
+    accident_type: string
+    count: number
 }
-export const PieChartView: FunctionComponent<IProps> = ({ data }) => {
+export const PieChartView: FunctionComponent<IProps> = ( { data } ) => {
     const pieChartViewStyle = {
         labels: {
             fontSize: 8,
@@ -17,15 +17,17 @@ export const PieChartView: FunctionComponent<IProps> = ({ data }) => {
     }
     return (
         <VictoryPie
-            data={data}
-            style={pieChartViewStyle}
-            labelRadius={60}
-            innerRadius={20}
-            padding={50}
-            width={200}
-            height={200}
+            data={ data }
+            x='accident_type'
+            y='count'
+            style={ pieChartViewStyle }
+            labelRadius={ 60 }
+            innerRadius={ 20 }
+            padding={ 50 }
+            width={ 200 }
+            height={ 200 }
             colorScale='red'
-            containerComponent={<VictoryContainer responsive={true} />}
+            containerComponent={ <VictoryContainer responsive={ true } /> }
         />
     )
 }
