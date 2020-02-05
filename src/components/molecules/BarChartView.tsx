@@ -1,32 +1,34 @@
-import React from 'react'
-import { VictoryContainer, VictoryBar } from 'victory'
+import React, { FunctionComponent } from 'react'
+import { VictoryContainer, VictoryBar, VictoryChart, VictoryLabel } from 'victory'
 
-interface Idata {
-    quarter?: string
-    earnings?: number
-    x?: number
-    y?: number
+interface IProps {
+    data: barChartDataType[]
 }
-const barChartViewStyle = { data: { fill: '#c43a31' } };
+export type barChartDataType = {
+    accident_year: number
+    count: number
+}
+const BarChartView: FunctionComponent<IProps> = ({ data }) => {
+    const barChartViewStyle = { data: { fill: '#c43a31' } }
 
-const BarChartView = () => {
-    const data: Idata[] = [
-        { quarter: 'Car', earnings: 13000 },
-        { quarter: 'Pedestrian', earnings: 16500 },
-        { quarter: 'Cyclist', earnings: 14250 },
-        { quarter: 'Public Transport', earnings: 19000 },
-        { quarter: 'Train', earnings: 19000 },
-        { quarter: 'Light Train', earnings: 19000 }
-    ];
     return (
-        <VictoryBar
-            data={data}
-            x='quarter'
-            y='earnings'
-            style={barChartViewStyle}
-            barRatio={1}
-            containerComponent={<VictoryContainer responsive={true} />}
-        />
+        <VictoryChart>
+            <VictoryBar
+                data={data}
+                x='accident_year'
+                y='count'
+                style={barChartViewStyle}
+                barRatio={1}
+                containerComponent={<VictoryContainer responsive={true} />}
+                labelComponent={<VictoryLabel textAnchor='start' />}
+                // labelComponent={ <VictoryLabel dy={ 30 } /> }
+                alignment='start'
+                animate={{
+                    duration: 2000,
+                    onLoad: { duration: 1000 }
+                }}
+            />
+        </VictoryChart>
     )
-};
+}
 export default BarChartView

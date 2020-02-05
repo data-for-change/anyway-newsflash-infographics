@@ -1,10 +1,4 @@
-export type WidgetType = 'heatMap' | 'streetView' | 'severityGraph'
+// export type WidgetType = 'heatMap' | 'streetView' | 'severityGraph'
+export type IWidgetData = any
 
-export interface IWidgetData {
-  type: WidgetType,
-  meta: {
-    tags: Array<string>,
-    categories: Array<string>
-  },
-  data: any
-}
+

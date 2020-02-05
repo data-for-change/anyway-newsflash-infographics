@@ -5,20 +5,13 @@ import widgetToJpeg from '../../services/to-image.service'
 
 interface IProps {}
 
-// const WidgetToJpeg = (node: any) => {
-//     if (node.current) {
-//         domtoimage.toSvg(node.current, { quality: 1 }).then(function(blob) {
-//             saveAs(blob, 'my-node.svg')
-//         })
-//     }
-// }
 const AnyWayCard: FunctionComponent<IProps> = ({ children }) => {
     const cardStyles: object = {
         padding: '20px',
         margin: '10px',
         borderRadius: '15px',
-        width: '90%',
-        height: '90%',
+        width: '360px',
+        height: '440px',
         display: 'flex',
         justifyContent: 'space-evenly',
         flexDirection: 'column'
@@ -29,13 +22,13 @@ const AnyWayCard: FunctionComponent<IProps> = ({ children }) => {
         border: 'none',
         cursor: 'pointer',
         backgroundColor: 'transparent'
-    };
-    const node = useRef<HTMLDivElement>();
+    }
+    const widget = useRef<HTMLDivElement>(null)
     const imgDownloadHandler = () => {
-        widgetToJpeg(node)
+        widgetToJpeg(widget)
     };
     return (
-        <Card ref={node} style={cardStyles}>
+        <Card ref={widget} style={cardStyles}>
             {children}
             <button style={btnStyle} onClick={imgDownloadHandler}>
                 <SvgIcon viewBox='0 0 24 24'>
