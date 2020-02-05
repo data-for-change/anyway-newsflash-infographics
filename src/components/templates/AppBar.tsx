@@ -1,6 +1,6 @@
-import React, { FunctionComponent } from "react";
-import { AnywayHeader } from "../molecules/AnywayHeader";
+import React, { FunctionComponent } from 'react';
+import { Header } from '../molecules/Header';
 
 export const AppBar: FunctionComponent = () => {
-  return <AnywayHeader />;
+  return <Header />;
 };

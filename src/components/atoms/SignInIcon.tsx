@@ -1,25 +1,18 @@
-import React, { useMemo } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
+import React from 'react';
+import {createStyles, makeStyles, Theme} from '@material-ui/core';
+
+const useStyles = makeStyles((theme: Theme) => createStyles({
+  root: {
+    color: '#000',
+  },
+}));
 
 export const SignInIcon = () => {
-  const divStyle = useMemo(
-    () => ({
-      marginRight: "1vw"
-    }),
-    []
-  );
-
-  const iconStyle = useMemo(
-    () => ({
-      color: "#555"
-    }),
-    []
-  );
-
+  const styles = useStyles();
+  
   return (
-    <div style={divStyle}>
-      <FontAwesomeIcon icon={faSignInAlt} style={iconStyle} />
+    <div className={styles.root}>
+      <i className="material-icons">person</i>
     </div>
   );
 };
