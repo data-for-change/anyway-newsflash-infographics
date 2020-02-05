@@ -16,21 +16,20 @@ const WidgetsTemplate: FunctionComponent<IProps> = observer(() => {
     const store: RootStore = useStore()
     const widgetsData: any = store.newsFlashWidgetsData
     const widgets = widgetsData.map((widget: any) => {
-        const name = widget.name
-        const data = widget.data
-
         return (
             <AnyWayGrid>
-                <AnyWayCard key={name}>
-                    {name === 'most_severe_accidents' ? (
-                        <LocationMap key={name} marker={{ lat: 32.0853, lng: 34.7818 }} />
+                <AnyWayCard key={widget.name}>
+                    {widget.name === 'most_severe_accidents' ? (
+                        <LocationMap key={widget.name} marker={{ lat: 32.0853, lng: 34.7818 }} />
                     ) : null}
-                    {name === 'accident_count_by_severity' ? <div key={name}>Text</div> : null}
-                    {name === 'accident_count_by_accident_type' ? (
-                        <PieChartView key={name} data={data} />
+                    {widget.name === 'accident_count_by_severity' ? (
+                        <div key={widget.name}>Text</div>
                     ) : null}
-                    {name === 'accident_count_by_accident_year' ? (
-                        <BarChartView key={name} data={data} />
+                    {widget.name === 'accident_count_by_accident_type' ? (
+                        <PieChartView key={widget.name} data={widget.data} />
+                    ) : null}
+                    {widget.name === 'accident_count_by_accident_year' ? (
+                        <BarChartView key={widget.name} data={widget.data} />
                     ) : null}
                 </AnyWayCard>
             </AnyWayGrid>
