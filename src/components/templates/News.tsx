@@ -1,7 +1,8 @@
 import React from 'react';
 import {observer} from 'mobx-react-lite';
 import {Box, makeStyles} from "@material-ui/core";
-import {Text, TextType} from '../atoms/Text';
+import {TextType} from '../atoms/Text';
+import Text  from '../atoms/Text';
 import {useStore} from "../../store/storeConfig";
 import RootStore from "../../store/root.store";
 
