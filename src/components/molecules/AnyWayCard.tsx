@@ -15,7 +15,7 @@ const AnyWayCard: FunctionComponent<IProps> = ({ children }) => {
         display: 'flex',
         justifyContent: 'space-evenly',
         flexDirection: 'column'
-    }
+    };
     const btnStyle = {
         display: 'block',
         textDecoration: 'none',
@@ -26,7 +26,7 @@ const AnyWayCard: FunctionComponent<IProps> = ({ children }) => {
     const widget = useRef<HTMLDivElement>(null)
     const imgDownloadHandler = () => {
         widgetToJpeg(widget)
-    }
+    };
     return (
         <Card ref={widget} style={cardStyles}>
             {children}
@@ -40,5 +40,5 @@ const AnyWayCard: FunctionComponent<IProps> = ({ children }) => {
             </button>
         </Card>
     )
-}
+};
 export default AnyWayCard

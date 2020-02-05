@@ -8,6 +8,6 @@ const widgetToJpeg = (widget: React.RefObject<HTMLDivElement>) => {
             saveAs(blob, 'my-node.svg')
         })
     }
-}
+};
 
 export default widgetToJpeg

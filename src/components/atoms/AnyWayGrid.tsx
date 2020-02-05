@@ -7,11 +7,11 @@ const AnyWayGrid: FunctionComponent<IProps> = ({ children }) => {
         margin: 12,
         justifyContent: 'center',
         padding: 20
-    }
+    };
     return (
         <Grid style={devStyles} container>
             {children}
         </Grid>
     )
-}
+};
 export default AnyWayGrid

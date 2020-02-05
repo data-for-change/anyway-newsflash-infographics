@@ -8,4 +8,4 @@ export default {
 
 export const ButtonPrimary = () => (
     <Button onClick={action('clicked')}>Button Primary</Button>
-)
+);
