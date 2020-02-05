@@ -8,13 +8,13 @@ Want to file a bug, contribute some code, or improve documentation? Excellent! P
 
 ### Diving in
 * For improving documentation:
-    - see issues marked as [documentation]() and contact Yuval for guidance
+    - see issues marked as [documentation](https://github.com/hasadna/anyway-newsflash-infographics/issues?q=is%3Aopen+is%3Aissue+label%3Adocumentation) and contact Yuval for guidance
     - This is a [good summary](https://medium.com/@kvosswinkel/coding-like-a-journalist-ee52360a16bc) for things to keep in mind when writing technical docs
 * For feature development, bug fixing etc:
     - Read the [Technical Overview](https://github.com/hasadna/anyway-newsflash-infographics#technical-overview) 
     and [Project directory structure](https://github.com/hasadna/anyway-newsflash-infographics#project-directory-structure) sections 
     - Contact one of the project's leaders, which can help you getting into things easily
-    - Select one of the issues marked as [good first issue]()
+    - Select one of the issues marked as [good first issue](https://github.com/hasadna/anyway-newsflash-infographics/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
     - Read [Contribution Guidelines](https://github.com/hasadna/anyway-newsflash-infographics#contribution-guidelines) before start working on an issue
 * If you have any question - feel free to contact Yuval or Atalya from AnyWAY Project
 

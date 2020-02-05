@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, TextType} from './Text';
+import {default as Text, TextType} from './Text'
 
 export default {
   title: 'Text',
