@@ -1,24 +1,20 @@
 import React, { FunctionComponent } from 'react'
 import Grid from '@material-ui/core/Grid'
-import {AnyWayGrid} from '../components/atoms';
+import { AnyWayGrid } from '../components/atoms';
 import AnyWayCard from '../components/molecules/AnyWayCard'
 import PieChartView from '../components/molecules/PieChartView'
 import BarChartView from '../components/molecules/BarChartView'
 import LocationMap from '../components/molecules/LocationMap'
+import HeatMap from '../components/molecules/HeatMap'
 
-interface IProps {}
+interface IProps { }
 
 export const HomePage: FunctionComponent<IProps> = () => {
     return (
         <AnyWayGrid>
             <Grid item lg={4} xl={4}>
                 <AnyWayCard>
-                    <h5>HeatMapWidget</h5>
-                    <p>
-                        HeatMapWidget(template) is an aware widget - it can fetch data from the
-                        store
-                    </p>
-                    <p>HeatMapWidget contain an un-aware component called HeatMapView(molecule) </p>
+                    <HeatMap marker={{ lat: 32.0853, lng: 34.7818 }} />
                 </AnyWayCard>
             </Grid>
             <Grid item lg={4} xl={4}>
