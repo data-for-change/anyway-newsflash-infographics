@@ -1,9 +1,9 @@
 import 'leaflet-css';
 import React, { FunctionComponent } from 'react';
-import L from 'leaflet';
 import { Map, Marker, TileLayer } from 'react-leaflet';
 // @ts-ignore
 import HeatmapLayer from 'react-leaflet-heatmap-layer';
+import { makeStyles } from '@material-ui/core/styles';
 
 export const geojson = {
     data: [
@@ -70,22 +70,23 @@ export const geojson = {
     ],
 };
 
-L.Icon.Default.mergeOptions({
-    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-    iconUrl: require('leaflet/dist/images/marker-icon.png'),
-    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-});
-
 interface IProps {
     marker: { lat: number, lng: number }
 }
 
 const INITIAL_ZOOM = 13;
-const WRAPPER_STYLES = { height: '100%', width: '100%' };
+
+const useStyles = makeStyles({
+    wrapper: {
+        height: '100%',
+        width: '100%'
+    },
+});
 
 const LocationMap: FunctionComponent<IProps> = ({ marker }) => {
+    const classes = useStyles();
     return (
-        <Map center={marker} zoom={INITIAL_ZOOM} style={WRAPPER_STYLES}>
+        <Map center={marker} zoom={INITIAL_ZOOM} className={classes.wrapper}>
             <HeatmapLayer
                 fitBoundsOnLoad
                 fitBoundsOnUpdate
