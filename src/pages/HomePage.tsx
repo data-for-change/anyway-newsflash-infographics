@@ -1,8 +1,8 @@
 import React from 'react'
-import WidgetsTemplateStore from '../components/templates/WidgetsTemplate'
+import WidgetsTemplate from '../components/templates/WidgetsTemplate'
 
 interface IProps {}
 
 export const HomePage: React.FC<IProps> = () => {
-    return <WidgetsTemplateStore />
+    return <WidgetsTemplate />
 }

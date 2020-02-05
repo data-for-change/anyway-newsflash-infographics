@@ -28,5 +28,4 @@ const App: React.FC = () => {
         </StoreContext.Provider>
     )
 }
-
 export default App
