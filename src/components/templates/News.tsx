@@ -1,11 +1,14 @@
 import React from 'react';
-import {newsApiDummy} from '../../assets/news-api-dummy';
+import {observer} from 'mobx-react-lite'
 import {Text, TextType} from '../atoms';
+import {useStore} from '../../store/storeConfig'
 import {Box} from "@material-ui/core";
+import RootStore from "../../store/root.store";
 
-const News: React.FC = () => {
+const News: React.FC = observer(() => {
+    const store :RootStore = useStore();
     return (<Box flexDirection={'column'}>
-        {newsApiDummy.map((news) => {
+        {store.newsFlashCollection.map((news) => {
             const date :Date = new Date(news.date);
             return <Box border ={1} borderColor='#6495ed'>
                 <Text  type={TextType.NEWS_FLASH_TITLE} children={`${date.toLocaleDateString()}, ${news.source}` }/>
@@ -13,6 +16,6 @@ const News: React.FC = () => {
             </Box>
         })}
     </Box>);
-};
+});
 
 export default News;

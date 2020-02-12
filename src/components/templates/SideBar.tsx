@@ -5,14 +5,15 @@ import {NewsFlashFilterPanel} from "../atoms/NewsFlahsFilterPanel";
 interface IProps {
 }
 
+// remove when no longer required
+const devStyles = {
+    border: '2px dashed blue',
+    height:'100%'
+};
 export const SideBar: FunctionComponent<IProps> = () => {
-  // remove when no longer required
-  const devStyles = {
-    border: '2px dashed blue'
-  };
 
   return (
-      <Box style={devStyles} height="100%">
+      <Box style={devStyles} >
           <NewsFlashFilterPanel />
         <News/>
       </Box>
