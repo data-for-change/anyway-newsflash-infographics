@@ -17,9 +17,9 @@ export default class RootStore {
     constructor () {
         // init app data
         initService().then( initData => {
-            console.log(initData.newsFlashWidgetsData.widgets)
-            this.safeInitialization( 'newsFlashCollection', initData.newsFlashCollection )
-            this.safeInitialization( 'newsFlashWidgetsData',initData.newsFlashWidgetsData.widgets )
+            console.log(initData);
+            this.safeInitialization( 'newsFlashCollection', initData.newsFlashCollection );
+            this.safeInitialization( 'newsFlashWidgetsData',initData.newsFlashWidgetsData.widgets );
             // console.log( this.newsFlashWidgetsData )
             // additional Initialization steps can be added here
             this.appInitialized = true
