@@ -92,7 +92,6 @@ const useStyles = makeStyles({
 
 const LocationMap: FunctionComponent<IProps> = ({ marker, data }) => {
     const classes = useStyles();
-    console.log('data', data);
     return (
         <Map center={marker} zoom={INITIAL_ZOOM} className={classes.wrapper}>
             <HeatmapLayer

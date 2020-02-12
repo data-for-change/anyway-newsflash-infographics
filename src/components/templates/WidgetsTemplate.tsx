@@ -8,7 +8,7 @@ import AnyWayGrid from '../atoms/AnyWayGrid'
 import AnyWayCard from '../molecules/AnyWayCard'
 import PieChartView from '../molecules/PieChartView'
 import BarChartView from '../molecules/BarChartView'
-import LocationMap from '../molecules/LocationMap'
+// import LocationMap from '../molecules/LocationMap'
 import HeatMap from '../molecules/HeatMap'
 
 interface IProps {}
