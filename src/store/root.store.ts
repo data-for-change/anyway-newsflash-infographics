@@ -1,6 +1,7 @@
 // https://mobx.js.org/best/store.html#combining-multiple-stores
 import { action,observable } from 'mobx'
 import { initService } from '../services/init.service'
+import { fetchWidgets } from '../services/widgets.data.service'
 import { INewsFlash } from '../models/NewFlash'
 import { IWidgetData } from '../models/WidgetData'
 
@@ -16,7 +17,8 @@ export default class RootStore {
     constructor () {
         // init app data
         initService().then( initData => {
-            this.safeInitialization( 'newsFlashCollection',initData.newsFlashCollection )
+            console.log(initData.newsFlashWidgetsData.widgets)
+            this.safeInitialization( 'newsFlashCollection', initData.newsFlashCollection )
             this.safeInitialization( 'newsFlashWidgetsData',initData.newsFlashWidgetsData.widgets )
             // console.log( this.newsFlashWidgetsData )
             // additional Initialization steps can be added here
@@ -34,7 +36,14 @@ export default class RootStore {
     }
 
     @action
-    selectNewsFlash (/*id: number*/ ): void {
+    selectNewsFlash (id: number ): void {
+        console.log(id);
+        fetchWidgets(id)
+        .then((response:any)=> {
+            if (response.widgets !== undefined) {
+                this.safeInitialization( 'newsFlashWidgetsData',response.widgets )
+            }
+        })
         // steps:
         // 1 - get data from data.service
         // 2 - save data to graphsData
