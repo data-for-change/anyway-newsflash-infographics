@@ -5,5 +5,5 @@ export interface INewsFlash {
   lon: number,
   title: string,
   source: string,
-  date: string|null|Date
+  date: string|null
 }

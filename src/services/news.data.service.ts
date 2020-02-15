@@ -1,5 +1,5 @@
 import {INewsFlash} from '../models/NewFlash';
-import {mockHTTPCall, newsFlashCollectionData} from "./mocks/mock.service";
+import {mockHTTPCall, newsFlashCollectionData} from './mocks/mock.service';
 
 const errorNews: INewsFlash = {
   lat:-1,

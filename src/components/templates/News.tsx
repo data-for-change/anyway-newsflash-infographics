@@ -9,7 +9,7 @@ const News: React.FC = observer(() => {
     const store :RootStore = useStore();
     return (<Box flexDirection={'column'}>
         {store.newsFlashCollection.map((news) => {
-            const date :null|string|Date = news.date ==null ? '': new Date(news.date).toLocaleDateString();
+            const date :null|string = news.date ==null ? '': new Date(news.date).toLocaleDateString();
             return <Box border ={1} borderColor='#6495ed'>
                 <Text  type={TextType.NEWS_FLASH_TITLE} children={`${date}, ${news.source}` }/>
                 <Text type={TextType.NEWS_FLASH_CONTENT} children={news.title}/>
