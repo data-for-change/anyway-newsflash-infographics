@@ -1,7 +1,7 @@
 import { defaultWidgetsCollectionData,mockHTTPCall } from './mocks/mock.service'
 import { IWidgetData } from '../models/WidgetData';
 import axios from 'axios'
-export function fetchDefaultWidgets (): Promise<Array<any>> {
+export function fetchDefaultWidgets (): Promise<any> {
   return mockHTTPCall<IWidgetData>( defaultWidgetsCollectionData )
 }
 
