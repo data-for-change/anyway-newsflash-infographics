@@ -7,7 +7,7 @@ export const newsApiDummy :Array<INewsFlash>= [
     "lon": 34.906059,
     "title": "\u05d4\u05d5\u05ea\u05e8 \u05dc\u05e4\u05e8\u05e1\u05d5\u05dd: \u05d9\u05d5\u05e1\u05e3 \u05e7\u05d4\u05dc\u05e0\u05d9, \u05d1\u05df 79 \u05de\u05e4\u05ea\u05d7 \u05ea\u05e7\u05d5\u05d5\u05d4, \u05d4\u05d5\u05d0 \u05d0\u05d7\u05d3 \u05d4\u05d4\u05e8\u05d5\u05d2\u05d9\u05dd \u05d1\u05ea\u05d0\u05d5\u05e0\u05d4 \u05d4\u05e7\u05d8\u05dc\u05e0\u05d9\u05ea",
     "source": "ynet",
-    "date": new Date("2019-12-23 12:33:54")
+    "date": "2019-12-23 12:33:54"
   },
   {
     "id": 13530,
@@ -15,7 +15,7 @@ export const newsApiDummy :Array<INewsFlash>= [
     "lon": 34.906059,
     "title": "\u05d1\u05ea\u05d5 \u05e9\u05dc \u05d4\u05d4\u05e8\u05d5\u05d2 \u05d1\u05ea\u05d0\u05d5\u05e0\u05d4 \u05d4\u05e7\u05d8\u05dc\u05e0\u05d9\u05ea: \"\u05d0\u05d9\u05df \u05d1\u05d9 \u05db\u05e2\u05e1, \u05d6\u05d4 \u05dc\u05d0 \u05d9\u05d7\u05d6\u05d9\u05e8 \u05d0\u05ea \u05d0\u05d1\u05d0 \u05e9\u05dc\u05d9\"",
     "source": "ynet",
-    "date": new Date("2019-12-23 10:35:25")
+    "date": "2019-12-23 10:35:25"
   },
   {
     "id": 13529,
@@ -23,7 +23,7 @@ export const newsApiDummy :Array<INewsFlash>= [
     "lon": 34.989571,
     "title": "\u05d4\u05ea\u05d0\u05d5\u05e0\u05d4 \u05d4\u05e7\u05d8\u05dc\u05e0\u05d9\u05ea \u05dc\u05d9\u05d3 \u05e0\u05ea\u05d1\"\u05d2: \u05d4\u05d5\u05d0\u05e8\u05da \u05de\u05e2\u05e6\u05e8 \u05e0\u05d4\u05d2 \u05d4\u05d0\u05d5\u05d8\u05d5\u05d1\u05d5\u05e1, \u05d1\u05df 44 \u05de\u05d7\u05d9\u05e4\u05d4",
     "source": "ynet",
-    "date": new Date("2019-12-23 10:15:01")
+    "date": "2019-12-23 10:15:01"
   },
   {
     "id": 13524,
@@ -31,7 +31,7 @@ export const newsApiDummy :Array<INewsFlash>= [
     "lon": 34.8854112,
     "title": "\u05d4\u05ea\u05d0\u05d5\u05e0\u05d4 \u05dc\u05d9\u05d3 \u05e0\u05ea\u05d1\"\u05d2: \u05e0\u05d4\u05d2 \u05d4\u05d0\u05d5\u05d8\u05d5\u05d1\u05d5\u05e1 \u05e0\u05e2\u05e6\u05e8 \u05d1\u05d7\u05e9\u05d3 \u05dc\u05d2\u05e8\u05d9\u05de\u05ea \u05de\u05d5\u05d5\u05ea \u05d1\u05e8\u05e9\u05dc\u05e0\u05d5\u05ea",
     "source": "ynet",
-    "date": new Date("2019-12-23 07:43:33")
+    "date": "2019-12-23 07:43:33"
   },
   {
     "id": 13522,
@@ -39,7 +39,7 @@ export const newsApiDummy :Array<INewsFlash>= [
     "lon": 34.8854112,
     "title": "\u05d4\u05ea\u05d0\u05d5\u05e0\u05d4 \u05dc\u05d9\u05d3 \u05e0\u05ea\u05d1\"\u05d2: \u05e9\u05e0\u05d9 \u05e4\u05e6\u05d5\u05e2\u05d9\u05dd \u05e0\u05d5\u05e1\u05e4\u05d9\u05dd \u05e9\u05d5\u05d7\u05e8\u05e8\u05d5 \u05de\u05d1\u05d9\u05ea \u05d4\u05d7\u05d5\u05dc\u05d9\u05dd",
     "source": "ynet",
-    "date": new Date("2019-12-23 06:44:32")
+    "date": "2019-12-23 06:44:32"
   },
   {
     "id": 13516,
@@ -47,7 +47,7 @@ export const newsApiDummy :Array<INewsFlash>= [
     "lon": 34.906059,
     "title": "\u05d4\u05ea\u05d0\u05d5\u05e0\u05d4 \u05dc\u05d9\u05d3 \u05e0\u05ea\u05d1\"\u05d2: \u05e0\u05d4\u05d2 \u05d4\u05d0\u05d5\u05d8\u05d5\u05d1\u05d5\u05e1 \u05e0\u05d7\u05e7\u05e8 \u05d1\u05d7\u05e9\u05d3 \u05dc\u05d2\u05e8\u05d9\u05de\u05ea \u05de\u05d5\u05d5\u05ea \u05d1\u05e8\u05e9\u05dc\u05e0\u05d5\u05ea",
     "source": "ynet",
-    "date": new Date("2019-12-23 01:34:32")
+    "date": "2019-12-23 01:34:32"
   },
   {
     "id": 13514,
@@ -55,7 +55,7 @@ export const newsApiDummy :Array<INewsFlash>= [
     "lon": 34.842852,
     "title": "\u05d4\u05ea\u05d0\u05d5\u05e0\u05d4 \u05dc\u05d9\u05d3 \u05e0\u05ea\u05d1\"\u05d2: \u05e9\u05dc\u05d5\u05e9\u05d4 \u05e4\u05e6\u05d5\u05e2\u05d9\u05dd \u05e9\u05d5\u05d7\u05e8\u05e8\u05d5 \u05de\u05d1\u05d9\u05ea \u05d4\u05d7\u05d5\u05dc\u05d9\u05dd",
     "source": "ynet",
-    "date": new Date("2019-12-23 00:14:22")
+    "date": "2019-12-23 00:14:22"
   },
   {
     "id": 13510,
@@ -63,7 +63,7 @@ export const newsApiDummy :Array<INewsFlash>= [
     "lon": 35.1823512,
     "title": "\u05d0\u05d9\u05e9\u05d4 \u05e0\u05e4\u05e6\u05e2\u05d4 \u05d1\u05d0\u05d5\u05e8\u05d7 \u05e7\u05e9\u05d4 \u05d1\u05d4\u05ea\u05e0\u05d2\u05e9\u05d5\u05ea \u05e9\u05e0\u05d9 \u05db\u05dc\u05d9 \u05e8\u05db\u05d1 \u05d1\u05e6\u05e4\u05d5\u05df",
     "source": "ynet",
-    "date": new Date("2019-12-22 22:44:02")
+    "date": "2019-12-22 22:44:02"
   },
   {
     "id": 13502,
@@ -71,7 +71,7 @@ export const newsApiDummy :Array<INewsFlash>= [
     "lon": 34.8854112,
     "title": "18 \u05e0\u05e4\u05d2\u05e2\u05d5 \u05d1\u05d4\u05ea\u05e0\u05d2\u05e9\u05d5\u05ea \u05d4\u05d0\u05d5\u05d8\u05d5\u05d1\u05d5\u05e1 \u05d1\u05ea\u05d7\u05e0\u05d4, \u05d1\u05d4\u05dd \u05d0\u05e8\u05d1\u05e2\u05d4 \u05d4\u05e8\u05d5\u05d2\u05d9\u05dd \u05d5\u05e9\u05e0\u05d9 \u05e4\u05e6\u05d5\u05e2\u05d9\u05dd \u05e7\u05e9\u05d4",
     "source": "ynet",
-    "date": new Date("2019-12-22 20:56:53")
+    "date": "2019-12-22 20:56:53"
   },
   {
     "id": 13500,
@@ -79,7 +79,7 @@ export const newsApiDummy :Array<INewsFlash>= [
     "lon": 34.8854112,
     "title": "\u05d4\u05ea\u05d0\u05d5\u05e0\u05d4 \u05dc\u05d9\u05d3 \u05e0\u05ea\u05d1\"\u05d2: \u05de\u05e0\u05d9\u05d9\u05df \u05d4\u05d4\u05e8\u05d5\u05d2\u05d9\u05dd \u05e2\u05dc\u05d4 \u05dc\u05d0\u05e8\u05d1\u05e2\u05d4",
     "source": "ynet",
-    "date": new Date("2019-12-22 20:29:24")
+    "date": "2019-12-22 20:29:24"
   }
 ];
 
