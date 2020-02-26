@@ -1,0 +1,29 @@
+name: deploy-development
+
+on: 
+  push:
+    branches: 
+      - development
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+    - name: Setup node
+      uses: actions/setup-node@master
+      with:
+        node-version: '10.x'
+    - name: Install Dependencies
+      run: npm install
+    - name: Build
+      run: npm run build
+    - name: Deploy
+      uses: w9jds/firebase-action@master
+      with:
+        args: deploy --only hosting
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        PROJECT_ID: anyway-newsflash-infographics
