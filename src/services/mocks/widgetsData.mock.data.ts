@@ -74,6 +74,72 @@ export default {
             "meta": {}
         },
         {
+            "name": "most_severe_accidents_heatmap",
+            "data": [
+                {
+                    "longitude": 34.9780568296871,
+                    "latitude": 32.4543458814189,
+                    "accident_severity": "קשה",
+                    "accident_timestamp": "2016-05-15 21:00:00"
+                },
+                {
+                    "longitude": 34.9618510776681,
+                    "latitude": 32.4494011939289,
+                    "accident_severity": "קשה",
+                    "accident_timestamp": "2015-01-02 06:45:00"
+                },
+                {
+                    "longitude": 34.968629300414,
+                    "latitude": 32.4520110942299,
+                    "accident_severity": "קשה",
+                    "accident_timestamp": "2014-09-12 09:45:00"
+                },
+                {
+                    "longitude": 34.9618510776681,
+                    "latitude": 32.4494011939289,
+                    "accident_severity": "קשה",
+                    "accident_timestamp": "2014-07-27 21:00:00"
+                },
+                {
+                    "longitude": 34.9865860704716,
+                    "latitude": 32.458914735012,
+                    "accident_severity": "קשה",
+                    "accident_timestamp": "2011-03-26 19:30:00"
+                },
+                {
+                    "longitude": 34.9865860704716,
+                    "latitude": 32.458914735012,
+                    "accident_severity": "קלה",
+                    "accident_timestamp": "2019-11-28 11:30:00"
+                },
+                {
+                    "longitude": 34.9618510776681,
+                    "latitude": 32.4494011939289,
+                    "accident_severity": "קלה",
+                    "accident_timestamp": "2019-10-31 19:45:00"
+                },
+                {
+                    "longitude": 34.9625415910224,
+                    "latitude": 32.4496820631224,
+                    "accident_severity": "קלה",
+                    "accident_timestamp": "2019-10-31 06:30:00"
+                },
+                {
+                    "longitude": 34.9865860704716,
+                    "latitude": 32.458914735012,
+                    "accident_severity": "קלה",
+                    "accident_timestamp": "2019-10-28 10:30:00"
+                },
+                {
+                    "longitude": 34.9618510776681,
+                    "latitude": 32.4494011939289,
+                    "accident_severity": "קלה",
+                    "accident_timestamp": "2019-06-22 12:00:00"
+                }
+            ],
+            "meta": {}
+        },
+        {
             "name": "accident_count_by_severity",
             "data": [
                 {
