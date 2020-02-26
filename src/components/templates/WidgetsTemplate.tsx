@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react'
 import { useStore } from '../../store/storeConfig'
 import RootStore from '../../store/root.store'
 import { observer } from 'mobx-react-lite'
-import AnyWayGrid from '../atoms/AnyWayGrid'
+import {Grid} from '../atoms'
 import AnyWayCard from '../molecules/AnyWayCard'
 import PieChartView from '../molecules/PieChartView'
 import LocationMap from '../molecules/LocationMap'
@@ -36,13 +36,13 @@ const getWidgetByType = (widget: any) => {
 const WidgetsTemplate: FunctionComponent<IProps> = () => {
 	const store: RootStore = useStore();
 	const widgetsData = store.newsFlashWidgetsData;
-
+	
 	return (
-		<AnyWayGrid>
+		<Grid.Container>
 			{widgetsData.map((widget, index) => (
 				<AnyWayCard key={index}>{getWidgetByType(widget)}</AnyWayCard>
 			))}
-		</AnyWayGrid>
+		</Grid.Container>
 	)
 };
 export default observer(WidgetsTemplate)
