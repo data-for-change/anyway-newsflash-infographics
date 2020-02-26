@@ -10,7 +10,7 @@ const News: React.FC = () => {
   
   const onNewsClick = useCallback((id: number) => {
     store.selectNewsFlash(id)
-  }, []);
+  }, [store]);
   
   return (<Box flexDirection={'column'}>
     {store.newsFlashCollection.map((news) => {
