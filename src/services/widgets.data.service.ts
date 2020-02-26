@@ -5,6 +5,7 @@ export function fetchDefaultWidgets (): Promise<Array<any>> {
   return mockHTTPCall<IWidgetData>( defaultWidgetsCollectionData )
 }
 
+
 //const widgetsUrl = 'https://anyway.co.il/api/infographics_data?news_flash_id=14849&end_time=1579368824&start_time=1262304000'
 export const fetchWidgets = async (id:number): Promise<Array<any> | undefined> => {
   try {
@@ -17,5 +18,4 @@ export const fetchWidgets = async (id:number): Promise<Array<any> | undefined> =
   } catch ( error ) {
     console.log( error )
   }
-
 }

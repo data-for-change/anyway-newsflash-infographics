@@ -1,51 +1,48 @@
-import React, {FunctionComponent} from 'react'
+import React, { FunctionComponent } from 'react'
 
-import {useStore} from '../../store/storeConfig'
+import { useStore } from '../../store/storeConfig'
 import RootStore from '../../store/root.store'
-import {observer} from 'mobx-react-lite'
-
+import { observer } from 'mobx-react-lite'
 import {Grid} from '../atoms'
 import AnyWayCard from '../molecules/AnyWayCard'
 import PieChartView from '../molecules/PieChartView'
-import BarChartView from '../molecules/BarChartView'
 import LocationMap from '../molecules/LocationMap'
+import CountByYearBarWidget from '../molecules/CountByYearBarWidget'
 import HeatMap from '../molecules/HeatMap'
 
-interface IProps {
-}
+interface IProps {}
 
-const WidgetsTemplate: FunctionComponent<IProps> = observer(() => {
-  const store: RootStore = useStore();
-  const widgetsData: any = store.newsFlashWidgetsData;
-  const widgets = widgetsData.map((widget: any) => {
-    return (
-      <Grid.Item>
-        <AnyWayCard key={widget.name}>
-          {widget.name === 'most_severe_accidents' ? (
-            <LocationMap key={widget.name} marker={{lat: 32.0853, lng: 34.7818}}/>
-          ) : null}
-          {widget.name === 'most_severe_accidents_heatmap' ? (
-            <HeatMap key={widget.name} data={widget.data} marker={{lat: 32.0853, lng: 34.7818}}/>
-          ) : null}
-          {widget.name === 'accident_count_by_severity' ? (
-            <div key={widget.name}>Text</div>
-          ) : null}
-          {widget.name === 'accident_count_by_accident_type' ? (
-            <PieChartView key={widget.name} data={widget.data}/>
-          ) : null}
-          {widget.name === 'accident_count_by_accident_year' ? (
-            <BarChartView key={widget.name} data={widget.data}/>
-          ) : null}
-        </AnyWayCard>
-      </Grid.Item>
-    )
-  });
-  
-  return (
-    <Grid.Container>
-      {widgets}
-    </Grid.Container>
-  )
-});
-
-export default WidgetsTemplate
+const getWidgetByType = (widget: any) => {
+	switch (widget.name) {
+		case 'most_severe_accidents': {
+			return <LocationMap marker={{ lat: 32.0853, lng: 34.7818 }} />
+		}
+		case 'most_severe_accidents_heatmap': {
+			return <HeatMap key={widget.name} data={widget.data} marker={{ lat: 32.0853, lng: 34.7818 }} />
+		}
+		case 'accident_count_by_severity': {
+			return <div>TEXT</div>
+		}
+		case 'accident_count_by_accident_type': {
+			return <PieChartView data={widget.data} />
+		}
+		case 'accident_count_by_accident_year': {
+			return <CountByYearBarWidget data={widget.data} />
+		}
+		default:
+			return null
+	}
+};
+const WidgetsTemplate: FunctionComponent<IProps> = () => {
+	const store: RootStore = useStore();
+	const widgetsData = store.newsFlashWidgetsData;
+	
+	return (
+		<Grid.Container>
+			{widgetsData.map((widget, index) => (
+				<AnyWayCard key={index}>{getWidgetByType(widget)}</AnyWayCard>
+			))}
+		</Grid.Container>
+	)
+};
+export default observer(WidgetsTemplate)

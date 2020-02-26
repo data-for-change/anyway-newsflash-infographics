@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 import WidgetsTemplate from '../components/templates/WidgetsTemplate'
 
 interface IProps {}
 
-export const HomePage: React.FC<IProps> = () => {
-    return <WidgetsTemplate />
+const HomePage: FunctionComponent<IProps> = () => {
+	return <WidgetsTemplate />
 }
+export default HomePage
