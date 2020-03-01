@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import logoHasdna from '../../assets/hasadna.png';
 import { makeStyles } from '@material-ui/core/styles';
-import {AnyWayLink} from '../atoms/AnywayLink';
+import {AnywayLink} from '../atoms/';
 import {onLinkColor} from '../../style/_globals';
 import {onLinkColorHover} from '../../style/_globals';
 interface IProps {
@@ -33,8 +33,8 @@ export const Footer: FunctionComponent<IProps> = () => {
       <a href="https://www.hasadna.org.il/" target="_blank" rel="noopener noreferrer">
        <img src={logoHasdna} alt="logo-hasadna" className={classes.logo}/>
       </a>
-      <AnyWayLink to="/todo">אודות</AnyWayLink>
-      <AnyWayLink to="/todo">תודות</AnyWayLink>
+      <AnywayLink to="/todo">אודות</AnywayLink>
+      <AnywayLink to="/todo">תודות</AnywayLink>
     </footer>
   );
 };
