@@ -16,7 +16,7 @@ const News: React.FC = () => {
   return (<Box flexDirection={'column'}>
     {store.newsFlashCollection.map((news) => {
       const date :null|string = news.date ==null ? '': new Date(news.date).toLocaleDateString();
-      return <AnywayLink key={news.id} onClick={onNewsClick.bind(null, news.id)}>
+      return <AnywayLink key={news.id} onClick={onNewsClick.bind(null, news.id)} to={`newsflash/${news.id}`}>
         <Box border={1} borderColor='#6495ed'>
           <Text type={TextType.NEWS_FLASH_TITLE} children={`${date}, ${news.source}` }/>
           <Text type={TextType.NEWS_FLASH_CONTENT} children={news.title}/>
