@@ -1,12 +1,11 @@
 import React, { FunctionComponent } from 'react'
 import { VictoryPie, VictoryContainer } from 'victory'
+import { IWidgetAccidentsByType, IWidgetCountBySeverity } from '../../models/WidgetData'
 
 interface IProps {
-	data: pieChartDataType[]
-}
-export type pieChartDataType = {
-	accident_type: string
-	count: number
+	data: IWidgetAccidentsByType[] | IWidgetCountBySeverity[]
+	xLabel: string
+	yLabel: string | number
 }
 export const PieChartView: FunctionComponent<IProps> = props => {
 	const pieChartViewStyle = {
@@ -15,11 +14,12 @@ export const PieChartView: FunctionComponent<IProps> = props => {
 			fill: 'black'
 		}
 	}
+
 	return (
 		<VictoryPie
 			data={props.data}
-			x='accident_type'
-			y='count'
+			x={props.xLabel}
+			y={props.yLabel}
 			style={pieChartViewStyle}
 			labelRadius={60}
 			innerRadius={20}
