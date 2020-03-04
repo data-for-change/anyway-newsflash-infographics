@@ -25,13 +25,12 @@ export default class RootStore {
     }
 	// prop is a property on RootStore to be initialized, like: this.suggestions
 	safeSet(prop: string, valueToCheck: any) {
-		if (Array.isArray(valueToCheck)) {
+		if (valueToCheck && Array.isArray(valueToCheck)) {
 			this[prop] = valueToCheck
 		} else {
 			console.warn(`Property [${prop}] was not initialized. Invalid value (${valueToCheck})`)
 		}
 	}
-
 
     @action
     selectNewsFlash (id: number ): void {
