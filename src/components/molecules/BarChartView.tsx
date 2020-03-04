@@ -3,8 +3,8 @@ import { VictoryContainer, VictoryBar, VictoryChart, VictoryLabel } from 'victor
 import { IWidgetAccidentsByYear } from '../../models/WidgetData'
 interface IProps {
 	data: IWidgetAccidentsByYear[]
-	xLabel: string
-	yLabel: string
+	xLabel: string | number
+	yLabel: string | number
 }
 const BarChartView: FunctionComponent<IProps> = props => {
 	const barChartViewStyle = { data: { fill: '#c43a31' } }
