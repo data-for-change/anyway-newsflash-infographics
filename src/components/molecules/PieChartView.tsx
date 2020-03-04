@@ -7,6 +7,7 @@ interface IProps {
 	xLabel: string
 	yLabel: string | number
 }
+
 export const PieChartView: FunctionComponent<IProps> = props => {
 	const pieChartViewStyle = {
 		labels: {

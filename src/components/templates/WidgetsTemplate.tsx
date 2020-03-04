@@ -8,6 +8,7 @@ import AnyWayCard from '../molecules/AnyWayCard'
 import LocationMap from '../molecules/LocationMap'
 import CountByYearBarWidget from '../molecules/CountByYearBarWidget'
 import CountByTypePieWidget from '../molecules/CountByTypePieWidget'
+import CountBySeverityPieWidget from '../molecules/CountBySeverityPieWidget'
 import HeatMap from '../molecules/HeatMap'
 
 interface IProps {}
@@ -27,11 +28,11 @@ const getWidgetByType = (widget: any) => {
 			)
 		}
 		case 'accident_count_by_severity': {
-			return <div>TEXT</div>
+			return <CountBySeverityPieWidget data={widget.data} />
 		}
 		case 'accident_count_by_accident_type': {
 			return <CountByTypePieWidget data={widget.data} />
-		}
+				}
 		case 'accident_count_by_accident_year': {
 			return <CountByYearBarWidget data={widget.data} />
 		}
