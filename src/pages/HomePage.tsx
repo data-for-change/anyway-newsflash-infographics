@@ -8,8 +8,8 @@ interface IProps { }
 const HomePage: FunctionComponent<IProps> = () => {
 
 	return (
-		<div>
-			<Box display='flex' flexGrow={1}>
+		<div style={{height:'100%'}}>
+			<Box display='flex' flexGrow={1} >
 				<Box flexBasis={300} flexShrink={0}>
 					<SideBar />
 				</Box>
