@@ -8,32 +8,32 @@ interface IProps {
 }
 
 const useStyles = makeStyles({
-    mainBox: {
-        height: 'inherit'
-    },
-    sideBarBox: {
-        height: 'inherit',
-        overflow: 'auto'
-
-    },
-    widgetBox: {
-        height: 'inherit',
-        overflow: 'auto'
-    }
+  mainBox: {
+    height: 'inherit'
+  },
+  sideBarBox: {
+    height: 'inherit',
+    overflow: 'auto'
+    
+  },
+  widgetBox: {
+    height: 'inherit',
+    overflow: 'auto'
+  }
 });
 const HomePage: FunctionComponent<IProps> = () => {
-    const classes = useStyles();
-
-    return (
-        <Box display='flex' flexGrow={1} className={classes.mainBox}>
-            <Box flexBasis={300} flexShrink={0} className={classes.sideBarBox}>
-                <SideBar/>
-            </Box>
-            <Box flexGrow={1} className={classes.widgetBox}>
-                <WidgetsTemplate/>
-            </Box>
-        </Box>
-    )
+  const classes = useStyles();
+  
+  return (
+    <Box display='flex' flexGrow={1} className={classes.mainBox}>
+      <Box flexBasis={300} flexShrink={0} className={classes.sideBarBox}>
+        <SideBar/>
+      </Box>
+      <Box flexGrow={1} className={classes.widgetBox}>
+        <WidgetsTemplate/>
+      </Box>
+    </Box>
+  )
 };
 
 export default HomePage
