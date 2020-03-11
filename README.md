@@ -1,3 +1,7 @@
+[![deploy-development](https://github.com/hasadna/anyway-newsflash-infographics/workflows/deploy-development/badge.svg)](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development)
+
+
+
 # ANYWAY: Newsflash InfoGraphics
 ## About this project
 ## Want to help?
