@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import HomePage from './pages/HomePage'
-import About from './pages/About';
+import About from './pages/AboutPage';
 import { Footer } from './components/templates/Footer'
 import { Box, CssBaseline } from '@material-ui/core'
 import { store, StoreContext } from './store/storeConfig'
