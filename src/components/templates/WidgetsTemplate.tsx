@@ -45,7 +45,7 @@ const WidgetsTemplate: FunctionComponent<IProps> = () => {
 	const widgetsData = store.newsFlashWidgetsData
 
 	return (
-		<Grid.Container>
+		<Grid.Container  >
 			{widgetsData.map((widget, index) => (
 				<AnyWayCard key={index}>{getWidgetByType(widget)}</AnyWayCard>
 			))}
