@@ -3,7 +3,7 @@ import { fetchDefaultWidgets } from './widgets.data.service';
 
 export function initService (): Promise<any> {
   const promiseArray = [
-    fetchNews(),
+    fetchNews('', 20, true),
     fetchDefaultWidgets()
     /* add promises here */
   ];

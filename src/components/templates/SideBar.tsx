@@ -7,7 +7,7 @@ interface IProps {
 
 // remove when no longer required
 const devStyles = {
-    border: '2px dashed blue',
+    borderLeft: '1px solid rgba(0, 0, 0, 0.12)',
     height:'100%'
 };
 export const SideBar: FunctionComponent<IProps> = () => {
