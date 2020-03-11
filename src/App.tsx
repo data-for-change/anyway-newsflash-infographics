@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import HomePage from './pages/HomePage'
-import { SideBar } from './components/templates/SideBar'
+import About from './pages/About';
 import { Footer } from './components/templates/Footer'
 import { Box, CssBaseline } from '@material-ui/core'
 import { store, StoreContext } from './store/storeConfig'
@@ -14,14 +14,10 @@ const App: React.FC = () => {
 				<CssBaseline />
 				<Header />
 				<Box display='flex' flexDirection='column' height='100%'>
-					<Box display='flex' flexGrow={1}>
-						<Box flexGrow={1}>
-							<SideBar />
-						</Box>
 						<Switch>
-							<Route path='/' component={HomePage} />
+							<Route exact path='/' component={HomePage} />
+							<Route path='/about' component={About} />
 						</Switch>
-					</Box>
 					<Footer />
 				</Box>
 			</Router>

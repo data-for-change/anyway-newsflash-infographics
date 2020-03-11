@@ -33,7 +33,7 @@ export const Footer: FunctionComponent<IProps> = () => {
       <a href="https://www.hasadna.org.il/" target="_blank" rel="noopener noreferrer">
        <img src={logoHasdna} alt="logo-hasadna" className={classes.logo}/>
       </a>
-      <AnyWayLink to="/todo">אודות</AnyWayLink>
+      <AnyWayLink to="/about">אודות</AnyWayLink>
       <AnyWayLink to="/todo">תודות</AnyWayLink>
     </footer>
   );
