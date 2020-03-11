@@ -7,24 +7,21 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 interface IProps {
 }
 
+const useStyles = makeStyles({
+    mainBox: {
+        height: 'inherit'
+    },
+    sideBarBox: {
+        height: 'inherit',
+        overflow: 'auto'
+
+    },
+    widgetBox: {
+        height: 'inherit',
+        overflow: 'auto'
+    }
+});
 const HomePage: FunctionComponent<IProps> = () => {
-
-    const useStyles = makeStyles({
-        mainBox: {
-            height: 'inherit'
-        },
-        sideBarBox: {
-            height: 'inherit',
-            overflow: 'auto'
-
-        },
-        widgetBox: {
-            height: 'inherit',
-            overflow: 'auto'
-        }
-
-    });
-
     const classes = useStyles();
 
     return (
@@ -36,7 +33,6 @@ const HomePage: FunctionComponent<IProps> = () => {
                 <WidgetsTemplate/>
             </Box>
         </Box>
-
     )
 };
 
