@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { VictoryContainer, VictoryBar, VictoryChart, VictoryLabel } from 'victory'
+import { VictoryContainer, VictoryBar, VictoryChart } from 'victory'
 import { IWidgetAccidentsByYear } from '../../models/WidgetData'
 interface IProps {
 	data: IWidgetAccidentsByYear[]
