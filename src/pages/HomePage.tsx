@@ -1,24 +1,43 @@
-import React, { FunctionComponent } from 'react'
+import React, {FunctionComponent} from 'react'
 import WidgetsTemplate from '../components/templates/WidgetsTemplate'
-import { Box } from '@material-ui/core'
-import { SideBar } from '../components/templates/SideBar'
+import {Box} from '@material-ui/core'
+import {SideBar} from '../components/templates/SideBar'
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
-interface IProps { }
+interface IProps {
+}
 
 const HomePage: FunctionComponent<IProps> = () => {
 
-	return (
-		<div style={{height:'100%'}}>
-			<Box display='flex' flexGrow={1} >
-				<Box flexBasis={300} flexShrink={0}>
-					<SideBar />
-				</Box>
-				<Box flexGrow={1}>
-					<WidgetsTemplate />
-				</Box>
-			</Box>
-		</div>
-	)
+    const useStyles = makeStyles({
+        mainBox: {
+            height: 'inherit'
+        },
+        sideBarBox: {
+            height: 'inherit',
+            overflow: 'auto'
+
+        },
+        widgetBox: {
+            height: 'inherit',
+            overflow: 'auto'
+        }
+
+    });
+
+    const classes = useStyles();
+
+    return (
+        <Box display='flex' flexGrow={1} className={classes.mainBox}>
+            <Box flexBasis={300} flexShrink={0} className={classes.sideBarBox}>
+                <SideBar/>
+            </Box>
+            <Box flexGrow={1} className={classes.widgetBox}>
+                <WidgetsTemplate/>
+            </Box>
+        </Box>
+
+    )
 };
 
 export default HomePage

@@ -8,8 +8,7 @@ const GridContainer: FunctionComponent<IProps> = ({ children }) => {
         maxWidth: '100%',
         justifyContent: 'center',
         padding: 20,
-        overflow:'auto',
-        height:'50%'
+        overflow:'auto'
     };
     return (
         <MaterialGrid style={devStyles} container>
