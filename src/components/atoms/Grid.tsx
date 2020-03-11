@@ -6,7 +6,6 @@ interface IProps {}
 const GridContainer: FunctionComponent<IProps> = ({ children }) => {
     const devStyles = {
         maxWidth: '100%',
-        margin: 12,
         justifyContent: 'center',
         padding: 20
     };

@@ -1,8 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import {Text, TextType} from '../components/atoms';
 
-
-
 interface IProps {}
 
 const About: FunctionComponent<IProps> = () => {
