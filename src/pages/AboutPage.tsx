@@ -3,7 +3,7 @@ import {Text, TextType} from '../components/atoms';
 
 interface IProps {}
 
-const About: FunctionComponent<IProps> = () => {
+const AboutPage: FunctionComponent<IProps> = () => {
     return (
         <div>
             <Text type={TextType.PAGE_TITLE}>About</Text>
@@ -15,4 +15,4 @@ const About: FunctionComponent<IProps> = () => {
     )
 }
 
-export default About
+export default AboutPage

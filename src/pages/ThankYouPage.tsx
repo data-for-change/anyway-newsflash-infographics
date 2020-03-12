@@ -1,11 +1,9 @@
 import React, { FunctionComponent } from 'react';
 import {Text, TextType} from '../components/atoms';
 
-
-
 interface IProps {}
 
-const ThankYou: FunctionComponent<IProps> = () => {
+const ThankYouPage: FunctionComponent<IProps> = () => {
     return (
         <div>
             <Text type={TextType.PAGE_TITLE}>Thank You</Text>
@@ -15,4 +13,4 @@ const ThankYou: FunctionComponent<IProps> = () => {
     )
 }
 
-export default ThankYou;
+export default ThankYouPage;
