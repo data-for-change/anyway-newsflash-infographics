@@ -9,6 +9,7 @@ import CountByYearBarWidget from '../molecules/CountByYearBarWidget'
 import CountByTypePieWidget from '../molecules/CountByTypePieWidget'
 import CountBySeverityPieWidget from '../molecules/CountBySeverityPieWidget'
 import HeatMap from '../molecules/HeatMap'
+import LocationMap from '../molecules/LocationMap'
 
 interface IProps {}
 
@@ -16,7 +17,7 @@ const getWidgetByType = (widget: any) => {
   switch (widget.name) {
     case 'most_severe_accidents': {
       return (
-        <div>Place holder for most severe accidents Widget</div>
+        <LocationMap  key={widget.name} data={widget.data} marker={{ lat: 32.0853, lng: 34.7818 }}  />
       )
     }
     case 'most_severe_accidents_heatmap': {
