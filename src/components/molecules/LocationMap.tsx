@@ -10,15 +10,10 @@ L.Icon.Default.mergeOptions({
     iconUrl: require('leaflet/dist/images/marker-icon.png'),
     shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 })
-const lIconSizes = { iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41] }
-const iconSize = lIconSizes;
-
-
 interface IProps {
     data: any[],
     marker: { lat: number; lng: number }
 }
-
 const INITIAL_ZOOM = 13
 const WRAPPER_STYLES = { height: '100%', width: '100%' }
 
@@ -42,31 +37,30 @@ const LocationMap: FunctionComponent<IProps> = ({ data, marker }) => {
     )
 }
 const setBounds = (data: any[]) => {
-    var bounds;
-    var corner1 = L.latLng(29.50, 34.22)
-    var corner2 = L.latLng(33.271, 35.946)
-    var arr:L.LatLng[] = [];
-    var lastPoint:L.LatLng = L.latLng(0,0) ;
+    const corner1 = L.latLng(29.50, 34.22)
+    const corner2 = L.latLng(33.271, 35.946)
+    let arr: L.LatLng[] = [];
+    let lastPoint: L.LatLng = L.latLng(0, 0);
     data.forEach(x => {
         if (x.latitude !== null && x.longitude !== null) {
             let p = new L.LatLng(x.latitude, x.longitude);
-            if ((lastPoint.lat ==0 && lastPoint.lng ==0 ) || x.latitude != lastPoint.lat || x.longitude != lastPoint.lng)
-            {
+            if ((lastPoint.lat === 0 && lastPoint.lng === 0) || x.latitude !== lastPoint.lat || x.longitude !== lastPoint.lng) {
                 arr.push(p)
-                //prevent insertion of dupliacte same point
-                lastPoint =  p;
+                //prevent insertion of duplicate same point
+                lastPoint = p;
             }
         }
     });
     //bounds for single point
-    if (arr.length == 1){
-        arr=[];
-        arr.push( L.latLng(lastPoint.lat+0.01, lastPoint.lng +0.01))
-        arr.push( L.latLng(lastPoint.lat-0.01, lastPoint.lng -0.01))
+    if (arr.length === 1) {
+        arr.length = 0; //clean tha array
+        arr.push(L.latLng(lastPoint.lat + 0.01, lastPoint.lng + 0.01))
+        arr.push(L.latLng(lastPoint.lat - 0.01, lastPoint.lng - 0.01))
     }
+    //in case no lat/lon info 
     if (arr.length < 2)
-        arr= [corner1, corner2];
-    bounds = L.latLngBounds(arr)    
+        arr = [corner1, corner2];
+    const bounds = L.latLngBounds(arr)
     return bounds;
 }
 export default LocationMap
