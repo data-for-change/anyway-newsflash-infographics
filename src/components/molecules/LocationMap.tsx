@@ -22,7 +22,7 @@ const LocationMap: FunctionComponent<IProps> = ({ data, marker }) => {
         if (x.latitude !== null && x.longitude !== null) {
             return <AnywayMarker markerdata={x} />
         }
-        else return null;
+        return null;
     });
     const bounds = setBounds(data)
 
