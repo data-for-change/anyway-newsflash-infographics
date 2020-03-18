@@ -99,6 +99,17 @@ You can safely use [named imports](https://stackoverflow.com/questions/36795819/
 when working with [Material UI components](https://material-ui.com/guides/minimizing-bundle-size/#how-to-reduce-the-bundle-size).
 
 
+### VScode prettier
+If you're using VScode prettier, please use the following config:
+```
+{
+  "prettier.jsxSingleQuote": true,
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "single",
+  "prettier.singleQuote": true
+} 
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
