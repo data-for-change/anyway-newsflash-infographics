@@ -1,7 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import HomePage from './pages/HomePage'
-import About from './pages/AboutPage';
+import AboutPage from './pages/AboutPage';
+import ThankYouPage from './pages/ThankYouPage';
 import { Footer } from './components/templates/Footer'
 import {Box, createStyles, CssBaseline, makeStyles, Theme} from '@material-ui/core'
 import { store, StoreContext } from './store/storeConfig'
@@ -31,7 +32,8 @@ const App: React.FC = () => {
 				<Box height={pageContentHeight} className={classes.pageContent}>
 						<Switch>
 							<Route exact path='/' component={HomePage} />
-							<Route path='/about' component={About} />
+							<Route path='/about' component={AboutPage} />
+							<Route path='/thank-you' component={ThankYouPage} />
 						</Switch>
 				</Box>
 				<Box height={footerHeight}>
