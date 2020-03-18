@@ -4,6 +4,8 @@
 
 # ANYWAY: Newsflash InfoGraphics
 ## About this project
+Learn more about our [Vision](https://github.com/hasadna/anyway-newsflash-infographics/blob/development/Vision.md)
+
 ## Want to help?
 Want to file a bug, contribute some code, or improve documentation? Excellent! Please follow these steps
 ### First thing first
@@ -92,6 +94,16 @@ A standard procedure for working on an issue would be to:
 5. Get a code review approval / reject
 6. After approval, merge your PR
 7. Delete your branch after merge
+
+
+### CICD <a id="cicd"></a> 
+We use [github actions](https://github.com/marketplace?type=actions) for the following flows:
+
+1. [on-push CI](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3ACI) - provide per-PR CI testing
+2. [deploy-development](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development) continous deployment of `development` branch to https://anyway-newsflash-infographics.web.app/
+3. [deploy-master]() - TBD
+
+Note: see the flows status badge at the top of this file
 
 ### About bundle size
 Since [Create React App](https://github.com/facebook/create-react-app) uses webpack under the hood,
