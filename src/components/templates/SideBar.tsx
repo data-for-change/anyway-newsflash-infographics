@@ -1,21 +1,24 @@
 import React, {FunctionComponent} from 'react';
-import {Box} from '@material-ui/core';
-import  News from './News';
+import {Box, makeStyles} from '@material-ui/core';
+import News from './News';
 import {NewsFlashFilterPanel} from "../atoms/NewsFlahsFilterPanel";
+
 interface IProps {
 }
 
-// remove when no longer required
-const devStyles = {
-    border: '2px dashed blue',
-    height:'100%'
-};
-export const SideBar: FunctionComponent<IProps> = () => {
+const useStyles = makeStyles({
+    root: {
+        borderLeft: '1px solid rgba(0, 0, 0, 0.12)'
+    }
+});
 
-  return (
-      <Box style={devStyles} >
-          <NewsFlashFilterPanel />
-        <News/>
-      </Box>
-  );
+export const SideBar: FunctionComponent<IProps> = () => {
+    const classes = useStyles();
+
+    return (
+        <Box className={classes.root}>
+            <NewsFlashFilterPanel/>
+            <News/>
+        </Box>
+    );
 };

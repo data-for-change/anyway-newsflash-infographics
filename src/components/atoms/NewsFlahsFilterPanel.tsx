@@ -1,6 +1,6 @@
 import React from 'react';
 import {Box, makeStyles} from '@material-ui/core';
-import ynetLogo from '../../assets/Ynet_website_logo.svg';
+import ynetLogo from '../../assets/ynet-website-logo.svg';
 import wallaLogo from '../../assets/walla-logo.svg';
 import {AnyWayButton} from "./AnyWayButton";
 
