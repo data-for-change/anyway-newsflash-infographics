@@ -7,7 +7,6 @@ import { Footer } from './components/templates/Footer'
 import {Box, createStyles, CssBaseline, makeStyles, Theme} from '@material-ui/core'
 import { store, StoreContext } from './store/storeConfig'
 import { Header } from './components/molecules/Header'
-import WidgetsTemplate from './components/templates/WidgetsTemplate';
 
 // main components height - must add up to 100
 const headerHeight = '6vh';

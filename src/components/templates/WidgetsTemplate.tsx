@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from 'react'
+import React, {useEffect,FunctionComponent} from 'react'
 
 import {useStore} from '../../store/storeConfig'
 import RootStore from '../../store/root.store'
@@ -10,7 +10,9 @@ import CountByTypePieWidget from '../molecules/CountByTypePieWidget'
 import CountBySeverityPieWidget from '../molecules/CountBySeverityPieWidget'
 import HeatMap from '../molecules/HeatMap'
 
-interface IProps {}
+interface IProps {
+  id: number;
+}
 
 const getWidgetByType = (widget: any) => {
   switch (widget.name) {
@@ -42,10 +44,13 @@ const getWidgetByType = (widget: any) => {
   }
 };
 
-const WidgetsTemplate: FunctionComponent<IProps> = () => {
+const WidgetsTemplate: FunctionComponent<IProps> = ({id}) => {
   const store: RootStore = useStore();
+  useEffect(()=>{
+    store.selectNewsFlash(id);
+  },[id])
   const widgetsData = store.newsFlashWidgetsData;
-  
+
   return (
     <Grid.Container>
       {widgetsData.map((widget, index) => (
