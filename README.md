@@ -4,6 +4,8 @@
 
 # ANYWAY: Newsflash InfoGraphics
 ## About this project
+Learn more about our [Vision](https://github.com/hasadna/anyway-newsflash-infographics/blob/development/Vision.md)
+
 ## Want to help?
 Want to file a bug, contribute some code, or improve documentation? Excellent! Please follow these steps
 ### First thing first
@@ -93,11 +95,32 @@ A standard procedure for working on an issue would be to:
 6. After approval, merge your PR
 7. Delete your branch after merge
 
+
+### CICD <a id="cicd"></a> 
+We use [github actions](https://github.com/marketplace?type=actions) for the following flows:
+
+1. [on-push CI](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3ACI) - provide per-PR CI testing
+2. [deploy-development](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development) continous deployment of `development` branch to https://anyway-newsflash-infographics.web.app/
+3. [deploy-master]() - TBD
+
+Note: see the flows status badge at the top of this file
+
 ### About bundle size
 Since [Create React App](https://github.com/facebook/create-react-app) uses webpack under the hood,
 You can safely use [named imports](https://stackoverflow.com/questions/36795819/when-should-i-use-curly-braces-for-es6-import/36796281#36796281)
 when working with [Material UI components](https://material-ui.com/guides/minimizing-bundle-size/#how-to-reduce-the-bundle-size).
 
+
+### VScode prettier
+If you're using VScode prettier, please use the following config:
+```
+{
+  "prettier.jsxSingleQuote": true,
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "single",
+  "prettier.singleQuote": true
+} 
+```
 
 ## Available Scripts
 
