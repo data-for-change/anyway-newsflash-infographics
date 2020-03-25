@@ -1,8 +1,10 @@
 import 'leaflet-css'
 import React, { FunctionComponent } from 'react'
-import L from 'leaflet'
+import L, {LatLng} from 'leaflet'
 import { Map, TileLayer } from 'react-leaflet'
 import AnywayMarker from '../atoms/AnywayMarker'
+import {uniquePoints} from '../../utils/utils';
+import {IPoint} from '../../models/Point';
 
 // TODO: Move to init.service once it's merged.
 L.Icon.Default.mergeOptions({
@@ -16,15 +18,19 @@ interface IProps {
 }
 const INITIAL_ZOOM = 13
 const WRAPPER_STYLES = { height: '100%', width: '100%' }
+const DEFAULT_BOUNDS = [
+    L.latLng(29.50, 34.22),     // most possible south-west point
+    L.latLng(33.271, 35.946),   // most possible north-east point
+];
 
 const LocationMap: FunctionComponent<IProps> = ({ data, marker }) => {
-    let markers = data.map((x: any) => {
+    let markers = data.map((x: IPoint, i:number) => {
         if (x.latitude !== null && x.longitude !== null) {
-            return <AnywayMarker markerdata={x} />
+            return <AnywayMarker markerdata={x} key={i}/>
         }
         return null;
     });
-    const bounds = setBounds(data)
+    const bounds = getBounds(data);
 
     return (
         <Map center={marker} bounds={bounds} zoom={INITIAL_ZOOM} style={WRAPPER_STYLES}>
@@ -35,32 +41,24 @@ const LocationMap: FunctionComponent<IProps> = ({ data, marker }) => {
             {markers}
         </Map>
     )
-}
-const setBounds = (data: any[]) => {
-    const corner1 = L.latLng(29.50, 34.22)
-    const corner2 = L.latLng(33.271, 35.946)
-    let arr: L.LatLng[] = [];
-    let lastPoint: L.LatLng = L.latLng(0, 0);
-    data.forEach(x => {
-        if (x.latitude !== null && x.longitude !== null) {
-            let p = new L.LatLng(x.latitude, x.longitude);
-            if ((lastPoint.lat === 0 && lastPoint.lng === 0) || x.latitude !== lastPoint.lat || x.longitude !== lastPoint.lng) {
-                arr.push(p)
-                //prevent insertion of duplicate same point
-                lastPoint = p;
-            }
-        }
-    });
-    //bounds for single point
-    if (arr.length === 1) {
-        arr.length = 0; //clean tha array
-        arr.push(L.latLng(lastPoint.lat + 0.01, lastPoint.lng + 0.01))
-        arr.push(L.latLng(lastPoint.lat - 0.01, lastPoint.lng - 0.01))
+};
+
+// get bounding box for collection of points
+const getBounds = (data: IPoint[]) => {
+    let bound: LatLng[] = DEFAULT_BOUNDS;
+    let points = uniquePoints(data);
+    
+    if (points.length === 1) {
+        // single point provided
+        const p = points[0];
+        bound = [
+            L.latLng(p.latitude + 0.01, p.longitude + 0.01),
+            L.latLng(p.latitude - 0.01, p.longitude - 0.01)
+        ]
+    } else if (points.length > 1) {
+        bound = points.map((p) =>  L.latLng(p.latitude, p.longitude))
     }
-    //in case no lat/lon info 
-    if (arr.length < 2)
-        arr = [corner1, corner2];
-    const bounds = L.latLngBounds(arr)
-    return bounds;
-}
+    
+    return L.latLngBounds(bound)
+};
 export default LocationMap
