@@ -8,6 +8,10 @@ import LocationMap from '../components/molecules/LocationMap';
 
 interface IProps {}
 
+interface IRouteProps {
+  id?: string
+}
+
 const useStyles = makeStyles({
   mainBox: {
     height: 'inherit'
@@ -22,9 +26,9 @@ const useStyles = makeStyles({
   }
 });
 
-const HomePage: FunctionComponent<IProps & RouteComponentProps> = ({match}) => {
+const HomePage: FunctionComponent<IProps & RouteComponentProps<IRouteProps>> = ({match}) => {
   const classes = useStyles();
-  const id = (match.params as {id: number}).id;
+  const id = match.params.id ? parseInt(match.params.id) : null;
 
   return (
     <Box display='flex' flexGrow={1} className={classes.mainBox}>

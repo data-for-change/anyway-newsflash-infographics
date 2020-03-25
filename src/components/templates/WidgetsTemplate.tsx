@@ -11,7 +11,7 @@ import CountBySeverityPieWidget from '../molecules/CountBySeverityPieWidget'
 import HeatMap from '../molecules/HeatMap'
 
 interface IProps {
-  id: number;
+  id: number | null;
 }
 
 const getWidgetByType = (widget: any) => {
@@ -46,9 +46,12 @@ const getWidgetByType = (widget: any) => {
 
 const WidgetsTemplate: FunctionComponent<IProps> = ({id}) => {
   const store: RootStore = useStore();
-  useEffect(()=>{
-    store.selectNewsFlash(id);
-  },[id])
+  useEffect(() => {
+    if(id) {
+      store.selectNewsFlash(id);
+    }
+  },[id, store]);
+
   const widgetsData = store.newsFlashWidgetsData;
 
   return (
