@@ -6,7 +6,6 @@ import {onLinkColorHover} from '../../style/_globals';
 
 const useStyles = makeStyles({
     link:{
-      padding :'5px 10px',
       color: `${onLinkColor}`,
       textDecoration:"none",
       "&:hover": {
@@ -21,6 +20,6 @@ interface IProps extends LinkProps {
 const AnyWayLink: FunctionComponent<IProps> = ({...props}) => {
     const classes = useStyles();
     return (<Link className={classes.link} {...props} />)
-    
+
 };
 export default AnyWayLink;
