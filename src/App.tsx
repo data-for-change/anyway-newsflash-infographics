@@ -32,6 +32,7 @@ const App: React.FC = () => {
 				<Box height={pageContentHeight} className={classes.pageContent}>
 						<Switch>
 							<Route exact path='/' component={HomePage} />
+							<Route path="/newsflash/:id" component={HomePage}/>
 							<Route path='/about' component={AboutPage} />
 							<Route path='/thank-you' component={ThankYouPage} />
 						</Switch>
