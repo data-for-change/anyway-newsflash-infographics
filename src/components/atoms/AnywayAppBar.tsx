@@ -4,6 +4,8 @@ import {createStyles, makeStyles, Theme} from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
+    position: 'relative',
+    flexGrow: 1,
     backgroundColor: '#fafafa',
     display: 'flex',
     flexDirection: 'row',
@@ -16,6 +18,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 export const AnywayAppBar: FunctionComponent = ({children}) => {
   const classes = useStyles();
-  
+
   return <AppBar className={classes.root}>{children}</AppBar>;
 };

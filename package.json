@@ -13,6 +13,7 @@
     "leaflet.heat": "^0.2.0",
     "mobx": "^5.15.1",
     "mobx-react-lite": "^1.5.1",
+    "normalize.css": "^8.0.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-leaflet": "^2.6.1",
@@ -24,6 +25,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "cache-proxy": "node cache-proxy/cache-proxy.js",
+    "dev:cache-win": "start cmd /k \"npm run cache-proxy\" && set REACT_APP_USE_LOCAL_PROXY=true&& npm start",
+    "dev:cache": "concurrently \"npm run cache-proxy\" \"REACT_APP_USE_LOCAL_PROXY=true npm start\"",
+    "dev:proxyserver": "REACT_APP_USE_REMOTE_PROXY=anyway-mock-server.herokuapp.com && npm start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -62,6 +67,8 @@
     "@types/react-dom": "^16.9.4",
     "@types/react-leaflet": "^2.5.0",
     "@types/react-router-dom": "^5.1.3",
-    "@types/victory": "^33.1.2"
+    "@types/victory": "^33.1.2",
+    "caching-proxy": "^1.3.3",
+    "concurrently": "^5.1.0"
   }
 }

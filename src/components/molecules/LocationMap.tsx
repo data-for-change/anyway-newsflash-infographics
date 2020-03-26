@@ -11,19 +11,21 @@ L.Icon.Default.mergeOptions({
     iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
     iconUrl: require('leaflet/dist/images/marker-icon.png'),
     shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-})
-interface IProps {
-    data: any[],
-    marker: { lat: number; lng: number }
-}
-const INITIAL_ZOOM = 13
-const WRAPPER_STYLES = { height: '100%', width: '100%' }
+});
+
+const INITIAL_ZOOM = 13;
+const WRAPPER_STYLES = { height: '100%', width: '100%' };
 const DEFAULT_BOUNDS = [
     L.latLng(29.50, 34.22),     // most possible south-west point
     L.latLng(33.271, 35.946),   // most possible north-east point
 ];
 
-const LocationMap: FunctionComponent<IProps> = ({ data, marker }) => {
+interface IProps {
+    data: IPoint[],
+    center?: { lat: number; lng: number }
+}
+
+const LocationMap: FunctionComponent<IProps> = ({ data, center }) => {
     let markers = data.map((x: IPoint, i:number) => {
         if (x.latitude !== null && x.longitude !== null) {
             return <AnywayMarker markerdata={x} key={i}/>
@@ -33,7 +35,7 @@ const LocationMap: FunctionComponent<IProps> = ({ data, marker }) => {
     const bounds = getBounds(data);
 
     return (
-        <Map center={marker} bounds={bounds} zoom={INITIAL_ZOOM} style={WRAPPER_STYLES}>
+        <Map center={center} bounds={bounds} zoom={INITIAL_ZOOM} style={WRAPPER_STYLES}>
             <TileLayer
                 url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -47,7 +49,7 @@ const LocationMap: FunctionComponent<IProps> = ({ data, marker }) => {
 const getBounds = (data: IPoint[]) => {
     let bound: LatLng[] = DEFAULT_BOUNDS;
     let points = uniquePoints(data);
-    
+
     if (points.length === 1) {
         // single point provided
         const p = points[0];
@@ -58,7 +60,7 @@ const getBounds = (data: IPoint[]) => {
     } else if (points.length > 1) {
         bound = points.map((p) =>  L.latLng(p.latitude, p.longitude))
     }
-    
+
     return L.latLngBounds(bound)
 };
 export default LocationMap

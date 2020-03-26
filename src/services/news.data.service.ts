@@ -10,13 +10,13 @@ const errorNews: INewsFlash = {
   date: null
 };
 
-const NEWS_FLASH_API_URL: string = 'https://anyway.co.il/api/news-flash-filters?';
+const NEWS_FLASH_API: string = '/api/news-flash-filters?';
 const SOURCE_QUERY = 'source=';
 const NUM_OF_NEWS = 'news_flash_count=';
 
 export function fetchNews(source = 'walla', count = 5, useMockData = false): Promise<any> {
 
-  return useMockData? mockHTTPCall<Array<INewsFlash|any >>(newsFlashCollectionData): fetch(`${NEWS_FLASH_API_URL}&${SOURCE_QUERY + source}&${NUM_OF_NEWS + count}`)
+  return useMockData? mockHTTPCall<Array<INewsFlash|any >>(newsFlashCollectionData): fetch(`${NEWS_FLASH_API}&${SOURCE_QUERY + source}&${NUM_OF_NEWS + count}`)
       .then(res => res.json()).catch(onErrorFetchNewsFlash);
 }
 

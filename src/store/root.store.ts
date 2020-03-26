@@ -37,8 +37,10 @@ export default class RootStore {
   selectNewsFlash(id: number): void {
     fetchWidgets(id)
       .then((response: any) => {
-        if (response.widgets !== undefined) {
+        if (response && response.widgets !== undefined) {
           this.safeSet('newsFlashWidgetsData', response.widgets)
+        } else  {
+          console.error(`fetchWidgets(id:${id}) invalid response:`, response)
         }
       })
   }
