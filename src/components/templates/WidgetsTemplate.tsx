@@ -19,13 +19,12 @@ const getWidgetByType = (widget: any) => {
   switch (widget.name) {
     case 'most_severe_accidents': {
       return (
-        <LocationMap  key={widget.name} data={widget.data} marker={{ lat: 32.0853, lng: 34.7818 }}  />
+        <LocationMap data={widget.data} center={{ lat: 32.0853, lng: 34.7818 }}  />
       )
     }
     case 'most_severe_accidents_heatmap': {
       return (
         <HeatMap
-          key={widget.name}
           data={widget.data}
           marker={{lat: 32.0853, lng: 34.7818}}
         />
