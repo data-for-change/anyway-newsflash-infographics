@@ -7,13 +7,6 @@ import orangeMarker from '../../assets/marker-icon-2x-orange.png'
 import yellowMarker from '../../assets/marker-icon-2x-yellow.png'
 import shadoMarker from '../../assets/marker-shadow.png'
 
-// TODO: Move to init.service once it's merged.
-L.Icon.Default.mergeOptions({
-    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-    iconUrl: require('leaflet/dist/images/marker-icon.png'),
-    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-})
-
 interface IProps {
     markerdata: any
 }

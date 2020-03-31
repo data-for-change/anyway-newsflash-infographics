@@ -6,13 +6,6 @@ import AnywayMarker from '../atoms/AnywayMarker'
 import {uniquePoints} from '../../utils/utils';
 import {IPoint} from '../../models/Point';
 
-// TODO: Move to init.service once it's merged.
-L.Icon.Default.mergeOptions({
-    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-    iconUrl: require('leaflet/dist/images/marker-icon.png'),
-    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-});
-
 const INITIAL_ZOOM = 13;
 const WRAPPER_STYLES = { height: '100%', width: '100%' };
 const DEFAULT_BOUNDS = [
