@@ -1,5 +1,6 @@
 import {INewsFlash} from '../models/NewFlash';
 import {mockHTTPCall, newsFlashCollectionData} from './mocks/mock.service';
+import axios from 'axios';
 
 const errorNews: INewsFlash = {
   lat:-1,
@@ -16,8 +17,8 @@ const NUM_OF_NEWS = 'news_flash_count=';
 
 export function fetchNews(source = 'walla', count = 5, useMockData = false): Promise<any> {
 
-  return useMockData? mockHTTPCall<Array<INewsFlash|any >>(newsFlashCollectionData): fetch(`${NEWS_FLASH_API}&${SOURCE_QUERY + source}&${NUM_OF_NEWS + count}`)
-      .then(res => res.json()).catch(onErrorFetchNewsFlash);
+  return useMockData? mockHTTPCall<Array<INewsFlash|any >>(newsFlashCollectionData): axios.get(`${NEWS_FLASH_API}&${SOURCE_QUERY + source}&${NUM_OF_NEWS + count}`)
+      .then (res=>res.data).catch(onErrorFetchNewsFlash);
 }
 
 function onErrorFetchNewsFlash() {
