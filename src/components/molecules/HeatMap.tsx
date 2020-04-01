@@ -24,7 +24,7 @@ const useStyles = makeStyles({
     },
 });
 
-const LocationMap: FunctionComponent<IProps> = ({ marker, data }) => {
+const HeatMap: FunctionComponent<IProps> = ({ marker, data }) => {
     const classes = useStyles();
     return (
         <Map center={marker} zoom={INITIAL_ZOOM} className={classes.wrapper}>
@@ -45,4 +45,4 @@ const LocationMap: FunctionComponent<IProps> = ({ marker, data }) => {
     );
 };
 
-export default LocationMap;
+export default HeatMap;

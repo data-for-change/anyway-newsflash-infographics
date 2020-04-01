@@ -49,7 +49,6 @@ const LocationMap: FunctionComponent<IProps> = ({ data, center }) => {
 const getBounds = (data: IPoint[]) => {
     let bound: LatLng[] = DEFAULT_BOUNDS;
     let points = uniquePoints(data);
-
     if (points.length === 1) {
         // single point provided
         const p = points[0];

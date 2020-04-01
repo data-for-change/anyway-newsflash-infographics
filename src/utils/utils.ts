@@ -5,11 +5,12 @@ export function uniquePoints(points: IPoint[]) {
   const uniqueSet = new Set();
   // fill only unique points (not yet included in uniqueSet)
   points.forEach((p) => {
-    if(!uniqueSet.has([p.latitude, p.longitude])) {
+    const pointKey = `${p.latitude}:${p.longitude}`;  // use x:y to create unique key
+    if(!uniqueSet.has(pointKey)) {
       uniquePoints.push(p);
-      uniqueSet.add([p.latitude, p.longitude])
+      uniqueSet.add(pointKey)
     }
   });
-  
+
   return uniquePoints;
 }
