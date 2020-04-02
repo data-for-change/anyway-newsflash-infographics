@@ -1,25 +1,26 @@
 import React from 'react';
 import {Box, makeStyles} from '@material-ui/core';
+import {borderColor} from '../../style/_globals';
 import ynetLogo from '../../assets/ynet-website-logo.svg';
 import wallaLogo from '../../assets/walla-logo.svg';
-import {AnyWayButton} from "./AnyWayButton";
+import {AnyWayButton} from "../atoms/AnyWayButton";
 
 const useStyles = makeStyles({
     image: {
-        height: '70%',
-        width: '70%'
+      maxWidth:'100%',
+      maxHeight:'100%'
     },
     button: {
-        Height: '30%',
-        maxWidth: '20%',
-        border: '0.5px solid grey',
-        boxShadow: '1px 1px 1px 1px #888888'
+      height: '50px',
+      width: '50px',
+      border:  `1px solid ${borderColor}`,
     },
     container: {
-        height: '7%',
+        paddingTop: '16px',
+        paddingBottom: '20px',
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-evenly'
+        justifyContent: 'space-evenly',
     }
 });
 export const NewsFlashFilterPanel: React.FC = () => {
