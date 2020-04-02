@@ -1,10 +1,10 @@
-import React, { FunctionComponent } from "react";
-import { createStyles, makeStyles } from "@material-ui/core/styles";
-import { ListItemIcon, List, ListItem } from "@material-ui/core";
-import { MenuItem } from "@material-ui/core";
-import { FormControl } from "@material-ui/core";
-import { Select } from "@material-ui/core";
-import { CalendarTodayOutlined } from "@material-ui/icons";
+import React, { FunctionComponent } from 'react';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { ListItemIcon, List, ListItem } from '@material-ui/core';
+import { MenuItem } from '@material-ui/core';
+import { FormControl } from '@material-ui/core';
+import { Select } from '@material-ui/core';
+import { CalendarTodayOutlined } from '@material-ui/icons';
 
 interface IProps {}
 
@@ -13,7 +13,7 @@ const useStyles = makeStyles(() =>
     formControl: {
       minWidth: 120,
       maxWidth: 300,
-      textAlign: "right"
+      textAlign: 'right'
     }
   })
 );
@@ -36,15 +36,15 @@ const SelectButton: FunctionComponent<IProps> = ({ children }) => {
   };
 
   return (
-    <List component="nav" aria-label="main mailbox folders">
+    <List component='nav' aria-label='main mailbox folders'>
       <ListItem>
         <ListItemIcon>
           <CalendarTodayOutlined />
         </ListItemIcon>
         <FormControl className={classes.formControl}>
           <Select
-            labelId="controlled-open-select-label"
-            id="controlled-open-select"
+            labelId='controlled-open-select-label'
+            id='controlled-open-select'
             open={open}
             onClose={handleClose}
             onOpen={handleOpen}

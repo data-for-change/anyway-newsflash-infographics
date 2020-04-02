@@ -1,4 +1,4 @@
-import React, {Component, ErrorInfo} from "react";
+import React, {Component, ErrorInfo} from 'react';
 
 export class ErrorBoundary extends Component {
   public state = {
@@ -11,7 +11,7 @@ export class ErrorBoundary extends Component {
 
   // set the types for error  and info
   public componentDidCatch(error: Error, info: ErrorInfo) {
-    console.error("ErrorBoundary caught an error", error, info);
+    console.error('ErrorBoundary caught an error', error, info);
   }
 
   public componentDidUpdate() {

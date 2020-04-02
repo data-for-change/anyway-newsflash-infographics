@@ -1,16 +1,16 @@
-import React, { FunctionComponent, useEffect } from "react";
+import React, { FunctionComponent, useEffect } from 'react';
 
-import { useStore } from "../../store/storeConfig";
-import RootStore from "../../store/root.store";
-import { observer } from "mobx-react-lite";
-import { Grid } from "../atoms";
-import AnyWayCard from "../molecules/AnyWayCard";
-import CountByYearBarWidget from "../molecules/CountByYearBarWidget";
-import CountByTypePieWidget from "../molecules/CountByTypePieWidget";
-import CountBySeverityPieWidget from "../molecules/CountBySeverityPieWidget";
-import HeatMap from "../molecules/HeatMap";
-import LocationMap from "../molecules/LocationMap";
-import ErrorBoundary from "../atoms/ErrorBoundary";
+import { useStore } from '../../store/storeConfig';
+import RootStore from '../../store/root.store';
+import { observer } from 'mobx-react-lite';
+import { Grid } from '../atoms';
+import AnyWayCard from '../molecules/AnyWayCard';
+import CountByYearBarWidget from '../molecules/CountByYearBarWidget';
+import CountByTypePieWidget from '../molecules/CountByTypePieWidget';
+import CountBySeverityPieWidget from '../molecules/CountBySeverityPieWidget';
+import HeatMap from '../molecules/HeatMap';
+import LocationMap from '../molecules/LocationMap';
+import ErrorBoundary from '../atoms/ErrorBoundary';
 
 
 interface IProps {
@@ -21,7 +21,7 @@ const getWidgetByType = (widget: any) => {
   let widgetComponent;
 
   switch (widget.name) {
-    case "most_severe_accidents": {
+    case 'most_severe_accidents': {
       widgetComponent = (
         <LocationMap
           data={widget.data}
@@ -30,20 +30,20 @@ const getWidgetByType = (widget: any) => {
       );
       break;
     }
-    case "accidents_heat_map": {
+    case 'accidents_heat_map': {
       // widgetComponent = <HeatMap data={widget.data} marker={{lat: 32.0853, lng: 34.7818}}/>;
       widgetComponent = <div>HeatMap under construction</div>;
       break;
     }
-    case "accident_count_by_severity": {
+    case 'accident_count_by_severity': {
       widgetComponent = <CountBySeverityPieWidget data={widget.data} />;
       break;
     }
-    case "accident_count_by_accident_type": {
+    case 'accident_count_by_accident_type': {
       widgetComponent = <CountByTypePieWidget data={widget.data} />;
       break;
     }
-    case "accident_count_by_accident_year": {
+    case 'accident_count_by_accident_year': {
       widgetComponent = <CountByYearBarWidget data={widget.data} />;
       break;
     }
