@@ -1,4 +1,4 @@
-import 'leaflet-css'
+import "leaflet/dist/leaflet.css";
 import React, { FC } from 'react'
 import L from 'leaflet'
 import { Marker, Popup } from 'react-leaflet'
