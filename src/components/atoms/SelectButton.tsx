@@ -12,7 +12,8 @@ const useStyles = makeStyles(() =>
   createStyles({
     formControl: {
       minWidth: 120,
-      maxWidth: 300
+      maxWidth: 300,
+      textAlign: "right"
     }
   })
 );

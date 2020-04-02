@@ -12,6 +12,7 @@ import HeatMap from "../molecules/HeatMap";
 import LocationMap from "../molecules/LocationMap";
 import ErrorBoundary from "../atoms/ErrorBoundary";
 
+
 interface IProps {
   id: number | null;
 }
