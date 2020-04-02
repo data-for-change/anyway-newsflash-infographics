@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { makeStyles, createStyles, Divider } from "@material-ui/core";
-import { Box } from "@material-ui/core";
+import { makeStyles, createStyles, Divider, Grid } from "@material-ui/core";
 import { AppBar, Toolbar } from "@material-ui/core";
 import SelectButton from "../atoms/SelectButton";
 
@@ -10,6 +9,10 @@ const useStyles = makeStyles(() =>
   createStyles({
     grow: {
       flexGrow: 1
+    },
+    filters: {
+      // display: "flex",
+      // flexFlow: "row wrap"
     }
   })
 );
@@ -18,18 +21,24 @@ const FilterBar: FunctionComponent<IProps> = () => {
   const classes = useStyles();
 
   return (
-    <Box className={classes.grow}>
+    <div className={classes.grow}>
       <AppBar position="static" color="transparent" elevation={0}>
         <Toolbar variant="dense">
-          <div className="filters">
-            <SelectButton />
-            <SelectButton />
-            <SelectButton />
-          </div>
+          <Grid container className={classes.filters}>
+            <Grid item xs={12} md={3}>
+              <SelectButton />
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <SelectButton />
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <SelectButton />
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
       <Divider />
-    </Box>
+    </div>
   );
 };
 
