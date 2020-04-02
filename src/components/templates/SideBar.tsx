@@ -1,7 +1,7 @@
 import React, {FunctionComponent} from 'react';
 import {Box, makeStyles} from '@material-ui/core';
 import News from './News';
-import {NewsFlashFilterPanel} from '../atoms/NewsFlashFilterPanel';
+import {NewsFlashFilterPanel} from '../molecules/NewsFlashFilterPanel';
 import LocationMap from '../molecules/LocationMap';
 import {borderColor} from '../../style/_globals';
 import ErrorBoundary from '../atoms/ErrorBoundary';
