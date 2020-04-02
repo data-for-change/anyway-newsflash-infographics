@@ -5,6 +5,7 @@ import {NewsFlashFilterPanel} from '../atoms/NewsFlahsFilterPanel';
 import LocationMap from '../molecules/LocationMap';
 import {borderColor} from '../../style/_globals';
 import ErrorBoundary from '../atoms/ErrorBoundary';
+import SelectButton from "../atoms/SelectButton";
 
 interface IProps {
 }
@@ -44,6 +45,8 @@ const SideBar: FunctionComponent<IProps> = () => {
           <LocationMap data={[{latitude: 32.0853, longitude: 34.7818}]} center={{lat: 32.0853, lng: 34.7818}}/>
         </ErrorBoundary>
       </Box>
+
+      <SelectButton/>
     </Box>
   );
 };
