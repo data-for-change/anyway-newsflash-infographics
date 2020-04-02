@@ -53,6 +53,7 @@ const SelectButton: FunctionComponent<IProps> = ({ children }) => {
           >
             <MenuItem value={1}>שנה אחרונה</MenuItem>
             <MenuItem value={3}>3 שנים אחרונות</MenuItem>
+            <MenuItem value={5}>5 שנים אחרונות</MenuItem>
             <MenuItem value={8}>8 שנים אחרונות</MenuItem>
           </Select>
         </FormControl>
