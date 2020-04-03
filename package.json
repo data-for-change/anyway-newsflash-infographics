@@ -9,7 +9,6 @@
     "file-saver": "^2.0.2",
     "html2canvas": "^1.0.0-rc.5",
     "leaflet": "^1.6.0",
-    "leaflet-css": "^0.1.0",
     "leaflet.heat": "^0.2.0",
     "mobx": "^5.15.1",
     "mobx-react-lite": "^1.5.1",

@@ -1,7 +1,7 @@
-import 'leaflet-css'
 import React, { FunctionComponent } from 'react'
+import { Map } from 'react-leaflet'
 import L, {LatLng} from 'leaflet'
-import { Map, TileLayer } from 'react-leaflet'
+import "leaflet/dist/leaflet.css";
 import AnywayMarker from '../atoms/AnywayMarker'
 import {uniquePoints} from '../../utils/utils';
 import {IPoint} from '../../models/Point';
@@ -31,7 +31,7 @@ const LocationMap: FunctionComponent<IProps> = ({ data, center }) => {
 
     return (
         <Map center={center} bounds={bounds} zoom={INITIAL_ZOOM} style={WRAPPER_STYLES}>
-          <ReactLeafletGoogleLayer googleMapsLoaderConf= {{KEY:'AIzaSyDGXVTyeDE33aDQiJjqAMLahYFd5mH9aMk'}} type='terrain'/>
+          <ReactLeafletGoogleLayer googleMapsLoaderConf= {{KEY:'AIzaSyDGXVTyeDE33aDQiJjqAMLahYFd5mH9aMk', VERSION: '3.40.6'}} type='terrain'/>
 
           {markers}
         </Map>
