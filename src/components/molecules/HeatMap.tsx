@@ -1,9 +1,10 @@
-import 'leaflet-css';
+import 'leaflet/dist/leaflet.css';
 import React, { FunctionComponent } from 'react';
 import { Map, Marker, TileLayer } from 'react-leaflet';
 // @ts-ignore
 import HeatmapLayer from 'react-leaflet-heatmap-layer';
 import { makeStyles } from '@material-ui/core/styles';
+import ReactLeafletGoogleLayer from "react-leaflet-google-layer";
 
 interface IProps {
     marker: { lat: number, lng: number },
@@ -36,10 +37,7 @@ const HeatMap: FunctionComponent<IProps> = ({ marker, data }) => {
                 latitudeExtractor={(m: any) => m.latitude}
                 intensityExtractor={(m: any) => parseFloat(m.latitude)}
             />
-            <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-            />
+            <ReactLeafletGoogleLayer googleMapsLoaderConf= {{KEY:'AIzaSyDUIWsBLkvIUwzLHMHos9qFebyJ63hEG2M', VERSION: '3.40.6'}} type='terrain'/>
             <Marker position={marker} />
         </Map>
     );
