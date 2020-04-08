@@ -11,7 +11,7 @@ import CountBySeverityPieWidget from '../molecules/CountBySeverityPieWidget'
 import HeatMap from '../molecules/HeatMap'
 import LocationMap from '../molecules/LocationMap'
 import ErrorBoundary from '../atoms/ErrorBoundary';
-import { uniquePoints } from "../../utils/utils";
+import { uniquePoints } from '../../utils/utils';
 
 interface IProps {
   id: number | null;

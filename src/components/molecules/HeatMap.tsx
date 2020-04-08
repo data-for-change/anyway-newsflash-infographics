@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 import { Map, TileLayer } from 'react-leaflet';
 // @ts-ignore
 import HeatmapLayer from 'react-leaflet-heatmap-layer';
-import { IPoint } from "../../models/Point";
+import { IPoint } from '../../models/Point';
 import L, { LatLng } from "leaflet";
 
 import { makeStyles } from '@material-ui/core/styles';
