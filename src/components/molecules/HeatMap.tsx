@@ -1,10 +1,11 @@
 import 'leaflet/dist/leaflet.css';
 import React, { FunctionComponent } from 'react';
-import { Map, Marker, TileLayer } from 'react-leaflet';
+import { Map, Marker } from 'react-leaflet';
 // @ts-ignore
 import HeatmapLayer from 'react-leaflet-heatmap-layer';
 import { makeStyles } from '@material-ui/core/styles';
 import ReactLeafletGoogleLayer from "react-leaflet-google-layer";
+import {getAPIKey} from '../../utils/utils';
 
 interface IProps {
     marker: { lat: number, lng: number },
@@ -37,7 +38,7 @@ const HeatMap: FunctionComponent<IProps> = ({ marker, data }) => {
                 latitudeExtractor={(m: any) => m.latitude}
                 intensityExtractor={(m: any) => parseFloat(m.latitude)}
             />
-            <ReactLeafletGoogleLayer googleMapsLoaderConf= {{KEY:'AIzaSyDUIWsBLkvIUwzLHMHos9qFebyJ63hEG2M', VERSION: '3.40.6'}} type='terrain'/>
+            <ReactLeafletGoogleLayer googleMapsLoaderConf= {{KEY:getAPIKey(), VERSION: '3.40.6'}} type='terrain'/>
             <Marker position={marker} />
         </Map>
     );
