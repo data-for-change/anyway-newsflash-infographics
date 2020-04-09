@@ -7,7 +7,7 @@ import {Grid} from '../atoms'
 import AnyWayCard from '../molecules/AnyWayCard'
 import CountByYearBarWidget from '../molecules/CountByYearBarWidget'
 import CountByTypePieWidget from '../molecules/CountByTypePieWidget'
-import CountBySeverityPieWidget from '../molecules/CountBySeverityPieWidget'
+import CountBySeverityTextWidget from '../molecules/CountBySeverityTextWidget'
 // import HeatMap from '../molecules/HeatMap'
 import LocationMap from '../molecules/LocationMap'
 import ErrorBoundary from '../atoms/ErrorBoundary';
@@ -30,7 +30,8 @@ const getWidgetByType = (widget: any) => {
       break;
     }
     case 'accident_count_by_severity': {
-      widgetComponent = <CountBySeverityPieWidget data={widget.data}/>;
+      //widget wait for data changes from server
+      widgetComponent = <CountBySeverityTextWidget data={widget.data}/>;
       break;
     }
     case 'accident_count_by_accident_type': {
