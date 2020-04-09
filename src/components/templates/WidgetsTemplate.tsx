@@ -1,5 +1,4 @@
-import React, {FunctionComponent, useEffect} from 'react'
-
+import React, { FunctionComponent, useEffect } from 'react';
 import {useStore} from '../../store/storeConfig'
 import RootStore from '../../store/root.store'
 import {observer} from 'mobx-react-lite';
@@ -21,7 +20,12 @@ const getWidgetByType = (widget: any) => {
   let widgetComponent;
   switch (widget.name) {
     case 'most_severe_accidents': {
-      widgetComponent = <LocationMap data={widget.data} center={{lat: 32.0853, lng: 34.7818}}/>;
+      widgetComponent = (
+        <LocationMap
+          data={widget.data}
+          center={{ lat: 32.0853, lng: 34.7818 }}
+        />
+      );
       break;
     }
     case 'accidents_heat_map': {
@@ -54,7 +58,7 @@ const getWidgetByType = (widget: any) => {
   return widgetComponent;
 };
 
-const WidgetsTemplate: FunctionComponent<IProps> = ({id}) => {
+const WidgetsTemplate: FunctionComponent<IProps> = ({ id }) => {
   const store: RootStore = useStore();
   useEffect(() => {
     if (id) {
@@ -65,25 +69,18 @@ const WidgetsTemplate: FunctionComponent<IProps> = ({id}) => {
   const widgetsData = store.newsFlashWidgetsData;
 
   const widgetCards = widgetsData.map((widget, index) => {
-      const widgetComponent = getWidgetByType(widget);
-      if (!widgetComponent) {
-        return null;
-      }
-      return (
-        <AnyWayCard key={index}>
-          <ErrorBoundary>
-            {widgetComponent}
-          </ErrorBoundary>
-        </AnyWayCard>
-      )
+    const widgetComponent = getWidgetByType(widget);
+    if (!widgetComponent) {
+      return null;
     }
-  );
+    return (
+      <AnyWayCard key={index}>
+        <ErrorBoundary>{widgetComponent}</ErrorBoundary>
+      </AnyWayCard>
+    );
+  });
 
-  return (
-    <Grid.Container>
-      {widgetCards}
-    </Grid.Container>
-  )
+  return <Grid.Container>{widgetCards}</Grid.Container>;
 };
 
-export default observer(WidgetsTemplate)
+export default observer(WidgetsTemplate);
