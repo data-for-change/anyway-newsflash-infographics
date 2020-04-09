@@ -7,13 +7,8 @@ import {Grid} from '../atoms'
 import AnyWayCard from '../molecules/AnyWayCard'
 import CountByYearBarWidget from '../molecules/CountByYearBarWidget'
 import CountByTypePieWidget from '../molecules/CountByTypePieWidget'
-<<<<<<< HEAD
-import CountBySeverityPieWidget from '../molecules/CountBySeverityPieWidget'
-// import HeatMap from '../molecules/HeatMap'
-=======
 import CountBySeverityTextWidget from '../molecules/CountBySeverityTextWidget'
 import HeatMap from '../molecules/HeatMap'
->>>>>>> development
 import LocationMap from '../molecules/LocationMap'
 import ErrorBoundary from '../atoms/ErrorBoundary';
 import { uniquePoints } from '../../utils/utils';
