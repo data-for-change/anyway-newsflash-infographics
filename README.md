@@ -95,6 +95,8 @@ A standard procedure for working on an issue would be to:
 6. After approval, merge your PR
 7. Delete your branch after merge
 
+### Server API <a id="serverapi"></a> 
+See [API document](https://docs.google.com/document/d/1Hv5ItvwM3z9nn95LjlsYHL-o18V8PgWrrQOKIPiPymU)
 
 ### CICD <a id="cicd"></a> 
 We use [github actions](https://github.com/marketplace?type=actions) for the following flows:
