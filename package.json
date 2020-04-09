@@ -36,6 +36,12 @@
     "sb": "start-storybook -p 9009 -s public",
     "build-sb": "build-storybook -s public"
   },
+  "prettier": {
+    "singleQuote": true,
+    "arrowParens": "always",
+    "trailingComma": "all",
+    "printWidth": 120
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
