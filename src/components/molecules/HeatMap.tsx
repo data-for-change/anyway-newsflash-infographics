@@ -1,12 +1,14 @@
-import 'leaflet-css';
+import 'leaflet/dist/leaflet.css';
 import React, { FunctionComponent } from 'react';
-import { Map, TileLayer } from 'react-leaflet';
+import { Map } from 'react-leaflet';
 // @ts-ignore
 import HeatmapLayer from 'react-leaflet-heatmap-layer';
 import { IPoint } from '../../models/Point';
 import L, { LatLng } from "leaflet";
 
 import { makeStyles } from '@material-ui/core/styles';
+import ReactLeafletGoogleLayer from 'react-leaflet-google-layer';
+import {getAPIKey} from '../../utils/utils';
 
 const INITIAL_ZOOM = 13;
 const useStyles = makeStyles({
@@ -39,10 +41,7 @@ const HeatMap: FunctionComponent<IProps> = ( {data, center} ) => {
         latitudeExtractor={(m: any) => m.latitude}
         intensityExtractor={ ( m: any ) => parseFloat(m.latitude)}
       />
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-      />
+      <ReactLeafletGoogleLayer googleMapsLoaderConf= {{KEY:getAPIKey(), VERSION: '3.40.6'}} type='terrain'/>
     </Map>
     );
 };

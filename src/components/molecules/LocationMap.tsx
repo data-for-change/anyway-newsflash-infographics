@@ -1,10 +1,12 @@
-import 'leaflet-css'
 import React, { FunctionComponent } from 'react'
+import { Map } from 'react-leaflet'
 import L, {LatLng} from 'leaflet'
-import { Map, TileLayer } from 'react-leaflet'
+import 'leaflet/dist/leaflet.css';
 import AnywayMarker from '../atoms/AnywayMarker'
 import {uniquePoints} from '../../utils/utils';
 import {IPoint} from '../../models/Point';
+import ReactLeafletGoogleLayer from 'react-leaflet-google-layer';
+
 
 const INITIAL_ZOOM = 13;
 const WRAPPER_STYLES = { height: '100%', width: '100%' };
@@ -29,11 +31,9 @@ const LocationMap: FunctionComponent<IProps> = ({ data, center }) => {
 
     return (
         <Map center={center} bounds={bounds} zoom={INITIAL_ZOOM} style={WRAPPER_STYLES}>
-            <TileLayer
-                url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            />
-            {markers}
+          <ReactLeafletGoogleLayer googleMapsLoaderConf= {{KEY:'', VERSION: '3.40.6'}} type='terrain'/>
+
+          {markers}
         </Map>
     )
 };
