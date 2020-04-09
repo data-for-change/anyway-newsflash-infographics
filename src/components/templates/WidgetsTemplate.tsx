@@ -8,6 +8,7 @@ import AnyWayCard from '../molecules/AnyWayCard'
 import CountByYearBarWidget from '../molecules/CountByYearBarWidget'
 import CountByTypePieWidget from '../molecules/CountByTypePieWidget'
 import CountBySeverityPieWidget from '../molecules/CountBySeverityPieWidget'
+// import HeatMap from '../molecules/HeatMap'
 import LocationMap from '../molecules/LocationMap'
 import ErrorBoundary from '../atoms/ErrorBoundary';
 
