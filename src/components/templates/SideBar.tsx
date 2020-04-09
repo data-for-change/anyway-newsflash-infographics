@@ -1,10 +1,10 @@
-import React, { FunctionComponent } from "react";
-import { Box, makeStyles } from "@material-ui/core";
-import News from "./News";
-import { NewsFlashFilterPanel } from "../atoms/NewsFlahsFilterPanel";
-import LocationMap from "../molecules/LocationMap";
-import { borderColor } from "../../style/_globals";
-import ErrorBoundary from "../atoms/ErrorBoundary";
+import React, {FunctionComponent} from 'react';
+import {Box, makeStyles} from '@material-ui/core';
+import News from './News';
+import {NewsFlashFilterPanel} from '../molecules/NewsFlashFilterPanel';
+import LocationMap from '../molecules/LocationMap';
+import {borderColor} from '../../style/_globals';
+import ErrorBoundary from '../atoms/ErrorBoundary';
 
 interface IProps {}
 
@@ -27,15 +27,8 @@ const SideBar: FunctionComponent<IProps> = () => {
       justifyContent="center"
       alignItems="stretch"
     >
-      <Box
-        display="flex"
-        flexDirection="column"
-        flexGrow={1}
-        className={classes.newsContainer}
-        pt={1}
-        border={1}
-        borderColor={borderColor}
-      >
+      <Box display='flex' flexDirection='column' flexGrow={1} className={classes.newsContainer}
+           border={1} borderColor={borderColor}>
         <ErrorBoundary>
           <NewsFlashFilterPanel />
         </ErrorBoundary>

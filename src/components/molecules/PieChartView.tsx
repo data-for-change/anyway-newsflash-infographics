@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react'
 import { VictoryPie, VictoryContainer } from 'victory'
-import { IWidgetAccidentsByType, IWidgetCountBySeverity } from '../../models/WidgetData'
+import { IWidgetAccidentsByType } from '../../models/WidgetData'
 
 interface IProps {
-	data: IWidgetAccidentsByType[] | IWidgetCountBySeverity[]
+	data: IWidgetAccidentsByType[]
 	xLabel: string
 	yLabel: string | number
 }

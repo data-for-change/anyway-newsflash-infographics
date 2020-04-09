@@ -74,7 +74,7 @@ export default {
             "meta": {}
         },
         {
-            "name": "most_severe_accidents_heatmap",
+            "name": "accidents_heat_map",
             "data": [
                 {
                     "longitude": 34.9780568296871,
