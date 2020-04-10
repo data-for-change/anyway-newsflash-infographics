@@ -1,10 +1,10 @@
 import React, {FunctionComponent} from 'react';
 import {Box, makeStyles} from '@material-ui/core';
+import {Text, TextType, ErrorBoundary} from '../atoms'
 import News from './News';
 import {NewsFlashFilterPanel} from '../molecules/NewsFlashFilterPanel';
 import LocationMap from '../molecules/LocationMap';
 import {borderColor} from '../../style/_globals';
-import ErrorBoundary from '../atoms/ErrorBoundary';
 
 interface IProps {}
 
@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 
 const SideBar: FunctionComponent<IProps> = () => {
   const classes = useStyles();
-
+  const mapTitle = "מיקום משוער:"
   return (
     <Box
       display="flex"
@@ -38,7 +38,8 @@ const SideBar: FunctionComponent<IProps> = () => {
           </Box>
         </Box>
       </Box>
-      <Box flexBasis={300} flexShrink={0} p={1}>
+      <Box flexBasis={300} flexShrink={0} m={0} >
+        <Text type={TextType.PAGE_TITLE} children={mapTitle} />
         <ErrorBoundary>
           <LocationMap
             data={[{ latitude: 32.0853, longitude: 34.7818 }]}
