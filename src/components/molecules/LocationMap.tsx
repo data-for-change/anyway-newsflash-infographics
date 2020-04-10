@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import { Map } from 'react-leaflet'
 import L, {LatLng} from 'leaflet'
-import 'leaflet/dist/leaflet.css';
 import AnywayMarker from '../atoms/AnywayMarker'
 import {uniquePoints} from '../../utils/utils';
 import {IPoint} from '../../models/Point';

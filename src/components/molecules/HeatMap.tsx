@@ -1,4 +1,3 @@
-import 'leaflet/dist/leaflet.css';
 import React, { FunctionComponent } from 'react';
 import { Map } from 'react-leaflet';
 // @ts-ignore

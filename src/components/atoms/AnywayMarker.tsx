@@ -1,4 +1,3 @@
-import "leaflet/dist/leaflet.css";
 import React, { FC } from 'react'
 import L from 'leaflet'
 import { Marker, Popup } from 'react-leaflet'
@@ -53,10 +52,10 @@ const AnywayMarker: FC<IProps> = ({ markerdata }) => {
 const setIconBySeverity = (severity: string) => {
     if (severity === "קלה")
         return YELLOW_ICON;
-    else if (severity === "קשה")   
-        return ORANGE_ICON; 
-    else // (severity === "קטלנית")    
-        return RED_ICON; 
+    else if (severity === "קשה")
+        return ORANGE_ICON;
+    else // (severity === "קטלנית")
+        return RED_ICON;
 }
 
 export default AnywayMarker
