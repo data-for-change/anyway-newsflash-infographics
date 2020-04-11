@@ -34,6 +34,7 @@ const getWidgetByType = (widget: any) => {
       break;
     }
     case 'accident_count_by_accident_type': {
+      // example of pie widget
       widgetComponent = <CountByTypePieWidget data={widget.data}/>;
       break;
     }
