@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.8.0",
+    "@material-ui/core": "^4.9.8",
+    "@material-ui/icons": "^4.9.1",
     "axios": "^0.19.2",
     "dom-to-image": "^2.6.0",
     "file-saver": "^2.0.2",
     "html2canvas": "^1.0.0-rc.5",
     "leaflet": "^1.6.0",
-    "leaflet-css": "^0.1.0",
     "leaflet.heat": "^0.2.0",
     "mobx": "^5.15.1",
     "mobx-react-lite": "^1.5.1",
@@ -17,6 +17,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-leaflet": "^2.6.1",
+    "react-leaflet-google-layer": "^1.1.4",
     "react-leaflet-heatmap-layer": "^2.0.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
@@ -34,6 +35,12 @@
     "eject": "react-scripts eject",
     "sb": "start-storybook -p 9009 -s public",
     "build-sb": "build-storybook -s public"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "arrowParens": "always",
+    "trailingComma": "all",
+    "printWidth": 120
   },
   "eslintConfig": {
     "extends": "react-app"

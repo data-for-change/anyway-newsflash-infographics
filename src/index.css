@@ -20,3 +20,19 @@ html, body, #root {
 p {
   margin: 0;
 }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(233, 240, 243);
+}
+::-webkit-scrollbar-thumb {
+  background-color: #90a4ae;
+  border-radius: 6px;
+  border: 2px solid rgb(233, 240, 243);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

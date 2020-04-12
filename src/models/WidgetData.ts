@@ -17,6 +17,14 @@ export type IWidgetMostSevereAccidents = {
 	}[]
 	meta: {}
 }
+export type IWidgetAccidentsHeatMap = {
+	name: string;
+	data: {
+		longitude: number;
+		latitude: number;
+	}[]
+	meta: {};
+};
 export type IWidgetCountBySeverity = {
 	name: string
 	data: {
@@ -47,7 +55,8 @@ export type IWidgetData = {
 	widgets: IWidgetTypes[]
 }
 export type IWidgetTypes =
-	| IWidgetMostSevereAccidents
-	| IWidgetCountBySeverity
-	| IWidgetAccidentsByType
-	| IWidgetAccidentsByYear
+  | IWidgetMostSevereAccidents
+  | IWidgetAccidentsHeatMap
+  | IWidgetCountBySeverity
+  | IWidgetAccidentsByType
+  | IWidgetAccidentsByYear;

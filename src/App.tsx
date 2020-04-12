@@ -1,12 +1,14 @@
-import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import HomePage from './pages/HomePage'
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ThankYouPage from './pages/ThankYouPage';
 import { Footer } from './components/templates/Footer'
 import {Box, createStyles, CssBaseline, makeStyles, Theme} from '@material-ui/core'
 import { store, StoreContext } from './store/storeConfig'
 import { Header } from './components/molecules/Header'
+import 'leaflet/dist/leaflet.css';
+
 
 // main components height - must add up to 100
 const headerHeight = '5vh';

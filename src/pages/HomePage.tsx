@@ -1,15 +1,16 @@
-import React, {FunctionComponent} from 'react'
-import WidgetsTemplate from '../components/templates/WidgetsTemplate'
-import {Box} from '@material-ui/core'
-import SideBar from '../components/templates/SideBar'
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import {RouteComponentProps} from 'react-router';
-import {borderColor} from '../style/_globals';
+import React, { FunctionComponent } from 'react';
+import WidgetsTemplate from '../components/templates/WidgetsTemplate';
+import { Box } from '@material-ui/core';
+import SideBar from '../components/templates/SideBar';
+import makeStyles from '@material-ui/core/styles/makeStyles';
+import { RouteComponentProps } from 'react-router';
+import { borderColor } from '../style/_globals';
+import FilterBar from '../components/molecules/FilterBar';
 
 interface IProps {}
 
 interface IRouteProps {
-  id?: string
+  id?: string;
 }
 
 const useStyles = makeStyles({
@@ -23,7 +24,8 @@ const useStyles = makeStyles({
   }
 });
 
-const HomePage: FunctionComponent<IProps & RouteComponentProps<IRouteProps>> = ({match}) => {
+const HomePage: FunctionComponent<IProps &
+  RouteComponentProps<IRouteProps>> = ({ match }) => {
   const classes = useStyles();
   const id = match.params.id ? parseInt(match.params.id) : null;
 
@@ -33,7 +35,8 @@ const HomePage: FunctionComponent<IProps & RouteComponentProps<IRouteProps>> = (
         <SideBar />
       </Box>
       <Box flexGrow={5} className={classes.widgetBox}>
-        <WidgetsTemplate id={id}/>
+        <FilterBar />
+        <WidgetsTemplate id={id} />
       </Box>
     </Box>
   );
