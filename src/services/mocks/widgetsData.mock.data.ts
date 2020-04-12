@@ -268,6 +268,19 @@ export default {
           accident_year: 2017,
           count: 5,
         },
+      ]
+    },
+    {
+      name: 'accident_count_by_day_night',
+      data: [
+        {
+            day_night: 'יום',
+            count: 23
+        },
+        {
+            day_night: 'לילה',
+            count: 5
+        },
       ],
       meta: {},
     },

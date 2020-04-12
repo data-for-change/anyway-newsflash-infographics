@@ -8,6 +8,7 @@ import CountByYearBarWidget from '../molecules/CountByYearBarWidget'
 import CountByTypePieWidget from '../molecules/CountByTypePieWidget'
 import CountInjuredByYearBarWidget from '../molecules/CountInjuredByYearBarWidget';
 import CountBySeverityTextWidget from '../molecules/CountBySeverityTextWidget'
+import CountAccidentsByDayNightPieWidget from '../molecules/CountAccidentsByDayNightPieWidget'
 import HeatMap from '../molecules/HeatMap'
 import LocationMap from '../molecules/LocationMap'
 import ErrorBoundary from '../atoms/ErrorBoundary';
@@ -47,7 +48,11 @@ const getWidgetByType = (widget: any) => {
       break;
     }
     case 'injured_count_by_accident_year': {
-      widgetComponent = <CountInjuredByYearBarWidget data={widget.data} />;
+      widgetComponent = <CountInjuredByYearBarWidget data={ widget.data } />
+      break
+    }
+    case 'accident_count_by_day_night': {
+      widgetComponent = <CountAccidentsByDayNightPieWidget data={widget.data} />;
       break;
     }
     default: {

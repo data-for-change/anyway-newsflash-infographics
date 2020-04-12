@@ -57,7 +57,14 @@ export type IWidgetInjuredByYear = {
 	}[];
 	meta: {};
 };
-
+export type IWidgetAccidentsByDayNight = {
+	name: string;
+	data: {
+		day_night: string
+		count: number
+	}[];
+	meta: {};
+};
 export type IWidgetData = {
 	meta: IWidgetsMeta
 	widgets: IWidgetTypes[]
@@ -65,6 +72,7 @@ export type IWidgetData = {
 export type IWidgetTypes =
   | IWidgetMostSevereAccidents
   | IWidgetAccidentsHeatMap
+  | IWidgetAccidentsByDayNight
   | IWidgetCountBySeverity
   | IWidgetAccidentsByType
   | IWidgetInjuredByYear
