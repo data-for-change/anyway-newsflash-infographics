@@ -4,15 +4,17 @@ import {initService} from '../services/init.service'
 import {fetchWidgets} from '../services/widgets.data.service'
 import {INewsFlash} from '../models/NewFlash'
 import {IWidgetData} from '../models/WidgetData'
+import {SourceFilterEnum} from '../models/SourceFilter';
+import {fetchNews} from '../services/news.data.service';
 
 export default class RootStore {
   [key: string]: any // Declaring an index signature
 
   appInitialized = false;
+  activeFilter = SourceFilterEnum.all;
 
   @observable newsFlashCollection: Array<INewsFlash> = [];
   @observable newsFlashWidgetsData: Array<IWidgetData> = [];
-  @observable newsFlashWidgetsMetaData: any = {};
 
   constructor() {
     // init app data
@@ -31,6 +33,18 @@ export default class RootStore {
     } else {
       console.warn(`Property [${prop}] was not initialized. Invalid value (${valueToCheck})`)
     }
+  }
+
+  @action
+  filterNewsFlashCollection(source: SourceFilterEnum): void {
+    fetchNews(source, 10)
+      .then((data: any) => {
+        if (data) {
+          this.safeSet('newsFlashCollection', data)
+        } else  {
+          console.error(`filterNewsFlashCollection(source:${source}) invalid data:`, data)
+        }
+      })
   }
 
   @action

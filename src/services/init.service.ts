@@ -8,7 +8,7 @@ export function initService(): Promise<any> {
   setLocationMapDefaults();
 
   const promiseArray = [
-    fetchNews('', 20, true),
+    fetchNews('', 10),
     fetchDefaultWidgets()
     /* add promises here */
   ];
