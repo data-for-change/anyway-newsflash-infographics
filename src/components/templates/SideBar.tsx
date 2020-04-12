@@ -4,7 +4,7 @@ import News from '../organisms/News';
 import {NewsFlashFilterPanel} from '../molecules/NewsFlashFilterPanel';
 import LocationMap from '../molecules/LocationMap';
 import {borderColor} from '../../style/_globals';
-import ErrorBoundary from '../atoms/ErrorBoundary';
+import {Text, TextType, ErrorBoundary} from '../atoms';
 
 interface IProps {}
 
@@ -19,6 +19,7 @@ const useStyles = makeStyles({
 
 const SideBar: FunctionComponent<IProps> = () => {
   const classes = useStyles();
+  const mapTitle = 'מיקום משוער:'
 
   return (
     <Box
@@ -38,7 +39,10 @@ const SideBar: FunctionComponent<IProps> = () => {
           </Box>
         </Box>
       </Box>
-      <Box flexBasis={300} flexShrink={0} p={1}>
+      <Box flexShrink={0} flexGrow={0} p={1}>
+        <Text type={TextType.CONTENT_TITLE} children={mapTitle} />
+      </Box>
+      <Box flexBasis={300} flexShrink={0} px={1} pb={1}>
         <ErrorBoundary>
           <LocationMap
             data={[{ latitude: 32.0853, longitude: 34.7818 }]}

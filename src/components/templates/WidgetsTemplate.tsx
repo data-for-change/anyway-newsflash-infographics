@@ -6,6 +6,7 @@ import {Grid} from '../atoms'
 import AnyWayCard from '../molecules/AnyWayCard'
 import CountByYearBarWidget from '../molecules/CountByYearBarWidget'
 import CountByTypePieWidget from '../molecules/CountByTypePieWidget'
+import CountInjuredByYearBarWidget from '../molecules/CountInjuredByYearBarWidget';
 import CountBySeverityTextWidget from '../molecules/CountBySeverityTextWidget'
 import HeatMap from '../molecules/HeatMap'
 import LocationMap from '../molecules/LocationMap'
@@ -20,34 +21,33 @@ const getWidgetByType = (widget: any) => {
   let widgetComponent;
   switch (widget.name) {
     case 'most_severe_accidents': {
-      widgetComponent = (
-        <LocationMap
-          data={widget.data}
-          center={{ lat: 32.0853, lng: 34.7818 }}
-        />
-      );
+      widgetComponent = <LocationMap data={widget.data} center={{ lat: 32.0853, lng: 34.7818 }} />;
       break;
     }
     case 'accidents_heat_map': {
-      const data = uniquePoints( widget.data )
-      if ( data.length <= 1 ) {
-        return  null
+      const data = uniquePoints(widget.data);
+      if (data.length <= 1) {
+        return null;
       }
-        widgetComponent = <HeatMap data={widget.data} center={{lat: 32.0853, lng: 34.7818}} />
+      widgetComponent = <HeatMap data={widget.data} center={{ lat: 32.0853, lng: 34.7818 }} />;
       break;
     }
     case 'accident_count_by_severity': {
       //widget wait for data changes from server
-      widgetComponent = <CountBySeverityTextWidget data={widget.data}/>;
+      widgetComponent = <CountBySeverityTextWidget data={widget.data} />;
       break;
     }
     case 'accident_count_by_accident_type': {
       // example of pie widget
-      widgetComponent = <CountByTypePieWidget data={widget.data}/>;
+      widgetComponent = <CountByTypePieWidget data={widget.data} />;
       break;
     }
     case 'accident_count_by_accident_year': {
       widgetComponent = <CountByYearBarWidget data={widget.data} />;
+      break;
+    }
+    case 'injured_count_by_accident_year': {
+      widgetComponent = <CountInjuredByYearBarWidget data={widget.data} />;
       break;
     }
     default: {

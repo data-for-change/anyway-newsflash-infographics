@@ -1,9 +1,9 @@
 import {INewsFlash} from '../models/NewFlash';
-import {mockHTTPCall, newsFlashCollectionData} from './mocks/mock.service';
+// import {mockHTTPCall, newsFlashCollectionData} from './mocks/mock.service';
 import axios from 'axios';
 
 const errorNews: INewsFlash = {
-  lat:-1,
+  lat: -1,
   lon: -1,
   source: 'Error',
   id: -1,
@@ -11,14 +11,29 @@ const errorNews: INewsFlash = {
   date: null
 };
 
-const NEWS_FLASH_API: string = '/api/news-flash-filters?';
-const SOURCE_QUERY = 'source=';
-const NUM_OF_NEWS = 'news_flash_count=';
+const NEWS_FLASH_API: string = '/api/news-flash';
 
-export function fetchNews(source = 'walla', count = 5, useMockData = false): Promise<any> {
+// export  function mockFetchNews(source = '', count = 5, useMockData = false): Promise<any> {
+//   console.log('== mockFetchNews ==', source, count);
+//   return  mockHTTPCall<Array<INewsFlash | any>>(newsFlashCollectionData);
+// }
 
-  return useMockData? mockHTTPCall<Array<INewsFlash|any >>(newsFlashCollectionData): axios.get(`${NEWS_FLASH_API}&${SOURCE_QUERY + source}&${NUM_OF_NEWS + count}`)
-      .then (res=>res.data).catch(onErrorFetchNewsFlash);
+export function fetchNews(source = '', count = 5): Promise<any> {
+  const query = []
+  if (source) {
+    query.push(`source=${source}`);
+  }
+  if (count) {
+    query.push(`news_flash_count=${count}`);
+  }
+  // temporary according to request from Atalya
+  query.push('road_number=90&road_regment_only=true')
+
+  const url = `${NEWS_FLASH_API}?${query.join('&')}`
+  // return mockHTTPCall<Array<INewsFlash | any>>(newsFlashCollectionData);
+  return axios.get(url)
+    .then(res => res.data)
+    .catch(onErrorFetchNewsFlash);
 }
 
 function onErrorFetchNewsFlash() {

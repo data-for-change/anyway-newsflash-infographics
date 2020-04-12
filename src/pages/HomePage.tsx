@@ -31,7 +31,7 @@ const HomePage: FunctionComponent<IProps &
 
   return (
     <Box display='flex' flexGrow={1} className={classes.mainBox}>
-      <Box flexGrow={1} display='flex' borderLeft={1} borderColor={borderColor}>
+      <Box flexGrow={1} flexBasis={500} display='flex' borderLeft={1} borderColor={borderColor}>
         <SideBar />
       </Box>
       <Box flexGrow={5} className={classes.widgetBox}>
