@@ -1,7 +1,10 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { makeStyles, createStyles, Divider, Grid } from '@material-ui/core';
 import { AppBar, Toolbar } from '@material-ui/core';
 import SelectButton from '../atoms/SelectButton';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../store/storeConfig';
+import RootStore from '../../store/root.store';
 
 interface IProps {}
 
@@ -13,8 +16,10 @@ const useStyles = makeStyles(() =>
   })
 );
 
-const FilterBar: FunctionComponent<IProps> = () => {
+const FilterBar: FC<IProps> = () => {
+  const store: RootStore = useStore();
   const classes = useStyles();
+  
 
   return (
     <div className={classes.grow}>
@@ -22,14 +27,15 @@ const FilterBar: FunctionComponent<IProps> = () => {
         <Toolbar variant='dense'>
           <Grid container>
             <Grid item xs={12} md={3}>
-              <SelectButton />
+              <SelectButton initialValue={0} onChange={(d) => console.log(d)}/>
             </Grid>
-            <Grid item xs={12} md={3}>
-              <SelectButton />
-            </Grid>
-            <Grid item xs={12} md={3}>
-              <SelectButton />
-            </Grid>
+            {/* TODO: add type / severity filters*/}
+            {/*<Grid item xs={12} md={3}>*/}
+            {/*  <SelectButton />*/}
+            {/*</Grid>*/}
+            {/*<Grid item xs={12} md={3}>*/}
+            {/*  <SelectButton />*/}
+            {/*</Grid>*/}
           </Grid>
         </Toolbar>
       </AppBar>
@@ -38,4 +44,4 @@ const FilterBar: FunctionComponent<IProps> = () => {
   );
 };
 
-export default FilterBar;
+export default observer(FilterBar);

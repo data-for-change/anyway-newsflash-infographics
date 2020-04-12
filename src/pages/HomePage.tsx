@@ -5,7 +5,7 @@ import SideBar from '../components/templates/SideBar';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { RouteComponentProps } from 'react-router';
 import { borderColor } from '../style/_globals';
-import FilterBar from '../components/molecules/FilterBar';
+import FilterBar from '../components/organisms/FilterBar';
 
 interface IProps {}
 
