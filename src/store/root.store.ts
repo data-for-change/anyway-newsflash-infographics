@@ -12,7 +12,6 @@ export default class RootStore {
 
   @observable newsFlashCollection: Array<INewsFlash> = [];
   @observable newsFlashWidgetsData: Array<IWidgetData> = [];
-  @observable newsFlashWidgetsMetaData: any = {};
 
   constructor() {
     // init app data
