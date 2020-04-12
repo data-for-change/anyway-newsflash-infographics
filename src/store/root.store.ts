@@ -50,7 +50,7 @@ export default class RootStore {
   @action
   selectNewsFlash(id: number): void {
     this.newsFlashId = id;
-    this.fetchSelectedNewsFlashWidgets(id);
+    this.fetchSelectedNewsFlashWidgets(id, this.newsFlashWidgetsTimerFilter);
   }
 
   @action
