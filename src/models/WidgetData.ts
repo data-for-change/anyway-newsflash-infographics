@@ -49,6 +49,14 @@ export type IWidgetAccidentsByYear = {
 	}[]
 	meta: {}
 }
+export type IWidgetInjuredByYear = {
+	name: string;
+	data: {
+		accident_year: number;
+		count: number;
+	}[];
+	meta: {};
+};
 
 export type IWidgetData = {
 	meta: IWidgetsMeta
@@ -59,4 +67,5 @@ export type IWidgetTypes =
   | IWidgetAccidentsHeatMap
   | IWidgetCountBySeverity
   | IWidgetAccidentsByType
+  | IWidgetInjuredByYear
   | IWidgetAccidentsByYear;
