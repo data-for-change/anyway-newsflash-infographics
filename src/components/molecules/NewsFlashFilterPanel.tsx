@@ -38,7 +38,8 @@ export const NewsFlashFilterPanel: React.FC = () => {
             <AnyWayButton  className={classes.button} onClick={() => {
               store.filterNewsFlashCollection(SourceFilterEnum.all);
             }}>
-               <Text type={TextType.CONTENT_TITLE} children="הכל" />
+               {/* <Text type={TextType.CONTENT_TITLE} children="הכל" /> */}
+               <Text type={TextType.CONTENT_TITLE}>הכל</Text>
             </AnyWayButton>
             <AnyWayButton className={classes.button} onClick={() => {
               store.filterNewsFlashCollection(SourceFilterEnum.ynet);
