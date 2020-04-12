@@ -1,12 +1,14 @@
 import React, { FunctionComponent } from 'react'
 import { ResponsiveContainer, BarChart, LabelList, XAxis, Label, Bar } from 'recharts'
 import { IWidgetAccidentsByYear } from '../../models/WidgetData'
+
 interface IProps {
 	data: IWidgetAccidentsByYear[]
 	xLabel: string | number
   yLabel: string | number
   textLabel: string
 }
+
 const BarChartViewRechart: FunctionComponent<IProps> = props => {
 
 	return (

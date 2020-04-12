@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import PieChartViewRechart from './PieChartViewRechart'
+import PieChartView from './PieChartView'
 import { IWidgetCountBySeverity } from '../../models/WidgetData'
 
 const ACCIDENT_SEVERITY = 'accident_severity'
@@ -9,6 +9,6 @@ interface IProps {
 	data: IWidgetCountBySeverity[]
 }
 const CountBySeverityPieWidget: FunctionComponent<IProps> = props => {
-	return <PieChartViewRechart data={props.data} xLabel={ACCIDENT_SEVERITY} yLabel={COUNT} />
+	return <PieChartView data={props.data} xLabel={ACCIDENT_SEVERITY} yLabel={COUNT} />
 }
 export default CountBySeverityPieWidget
