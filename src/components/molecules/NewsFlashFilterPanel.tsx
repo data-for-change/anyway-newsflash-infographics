@@ -4,6 +4,9 @@ import {borderColor} from '../../style/_globals';
 import ynetLogo from '../../assets/ynet-website-logo.svg';
 import wallaLogo from '../../assets/walla-logo.svg';
 import {AnyWayButton} from "../atoms/AnyWayButton";
+import RootStore from '../../store/root.store';
+import {useStore} from '../../store/storeConfig';
+import {SourceFilterEnum} from '../../models/SourceFilter';
 
 const useStyles = makeStyles({
     image: {
@@ -24,11 +27,14 @@ const useStyles = makeStyles({
     }
 });
 export const NewsFlashFilterPanel: React.FC = () => {
-    const classes = useStyles();
-    return (
+  const classes = useStyles();
+  const store: RootStore = useStore();
+
+  return (
         // will be convert to filterButtonsMap instead of code duplicate for the filter button
         <Box className={classes.container}>
             <AnyWayButton className={classes.button} onClick={() => {
+              store.filterNewsFlashCollection(SourceFilterEnum.ynet);
             }}>
                 <img className={classes.image} src={ynetLogo} alt="Ynet"/>
             </AnyWayButton>
