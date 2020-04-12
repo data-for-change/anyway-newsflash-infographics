@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import { makeStyles, createStyles, Divider, Grid } from '@material-ui/core';
 import { AppBar, Toolbar } from '@material-ui/core';
 import SelectButton from '../atoms/SelectButton';
@@ -19,7 +19,7 @@ const useStyles = makeStyles(() =>
 const FilterBar: FC<IProps> = () => {
   const store: RootStore = useStore();
   const classes = useStyles();
-  
+  const onFilterChange = useCallback((value: number) => store.changeTimeFilter(value), [store]);
 
   return (
     <div className={classes.grow}>
@@ -27,7 +27,7 @@ const FilterBar: FC<IProps> = () => {
         <Toolbar variant='dense'>
           <Grid container>
             <Grid item xs={12} md={3}>
-              <SelectButton initialValue={0} onChange={(d) => console.log(d)}/>
+              <SelectButton initialValue={0} onChange={onFilterChange}/>
             </Grid>
             {/* TODO: add type / severity filters*/}
             {/*<Grid item xs={12} md={3}>*/}

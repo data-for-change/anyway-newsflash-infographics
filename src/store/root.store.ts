@@ -1,61 +1,73 @@
 // https://mobx.js.org/best/store.html#combining-multiple-stores
-import {action, observable} from 'mobx'
-import {initService} from '../services/init.service'
-import {fetchWidgets} from '../services/widgets.data.service'
-import {INewsFlash} from '../models/NewFlash'
-import {IWidgetData} from '../models/WidgetData'
-import {SourceFilterEnum} from '../models/SourceFilter';
-import {fetchNews} from '../services/news.data.service';
+import { action, observable } from 'mobx';
+import { initService } from '../services/init.service';
+import { fetchWidgets } from '../services/widgets.data.service';
+import { INewsFlash } from '../models/NewFlash';
+import { IWidgetData } from '../models/WidgetData';
+import { SourceFilterEnum } from '../models/SourceFilter';
+import { fetchNews } from '../services/news.data.service';
 
 export default class RootStore {
-  [key: string]: any // Declaring an index signature
+  [key: string]: any; // Declaring an index signature
 
   appInitialized = false;
-  activeFilter = SourceFilterEnum.all;
 
   @observable newsFlashCollection: Array<INewsFlash> = [];
+  @observable newsFlashId: number = 0; // active newsflash id
   @observable newsFlashWidgetsData: Array<IWidgetData> = [];
+  @observable newsFlashWidgetsTimerFilter = 0; // newsflash time filter (in years ago, 0- no filter)
 
   constructor() {
     // init app data
-    initService().then(initData => {
+    initService().then((initData) => {
       console.log(initData);
       this.safeSet('newsFlashCollection', initData.newsFlashCollection);
       this.safeSet('newsFlashWidgetsData', initData.newsFlashWidgetsData.widgets);
-      this.appInitialized = true
-    })
+      this.appInitialized = true;
+    });
   }
 
   // prop is a property on RootStore to be initialized, like: this.suggestions
   safeSet(prop: string, valueToCheck: any) {
     if (valueToCheck && Array.isArray(valueToCheck)) {
-      this[prop] = valueToCheck
+      this[prop] = valueToCheck;
     } else {
-      console.warn(`Property [${prop}] was not initialized. Invalid value (${valueToCheck})`)
+      console.warn(`Property [${prop}] was not initialized. Invalid value (${valueToCheck})`);
     }
   }
 
   @action
   filterNewsFlashCollection(source: SourceFilterEnum): void {
-    fetchNews(source, 10)
-      .then((data: any) => {
-        if (data) {
-          this.safeSet('newsFlashCollection', data)
-        } else  {
-          console.error(`filterNewsFlashCollection(source:${source}) invalid data:`, data)
-        }
-      })
+    fetchNews(source, 10).then((data: any) => {
+      if (data) {
+        this.safeSet('newsFlashCollection', data);
+      } else {
+        console.error(`filterNewsFlashCollection(source:${source}) invalid data:`, data);
+      }
+    });
   }
 
   @action
   selectNewsFlash(id: number): void {
-    fetchWidgets(id)
-      .then((response: any) => {
-        if (response && response.widgets !== undefined) {
-          this.safeSet('newsFlashWidgetsData', response.widgets)
-        } else  {
-          console.error(`fetchWidgets(id:${id}) invalid response:`, response)
-        }
-      })
+    this.newsFlashId = id;
+    this.fetchSelectedNewsFlashWidgets(id);
+  }
+
+  @action
+  changeTimeFilter(filterValue: number): void {
+    if (this.newsFlashWidgetsTimerFilter !== filterValue) {
+      this.newsFlashWidgetsTimerFilter = filterValue;
+      this.fetchSelectedNewsFlashWidgets(this.newsFlashId, filterValue);
+    }
+  }
+
+  private fetchSelectedNewsFlashWidgets(id: number, filterValue = 0): void {
+    fetchWidgets(id, filterValue).then((response: any) => {
+      if (response && response.widgets !== undefined) {
+        this.safeSet('newsFlashWidgetsData', response.widgets);
+      } else {
+        console.error(`fetchWidgets(id:${id}) invalid response:`, response);
+      }
+    });
   }
 }
