@@ -42,7 +42,8 @@ const getWidgetByType = (widget: any) => {
       break;
     }
     case 'accident_count_by_accident_type': {
-      widgetComponent = <CountByTypePieWidget data={widget.data} />;
+      // example of pie widget
+      widgetComponent = <CountByTypePieWidget data={widget.data}/>;
       break;
     }
     case 'accident_count_by_accident_year': {
