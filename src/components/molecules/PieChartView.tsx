@@ -1,15 +1,17 @@
-import React, { FunctionComponent } from 'react'
-import { ResponsiveContainer, PieChart, Pie } from 'recharts';
-import { IWidgetAccidentsByType, IWidgetCountBySeverity, IWidgetAccidentsByDayNight } from '../../models/WidgetData';
+import React, { FC } from 'react'
+import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import red from '@material-ui/core/colors/red';
 
 interface IProps {
-	data: IWidgetAccidentsByType[] | IWidgetCountBySeverity[] | IWidgetAccidentsByDayNight[]
+	data: Array<object>
 	xLabel: string
 	yLabel: string | number
 }
-
+// hardcoded colors, will be changed
+const COLORS = [ red[ 100 ], red[ 200 ], red[ 300 ], red[ 400 ], red[ 500 ], red[ 600 ], red[ 700 ], red[ 800 ], red[ 900 ] ];
 const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = (props:any) => {
+
+const renderCustomizedLabel = ( props: any ) => {
 	const { cx, cy, midAngle, innerRadius, outerRadius, value, fill } = props
 	const radius = innerRadius + (outerRadius - innerRadius) * 0.7;
   	const xCountLabel = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -32,25 +34,27 @@ const renderCustomizedLabel = (props:any) => {
 		</g>
 	);
 };
-export const PieChartView: FunctionComponent<IProps> = props => {
+export const PieChartView: FC<IProps> = ( { data, yLabel, xLabel } ) => {
 
 	return (
-    <ResponsiveContainer width={'100%'} height={'100%'}>
-      <PieChart>
-        <Pie
-          data={props.data}
-          dataKey={props.yLabel}
-          nameKey={props.xLabel}
-          cx='50%'
-          cy='50%'
-          outerRadius={90}
-          fill='#c43a31'
-          minAngle={20}
-          label={renderCustomizedLabel}
-          labelLine={false}
-        />
-      </PieChart>
-    </ResponsiveContainer>
+		<ResponsiveContainer width={'100%'} height={'100%'}>
+			<PieChart>
+				<Pie
+				data={data}
+				dataKey={yLabel}
+				nameKey={xLabel}
+				cx='50%'
+				cy='50%'
+				outerRadius={90}
+				fill='#c43a31'
+				minAngle={20}
+				label={renderCustomizedLabel}
+				labelLine={false}
+				>
+					{data.map((entry:any, index:any) => <Cell fill={COLORS[index % COLORS.length]}/>)}
+				</Pie>
+			</PieChart>
+		</ResponsiveContainer>
   );
 }
 export default PieChartView
