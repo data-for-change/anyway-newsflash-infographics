@@ -1,9 +1,8 @@
 import React, { FunctionComponent } from 'react'
 import { ResponsiveContainer, PieChart, Pie } from 'recharts';
-import { IWidgetAccidentsByType, IWidgetCountBySeverity, IWidgetAccidentsByDayNight } from '../../models/WidgetData';
 
 interface IProps {
-	data: IWidgetAccidentsByType[] | IWidgetCountBySeverity[] | IWidgetAccidentsByDayNight[]
+	data: Array<object>
 	xLabel: string
 	yLabel: string | number
 }
@@ -32,15 +31,15 @@ const renderCustomizedLabel = (props:any) => {
 		</g>
 	);
 };
-export const PieChartView: FunctionComponent<IProps> = props => {
+export const PieChartView: FunctionComponent<IProps> = ({data, yLabel, xLabel}) => {
 
 	return (
     <ResponsiveContainer width={'100%'} height={'100%'}>
       <PieChart>
         <Pie
-          data={props.data}
-          dataKey={props.yLabel}
-          nameKey={props.xLabel}
+          data={data}
+          dataKey={yLabel}
+          nameKey={xLabel}
           cx='50%'
           cy='50%'
           outerRadius={90}
