@@ -1,35 +1,36 @@
-import React, {FunctionComponent} from 'react';
-import {Box, makeStyles} from '@material-ui/core';
+import React, { FunctionComponent } from 'react';
+import { Box, makeStyles } from '@material-ui/core';
 import News from '../organisms/News';
-import {NewsFlashFilterPanel} from '../molecules/NewsFlashFilterPanel';
+import { NewsFlashFilterPanel } from '../molecules/NewsFlashFilterPanel';
 import LocationMap from '../molecules/LocationMap';
-import {borderColor} from '../../style/_globals';
-import {Text, TextType, ErrorBoundary} from '../atoms';
+import { borderColor } from '../../style/_globals';
+import { Text, TextType, ErrorBoundary } from '../atoms';
 
 interface IProps {}
 
 const useStyles = makeStyles({
   newsContainer: {
-    overflow: "auto"
+    overflow: 'auto',
   },
   newsFeed: {
-    overflow: "auto"
-  }
+    overflow: 'auto',
+  },
 });
 
 const SideBar: FunctionComponent<IProps> = () => {
   const classes = useStyles();
-  const mapTitle = 'מיקום משוער:'
+  const mapTitle = 'מיקום משוער:';
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      justifyContent="center"
-      alignItems="stretch"
-    >
-      <Box display='flex' flexDirection='column' flexGrow={1} className={classes.newsContainer}
-           border={1} borderColor={borderColor}>
+    <Box display="flex" flexDirection="column" justifyContent="center" alignItems="stretch">
+      <Box
+        display="flex"
+        flexDirection="column"
+        flexGrow={1}
+        className={classes.newsContainer}
+        border={1}
+        borderColor={borderColor}
+      >
         <ErrorBoundary>
           <NewsFlashFilterPanel />
         </ErrorBoundary>
@@ -44,10 +45,7 @@ const SideBar: FunctionComponent<IProps> = () => {
       </Box>
       <Box flexBasis={300} flexShrink={0} px={1} pb={1}>
         <ErrorBoundary>
-          <LocationMap
-            data={[{ latitude: 32.0853, longitude: 34.7818 }]}
-            center={{ lat: 32.0853, lng: 34.7818 }}
-          />
+          <LocationMap data={[{ latitude: 32.0853, longitude: 34.7818 }]} center={{ lat: 32.0853, lng: 34.7818 }} />
         </ErrorBoundary>
       </Box>
     </Box>

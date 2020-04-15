@@ -14,6 +14,7 @@
     "mobx": "^5.15.1",
     "mobx-react-lite": "^1.5.1",
     "normalize.css": "^8.0.1",
+    "prettier": "^2.0.4",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-leaflet": "^2.6.1",
@@ -24,7 +25,9 @@
     "recharts": "^1.8.5",
     "typescript": "^3.7.4"
   },
+  "post-commit": "npm run pret",
   "scripts": {
+    "pret": "prettier --write ./src/",
     "start": "react-scripts start",
     "cache-proxy": "node cache-proxy/cache-proxy.js",
     "dev:cache-win": "start cmd /k \"npm run cache-proxy\" && set REACT_APP_USE_LOCAL_PROXY=true&& npm start",
