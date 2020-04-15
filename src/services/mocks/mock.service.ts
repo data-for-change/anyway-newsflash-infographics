@@ -7,7 +7,7 @@ export {
   // add more mock data here
 };
 
-export function mockHTTPCall<T>(mockData: T): Promise<T> {
+export function mockHTTPCall<T>(mockData: T): Promise<T>{
   return new Promise(function (resolve) {
     setTimeout(function () {
       resolve(mockData);
