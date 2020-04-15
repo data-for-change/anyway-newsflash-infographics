@@ -17,12 +17,14 @@ const useStyles = makeStyles({
   },
   button: {
     height: '50px',
+    marginLeft: '10px',
     width: '50px',
     border: `1px solid ${borderColor}`,
   },
   container: {
     paddingTop: '16px',
     paddingBottom: '20px',
+    marginRight: '10px',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
