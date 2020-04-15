@@ -1,18 +1,15 @@
-import React, {FunctionComponent} from 'react';
+import React, { FunctionComponent } from 'react';
 
 interface IProps {
-  value: string,
-  onChange: (value: string) => any,
+  value: string;
+  onChange: (value: string) => any;
 }
 
-export const Textbox: FunctionComponent<IProps> = ({value = '', onChange}) => {
-  
+export const Textbox: FunctionComponent<IProps> = ({ value = '', onChange }) => {
   const changFn = (e: any) => {
     onChange(e);
   };
-  
-  return (
-    <input value={value} onChange={changFn}/>
-  );
+
+  return <input value={value} onChange={changFn} />;
 };
 export default Textbox;

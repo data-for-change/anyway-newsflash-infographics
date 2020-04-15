@@ -1,17 +1,16 @@
-import React, {FunctionComponent} from 'react';
+import React, { FunctionComponent } from 'react';
 import logoHasdna from '../../assets/hasadna.png';
-import {makeStyles} from '@material-ui/core/styles';
-import {AnywayLink} from '../atoms/';
-import {Box} from "@material-ui/core";
-import {borderColor} from '../../style/_globals';
+import { makeStyles } from '@material-ui/core/styles';
+import { AnywayLink } from '../atoms/';
+import { Box } from '@material-ui/core';
+import { borderColor } from '../../style/_globals';
 
-interface IProps {
-}
+interface IProps {}
 const useStyles = makeStyles({
   logo: {
-    height: '30px'
+    height: '30px',
   },
-  footer : {
+  footer: {
     position: 'relative',
     flexGrow: 1,
     display: 'flex',
@@ -26,7 +25,7 @@ export const Footer: FunctionComponent<IProps> = () => {
   return (
     <footer className={classes.footer}>
       <a href="https://www.hasadna.org.il/" target="_blank" rel="noopener noreferrer">
-       <img src={logoHasdna} alt="logo-hasadna" className={classes.logo}/>
+        <img src={logoHasdna} alt="logo-hasadna" className={classes.logo} />
       </a>
       <AnywayLink to="/about">
         <Box p={2} component="span">

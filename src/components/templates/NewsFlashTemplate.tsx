@@ -1,11 +1,7 @@
-import React, {FunctionComponent} from 'react';
+import React, { FunctionComponent } from 'react';
 
-interface IProps {
-}
+interface IProps {}
 
 export const NewsFlashTemplate: FunctionComponent<IProps> = () => {
-  
-  return (
-    <div>NewsFlashTemplate</div>
-  );
+  return <div>NewsFlashTemplate</div>;
 };

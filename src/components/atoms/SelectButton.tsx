@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useCallback} from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { ListItemIcon, List, ListItem } from '@material-ui/core';
 import { MenuItem } from '@material-ui/core';
@@ -16,9 +16,9 @@ const useStyles = makeStyles(() =>
     formControl: {
       minWidth: 120,
       maxWidth: 300,
-      textAlign: 'right'
-    }
-  })
+      textAlign: 'right',
+    },
+  }),
 );
 
 const SelectButton: FunctionComponent<IProps> = ({ onChange, initialValue }) => {
@@ -26,10 +26,13 @@ const SelectButton: FunctionComponent<IProps> = ({ onChange, initialValue }) => 
   const [selectValue, setsSelectValue] = React.useState<string | number>(0);
   const [open, setOpen] = React.useState(false);
 
-  const handleChange = useCallback((event: React.ChangeEvent<{ value: unknown }>) => {
-    setsSelectValue(event.target.value as number);
-    onChange(event.target.value as number);
-  }, [setsSelectValue, onChange])
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<{ value: unknown }>) => {
+      setsSelectValue(event.target.value as number);
+      onChange(event.target.value as number);
+    },
+    [setsSelectValue, onChange],
+  );
 
   const handleClose = () => {
     setOpen(false);
@@ -40,15 +43,15 @@ const SelectButton: FunctionComponent<IProps> = ({ onChange, initialValue }) => 
   };
 
   return (
-    <List component='nav' aria-label='main mailbox folders'>
+    <List component="nav" aria-label="main mailbox folders">
       <ListItem>
         <ListItemIcon>
           <CalendarTodayOutlined />
         </ListItemIcon>
         <FormControl className={classes.formControl}>
           <Select
-            labelId='controlled-open-select-label'
-            id='controlled-open-select'
+            labelId="controlled-open-select-label"
+            id="controlled-open-select"
             open={open}
             onClose={handleClose}
             onOpen={handleOpen}
