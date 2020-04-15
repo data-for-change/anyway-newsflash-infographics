@@ -3,7 +3,7 @@
 import React from 'react';
 import RootStore from './root.store';
 
-export const store = new RootStore();
+const store = new RootStore();
 export const StoreContext = React.createContext(store);
 
 export const useStore = (): RootStore => {

@@ -6,6 +6,7 @@ import { INewsFlash } from '../models/NewFlash';
 import { IWidgetData } from '../models/WidgetData';
 import { SourceFilterEnum } from '../models/SourceFilter';
 import { fetchNews } from '../services/news.data.service';
+import SettingsStore from './settings.store';
 
 export default class RootStore {
   [key: string]: any; // Declaring an index signature
@@ -17,6 +18,9 @@ export default class RootStore {
   @observable newsFlashWidgetsData: Array<IWidgetData> = [];
   @observable newsFlashWidgetsTimerFilter = 0; // newsflash time filter (in years ago, 0- no filter)
 
+  // domain stores
+  settingsStore: SettingsStore;
+
   constructor() {
     // init app data
     initService().then((initData) => {
@@ -25,6 +29,8 @@ export default class RootStore {
       this.safeSet('newsFlashWidgetsData', initData.newsFlashWidgetsData.widgets);
       this.appInitialized = true;
     });
+    // settings store - settings of the app such as num of results returned etc.
+    this.settingsStore = new SettingsStore(this);
   }
 
   // prop is a property on RootStore to be initialized, like: this.suggestions
