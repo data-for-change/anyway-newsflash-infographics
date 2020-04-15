@@ -25,9 +25,7 @@
     "recharts": "^1.8.5",
     "typescript": "^3.7.4"
   },
-  "post-commit": "npm run pret",
   "scripts": {
-    "pret": "prettier --write ./src/",
     "start": "react-scripts start",
     "cache-proxy": "node cache-proxy/cache-proxy.js",
     "dev:cache-win": "start cmd /k \"npm run cache-proxy\" && set REACT_APP_USE_LOCAL_PROXY=true&& npm start",
@@ -38,6 +36,11 @@
     "eject": "react-scripts eject",
     "sb": "start-storybook -p 9009 -s public",
     "build-sb": "build-storybook -s public"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "prettier --write ./src/"
+    }
   },
   "prettier": {
     "singleQuote": true,
