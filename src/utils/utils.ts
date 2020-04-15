@@ -17,5 +17,5 @@ export function uniquePoints(points: IPoint[]) {
 
 //function return api key depends on the env it running on
 export function getAPIKey(){
-  return process.env.NODE_ENV ==='production'? process.env.REACT_APP_GOOGLE_MAPS_API_KEY:'';
+  return process.env.REACT_APP_GOOGLE_MAP_KEY ? process.env.REACT_APP_GOOGLE_MAP_KEY:'';
 }

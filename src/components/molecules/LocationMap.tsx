@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react'
 import { Map } from 'react-leaflet'
 import L, {LatLng} from 'leaflet'
 import AnywayMarker from '../atoms/AnywayMarker'
-import {uniquePoints} from '../../utils/utils';
+import {getAPIKey, uniquePoints} from '../../utils/utils';
 import {IPoint} from '../../models/Point';
 import ReactLeafletGoogleLayer from 'react-leaflet-google-layer';
 
@@ -30,7 +30,7 @@ const LocationMap: FunctionComponent<IProps> = ({ data, center }) => {
 
     return (
         <Map center={center} bounds={bounds} zoom={INITIAL_ZOOM} style={WRAPPER_STYLES}>
-          <ReactLeafletGoogleLayer googleMapsLoaderConf= {{KEY:'', VERSION: '3.40.6'}} type='terrain'/>
+          <ReactLeafletGoogleLayer googleMapsLoaderConf= {{KEY:getAPIKey(), VERSION: '3.40.6'}} type='terrain'/>
 
           {markers}
         </Map>
