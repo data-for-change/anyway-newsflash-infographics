@@ -29,6 +29,20 @@ const useStyles = makeStyles({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
+  adjust: {
+    display: 'flex',
+    flexFlow: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  adjustText: {
+    fontSize: '70%',
+    lineHeight: 1,
+    textTransform: 'lowercase',
+  },
+  adjustImage: {
+    maxWidth: '40%',
+  },
 });
 export const NewsFlashFilterPanel: React.FC = () => {
   const classes = useStyles();
@@ -63,7 +77,10 @@ export const NewsFlashFilterPanel: React.FC = () => {
           store.filterNewsFlashCollection(SourceFilterEnum.mda);
         }}
       >
-        <img className={classes.image} src={mdaLogo} alt="Magen David Adom" />
+        <div className={classes.adjust}>
+          <img className={classes.adjustImage} src={mdaLogo} alt="Magen David Adom" />
+          <span className={classes.adjustText}>twitter</span>
+        </div>
       </AnyWayButton>
     </Box>
   );
