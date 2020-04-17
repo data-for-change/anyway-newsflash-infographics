@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import red from '@material-ui/core/colors/red';
+import { rightToLeftText } from '../../utils/utils';
 
 interface IProps {
 	data: Array<object>
@@ -12,7 +13,11 @@ const COLORS = [ red[ 100 ], red[ 200 ], red[ 300 ], red[ 400 ], red[ 500 ], red
 const RADIAN = Math.PI / 180;
 
 const renderCustomizedLabel = ( props: any ) => {
-	const { cx, cy, midAngle, innerRadius, outerRadius, value, fill } = props
+	const { cx, cy, midAngle, innerRadius, outerRadius, value, fill, name } = props
+
+	//temporary solution
+	const hebrewName = rightToLeftText( name );
+
 	const radius = innerRadius + (outerRadius - innerRadius) * 0.7;
   	const xCountLabel = cx + radius * Math.cos(-midAngle * RADIAN);
 	const yCountLabel = cy + radius * Math.sin(-midAngle * RADIAN);
@@ -30,7 +35,7 @@ const renderCustomizedLabel = ( props: any ) => {
 			<path d={ `M${ sx },${ sy }L${ mx },${ my }L${ ex },${ ey }` } stroke={ fill } fill='none' />
 			<circle cx={ex} cy={ey} r={2} fill={fill} stroke='none'/>
 			<text x={xCountLabel} y={yCountLabel} fill='black' textAnchor={xCountLabel > cx ? 'start' : 'end'} dominantBaseline='central'>{value}</text>
-			<text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} fill='black' textAnchor={'middle'} dominantBaseline='central'>{value}</text>
+			<text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} fill='black' textAnchor={'middle'} dominantBaseline='central'>{hebrewName}</text>
 		</g>
 	);
 };
@@ -56,5 +61,5 @@ export const PieChartView: FC<IProps> = ( { data, yLabel, xLabel } ) => {
 			</PieChart>
 		</ResponsiveContainer>
   );
-}
-export default PieChartView
+};
+export default PieChartView;

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { ListItemIcon, List, ListItem } from '@material-ui/core';
 import { MenuItem } from '@material-ui/core';
@@ -6,26 +6,33 @@ import { FormControl } from '@material-ui/core';
 import { Select } from '@material-ui/core';
 import { CalendarTodayOutlined } from '@material-ui/icons';
 
-interface IProps {}
+interface IProps {
+  onChange: (value: number) => any;
+  initialValue: number;
+}
 
 const useStyles = makeStyles(() =>
   createStyles({
     formControl: {
       minWidth: 120,
       maxWidth: 300,
-      textAlign: 'right'
-    }
-  })
+      textAlign: 'right',
+    },
+  }),
 );
 
-const SelectButton: FunctionComponent<IProps> = ({ children }) => {
+const SelectButton: FunctionComponent<IProps> = ({ onChange, initialValue }) => {
   const classes = useStyles();
-  const [date, setDate] = React.useState<string | number>(1);
+  const [selectValue, setsSelectValue] = React.useState<string | number>(0);
   const [open, setOpen] = React.useState(false);
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setDate(event.target.value as number);
-  };
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<{ value: unknown }>) => {
+      setsSelectValue(event.target.value as number);
+      onChange(event.target.value as number);
+    },
+    [setsSelectValue, onChange],
+  );
 
   const handleClose = () => {
     setOpen(false);
@@ -36,21 +43,22 @@ const SelectButton: FunctionComponent<IProps> = ({ children }) => {
   };
 
   return (
-    <List component='nav' aria-label='main mailbox folders'>
+    <List component="nav" aria-label="main mailbox folders">
       <ListItem>
         <ListItemIcon>
           <CalendarTodayOutlined />
         </ListItemIcon>
         <FormControl className={classes.formControl}>
           <Select
-            labelId='controlled-open-select-label'
-            id='controlled-open-select'
+            labelId="controlled-open-select-label"
+            id="controlled-open-select"
             open={open}
             onClose={handleClose}
             onOpen={handleOpen}
-            value={date}
+            value={selectValue}
             onChange={handleChange}
           >
+            <MenuItem value={0}>הכל</MenuItem>
             <MenuItem value={1}>שנה אחרונה</MenuItem>
             <MenuItem value={3}>3 שנים אחרונות</MenuItem>
             <MenuItem value={5}>5 שנים אחרונות</MenuItem>
