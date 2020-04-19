@@ -56,7 +56,7 @@ export const PieChartView: FC<IProps> = ( { data, yLabel, xLabel } ) => {
 				label={renderCustomizedLabel}
 				labelLine={false}
 				>
-					{data.map((entry:any, index:any) => <Cell fill={COLORS[index % COLORS.length]}/>)}
+					{data.map((entry:any, index:any) => <Cell key={index} fill={COLORS[index % COLORS.length]}/>)}
 				</Pie>
 			</PieChart>
 		</ResponsiveContainer>

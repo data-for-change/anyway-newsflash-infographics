@@ -1,11 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { Map } from 'react-leaflet';
 import L, { LatLng } from 'leaflet';
-import AnywayMarker from '../atoms/AnywayMarker';
+import AnywayMostSevereAccidentsMarker from '../atoms/AnywayMostSevereAccidentsMarker';
 import { getAPIKey, uniquePoints } from '../../utils/utils';
 import { IPoint } from '../../models/Point';
 import ReactLeafletGoogleLayer from 'react-leaflet-google-layer';
-
 const INITIAL_ZOOM = 13;
 const WRAPPER_STYLES = { height: '100%', width: '100%' };
 const DEFAULT_BOUNDS = [
@@ -14,14 +13,14 @@ const DEFAULT_BOUNDS = [
 ];
 
 interface IProps {
-  data: IPoint[];
+  data: IPoint[] | any;
   center?: { lat: number; lng: number };
 }
 
 const LocationMap: FunctionComponent<IProps> = ({ data, center }) => {
   let markers = data.map((x: IPoint, i: number) => {
     if (x.latitude !== null && x.longitude !== null) {
-      return <AnywayMarker markerdata={x} key={i} />;
+      return <AnywayMostSevereAccidentsMarker markerdata={x} key={i} />;
     }
     return null;
   });
