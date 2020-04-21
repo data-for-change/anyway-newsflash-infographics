@@ -17,9 +17,10 @@ const useStyles = makeStyles({
   },
   mapLabel: {
     position: 'absolute',
+    bottom: '-5px',
+    right: '5px',
     display: 'flex',
     alignItems: 'center',
-    bottom: 0,
   },
   mapLabelContent: {
     position: 'relative',
@@ -33,10 +34,8 @@ const useStyles = makeStyles({
   },
   mapLabelArrow: {
     display: 'inline-flex',
-    width: 0,
-    height: 0,
     borderStyle: 'solid',
-    borderWidth: '5px 0 5px 20px',
+    borderWidth: '5px 0 5px 40px',
     borderColor: 'transparent transparent transparent #000000',
   },
 });
@@ -54,15 +53,16 @@ const IconMap = ({markerData}:any) => {
   );
 };
 
-const AnywayMostSevereAccidentsMarker: FC<IProps> = (  {markerdata}  ) => {
+const AnywayMostSevereAccidentsMarker: FC<IProps> = ( { markerdata } ) => {
+  const { latitude, longitude, accident_severity, accident_timestamp } = markerdata
   const classes = useStyles();
-  const lPoint: L.LatLng = new L.LatLng(markerdata.latitude, markerdata.longitude);
+  const lPoint: L.LatLng = new L.LatLng(latitude, longitude);
   const icon = L.divIcon( {
     className: classes.icon,
-    html: ReactDOMServer.renderToString( <IconMap markerData={ markerdata }/>),
+    html: ReactDOMServer.renderToString(<IconMap markerData={ markerdata }/>),
   } );
 
-  return <Marker key={`marker-${markerdata.accident_timestamp}`} icon={icon} position={lPoint} />;
+  return !accident_timestamp && !accident_severity ? null : <Marker key={`marker-${accident_timestamp}`} icon={icon} position={lPoint} />;
 };
 
 export default AnywayMostSevereAccidentsMarker;
