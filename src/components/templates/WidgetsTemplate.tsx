@@ -13,12 +13,14 @@ import HeatMap from '../molecules/HeatMap';
 import LocationMap from '../molecules/LocationMap';
 import ErrorBoundary from '../atoms/ErrorBoundary';
 import { uniquePoints } from '../../utils/utils';
+import StreetViewWidget from '../molecules/StreetViewWidget'
 
 interface IProps {
   id: number | null;
 }
 
-const getWidgetByType = (widget: any) => {
+const getWidgetByType = ( widget: any ) => {
+
   let widgetComponent;
   switch (widget.name) {
     case 'most_severe_accidents': {
@@ -31,6 +33,10 @@ const getWidgetByType = (widget: any) => {
         return null;
       }
       widgetComponent = <HeatMap data={widget.data} center={{ lat: 32.0853, lng: 34.7818 }} />;
+      break;
+    }
+    case 'street_view': {
+      widgetComponent = <StreetViewWidget data={widget.data} />;
       break;
     }
     case 'accident_count_by_severity': {
