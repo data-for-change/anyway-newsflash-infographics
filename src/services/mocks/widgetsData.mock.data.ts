@@ -285,15 +285,5 @@ export default {
       ],
       meta: {},
     },
-    {
-      name: 'street_view',
-      data: [
-        {
-          latitude: 32.0853,
-          longitude: 34.7818,
-        },
-      ],
-      meta: {},
-    },
   ],
 };
