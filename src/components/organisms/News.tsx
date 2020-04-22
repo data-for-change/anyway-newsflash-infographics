@@ -11,7 +11,8 @@ const News: React.FC = () => {
 
   return (
     <Box flexDirection={'column'}>
-      {store.newsFlashCollection.map((news) => {
+      {store.newsFlashCollection.length > 0 ?
+      store.newsFlashCollection.map((news) => {
         const date: null | string = news.date == null ? '' : new Date(news.date).toLocaleDateString();
         return (
           <AnywayLink key={news.id} to={`/newsflash/${news.id}`}>
@@ -21,7 +22,11 @@ const News: React.FC = () => {
             </Box>
           </AnywayLink>
         );
-      })}
+        }) :
+        <Box p={1}>
+          <Text type={TextType.NEWS_FLASH_CONTENT}>לא נמצאו תוצאות מהמקור המבוקש</Text>
+        </Box>
+      }
     </Box>
   );
 };
