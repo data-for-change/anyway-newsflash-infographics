@@ -23,10 +23,10 @@ const LocationMap: FunctionComponent<IProps> = ({ data, center }) => {
   let markers = data.map((x: IPoint, i: number) => {
     if (x.latitude !== null && x.longitude !== null) {
       return (
-        <>
-          <AnywayMostSevereAccidentsMarker markerdata={x} key={i} />;
-          <AnywayMarker markerdata={x} key={i} />;
-        </>
+        <div key={i}>
+          <AnywayMostSevereAccidentsMarker markerdata={x} />;
+          <AnywayMarker markerdata={x} />;
+        </div>
       );
     }
     return null;
@@ -36,7 +36,6 @@ const LocationMap: FunctionComponent<IProps> = ({ data, center }) => {
   return (
     <Map center={center} bounds={bounds} zoom={INITIAL_ZOOM} style={WRAPPER_STYLES}>
       <ReactLeafletGoogleLayer googleMapsLoaderConf={{ KEY: getAPIKey(), VERSION: '3.40.6' }} type="terrain" />
-
       {markers}
     </Map>
   );
