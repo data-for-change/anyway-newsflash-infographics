@@ -43,7 +43,6 @@ export const NewsFlashFilterPanel: React.FC = () => {
           store.filterNewsFlashCollection(SourceFilterEnum.all);
         }}
       >
-        {/* <Text type={TextType.CONTENT_TITLE} children="הכל" /> */}
         <Text type={TextType.CONTENT_TITLE}>הכל</Text>
       </AnyWayButton>
       <AnyWayButton
@@ -54,7 +53,9 @@ export const NewsFlashFilterPanel: React.FC = () => {
       >
         <img className={classes.image} src={ynetLogo} alt="Ynet" />
       </AnyWayButton>
-      <AnyWayButton className={classes.button} onClick={() => {}}>
+      <AnyWayButton className={classes.button} onClick={() => {
+          store.filterNewsFlashCollection(SourceFilterEnum.walla);
+        }}>
         <img className={classes.image} src={wallaLogo} alt="Walla" />
       </AnyWayButton>
       <AnyWayButton
