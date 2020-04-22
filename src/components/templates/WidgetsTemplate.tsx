@@ -9,11 +9,8 @@ import CountByTypePieWidget from '../molecules/CountByTypePieWidget';
 import CountInjuredByYearBarWidget from '../molecules/CountInjuredByYearBarWidget';
 import CountBySeverityTextWidget from '../molecules/CountBySeverityTextWidget';
 import CountAccidentsByDayNightPieWidget from '../molecules/CountAccidentsByDayNightPieWidget';
-<<<<<<< HEAD
 import StreetViewWidget from '../molecules/StreetViewWidget';
-=======
 import MostSevereAccidentsMapWidget from '../molecules/MostSevereAccidentsMapWidget';
->>>>>>> 0fb3b4f422008f3ee841d1b721a8e158602a9e61
 import HeatMap from '../molecules/HeatMap';
 import ErrorBoundary from '../atoms/ErrorBoundary';
 import { uniquePoints } from '../../utils/utils';
