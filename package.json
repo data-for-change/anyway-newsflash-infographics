@@ -38,11 +38,6 @@
     "sb": "start-storybook -p 9009 -s public",
     "build-sb": "build-storybook -s public"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "prettier --write ./src/"
-    }
-  },
   "prettier": {
     "singleQuote": true,
     "arrowParens": "always",
