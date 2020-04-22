@@ -19,7 +19,7 @@ const renderCustomizedLabel = ( props: any ) => {
 	const hebrewName = rightToLeftText( name );
 
 	const radius = innerRadius + (outerRadius - innerRadius) * 0.7;
-  	const xCountLabel = cx + radius * Math.cos(-midAngle * RADIAN);
+  const xCountLabel = cx + radius * Math.cos(-midAngle * RADIAN);
 	const yCountLabel = cy + radius * Math.sin(-midAngle * RADIAN);
 	const sin = Math.sin(-RADIAN * midAngle);
 	const cos = Math.cos(-RADIAN * midAngle);
@@ -39,6 +39,7 @@ const renderCustomizedLabel = ( props: any ) => {
 		</g>
 	);
 };
+
 export const PieChartView: FC<IProps> = ( { data, yLabel, xLabel } ) => {
 
 	return (
@@ -56,7 +57,7 @@ export const PieChartView: FC<IProps> = ( { data, yLabel, xLabel } ) => {
 				label={renderCustomizedLabel}
 				labelLine={false}
 				>
-					{data.map((entry:any, index:any) => <Cell fill={COLORS[index % COLORS.length]}/>)}
+					{data.map((entry:any, index:any) => <Cell key={index} fill={COLORS[index % COLORS.length]}/>)}
 				</Pie>
 			</PieChart>
 		</ResponsiveContainer>
