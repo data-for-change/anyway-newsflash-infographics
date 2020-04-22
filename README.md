@@ -125,9 +125,7 @@ If you're using VScode prettier, please use the following config:
 ```
 ## Mock Server 
 Mock server can be found under https://anyway-mock-server.herokuapp.com/api.
-The server caching the lsat 10 news flash objects from the actual server .
-the url request for feitching the data: 
-https://anyway.co.il/api/news-flash-filters?news_flash_count=10.
+The server caching all responses from each unique request.
 
 ## Available Scripts
 

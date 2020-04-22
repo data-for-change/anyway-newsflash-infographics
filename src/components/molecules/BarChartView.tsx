@@ -1,11 +1,12 @@
-import React, { FunctionComponent } from 'react'
-import { ResponsiveContainer, BarChart, LabelList, XAxis, Label, Bar } from 'recharts'
+import React, { FC } from 'react';
+import { ResponsiveContainer, BarChart, LabelList, XAxis, Label, Bar } from 'recharts';
+import { IWidgetAccidentsByYear, IWidgetInjuredByYear } from '../../models/WidgetData';
 
 interface IProps {
-	data: Array<object>
-	xLabel: string | number
-  yLabel: string | number
-  textLabel: string
+  data: IWidgetAccidentsByYear[] | IWidgetInjuredByYear[];
+  xLabel: string | number;
+  yLabel: string | number;
+  textLabel: string;
 }
 const renderCustomizedLabel = (props:any) => {
   const { x, y, width, height, value } = props;
@@ -18,7 +19,7 @@ const renderCustomizedLabel = (props:any) => {
     </g>
   );
 };
-const BarChartView: FunctionComponent<IProps> = ({data, xLabel, yLabel, textLabel}) => {
+const BarChartView: FC<IProps> = ({data, xLabel, yLabel, textLabel}) => {
 
 	return (
     <ResponsiveContainer width={'100%'} height={'90%'}>
@@ -33,5 +34,5 @@ const BarChartView: FunctionComponent<IProps> = ({data, xLabel, yLabel, textLabe
       </BarChart>
     </ResponsiveContainer>
   );
-}
-export default BarChartView
+};
+export default BarChartView;

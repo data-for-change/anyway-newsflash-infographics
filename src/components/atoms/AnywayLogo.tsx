@@ -10,10 +10,10 @@ export const AnywayLogo: FunctionComponent<AnywayLogoProps> = ({ height }) => {
 
   const logoStyle = useMemo(
     () => ({
-      height
+      height,
     }),
-    [height]
+    [height],
   );
 
-  return <img src={logo} alt='logo' style={logoStyle} />;
+  return <img src={logo} alt="logo" style={logoStyle} />;
 };
