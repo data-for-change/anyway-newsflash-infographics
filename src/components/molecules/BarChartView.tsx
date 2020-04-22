@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from 'react'
 import { ResponsiveContainer, BarChart, LabelList, XAxis, Label, Bar } from 'recharts'
-import { position } from 'html2canvas/dist/types/css/property-descriptors/position'
 
 interface IProps {
 	data: Array<object>

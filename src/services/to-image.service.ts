@@ -1,6 +1,6 @@
 import React from 'react'
 import { saveAs } from 'file-saver'
-import domtoimage from 'dom-to-image'
+// import domtoimage from 'dom-to-image'
 import html2canvas from 'html2canvas';
 // const widgetToJpeg = (widget: React.RefObject<HTMLDivElement>) => {
 //     if (widget.current) {
