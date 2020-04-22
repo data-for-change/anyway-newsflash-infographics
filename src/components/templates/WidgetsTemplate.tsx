@@ -9,6 +9,7 @@ import CountByTypePieWidget from '../molecules/CountByTypePieWidget';
 import CountInjuredByYearBarWidget from '../molecules/CountInjuredByYearBarWidget';
 import CountBySeverityTextWidget from '../molecules/CountBySeverityTextWidget';
 import CountAccidentsByDayNightPieWidget from '../molecules/CountAccidentsByDayNightPieWidget';
+import StreetViewWidget from '../molecules/StreetViewWidget';
 import MostSevereAccidentsMapWidget from '../molecules/MostSevereAccidentsMapWidget';
 import HeatMap from '../molecules/HeatMap';
 import ErrorBoundary from '../atoms/ErrorBoundary';
@@ -31,6 +32,10 @@ const getWidgetByType = (widget: any) => {
         return null;
       }
       widgetComponent = <HeatMap data={widget.data} center={{ lat: 32.0853, lng: 34.7818 }} />;
+      break;
+    }
+    case 'street_view': {
+      widgetComponent = <StreetViewWidget data={widget.data} />;
       break;
     }
     case 'accident_count_by_severity': {
