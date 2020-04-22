@@ -1,7 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { Map } from 'react-leaflet';
 import L, { LatLng } from 'leaflet';
-import AnywayMarker from '../atoms/AnywayMarker';
+import AnywayMostSevereAccidentsMarker from '../atoms/AnywayMostSevereAccidentsMarker';
+import AnywayMarker from '../atoms/AnywayMarker'
 import { getAPIKey, uniquePoints } from '../../utils/utils';
 import { IPoint } from '../../models/Point';
 import ReactLeafletGoogleLayer from 'react-leaflet-google-layer';
@@ -14,14 +15,19 @@ const DEFAULT_BOUNDS = [
 ];
 
 interface IProps {
-  data: IPoint[];
+  data: IPoint[] | any;
   center?: { lat: number; lng: number };
 }
 
 const LocationMap: FunctionComponent<IProps> = ({ data, center }) => {
   let markers = data.map((x: IPoint, i: number) => {
     if (x.latitude !== null && x.longitude !== null) {
-      return <AnywayMarker markerdata={x} key={i} />;
+      return (
+        <div key={i}>
+          <AnywayMostSevereAccidentsMarker markerdata={x} />;
+          <AnywayMarker markerdata={x} />;
+        </div>
+      );
     }
     return null;
   });
@@ -30,7 +36,6 @@ const LocationMap: FunctionComponent<IProps> = ({ data, center }) => {
   return (
     <Map center={center} bounds={bounds} zoom={INITIAL_ZOOM} style={WRAPPER_STYLES}>
       <ReactLeafletGoogleLayer googleMapsLoaderConf={{ KEY: getAPIKey(), VERSION: '3.40.6' }} type="terrain" />
-
       {markers}
     </Map>
   );

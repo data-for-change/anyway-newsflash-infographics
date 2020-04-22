@@ -9,9 +9,12 @@ import CountByTypePieWidget from '../molecules/CountByTypePieWidget';
 import CountInjuredByYearBarWidget from '../molecules/CountInjuredByYearBarWidget';
 import CountBySeverityTextWidget from '../molecules/CountBySeverityTextWidget';
 import CountAccidentsByDayNightPieWidget from '../molecules/CountAccidentsByDayNightPieWidget';
+<<<<<<< HEAD
 import StreetViewWidget from '../molecules/StreetViewWidget';
+=======
+import MostSevereAccidentsMapWidget from '../molecules/MostSevereAccidentsMapWidget';
+>>>>>>> 0fb3b4f422008f3ee841d1b721a8e158602a9e61
 import HeatMap from '../molecules/HeatMap';
-import LocationMap from '../molecules/LocationMap';
 import ErrorBoundary from '../atoms/ErrorBoundary';
 import { uniquePoints } from '../../utils/utils';
 
@@ -23,7 +26,7 @@ const getWidgetByType = (widget: any) => {
   let widgetComponent;
   switch (widget.name) {
     case 'most_severe_accidents': {
-      widgetComponent = <LocationMap data={widget.data} center={{ lat: 32.0853, lng: 34.7818 }} />;
+      widgetComponent = <MostSevereAccidentsMapWidget data={widget.data}  />;
       break;
     }
     case 'accidents_heat_map': {
