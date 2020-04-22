@@ -2,6 +2,7 @@ import React, { FC, useRef } from 'react'
 import { Card, CardContent, CardActions } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import Image from '../../assets/road-image.png';
+import widgetToJpeg from '../../services/to-image.service';
 import { AnywayLogo } from '../atoms/AnywayLogo';
 import { AnyWayButton } from '../atoms/AnyWayButton';
 import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
