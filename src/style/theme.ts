@@ -1,5 +1,7 @@
-const defaultThemeOptions /*: ThemeOptions*/ = {
+import { ThemeOptions } from '@material-ui/core';
+
+const defaultThemeOptions: ThemeOptions = {
   palette: {},
 };
 
-export {defaultThemeOptions};
+export { defaultThemeOptions };

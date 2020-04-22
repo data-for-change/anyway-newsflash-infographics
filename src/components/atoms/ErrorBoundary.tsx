@@ -1,12 +1,12 @@
-import React, {Component, ErrorInfo} from 'react';
+import React, { Component, ErrorInfo } from 'react';
 
 export class ErrorBoundary extends Component {
   public state = {
-    hasError: false
+    hasError: false,
   };
 
   public static getDerivedStateFromError() {
-    return {hasError: true};
+    return { hasError: true };
   }
 
   // set the types for error  and info
@@ -16,13 +16,13 @@ export class ErrorBoundary extends Component {
 
   public componentDidUpdate() {
     if (this.state.hasError) {
-      setTimeout(() => this.setState({redirect: true}), 5000);
+      setTimeout(() => this.setState({ redirect: true }), 5000);
     }
   }
 
   public render() {
     if (this.state.hasError) {
-      return (<p>Invalid Component widget.</p>);
+      return <p>Invalid Component widget.</p>;
     }
 
     return this.props.children;

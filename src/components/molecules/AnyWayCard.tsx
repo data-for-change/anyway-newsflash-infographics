@@ -1,7 +1,6 @@
 import React, { FC, useRef } from 'react'
 import { Card, CardContent, CardActions } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
-import widgetToJpeg from '../../services/to-image.service'
 import Image from '../../assets/road-image.png';
 import { AnywayLogo } from '../atoms/AnywayLogo';
 import { AnyWayButton } from '../atoms/AnyWayButton';
@@ -16,7 +15,7 @@ const useStyles = makeStyles({
     borderRadius: '15px',
     margin: '10px',
     padding: '16px',
-    backgroundImage: `url(${ Image })`,
+    backgroundImage: `url(${Image})`,
   },
   space: {
     justifyContent: 'space-between',
@@ -24,15 +23,17 @@ const useStyles = makeStyles({
   dimension: {
     width: '100%',
     height: '90%',
-    padding: 0
-  }
+    padding: 0,
+  },
 });
+
 const AnyWayCard: FC<IProps> = ({children}) => {
+
   const classes = useStyles();
-	const widget = useRef<HTMLDivElement>(null)
-	const imgDownloadHandler = () => {
-		widgetToJpeg(widget)
-  }
+  const widget = useRef<HTMLDivElement>(null);
+  const imgDownloadHandler = () => {
+    widgetToJpeg(widget);
+  };
 
   return (
     <Card ref={widget} className={classes.root}>
@@ -45,5 +46,5 @@ const AnyWayCard: FC<IProps> = ({children}) => {
       </CardActions>
     </Card>
   );
-}
-export default AnyWayCard
+};
+export default AnyWayCard;

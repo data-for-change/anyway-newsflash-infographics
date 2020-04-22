@@ -12,7 +12,6 @@ import html2canvas from 'html2canvas';
 //     }
 // };
 
-
 const widgetToJpeg = ( widget: React.RefObject<HTMLDivElement> ) => {
 
   if (widget.current) {
@@ -31,4 +30,4 @@ const widgetToJpeg = ( widget: React.RefObject<HTMLDivElement> ) => {
   }
 };
 
-export default widgetToJpeg
+export default widgetToJpeg;

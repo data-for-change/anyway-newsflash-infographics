@@ -1,16 +1,16 @@
 import React, { FunctionComponent, useEffect } from 'react';
-import {useStore} from '../../store/storeConfig'
-import RootStore from '../../store/root.store'
-import {observer} from 'mobx-react-lite';
-import {Grid} from '../atoms'
-import AnyWayCard from '../molecules/AnyWayCard'
-import CountByYearBarWidget from '../molecules/CountByYearBarWidget'
-import CountByTypePieWidget from '../molecules/CountByTypePieWidget'
+import { useStore } from '../../store/storeConfig';
+import RootStore from '../../store/root.store';
+import { observer } from 'mobx-react-lite';
+import { Grid } from '../atoms';
+import AnyWayCard from '../molecules/AnyWayCard';
+import CountByYearBarWidget from '../molecules/CountByYearBarWidget';
+import CountByTypePieWidget from '../molecules/CountByTypePieWidget';
 import CountInjuredByYearBarWidget from '../molecules/CountInjuredByYearBarWidget';
-import CountBySeverityTextWidget from '../molecules/CountBySeverityTextWidget'
-import CountAccidentsByDayNightPieWidget from '../molecules/CountAccidentsByDayNightPieWidget'
-import HeatMap from '../molecules/HeatMap'
-import LocationMap from '../molecules/LocationMap'
+import CountBySeverityTextWidget from '../molecules/CountBySeverityTextWidget';
+import CountAccidentsByDayNightPieWidget from '../molecules/CountAccidentsByDayNightPieWidget';
+import HeatMap from '../molecules/HeatMap';
+import LocationMap from '../molecules/LocationMap';
 import ErrorBoundary from '../atoms/ErrorBoundary';
 import { uniquePoints } from '../../utils/utils';
 
@@ -48,8 +48,8 @@ const getWidgetByType = (widget: any) => {
       break;
     }
     case 'injured_count_by_accident_year': {
-      widgetComponent = <CountInjuredByYearBarWidget data={ widget.data } />
-      break
+      widgetComponent = <CountInjuredByYearBarWidget data={widget.data} />;
+      break;
     }
     case 'accident_count_by_day_night': {
       widgetComponent = <CountAccidentsByDayNightPieWidget data={widget.data} />;

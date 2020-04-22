@@ -11,9 +11,9 @@ interface IProps {}
 const useStyles = makeStyles(() =>
   createStyles({
     grow: {
-      flexGrow: 1
-    }
-  })
+      flexGrow: 1,
+    },
+  }),
 );
 
 const FilterBar: FC<IProps> = () => {
@@ -23,11 +23,11 @@ const FilterBar: FC<IProps> = () => {
 
   return (
     <div className={classes.grow}>
-      <AppBar position='static' color='transparent' elevation={0}>
-        <Toolbar variant='dense'>
+      <AppBar position="static" color="transparent" elevation={0}>
+        <Toolbar variant="dense">
           <Grid container>
             <Grid item xs={12} md={3}>
-              <SelectButton initialValue={0} onChange={onFilterChange}/>
+              <SelectButton initialValue={0} onChange={onFilterChange} />
             </Grid>
             {/* TODO: add type / severity filters*/}
             {/*<Grid item xs={12} md={3}>*/}
