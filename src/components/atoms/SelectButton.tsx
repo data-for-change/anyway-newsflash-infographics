@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { FC, useCallback } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { ListItemIcon, List, ListItem } from '@material-ui/core';
 import { MenuItem } from '@material-ui/core';
@@ -21,7 +21,7 @@ const useStyles = makeStyles(() =>
   }),
 );
 
-const SelectButton: FunctionComponent<IProps> = ({ onChange, initialValue }) => {
+const SelectButton: FC<IProps> = ({ onChange, initialValue }) => {
   const classes = useStyles();
   const [selectValue, setsSelectValue] = React.useState<string | number>(0);
   const [open, setOpen] = React.useState(false);

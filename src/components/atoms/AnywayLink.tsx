@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link, LinkProps } from 'react-router-dom';
 import { onLinkColor } from '../../style/_globals';
@@ -17,7 +17,7 @@ interface IProps extends LinkProps {
   to: string;
 }
 
-const AnyWayLink: FunctionComponent<IProps> = ({ ...props }) => {
+const AnyWayLink: FC<IProps> = ({ ...props }) => {
   const classes = useStyles();
   return <Link className={classes.link} {...props} />;
 };
