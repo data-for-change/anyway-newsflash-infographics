@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { IWidgetCountBySeverity } from '../../models/WidgetData';
 import { Text, TextType } from '../atoms';
 import { Theme, makeStyles, Avatar } from '@material-ui/core'
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: theme.spacing(5),
   },
 }));
-const TextView: FunctionComponent<IProps> = (props) => {
+const TextView: FC<IProps> = (props) => {
   //hardcoded, waiting for data changes from the server
   const classes = useStyles();
   return (

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import WidgetsTemplate from '../components/templates/WidgetsTemplate';
 import { Box } from '@material-ui/core';
 import SideBar from '../components/templates/SideBar';
@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-const HomePage: FunctionComponent<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
+const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
   const classes = useStyles();
   const id = match.params.id ? parseInt(match.params.id) : null;
 

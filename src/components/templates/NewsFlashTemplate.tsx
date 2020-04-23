@@ -1,7 +1,7 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 
 interface IProps {}
 
-export const NewsFlashTemplate: FunctionComponent<IProps> = () => {
+export const NewsFlashTemplate: FC<IProps> = () => {
   return <div>NewsFlashTemplate</div>;
 };
