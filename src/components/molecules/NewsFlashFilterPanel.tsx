@@ -3,7 +3,7 @@ import { Box, makeStyles } from '@material-ui/core';
 import { borderColor } from '../../style/_globals';
 import ynetLogo from '../../assets/ynet-website-logo.svg';
 import wallaLogo from '../../assets/walla-logo.svg';
-import mdaLogo from '../../assets/mda-logo.svg';
+import madaLogo from '../../assets/mada-logo.svg';
 import { AnyWayButton } from '../atoms/AnyWayButton';
 import RootStore from '../../store/root.store';
 import { useStore } from '../../store/storeConfig';
@@ -12,8 +12,8 @@ import { Text, TextType } from '../atoms';
 
 const useStyles = makeStyles({
   image: {
-    maxWidth: '100%',
-    maxHeight: '100%',
+    maxWidth: '50px',
+    maxHeight: '35px',
   },
   button: {
     height: '50px',
@@ -64,7 +64,7 @@ export const NewsFlashFilterPanel: React.FC = () => {
           store.filterNewsFlashCollection(SourceFilterEnum.mda);
         }}
       >
-        <img className={classes.image} src={mdaLogo} alt="Magen David Adom" />
+        <img className={classes.image} src={madaLogo} alt="Magen David Adom" />
       </AnyWayButton>
     </Box>
   );
