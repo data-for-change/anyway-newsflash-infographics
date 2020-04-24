@@ -20,7 +20,7 @@ const News: React.FC = () => {
     <Box className={classes.container} flexDirection={'column'}>
       {store.newsFlashCollection.length > 0 ?
       store.newsFlashCollection.map((news) => {
-        const date: null | string = news.date == null ? '' : new Date(news.date.replace(/-/g, "/")).toLocaleDateString();
+        const date: null | string = news.date == null ? '' : new Date(news.date.replace(/-/g, '/')).toLocaleDateString();
         return (
           <AnywayLink key={news.id} to={`/newsflash/${news.id}`}>
             <Box border={1} borderColor={borderColor} p={1}>
