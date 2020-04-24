@@ -1,19 +1,26 @@
 import React from 'react';
 import { AnywayLink, Text, TextType } from '../atoms';
-import { Box } from '@material-ui/core';
+import { Box, makeStyles } from '@material-ui/core';
 import { borderColor } from '../../style/_globals';
 import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
 import { observer } from 'mobx-react-lite';
 
+const useStyles = makeStyles({
+  container:{
+    maxHeight: "300px"
+  }
+});
+
 const News: React.FC = () => {
   const store: RootStore = useStore();
+  const classes = useStyles();
 
   return (
-    <Box flexDirection={'column'}>
+    <Box className={classes.container} flexDirection={'column'}>
       {store.newsFlashCollection.length > 0 ?
       store.newsFlashCollection.map((news) => {
-        const date: null | string = news.date == null ? '' : new Date(news.date).toLocaleDateString();
+        const date: null | string = news.date == null ? '' : new Date(news.date.replace(/-/g, '/')).toLocaleDateString();
         return (
           <AnywayLink key={news.id} to={`/newsflash/${news.id}`}>
             <Box border={1} borderColor={borderColor} p={1}>
