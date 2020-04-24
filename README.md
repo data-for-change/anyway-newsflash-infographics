@@ -10,7 +10,7 @@ Learn more about our [Vision](https://github.com/hasadna/anyway-newsflash-infogr
 Want to file a bug, contribute some code, or improve documentation? Excellent! Please follow these steps
 ### First thing first
 * Join our [Slack Channel](https://app.slack.com/client/T02G85W3A/CLWT1CLDQ). contact Yuval or Atalya to get invitation.
-* Optional: installing [ZenHub](https://www.zenhub.com/) would make it easier to look at our project [board](https://github.com/hasadna/anyway-newsflash-infographics#workspaces/anyway-5e00f3aa79454c5108bf2370/).
+* Optional: installing [ZenHub](https://chrome.google.com/webstore/detail/zenhub-for-github/ogcgkffhplmphkaahpmffcafajaocjbd) would make it easier to look at our project [board](https://github.com/hasadna/anyway-newsflash-infographics#workspaces/anyway-5e00f3aa79454c5108bf2370/).
 
 ### Diving in
 * For improving documentation:
