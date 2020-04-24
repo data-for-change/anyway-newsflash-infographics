@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import L from 'leaflet';
 import { Marker } from 'react-leaflet';
@@ -53,7 +53,7 @@ const IconMap = ({markerData}:any) => {
   );
 };
 
-const AnywayMostSevereAccidentsMarker: FC<IProps> = ( { markerdata } ) => {
+const AnywayMostSevereAccidentsMarker: React.FC<IProps> = ( { markerdata } ) => {
   const { latitude, longitude, accident_severity, accident_timestamp } = markerdata
   const classes = useStyles();
   const lPoint: L.LatLng = new L.LatLng(latitude, longitude);

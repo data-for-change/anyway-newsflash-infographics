@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import red from '@material-ui/core/colors/red';
 import { rightToLeftText } from '../../utils/utils';
@@ -40,7 +40,7 @@ const renderCustomizedLabel = ( props: any ) => {
 	);
 };
 
-export const PieChartView: FC<IProps> = ( { data, yLabel, xLabel } ) => {
+export const PieChartView: React.FC<IProps> = ( { data, yLabel, xLabel } ) => {
 
 	return (
 		<ResponsiveContainer width={'100%'} height={'100%'}>

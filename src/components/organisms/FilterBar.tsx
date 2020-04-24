@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { makeStyles, createStyles, Divider, Grid } from '@material-ui/core';
 import { AppBar, Toolbar } from '@material-ui/core';
 import SelectButton from '../atoms/SelectButton';
@@ -16,7 +16,7 @@ const useStyles = makeStyles(() =>
   }),
 );
 
-const FilterBar: FC<IProps> = () => {
+const FilterBar: React.FC<IProps> = () => {
   const store: RootStore = useStore();
   const classes = useStyles();
   const onFilterChange = useCallback((value: number) => store.changeTimeFilter(value), [store]);

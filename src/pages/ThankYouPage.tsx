@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { Text, TextType } from '../components/atoms';
 
 interface IProps {}
 
-const ThankYouPage: FunctionComponent<IProps> = () => {
+const ThankYouPage: React.FC<IProps> = () => {
   return (
     <div>
       <Text type={TextType.PAGE_TITLE}>Thank You</Text>

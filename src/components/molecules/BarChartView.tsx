@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { ResponsiveContainer, BarChart, LabelList, XAxis, Label, Bar } from 'recharts';
 import { IWidgetAccidentsByYear, IWidgetInjuredByYear } from '../../models/WidgetData';
 
@@ -19,7 +19,7 @@ const renderCustomizedLabel = (props:any) => {
     </g>
   );
 };
-const BarChartView: FC<IProps> = ({data, xLabel, yLabel, textLabel}) => {
+const BarChartView: React.FC<IProps> = ({data, xLabel, yLabel, textLabel}) => {
 
 	return (
     <ResponsiveContainer width={'100%'} height={'90%'}>

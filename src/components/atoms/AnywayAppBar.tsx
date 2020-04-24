@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const AnywayAppBar: FunctionComponent = ({ children }) => {
+export const AnywayAppBar: React.FC = ({ children }) => {
   const classes = useStyles();
 
   return <AppBar className={classes.root}>{children}</AppBar>;

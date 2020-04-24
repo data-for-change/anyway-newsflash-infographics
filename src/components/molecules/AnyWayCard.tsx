@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react'
+import React, { useRef } from 'react'
 import { Card, CardContent, CardActions } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import Image from '../../assets/road-image.png';
@@ -28,7 +28,7 @@ const useStyles = makeStyles({
   },
 });
 
-const AnyWayCard: FC<IProps> = ({children}) => {
+const AnyWayCard: React.FC<IProps> = ({children}) => {
 
   const classes = useStyles();
   const widget = useRef<HTMLDivElement>(null);

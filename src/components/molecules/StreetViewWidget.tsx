@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { getAPIKey } from '../../utils/utils';
 import { IPoint } from '../../models/Point';
 import ReactStreetview from 'react-streetview';
@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   },
 });
 
-const StreetViewWidget: FC<IProps> = ( {data} ) => {
+const StreetViewWidget: React.FC<IProps> = ( {data} ) => {
   const classes = useStyles();
   const streetViewPanoramaOptions = {
     position: {lat: 46.9171876, lng: 17.8951832} ,

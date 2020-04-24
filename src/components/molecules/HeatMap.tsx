@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { Map } from 'react-leaflet';
 // @ts-ignore
 import HeatmapLayer from 'react-leaflet-heatmap-layer';
@@ -26,7 +26,7 @@ interface IProps {
   center?: { lat: number; lng: number };
 }
 
-const HeatMap: FunctionComponent<IProps> = ({ data, center }) => {
+const HeatMap: React.FC<IProps> = ({ data, center }) => {
   const classes = useStyles();
   const bounds = getBounds(data);
 

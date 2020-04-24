@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { Map } from 'react-leaflet';
 import L, { LatLng } from 'leaflet';
 import AnywayMostSevereAccidentsMarker from '../atoms/AnywayMostSevereAccidentsMarker';
@@ -19,7 +19,7 @@ interface IProps {
   center?: { lat: number; lng: number };
 }
 
-const LocationMap: FunctionComponent<IProps> = ({ data, center }) => {
+const LocationMap: React.FC<IProps> = ({ data, center }) => {
   let markers = data.map((x: IPoint, i: number) => {
     if (x.latitude !== null && x.longitude !== null) {
       return (

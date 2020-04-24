@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import L from 'leaflet';
 import { Marker, Popup } from 'react-leaflet';
 import redMarker from '../../assets/marker-icon-2x-red.png';
@@ -36,7 +36,7 @@ const YELLOW_ICON = new L.Icon({
   shadowSize: L.point(iconSize.shadowSize[0], iconSize.shadowSize[1]),
 });
 
-const AnywayMarker: FC<IProps> = ({ markerdata }) => {
+const AnywayMarker: React.FC<IProps> = ({ markerdata }) => {
   const lPoint: L.LatLng = new L.LatLng(markerdata.latitude, markerdata.longitude);
   const icon: L.Icon = setIconBySeverity(markerdata.accident_severity);
   return (

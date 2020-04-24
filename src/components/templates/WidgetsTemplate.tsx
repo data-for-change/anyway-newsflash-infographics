@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
 import { observer } from 'mobx-react-lite';
@@ -69,7 +69,7 @@ const getWidgetByType = (widget: any) => {
   return widgetComponent;
 };
 
-const WidgetsTemplate: FunctionComponent<IProps> = ({ id }) => {
+const WidgetsTemplate: React.FC<IProps> = ({ id }) => {
   const store: RootStore = useStore();
   useEffect(() => {
     if (id) {

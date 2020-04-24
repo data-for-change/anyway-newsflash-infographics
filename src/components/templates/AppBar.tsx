@@ -1,6 +1,6 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { Header } from '../molecules/Header';
 
-export const AppBar: FunctionComponent = () => {
+export const AppBar: React.FC = () => {
   return <Header />;
 };

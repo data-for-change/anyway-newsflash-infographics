@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { AnywayAppBar } from '../atoms/AnywayAppBar';
 import { AnywayLogo } from '../atoms/AnywayLogo';
 import { SignInIcon } from '../atoms/SignInIcon';
 
-export const Header: FunctionComponent = () => {
+export const Header: React.FC = () => {
   return (
     <AnywayAppBar>
       <AnywayLogo height={'30px'} />
