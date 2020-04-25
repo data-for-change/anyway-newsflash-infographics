@@ -45,7 +45,7 @@ It is following [Atomic Design](https://bradfrost.com/blog/post/atomic-web-desig
 ### Project directory structure
 ```
 .
-+-- assets          // images, icons, audio atc.
++-- assets          // images, icons, audio etc.
 +-- components      // internal components (anything other than page component)
 |   +-- atoms
 |   +-- molecules
@@ -54,7 +54,7 @@ It is following [Atomic Design](https://bradfrost.com/blog/post/atomic-web-desig
 +-- hooks           // common reusable hooks 
 +-- models          // typescript interfaces and classes
 +-- pages           // page components
-+-- services        // REST API, websocket, storage ect.
++-- services        // REST API, websocket, storage etc.
 +-- store           // MobX stores
 +-- style           // css-in-js code and wrappers
 |   +-- _globals.ts // sizes, colors etc. - can be divided as project grow
