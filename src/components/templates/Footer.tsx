@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import logoHasdna from '../../assets/hasadna.png';
 import { makeStyles } from '@material-ui/core/styles';
 import { AnywayLink } from '../atoms/';
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const Footer: FunctionComponent<IProps> = () => {
+export const Footer: FC<IProps> = () => {
   const classes = useStyles();
   return (
     <footer className={classes.footer}>

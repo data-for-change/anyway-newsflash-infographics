@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { Box, makeStyles } from '@material-ui/core';
 import News from '../organisms/News';
 import { NewsFlashFilterPanel } from '../molecules/NewsFlashFilterPanel';
@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-const SideBar: FunctionComponent<IProps> = () => {
+const SideBar: FC<IProps> = () => {
   const classes = useStyles();
   const mapTitle = 'מיקום משוער:';
 

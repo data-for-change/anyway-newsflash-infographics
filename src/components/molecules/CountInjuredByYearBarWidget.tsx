@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import BarChartView from './BarChartView';
 import { IWidgetInjuredByYear } from '../../models/WidgetData';
 import { rightToLeftText } from '../../utils/utils';
@@ -11,7 +11,7 @@ interface IProps {
   data: IWidgetInjuredByYear[];
 }
 
-const CountInjuredByYearBarWidget: FunctionComponent<IProps> = (props) => {
+const CountInjuredByYearBarWidget: FC<IProps> = (props) => {
   return <BarChartView data={props.data} xLabel={ACCIDENT_YEAR} yLabel={COUNT} textLabel={TEXT} />;
 };
 export default CountInjuredByYearBarWidget;

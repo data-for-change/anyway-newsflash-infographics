@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 
 export enum TextType {
   PAGE_TITLE,
@@ -15,7 +15,7 @@ interface IProps {
   type: TextType;
 }
 
-const Text: FunctionComponent<IProps> = ({ type, children }) => {
+const Text: FC<IProps> = ({ type, children }) => {
   switch (type) {
     case TextType.PAGE_TITLE:
       return <h1>{children}</h1>;

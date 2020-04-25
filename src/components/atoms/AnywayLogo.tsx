@@ -1,11 +1,11 @@
-import React, { FunctionComponent, useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 import AnywayImage from '../../assets/anyway.png';
 
 interface AnywayLogoProps {
   height: string;
 }
 
-export const AnywayLogo: FunctionComponent<AnywayLogoProps> = ({ height }) => {
+export const AnywayLogo: FC<AnywayLogoProps> = ({ height }) => {
   const logo = useMemo(() => AnywayImage.toString(), []);
 
   const logoStyle = useMemo(

@@ -1,8 +1,8 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 
 interface IProps {
   onClick: () => any;
 }
 
-const Button: FunctionComponent<IProps> = ({ onClick, children }) => <button onClick={onClick}>{children}</button>;
+const Button: FC<IProps> = ({ onClick, children }) => <button onClick={onClick}>{children}</button>;
 export default Button;

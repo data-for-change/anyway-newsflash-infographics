@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { default as MaterialGrid } from '@material-ui/core/Grid';
 
 interface IProps {}
 
-const GridContainer: FunctionComponent<IProps> = ({ children }) => {
+const GridContainer: FC<IProps> = ({ children }) => {
   const devStyles = {
     maxWidth: '100%',
     justifyContent: 'center',
@@ -17,7 +17,7 @@ const GridContainer: FunctionComponent<IProps> = ({ children }) => {
   );
 };
 
-const GridItem: FunctionComponent<IProps> = ({ children }) => {
+const GridItem: FC<IProps> = ({ children }) => {
   return (
     <MaterialGrid item xs={12} sm={6} lg={4} xl={3}>
       {children}
