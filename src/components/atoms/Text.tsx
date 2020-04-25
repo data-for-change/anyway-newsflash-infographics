@@ -42,7 +42,7 @@ const Text: FC<IProps> = ({ type, children }) => {
       return <h2>{ children }</h2>;
 
     case TextType.WIDGET_CONTENT:
-      return <h1>{children}</h1>;
+      return <p>{children}</p>;
   }
 };
 

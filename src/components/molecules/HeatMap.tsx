@@ -7,7 +7,7 @@ import L, { LatLng } from 'leaflet';
 
 import { makeStyles } from '@material-ui/core/styles';
 import ReactLeafletGoogleLayer from 'react-leaflet-google-layer';
-import { getAPIKey } from '../../utils/utils';
+import { getAPIKey, uniquePoints } from '../../utils/utils';
 
 const INITIAL_ZOOM = 13;
 const useStyles = makeStyles({
@@ -28,6 +28,12 @@ interface IProps {
 
 const HeatMap: FC<IProps> = ({ data, center }) => {
   const classes = useStyles();
+
+
+  const isDataValid = data && uniquePoints(data).length > 1;
+  if (!isDataValid) {
+    return null;
+  }
   const bounds = getBounds(data);
 
   return (

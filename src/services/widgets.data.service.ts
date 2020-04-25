@@ -1,9 +1,9 @@
 import { defaultWidgetsCollectionData, mockHTTPCall } from './mocks/mock.service';
-import { IWidgetData } from '../models/WidgetData';
+import { ILocationData } from '../models/WidgetData';
 import axios from 'axios';
 
 export function fetchDefaultWidgets(): Promise<any> {
-  return mockHTTPCall<IWidgetData>(defaultWidgetsCollectionData);
+  return mockHTTPCall<ILocationData>(defaultWidgetsCollectionData);
 }
 
 const NEWS_FLASH_API: string = '/api/infographics_data';

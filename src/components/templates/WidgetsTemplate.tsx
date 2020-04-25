@@ -13,56 +13,53 @@ import StreetViewWidget from '../molecules/StreetViewWidget';
 import MostSevereAccidentsMapWidget from '../molecules/MostSevereAccidentsMapWidget';
 import HeatMap from '../molecules/HeatMap';
 import ErrorBoundary from '../atoms/ErrorBoundary';
-import { uniquePoints } from '../../utils/utils';
+import { MetaTag } from '../atoms';
 
 interface IProps {
   id: number | null;
 }
 
 const getWidgetByType = (widget: any) => {
+  const { name, data } = widget;
   let widgetComponent;
-  switch (widget.name) {
+  switch (name) {
     case 'most_severe_accidents': {
-      widgetComponent = <MostSevereAccidentsMapWidget data={widget.data}  />;
+      widgetComponent = <MostSevereAccidentsMapWidget data={data} />;
       break;
     }
     case 'accidents_heat_map': {
-      const data = uniquePoints(widget.data);
-      if (data.length <= 1) {
-        return null;
-      }
-      widgetComponent = <HeatMap data={widget.data} center={{ lat: 32.0853, lng: 34.7818 }} />;
+      widgetComponent = <HeatMap data={data} center={{ lat: 32.0853, lng: 34.7818 }} />;
       break;
     }
     case 'street_view': {
-      widgetComponent = <StreetViewWidget data={widget.data} />;
+      widgetComponent = <StreetViewWidget data={data} />;
       break;
     }
     case 'accident_count_by_severity': {
       //widget wait for data changes from server
-      widgetComponent = <CountBySeverityTextWidget data={widget.data} />;
+      widgetComponent = <CountBySeverityTextWidget data={data} />;
       break;
     }
     case 'accident_count_by_accident_type': {
       // example of pie widget
-      widgetComponent = <CountByTypePieWidget data={widget.data} />;
+      widgetComponent = <CountByTypePieWidget data={data} />;
       break;
     }
     case 'accident_count_by_accident_year': {
-      widgetComponent = <CountByYearBarWidget data={widget.data} />;
+      widgetComponent = <CountByYearBarWidget data={data} />;
       break;
     }
     case 'injured_count_by_accident_year': {
-      widgetComponent = <CountInjuredByYearBarWidget data={widget.data} />;
+      widgetComponent = <CountInjuredByYearBarWidget data={data} />;
       break;
     }
     case 'accident_count_by_day_night': {
-      widgetComponent = <CountAccidentsByDayNightPieWidget data={widget.data} />;
+      widgetComponent = <CountAccidentsByDayNightPieWidget data={data} />;
       break;
     }
     default: {
       widgetComponent = null; // do not create element for unrecognized widget
-      console.warn(`widget name (${widget.name}) was not recognize `, widget);
+      console.warn(`widget name (${name}) was not recognize `, widget);
       break;
     }
   }
@@ -86,6 +83,7 @@ const WidgetsTemplate: FC<IProps> = ({ id }) => {
     }
     return (
       <AnyWayCard key={index}>
+        <MetaTag>{widget.name}</MetaTag>
         <ErrorBoundary>{widgetComponent}</ErrorBoundary>
       </AnyWayCard>
     );

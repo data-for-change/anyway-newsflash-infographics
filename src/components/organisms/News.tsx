@@ -8,7 +8,6 @@ import { observer } from 'mobx-react-lite';
 
 const useStyles = makeStyles({
   container:{
-    maxHeight: "300px"
   }
 });
 

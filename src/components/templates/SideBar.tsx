@@ -34,7 +34,7 @@ const SideBar: FC<IProps> = () => {
         <ErrorBoundary>
           <NewsFlashFilterPanel />
         </ErrorBoundary>
-        <Box display="flex" flexDirection="column" className={classes.newsFeed}>
+        <Box flexGrow={1} display="flex" flexDirection="column" className={classes.newsFeed}>
           <Box flexGrow={1}>
             <News />
           </Box>
