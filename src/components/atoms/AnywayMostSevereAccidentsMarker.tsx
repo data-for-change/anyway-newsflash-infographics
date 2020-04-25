@@ -3,6 +3,7 @@ import ReactDOMServer from 'react-dom/server';
 import L from 'leaflet';
 import { Marker } from 'react-leaflet';
 import { makeStyles } from '@material-ui/core';
+import { dateFormat } from '../../utils/time.utils';
 
 
 interface IProps {
@@ -41,12 +42,13 @@ const useStyles = makeStyles({
 });
 const IconMap = ({markerData}:any) => {
   const classes = useStyles();
-  const { accident_timestamp, accident_severity } = markerData;
+  const { accident_timestamp, accident_severity, accident_type } = markerData;
+  const iconText = `${dateFormat(accident_timestamp)} - ${accident_severity}, ${accident_type}`
 
   return (
     <div className={classes.mapLabel}>
       <div className={classes.mapLabelContent}>
-        {accident_timestamp}-{accident_severity}
+        {iconText}
       </div>
       <div className={classes.mapLabelArrow}></div>
     </div>
