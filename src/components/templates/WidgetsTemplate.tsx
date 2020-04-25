@@ -14,6 +14,7 @@ import MostSevereAccidentsMapWidget from '../molecules/MostSevereAccidentsMapWid
 import HeatMap from '../molecules/HeatMap';
 import ErrorBoundary from '../atoms/ErrorBoundary';
 import { uniquePoints } from '../../utils/utils';
+import { MetaTag } from '../atoms';
 
 interface IProps {
   id: number | null;
@@ -86,6 +87,7 @@ const WidgetsTemplate: FC<IProps> = ({ id }) => {
     }
     return (
       <AnyWayCard key={index}>
+        <MetaTag>{widget.name}</MetaTag>
         <ErrorBoundary>{widgetComponent}</ErrorBoundary>
       </AnyWayCard>
     );

@@ -1,72 +1,77 @@
-// export type WidgetType = 'heatMap' | 'streetView' | 'severityGraph'
-// interface IData {}
-export type IWidgetsMeta = {
+// current suggestion for widget structure (25 April 2020)
+// export interface IWidgetBase = {
+//   name: string; // unique - used as identifier
+//   data: {
+//     text: Array<string>;  // text items - title, text content etc.
+//     items: object | Array<any>;    // data items - points, events, image name, chart ticks etc.
+//     addionals?: any       // optional - any additional data
+//   };
+//   meta: {
+//     category: string;     // one per widget
+//     tags: Array<string>;  // zero or more per widget
+//   };
+// }
+
+export interface ILocationMeta {
   location_info: {
     resolution: string;
     road1: number;
     road_segment_name: string;
   };
 };
-export type IWidgetMostSevereAccidents = {
-  name: string;
+
+export interface IWidgetBase {
+  name: string; // unique - used as identifier
+  data: any;
+  meta: {};
+}
+
+export interface IWidgetMostSevereAccidents extends IWidgetBase {
   data: {
     longitude: number;
     latitude: number;
     accident_severity: string;
     accident_timestamp: string;
   }[];
-  meta: {};
 };
-export type IWidgetAccidentsHeatMap = {
-  name: string;
+export interface IWidgetAccidentsHeatMap extends IWidgetBase {
   data: {
     longitude: number;
     latitude: number;
   }[];
-  meta: {};
 };
-export type IWidgetCountBySeverity = {
-  name: string;
+export interface IWidgetCountBySeverity extends IWidgetBase {
   data: {
     accident_severity: string;
     count: number;
   }[];
-  meta: {};
 };
-export type IWidgetAccidentsByType = {
-  name: string;
+export interface IWidgetAccidentsByType extends IWidgetBase {
   data: {
     accident_type: string;
     count: number;
   }[];
-  meta: {};
 };
-export type IWidgetAccidentsByYear = {
-  name: string;
+export interface IWidgetAccidentsByYear extends IWidgetBase {
   data: {
     accident_year: number;
     count: number;
   }[];
-  meta: {};
 };
-export type IWidgetInjuredByYear = {
-  name: string;
+export interface IWidgetInjuredByYear extends IWidgetBase {
   data: {
     accident_year: number;
     count: number;
   }[];
-  meta: {};
 };
-export type IWidgetAccidentsByDayNight = {
-  name: string;
+export interface IWidgetAccidentsByDayNight extends IWidgetBase {
   data: {
     day_night: string;
     count: number;
   }[];
-  meta: {};
 };
-export type IWidgetData = {
-  meta: IWidgetsMeta;
+export interface ILocationData {
+  meta: ILocationMeta;
   widgets: IWidgetTypes[];
 };
 export type IWidgetTypes =

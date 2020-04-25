@@ -11,6 +11,7 @@ interface IProps {}
 
 const useStyles = makeStyles({
   root: {
+    position: 'relative', // for meta tags
     width: '360px',
     height: '440px',
     borderRadius: '15px',

@@ -3,7 +3,7 @@ import { action, observable } from 'mobx';
 import { initService } from '../services/init.service';
 import { fetchWidgets } from '../services/widgets.data.service';
 import { INewsFlash } from '../models/NewFlash';
-import { IWidgetData } from '../models/WidgetData';
+import { IWidgetTypes } from '../models/WidgetData';
 import { SourceFilterEnum } from '../models/SourceFilter';
 import { fetchNews } from '../services/news.data.service';
 import SettingsStore from './settings.store';
@@ -15,7 +15,7 @@ export default class RootStore {
 
   @observable newsFlashCollection: Array<INewsFlash> = [];
   @observable newsFlashId: number = 0; // active newsflash id
-  @observable newsFlashWidgetsData: Array<IWidgetData> = [];
+  @observable newsFlashWidgetsData: Array<IWidgetTypes> = [];
   @observable newsFlashWidgetsTimerFilter = 0; // newsflash time filter (in years ago, 0- no filter)
 
   // domain stores
