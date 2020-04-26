@@ -45,7 +45,8 @@ export default class RootStore {
   @computed
   get activeNewsFlash() {
     return this.newsFlashCollection.find((activeNewsFlash) => {
-      return activeNewsFlash.id === this.activeNewsFlashId ? activeNewsFlash : this.activeNewsFlashId;
+      if (activeNewsFlash.id === this.activeNewsFlashId) return activeNewsFlash;
+      else return this.newsFlashCollection[0];
     });
   }
 
