@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ReactLeafletGoogleLayer from 'react-leaflet-google-layer';
 import { getAPIKey, uniquePoints } from '../../utils/utils';
 
-const INITIAL_ZOOM = 13;
+const INITIAL_ZOOM = parseInt(process.env.REACT_APP_DEFAULT_MAP_ZOOM!);
 const useStyles = makeStyles({
   wrapper: {
     height: '100%',
