@@ -1,5 +1,5 @@
 // https://mobx.js.org/best/store.html#combining-multiple-stores
-import { action, observable } from 'mobx';
+import { action, observable, computed } from 'mobx';
 import { initService } from '../services/init.service';
 import { fetchWidgets } from '../services/widgets.data.service';
 import { INewsFlash } from '../models/NewFlash';
@@ -14,7 +14,7 @@ export default class RootStore {
   appInitialized = false;
 
   @observable newsFlashCollection: Array<INewsFlash> = [];
-  @observable newsFlashId: number = 0; // active newsflash id
+  @observable activeNewsFlashId: number = 0; // active newsflash id
   @observable newsFlashWidgetsData: Array<IWidgetTypes> = [];
   @observable newsFlashWidgetsTimerFilter = 0; // newsflash time filter (in years ago, 0- no filter)
 
@@ -42,6 +42,13 @@ export default class RootStore {
     }
   }
 
+  @computed
+  get activeNewsFlash() {
+    return this.newsFlashCollection.find((activeNewsFlash) => {
+      return activeNewsFlash.id === this.activeNewsFlashId ? activeNewsFlash : this.activeNewsFlashId;
+    });
+  }
+
   @action
   filterNewsFlashCollection(source: SourceFilterEnum): void {
     fetchNews(source, 10).then((data: any) => {
@@ -55,7 +62,7 @@ export default class RootStore {
 
   @action
   selectNewsFlash(id: number): void {
-    this.newsFlashId = id;
+    this.activeNewsFlashId = id;
     this.fetchSelectedNewsFlashWidgets(id, this.newsFlashWidgetsTimerFilter);
   }
 
@@ -63,7 +70,7 @@ export default class RootStore {
   changeTimeFilter(filterValue: number): void {
     if (this.newsFlashWidgetsTimerFilter !== filterValue) {
       this.newsFlashWidgetsTimerFilter = filterValue;
-      this.fetchSelectedNewsFlashWidgets(this.newsFlashId, filterValue);
+      this.fetchSelectedNewsFlashWidgets(this.activeNewsFlashId, filterValue);
     }
   }
 
