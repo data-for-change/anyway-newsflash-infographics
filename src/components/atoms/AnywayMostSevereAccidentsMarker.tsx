@@ -5,10 +5,8 @@ import { Marker } from 'react-leaflet';
 import { makeStyles } from '@material-ui/core';
 import { dateFormat } from '../../utils/time.utils';
 
-
 interface IProps {
   markerdata: any;
-
 }
 const useStyles = makeStyles({
   icon: {
@@ -31,7 +29,6 @@ const useStyles = makeStyles({
     whiteSpace: 'nowrap',
     color: '#FFFFFF',
     backgroundColor: '#000000',
-
   },
   mapLabelArrow: {
     display: 'inline-flex',
@@ -40,31 +37,32 @@ const useStyles = makeStyles({
     borderColor: 'transparent transparent transparent #000000',
   },
 });
-const IconMap = ({markerData}:any) => {
+const IconMap = ({ markerData }: any) => {
   const classes = useStyles();
-  const { accident_timestamp, accident_severity, accident_type } = markerData;
-  const iconText = `${dateFormat(accident_timestamp)} - ${accident_severity}, ${accident_type}`
+  const { accident_timestamp, accident_severity = '', accident_type } = markerData;
+  const typeStr = accident_type ? `, ${accident_type}` : ''
+  const iconText = `${dateFormat(accident_timestamp)} - ${accident_severity}${typeStr}`;
 
   return (
     <div className={classes.mapLabel}>
-      <div className={classes.mapLabelContent}>
-        {iconText}
-      </div>
+      <div className={classes.mapLabelContent}>{iconText}</div>
       <div className={classes.mapLabelArrow}></div>
     </div>
   );
 };
 
-const AnywayMostSevereAccidentsMarker: FC<IProps> = ( { markerdata } ) => {
-  const { latitude, longitude, accident_severity, accident_timestamp } = markerdata
+const AnywayMostSevereAccidentsMarker: FC<IProps> = ({ markerdata }) => {
+  const { latitude, longitude, accident_severity, accident_timestamp } = markerdata;
   const classes = useStyles();
   const lPoint: L.LatLng = new L.LatLng(latitude, longitude);
-  const icon = L.divIcon( {
+  const icon = L.divIcon({
     className: classes.icon,
-    html: ReactDOMServer.renderToString(<IconMap markerData={ markerdata }/>),
-  } );
+    html: ReactDOMServer.renderToString(<IconMap markerData={markerdata} />),
+  });
 
-  return !accident_timestamp && !accident_severity ? null : <Marker key={`marker-${accident_timestamp}`} icon={icon} position={lPoint} />;
+  return !accident_timestamp && !accident_severity ? null : (
+    <Marker key={`marker-${accident_timestamp}`} icon={icon} position={lPoint} />
+  );
 };
 
 export default AnywayMostSevereAccidentsMarker;
