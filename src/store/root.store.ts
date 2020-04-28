@@ -18,6 +18,7 @@ export default class RootStore {
 
   @observable newsFlashCollection: Array<INewsFlash> = [];
   @observable activeNewsFlashId: number = 0; // active newsflash id
+  @observable newsFlashFetchLimit: number = 0;
   @observable newsFlashWidgetsData: Array<IWidgetTypes> = [];
   @observable newsFlashWidgetsTimerFilter = 0; // newsflash time filter (in years ago, 0- no filter)
 
@@ -63,14 +64,22 @@ export default class RootStore {
   }
 
   @action
-  filterNewsFlashCollection(source: SourceFilterEnum): void {
-    fetchNews(source, 10).then((data: any) => {
+  filterNewsFlashCollection ( source?: SourceFilterEnum ): void {
+    fetchNews( source, this.newsFlashFetchLimit ).then((data: any) => {
       if (data) {
         this.safeSet('newsFlashCollection', data);
       } else {
         console.error(`filterNewsFlashCollection(source:${source}) invalid data:`, data);
       }
     });
+  }
+
+  @action
+  infiniteFetchLimit ( count: number ): void {
+    this.newsFlashFetchLimit += count;
+    const {newsFlashCollection, newsFlashFetchLimit} = this
+    if (newsFlashCollection.length < newsFlashFetchLimit-count) return;
+    this.filterNewsFlashCollection();
   }
 
   @action

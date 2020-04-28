@@ -8,3 +8,5 @@ export const highlightBasicColor = '#ECED4B';
 export const highlightDarkColor = 'black';
 export const highlightAlertColor = '#D6391A';
 export const highlightWarnColor = '#C36A1A';
+
+export const barChartFillColor = '#c43a31'

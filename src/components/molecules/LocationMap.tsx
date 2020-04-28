@@ -7,7 +7,7 @@ import { getAPIKey, uniquePoints } from '../../utils/utils';
 import { IPoint } from '../../models/Point';
 import ReactLeafletGoogleLayer from 'react-leaflet-google-layer';
 
-const INITIAL_ZOOM = 13;
+const INITIAL_ZOOM = parseInt(process.env.REACT_APP_DEFAULT_MAP_ZOOM!);
 const WRAPPER_STYLES = { height: '100%', width: '100%' };
 const DEFAULT_BOUNDS = [
   L.latLng(29.5, 34.22), // most possible south-west point

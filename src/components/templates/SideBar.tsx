@@ -14,10 +14,7 @@ interface IProps {}
 const useStyles = makeStyles({
   newsContainer: {
     overflow: 'auto',
-  },
-  newsFeed: {
-    overflow: 'auto',
-  },
+  }
 });
 
 const SideBar: FC<IProps> = () => {
@@ -39,11 +36,7 @@ const SideBar: FC<IProps> = () => {
         <ErrorBoundary>
           <NewsFlashFilterPanel />
         </ErrorBoundary>
-        <Box flexGrow={1} display="flex" flexDirection="column" className={classes.newsFeed}>
-          <Box flexGrow={1}>
-            <News />
-          </Box>
-        </Box>
+        <News />
       </Box>
       <Box flexShrink={0} flexGrow={0} p={1}>
         <Text type={TextType.CONTENT_TITLE} children={mapTitle} />
