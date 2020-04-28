@@ -24,8 +24,7 @@ const SideBar: FC<IProps> = () => {
   const store: RootStore = useStore();
   const classes = useStyles();
   const mapTitle = 'מיקום משוער:';
-
-  console.log(store.activeNewsFlash);
+  const location = store.activeNewsFlashLocation;
 
   return (
     <Box display="flex" flexDirection="column" justifyContent="center" alignItems="stretch">
@@ -52,8 +51,7 @@ const SideBar: FC<IProps> = () => {
       <Box flexBasis={300} flexShrink={0} px={1} pb={1}>
         <ErrorBoundary>
           <LocationMap
-            data={[{ latitude: store.activeNewsFlash?.lat, longitude: store.activeNewsFlash?.lon }]}
-            center={{ lat: store.activeNewsFlash?.lat, lng: store.activeNewsFlash?.lon }}
+            data={[location]}
           />
         </ErrorBoundary>
       </Box>
@@ -61,4 +59,4 @@ const SideBar: FC<IProps> = () => {
   );
 };
 
-export default SideBar;
+export default observer(SideBar);

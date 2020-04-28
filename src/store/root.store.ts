@@ -7,7 +7,10 @@ import { IWidgetTypes } from '../models/WidgetData';
 import { SourceFilterEnum } from '../models/SourceFilter';
 import { fetchNews } from '../services/news.data.service';
 import SettingsStore from './settings.store';
+import { IPoint } from '../models/Point';
 
+// todo: move all map defaults to one place
+const DEFAULT_LOCATION = { latitude: 32.0853, longitude: 34.7818 }
 export default class RootStore {
   [key: string]: any; // Declaring an index signature
 
@@ -44,10 +47,20 @@ export default class RootStore {
 
   @computed
   get activeNewsFlash() {
-    return this.newsFlashCollection.find((activeNewsFlash) => {
-      if (activeNewsFlash.id === this.activeNewsFlashId) return activeNewsFlash;
-      else return this.newsFlashCollection[0];
-    });
+    return this.newsFlashCollection.find((item) => item.id === this.activeNewsFlashId);
+  }
+
+  
+  @computed
+  get activeNewsFlashLocation() {
+    let location: IPoint = DEFAULT_LOCATION; // default location
+    if(this.activeNewsFlash) {
+      location = {
+        latitude: this.activeNewsFlash.lat,
+        longitude: this.activeNewsFlash.lon,
+      }
+    }
+    return location;
   }
 
   @action
