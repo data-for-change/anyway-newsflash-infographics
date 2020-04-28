@@ -17,6 +17,7 @@ body,
   font-family: 'Alef', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
     'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   font-weight: 700;
+  letter-spacing: normal;
 }
 
 h1,

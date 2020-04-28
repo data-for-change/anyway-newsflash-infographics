@@ -42,7 +42,7 @@ const useStyles = makeStyles({
 });
 const IconMap = ({markerData}:any) => {
   const classes = useStyles();
-  const { accident_timestamp, accident_severity, accident_type } = markerData;
+  const { accident_timestamp, accident_severity = '', accident_type } = markerData;
   const iconText = `${dateFormat(accident_timestamp)} - ${accident_severity}, ${accident_type}`
 
   return (
