@@ -10,27 +10,31 @@ import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
 interface IProps {}
 
 const useStyles = makeStyles({
-  root: {
-    position: 'relative', // for meta tags
-    width: '360px',
-    height: '440px',
-    borderRadius: '15px',
-    margin: '10px',
-    padding: '16px',
-    backgroundImage: `url(${Image})`,
-  },
-  space: {
-    justifyContent: 'space-between',
-  },
-  dimension: {
-    width: '100%',
-    height: '90%',
-    padding: 0,
-  },
-});
+    root: {
+      position: 'relative', // for meta tags
+      width: '360px',
+      height: '440px',
+      borderRadius: '15px',
+      margin: '10px',
+      padding: '16px',
+      backgroundImage: `url(${Image})`,
+    },
+    space: {
+      justifyContent: 'space-between',
+    },
+    dimension: {
+      width: '100%',
+      height: '90%',
+      padding: 0,
+    },
+    button: {
+      '&:hover': {
+        backgroundColor: 'transparent',
+      },
+    },
+  });
 
 const AnyWayCard: FC<IProps> = ({children}) => {
-
   const classes = useStyles();
   const widget = useRef<HTMLDivElement>(null);
   const imgDownloadHandler = () => {
@@ -41,8 +45,8 @@ const AnyWayCard: FC<IProps> = ({children}) => {
     <Card ref={widget} className={classes.root}>
       <CardContent className={classes.dimension}>{children}</CardContent>
       <CardActions className={classes.space}>
-        <AnyWayButton onClick={imgDownloadHandler}>
-          <GetAppOutlinedIcon/>
+        <AnyWayButton className={classes.button } onClick={imgDownloadHandler}>
+          <GetAppOutlinedIcon />
         </AnyWayButton>
         <AnywayLogo height={'25px'} />
       </CardActions>
