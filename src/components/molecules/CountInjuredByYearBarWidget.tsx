@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
 import BarChartView from './BarChartView';
 import { IWidgetInjuredByYear } from '../../models/WidgetData';
-import { rightToLeftText } from '../../utils/utils';
 
 const ACCIDENT_YEAR = 'accident_year';
 const COUNT = 'count';
-const TEXT = rightToLeftText('כמות פצעוים בשנה');
+const TEXT = 'כמות פצועים בשנה';
 
 interface IProps {
   data: IWidgetInjuredByYear[];

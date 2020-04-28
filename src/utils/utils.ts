@@ -19,14 +19,4 @@ export function uniquePoints(points: IPoint[]) {
 export function getAPIKey() {
   return process.env.REACT_APP_GOOGLE_MAP_KEY ? process.env.REACT_APP_GOOGLE_MAP_KEY : '';
 }
-//temporary solution
-const isHebrew = (text: string) => {
-  return text.search(/[\u0590-\u05FF]/) >= 0;
-};
-export function rightToLeftText(text: string) {
-  if (isHebrew(text)) {
-    return text.split('').reverse().join('');
-  } else {
-    return text;
-  }
-}
+

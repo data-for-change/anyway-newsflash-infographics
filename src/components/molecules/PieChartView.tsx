@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import red from '@material-ui/core/colors/red';
-import { rightToLeftText } from '../../utils/utils';
 
 interface IProps {
 	data: Array<object>
@@ -14,9 +13,6 @@ const RADIAN = Math.PI / 180;
 
 const renderCustomizedLabel = ( props: any ) => {
 	const { cx, cy, midAngle, innerRadius, outerRadius, value, fill, name } = props
-
-	//temporary solution
-	const hebrewName = rightToLeftText( name );
 
 	const radius = innerRadius + (outerRadius - innerRadius) * 0.7;
   	const xCountLabel = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -35,7 +31,7 @@ const renderCustomizedLabel = ( props: any ) => {
 			<path d={ `M${ sx },${ sy }L${ mx },${ my }L${ ex },${ ey }` } stroke={ fill } fill='none' />
 			<circle cx={ex} cy={ey} r={2} fill={fill} stroke='none'/>
 			<text x={xCountLabel} y={yCountLabel} fill='black' textAnchor={xCountLabel > cx ? 'start' : 'end'} dominantBaseline='central'>{value}</text>
-			<text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} fill='black' textAnchor={'middle'} dominantBaseline='central'>{hebrewName}</text>
+			<text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} fill='black' textAnchor={'middle'} dominantBaseline='central'>{name}</text>
 		</g>
 	);
 };
