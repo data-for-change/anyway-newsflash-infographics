@@ -14,7 +14,7 @@ interface IProps {}
 const useStyles = makeStyles({
   newsContainer: {
     overflow: 'auto',
-  }
+  },
 });
 
 const SideBar: FC<IProps> = () => {
@@ -43,9 +43,7 @@ const SideBar: FC<IProps> = () => {
       </Box>
       <Box flexBasis={300} flexShrink={0} px={1} pb={1}>
         <ErrorBoundary>
-          <LocationMap
-            data={[location]}
-          />
+          <LocationMap data={[location]} />
         </ErrorBoundary>
       </Box>
     </Box>
