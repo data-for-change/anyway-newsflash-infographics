@@ -1,5 +1,5 @@
 // https://mobx.js.org/best/store.html#combining-multiple-stores
-import { action, observable } from 'mobx';
+import { action, observable, computed } from 'mobx';
 import { initService } from '../services/init.service';
 import { fetchWidgets } from '../services/widgets.data.service';
 import { INewsFlash } from '../models/NewFlash';
@@ -7,15 +7,18 @@ import { IWidgetTypes } from '../models/WidgetData';
 import { SourceFilterEnum } from '../models/SourceFilter';
 import { fetchNews } from '../services/news.data.service';
 import SettingsStore from './settings.store';
+import { IPoint } from '../models/Point';
 
+// todo: move all map defaults to one place
+const DEFAULT_LOCATION = { latitude: 32.0853, longitude: 34.7818 }
 export default class RootStore {
   [key: string]: any; // Declaring an index signature
 
   appInitialized = false;
 
   @observable newsFlashCollection: Array<INewsFlash> = [];
+  @observable activeNewsFlashId: number = 0; // active newsflash id
   @observable newsFlashFetchLimit: number = 0;
-  @observable newsFlashId: number = 0; // active newsflash id
   @observable newsFlashWidgetsData: Array<IWidgetTypes> = [];
   @observable newsFlashWidgetsTimerFilter = 0; // newsflash time filter (in years ago, 0- no filter)
 
@@ -43,6 +46,23 @@ export default class RootStore {
     }
   }
 
+  @computed
+  get activeNewsFlash() {
+    return this.newsFlashCollection.find((item) => item.id === this.activeNewsFlashId);
+  }
+  
+  @computed
+  get activeNewsFlashLocation() {
+    let location: IPoint = DEFAULT_LOCATION; // default location
+    if(this.activeNewsFlash) {
+      location = {
+        latitude: this.activeNewsFlash.lat,
+        longitude: this.activeNewsFlash.lon,
+      }
+    }
+    return location;
+  }
+
   @action
   filterNewsFlashCollection ( source?: SourceFilterEnum ): void {
     fetchNews( source, this.newsFlashFetchLimit ).then((data: any) => {
@@ -64,7 +84,7 @@ export default class RootStore {
 
   @action
   selectNewsFlash(id: number): void {
-    this.newsFlashId = id;
+    this.activeNewsFlashId = id;
     this.fetchSelectedNewsFlashWidgets(id, this.newsFlashWidgetsTimerFilter);
   }
 
@@ -72,7 +92,7 @@ export default class RootStore {
   changeTimeFilter(filterValue: number): void {
     if (this.newsFlashWidgetsTimerFilter !== filterValue) {
       this.newsFlashWidgetsTimerFilter = filterValue;
-      this.fetchSelectedNewsFlashWidgets(this.newsFlashId, filterValue);
+      this.fetchSelectedNewsFlashWidgets(this.activeNewsFlashId, filterValue);
     }
   }
 

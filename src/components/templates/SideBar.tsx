@@ -5,18 +5,23 @@ import { NewsFlashFilterPanel } from '../molecules/NewsFlashFilterPanel';
 import LocationMap from '../molecules/LocationMap';
 import { borderColor } from '../../style/_globals';
 import { Text, TextType, ErrorBoundary } from '../atoms';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../store/storeConfig';
+import RootStore from '../../store/root.store';
 
 interface IProps {}
 
 const useStyles = makeStyles({
   newsContainer: {
     overflow: 'auto',
-  }
+  },
 });
 
 const SideBar: FC<IProps> = () => {
+  const store: RootStore = useStore();
   const classes = useStyles();
   const mapTitle = 'מיקום משוער:';
+  const location = store.activeNewsFlashLocation;
 
   return (
     <Box display="flex" flexDirection="column" justifyContent="center" alignItems="stretch">
@@ -38,11 +43,11 @@ const SideBar: FC<IProps> = () => {
       </Box>
       <Box flexBasis={300} flexShrink={0} px={1} pb={1}>
         <ErrorBoundary>
-          <LocationMap data={[{ latitude: 32.0853, longitude: 34.7818 }]} center={{ lat: 32.0853, lng: 34.7818 }} />
+          <LocationMap data={[location]} />
         </ErrorBoundary>
       </Box>
     </Box>
   );
 };
 
-export default SideBar;
+export default observer(SideBar);
