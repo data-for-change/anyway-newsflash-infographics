@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
-    display: (process.env.REACT_APP_SHOW_META_TAGS) ? 'block': 'none',
+    display: (process.env.REACT_APP_SHOW_META_TAGS === 'true') ? 'block': 'none',
     position: 'absolute',
     top: 0,
     left: 0,
