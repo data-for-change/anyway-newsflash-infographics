@@ -19,7 +19,7 @@ export const fetchWidgets = async (id: number, yearAgo?: number): Promise<any | 
     console.log(widgetsUrl);
     const response = await axios.get(widgetsUrl);
     const verifiedData = {
-      meta: getVerifiedWidgetsData(response.data.meta),
+      meta: response.data.meta,
       widgets: getVerifiedWidgetsData(response.data.widgets),
     }
     return verifiedData;
