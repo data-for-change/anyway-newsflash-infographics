@@ -14,6 +14,7 @@ import MostSevereAccidentsMapWidget from '../molecules/MostSevereAccidentsMapWid
 import HeatMap from '../molecules/HeatMap';
 import ErrorBoundary from '../atoms/ErrorBoundary';
 import { MetaTag } from '../atoms';
+import {Text, TextType} from '../atoms'
 
 interface IProps {
   id: number | null;
@@ -89,7 +90,9 @@ const WidgetsTemplate: FC<IProps> = ({ id }) => {
     );
   });
 
-  return <Grid.Container>{widgetCards}</Grid.Container>;
+ const NoDataText = <Text type={TextType.CONTENT_TITLE}>אין נתונים להצגה</Text>
+ 
+ return  <Grid.Container>{widgetsData && widgetsData.length > 0 ? widgetCards: NoDataText} </Grid.Container> 
 };
 
 export default observer(WidgetsTemplate);
