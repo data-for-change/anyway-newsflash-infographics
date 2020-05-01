@@ -3,14 +3,16 @@ import { action, observable, computed } from 'mobx';
 import { initService } from '../services/init.service';
 import { fetchWidgets } from '../services/widgets.data.service';
 import { INewsFlash } from '../models/NewFlash';
-import { IWidgetTypes } from '../models/WidgetData';
+import { IWidgetTypes, ILocationMeta } from '../models/WidgetData';
 import { SourceFilterEnum } from '../models/SourceFilter';
 import { fetchNews } from '../services/news.data.service';
 import SettingsStore from './settings.store';
 import { IPoint } from '../models/Point';
 
 // todo: move all map defaults to one place
-const DEFAULT_LOCATION = { latitude: 32.0853, longitude: 34.7818 }
+const DEFAULT_LOCATION = { latitude: 32.0853, longitude: 34.7818 };
+const DEFAULT_LOCATION_META = { location_info: { resolution: '', road1: 0, road_segment_name: '' } };
+
 export default class RootStore {
   [key: string]: any; // Declaring an index signature
 
@@ -19,6 +21,7 @@ export default class RootStore {
   @observable newsFlashCollection: Array<INewsFlash> = [];
   @observable activeNewsFlashId: number = 0; // active newsflash id
   @observable newsFlashFetchLimit: number = 0;
+  @observable newsFlashWidgetsMeta: ILocationMeta = DEFAULT_LOCATION_META;
   @observable newsFlashWidgetsData: Array<IWidgetTypes> = [];
   @observable newsFlashWidgetsTimerFilter = 0; // newsflash time filter (in years ago, 0- no filter)
 
@@ -31,6 +34,7 @@ export default class RootStore {
       console.log(initData);
       this.safeSet('newsFlashCollection', initData.newsFlashCollection);
       this.safeSet('newsFlashWidgetsData', initData.newsFlashWidgetsData.widgets);
+      this.newsFlashWidgetsMeta = initData.newsFlashWidgetsData.meta;
       this.appInitialized = true;
     });
     // settings store - settings of the app such as num of results returned etc.
@@ -47,25 +51,31 @@ export default class RootStore {
   }
 
   @computed
-  get activeNewsFlash() {
-    return this.newsFlashCollection.find((item) => item.id === this.activeNewsFlashId);
+  get newsFlashWidgetsMetaString(): string {
+    let { resolution, road1, road_segment_name } = this.newsFlashWidgetsMeta.location_info;
+    return `${resolution ? resolution : ''} ${road1 ? road1 : ''} ${road_segment_name ? road_segment_name : ''}`;
   }
-  
+
   @computed
   get activeNewsFlashLocation() {
     let location: IPoint = DEFAULT_LOCATION; // default location
-    if(this.activeNewsFlash) {
+    if (this.activeNewsFlash) {
       location = {
         latitude: this.activeNewsFlash.lat,
         longitude: this.activeNewsFlash.lon,
-      }
+      };
     }
     return location;
   }
 
+  @computed
+  get activeNewsFlash() {
+    return this.newsFlashCollection.find((item) => item.id === this.activeNewsFlashId);
+  }
+
   @action
-  filterNewsFlashCollection ( source?: SourceFilterEnum ): void {
-    fetchNews( source, this.newsFlashFetchLimit ).then((data: any) => {
+  filterNewsFlashCollection(source?: SourceFilterEnum): void {
+    fetchNews(source, this.newsFlashFetchLimit).then((data: any) => {
       if (data) {
         this.safeSet('newsFlashCollection', data);
       } else {
@@ -75,10 +85,10 @@ export default class RootStore {
   }
 
   @action
-  infiniteFetchLimit ( count: number ): void {
+  infiniteFetchLimit(count: number): void {
     this.newsFlashFetchLimit += count;
-    const {newsFlashCollection, newsFlashFetchLimit} = this
-    if (newsFlashCollection.length < newsFlashFetchLimit-count) return;
+    const { newsFlashCollection, newsFlashFetchLimit } = this;
+    if (newsFlashCollection.length < newsFlashFetchLimit - count) return;
     this.filterNewsFlashCollection();
   }
 
@@ -99,6 +109,9 @@ export default class RootStore {
   private fetchSelectedNewsFlashWidgets(id: number, filterValue = 0): void {
     fetchWidgets(id, filterValue).then((response: any) => {
       if (response && response.widgets !== undefined) {
+        console.log('===', response.meta);
+
+        this.newsFlashWidgetsMeta = response.meta;
         this.safeSet('newsFlashWidgetsData', response.widgets);
       } else {
         console.error(`fetchWidgets(id:${id}) invalid response:`, response);

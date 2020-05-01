@@ -5,6 +5,7 @@ import SelectButton from '../atoms/SelectButton';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
+import { Text, TextType } from '../atoms';
 
 interface IProps {}
 
@@ -13,6 +14,10 @@ const useStyles = makeStyles(() =>
     grow: {
       flexGrow: 1,
     },
+    locationMeta: {
+      display: 'flex',
+      alignItems: 'center',
+    },
   }),
 );
 
@@ -20,6 +25,7 @@ const FilterBar: FC<IProps> = () => {
   const store: RootStore = useStore();
   const classes = useStyles();
   const onFilterChange = useCallback((value: number) => store.changeTimeFilter(value), [store]);
+  console.log('aaaaaa ' + store.newsFlashWidgetsMetaString);
 
   return (
     <div className={classes.grow}>
@@ -29,13 +35,9 @@ const FilterBar: FC<IProps> = () => {
             <Grid item xs={12} md={3}>
               <SelectButton initialValue={0} onChange={onFilterChange} />
             </Grid>
-            {/* TODO: add type / severity filters*/}
-            {/*<Grid item xs={12} md={3}>*/}
-            {/*  <SelectButton />*/}
-            {/*</Grid>*/}
-            {/*<Grid item xs={12} md={3}>*/}
-            {/*  <SelectButton />*/}
-            {/*</Grid>*/}
+            <Grid item xs={12} md={9} className={classes.locationMeta}>
+              <Text type={TextType.CONTENT_TITLE}>{store.newsFlashWidgetsMetaString}</Text>
+            </Grid>
           </Grid>
         </Toolbar>
       </AppBar>
