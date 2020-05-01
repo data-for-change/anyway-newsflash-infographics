@@ -1,5 +1,5 @@
 import React, { FC, useCallback } from 'react';
-import { makeStyles, createStyles, Divider, Grid, Box } from '@material-ui/core';
+import { makeStyles, createStyles, Divider, Grid } from '@material-ui/core';
 import { AppBar, Toolbar } from '@material-ui/core';
 import SelectButton from '../atoms/SelectButton';
 import { observer } from 'mobx-react-lite';
