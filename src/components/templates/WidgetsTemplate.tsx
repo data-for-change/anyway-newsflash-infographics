@@ -10,6 +10,7 @@ import CountInjuredByYearBarWidget from '../molecules/CountInjuredByYearBarWidge
 import CountBySeverityTextWidget from '../molecules/CountBySeverityTextWidget';
 import CountAccidentsByDayNightPieWidget from '../molecules/CountAccidentsByDayNightPieWidget';
 import StreetViewWidget from '../molecules/StreetViewWidget';
+import StaticImageWidget from '../molecules/StaticImageWidget';
 import MostSevereAccidentsMapWidget from '../molecules/MostSevereAccidentsMapWidget';
 import HeatMap from '../molecules/HeatMap';
 import ErrorBoundary from '../atoms/ErrorBoundary';
@@ -57,7 +58,11 @@ const getWidgetByType = (widget: any) => {
     case 'accident_count_by_day_night': {
       widgetComponent = <CountAccidentsByDayNightPieWidget data={data} />;
       break;
-    }
+	}
+	case 'vision_zero_view': {
+		widgetComponent = <StaticImageWidget data={data} />;
+		break;
+	}
     default: {
       widgetComponent = null; // do not create element for unrecognized widget
       console.warn(`widget name (${name}) was not recognize `, widget);
