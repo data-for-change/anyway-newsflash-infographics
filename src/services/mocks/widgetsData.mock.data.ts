@@ -294,6 +294,15 @@ export default {
         },
       ],
       meta: {},
-    },
+	},
+	{
+		name: 'vision_zero_view',
+		data: [
+		  {
+			  image_src:'../../assets/vision_zero.png',
+		  },
+		],
+		meta: {},
+	  },
   ],
 };

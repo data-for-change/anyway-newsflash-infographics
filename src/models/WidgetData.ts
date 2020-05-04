@@ -74,6 +74,11 @@ export interface ILocationData {
   meta: ILocationMeta;
   widgets: IWidgetTypes[];
 };
+export interface IWidgetStaticImg extends IWidgetBase {
+	data: {
+	  image_src: string;
+	}[];
+  };
 export type IWidgetTypes =
   | IWidgetMostSevereAccidents
   | IWidgetAccidentsHeatMap
@@ -81,4 +86,5 @@ export type IWidgetTypes =
   | IWidgetCountBySeverity
   | IWidgetAccidentsByType
   | IWidgetInjuredByYear
-  | IWidgetAccidentsByYear;
+  | IWidgetAccidentsByYear
+  | IWidgetStaticImg ;
