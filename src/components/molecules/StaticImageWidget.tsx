@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
 import { IWidgetStaticImg } from '../../models/WidgetData';
 import VisionZeroImg from '../../assets/vision_zero.png';
-import { SignalWifi1BarLockSharp } from '@material-ui/icons';
-import { green } from '@material-ui/core/colors';
 
 let imageStyles = {
     margin: '15px',
