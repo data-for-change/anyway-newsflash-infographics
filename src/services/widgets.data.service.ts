@@ -19,7 +19,7 @@ export const fetchWidgets = async (id: number, yearAgo?: number): Promise<any | 
     console.log(widgetsUrl);
     const response = await axios.get(widgetsUrl);
     const verifiedData = {
-      meta: getVerifiedWidgetsData(response.data.meta),
+      meta: response.data.meta,
       widgets: getVerifiedWidgetsData(response.data.widgets),
     }
     return verifiedData;
@@ -30,10 +30,24 @@ export const fetchWidgets = async (id: number, yearAgo?: number): Promise<any | 
 
 // return array of valid widgets data (invalid widget objects will be removed!)
 function getVerifiedWidgetsData(widgets: Array<any>) {
-  const verifiedWidgets = widgets.filter((widget) => {
-    let isValid = true;
+  const verifiedWidgets = widgets.filter((widget, index) => {
+    // general structure tests (for all widgets)
+    // test name property
+    let isValid = widget && widget.name && typeof widget.name === 'string';
+    // test data property
+    isValid = isValid && widget.data
+    if(Array.isArray(widget.data)) {
+      isValid = isValid && widget.data.length > 0;
+    } else {
+      isValid = isValid && typeof widget.data === 'object'
+    }
+    // TODO
     // add checks per widget (switch) here
-    // in case of invalid widget: (1) set isValid to false (2) display warning to console
+
+
+    if(!isValid) {
+      console.warn(`Invalid widget ${widget.name} [index: ${index}]: `, widget);
+    }
     return isValid;
   });
   return verifiedWidgets;

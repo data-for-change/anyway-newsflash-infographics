@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 import { getAPIKey } from '../../utils/utils';
 import { IPoint } from '../../models/Point';
 import ReactStreetview from 'react-streetview';
-
 import { makeStyles } from '@material-ui/core';
+
 interface IProps {
-  data: IPoint;
+  data: IPoint[];
 }
 
 const useStyles = makeStyles({
@@ -17,8 +17,10 @@ const useStyles = makeStyles({
 
 const StreetViewWidget: FC<IProps> = ( {data} ) => {
   const classes = useStyles();
+  const {latitude, longitude} = data[0]
+
   const streetViewPanoramaOptions = {
-    position: {lat: 46.9171876, lng: 17.8951832} ,
+    position: {lat: latitude, lng: longitude },
     pov: { heading: 100, pitch: 0 },
     zoom: 1,
   };

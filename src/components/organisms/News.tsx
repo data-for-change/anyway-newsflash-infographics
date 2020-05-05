@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useRef, useCallback } from 'react';
 import { AnywayLink, Text, TextType } from '../atoms';
 import { Box, makeStyles } from '@material-ui/core';
-import { borderColor } from '../../style/_globals';
+import { borderColor, selectedNewsFlash } from '../../style/_globals';
 import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
 import { observer } from 'mobx-react-lite';
@@ -12,6 +12,9 @@ const useStyles = makeStyles({
   container: {},
   newsFeed: {
     overflow: 'auto',
+  },
+  activeNewsFlash: {
+    backgroundColor: selectedNewsFlash,
   },
 });
 
@@ -42,11 +45,11 @@ const News: FC = () => {
           <Box className={classes.container} flexDirection={'column'}>
             {store.newsFlashCollection.length > 0 ? (
               store.newsFlashCollection.map((news) => {
-                const date: null | string =
-                  news.date == null ? '' : new Date(news.date.replace(/-/g, '/')).toLocaleDateString();
+                const className = news.id === store.activeNewsFlashId ? classes.activeNewsFlash : '';
+                const date = news.date == null ? '' : new Date(news.date.replace(/-/g, '/')).toLocaleDateString();
                 return (
                   <AnywayLink key={news.id} to={`/newsflash/${news.id}`}>
-                    <Box border={1} borderColor={borderColor} p={1}>
+                    <Box border={1} borderColor={borderColor} p={1} className={className}>
                       <Text type={TextType.NEWS_FLASH_TITLE} children={`${date}, ${news.source}`} />
                       <Text type={TextType.NEWS_FLASH_CONTENT} children={news.title} />
                     </Box>
