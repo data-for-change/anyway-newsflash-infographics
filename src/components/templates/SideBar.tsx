@@ -3,6 +3,7 @@ import { Box, makeStyles } from '@material-ui/core';
 import News from '../organisms/News';
 import { NewsFlashFilterPanel } from '../molecules/NewsFlashFilterPanel';
 import LocationMap from '../molecules/LocationMap';
+import OverlayLoader  from '../molecules/OverlayLoader';
 import { borderColor } from '../../style/_globals';
 import { Text, TextType, ErrorBoundary } from '../atoms';
 import { observer } from 'mobx-react-lite';
@@ -36,7 +37,9 @@ const SideBar: FC<IProps> = () => {
         <ErrorBoundary>
           <NewsFlashFilterPanel />
         </ErrorBoundary>
-        <News />
+        <OverlayLoader dataToLoad={"newsFlashCollection"}>
+          <News />
+        </OverlayLoader>
       </Box>
       <Box flexShrink={0} flexGrow={0} p={1}>
         <Text type={TextType.CONTENT_TITLE} children={mapTitle} />
