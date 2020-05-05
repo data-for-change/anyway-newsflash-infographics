@@ -74,7 +74,7 @@ export interface ILocationData {
   meta: ILocationMeta;
   widgets: IWidgetTypes[];
 };
-export interface IWidgetStaticImg extends IWidgetBase {
+export interface IWidgetVisionZeroImage extends IWidgetBase {
 	data: {
 	  image_src: string;
 	}[];
@@ -87,4 +87,4 @@ export type IWidgetTypes =
   | IWidgetAccidentsByType
   | IWidgetInjuredByYear
   | IWidgetAccidentsByYear
-  | IWidgetStaticImg ;
+  | IWidgetVisionZeroImage ;
