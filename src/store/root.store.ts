@@ -1,5 +1,5 @@
 // https://mobx.js.org/best/store.html#combining-multiple-stores
-import { action, observable, computed, toJS } from 'mobx';
+import { action, observable, computed } from 'mobx';
 import { initService } from '../services/init.service';
 import { fetchWidgets } from '../services/widgets.data.service';
 import { INewsFlash } from '../models/NewFlash';
