@@ -1,5 +1,5 @@
 // https://mobx.js.org/best/store.html#combining-multiple-stores
-import { action, observable, computed } from 'mobx';
+import { action, observable, computed, toJS } from 'mobx';
 import { initService } from '../services/init.service';
 import { fetchWidgets } from '../services/widgets.data.service';
 import { INewsFlash } from '../models/NewFlash';
@@ -21,6 +21,7 @@ export default class RootStore {
   @observable newsFlashFetchLimit: number = 0;
   @observable newsFlashWidgetsData: Array<IWidgetTypes> = [];
   @observable newsFlashWidgetsTimerFilter = 0; // newsflash time filter (in years ago, 0- no filter)
+  @observable dataIsLoading : Array<string> = []; 
 
   // domain stores
   settingsStore: SettingsStore;
@@ -65,7 +66,9 @@ export default class RootStore {
 
   @action
   filterNewsFlashCollection ( source?: SourceFilterEnum ): void {
+    this.dataIsLoading.push('newsFlashCollection');
     fetchNews( source, this.newsFlashFetchLimit ).then((data: any) => {
+      this.dataIsLoading = this.dataIsLoading.filter(collection => collection !== 'newsFlashCollection');
       if (data) {
         this.safeSet('newsFlashCollection', data);
       } else {
