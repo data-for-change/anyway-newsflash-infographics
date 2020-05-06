@@ -3,6 +3,7 @@ import { Card, CardContent, CardActions } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import Image from '../../assets/road-image.png';
 import widgetToJpeg from '../../services/to-image.service';
+import { LamasLogo } from '../atoms/LamasLogo';
 import { AnywayLogo } from '../atoms/AnywayLogo';
 import { AnyWayButton } from '../atoms/AnyWayButton';
 import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
@@ -19,14 +20,14 @@ const useStyles = makeStyles({
       padding: '16px',
       backgroundImage: `url(${Image})`,
     },
-    space: {
-      justifyContent: 'space-between',
-    },
     dimension: {
-      width: '100%',
+			width: '100%',
       height: '90%',
       padding: 0,
     },
+		space: {
+			justifyContent: 'space-between',
+		},
     button: {
       '&:hover': {
         backgroundColor: 'transparent',
@@ -48,7 +49,12 @@ const AnyWayCard: FC<IProps> = ({children}) => {
         <AnyWayButton className={classes.button } onClick={imgDownloadHandler}>
           <GetAppOutlinedIcon />
         </AnyWayButton>
-        <AnywayLogo height={'25px'} />
+				<div>
+					<div style={{ display: 'inline', margin: '10px' }}>
+						<LamasLogo height={'30px'} />
+					</div>
+					<AnywayLogo height={'20px'} />
+				</div>
       </CardActions>
     </Card>
   );
