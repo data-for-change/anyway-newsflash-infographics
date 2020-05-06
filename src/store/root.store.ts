@@ -24,6 +24,7 @@ export default class RootStore {
   @observable newsFlashWidgetsMeta: ILocationMeta = DEFAULT_LOCATION_META;
   @observable newsFlashWidgetsData: Array<IWidgetTypes> = [];
   @observable newsFlashWidgetsTimerFilter = 0; // newsflash time filter (in years ago, 0- no filter)
+  @observable newsFlashLoading: boolean = false;
 
   // domain stores
   settingsStore: SettingsStore;
@@ -74,8 +75,10 @@ export default class RootStore {
   }
 
   @action
-  filterNewsFlashCollection(source?: SourceFilterEnum): void {
+  filterNewsFlashCollection (source?: SourceFilterEnum): void {
+    this.newsFlashLoading = true;
     fetchNews(source, this.newsFlashFetchLimit).then((data: any) => {
+      this.newsFlashLoading = false;
       if (data) {
         this.safeSet('newsFlashCollection', data);
       } else {
