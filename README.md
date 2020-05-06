@@ -2,8 +2,8 @@
 
 [![CI](https://github.com/hasadna/anyway-newsflash-infographics/workflows/CI/badge.svg)](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3ACI)
 
-# ANYWAY: Newsflash InfoGraphics
-## About this project
+# ANYWAY: Newsflash InfoGraphics.
+## About this project:
 Learn more about our [Vision](https://github.com/hasadna/anyway-newsflash-infographics/blob/development/Vision.md)
 
 ## Want to help?
