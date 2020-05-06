@@ -5,8 +5,7 @@ import ImageView from './ImageView';
 interface IProps {
   data: IWidgetVisionZeroImage[];
 }
-const StaticImg: FC<IProps> = (props) => {
-  console.log('props-visionzero', props);
+const VisionZeroImageViewWidget: FC<IProps> = (props) => {
   return <ImageView data={props.data} />;
 };
-export default StaticImg;
+export default VisionZeroImageViewWidget;

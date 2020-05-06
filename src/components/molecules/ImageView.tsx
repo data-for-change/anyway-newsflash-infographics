@@ -4,6 +4,7 @@ import visionZeroImage from '../../assets/vision-zero.png';
 import { makeStyles } from '@material-ui/core';
 
 //Image SRC hardcoded,
+
 interface IProps {
   data: IWidgetVisionZeroImage[];
 }
@@ -17,11 +18,10 @@ const useStyles = makeStyles(() => ({
   },
 }));
 const ImageView: FC<IProps> = (data) => {
-  console.log('data image view template', data);
   const classes = useStyles();
   return (
     <div>
-      <img src={visionZeroImage} className={classes.root} alt="vision zero" />
+      <img src= { visionZeroImage } className={classes.root} alt="vision zero" />
     </div>
   );
 };
