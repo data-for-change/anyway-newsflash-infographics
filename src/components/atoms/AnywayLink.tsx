@@ -19,9 +19,7 @@ interface IProps extends LinkProps {
 
 const AnyWayLink: FC<IProps> = ({ ...props }) => {
   const classes = useStyles();
-  // @ts-ignore
-  return <div>
-    <Link className={classes.link} {...props} />
-  </div>;
+  return <Link className={classes.link} {...props} />
+
 };
 export default AnyWayLink;
