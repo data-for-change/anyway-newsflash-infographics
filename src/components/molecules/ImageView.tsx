@@ -11,13 +11,13 @@ const useStyles = makeStyles(() => ({
   root: {
     borderRadius: '10px',
     margin: '15px',
-    backgroundColor: 'gray',
-    border: '5px dashed green',
+    border: '5px solid gray',
     width: '90%',
     height: '100%',
   },
 }));
-const ImageView: FC<IProps> = (props) => {
+const ImageView: FC<IProps> = (data) => {
+  console.log('data image view template', data);
   const classes = useStyles();
   return (
     <div>

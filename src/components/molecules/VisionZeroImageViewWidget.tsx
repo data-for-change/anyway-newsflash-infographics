@@ -6,7 +6,7 @@ interface IProps {
   data: IWidgetVisionZeroImage[];
 }
 const StaticImg: FC<IProps> = (props) => {
-  console.log('props', props);
+  console.log('props-visionzero', props);
   return <ImageView data={props.data} />;
 };
 export default StaticImg;
