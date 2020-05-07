@@ -18,6 +18,7 @@ export interface ILocationMeta {
     road1: number;
     road_segment_name: string;
   };
+  location_text: string;
 };
 
 export interface IWidgetBase {

@@ -5,6 +5,7 @@ export default {
       road1: 65,
       road_segment_name: 'צומת אלון (שמורת אלון) - צומת חנה',
     },
+    location_text: 'כביש בינעירוני 65 צומת אלון (שמורת אלון) - צומת חנה'
   },
   widgets: [
     {

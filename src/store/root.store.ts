@@ -11,7 +11,14 @@ import { IPoint } from '../models/Point';
 
 // todo: move all map defaults to one place
 const DEFAULT_LOCATION = { latitude: 32.0853, longitude: 34.7818 };
-const DEFAULT_LOCATION_META = { location_info: { resolution: '', road1: 0, road_segment_name: '' } };
+const DEFAULT_LOCATION_META = { 
+  location_info: { 
+    resolution: '', 
+    road1: 0, 
+    road_segment_name: '' 
+  },
+  location_text: '',
+};
 
 export default class RootStore {
   [key: string]: any; // Declaring an index signature
