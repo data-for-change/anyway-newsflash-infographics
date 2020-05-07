@@ -1,11 +1,12 @@
 import React, { FC, useRef } from 'react'
 import { Card, CardContent, CardActions } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
-import Image from '../../assets/road-image.png';
+import RoadImage from '../../assets/road-image.png';
 import widgetToJpeg from '../../services/to-image.service';
-import { LamasLogo } from '../atoms/LamasLogo';
-import { AnywayLogo } from '../atoms/AnywayLogo';
 import { AnyWayButton } from '../atoms/AnyWayButton';
+import { Logo } from '../atoms/Logo';
+import LamasImage from '../../assets/cbs.png';
+import AnywayImage from '../../assets/anyway.png';
 import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
 
 interface IProps {}
@@ -18,7 +19,7 @@ const useStyles = makeStyles({
       borderRadius: '15px',
       margin: '10px',
       padding: '16px',
-      backgroundImage: `url(${Image})`,
+      backgroundImage: `url(${RoadImage})`,
     },
     dimension: {
 			width: '100%',
@@ -27,6 +28,10 @@ const useStyles = makeStyles({
     },
 		space: {
 			justifyContent: 'space-between',
+		},
+		logoSpace: {
+			display: 'inline',
+			margin: '10px'
 		},
     button: {
       '&:hover': {
@@ -46,14 +51,14 @@ const AnyWayCard: FC<IProps> = ({children}) => {
     <Card ref={widget} className={classes.root}>
       <CardContent className={classes.dimension}>{children}</CardContent>
       <CardActions className={classes.space}>
-        <AnyWayButton className={classes.button } onClick={imgDownloadHandler}>
+        <AnyWayButton className={classes.button} onClick={imgDownloadHandler}>
           <GetAppOutlinedIcon />
         </AnyWayButton>
 				<div>
-					<div style={{ display: 'inline', margin: '10px' }}>
-						<LamasLogo height={'30px'} />
+					<div className={classes.logoSpace}>
+						<Logo src={LamasImage} alt={'Lamas'} height={'30px'} />
 					</div>
-					<AnywayLogo height={'20px'} />
+					<Logo src={AnywayImage} alt={'Anyway'} height={'20px'} />
 				</div>
       </CardActions>
     </Card>
