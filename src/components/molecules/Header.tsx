@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { AnywayAppBar } from '../atoms/AnywayAppBar';
-import { AnywayLogo } from '../atoms/AnywayLogo';
+import { Logo } from '../atoms/Logo';
+import AnywayImage from '../../assets/anyway.png';
 import { SignInIcon } from '../atoms/SignInIcon';
 import LogInLinkGoogle from './LogInLinkGoogle';
 import { Box } from '@material-ui/core'
@@ -18,7 +19,7 @@ export const Header: FC = () => {
 
   return (
     <AnywayAppBar>
-      <AnywayLogo height={'30px'} />
+      <Logo src={AnywayImage} alt={'Anyway'} height={'30px'} />
       <Box className={classes.navContainer}>
         <LogInLinkGoogle />
         <SignInIcon />
