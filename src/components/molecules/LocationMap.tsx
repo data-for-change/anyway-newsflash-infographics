@@ -15,12 +15,12 @@ const DEFAULT_BOUNDS = [
 ];
 
 interface IProps {
-  data: IPoint[] | any;
+  items: IPoint[] | any;
   center?: { lat: number; lng: number };
 }
 
-const LocationMap: FC<IProps> = ({ data, center }) => {
-  let markers = data.map((x: IPoint, i: number) => {
+const LocationMap: FC<IProps> = ({ items, center }) => {
+  let markers = items.map((x: IPoint, i: number) => {
     if (x.latitude !== null && x.longitude !== null) {
       return (
         <div key={i}>
@@ -31,7 +31,7 @@ const LocationMap: FC<IProps> = ({ data, center }) => {
     }
     return null;
   });
-  const bounds = getBounds(data);
+  const bounds = getBounds(items);
 
   return (
     <Map center={center} bounds={bounds} zoom={INITIAL_ZOOM} style={WRAPPER_STYLES}>
@@ -42,9 +42,9 @@ const LocationMap: FC<IProps> = ({ data, center }) => {
 };
 
 // get bounding box for collection of points
-const getBounds = (data: IPoint[]) => {
+const getBounds = (items: IPoint[]) => {
   let bound: LatLng[] = DEFAULT_BOUNDS;
-  let points = uniquePoints(data);
+  let points = uniquePoints(items);
   if (points.length === 1) {
     // single point provided
     const p = points[0];

@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
-import { IWidgetVisionZeroImage } from '../../models/WidgetData';
+import { IWidgetVisionZeroImageData } from '../../models/WidgetData';
 import ImageView from './ImageView';
 
 interface IProps {
-  data: IWidgetVisionZeroImage[];
+  data: IWidgetVisionZeroImageData;
 }
-const VisionZeroImageViewWidget: FC<IProps> = (props) => {
-  return <ImageView data={props.data} />;
+const VisionZeroImageViewWidget: FC<IProps> = ({ data }) => {
+  return <ImageView data={data} />;
 };
 export default VisionZeroImageViewWidget;

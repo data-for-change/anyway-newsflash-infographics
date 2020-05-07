@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import PieChartView from './PieChartView';
-import { IWidgetAccidentsByDayNight } from '../../models/WidgetData';
+import { IWidgetAccidentsByDayNightData } from '../../models/WidgetData';
 
 const ACCIDENT_TYPE = 'day_night';
 const COUNT = 'count';
 
 interface IProps {
-  data: IWidgetAccidentsByDayNight[];
+  data: IWidgetAccidentsByDayNightData;
 }
-const CountAccidentsByDayNightPieWidget: FC<IProps> = (props) => {
-  return <PieChartView data={props.data} xLabel={ACCIDENT_TYPE} yLabel={COUNT} />;
+const CountAccidentsByDayNightPieWidget: FC<IProps> = ({data}) => {
+  return <PieChartView data={data.items} xLabel={ACCIDENT_TYPE} yLabel={COUNT} />;
 };
 export default CountAccidentsByDayNightPieWidget;

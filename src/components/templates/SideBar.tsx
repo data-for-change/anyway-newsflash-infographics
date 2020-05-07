@@ -49,9 +49,12 @@ const SideBar: FC<IProps> = () => {
         <Text type={TextType.CONTENT_TITLE} children={mapTitle} />
       </Box>
       <Box flexBasis={300} flexShrink={0} px={1} pb={1}>
-        <ErrorBoundary>
-          <LocationMap data={[location]} />
-        </ErrorBoundary>
+        {
+          location && 
+          <ErrorBoundary>
+            <LocationMap items={[location]} />
+          </ErrorBoundary>
+        }
       </Box>
     </Box>
   );
