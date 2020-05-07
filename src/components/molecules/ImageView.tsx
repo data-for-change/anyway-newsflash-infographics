@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { IWidgetVisionZeroImage } from '../../models/WidgetData';
+import { IWidgetVisionZeroImageData } from '../../models/WidgetData';
 import visionZeroImage from '../../assets/vision-zero.png';
 import { makeStyles } from '@material-ui/core';
 
 //Image SRC hardcoded,
 
 interface IProps {
-  data: IWidgetVisionZeroImage[];
+  data: IWidgetVisionZeroImageData;
 }
 const useStyles = makeStyles(() => ({
   root: {
@@ -17,7 +17,8 @@ const useStyles = makeStyles(() => ({
     height: '100%',
   },
 }));
-const ImageView: FC<IProps> = (data) => {
+const ImageView: FC<IProps> = ({data}) => {
+  // todo: set image based on data
   const classes = useStyles();
   return (
     <div>

@@ -3,6 +3,7 @@ import { ILocationData } from '../models/WidgetData';
 import axios from 'axios';
 
 export function fetchDefaultWidgets(): Promise<any> {
+  // @ts-ignore
   return mockHTTPCall<ILocationData>(defaultWidgetsCollectionData);
 }
 

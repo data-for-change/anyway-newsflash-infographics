@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { IWidgetCountBySeverity } from '../../models/WidgetData';
+import { IWidgetCountBySeverityData } from '../../models/WidgetData';
 import { Text, TextType } from '../atoms';
 import { Theme, makeStyles, Avatar } from '@material-ui/core';
 import roadNumberIcon from '../../assets/640px-ISR-HW-90.svg.png';
 import { highlightBasicColor, highlightDarkColor, highlightAlertColor, highlightWarnColor } from '../../style/_globals';
 
 interface IProps {
-  data: IWidgetCountBySeverity[];
+  data: IWidgetCountBySeverityData;
 }
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: highlightWarnColor,
   },
 }));
-const TextView: FC<IProps> = (props) => {
+const TextView: FC<IProps> = ({data}) => {
   //hardcoded, waiting for data changes from the server
   const classes = useStyles();
   return (

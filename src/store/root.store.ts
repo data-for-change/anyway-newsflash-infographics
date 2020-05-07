@@ -3,7 +3,7 @@ import { action, observable, computed } from 'mobx';
 import { initService } from '../services/init.service';
 import { fetchWidgets } from '../services/widgets.data.service';
 import { INewsFlash } from '../models/NewFlash';
-import { IWidgetTypes, ILocationMeta } from '../models/WidgetData';
+import { ILocationMeta, IWidgetBase } from '../models/WidgetData';
 import { SourceFilterEnum } from '../models/SourceFilter';
 import { fetchNews } from '../services/news.data.service';
 import SettingsStore from './settings.store';
@@ -29,7 +29,7 @@ export default class RootStore {
   @observable activeNewsFlashId: number = 0; // active newsflash id
   @observable newsFlashFetchLimit: number = 0;
   @observable newsFlashWidgetsMeta: ILocationMeta = DEFAULT_LOCATION_META;
-  @observable newsFlashWidgetsData: Array<IWidgetTypes> = [];
+  @observable newsFlashWidgetsData: Array<IWidgetBase> = [];
   @observable newsFlashWidgetsTimerFilter = 0; // newsflash time filter (in years ago, 0- no filter)
   @observable newsFlashLoading: boolean = false;
 
@@ -41,8 +41,8 @@ export default class RootStore {
     initService().then((initData) => {
       console.log(initData);
       this.safeSet('newsFlashCollection', initData.newsFlashCollection);
-      this.safeSet('newsFlashWidgetsData', initData.newsFlashWidgetsData.widgets);
-      this.newsFlashWidgetsMeta = initData.newsFlashWidgetsData.meta;
+      // this.safeSet('newsFlashWidgetsData', initData.newsFlashWidgetsData.widgets);
+      // this.newsFlashWidgetsMeta = initData.newsFlashWidgetsData.meta;
       this.appInitialized = true;
     });
     // settings store - settings of the app such as num of results returned etc.
