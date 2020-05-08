@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { fetchNews } from './news.data.service';
-import { fetchDefaultWidgets } from './widgets.data.service';
+// import { fetchDefaultWidgets } from './widgets.data.service';
 import L from 'leaflet';
 
 export function initService(): Promise<any> {
