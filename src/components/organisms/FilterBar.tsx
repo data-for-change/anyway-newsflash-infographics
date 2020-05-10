@@ -25,7 +25,6 @@ const FilterBar: FC<IProps> = () => {
   const store: RootStore = useStore();
   const classes = useStyles();
   const onFilterChange = useCallback((value: number) => store.changeTimeFilter(value), [store]);
-  console.log('aaaaaa ' + store.newsFlashWidgetsMetaString);
 
   return (
     <div className={classes.grow}>

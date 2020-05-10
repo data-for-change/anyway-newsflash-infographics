@@ -12,79 +12,91 @@
 //   };
 // }
 
+import { IPoint, IPointAccident } from './Point';
+
+export interface ILocationData {
+  meta: ILocationMeta;
+  widgets: IWidgetBase[];
+};
+
+export interface IWidgetBase {
+  rank: number; // order? (not in use)
+  name: string; // unique - used as identifier
+  data: IWidgetDataType
+  meta?: {};
+}
+
+export type IWidgetDataType =
+  | IWidgetMostSevereAccidentsData
+  | IWidgetAccidentsHeatMapData
+  | IWidgetAccidentsByDayNightData
+  | IWidgetCountBySeverityData
+  | IWidgetAccidentsByTypeData
+  | IWidgetInjuredByYearData
+  | IWidgetAccidentsByYearData
+  | IWidgetVisionZeroImageData ;
+
 export interface ILocationMeta {
   location_info: {
     resolution: string;
     road1: number;
     road_segment_name: string;
   };
+  location_text: string;
 };
 
-export interface IWidgetBase {
-  name: string; // unique - used as identifier
-  data: any;
-  meta: {};
-}
 
-export interface IWidgetMostSevereAccidents extends IWidgetBase {
-  data: {
-    longitude: number;
-    latitude: number;
-    accident_severity: string;
-    accident_timestamp: string;
-  }[];
+
+export interface IWidgetMostSevereAccidentsData {
+  items: IPointAccident[];
 };
-export interface IWidgetAccidentsHeatMap extends IWidgetBase {
-  data: {
-    longitude: number;
-    latitude: number;
-  }[];
+export interface IWidgetAccidentsHeatMapData {
+  items: IPoint[];
 };
-export interface IWidgetCountBySeverity extends IWidgetBase {
-  data: {
+export interface IWidgetCountBySeverityData {
+  items: {
     accident_severity: string;
     count: number;
   }[];
 };
-export interface IWidgetAccidentsByType extends IWidgetBase {
-  data: {
+export interface IWidgetAccidentsByTypeData {
+  items: {
     accident_type: string;
     count: number;
   }[];
 };
-export interface IWidgetAccidentsByYear extends IWidgetBase {
-  data: {
+export interface IWidgetAccidentsByYearData {
+  items: {
     accident_year: number;
     count: number;
   }[];
 };
-export interface IWidgetInjuredByYear extends IWidgetBase {
-  data: {
+export interface IWidgetInjuredByYearData {
+  items: {
     accident_year: number;
     count: number;
   }[];
 };
-export interface IWidgetAccidentsByDayNight extends IWidgetBase {
-  data: {
+export interface IWidgetStreetViewData {
+  items: IPoint
+};
+
+export interface IWidgetVisionZeroImageData {
+	items: {
+	  image_src: string;
+	}[];
+};
+
+export interface IWidgetAccidentsByDayNightData {
+  items: {
     day_night: string;
     count: number;
   }[];
 };
-export interface ILocationData {
-  meta: ILocationMeta;
-  widgets: IWidgetTypes[];
-};
-export interface IWidgetVisionZeroImage extends IWidgetBase {
-	data: {
+
+export interface IWidgetVisionZeroImageData {
+	items: {
 	  image_src: string;
 	}[];
-  };
-export type IWidgetTypes =
-  | IWidgetMostSevereAccidents
-  | IWidgetAccidentsHeatMap
-  | IWidgetAccidentsByDayNight
-  | IWidgetCountBySeverity
-  | IWidgetAccidentsByType
-  | IWidgetInjuredByYear
-  | IWidgetAccidentsByYear
-  | IWidgetVisionZeroImage ;
+};
+

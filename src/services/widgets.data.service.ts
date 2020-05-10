@@ -3,10 +3,11 @@ import { ILocationData } from '../models/WidgetData';
 import axios from 'axios';
 
 export function fetchDefaultWidgets(): Promise<any> {
+  // @ts-ignore
   return mockHTTPCall<ILocationData>(defaultWidgetsCollectionData);
 }
 
-const NEWS_FLASH_API: string = '/api/infographics_data';
+const NEWS_FLASH_API: string = '/api/infographics-data';
 
 export const fetchWidgets = async (id: number, yearAgo?: number): Promise<any | undefined> => {
   try {

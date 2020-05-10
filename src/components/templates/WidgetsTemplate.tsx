@@ -30,7 +30,7 @@ const getWidgetByType = (widget: any) => {
       break;
     }
     case 'accidents_heat_map': {
-      widgetComponent = <HeatMap data={data} center={{ lat: 32.0853, lng: 34.7818 }} />;
+      widgetComponent = <HeatMap data={data.items} center={{ lat: 32.0853, lng: 34.7818 }} />;
       break;
     }
     case 'street_view': {
