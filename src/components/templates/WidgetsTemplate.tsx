@@ -76,7 +76,9 @@ const WidgetsTemplate: FC<IProps> = ({ id }) => {
   const store: RootStore = useStore();
   useEffect(() => {
     if (id) {
+      store.widgetBoxLoading = true;
       store.selectNewsFlash(id);
+      store.widgetBoxLoading = false;
     }
   }, [id, store]);
 
@@ -96,8 +98,8 @@ const WidgetsTemplate: FC<IProps> = ({ id }) => {
   });
 
  const NoDataText = <Text type={TextType.CONTENT_TITLE}>אין נתונים להצגה</Text>
- 
- return  <Grid.Container>{widgetsData && widgetsData.length > 0 ? widgetCards: NoDataText} </Grid.Container> 
+
+ return  <Grid.Container>{widgetsData && widgetsData.length > 0 ? widgetCards: NoDataText} </Grid.Container>
 };
 
 export default observer(WidgetsTemplate);
