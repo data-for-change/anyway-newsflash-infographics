@@ -12,13 +12,6 @@ import RootStore from '../../store/root.store';
 import UserProfileHeader from './UserProfileHeader';
 
 
-const useStyles = makeStyles({
-  navContainer: {
-    display: 'flex',
-    alignItems: 'center'
-  }
-});
-
  const Header: FC = () => {
   const store : RootStore = useStore();
 

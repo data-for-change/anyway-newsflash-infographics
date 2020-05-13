@@ -1,9 +1,7 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {onLinkColor, onLinkColorHover} from '../../style/_globals';
 import Text, {TextType} from "../atoms/Text";
-import React, {useEffect} from "react";
-import {useStore} from '../../store/storeConfig';
-import RootStore from '../../store/root.store';
+import React from "react";
 
 
 
