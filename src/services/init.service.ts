@@ -21,7 +21,7 @@ export function initService(): Promise<any> {
 }
 
 function setAxiosDefaults() {
-  axios.defaults.baseURL = process.env.REACT_APP_BASE_URL_DEV;
+  axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 }
 
 function setLocationMapDefaults() {
