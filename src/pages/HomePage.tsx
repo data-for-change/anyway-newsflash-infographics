@@ -6,6 +6,10 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import { RouteComponentProps } from 'react-router';
 import { borderColor } from '../style/_globals';
 import FilterBar from '../components/organisms/FilterBar';
+import OverlayLoader from '../components/molecules/OverlayLoader';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../store/storeConfig';
+import RootStore from '../store/root.store';
 
 interface IProps {}
 
@@ -27,6 +31,8 @@ const useStyles = makeStyles({
 const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
   const classes = useStyles();
   const id = match.params.id ? parseInt(match.params.id) : null;
+  const store: RootStore = useStore();
+  const loading = store.widgetBoxLoading;
 
   return (
     <Box display="flex" flexGrow={1} className={classes.mainBox}>
@@ -34,11 +40,20 @@ const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
         <SideBar />
       </Box>
       <Box flexGrow={5} className={classes.widgetBox}>
-        <FilterBar />
-        <WidgetsTemplate id={id} />
+        {loading ? (
+          <OverlayLoader>
+            <FilterBar />
+            <WidgetsTemplate id={id} />
+          </OverlayLoader>
+        ) : (
+          <>
+            <FilterBar />
+            <WidgetsTemplate id={id} />
+          </>
+        )}
       </Box>
     </Box>
   );
 };
 
-export default HomePage;
+export default observer(HomePage);

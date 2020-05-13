@@ -81,7 +81,9 @@ const WidgetsTemplate: FC<IProps> = ({ id }) => {
   const store: RootStore = useStore();
   useEffect(() => {
     if (id) {
+      store.widgetBoxLoading = true;
       store.selectNewsFlash(id);
+      store.widgetBoxLoading = false;
     }
   }, [id, store]);
 
