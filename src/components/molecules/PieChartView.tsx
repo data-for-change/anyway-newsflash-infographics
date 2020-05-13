@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import red from '@material-ui/core/colors/red';
 import { fontFamilyString } from '../../style/_globals';
-import { Text, TextType } from '../atoms';
 
 interface IProps {
   data: Array<object>;

@@ -16,17 +16,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'space-evenly',
     padding: '5px',
     borderRadius: '10px',
+    '& span': {
+      marginLeft: 10,
+    }
   },
   large: {
     width: theme.spacing(7),
     height: theme.spacing(5),
   },
   mainText: {
+    fontSize: 19,
     padding: '5px',
     backgroundColor: highlightBasicColor,
   },
   bottomText: {
-    fontSize: 24,
+    fontSize: ,
     padding: '5px 0 5px 5px',
     backgroundColor: highlightBasicColor,
   },
@@ -53,7 +57,20 @@ const TextView: FC<IProps> = ({data}) => {
       <Text type={TextType.WIDGET_TITLE}>
         <span className={classes.mainText}>
           <span>
-            בין השנים {'2015-2019'} במקטע מצפה שלם - צומת שדי שבכביש {'90'} התרחשו
+            בין השנים
+          </span>
+          <span>
+            {'2015-2019'}
+          </span>
+          <br/>
+          <span>
+            במקטע
+          </span>
+          <span>
+            מצפה שלם - צומת שדי שבכביש 90
+          </span>
+          <span>
+            התרחשו
           </span>
           <span className={classes.highlightDark}>266</span>
           <span>תאונות</span>

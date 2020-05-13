@@ -61,7 +61,7 @@ const Text: FC<IProps> = ({ type, children }) => {
       );
     case TextType.WIDGET_TITLE:
       return (
-        <Typography variant="body1" component="h3">
+        <Typography variant="body1" component="h2">
           {children}
         </Typography>
       )
