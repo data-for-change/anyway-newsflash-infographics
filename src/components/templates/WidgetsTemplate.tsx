@@ -95,7 +95,7 @@ const WidgetsTemplate: FC<IProps> = ({ id }) => {
       return null;
     }
     return (
-      <AnyWayCard key={index}>
+      <AnyWayCard key={index} widgetName={widget.name}>
         <MetaTag>{widget.name}</MetaTag>
         <ErrorBoundary>{widgetComponent}</ErrorBoundary>
       </AnyWayCard>
