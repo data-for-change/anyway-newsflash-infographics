@@ -10,7 +10,7 @@ import CountInjuredByYearBarWidget from '../molecules/CountInjuredByYearBarWidge
 import CountBySeverityTextWidget from '../molecules/CountBySeverityTextWidget';
 import CountAccidentsByDayNightPieWidget from '../molecules/CountAccidentsByDayNightPieWidget';
 import StreetViewWidget from '../molecules/StreetViewWidget';
-import VisionZeroImageViewWidget from '../molecules/VisionZeroImageViewWidget';
+import StaticImageViewWidget from '../molecules/StaticImageViewWidget';
 import MostSevereAccidentsMapWidget from '../molecules/MostSevereAccidentsMapWidget';
 import HeatMap from '../molecules/HeatMap';
 import ErrorBoundary from '../atoms/ErrorBoundary';
@@ -60,7 +60,7 @@ const getWidgetByType = (widget: any) => {
       break;
 	}
 	case 'vision_zero': {
-		widgetComponent = <VisionZeroImageViewWidget data={data} />;
+		widgetComponent = <StaticImageViewWidget data={data} />;
 		break;
 	}
     default: {
