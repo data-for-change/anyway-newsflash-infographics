@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: highlightBasicColor,
   },
   bottomText: {
-    fontSize: ,
+    fontSize: 22,
     padding: '5px 0 5px 5px',
     backgroundColor: highlightBasicColor,
   },
