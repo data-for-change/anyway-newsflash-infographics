@@ -6,7 +6,6 @@ import AnywayImage from '../../assets/anyway.png';
 import { SignInIcon } from '../atoms/SignInIcon';
 import LogInLinkGoogle from './LogInLinkGoogle';
 import { Box } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles';
 import {useStore} from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
 import UserProfileHeader from './UserProfileHeader';
@@ -17,7 +16,7 @@ import UserProfileHeader from './UserProfileHeader';
 
   useEffect(()=>{
     store.getUserLoginDetails();
-  },[]);
+  },[store]);
   let logElement;
   if(store.isUserLogin){
     logElement = <UserProfileHeader name={store.userName}/>
