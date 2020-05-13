@@ -12,6 +12,7 @@ import CountAccidentsByDayNightPieWidget from '../molecules/CountAccidentsByDayN
 import StreetViewWidget from '../molecules/StreetViewWidget';
 import VisionZeroImageViewWidget from '../molecules/VisionZeroImageViewWidget';
 import MostSevereAccidentsMapWidget from '../molecules/MostSevereAccidentsMapWidget';
+import MostSevereAccidentsTableWidget from '../molecules/MostSevereAccidentsTableWidget';
 import HeatMap from '../molecules/HeatMap';
 import ErrorBoundary from '../atoms/ErrorBoundary';
 import { MetaTag } from '../atoms';
@@ -27,6 +28,10 @@ const getWidgetByType = (widget: any) => {
   switch (name) {
     case 'most_severe_accidents': {
       widgetComponent = <MostSevereAccidentsMapWidget data={data} />;
+      break;
+    }
+    case 'most_severe_accidents_table': {
+      widgetComponent = <MostSevereAccidentsTableWidget data={data} />;
       break;
     }
     case 'accidents_heat_map': {
@@ -58,11 +63,11 @@ const getWidgetByType = (widget: any) => {
     case 'accident_count_by_day_night': {
       widgetComponent = <CountAccidentsByDayNightPieWidget data={data} />;
       break;
-	}
-	case 'vision_zero_view': {
-		widgetComponent = <VisionZeroImageViewWidget data={data} />;
-		break;
-	}
+    }
+    case 'vision_zero_view': {
+      widgetComponent = <VisionZeroImageViewWidget data={data} />;
+      break;
+    }
     default: {
       widgetComponent = null; // do not create element for unrecognized widget
       console.warn(`widget name (${name}) was not recognize `, widget);
@@ -96,8 +101,8 @@ const WidgetsTemplate: FC<IProps> = ({ id }) => {
   });
 
  const NoDataText = <Text type={TextType.CONTENT_TITLE}>אין נתונים להצגה</Text>
- 
- return  <Grid.Container>{widgetsData && widgetsData.length > 0 ? widgetCards: NoDataText} </Grid.Container> 
+
+ return  <Grid.Container>{widgetsData && widgetsData.length > 0 ? widgetCards: NoDataText} </Grid.Container>
 };
 
 export default observer(WidgetsTemplate);
