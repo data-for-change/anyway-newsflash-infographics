@@ -86,14 +86,18 @@ When `TYPE` can be:
 Branching system:
 *master* - used for production <br>
 *development* - anything else <br>
+* For the initial start, Use git clone command to download the repository to your computer (With `write` privileges there is no need to fork the repo)
+
 A standard procedure for working on an issue would be to:
 1. `git pull development`
 2. Create new branch from `development` , like: `refactor(137)-making-pie-chart-generic-component`
 3. Work - commit - repeat
-4. Push branch and open PR to `development`.
-5. Get a code review approval / reject
-6. After approval, merge your PR
-7. Delete your branch after merge
+4. Git pull at `development`
+5. On your branch: `git merge development` and solve conflicts if they exist
+6. Push branch and open PR to `development`.
+7. Get a code review approval / reject
+8. After approval, merge your PR
+9. Delete your branch after merge
 
 ### Server API <a id="serverapi"></a> 
 See [API document](https://docs.google.com/document/d/1Hv5ItvwM3z9nn95LjlsYHL-o18V8PgWrrQOKIPiPymU)

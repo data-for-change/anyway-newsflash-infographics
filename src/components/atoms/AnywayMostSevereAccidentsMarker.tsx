@@ -39,9 +39,13 @@ const useStyles = makeStyles({
 });
 const IconMap = ({ markerData }: any) => {
   const classes = useStyles();
-  const { accident_timestamp, accident_severity, accident_type = '' } = markerData;
-  const typeStr = accident_type === '' ? '' : `, ${accident_type}`;
-  const iconText = `${dateFormat(accident_timestamp)} - ${accident_severity}${typeStr}`;
+  // const { accident_timestamp, accident_severity, accident_type = '' } = markerData;
+  // const { accident_timestamp, accident_severity, accident_type = '' } = markerData;
+  // const typeStr = accident_type === '' ? '' : `, ${accident_type}`;
+
+  // temp: make string short - skip desription
+  // const iconText = `${dateFormat(accident_timestamp)} - ${accident_severity}${typeStr}`;
+  const iconText = `${dateFormat(markerData.accident_timestamp)}`;
 
   return (
     <div className={classes.mapLabel}>

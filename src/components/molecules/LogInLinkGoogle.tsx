@@ -4,9 +4,9 @@ import {onLinkColor, onLinkColorHover} from '../../style/_globals';
 import axios, {AxiosResponse} from 'axios'
 import Text, {TextType} from "../atoms/Text";
 
+
 const LOGIN_LINK = process.env.REACT_APP_GOOGLE_LOGIN_LINK_DEV;
 const LOGOUT_LINK = process.env.REACT_APP_GOOGLE_LOGIN_LINK_DEV;
-
 
 interface IloginRes {
   authenticated : boolean,
@@ -14,6 +14,16 @@ interface IloginRes {
   user : string,
 
 }
+const useStyles = makeStyles({
+  link: {
+    color: `${onLinkColor}`,
+    textDecoration: 'none',
+    '&:hover': {
+      color: `${onLinkColorHover}`,
+    },
+    cursor: 'pointer',
+  },
+});
 const LogInLinkGoogle = () => {
   const useStyles = makeStyles({
     link: {
@@ -49,4 +59,5 @@ const LogInLinkGoogle = () => {
   return isLogin ? <div><a href={LOGOUT_LINK} onClick={handleLogout} >LOGOUT</a> <Text type={TextType.CONTENT_TITLE}> {` שלום ${user}`}</Text></div>  : <a className={classes.link}  href={LOGIN_LINK} >LOGIN</a>
 };
 
-export default LogInLinkGoogle
+export default LogInLinkGoogle;
+
