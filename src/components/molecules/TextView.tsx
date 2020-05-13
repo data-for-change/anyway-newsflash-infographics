@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { IWidgetCountBySeverityData } from '../../models/WidgetData';
 import { Text, TextType } from '../atoms';
 import { Theme, makeStyles, Avatar } from '@material-ui/core';
-import roadNumberIcon from '../../assets/640px-ISR-HW-90.svg.png';
+import roadNumberIcon from '../../assets/road90.svg.png';
 import { highlightBasicColor, highlightDarkColor, highlightAlertColor, highlightWarnColor } from '../../style/_globals';
 
 interface IProps {

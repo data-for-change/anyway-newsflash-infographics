@@ -10,6 +10,9 @@ export enum TextType {
   NEWS_FLASH_DATETIME,
   WIDGET_TITLE,
   WIDGET_CONTENT,
+  WIDGET_TABLE_TITLE,
+  WIDGET_TABLE_CONTENT,
+  WIDGET_TABLE_HEADER,
 }
 
 interface IProps {
@@ -60,6 +63,7 @@ const Text: FC<IProps> = ({ type, children }) => {
         </p>
       );
     case TextType.WIDGET_TITLE:
+<<<<<<< HEAD
       return (
         <Typography variant="body1" component="h2">
           {children}
@@ -72,6 +76,21 @@ const Text: FC<IProps> = ({ type, children }) => {
           {children}
         </Typography>
       )
+=======
+      return <h2>{children}</h2>;
+
+    case TextType.WIDGET_CONTENT:
+      return <p>{children}</p>;
+
+    case TextType.WIDGET_TABLE_TITLE:
+      return <h4>{children}</h4>;
+
+    case TextType.WIDGET_TABLE_HEADER:
+      return <h5>{children}</h5>;
+
+    case TextType.WIDGET_TABLE_CONTENT:
+      return <p>{children}</p>;
+>>>>>>> development
   }
 };
 

@@ -34,7 +34,8 @@ export type IWidgetDataType =
   | IWidgetAccidentsByTypeData
   | IWidgetInjuredByYearData
   | IWidgetAccidentsByYearData
-  | IWidgetVisionZeroImageData ;
+  | IWidgetVisionZeroImageData
+  | IWidgetMostSevereAccidentsTableData;
 
 export interface ILocationMeta {
   location_info: {
@@ -49,6 +50,19 @@ export interface ILocationMeta {
 
 export interface IWidgetMostSevereAccidentsData {
   items: IPointAccident[];
+};
+export interface IWidgetMostSevereAccidentsTableData {
+  items: {
+    accident_year: 2019;
+    date: string;
+    hour: string;
+    injured_count: number;
+    killed_count: number;
+    type: string;
+  }[],
+  text: {
+    title: string
+  };
 };
 export interface IWidgetAccidentsHeatMapData {
   items: IPoint[];
@@ -99,4 +113,3 @@ export interface IWidgetVisionZeroImageData {
 	  image_src: string;
 	}[];
 };
-

@@ -30,6 +30,7 @@ export default class RootStore {
   @observable newsFlashWidgetsData: Array<IWidgetBase> = [];
   @observable newsFlashWidgetsTimerFilter = 0; // newsflash time filter (in years ago, 0- no filter)
   @observable newsFlashLoading: boolean = false;
+  @observable widgetBoxLoading: boolean = false;
 
   // domain stores
   settingsStore: SettingsStore;
@@ -98,7 +99,7 @@ export default class RootStore {
   @action
   selectNewsFlash(id: number): void {
     this.activeNewsFlashId = id;
-    this.fetchSelectedNewsFlashWidgets(id, this.newsFlashWidgetsTimerFilter);
+    this.fetchSelectedNewsFlashWidgets(id, this.newsFlashWidgetsTimerFilter)
   }
 
   @action
