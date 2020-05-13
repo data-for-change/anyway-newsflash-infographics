@@ -22,7 +22,6 @@ const useStyles = makeStyles({
     margin: '10px',
     padding: '16px',
     backgroundImage: `url(${RoadImage})`,
-    letterSpacing: 1,
   },
   dimension: {
     width: '100%',
