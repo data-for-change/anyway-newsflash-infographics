@@ -4,7 +4,7 @@ import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ThankYouPage from './pages/ThankYouPage';
 import { Footer } from './components/templates/Footer';
-import { Box, createStyles, CssBaseline, makeStyles, Theme, ThemeProvider } from '@material-ui/core';
+import { Box, createStyles, makeStyles, Theme, ThemeProvider } from '@material-ui/core';
 import { StoreContext, useStore } from './store/storeConfig';
 import { Header } from './components/molecules/Header';
 import 'leaflet/dist/leaflet.css';
@@ -30,7 +30,6 @@ const App: React.FC = () => {
     <StoreContext.Provider value={store}>
       <ThemeProvider theme={store.settingsStore.theme}>
         <Router>
-          <CssBaseline />
           <Box height={headerHeight} display="flex">
             <Header />
           </Box>
