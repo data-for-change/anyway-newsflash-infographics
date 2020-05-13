@@ -86,7 +86,7 @@ When `TYPE` can be:
 Branching system:
 *master* - used for production <br>
 *development* - anything else <br>
-* For the initial start, Use git clone command to download the repository to your computer.
+* For the initial start, Use git clone command to download the repository to your computer (With `write` privileges there is no need to fork the repo)
 
 A standard procedure for working on an issue would be to:
 1. `git pull development`
