@@ -4,6 +4,7 @@ import html2canvas from 'html2canvas';
 
 const widgetToJpeg = (fileName: string, widgetElement: HTMLElement) => {
   html2canvas(widgetElement, {
+    useCORS: true,  // to allow loading maps
     imageTimeout: 3000,
     ignoreElements: (AnyWayButtton) => false,
   })
