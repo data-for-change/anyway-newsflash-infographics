@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   mainText: {
     fontSize: 19,
+    lineHeight: '32px',
     padding: '5px',
     backgroundColor: highlightBasicColor,
   },
