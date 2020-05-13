@@ -21,8 +21,6 @@ const DEFAULT_LOCATION_META = {
 };
 
 export default class RootStore {
-  [key: string]: any; // Declaring an index signature
-
   appInitialized = false;
 
   @observable newsFlashCollection: Array<INewsFlash> = [];
@@ -32,6 +30,7 @@ export default class RootStore {
   @observable newsFlashWidgetsData: Array<IWidgetBase> = [];
   @observable newsFlashWidgetsTimerFilter = 0; // newsflash time filter (in years ago, 0- no filter)
   @observable newsFlashLoading: boolean = false;
+  @observable widgetBoxLoading: boolean = false;
 
   // domain stores
   settingsStore: SettingsStore;
@@ -40,22 +39,17 @@ export default class RootStore {
     // init app data
     initService().then((initData) => {
       console.log(initData);
-      this.safeSet('newsFlashCollection', initData.newsFlashCollection);
-      // this.safeSet('newsFlashWidgetsData', initData.newsFlashWidgetsData.widgets);
-      // this.newsFlashWidgetsMeta = initData.newsFlashWidgetsData.meta;
+      if(initData.newsFlashCollection) {
+        this.newsFlashCollection = initData.newsFlashCollection
+      }
+      if(initData.newsFlashWidgetsData) {
+        this.newsFlashWidgetsData = initData.newsFlashWidgetsData.widgets
+        this.newsFlashWidgetsMeta = initData.newsFlashWidgetsData.meta
+      }
       this.appInitialized = true;
     });
     // settings store - settings of the app such as num of results returned etc.
     this.settingsStore = new SettingsStore(this);
-  }
-
-  // prop is a property on RootStore to be initialized, like: this.suggestions
-  safeSet(prop: string, valueToCheck: any) {
-    if (valueToCheck && Array.isArray(valueToCheck)) {
-      this[prop] = valueToCheck;
-    } else {
-      console.warn(`Property [${prop}] was not initialized. Invalid value (${valueToCheck})`);
-    }
   }
 
   @computed
@@ -87,7 +81,7 @@ export default class RootStore {
     fetchNews(source, this.newsFlashFetchLimit).then((data: any) => {
       this.newsFlashLoading = false;
       if (data) {
-        this.safeSet('newsFlashCollection', data);
+        this.newsFlashCollection = data;
       } else {
         console.error(`filterNewsFlashCollection(source:${source}) invalid data:`, data);
       }
@@ -105,7 +99,7 @@ export default class RootStore {
   @action
   selectNewsFlash(id: number): void {
     this.activeNewsFlashId = id;
-    this.fetchSelectedNewsFlashWidgets(id, this.newsFlashWidgetsTimerFilter);
+    this.fetchSelectedNewsFlashWidgets(id, this.newsFlashWidgetsTimerFilter)
   }
 
   @action
@@ -118,11 +112,9 @@ export default class RootStore {
 
   private fetchSelectedNewsFlashWidgets(id: number, filterValue = 0): void {
     fetchWidgets(id, filterValue).then((response: any) => {
-      if (response && response.widgets !== undefined) {
-        console.log('===', response.meta);
-
+      if (response && response.widgets && response.meta) {
         this.newsFlashWidgetsMeta = response.meta;
-        this.safeSet('newsFlashWidgetsData', response.widgets);
+        this.newsFlashWidgetsData = response.widgets;
       } else {
         console.error(`fetchWidgets(id:${id}) invalid response:`, response);
       }

@@ -12,6 +12,7 @@ import CountAccidentsByDayNightPieWidget from '../molecules/CountAccidentsByDayN
 import StreetViewWidget from '../molecules/StreetViewWidget';
 import StaticImageViewWidget from '../molecules/StaticImageViewWidget';
 import MostSevereAccidentsMapWidget from '../molecules/MostSevereAccidentsMapWidget';
+import MostSevereAccidentsTableWidget from '../molecules/MostSevereAccidentsTableWidget';
 import HeatMap from '../molecules/HeatMap';
 import ErrorBoundary from '../atoms/ErrorBoundary';
 import { MetaTag } from '../atoms';
@@ -27,6 +28,10 @@ const getWidgetByType = (widget: any) => {
   switch (name) {
     case 'most_severe_accidents': {
       widgetComponent = <MostSevereAccidentsMapWidget data={data} />;
+      break;
+    }
+    case 'most_severe_accidents_table': {
+      widgetComponent = <MostSevereAccidentsTableWidget data={data} />;
       break;
     }
     case 'accidents_heat_map': {
@@ -76,7 +81,9 @@ const WidgetsTemplate: FC<IProps> = ({ id }) => {
   const store: RootStore = useStore();
   useEffect(() => {
     if (id) {
+      store.widgetBoxLoading = true;
       store.selectNewsFlash(id);
+      store.widgetBoxLoading = false;
     }
   }, [id, store]);
 
@@ -88,7 +95,7 @@ const WidgetsTemplate: FC<IProps> = ({ id }) => {
       return null;
     }
     return (
-      <AnyWayCard key={index}>
+      <AnyWayCard key={index} widgetName={widget.name}>
         <MetaTag>{widget.name}</MetaTag>
         <ErrorBoundary>{widgetComponent}</ErrorBoundary>
       </AnyWayCard>
@@ -96,8 +103,8 @@ const WidgetsTemplate: FC<IProps> = ({ id }) => {
   });
 
  const NoDataText = <Text type={TextType.CONTENT_TITLE}>אין נתונים להצגה</Text>
- 
- return  <Grid.Container>{widgetsData && widgetsData.length > 0 ? widgetCards: NoDataText} </Grid.Container> 
+
+ return  <Grid.Container>{widgetsData && widgetsData.length > 0 ? widgetCards: NoDataText} </Grid.Container>
 };
 
 export default observer(WidgetsTemplate);
