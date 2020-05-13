@@ -4,22 +4,10 @@ import {onLinkColor, onLinkColorHover} from '../../style/_globals';
 import axios, {AxiosResponse} from 'axios'
 import Text, {TextType} from "../atoms/Text";
 
-const LINK = process.env.REACT_APP_GOOGLE_LOGIN_LINK_DEV;
+const LOGIN_LINK = process.env.REACT_APP_GOOGLE_LOGIN_LINK_DEV;
+const LOGOUT_LINK = process.env.REACT_APP_GOOGLE_LOGIN_LINK_DEV;
 
-const useStyles = makeStyles({
-  link: {
-    color: `${onLinkColor}`,
-    textDecoration: 'none',
-    '&:hover': {
-      color: `${onLinkColorHover}`,
-    },
-    cursor: 'pointer'
-  },
-  profile:{
-    color: `black`
 
-  },
-});
 interface IloginRes {
   authenticated : boolean,
   cookies : any,
@@ -27,6 +15,16 @@ interface IloginRes {
 
 }
 const LogInLinkGoogle = () => {
+  const useStyles = makeStyles({
+    link: {
+      color: `${onLinkColor}`,
+      textDecoration: 'none',
+      '&:hover': {
+        color: `${onLinkColorHover}`,
+      },
+      cursor: 'pointer'
+    },
+  });
   const classes = useStyles();
   const [isLogin, setIsLogin] = useState(false);
   const [user, setUser] = useState('');
@@ -41,9 +39,14 @@ const LogInLinkGoogle = () => {
         }
       ).catch( err=> console.log(err));
     }
-    ,[])
+    ,[]);
 
-  return isLogin ? <Text type={TextType.CONTENT_TITLE}> {` שלום${user}`}</Text>  : <a className={classes.link}  href={LINK} >LOGIN</a>
+    const handleLogout =  () => {
+      setIsLogin(false);
+      setUser('');
+  }
+
+  return isLogin ? <div><a href={LOGOUT_LINK} onClick={handleLogout} >LOGOUT</a> <Text type={TextType.CONTENT_TITLE}> {` שלום ${user}`}</Text></div>  : <a className={classes.link}  href={LOGIN_LINK} >LOGIN</a>
 };
 
 export default LogInLinkGoogle
