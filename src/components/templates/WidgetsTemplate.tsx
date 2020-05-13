@@ -59,7 +59,7 @@ const getWidgetByType = (widget: any) => {
       widgetComponent = <CountAccidentsByDayNightPieWidget data={data} />;
       break;
 	}
-	case 'vision_zero_view': {
+	case 'vision_zero': {
 		widgetComponent = <VisionZeroImageViewWidget data={data} />;
 		break;
 	}
