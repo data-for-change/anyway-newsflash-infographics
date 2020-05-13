@@ -11,3 +11,14 @@ export const highlightAlertColor = '#D6391A';
 export const highlightWarnColor = '#C36A1A';
 
 export const barChartFillColor = '#c43a31'
+
+export const fontFamilyString = [
+  '"Alef"',
+  '-apple-system',
+  'BlinkMacSystemFont',
+  '"Segoe UI"',
+  'Roboto',
+  '"Helvetica Neue"',
+  'Arial',
+  'sans-serif',
+].join(',');

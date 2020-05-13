@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import red from '@material-ui/core/colors/red';
+import { fontFamilyString } from '../../style/_globals';
+import { Text, TextType } from '../atoms';
 
 interface IProps {
   data: Array<object>;
@@ -39,7 +41,16 @@ const renderCustomizedLabel = (props: any) => {
       >
         {value}
       </text>
-      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} fill="black" textAnchor={'middle'} dominantBaseline="central">
+      <text
+        fontFamily={fontFamilyString}
+        fontWeight={700}
+        fontSize={14}
+        x={ex + (cos >= 0 ? 1 : -1) * 12}
+        y={ey}
+        fill="black"
+        textAnchor={'middle'}
+        dominantBaseline="central"
+      >
         {name}
       </text>
     </g>
