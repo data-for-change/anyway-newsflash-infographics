@@ -6,7 +6,7 @@ import ThankYouPage from './pages/ThankYouPage';
 import { Footer } from './components/templates/Footer';
 import { Box, createStyles, makeStyles, Theme, ThemeProvider } from '@material-ui/core';
 import { StoreContext, useStore } from './store/storeConfig';
-import { Header } from './components/molecules/Header';
+import Header from './components/molecules/Header';
 import 'leaflet/dist/leaflet.css';
 
 // main components height - must add up to 100
