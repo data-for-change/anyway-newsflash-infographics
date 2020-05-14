@@ -80,7 +80,7 @@ const TableView: FC<IProps> = ( { data } ) => {
         <TableHead>
           <StyledTableRow>
             <StyledTableCell>
-              <Text type={TextType.WIDGET_TABLE_HEADER}>תהריך</Text>
+              <Text type={TextType.WIDGET_TABLE_HEADER}>תאריך</Text>
             </StyledTableCell>
             <StyledTableCell align="right">
               <Text type={TextType.WIDGET_TABLE_HEADER}>שעה</Text>

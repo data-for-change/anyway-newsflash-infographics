@@ -127,7 +127,10 @@ export default class RootStore {
   }
 
   private fetchSelectedNewsFlashWidgets(id: number, filterValue = 0): void {
+    this.widgetBoxLoading = true;
+
     fetchWidgets(id, filterValue).then((response: any) => {
+      this.widgetBoxLoading = false;
       if (response && response.widgets && response.meta) {
         this.newsFlashWidgetsMeta = response.meta;
         this.newsFlashWidgetsData = response.widgets;

@@ -38,12 +38,10 @@ const SideBar: FC<IProps> = () => {
         <ErrorBoundary>
           <NewsFlashFilterPanel />
         </ErrorBoundary>
-       { loading ?
-        <OverlayLoader>
+        <Box position="relative" overflow="auto">
+          <OverlayLoader show={loading}/> 
           <News />
-        </OverlayLoader>
-        :
-        <News />}
+        </Box>
       </Box>
       <Box flexShrink={0} flexGrow={0} p={1}>
         <Text type={TextType.CONTENT_TITLE} children={mapTitle} />
