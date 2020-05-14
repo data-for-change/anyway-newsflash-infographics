@@ -34,9 +34,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: '1px',
     backgroundColor: highlightBasicColor,
   },
-  tableText: {
-    fontSize: '12px'
-  }
 }));
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -103,29 +100,19 @@ const TableView: FC<IProps> = ( { data } ) => {
           {items.map((item, index) => (
             <StyledTableRow key={index}>
               <StyledTableCell component="th" scope="row">
-                <span className={classes.tableText}>
                 <Text type={TextType.WIDGET_TABLE_CONTENT}>{item.date}</Text>
-                </span>
               </StyledTableCell>
               <StyledTableCell align="right">
-                <span className={classes.tableText}>
                 <Text type={TextType.WIDGET_TABLE_CONTENT}>{item.hour}</Text>
-                </span>
               </StyledTableCell>
               <StyledTableCell align="right">
-                <span className={classes.tableText}>
                 <Text type={TextType.WIDGET_TABLE_CONTENT}>{item.type}</Text>
-                </span>
               </StyledTableCell>
               <StyledTableCell align="right">
-                <span className={classes.tableText}>
                 <Text type={TextType.WIDGET_TABLE_CONTENT}>{item.killed_count}</Text>
-                </span>
               </StyledTableCell>
               <StyledTableCell align="right">
-                <span className={classes.tableText}>
                 <Text type={TextType.WIDGET_TABLE_CONTENT}>{item.injured_count}</Text>
-                </span>
               </StyledTableCell>
             </StyledTableRow>
           ))}
