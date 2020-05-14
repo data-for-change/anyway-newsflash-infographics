@@ -33,24 +33,16 @@ const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
   const id = match.params.id ? parseInt(match.params.id) : null;
   const store: RootStore = useStore();
   const loading = store.widgetBoxLoading;
-
+  
   return (
     <Box display="flex" flexGrow={1} className={classes.mainBox}>
-      <Box flexGrow={1} flexBasis={500} display="flex" borderLeft={1} borderColor={borderColor}>
+      <Box flexGrow={1} maxWidth={319} display="flex" borderLeft={1} borderColor={borderColor}>
         <SideBar />
       </Box>
-      <Box flexGrow={5} className={classes.widgetBox}>
-        {loading ? (
-          <OverlayLoader>
-            <FilterBar />
-            <WidgetsTemplate id={id} />
-          </OverlayLoader>
-        ) : (
-          <>
-            <FilterBar />
-            <WidgetsTemplate id={id} />
-          </>
-        )}
+      <Box flexGrow={5} className={classes.widgetBox} position="relative">
+        <OverlayLoader show={loading}/>
+        <FilterBar />
+        <WidgetsTemplate id={id} />
       </Box>
     </Box>
   );
