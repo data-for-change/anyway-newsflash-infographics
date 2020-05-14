@@ -9,7 +9,7 @@ import { Text, TextType, ErrorBoundary } from '../atoms';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
-import { InfinitScroll } from '../atoms/InfinitScroll';
+import { InfinitScroll } from '../atoms';
 
 const INFINITE_SCROLL_FETCH_SIZE = 5;
 
