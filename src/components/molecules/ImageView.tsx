@@ -10,26 +10,24 @@ interface IProps {
 }
 const useStyles = makeStyles(() => ({
   root: {
-	display: 'flex',
-	justifyContent: 'center',
-	alignItems: 'center', 
-	padding: '0px', 
-	height: '100%',  
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
   },
   image: {
-	borderRadius: '10px',
-	border: '1px solid gray',
-	maxWidth: '100%',
-	maxHeight:'100%',
-
-  }
+    borderRadius: '10px',
+    border: '1px solid gray',
+    maxWidth: '100%',
+    maxHeight: '100%',
+  },
 }));
-const ImageView: FC<IProps> = ({data}) => {
+const ImageView: FC<IProps> = ({ data }) => {
   // todo: set image based on data
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <img src= { visionZeroImage } className={classes.image}  alt="vision zero" />
+      <img src={visionZeroImage} className={classes.image} alt="vision zero" />
     </div>
   );
 };
