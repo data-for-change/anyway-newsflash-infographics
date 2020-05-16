@@ -25,7 +25,7 @@ export default class RootStore {
   appInitialized = false;
 
   @observable newsFlashCollection: Array<INewsFlash> = [];
-  @observable isUserLogin: boolean = false;
+  @observable isUserAuthenticated: boolean = false;
   @observable userName :string = '';
   @observable activeNewsFlashId: number = 0; // active newsflash id
   @observable newsFlashFetchLimit: number = 0;
@@ -106,7 +106,7 @@ export default class RootStore {
   @action
   getUserLoginDetails(){
     fetchUserLoginStatus().then(userData => {
-      this.isUserLogin = userData.authenticated;
+      this.isUserAuthenticated = userData.authenticated;
       this.userName = userData.userName;
     }).catch(err=>console.log(err));
 

@@ -18,7 +18,7 @@ import UserProfileHeader from './UserProfileHeader';
     store.getUserLoginDetails();
   },[store]);
   let logElement;
-  if(store.isUserLogin){
+  if(store.isUserAuthenticated){
     logElement = <UserProfileHeader name={store.userName}/>
   }
   else{

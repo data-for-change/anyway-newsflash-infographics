@@ -19,9 +19,11 @@ const useStyles = makeStyles({
 });
 const LogInLinkGoogle = () => {
   const classes = useStyles();
-  return ( <a className={classes.link} href={LINK}>
-    <Text type={TextType.CONTENT}>LOGIN</Text>
-  </a>);
+  return (
+    <a className={classes.link} href={LINK}>
+      <Text type={TextType.CONTENT}>LOGIN</Text>
+    </a>
+  );
 };
 
 export default LogInLinkGoogle;
