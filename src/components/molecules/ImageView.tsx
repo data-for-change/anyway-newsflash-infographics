@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { IWidgetVisionZeroImageData } from '../../models/WidgetData';
 import visionZeroImage from '../../assets/vision-zero.png';
 import { makeStyles } from '@material-ui/core';
-import { FullscreenExit } from '@material-ui/icons';
 
 //Image SRC hardcoded,
 
