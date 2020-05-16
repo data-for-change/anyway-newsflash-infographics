@@ -15,16 +15,18 @@ const DEFAULT_BOUNDS = [
 ];
 
 interface IProps {
-  items: IPoint[] | any;
-  center?: { lat: number; lng: number };
+  items: IPoint[] | any ;
+  center?: { lat: number; lng: number; };
 }
 
-const LocationMap: FC<IProps> = ({ items, center }) => {
+const LocationMap: FC<IProps> = ( { items, center } ) => {
   let markers = items.map((x: IPoint, i: number) => {
-    if (x.latitude !== null && x.longitude !== null) {
+    if ( x.latitude !== null && x.longitude !== null ) {
+      let toolTipRight = ( i % 2 === 0 ) ? true : false;
+
       return (
         <div key={i}>
-          <AnywayMostSevereAccidentsMarker markerdata={x} />;
+          <AnywayMostSevereAccidentsMarker markerdata={x} markerside={toolTipRight} />;
           <AnywayMarker markerdata={x} />;
         </div>
       );

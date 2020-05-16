@@ -7,6 +7,7 @@ import { dateFormat } from '../../utils/time.utils';
 
 interface IProps {
   markerdata: any;
+  markerside: any;
 }
 const useStyles = makeStyles({
   icon: {
@@ -14,14 +15,15 @@ const useStyles = makeStyles({
     height: 0,
     backgroundColor: 'transparent',
   },
-  mapLabel: {
+  mapLabel: (side) => ({
     position: 'absolute',
-    bottom: '-5px',
-    right: '5px',
+    bottom: '-1px',
+    right: side ? '-95px' : '10px',
     display: 'flex',
     alignItems: 'center',
-  },
-  mapLabelContent: {
+    transform: side ? 'scaleX(-1)' : '',
+  }),
+  mapLabelContent: (side) => ({
     position: 'relative',
     order: 1,
     padding: ' 1px 3px',
@@ -29,23 +31,26 @@ const useStyles = makeStyles({
     whiteSpace: 'nowrap',
     color: '#FFFFFF',
     backgroundColor: '#000000',
-  },
+    transform: side ? 'scaleX(-1)' : '',
+  }),
   mapLabelArrow: {
     display: 'inline-flex',
     borderStyle: 'solid',
-    borderWidth: '5px 0 5px 40px',
+    borderWidth: '5px 0 5px 20px',
+    marginRight: '10px',
     borderColor: 'transparent transparent transparent #000000',
   },
 });
-const IconMap = ({ markerData }: any) => {
-  const classes = useStyles();
+const IconMap = ( { markerData, side }: any ) => {
+  const classes = useStyles( side);
+
   // const { accident_timestamp, accident_severity, accident_type = '' } = markerData;
   // const { accident_timestamp, accident_severity, accident_type = '' } = markerData;
   // const typeStr = accident_type === '' ? '' : `, ${accident_type}`;
 
   // temp: make string short - skip desription
   // const iconText = `${dateFormat(accident_timestamp)} - ${accident_severity}${typeStr}`;
-  const iconText = `${dateFormat(markerData.accident_timestamp)}`;
+  const iconText: any = `${ dateFormat( markerData.accident_timestamp ) }`;
 
   return (
     <div className={classes.mapLabel}>
@@ -55,14 +60,14 @@ const IconMap = ({ markerData }: any) => {
   );
 };
 
-const AnywayMostSevereAccidentsMarker: FC<IProps> = ({ markerdata }) => {
+const AnywayMostSevereAccidentsMarker: FC<IProps> = ({ markerdata, markerside }) => {
   const { latitude, longitude, accident_severity, accident_timestamp } = markerdata;
   const classes = useStyles();
   const lPoint: L.LatLng = new L.LatLng(latitude, longitude);
   const icon = L.divIcon({
     className: classes.icon,
-    html: ReactDOMServer.renderToString(<IconMap markerData={markerdata} />),
-  });
+    html: ReactDOMServer.renderToString(<IconMap side={markerside} markerData={markerdata} />),
+  } );
 
   return !accident_timestamp && !accident_severity ? null : (
     <Marker key={`marker-${accident_timestamp}`} icon={icon} position={lPoint} />

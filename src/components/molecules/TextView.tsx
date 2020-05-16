@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'space-evenly',
     padding: '5px',
     borderRadius: '10px',
+    letterSpacing: 1,
     '& span': {
       marginLeft: 10,
     }
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   mainText: {
     fontSize: 19,
+    lineHeight: '32px',
     padding: '5px',
     backgroundColor: highlightBasicColor,
   },
