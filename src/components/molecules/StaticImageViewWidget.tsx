@@ -5,7 +5,7 @@ import ImageView from './ImageView';
 interface IProps {
   data: IWidgetVisionZeroImageData;
 }
-const VisionZeroImageViewWidget: FC<IProps> = ({ data }) => {
+const StaticImageViewWidget: FC<IProps> = ({ data }) => {
   return <ImageView data={data} />;
 };
-export default VisionZeroImageViewWidget;
+export default StaticImageViewWidget;
