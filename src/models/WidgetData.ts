@@ -30,6 +30,7 @@ export type IWidgetDataType =
   | IWidgetMostSevereAccidentsData
   | IWidgetAccidentsHeatMapData
   | IWidgetAccidentsByDayNightData
+  | WidgetCountBySeverityTextData
   | IWidgetCountBySeverityData
   | IWidgetAccidentsByTypeData
   | IWidgetInjuredByYearData
@@ -67,6 +68,16 @@ export interface IWidgetMostSevereAccidentsTableData {
 export interface IWidgetAccidentsHeatMapData {
   items: IPoint[];
 };
+export interface WidgetCountBySeverityTextData {
+		items: {
+			severity_light_count: number;
+			severity_fatal_count: number;
+			severity_severe_count: number;
+			start_year: string;
+			end_year: string;
+			total_accidents_count: number;
+		  };
+	};
 export interface IWidgetCountBySeverityData {
   items: {
     accident_severity: string;
