@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { IWidgetCountBySeverityData } from '../../models/WidgetData';
+import { WidgetCountBySeverityTextData } from '../../models/WidgetData';
 import { Text, TextType } from '../atoms';
 import { Theme, makeStyles, Avatar } from '@material-ui/core';
 import roadNumberIcon from '../../assets/road90.svg.png';
 import { highlightBasicColor, highlightDarkColor, highlightAlertColor, highlightWarnColor } from '../../style/_globals';
 
 interface IProps {
-  data: IWidgetCountBySeverityData;
+  data: WidgetCountBySeverityTextData;
 }
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     letterSpacing: 1,
     '& span': {
       marginLeft: 10,
-    }
+    },
   },
   large: {
     width: theme.spacing(7),
@@ -50,49 +50,39 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: highlightWarnColor,
   },
 }));
-const TextView: FC<IProps> = ({data}) => {
-  //hardcoded, waiting for data changes from the server
+const TextView: FC<IProps> = ({ data }) => {
   const classes = useStyles();
+  const { items } = data;									  
   return (
     <div className={classes.root}>
       <Avatar variant="square" alt="Road Number" src={roadNumberIcon} className={classes.large} />
       <Text type={TextType.WIDGET_TITLE}>
         <span className={classes.mainText}>
-          <span>
-            בין השנים
-          </span>
-          <span>
-            {'2015-2019'}
-          </span>
-          <br/>
-          <span>
-            במקטע
-          </span>
-          <span>
-            מצפה שלם - צומת שדי שבכביש 90
-          </span>
-          <span>
-            התרחשו
-          </span>
-          <span className={classes.highlightDark}>266</span>
+          <span>בין השנים</span>
+          <span>{items.end_year} - {items.start_year} </span>
+          <br />
+          <span>במקטע</span>
+          <span>מצפה שלם - צומת שדי שבכביש 90</span>
+          <span>התרחשו</span>
+          <span className={classes.highlightDark}>{items.total_accidents_count}</span>
           <span>תאונות</span>
         </span>
       </Text>
       <div>
         <Text type={TextType.WIDGET_CONTENT}>
           <span className={classes.bottomText}>
-            <span className={classes.highlightAlert}>13</span>
+            <span className={classes.highlightAlert}>{items.severity_fatal_count}</span>
             <span>קטלניות</span>
           </span>
         </Text>
         <Text type={TextType.WIDGET_CONTENT}>
           <span className={classes.bottomText}>
-            <span className={classes.highlightWarn}>16</span>
+            <span className={classes.highlightWarn}>{items.severity_severe_count}</span>
             <span>קשות</span>
           </span>
         </Text>
         <Text type={TextType.WIDGET_CONTENT}>
-          <span className={classes.bottomText}>ו- 255 קלות</span>
+          <span className={classes.bottomText}>ו- {items.severity_light_count} קלות</span>
         </Text>
       </div>
     </div>
