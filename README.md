@@ -4,7 +4,7 @@
 
 # ANYWAY: Newsflash InfoGraphics.
 ## About this project:
-Learn more about our [Vision](https://github.com/hasadna/anyway-newsflash-infographics/blob/development/Vision.md)
+Learn more about our [Vision](https://github.com/hasadna/anyway-newsflash-infographics/blob/development/docs/Vision.md)
 
 ## Want to help?
 Want to file a bug, contribute some code, or improve documentation? Excellent! Please follow these steps
