@@ -68,11 +68,11 @@ It is following [Atomic Design](https://bradfrost.com/blog/post/atomic-web-desig
 ### Contribution Guidelines
 Branch naming convention is as following
 ```
-TYPE(ISSUE_ID)-DESCRIPTION
+TYPE-ISSUE_ID-DESCRIPTION
 
 examples:
-feat(113)-add-newsflash-location-on-map
-fix(114)-newsflash-location-not-accurate
+feat-113-add-newsflash-location-on-map
+fix-114-newsflash-location-not-accurate
 ```
 When `TYPE` can be:
 * **feat** - is a new feature
@@ -90,7 +90,7 @@ Branching system:
 
 A standard procedure for working on an issue would be to:
 1. `git pull development`
-2. Create new branch from `development` , like: `refactor(137)-making-pie-chart-generic-component`
+2. Create new branch from `development` , like: `refactor-137-making-pie-chart-generic-component`
 3. Work - commit - repeat
 4. Git pull at `development`
 5. On your branch: `git merge development` and solve conflicts if they exist
@@ -117,8 +117,16 @@ You can safely use [named imports](https://stackoverflow.com/questions/36795819/
 when working with [Material UI components](https://material-ui.com/guides/minimizing-bundle-size/#how-to-reduce-the-bundle-size).
 
 
-### VScode prettier
-If you're using VScode prettier, please use the following config:
+### Git Scripts <a id="gitscripts"></a> [🔼](#migdalor) 
+Git scripts include in `package.json` to make working with git easier:
+* `git:prune` - Remove tracking branches no longer on remote (run it around once a week)
+* `git:merged` -  Lists branches that have been merged into `dev`
+
+### VScode & prettier
+Our `package.json` already include `prettier` section.
+If you have your own settings for `VScode prettier extension`, make sure to use the project config.
+
+We use `singleQuote` as default. If having trouble with making the VScode extension use single quotes, please use the following config:
 ```
 {
   "prettier.jsxSingleQuote": true,
