@@ -70,7 +70,7 @@ const AnywayMostSevereAccidentsMarker: FC<IProps> = ({ markerdata, markerside })
   } );
 
   return !accident_timestamp && !accident_severity ? null : (
-    <Marker key={`marker-${accident_timestamp}`} icon={icon} position={lPoint} />
+    <Marker icon={icon} position={lPoint} />
   );
 };
 

@@ -26,8 +26,8 @@ const LocationMap: FC<IProps> = ( { items, center } ) => {
 
       return (
         <div key={i}>
-          <AnywayMostSevereAccidentsMarker markerdata={x} markerside={toolTipRight} />;
-          <AnywayMarker markerdata={x} />;
+          <AnywayMostSevereAccidentsMarker markerdata={x} markerside={toolTipRight} />
+          <AnywayMarker markerdata={x} />
         </div>
       );
     }
