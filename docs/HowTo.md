@@ -6,7 +6,23 @@
 
 
 ### How To Open a PR ↸ <a id="openbug"></a> [🔼](#howtocontent)
-TODO
+The following steps will guide you through PR process:
+Once your branch has been merged with development, resolved conflicts and push into github, a PR (Pull Request)
+to be performed.
+1. Go to  Pull Request >> New Pull Request
+![](2020-05-21-00-07-13.png)
+2. Find your branch.
+3. Connect your PR with the relevant issue.
+![](2020-05-20-23-59-24.png)
+4. Request for a review, otherwise the PR might fail.
+	See below -failed PR.
+![](2020-05-21-00-13-38.png)
+5. Wait for reviewer comments(reject) or approved ( if rejected, resolve reviewer comments ,commit and push)
+![](2020-05-20-23-37-56.png)
+6. Once changes approved, you will be able to Merge Pull Request.
+![](2020-05-21-00-22-50.png)
+7. github will automatically delete the branch, after the merge is done. (they can still be restored).
+8. Hooray, you are done, cherish the moment!
  
 
 
