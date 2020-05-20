@@ -34,7 +34,7 @@
     "sb": "start-storybook -p 9009 -s public",
     "build-sb": "build-storybook -s public",
     "git:prune": "git remote prune origin",
-    "git:merged": "git branch --merged dev"
+    "git:merged": "git branch --merged development"
   },
   "prettier": {
     "singleQuote": true,
