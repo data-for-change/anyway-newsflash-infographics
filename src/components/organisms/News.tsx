@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { AnywayLink, Text, TextType } from '../atoms';
 import { Box, makeStyles } from '@material-ui/core';
-import { borderColor, selectedNewsFlash } from '../../style/_globals';
+import { borderColor, selectedNewsFlash } from '../../style';
 import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
 import { observer } from 'mobx-react-lite';

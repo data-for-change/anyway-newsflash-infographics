@@ -3,7 +3,7 @@ import logoHasdna from '../../assets/hasadna.png';
 import { makeStyles } from '@material-ui/core/styles';
 import { AnywayLink } from '../atoms/';
 import { Box } from '@material-ui/core';
-import { borderColor } from '../../style/_globals';
+import { borderColor } from '../../style';
 
 interface IProps {}
 const useStyles = makeStyles({

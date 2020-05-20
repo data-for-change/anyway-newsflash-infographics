@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link, LinkProps } from 'react-router-dom';
-import { onLinkColor } from '../../style/_globals';
-import { onLinkColorHover } from '../../style/_globals';
+import { onLinkColor } from '../../style';
+import { onLinkColorHover } from '../../style';
 
 const useStyles = makeStyles({
   link: {

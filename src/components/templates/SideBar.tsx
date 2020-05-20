@@ -4,7 +4,7 @@ import News from '../organisms/News';
 import { NewsFlashFilterPanel } from '../molecules/NewsFlashFilterPanel';
 import LocationMap from '../molecules/LocationMap';
 import OverlayLoader  from '../molecules/OverlayLoader';
-import { borderColor } from '../../style/_globals';
+import { borderColor } from '../../style';
 import { Text, TextType, ErrorBoundary } from '../atoms';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store/storeConfig';
