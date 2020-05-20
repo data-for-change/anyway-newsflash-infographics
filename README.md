@@ -99,6 +99,12 @@ A standard procedure for working on an issue would be to:
 8. After approval, merge your PR
 9. Delete your branch after merge
 
+### Server code
+We have app server (written in [express](https://expressjs.com/), a node.js-based framework) which supports 2 functions:
+* Cache API requests (from the backend data cluster)
+* Provide user management capabilities
+[Our server repo](https://github.com/hasadna/anyway-newsflash-infographics-backend) 
+
 ### Server API <a id="serverapi"></a> 
 See [API document](https://docs.google.com/document/d/1Hv5ItvwM3z9nn95LjlsYHL-o18V8PgWrrQOKIPiPymU)
 
