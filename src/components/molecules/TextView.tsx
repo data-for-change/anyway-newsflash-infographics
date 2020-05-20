@@ -3,7 +3,7 @@ import { WidgetCountBySeverityTextData } from '../../models/WidgetData';
 import { Text, TextType } from '../atoms';
 import { Theme, makeStyles, Avatar } from '@material-ui/core';
 import roadNumberIcon from '../../assets/road90.svg.png';
-import { highlightBasicColor, highlightDarkColor, highlightAlertColor, highlightWarnColor } from '../../style/_globals';
+import { highlightBasicColor, highlightDarkColor, highlightAlertColor, highlightWarnColor } from '../../style';
 
 interface IProps {
   data: WidgetCountBySeverityTextData;

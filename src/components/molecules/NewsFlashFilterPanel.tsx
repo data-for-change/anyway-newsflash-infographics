@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, makeStyles } from '@material-ui/core';
-import { borderColor } from '../../style/_globals';
+import { borderColor } from '../../style';
 import ynetLogo from '../../assets/ynet-website-logo.svg';
 import wallaLogo from '../../assets/walla-logo.svg';
 import madaLogo from '../../assets/mada-logo.svg';

@@ -1,5 +1,5 @@
 import {makeStyles} from '@material-ui/core/styles';
-import {onLinkColor, onLinkColorHover} from '../../style/_globals';
+import {onLinkColor, onLinkColorHover} from '../../style';
 import Text, {TextType} from "../atoms/Text";
 import React from "react";
 

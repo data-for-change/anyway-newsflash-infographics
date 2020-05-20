@@ -9,7 +9,7 @@ import {
   tableHeadColor,
   tableBackgroundColorMain,
   tableBackgroundColorOdd,
-} from '../../style/_globals';
+} from '../../style';
 
 interface IProps {
   data: IWidgetMostSevereAccidentsTableData;

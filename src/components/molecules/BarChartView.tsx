@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { ResponsiveContainer, BarChart, LabelList, XAxis, Label, Bar } from 'recharts';
-import { barChartFillColor } from '../../style/_globals';
-import { fontFamilyString } from '../../style/_globals';
+import { barChartFillColor } from '../../style';
+import { fontFamilyString } from '../../style';
 
 interface IProps {
   data: Array<object>

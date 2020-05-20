@@ -8,6 +8,7 @@ import { Logo } from '../atoms/Logo';
 import LamasImage from '../../assets/cbs.png';
 import AnywayImage from '../../assets/anyway.png';
 import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
+import { fontFamilyString } from '../../style';
 
 interface IProps {
   widgetName: string;
@@ -15,6 +16,7 @@ interface IProps {
 
 const useStyles = makeStyles({
   root: {
+    fontFamily: fontFamilyString,
     position: 'relative', // for meta tags
     width: '360px',
     height: '440px',

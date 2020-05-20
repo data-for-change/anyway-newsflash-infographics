@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Loader from '../atoms/Loader';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core';
-import { borderColor } from '../../style/_globals';
+import { borderColor } from '../../style';
 
 const useStyles = makeStyles({
   root: {
