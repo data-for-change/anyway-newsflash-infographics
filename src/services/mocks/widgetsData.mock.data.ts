@@ -346,6 +346,41 @@ export default {
       },
     },
     {
+      name: 'fatal_accidents_by_type',
+      rank: 10,
+      data: {
+        items: [
+          {
+            title: 'בכביש 90 מקטע מצפה שלם - צומת שדי תרומות', 
+            chartData: [
+              {
+                count: 61.5,
+                desc: 'תאונות חזיתיות'
+              },
+              {
+                count: 38.5,
+                desc: 'תאונות אחרות'
+              }
+            ]
+          },
+          {
+            title: 'בכבישים בין עירוניים (ללא צמתים) בכל הארץ', 
+            chartData: [
+              {
+                count: 21.1,
+                desc: 'תאונות חזיתיות'
+              },
+              {
+                count: 74.9,
+                desc: 'תאונות אחרות'
+              }
+            ]
+          }
+        ],
+        text: { title: 'תאונות קטלניות ע"פ סוג (2015-2019)' },
+      },
+    },
+    {
       name: 'accidents_count_by_hour',
       rank: 11,
       data: {
