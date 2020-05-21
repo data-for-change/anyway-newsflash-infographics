@@ -27,6 +27,7 @@ const useStyles = makeStyles({
     marginRight: '10px',
     display: 'flex',
     flexDirection: 'row',
+    flexShrink: 0,
     justifyContent: 'space-evenly',
   },
 });
