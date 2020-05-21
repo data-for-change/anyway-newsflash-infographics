@@ -119,6 +119,16 @@ export interface IWidgetAccidentsByDayNightData {
   }[];
 };
 
+export interface IWidgetFatalAccidentsByTypeData {
+  items: {
+      title: string; 
+      chartData: {
+          count: number,
+          desc: string
+      }[];
+  }[];
+};
+
 export interface IWidgetVisionZeroImageData {
 	items: {
 	  image_src: string;

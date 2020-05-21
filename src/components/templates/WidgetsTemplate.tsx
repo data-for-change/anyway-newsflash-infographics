@@ -13,6 +13,7 @@ import StreetViewWidget from '../molecules/StreetViewWidget';
 import StaticImageViewWidget from '../molecules/StaticImageViewWidget';
 import MostSevereAccidentsMapWidget from '../molecules/MostSevereAccidentsMapWidget';
 import MostSevereAccidentsTableWidget from '../molecules/MostSevereAccidentsTableWidget';
+import FatalAccidentsSegmentationPieWidget from '../molecules/FatalAccidentsSegmentationPieWidget';
 import HeatMap from '../molecules/HeatMap';
 import ErrorBoundary from '../atoms/ErrorBoundary';
 import { MetaTag } from '../atoms';
@@ -62,6 +63,10 @@ const getWidgetByType = (widget: any) => {
     }
     case 'accident_count_by_day_night': {
       widgetComponent = <CountAccidentsByDayNightPieWidget data={data} />;
+      break;
+	}
+    case 'fatal_accidents_by_type': {
+      widgetComponent = <FatalAccidentsSegmentationPieWidget data={data} />;
       break;
 	}
 	case 'vision_zero': {
