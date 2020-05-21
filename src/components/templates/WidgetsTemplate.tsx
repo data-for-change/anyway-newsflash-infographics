@@ -18,6 +18,7 @@ import HeatMap from '../molecules/HeatMap';
 import ErrorBoundary from '../atoms/ErrorBoundary';
 import { MetaTag } from '../atoms';
 import {Text, TextType} from '../atoms'
+import { Box } from '@material-ui/core';
 
 interface IProps {
   id: number | null;
@@ -84,6 +85,7 @@ const getWidgetByType = (widget: any) => {
 
 const WidgetsTemplate: FC<IProps> = ({ id }) => {
   const store: RootStore = useStore();
+
   useEffect(() => {
     if (id) {
       store.selectNewsFlash(id);
@@ -98,10 +100,12 @@ const WidgetsTemplate: FC<IProps> = ({ id }) => {
       return null;
     }
     return (
-      <AnyWayCard key={index} widgetName={widget.name}>
-        <MetaTag>{widget.name}</MetaTag>
-        <ErrorBoundary>{widgetComponent}</ErrorBoundary>
-      </AnyWayCard>
+      <Box m={2}>
+        <AnyWayCard key={index} widgetName={widget.name}>
+          <MetaTag>{widget.name}</MetaTag>
+          <ErrorBoundary>{widgetComponent}</ErrorBoundary>
+        </AnyWayCard>
+      </Box>
     );
   });
 

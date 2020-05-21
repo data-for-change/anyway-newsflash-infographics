@@ -2,13 +2,13 @@ import React, { FC, useRef } from 'react';
 import { Card, CardContent, CardActions } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import RoadImage from '../../assets/road-image.png';
-import widgetToJpeg from '../../services/to-image.service';
+import widgetToImage from '../../services/to-image.service';
 import { AnyWayButton } from '../atoms/AnyWayButton';
 import { Logo } from '../atoms/Logo';
 import LamasImage from '../../assets/cbs.png';
 import AnywayImage from '../../assets/anyway.png';
 import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
-import { fontFamilyString } from '../../style';
+import { fontFamilyString, cardWidth, cardHeight } from '../../style';
 
 interface IProps {
   widgetName: string;
@@ -18,12 +18,11 @@ const useStyles = makeStyles({
   root: {
     fontFamily: fontFamilyString,
     position: 'relative', // for meta tags
-    width: '360px',
-    height: '440px',
-    borderRadius: '15px',
-    margin: '10px',
+    width: cardWidth,
+    height: cardHeight,
     padding: '16px',
     backgroundImage: `url(${RoadImage})`,
+    boxSizing: 'border-box',
   },
   dimension: {
     width: '100%',
@@ -49,7 +48,7 @@ const AnyWayCard: FC<IProps> = ({ widgetName, children }) => {
   const widget = useRef<HTMLDivElement>(null);
   const imgDownloadHandler = () => {
     if(widget && widget.current) {
-      widgetToJpeg(widgetName, widget.current);
+      widgetToImage(widgetName, widget.current);
     }
   };
 
