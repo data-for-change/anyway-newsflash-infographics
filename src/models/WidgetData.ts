@@ -17,12 +17,12 @@ import { IPoint, IPointAccident } from './Point';
 export interface ILocationData {
   meta: ILocationMeta;
   widgets: IWidgetBase[];
-};
+}
 
 export interface IWidgetBase {
   rank: number; // order? (not in use)
   name: string; // unique - used as identifier
-  data: IWidgetDataType
+  data: IWidgetDataType;
   meta?: {};
 }
 
@@ -45,13 +45,11 @@ export interface ILocationMeta {
     road_segment_name: string;
   };
   location_text: string;
-};
-
-
+}
 
 export interface IWidgetMostSevereAccidentsData {
   items: IPointAccident[];
-};
+}
 export interface IWidgetMostSevereAccidentsTableData {
   items: {
     accident_year: 2019;
@@ -60,77 +58,80 @@ export interface IWidgetMostSevereAccidentsTableData {
     injured_count: number;
     killed_count: number;
     type: string;
-  }[],
+  }[];
   text: {
-    title: string
+    title: string;
   };
-};
+}
 export interface IWidgetAccidentsHeatMapData {
   items: IPoint[];
-};
+}
 export interface WidgetCountBySeverityTextData {
-		items: {
-			severity_light_count: number;
-			severity_fatal_count: number;
-			severity_severe_count: number;
-			start_year: string;
-			end_year: string;
-			total_accidents_count: number;
-		  };
-	};
+  items: {
+    severity_light_count: number;
+    severity_fatal_count: number;
+    severity_severe_count: number;
+    start_year: string;
+    end_year: string;
+    total_accidents_count: number;
+  };
+}
 export interface IWidgetCountBySeverityData {
   items: {
     accident_severity: string;
     count: number;
   }[];
-};
+}
 export interface IWidgetAccidentsByTypeData {
   items: {
     accident_type: string;
     count: number;
   }[];
-};
+}
 export interface IWidgetAccidentsByYearData {
   items: {
     accident_year: number;
     count: number;
   }[];
-};
+}
 export interface IWidgetInjuredByYearData {
   items: {
     accident_year: number;
     count: number;
   }[];
-};
+}
 export interface IWidgetStreetViewData {
-  items: IPoint
-};
+  items: IPoint;
+}
 
 export interface IWidgetVisionZeroImageData {
-	items: {
-	  image_src: string;
-	}[];
-};
+  items: {
+    image_src: string;
+  }[];
+}
 
 export interface IWidgetAccidentsByDayNightData {
   items: {
     day_night: string;
     count: number;
   }[];
-};
+}
 
-export interface IWidgetFatalAccidentsByTypeData {
+export interface IWidgetHeadOnCollisionsComparisonData {
   items: {
-      title: string; 
-      chartData: {
-          count: number,
-          desc: string
-      }[];
-  }[];
-};
+    all_roads_fatal_accidents: { 
+      desc: string; 
+      count: number; 
+    }[];
+    specific_road_segment_fatal_accidents: { 
+      desc: string; 
+      count: number; 
+    }[];
+  };
+}
 
 export interface IWidgetVisionZeroImageData {
-	items: {
-	  image_src: string;
-	}[];
-};
+  items: {
+    image_src: string;
+  }[];
+}

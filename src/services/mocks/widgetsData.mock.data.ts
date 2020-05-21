@@ -99,7 +99,7 @@ export default {
           },
         ],
         text: {
-          title: 'תאונות קטלניות בכביש 90: מקטע מצפה שלם - צומת שדי תרומות'
+          title: 'תאונות קטלניות בכביש 90: מקטע מצפה שלם - צומת שדי תרומות',
         },
       },
     },
@@ -346,37 +346,19 @@ export default {
       },
     },
     {
-      name: 'fatal_accidents_by_type',
+      name: 'head_on_collisions_comparison',
       rank: 10,
       data: {
-        items: [
-          {
-            title: 'בכביש 90 מקטע מצפה שלם - צומת שדי תרומות', 
-            chartData: [
-              {
-                count: 61.5,
-                desc: 'תאונות חזיתיות'
-              },
-              {
-                count: 38.5,
-                desc: 'תאונות אחרות'
-              }
-            ]
-          },
-          {
-            title: 'בכבישים בין עירוניים (ללא צמתים) בכל הארץ', 
-            chartData: [
-              {
-                count: 21.1,
-                desc: 'תאונות חזיתיות'
-              },
-              {
-                count: 74.9,
-                desc: 'תאונות אחרות'
-              }
-            ]
-          }
-        ],
+        items: {
+          all_roads_fatal_accidents: [
+            { desc: 'התנגשות חזית בחזית', count: 61 },
+            { desc: 'תאונות אחרות', count: 39 },
+          ],
+          specific_road_segment_fatal_accidents: [
+            { desc: 'התנגשות חזית בחזית', count: 21 },
+            { desc: 'תאונות אחרות', count: 79 },
+          ],
+        },
         text: { title: 'תאונות קטלניות ע"פ סוג (2015-2019)' },
       },
     },

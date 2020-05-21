@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
 import { Text, TextType } from '../atoms';
-import { Table, TableBody, TableCell, TableHead, TableRow, Theme, Avatar } from '@material-ui/core';
+import { Table, TableBody, TableCell, TableHead, TableRow, Theme } from '@material-ui/core';
 import { IWidgetMostSevereAccidentsTableData } from '../../models/WidgetData';
 import roadNumberIcon from '../../assets/road90.svg.png';
 import {
@@ -71,7 +71,7 @@ const TableView: FC<IProps> = ( { data } ) => {
   return (
     <div className={classes.root}>
       <div className={classes.title}>
-        <Avatar variant="square" alt="Road Number" src={roadNumberIcon} className={classes.large} />
+        <img alt="Road Number" src={roadNumberIcon} className={classes.large} />
         <Text type={TextType.WIDGET_TABLE_TITLE}>
           <span className={classes.mainText}>{text.title}</span>
         </Text>

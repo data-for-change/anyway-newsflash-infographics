@@ -17,13 +17,11 @@ const useStyles = makeStyles({
   },
   mapLabel: (side) => ({
     position: 'absolute',
-    // top: '20px',
+    bottom: '-1px',
     right: side ? -72 : 2,
-    bottom: '0px',
     display: 'flex',
     alignItems: 'center',
-    marginRight: side ? '-15px' : '15px',
-    transform: side ? 'scaleX(-1)' : ''
+    transform: side ? 'scaleX(-1)' : '',
   }),
   mapLabelContent: (side) => ({
     position: 'relative',
@@ -39,7 +37,7 @@ const useStyles = makeStyles({
     display: 'inline-flex',
     borderStyle: 'solid',
     borderWidth: '5px 0 5px 20px',
-    // marginRight: '10px',
+    marginRight: '10px',
     borderColor: 'transparent transparent transparent #000000',
   },
 });
@@ -62,7 +60,7 @@ const IconMap = ( { markerData, side }: any ) => {
   );
 };
 
-const AnywayMostSevereAccidentsToolTip: FC<IProps> = ({ markerdata, markerside }) => {
+const AnywayMostSevereAccidentsMarker: FC<IProps> = ({ markerdata, markerside }) => {
   const { latitude, longitude, accident_severity, accident_timestamp } = markerdata;
   const classes = useStyles();
   const lPoint: L.LatLng = new L.LatLng(latitude, longitude);
@@ -72,8 +70,8 @@ const AnywayMostSevereAccidentsToolTip: FC<IProps> = ({ markerdata, markerside }
   } );
 
   return !accident_timestamp && !accident_severity ? null : (
-    <Marker icon={icon} position={lPoint} />
+    <Marker key={`marker-${accident_timestamp}`} icon={icon} position={lPoint} />
   );
 };
 
-export default AnywayMostSevereAccidentsToolTip;
+export default AnywayMostSevereAccidentsMarker;
