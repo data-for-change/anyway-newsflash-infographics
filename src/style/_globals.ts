@@ -8,6 +8,10 @@ export const sidBarWidth = 300;
 // card
 export const cardHeight = 480;
 export const cardWidth = 370;
+export const cardPadding = 16;
+// card content and actions (footer)
+export const cardContentHeight = 400;
+export const cardActionsHeight = cardHeight - cardContentHeight - 2 * cardPadding;
 
 // text highlight colors
 export const highlightBasicColor = '#ECED4B';

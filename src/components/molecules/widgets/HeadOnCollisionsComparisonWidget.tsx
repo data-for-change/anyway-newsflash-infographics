@@ -3,11 +3,12 @@ import PieChartView from '../PieChartView';
 import { IWidgetHeadOnCollisionsComparisonData } from '../../../models/WidgetData';
 import { Box, makeStyles, Theme } from '@material-ui/core';
 import roadNumberIcon from '../../../assets/road90.svg.png';
-import { cardHeight } from '../../../style';
+import { cardContentHeight } from '../../../style';
 
 const ACCIDENT_TYPE = 'desc';
 const COUNT = 'count';
 const MAIN_CONTENT_HEIGHT = 250;
+const SECONDARY_CONTENT_HEIGHT = cardContentHeight - MAIN_CONTENT_HEIGHT ;
 
 interface IProps {
   data: IWidgetHeadOnCollisionsComparisonData;
@@ -33,7 +34,7 @@ const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data }) => {
         </Box>
         <PieChartView data={bigPieData} xLabel={ACCIDENT_TYPE} yLabel={COUNT} />
       </Box>
-      <Box display="flex" height={cardHeight - MAIN_CONTENT_HEIGHT} width={'100%'}>
+      <Box display="flex" height={SECONDARY_CONTENT_HEIGHT} width={'100%'}>
         <PieChartView data={smallPieData} xLabel={ACCIDENT_TYPE} yLabel={COUNT} />
         <Box flexBasis={250}>בכבישים עירוניים (ללא צמתים) בכל הארץ</Box>
       </Box>

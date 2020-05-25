@@ -18,40 +18,51 @@ const renderCustomizedLabel = (props: any) => {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.7;
   const xCountLabel = cx + radius * Math.cos(-midAngle * RADIAN);
   const yCountLabel = cy + radius * Math.sin(-midAngle * RADIAN);
-  const sin = Math.sin(-RADIAN * midAngle);
-  const cos = Math.cos(-RADIAN * midAngle);
-  const sx = cx + outerRadius * cos;
-  const sy = cy + outerRadius * sin;
+  const sin = Math.sin(-RADIAN * midAngle); // if sin >= 0 label is on top half
+  const cos = Math.cos(-RADIAN * midAngle); // if cos >= 0 label is on right half
+  // const sx = cx + outerRadius * cos;
+  // const sy = cy + outerRadius * sin;
   const mx = cx + (outerRadius + 30) * cos;
   const my = cy + (outerRadius + 30) * sin;
-  const ex = mx + (cos >= 0 ? 1 : -1) * 22;
-  const ey = my;
+  const ex = mx + (cos >= 0 ? -1 : -1.5) * 25;
+  const ey = my + (sin >= 0 ? -2 : -1) * 10;
+
+  const textLabelStyle = {
+    fontFamily: fontFamilyString,
+    fontWeight: 700,
+    fontSize: 14,
+    textAlign: 'center' as 'center',
+  };
 
   return (
     <g>
-      <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
-      <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
+      {/* { line with bullet - old style } */}
+      {/* <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
+      <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" /> */}
       <text
         x={xCountLabel}
         y={yCountLabel}
         fill="black"
         textAnchor={xCountLabel > cx ? 'start' : 'end'}
         dominantBaseline="central"
+        fontFamily={fontFamilyString}
       >
         {value}
       </text>
-      <text
+      {/* for text wrapping in svg - use foreignObject
+      make sure to give foreignObject height and width, or inner element will not be displayed
+      https://stackoverflow.com/questions/4991171/auto-line-wrapping-in-svg-text */}
+      <foreignObject
         fontFamily={fontFamilyString}
         fontWeight={700}
         fontSize={14}
-        x={ex + (cos >= 0 ? 1 : -1) * 12}
+        x={ex}
         y={ey}
-        fill="black"
-        textAnchor={'middle'}
-        dominantBaseline="central"
+        height={76}
+        width={60}
       >
-        {name}
-      </text>
+        <div style={textLabelStyle}>{name}</div>
+      </foreignObject>
     </g>
   );
 };
@@ -64,10 +75,8 @@ export const PieChartView: FC<IProps> = ({ data, yLabel, xLabel }) => {
           data={data}
           dataKey={yLabel}
           nameKey={xLabel}
-          cx="50%"
-          cy="50%"
-          outerRadius={90}
-          minAngle={20}
+          outerRadius={'60%'}
+          minAngle={15}
           label={renderCustomizedLabel}
           labelLine={false}
         >
