@@ -9,29 +9,36 @@ import { Box } from '@material-ui/core'
 import {useStore} from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
 import UserProfileHeader from './UserProfileHeader';
+import {makeStyles} from '@material-ui/core/styles';
 
+const useStyles = makeStyles({
+  profileBox:{
+  display:'flex'
+}
+});
 
  const Header: FC = () => {
   const store : RootStore = useStore();
-
+  const classes = useStyles();
   useEffect(()=>{
     store.getUserLoginDetails();
   },[store]);
-  let logElement;
+  //login or logout- depend on authentication state
+  let authElement;
   if(store.isUserAuthenticated){
-    logElement = <UserProfileHeader name={store.userName}/>
+    authElement = <UserProfileHeader name={store.userName}/>
   }
   else{
-    logElement = <div>
+    authElement = <div>
       <LogInLinkGoogle/>
-      <SignInIcon/>
     </div>
   }
   return (
     <AnywayAppBar>
       <Logo src={AnywayImage} alt={'Anyway'} height={'30px'} />
-      <Box >
-        {logElement}
+      <Box className={classes.profileBox} >
+        {authElement}
+        <SignInIcon/>
       </Box>
     </AnywayAppBar>
   );

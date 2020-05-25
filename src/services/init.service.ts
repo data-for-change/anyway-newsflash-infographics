@@ -2,6 +2,7 @@ import axios from 'axios';
 import { fetchNews } from './news.data.service';
 import { fetchDefaultWidgets } from './widgets.data.service';
 import L from 'leaflet';
+import {getServerUrl} from "../utils/utils";
 
 export function initService(): Promise<any> {
   setAxiosDefaults();
@@ -21,7 +22,7 @@ export function initService(): Promise<any> {
 }
 
 function setAxiosDefaults() {
-  axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
+  axios.defaults.baseURL = getServerUrl();
 }
 
 function setLocationMapDefaults() {
