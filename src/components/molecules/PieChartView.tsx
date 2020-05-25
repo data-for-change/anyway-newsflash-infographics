@@ -13,7 +13,7 @@ const COLORS = [red[100], red[200], red[300], red[400], red[500], red[600], red[
 const RADIAN = Math.PI / 180;
 
 const renderCustomizedLabel = (props: any) => {
-  const { cx, cy, midAngle, innerRadius, outerRadius, value, fill, name } = props;
+  const { cx, cy, midAngle, innerRadius, outerRadius, value, /*fill,*/ name } = props;
 
   const radius = innerRadius + (outerRadius - innerRadius) * 0.7;
   const xCountLabel = cx + radius * Math.cos(-midAngle * RADIAN);
