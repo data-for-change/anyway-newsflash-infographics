@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import LocationMap from './LocationMap';
-import { IWidgetMostSevereAccidentsData } from '../../models/WidgetData';
+import LocationMap from '../LocationMap';
+import { IWidgetMostSevereAccidentsData } from '../../../models/WidgetData';
 
 const CENTER = { lat: 32.0853, lng: 34.7818 };
 

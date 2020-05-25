@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import TableView from './TableView';
-import { IWidgetMostSevereAccidentsTableData } from '../../models/WidgetData';
+import TableView from '../TableView';
+import { IWidgetMostSevereAccidentsTableData } from '../../../models/WidgetData';
 
 interface IProps {
   data: IWidgetMostSevereAccidentsTableData

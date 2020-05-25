@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import { getAPIKey } from '../../utils/utils';
+import { getAPIKey } from '../../../utils/utils';
 import ReactStreetview from 'react-streetview';
 import { makeStyles } from '@material-ui/core';
-import { IWidgetStreetViewData } from '../../models/WidgetData';
+import { IWidgetStreetViewData } from '../../../models/WidgetData';
 
 interface IProps {
   data: IWidgetStreetViewData;

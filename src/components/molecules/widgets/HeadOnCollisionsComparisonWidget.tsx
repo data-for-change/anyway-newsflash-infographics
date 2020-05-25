@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import PieChartView from './PieChartView';
-import { IWidgetHeadOnCollisionsComparisonData } from '../../models/WidgetData';
+import PieChartView from '../PieChartView';
+import { IWidgetHeadOnCollisionsComparisonData } from '../../../models/WidgetData';
 import { Box, makeStyles, Theme } from '@material-ui/core';
-import roadNumberIcon from '../../assets/road90.svg.png';
-import { cardHeight } from '../../style';
+import roadNumberIcon from '../../../assets/road90.svg.png';
+import { cardHeight } from '../../../style';
 
 const ACCIDENT_TYPE = 'desc';
 const COUNT = 'count';
