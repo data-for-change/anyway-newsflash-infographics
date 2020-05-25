@@ -4,25 +4,27 @@ import RootStore from '../../store/root.store';
 import { observer } from 'mobx-react-lite';
 import { Grid } from '../atoms';
 import AnyWayCard from '../molecules/AnyWayCard';
-import CountByYearBarWidget from '../molecules/CountByYearBarWidget';
-import CountByTypePieWidget from '../molecules/CountByTypePieWidget';
-import CountInjuredByYearBarWidget from '../molecules/CountInjuredByYearBarWidget';
-import CountBySeverityTextWidget from '../molecules/CountBySeverityTextWidget';
-import CountAccidentsByDayNightPieWidget from '../molecules/CountAccidentsByDayNightPieWidget';
-import StreetViewWidget from '../molecules/StreetViewWidget';
-import StaticImageViewWidget from '../molecules/StaticImageViewWidget';
-import MostSevereAccidentsMapWidget from '../molecules/MostSevereAccidentsMapWidget';
-import MostSevereAccidentsTableWidget from '../molecules/MostSevereAccidentsTableWidget';
+import CountByYearBarWidget from '../molecules/widgets/CountByYearBarWidget';
+import CountByTypePieWidget from '../molecules/widgets/CountByTypePieWidget';
+import CountInjuredByYearBarWidget from '../molecules/widgets/CountInjuredByYearBarWidget';
+import CountBySeverityTextWidget from '../molecules/widgets/CountBySeverityTextWidget';
+import CountAccidentsByDayNightPieWidget from '../molecules/widgets/CountAccidentsByDayNightPieWidget';
+import StreetViewWidget from '../molecules/widgets/StreetViewWidget';
+import StaticImageViewWidget from '../molecules/widgets/StaticImageViewWidget';
+import MostSevereAccidentsMapWidget from '../molecules/widgets/MostSevereAccidentsMapWidget';
+import MostSevereAccidentsTableWidget from '../molecules/widgets/MostSevereAccidentsTableWidget';
+import HeadOnCollisionsComparisonWidget from '../molecules/widgets/HeadOnCollisionsComparisonWidget';
 import HeatMap from '../molecules/HeatMap';
 import ErrorBoundary from '../atoms/ErrorBoundary';
 import { MetaTag } from '../atoms';
-import {Text, TextType} from '../atoms'
+import { Text, TextType } from '../atoms';
+import { Box } from '@material-ui/core';
 
 interface IProps {
   id: number | null;
 }
 
-const getWidgetByType = (widget: any) => {
+const getWidgetByType = (widget: any, segmentText: string) => {
   const { name, data } = widget;
   let widgetComponent;
   switch (name) {
@@ -63,11 +65,15 @@ const getWidgetByType = (widget: any) => {
     case 'accident_count_by_day_night': {
       widgetComponent = <CountAccidentsByDayNightPieWidget data={data} />;
       break;
-	}
-	case 'vision_zero': {
-		widgetComponent = <StaticImageViewWidget data={data} />;
-		break;
-	}
+    }
+    case 'head_on_collisions_comparison': {
+      widgetComponent = <HeadOnCollisionsComparisonWidget data={data} segmetText={segmentText} />;
+      break;
+    }
+    case 'vision_zero': {
+      widgetComponent = <StaticImageViewWidget data={data} />;
+      break;
+    }
     default: {
       widgetComponent = null; // do not create element for unrecognized widget
       console.warn(`widget name (${name}) was not recognize `, widget);
@@ -79,6 +85,7 @@ const getWidgetByType = (widget: any) => {
 
 const WidgetsTemplate: FC<IProps> = ({ id }) => {
   const store: RootStore = useStore();
+
   useEffect(() => {
     if (id) {
       store.selectNewsFlash(id);
@@ -88,21 +95,23 @@ const WidgetsTemplate: FC<IProps> = ({ id }) => {
   const widgetsData = store.newsFlashWidgetsData;
 
   const widgetCards = widgetsData.map((widget, index) => {
-    const widgetComponent = getWidgetByType(widget);
+    const widgetComponent = getWidgetByType(widget, store.newsFlashWidgetsMetaString);
     if (!widgetComponent) {
       return null;
     }
     return (
-      <AnyWayCard key={index} widgetName={widget.name}>
-        <MetaTag>{widget.name}</MetaTag>
-        <ErrorBoundary>{widgetComponent}</ErrorBoundary>
-      </AnyWayCard>
+      <Box m={2} key={index}>
+        <AnyWayCard widgetName={widget.name}>
+          <MetaTag>{widget.name}</MetaTag>
+          <ErrorBoundary>{widgetComponent}</ErrorBoundary>
+        </AnyWayCard>
+      </Box>
     );
   });
 
- const NoDataText = <Text type={TextType.CONTENT_TITLE}>אין נתונים להצגה</Text>
+  const NoDataText = <Text type={TextType.CONTENT_TITLE}>אין נתונים להצגה</Text>;
 
- return  <Grid.Container>{widgetsData && widgetsData.length > 0 ? widgetCards: NoDataText} </Grid.Container>
+  return <Grid.Container>{widgetsData && widgetsData.length > 0 ? widgetCards : NoDataText} </Grid.Container>;
 };
 
 export default observer(WidgetsTemplate);

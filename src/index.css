@@ -27,6 +27,9 @@ p {
   margin: 0;
 }
 
+svg {
+  overflow: visible;
+}
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 12px;

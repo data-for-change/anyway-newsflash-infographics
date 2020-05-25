@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import PieChartView from './PieChartView';
-import { IWidgetCountBySeverityData } from '../../models/WidgetData';
+import PieChartView from '../PieChartView';
+import { IWidgetCountBySeverityData } from '../../../models/WidgetData';
 
 const ACCIDENT_SEVERITY = 'accident_severity';
 const COUNT = 'count';

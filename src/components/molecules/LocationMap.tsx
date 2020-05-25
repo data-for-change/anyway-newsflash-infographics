@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Map } from 'react-leaflet';
 import L, { LatLng } from 'leaflet';
-import AnywayMostSevereAccidentsMarker from '../atoms/AnywayMostSevereAccidentsMarker';
+import AnywayMostSevereAccidentsToolTip from '../atoms/AnywayMostSevereAccidentsToolTip';
 import AnywayMarker from '../atoms/AnywayMarker'
 import { getAPIKey, uniquePoints } from '../../utils/utils';
 import { IPoint } from '../../models/Point';
@@ -26,8 +26,8 @@ const LocationMap: FC<IProps> = ( { items, center } ) => {
 
       return (
         <div key={i}>
-          <AnywayMostSevereAccidentsMarker markerdata={x} markerside={toolTipRight} />;
-          <AnywayMarker markerdata={x} />;
+          <AnywayMostSevereAccidentsToolTip markerdata={x} markerside={toolTipRight} />
+          <AnywayMarker markerdata={x} />
         </div>
       );
     }

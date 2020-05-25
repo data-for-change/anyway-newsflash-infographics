@@ -99,7 +99,7 @@ export default {
           },
         ],
         text: {
-          title: 'תאונות קטלניות בכביש 90: מקטע מצפה שלם - צומת שדי תרומות'
+          title: 'תאונות קטלניות בכביש 90: מקטע מצפה שלם - צומת שדי תרומות',
         },
       },
     },
@@ -343,6 +343,23 @@ export default {
           { day_night: 'לילה', count: 19 },
         ],
         text: { title: 'כמות תאונות ביום ובלילה' },
+      },
+    },
+    {
+      name: 'head_on_collisions_comparison',
+      rank: 10,
+      data: {
+        items: {
+          all_roads_fatal_accidents: [
+            { desc: 'התנגשות חזית בחזית', count: 61 },
+            { desc: 'תאונות אחרות', count: 39 },
+          ],
+          specific_road_segment_fatal_accidents: [
+            { desc: 'התנגשות חזית בחזית', count: 21 },
+            { desc: 'תאונות אחרות', count: 79 },
+          ],
+        },
+        text: { title: 'תאונות קטלניות ע"פ סוג (2015-2019)' },
       },
     },
     {

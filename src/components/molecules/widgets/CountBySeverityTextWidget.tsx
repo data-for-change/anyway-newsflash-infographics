@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { WidgetCountBySeverityTextData } from '../../models/WidgetData';
-import TextView from './TextView';
+import { WidgetCountBySeverityTextData } from '../../../models/WidgetData';
+import TextView from '../TextView';
 
 interface IProps {
   data: WidgetCountBySeverityTextData;

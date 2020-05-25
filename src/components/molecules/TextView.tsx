@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { WidgetCountBySeverityTextData } from '../../models/WidgetData';
 import { Text, TextType } from '../atoms';
-import { Theme, makeStyles, Avatar } from '@material-ui/core';
+import { Theme, makeStyles } from '@material-ui/core';
 import roadNumberIcon from '../../assets/road90.svg.png';
 import { highlightBasicColor, highlightDarkColor, highlightAlertColor, highlightWarnColor } from '../../style';
 
@@ -14,8 +14,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     height: '100%',
     justifyContent: 'space-evenly',
-    padding: '5px',
-    borderRadius: '10px',
     letterSpacing: 1,
     '& span': {
       marginLeft: 10,
@@ -55,7 +53,7 @@ const TextView: FC<IProps> = ({ data }) => {
   const { items } = data;									  
   return (
     <div className={classes.root}>
-      <Avatar variant="square" alt="Road Number" src={roadNumberIcon} className={classes.large} />
+      <img alt="Road Number" src={roadNumberIcon} className={classes.large} />
       <Text type={TextType.WIDGET_TITLE}>
         <span className={classes.mainText}>
           <span>בין השנים</span>
