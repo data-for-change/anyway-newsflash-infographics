@@ -14,8 +14,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     height: '100%',
     justifyContent: 'space-evenly',
-    padding: '5px',
-    borderRadius: '10px',
     letterSpacing: 1,
     '& span': {
       marginLeft: 10,

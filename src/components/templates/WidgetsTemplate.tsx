@@ -4,16 +4,16 @@ import RootStore from '../../store/root.store';
 import { observer } from 'mobx-react-lite';
 import { Grid } from '../atoms';
 import AnyWayCard from '../molecules/AnyWayCard';
-import CountByYearBarWidget from '../molecules/CountByYearBarWidget';
-import CountByTypePieWidget from '../molecules/CountByTypePieWidget';
-import CountInjuredByYearBarWidget from '../molecules/CountInjuredByYearBarWidget';
-import CountBySeverityTextWidget from '../molecules/CountBySeverityTextWidget';
-import CountAccidentsByDayNightPieWidget from '../molecules/CountAccidentsByDayNightPieWidget';
-import StreetViewWidget from '../molecules/StreetViewWidget';
-import StaticImageViewWidget from '../molecules/StaticImageViewWidget';
-import MostSevereAccidentsMapWidget from '../molecules/MostSevereAccidentsMapWidget';
-import MostSevereAccidentsTableWidget from '../molecules/MostSevereAccidentsTableWidget';
-import HeadOnCollisionsComparisonWidget from '../molecules/HeadOnCollisionsComparisonWidget';
+import CountByYearBarWidget from '../molecules/widgets/CountByYearBarWidget';
+import CountByTypePieWidget from '../molecules/widgets/CountByTypePieWidget';
+import CountInjuredByYearBarWidget from '../molecules/widgets/CountInjuredByYearBarWidget';
+import CountBySeverityTextWidget from '../molecules/widgets/CountBySeverityTextWidget';
+import CountAccidentsByDayNightPieWidget from '../molecules/widgets/CountAccidentsByDayNightPieWidget';
+import StreetViewWidget from '../molecules/widgets/StreetViewWidget';
+import StaticImageViewWidget from '../molecules/widgets/StaticImageViewWidget';
+import MostSevereAccidentsMapWidget from '../molecules/widgets/MostSevereAccidentsMapWidget';
+import MostSevereAccidentsTableWidget from '../molecules/widgets/MostSevereAccidentsTableWidget';
+import HeadOnCollisionsComparisonWidget from '../molecules/widgets/HeadOnCollisionsComparisonWidget';
 import HeatMap from '../molecules/HeatMap';
 import ErrorBoundary from '../atoms/ErrorBoundary';
 import { MetaTag } from '../atoms';
@@ -100,8 +100,8 @@ const WidgetsTemplate: FC<IProps> = ({ id }) => {
       return null;
     }
     return (
-      <Box m={2}>
-        <AnyWayCard key={index} widgetName={widget.name}>
+      <Box m={2} key={index}>
+        <AnyWayCard widgetName={widget.name}>
           <MetaTag>{widget.name}</MetaTag>
           <ErrorBoundary>{widgetComponent}</ErrorBoundary>
         </AnyWayCard>

@@ -8,7 +8,7 @@ import { Logo } from '../atoms/Logo';
 import LamasImage from '../../assets/cbs.png';
 import AnywayImage from '../../assets/anyway.png';
 import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
-import { fontFamilyString, cardWidth, cardHeight } from '../../style';
+import { fontFamilyString, cardWidth, cardHeight, cardPadding, cardContentHeight, cardActionsHeight } from '../../style';
 
 interface IProps {
   widgetName: string;
@@ -20,17 +20,21 @@ const useStyles = makeStyles({
     position: 'relative', // for meta tags
     width: cardWidth,
     height: cardHeight,
-    padding: '16px',
+    padding: cardPadding,
     backgroundImage: `url(${RoadImage})`,
     boxSizing: 'border-box',
   },
-  dimension: {
-    width: '100%',
-    height: '90%',
+  content: {
+    height: cardContentHeight,
+    boxSizing: 'border-box',
     padding: 0,
   },
-  space: {
+  actions: {
+    boxSizing: 'border-box',
+    height: cardActionsHeight,
+    padding: 0,
     justifyContent: 'space-between',
+    alignItems: 'flex-end',
   },
   logoSpace: {
     display: 'inline',
@@ -54,8 +58,8 @@ const AnyWayCard: FC<IProps> = ({ widgetName, children }) => {
 
   return (
     <Card ref={widget} className={classes.root} variant="outlined">
-      <CardContent className={classes.dimension}>{children}</CardContent>
-      <CardActions className={classes.space}>
+      <CardContent className={classes.content}>{children}</CardContent>
+      <CardActions className={classes.actions}>
         <AnyWayButton className={classes.button} disableRipple={true} onClick={imgDownloadHandler}>
           <GetAppOutlinedIcon />
         </AnyWayButton>
