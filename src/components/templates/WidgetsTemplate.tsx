@@ -17,7 +17,7 @@ import HeadOnCollisionsComparisonWidget from '../molecules/widgets/HeadOnCollisi
 import HeatMap from '../molecules/HeatMap';
 import ErrorBoundary from '../atoms/ErrorBoundary';
 import { MetaTag } from '../atoms';
-import {Text, TextType} from '../atoms'
+import { Text, TextType } from '../atoms';
 import { Box } from '@material-ui/core';
 
 interface IProps {
@@ -65,15 +65,15 @@ const getWidgetByType = (widget: any, segmentText: string) => {
     case 'accident_count_by_day_night': {
       widgetComponent = <CountAccidentsByDayNightPieWidget data={data} />;
       break;
-	}
+    }
     case 'head_on_collisions_comparison': {
-      widgetComponent = <HeadOnCollisionsComparisonWidget data={data} segmetText={segmentText}/>;
+      widgetComponent = <HeadOnCollisionsComparisonWidget data={data} segmetText={segmentText} />;
       break;
-	}
-	case 'vision_zero': {
-		widgetComponent = <StaticImageViewWidget data={data} />;
-		break;
-	}
+    }
+    case 'vision_zero': {
+      widgetComponent = <StaticImageViewWidget data={data} />;
+      break;
+    }
     default: {
       widgetComponent = null; // do not create element for unrecognized widget
       console.warn(`widget name (${name}) was not recognize `, widget);
@@ -109,9 +109,9 @@ const WidgetsTemplate: FC<IProps> = ({ id }) => {
     );
   });
 
- const NoDataText = <Text type={TextType.CONTENT_TITLE}>אין נתונים להצגה</Text>
+  const NoDataText = <Text type={TextType.CONTENT_TITLE}>אין נתונים להצגה</Text>;
 
- return  <Grid.Container>{widgetsData && widgetsData.length > 0 ? widgetCards: NoDataText} </Grid.Container>
+  return <Grid.Container>{widgetsData && widgetsData.length > 0 ? widgetCards : NoDataText} </Grid.Container>;
 };
 
 export default observer(WidgetsTemplate);
