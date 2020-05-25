@@ -24,7 +24,7 @@ interface IProps {
   id: number | null;
 }
 
-const getWidgetByType = (widget: any) => {
+const getWidgetByType = (widget: any, segmentText: string) => {
   const { name, data } = widget;
   let widgetComponent;
   switch (name) {
@@ -67,7 +67,7 @@ const getWidgetByType = (widget: any) => {
       break;
 	}
     case 'head_on_collisions_comparison': {
-      widgetComponent = <HeadOnCollisionsComparisonWidget data={data} />;
+      widgetComponent = <HeadOnCollisionsComparisonWidget data={data} segmetText={segmentText}/>;
       break;
 	}
 	case 'vision_zero': {
@@ -95,7 +95,7 @@ const WidgetsTemplate: FC<IProps> = ({ id }) => {
   const widgetsData = store.newsFlashWidgetsData;
 
   const widgetCards = widgetsData.map((widget, index) => {
-    const widgetComponent = getWidgetByType(widget);
+    const widgetComponent = getWidgetByType(widget, store.newsFlashWidgetsMetaString);
     if (!widgetComponent) {
       return null;
     }
