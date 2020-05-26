@@ -97,7 +97,7 @@ A standard procedure for working on an issue would be to:
 6. Push branch and open PR to `development`.
 7. Get a code review approval / reject
 8. After approval, merge your PR
-9. github will automatically delete the branch, after the merge is done. (they can still be restored).
+9. GitHub will automatically delete the branch, after the merge is done. (they can still be restored).
 
 ### Server code
 We have app server (written in [express](https://expressjs.com/), a node.js-based framework) which supports 2 functions:
