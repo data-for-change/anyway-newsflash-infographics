@@ -10,12 +10,12 @@
 1.[ Want to help? ](#help)
 1.[ Diving in ](#diving)
 1.[ Technical Overview ](#technical-overview)
- 1.1. [3nd party libraries](#2nd-party-libraries)
+    1. [3nd party libraries](#2nd-party-libraries)
 1. [ Project directory structure ](#directory-structure)
-1. [ Contribution Guidelines ](#contribution-guidelines)<br/>
- 1.1. [Branch naming](#branch-naming)<br/>
- 1.1. [Pull request naming](#pr-naming)<br/>
- 1.1. [Opening issues](#issues)
+1. [ Contribution Guidelines ](#contribution-guidelines)
+    1. [Branch naming](#branch-naming)
+    1. [Pull request naming](#pr-naming)
+    1. [Opening issues](#issues)
 1. [ Server code ](#server-code)
 1. [ Server API ](#server-api)
 1. [ CI/CD ](#cicd)
