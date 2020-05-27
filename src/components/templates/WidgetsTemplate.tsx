@@ -45,8 +45,7 @@ const getWidgetByType = (widget: any, segmentText: string) => {
       break;
     }
     case 'accident_count_by_severity': {
-      //widget wait for data changes from server
-      widgetComponent = <CountBySeverityTextWidget data={data} />;
+      widgetComponent = <CountBySeverityTextWidget data={data} segmentText={segmentText} />;
       break;
     }
     case 'accident_count_by_accident_type': {

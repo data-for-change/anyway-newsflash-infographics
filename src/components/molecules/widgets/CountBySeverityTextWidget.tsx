@@ -4,8 +4,9 @@ import TextView from '../TextView';
 
 interface IProps {
   data: WidgetCountBySeverityTextData;
+  segmentText: string;
 }
-const CountBySeverityTextWidget: FC<IProps> = ({ data }) => {
-  return <TextView data={data} />;
+const CountBySeverityTextWidget: FC<IProps> = ( { data, segmentText }) => {
+  return <TextView data={data} segmentText={segmentText} />;
 };
 export default CountBySeverityTextWidget;
