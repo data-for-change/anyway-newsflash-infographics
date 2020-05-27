@@ -6,24 +6,24 @@
 
 ### Table of Contents
 
-1. [ About the project ](#about)
-2. [ Want to help? ](#help)
-3. [ Diving in ](#diving)
-4. [ Technical Overview ](#technical-overview)
-   4.1. [2nd party libraries](#2nd-party-libraries)
-5. [ Project directory structure ](#directory-structure)
-6. [ Contribution Guidelines ](#contribution-guidelines)
-   6.1. [Branch naming](#branch-naming)
-   6.2. [Pull request naming](#pr-naming)
-   6.3. [Opening issues](#issues)
-7. [ Server code ](#server-code)
-8. [ Server API ](#server-api)
-9. [ CI/CD ](#cicd)
-10. [ Bundle size ](#bundle-size)
-11. [ Git Scripts ](#git-scripts)
-12. [ VScode & prettier ](#formatting)
-13. [ Mock Server ](#mock-server)
-14. [ Available Scripts ](#available-scripts)
+1.[ About the project ](#about)
+1.[ Want to help? ](#help)
+1.[ Diving in ](#diving)
+1.[ Technical Overview ](#technical-overview)
+ 1.1. [3nd party libraries](#2nd-party-libraries)
+1. [ Project directory structure ](#directory-structure)
+1. [ Contribution Guidelines ](#contribution-guidelines)<br/>
+ 1.1. [Branch naming](#branch-naming)<br/>
+ 1.1. [Pull request naming](#pr-naming)<br/>
+ 1.1. [Opening issues](#issues)
+1. [ Server code ](#server-code)
+1. [ Server API ](#server-api)
+1. [ CI/CD ](#cicd)
+1. [ Bundle size ](#bundle-size)
+1. [ Git Scripts ](#git-scripts)
+1. [ VScode & prettier ](#formatting)
+1. [ Mock Server ](#mock-server)
+1. [ Available Scripts ](#available-scripts)
 
 ## About this project: <a id="about"></a>
 
@@ -63,7 +63,7 @@ It is following [Atomic Design](https://bradfrost.com/blog/post/atomic-web-desig
 - Templates and Pages are state-aware
 - Molecules may contain other Molecules or Atoms. Atoms does not contain other Atoms.
 
-2rd Party libraries included: <a id="2nd-party-libraries"></a>
+3rd Party libraries included: <a id="2nd-party-libraries"></a>
 
 - [React Router](https://reacttraining.com/react-router/web/guides/quick-start)
 - [MobX](https://mobx.js.org/) - using [react-mobx-lite](https://github.com/mobxjs/mobx-react-lite) with [hooks](https://mobx-react.js.org/libraries)
