@@ -1,48 +1,79 @@
-[![deploy-development](https://github.com/hasadna/anyway-newsflash-infographics/workflows/deploy-development/badge.svg)](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development)
+<img src="./src/assets/anyway.png" alt="ANYWAY" style="width:auto;height:50px;" align="right" />
 
-[![CI](https://github.com/hasadna/anyway-newsflash-infographics/workflows/CI/badge.svg)](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3ACI)
+[![deploy-development](https://github.com/hasadna/anyway-newsflash-infographics/workflows/deploy-development/badge.svg)](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development) [![CI](https://github.com/hasadna/anyway-newsflash-infographics/workflows/CI/badge.svg)](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3ACI)
 
 # ANYWAY: Newsflash InfoGraphics.
-## About this project:
+
+### Table of Contents
+
+1. [ About the project ](#about)
+2. [ Want to help? ](#help)
+3. [ Diving in ](#diving)
+4. [ Technical Overview ](#technical-overview)
+   4.1. [2nd party libraries](#2nd-party-libraries)
+5. [ Project directory structure ](#directory-structure)
+6. [ Contribution Guidelines ](#contribution-guidelines)
+   6.1. [Branch naming](#branch-naming)
+   6.2. [Pull request naming](#pr-naming)
+   6.3. [Opening issues](#issues)
+7. [ Server code ](#server-code)
+8. [ Server API ](#server-api)
+9. [ CI/CD ](#cicd)
+10. [ Bundle size ](#bundle-size)
+11. [ Git Scripts ](#git-scripts)
+12. [ VScode & prettier ](#formatting)
+13. [ Mock Server ](#mock-server)
+14. [ Available Scripts ](#available-scripts)
+
+## About this project: <a id="about"></a>
+
 Learn more about our [Vision](https://github.com/hasadna/anyway-newsflash-infographics/blob/development/docs/Vision.md)
 
-## Want to help?
+## Want to help? <a id="help"></a>
+
 Want to file a bug, contribute some code, or improve documentation? Excellent! Please follow these steps
+
 ### First thing first
-* Join our [Slack Channel](https://app.slack.com/client/T02G85W3A/CLWT1CLDQ). contact Yuval or Atalya to get invitation.
-* Optional: installing [ZenHub](https://chrome.google.com/webstore/detail/zenhub-for-github/ogcgkffhplmphkaahpmffcafajaocjbd) would make it easier to look at our project [board](https://github.com/hasadna/anyway-newsflash-infographics#workspaces/anyway-5e00f3aa79454c5108bf2370/).
 
-### Diving in
-* For improving documentation:
-    - see issues marked as [documentation](https://github.com/hasadna/anyway-newsflash-infographics/issues?q=is%3Aopen+is%3Aissue+label%3Adocumentation) and contact Yuval for guidance
-    - This is a [good summary](https://medium.com/@kvosswinkel/coding-like-a-journalist-ee52360a16bc) for things to keep in mind when writing technical docs
-* For feature development, bug fixing etc:
-    - Read the [Technical Overview](https://github.com/hasadna/anyway-newsflash-infographics#technical-overview) 
-    and [Project directory structure](https://github.com/hasadna/anyway-newsflash-infographics#project-directory-structure) sections 
-    - Contact one of the project's leaders, which can help you getting into things easily
-    - Select one of the issues marked as [good first issue](https://github.com/hasadna/anyway-newsflash-infographics/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
-    - Read [Contribution Guidelines](https://github.com/hasadna/anyway-newsflash-infographics#contribution-guidelines) before start working on an issue
-* If you have any question - feel free to contact Yuval or Atalya from AnyWAY Project
+- Join our [Slack Channel](https://app.slack.com/client/T02G85W3A/CLWT1CLDQ). contact Yuval or Atalya to get invitation.
+- Optional: installing [ZenHub](https://chrome.google.com/webstore/detail/zenhub-for-github/ogcgkffhplmphkaahpmffcafajaocjbd) would make it easier to look at our project [board](https://github.com/hasadna/anyway-newsflash-infographics#workspaces/anyway-5e00f3aa79454c5108bf2370/).
 
-### Technical Overview
+### Diving in <a id="diving"></a>
+
+- For improving documentation:
+  - see issues marked as [documentation](https://github.com/hasadna/anyway-newsflash-infographics/issues?q=is%3Aopen+is%3Aissue+label%3Adocumentation) and contact Yuval for guidance
+  - This is a [good summary](https://medium.com/@kvosswinkel/coding-like-a-journalist-ee52360a16bc) for things to keep in mind when writing technical docs
+- For feature development, bug fixing etc:
+  - Read the [Technical Overview](https://github.com/hasadna/anyway-newsflash-infographics#technical-overview)
+    and [Project directory structure](https://github.com/hasadna/anyway-newsflash-infographics#project-directory-structure) sections
+  - Contact one of the project's leaders, which can help you getting into things easily
+  - Select one of the issues marked as [good first issue](https://github.com/hasadna/anyway-newsflash-infographics/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
+  - Read [Contribution Guidelines](https://github.com/hasadna/anyway-newsflash-infographics#contribution-guidelines) before start working on an issue
+- If you have any question - feel free to contact Yuval or Atalya from AnyWAY Project
+
+### Technical Overview <a id="technical-overview"></a>
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 It is following [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) guidelines with the following changes:
-* There are no "Organisms" components.
-* Atoms and Molecules are not state-aware (do not know MobX store exist)
-* Templates and Pages are state-aware
-* Molecules may contain other Molecules or Atoms. Atoms does not contain other Atoms.
 
-2rd Party libraries included:
-* [React Router](https://reacttraining.com/react-router/web/guides/quick-start)
-* [MobX](https://mobx.js.org/) - using [react-mobx-lite](https://github.com/mobxjs/mobx-react-lite) with [hooks](https://mobx-react.js.org/libraries)
-* [axios](https://github.com/axios/axios)
-* [Storybook](https://storybook.js.org/)
-* [Material-UI](https://material-ui.com/)
-* [React-Vis](https://uber.github.io/react-vis/) - Graphs Data Visualization Components
+- There are no "Organisms" components.
+- Atoms and Molecules are not state-aware (do not know MobX store exist)
+- Templates and Pages are state-aware
+- Molecules may contain other Molecules or Atoms. Atoms does not contain other Atoms.
 
-### Project directory structure
+2rd Party libraries included: <a id="2nd-party-libraries"></a>
+
+- [React Router](https://reacttraining.com/react-router/web/guides/quick-start)
+- [MobX](https://mobx.js.org/) - using [react-mobx-lite](https://github.com/mobxjs/mobx-react-lite) with [hooks](https://mobx-react.js.org/libraries)
+- [axios](https://github.com/axios/axios)
+- [Storybook](https://storybook.js.org/)
+- [Material-UI](https://material-ui.com/)
+- [React-Vis](https://uber.github.io/react-vis/) - Graphs Data Visualization Components
+
+### Project directory structure <a id="directory-structure"></a>
+
 ```
 .
 +-- assets          // images, icons, audio etc.
@@ -51,7 +82,7 @@ It is following [Atomic Design](https://bradfrost.com/blog/post/atomic-web-desig
 |   +-- molecules
 |   +-- organisms
 |   +-- templates
-+-- hooks           // common reusable hooks 
++-- hooks           // common reusable hooks
 +-- models          // typescript interfaces and classes
 +-- pages           // page components
 +-- services        // REST API, websocket, storage etc.
@@ -65,8 +96,10 @@ It is following [Atomic Design](https://bradfrost.com/blog/post/atomic-web-desig
 +-- index.css      // global styles (like fonts or reset/normalize css code)
 ```
 
-### Contribution Guidelines
-Branch naming convention is as following
+### Contribution Guidelines <a id="contribution-guidelines"></a>
+
+Branch naming convention is as following <a id="branch-naming"></a>
+
 ```
 TYPE-ISSUE_ID-DESCRIPTION
 
@@ -74,41 +107,48 @@ examples:
 feat-113-add-newsflash-location-on-map
 fix-114-newsflash-location-not-accurate
 ```
-When `TYPE` can be:
-* **feat** - is a new feature
-* **doc** - documentation only changes
-* **cicd** - changes related to CI/CD system
-* **fix** - a bug fix
-* **refactor** -  code change that neither fixes a bug nor adds a feature
 
-**All PRs must include commit message with the changes description!**
+When `TYPE` can be:
+
+- **feat** - is a new feature
+- **doc** - documentation only changes
+- **cicd** - changes related to CI/CD system
+- **fix** - a bug fix
+- **refactor** - code change that neither fixes a bug nor adds a feature
+
+**All PRs must include commit message with the changes description!** <a id="pr-naming"></a>
 
 Branching system:
-*master* - used for production <br>
-*development* - anything else <br>
-* For the initial start, Use git clone command to download the repository to your computer (With `write` privileges there is no need to fork the repo)
+_master_ - used for production <br>
+_development_ - anything else <br>
+\* For the initial start, Use git clone command to download the repository to your computer (With `write` privileges there is no need to fork the repo)
 
-A standard procedure for working on an issue would be to:
+A standard procedure for working on an issue would be to: <a id="issues"></a>
+
 1. `git pull development`
 2. Create new branch from `development` , like: `refactor-137-making-pie-chart-generic-component`
 3. Work - commit - repeat
 4. Git pull at `development`
-5. On your branch: `git merge development` and solve conflicts if they exist
+5. On your branch: `git merge development` and solve conflicts if they exist
 6. Push branch and open PR to `development`.
 7. Get a code review approval / reject
 8. After approval, merge your PR
 9. GitHub will automatically delete the branch, after the merge is done. (they can still be restored).
 
-### Server code
-We have app server (written in [express](https://expressjs.com/), a node.js-based framework) which supports 2 functions:
-* Cache API requests (from the backend data cluster)
-* Provide user management capabilities
-[Our server repo](https://github.com/hasadna/anyway-newsflash-infographics-backend) 
+### Server code <a id="server-code"></a>
 
-### Server API <a id="serverapi"></a> 
+We have app server (written in [express](https://expressjs.com/), a node.js-based framework) which supports 2 functions:
+
+- Cache API requests (from the backend data cluster)
+- Provide user management capabilities
+  [Our server repo](https://github.com/hasadna/anyway-newsflash-infographics-backend)
+
+### Server API <a id="server-api"></a>
+
 See [API document](https://docs.google.com/document/d/1Hv5ItvwM3z9nn95LjlsYHL-o18V8PgWrrQOKIPiPymU)
 
-### CICD <a id="cicd"></a> 
+### CICD <a id="cicd"></a>
+
 We use [github actions](https://github.com/marketplace?type=actions) for the following flows:
 
 1. [on-push CI](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3ACI) - provide per-PR CI testing
@@ -117,35 +157,41 @@ We use [github actions](https://github.com/marketplace?type=actions) for the fol
 
 Note: see the flows status badge at the top of this file
 
-### About bundle size
+### About bundle size <a id="bundle-size"></a>
+
 Since [Create React App](https://github.com/facebook/create-react-app) uses webpack under the hood,
 You can safely use [named imports](https://stackoverflow.com/questions/36795819/when-should-i-use-curly-braces-for-es6-import/36796281#36796281)
 when working with [Material UI components](https://material-ui.com/guides/minimizing-bundle-size/#how-to-reduce-the-bundle-size).
 
+### Git Scripts <a id="git-scripts"></a> [🔼](#migdalor)
 
-### Git Scripts <a id="gitscripts"></a> [🔼](#migdalor) 
 Git scripts include in `package.json` to make working with git easier:
-* `git:prune` - Remove tracking branches no longer on remote (run it around once a week)
-* `git:merged` -  Lists branches that have been merged into `dev`
 
-### VScode & prettier
+- `git:prune` - Remove tracking branches no longer on remote (run it around once a week)
+- `git:merged` - Lists branches that have been merged into `dev`
+
+### VScode & prettier <a id="formatting"></a>
+
 Our `package.json` already include `prettier` section.
 If you have your own settings for `VScode prettier extension`, make sure to use the project config.
 
 We use `singleQuote` as default. If having trouble with making the VScode extension use single quotes, please use the following config:
+
 ```
 {
   "prettier.jsxSingleQuote": true,
   "javascript.preferences.quoteStyle": "single",
   "typescript.preferences.quoteStyle": "single",
   "prettier.singleQuote": true
-} 
+}
 ```
-## Mock Server 
+
+## Mock Server <a id="mock-server"></a>
+
 Mock server can be found under https://anyway-mock-server.herokuapp.com/api.
 The server caching all responses from each unique request.
 
-## Available Scripts
+## Available Scripts <a name="available-scripts"></a>
 
 In the project directory, you can run:
 
@@ -173,4 +219,5 @@ Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### `npm run sb`
+
 Run [storybook](https://storybook.js.org/docs/configurations/cli-options/#for-start-storybook) locally.
