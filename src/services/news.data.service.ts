@@ -27,7 +27,7 @@ export function fetchNews(source = '', count = 5): Promise<any> {
     query.push(`news_flash_count=${count}`);
   }
   // temporary according to request from Atalya
-  query.push('road_number=90&road_regment_only=true&interurban_only=true');
+  query.push('road_regment_only=true&interurban_only=true');
 
   const url = `${NEWS_FLASH_API}?${query.join('&')}`;
   // return mockHTTPCall<Array<INewsFlash | any>>(newsFlashCollectionData);
