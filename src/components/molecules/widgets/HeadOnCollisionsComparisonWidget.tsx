@@ -12,6 +12,7 @@ const SECONDARY_CONTENT_HEIGHT = cardContentHeight - MAIN_CONTENT_HEIGHT ;
 
 interface IProps {
   data: IWidgetHeadOnCollisionsComparisonData;
+  segmetText: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data }) => {
+const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText}) => {
   const classes = useStyles();
   const bigPieData = data.items.specific_road_segment_fatal_accidents;
   const smallPieData = data.items.all_roads_fatal_accidents;
@@ -35,7 +36,7 @@ const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data }) => {
       <Box display="flex" height={MAIN_CONTENT_HEIGHT} width={'100%'}>
         <Box flexBasis={120} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
           <img alt="Road Number" src={roadNumberIcon} className={classes.roadNumber} />
-          <span className={classes.textHighlight}>בכביש 90 מקטע מצפה שלם - צומת שדי תרומות</span>
+          <span className={classes.textHighlight}>{segmetText}</span>
         </Box>
         <PieChartView data={bigPieData} xLabel={ACCIDENT_TYPE} yLabel={COUNT} />
       </Box>
