@@ -2,7 +2,6 @@ import React, { FC, useCallback } from 'react';
 import { Box, makeStyles } from '@material-ui/core';
 import News from '../organisms/News';
 import { NewsFlashFilterPanel } from '../molecules/NewsFlashFilterPanel';
-import LocationMap from '../molecules/LocationMap';
 import OverlayLoader  from '../molecules/OverlayLoader';
 import { borderColor } from '../../style';
 import { Text, TextType, ErrorBoundary } from '../atoms';
@@ -10,7 +9,7 @@ import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
 import { InfinitScroll } from '../atoms';
-
+import SideBarMap from '../molecules/SideBarMap'
 const INFINITE_SCROLL_FETCH_SIZE = 5;
 
 interface IProps {}
@@ -27,12 +26,11 @@ const SideBar: FC<IProps> = () => {
   const mapTitle = 'מיקום משוער:';
   const location = store.activeNewsFlashLocation;
   const loading = store.newsFlashLoading;
-
   const fetchMoreNewsItems = useCallback(() => {
     console.log('fetchMoreNewsItems');
     store.infiniteFetchLimit(INFINITE_SCROLL_FETCH_SIZE);
   }, [store]);
-  
+
   return (
     <Box display="flex" flexDirection="column" justifyContent="center" alignItems="stretch">
       <Box
@@ -48,7 +46,7 @@ const SideBar: FC<IProps> = () => {
         </ErrorBoundary>
 
         <InfinitScroll onScrollEnd={fetchMoreNewsItems}>
-            <OverlayLoader show={loading}/> 
+            <OverlayLoader show={loading}/>
             <News />
         </InfinitScroll>
       </Box>
@@ -57,9 +55,9 @@ const SideBar: FC<IProps> = () => {
       </Box>
       <Box flexBasis={300} flexShrink={0} px={1} pb={1}>
         {
-          location && 
+          location &&
           <ErrorBoundary>
-            <LocationMap items={[location]} />
+            <SideBarMap items={[location]} />
           </ErrorBoundary>
         }
       </Box>
