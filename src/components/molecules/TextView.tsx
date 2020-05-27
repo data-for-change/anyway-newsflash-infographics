@@ -7,6 +7,7 @@ import { highlightBasicColor, highlightDarkColor, highlightAlertColor, highlight
 
 interface IProps {
   data: WidgetCountBySeverityTextData;
+  segmentText: string;
 }
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -48,9 +49,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: highlightWarnColor,
   },
 }));
-const TextView: FC<IProps> = ({ data }) => {
+const TextView: FC<IProps> = ( { data, segmentText } ) => {
   const classes = useStyles();
-  const { items } = data;									  
+  const { items } = data;
   return (
     <div className={classes.root}>
       <img alt="Road Number" src={roadNumberIcon} className={classes.large} />
@@ -60,7 +61,7 @@ const TextView: FC<IProps> = ({ data }) => {
           <span>{items.end_year} - {items.start_year} </span>
           <br />
           <span>במקטע</span>
-          <span>מצפה שלם - צומת שדי שבכביש 90</span>
+          <span>{ segmentText }</span>
           <span>התרחשו</span>
           <span className={classes.highlightDark}>{items.total_accidents_count}</span>
           <span>תאונות</span>
