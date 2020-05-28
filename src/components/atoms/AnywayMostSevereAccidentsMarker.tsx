@@ -4,6 +4,7 @@ import L from 'leaflet';
 import { Marker } from 'react-leaflet';
 import { makeStyles } from '@material-ui/core';
 import { dateFormat } from '../../utils/time.utils';
+import MapIcon from '../atoms/MapIcon'
 
 interface IProps {
   markerdata: any;
@@ -17,10 +18,11 @@ const useStyles = makeStyles({
   },
   mapLabel: (side) => ({
     position: 'absolute',
-    bottom: '-1px',
     right: side ? -72 : 2,
+    bottom: '0px',
     display: 'flex',
     alignItems: 'center',
+    marginRight: side ? '-15px' : '15px',
     transform: side ? 'scaleX(-1)' : '',
   }),
   mapLabelContent: (side) => ({
@@ -37,12 +39,11 @@ const useStyles = makeStyles({
     display: 'inline-flex',
     borderStyle: 'solid',
     borderWidth: '5px 0 5px 20px',
-    marginRight: '10px',
     borderColor: 'transparent transparent transparent #000000',
   },
 });
-const IconMap = ( { markerData, side }: any ) => {
-  const classes = useStyles( side);
+const IconMap = ({ markerData, side }: any) => {
+  const classes = useStyles(side);
 
   // const { accident_timestamp, accident_severity, accident_type = '' } = markerData;
   // const { accident_timestamp, accident_severity, accident_type = '' } = markerData;
@@ -50,7 +51,7 @@ const IconMap = ( { markerData, side }: any ) => {
 
   // temp: make string short - skip desription
   // const iconText = `${dateFormat(accident_timestamp)} - ${accident_severity}${typeStr}`;
-  const iconText: any = `${ dateFormat( markerData.accident_timestamp ) }`;
+  const iconText: any = `${dateFormat(markerData.accident_timestamp)}`;
 
   return (
     <div className={classes.mapLabel}>
@@ -60,17 +61,20 @@ const IconMap = ( { markerData, side }: any ) => {
   );
 };
 
-const AnywayMostSevereAccidentsMarker: FC<IProps> = ({ markerdata, markerside }) => {
+const AnywayMostSevereAccidentsMarker: FC<IProps> = ( { markerdata, markerside } ) => {
   const { latitude, longitude, accident_severity, accident_timestamp } = markerdata;
   const classes = useStyles();
   const lPoint: L.LatLng = new L.LatLng(latitude, longitude);
   const icon = L.divIcon({
     className: classes.icon,
     html: ReactDOMServer.renderToString(<IconMap side={markerside} markerData={markerdata} />),
-  } );
+  });
 
   return !accident_timestamp && !accident_severity ? null : (
-    <Marker key={`marker-${accident_timestamp}`} icon={icon} position={lPoint} />
+    <>
+      <Marker icon={icon} position={lPoint} />
+      <Marker icon={MapIcon.accidentMarker()} position={lPoint} />
+    </>
   );
 };
 
