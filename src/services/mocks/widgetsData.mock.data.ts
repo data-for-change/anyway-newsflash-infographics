@@ -182,19 +182,7 @@ export default {
       },
     },
     { name: 'street_view', rank: 4, data: { items: { longitude: 35.5879975, latitude: 32.8244321 } } },
-    {
-      name: 'head_on_collisions_comparison',
-      rank: 5,
-      data: {
-        items: {
-          specific_road_segment_fatal_accidents: [{ desc: 'תאונות אחרות', count: 1 }],
-          all_roads_fatal_accidents: [
-            { desc: 'תאונות אחרות', count: 583 },
-            { desc: 'התנגשות חזית בחזית', count: 195 },
-          ],
-        },
-      },
-    },
+ 
     {
       name: 'accident_count_by_accident_type',
       rank: 6,
