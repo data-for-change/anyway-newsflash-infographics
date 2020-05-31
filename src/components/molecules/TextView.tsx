@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const TextView: FC<IProps> = ( { data, segmentText } ) => {
   const classes = useStyles();
   const { items } = data;
+  console.log("items", items)
   return (
     <div className={classes.root}>
       <img alt="Road Number" src={roadNumberIcon} className={classes.large} />
@@ -73,18 +74,27 @@ const TextView: FC<IProps> = ( { data, segmentText } ) => {
       <div>
         <Text type={TextType.WIDGET_CONTENT}>
           <span className={classes.bottomText}>
-            <span className={classes.highlightAlert}>{items.severity_fatal_count}</span>
+			<span className={classes.highlightAlert}>
+				{ items.severity_fatal_count
+				? items.severity_fatal_count
+				: 0 }</span>
             <span>קטלניות</span>
           </span>
         </Text>
         <Text type={TextType.WIDGET_CONTENT}>
           <span className={classes.bottomText}>
-            <span className={classes.highlightWarn}>{items.severity_severe_count}</span>
+            <span className={classes.highlightWarn}>
+				{ items.severity_severe_count
+				? items.severity_severe_count
+				: 0 }</span>
             <span>קשות</span>
           </span>
         </Text>
         <Text type={TextType.WIDGET_CONTENT}>
-          <span className={classes.bottomText}>ו- {items.severity_light_count} קלות</span>
+          <span className={classes.bottomText}>ו- 
+		  { items.severity_light_count
+		  ? items.severity_light_count
+		  : 0 } קלות</span>
         </Text>
       </div>
     </div>
