@@ -57,9 +57,12 @@ const TextView: FC<IProps> = ( { data, segmentText } ) => {
       <img alt="Road Number" src={roadNumberIcon} className={classes.large} />
       <Text type={TextType.WIDGET_TITLE}>
         <span className={classes.mainText}>
-          <span>בין השנים</span>
-          <span>{items.end_year} - {items.start_year} </span>
-          <br />
+		{items.end_year === items.start_year
+		? <><span> בשנה</span>
+			<span>{items.end_year}</span> </>
+		: <><span>בין השנים</span>
+			<span>{items.end_year} - {items.start_year} </span> </>}
+		<br />
           <span>במקטע</span>
           <span>{ segmentText }</span>
           <span>התרחשו</span>
