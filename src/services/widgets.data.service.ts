@@ -1,5 +1,5 @@
 import { defaultWidgetsCollectionData, mockHTTPCall } from './mocks/mock.service';
-import { ILocationData } from '../models/WidgetData';
+import { ILocationData, IWidgetHeadOnCollisionsComparisonData } from '../models/WidgetData';
 import axios from 'axios';
 
 export function fetchDefaultWidgets(): Promise<any> {
@@ -42,15 +42,21 @@ function getVerifiedWidgetsData(widgets: Array<any>) {
     } else {
       isValid = isValid && typeof widget.data.items === 'object'
     }
-    }
-    // TODO
-    // add checks per widget (switch) here
-
-
-    if(!isValid) {
-      console.warn(`Invalid widget ${widget.name} [index: ${index}]: `, widget);
-    }
-    return isValid;
+    // checks per widget
+    switch (widget.name) {
+      case "head_on_collisions_comparison": {
+        const data: IWidgetHeadOnCollisionsComparisonData = {items: widget.data.items};
+        const specificHeadOn = data.items.specific_road_segment_fatal_accidents && data.items.specific_road_segment_fatal_accidents.find(item => item.desc === "התנגשות חזית בחזית");
+        if (specificHeadOn) {
+          isValid = isValid && Number(specificHeadOn.count) > 0;
+        }
+      }
+      break;
+      }
+        if(!isValid){
+          console.warn(`Invalid widget ${widget.name} [index: ${index}]: `, widget);
+        }
+      return isValid;
   });
   return verifiedWidgets;
 }
