@@ -35,12 +35,13 @@ function getVerifiedWidgetsData(widgets: Array<any>) {
     // general structure tests (for all widgets)
     // test name property
     let isValid = widget && widget.name && typeof widget.name === 'string';
-    // test data property
-    isValid = isValid && widget.data
-    if(Array.isArray(widget.data)) {
-      isValid = isValid && widget.data.length > 0;
+    // test data and data.items property
+    isValid = isValid && widget.data && widget.data.items
+    if(Array.isArray(widget.data.items)) {
+      isValid = isValid && widget.data.items.length > 0;
     } else {
-      isValid = isValid && typeof widget.data === 'object'
+      isValid = isValid && typeof widget.data.items === 'object'
+    }
     }
     // TODO
     // add checks per widget (switch) here
