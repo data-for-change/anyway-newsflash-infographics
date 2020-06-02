@@ -91,7 +91,6 @@
     "@types/react-leaflet": "^2.5.1",
     "@types/react-router-dom": "^5.1.5",
     "@types/recharts": "^1.8.10",
-    "eslint-config-prettier": "^6.11.0",
     "husky": "4.2.5",
     "lint-staged": "10.2.6",
     "prettier": "2.0.5"
