@@ -1,6 +1,9 @@
 import L from 'leaflet';
 
-const AnywayMapIcon = ( image: string, iconSize: any, shadow?: string ) => {
+const L_ICON_SIZE = { iconSize: [25, 25], iconAnchor: [10,15], popupAnchor: [0, -4], shadowSize: [41, 41] };
+const iconSize = L_ICON_SIZE;
+
+const AnywayMapIcon = (image: string, shadow?:string) => {
     const icon = new L.Icon({
       iconUrl: image,
       shadowUrl: shadow,

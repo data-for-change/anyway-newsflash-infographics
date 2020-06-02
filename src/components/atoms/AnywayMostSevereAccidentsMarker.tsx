@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import L from 'leaflet';
-import { Marker, Popup } from 'react-leaflet';
+import { Marker } from 'react-leaflet';
 import { makeStyles } from '@material-ui/core';
 import { dateFormat } from '../../utils/time.utils';
 import MapIcon from '../atoms/MapIcon'
@@ -73,15 +73,7 @@ const AnywayMostSevereAccidentsMarker: FC<IProps> = ( { markerdata, markerside }
   return !accident_timestamp && !accident_severity ? null : (
     <>
       <Marker icon={icon} position={lPoint} />
-      <Marker icon={MapIcon.accidentMarker()} position={lPoint}>
-        {
-          <Popup>
-            <div>
-              {markerdata.accident_timestamp}, {markerdata.accident_severity}
-            </div>
-          </Popup>
-        }
-      </Marker>
+      <Marker icon={MapIcon.accidentMarker()} position={lPoint} />
     </>
   );
 };
