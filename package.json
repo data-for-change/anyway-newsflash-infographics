@@ -28,7 +28,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "lint": "eslint . --color --ignore-path .gitignore",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "sb": "start-storybook -p 9009 -s public",
@@ -57,16 +56,6 @@
       "last 1 safari version"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{html, css, scss, stylus, js, jsx, ts, tsx, json, yml, md}": [
-      "prettier --write"
-    ]
-  },
   "devDependencies": {
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-links": "^5.3.19",
@@ -86,8 +75,6 @@
     "@types/react-leaflet": "^2.5.1",
     "@types/react-router-dom": "^5.1.5",
     "@types/recharts": "^1.8.10",
-    "husky": "4.2.5",
-    "lint-staged": "10.2.6",
     "prettier": "2.0.5"
   }
 }
