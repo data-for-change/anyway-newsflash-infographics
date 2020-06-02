@@ -49,23 +49,30 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: highlightWarnColor,
   },
 }));
-const TextView: FC<IProps> = ( { data, segmentText } ) => {
+const TextView: FC<IProps> = ({ data, segmentText }) => {
   const classes = useStyles();
   const { items } = data;
-  console.log("items", items)
   return (
     <div className={classes.root}>
       <img alt="Road Number" src={roadNumberIcon} className={classes.large} />
       <Text type={TextType.WIDGET_TITLE}>
         <span className={classes.mainText}>
-		{items.end_year === items.start_year
-		? <><span> בשנה</span>
-			<span>{items.end_year}</span> </>
-		: <><span>בין השנים</span>
-			<span>{items.end_year} - {items.start_year} </span> </>}
-		<br />
+          {items.end_year === items.start_year ? (
+            <>
+              <span> בשנה</span>
+              <span>{items.end_year}</span>{' '}
+            </>
+          ) : (
+            <>
+              <span>בין השנים</span>
+              <span>
+                {items.end_year} - {items.start_year}{' '}
+              </span>{' '}
+            </>
+          )}
+          <br />
           <span>במקטע</span>
-          <span>{ segmentText }</span>
+          <span>{segmentText}</span>
           <span>התרחשו</span>
           <span className={classes.highlightDark}>{items.total_accidents_count}</span>
           <span>תאונות</span>
@@ -73,28 +80,31 @@ const TextView: FC<IProps> = ( { data, segmentText } ) => {
       </Text>
       <div>
         <Text type={TextType.WIDGET_CONTENT}>
-          <span className={classes.bottomText}>
-			<span className={classes.highlightAlert}>
-				{ items.severity_fatal_count
-				? items.severity_fatal_count
-				: 0 }</span>
-            <span>קטלניות</span>
-          </span>
+          {items.severity_fatal_count && (
+            <span className={classes.bottomText}>
+              <span className={classes.highlightAlert}> {items.severity_fatal_count}</span>
+              <span>קטלניות</span>
+            </span>
+          )}
         </Text>
         <Text type={TextType.WIDGET_CONTENT}>
-          <span className={classes.bottomText}>
-            <span className={classes.highlightWarn}>
-				{ items.severity_severe_count
-				? items.severity_severe_count
-				: 0 }</span>
-            <span>קשות</span>
-          </span>
+          {items.severity_severe_count && (
+            <span className={classes.bottomText}>
+              <span className={classes.highlightWarn}>{items.severity_severe_count}</span>
+              <span>קשות</span>
+            </span>
+          )}
         </Text>
         <Text type={TextType.WIDGET_CONTENT}>
-          <span className={classes.bottomText}>ו- 
-		  { items.severity_light_count
-		  ? items.severity_light_count
-		  : 0 } קלות</span>
+          {items.severity_light_count && (
+            <span className={classes.bottomText}>
+              <span>
+                {(items.severity_fatal_count || items.severity_severe_count) && <span> ו- </span>}
+                {items.severity_light_count}
+              </span>
+              <span>קלות</span>
+            </span>
+          )}
         </Text>
       </div>
     </div>
