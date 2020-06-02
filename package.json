@@ -65,9 +65,6 @@
   "lint-staged": {
     "*.{html, css, scss, stylus, js, jsx, ts, tsx, json, yml, md}": [
       "prettier --write"
-    ],
-    "*.{ts, tsx}": [
-      "eslint"
     ]
   },
   "devDependencies": {
