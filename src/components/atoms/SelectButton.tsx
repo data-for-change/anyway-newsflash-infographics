@@ -23,7 +23,7 @@ const useStyles = makeStyles(() =>
 
 const SelectButton: FC<IProps> = ({ onChange, initialValue }) => {
   const classes = useStyles();
-  const [selectValue, setsSelectValue] = React.useState<string | number>(0);
+  const [selectValue, setsSelectValue] = React.useState<string | number>(5);
   const [open, setOpen] = React.useState(false);
 
   const handleChange = useCallback(
@@ -58,7 +58,6 @@ const SelectButton: FC<IProps> = ({ onChange, initialValue }) => {
             value={selectValue}
             onChange={handleChange}
           >
-            <MenuItem value={0}>הכל</MenuItem>
             <MenuItem value={1}>שנה אחרונה</MenuItem>
             <MenuItem value={3}>3 שנים אחרונות</MenuItem>
             <MenuItem value={5}>5 שנים אחרונות</MenuItem>
