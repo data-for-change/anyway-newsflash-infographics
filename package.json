@@ -85,5 +85,20 @@
     "husky": "4.2.5",
     "lint-staged": "10.2.8",
     "prettier": "2.0.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{html, css, scss, stylus, js, ts, json, yml, md}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{ts, tsx}": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
