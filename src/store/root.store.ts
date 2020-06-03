@@ -18,7 +18,7 @@ const DEFAULT_LOCATION_META = {
     road1: 0,
     road_segment_name: ''
   },
-  location_text: ,
+  location_text: '',
 };
 
 export default class RootStore {
