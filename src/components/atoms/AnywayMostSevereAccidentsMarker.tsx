@@ -4,7 +4,7 @@ import L from 'leaflet';
 import { Marker, Popup } from 'react-leaflet';
 import { makeStyles } from '@material-ui/core';
 import { dateFormat } from '../../utils/time.utils';
-import MapIcon from '../atoms/MapIcon'
+import MapIcon from '../atoms/AnywayMapIcon'
 
 interface IProps {
   markerdata: any;
@@ -42,7 +42,7 @@ const useStyles = makeStyles({
     borderColor: 'transparent transparent transparent #000000',
   },
 });
-const IconMap = ({ markerData, side }: any) => {
+const TooltipIcon = ({ markerData, side }: any) => {
   const classes = useStyles(side);
 
   // const { accident_timestamp, accident_severity, accident_type = '' } = markerData;
@@ -65,15 +65,16 @@ const AnywayMostSevereAccidentsMarker: FC<IProps> = ( { markerdata, markerside }
   const { latitude, longitude, accident_severity, accident_timestamp } = markerdata;
   const classes = useStyles();
   const lPoint: L.LatLng = new L.LatLng(latitude, longitude);
-  const icon = L.divIcon({
+  const tooltipIcon = L.divIcon({
     className: classes.icon,
-    html: ReactDOMServer.renderToString(<IconMap side={markerside} markerData={markerdata} />),
+    html: ReactDOMServer.renderToString(<TooltipIcon side={markerside} markerData={markerdata} />),
   });
+  const icon: L.Icon = MapIcon.getIconBySeverity( 'carIcon', markerdata.accident_severity );
 
   return !accident_timestamp && !accident_severity ? null : (
     <>
-      <Marker icon={icon} position={lPoint} />
-      <Marker icon={MapIcon.accidentMarker()} position={lPoint}>
+      <Marker icon={tooltipIcon} position={lPoint} />
+      <Marker icon={icon} position={lPoint}>
         {
           <Popup>
             <div>

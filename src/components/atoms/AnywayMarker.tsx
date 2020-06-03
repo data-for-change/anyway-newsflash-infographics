@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import L from 'leaflet';
 import { Marker, Popup } from 'react-leaflet';
-import MapIcon from './MapIcon'
+import MapIcon from './AnywayMapIcon'
 
 interface IProps {
   markerdata: any;
@@ -9,7 +9,7 @@ interface IProps {
 
 const AnywayMarker: FC<IProps> = ( { markerdata } ) => {
   const lPoint: L.LatLng = new L.LatLng(markerdata.latitude, markerdata.longitude);
-  const icon: L.Icon = setIconBySeverity( markerdata.accident_severity );
+  const icon: L.Icon = MapIcon.getIconBySeverity( 'standardIcon', markerdata.accident_severity );
   return (
     <Marker position={lPoint} icon={icon}>
       {
@@ -21,12 +21,6 @@ const AnywayMarker: FC<IProps> = ( { markerdata } ) => {
       }
     </Marker>
   );
-};
-const setIconBySeverity = (severity: string) => {
-  if (severity === 'קלה') return MapIcon.yellowMarker();
-  else if (severity === 'קשה') return MapIcon.orangeMarker();
-  // (severity === "קטלנית")
-  else return MapIcon.redMarker();
 };
 
 export default AnywayMarker;
