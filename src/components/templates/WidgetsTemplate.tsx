@@ -15,6 +15,7 @@ import MostSevereAccidentsMapWidget from '../molecules/widgets/MostSevereAcciden
 import MostSevereAccidentsTableWidget from '../molecules/widgets/MostSevereAccidentsTableWidget';
 import HeadOnCollisionsComparisonWidget from '../molecules/widgets/HeadOnCollisionsComparisonWidget';
 import InjuredCountPerAgeGroupPieWidget from '../molecules/widgets/InjuredCountPerAgeGroupPieWidget';
+import AccidentsCountByHourBarWidget from '../molecules/widgets/AccidentsCountByHourBarWidget';
 import HeatMap from '../molecules/HeatMap';
 import ErrorBoundary from '../atoms/ErrorBoundary';
 import { MetaTag } from '../atoms';
@@ -29,6 +30,10 @@ const getWidgetByType = (widget: any, segmentText: string) => {
   const { name, data } = widget;
   let widgetComponent;
   switch ( name ) {
+    case 'accidents_count_by_hour': {
+      widgetComponent = <AccidentsCountByHourBarWidget data={ data } />;
+      break;
+    }
     case 'injured_count_per_age_group': {
       widgetComponent = <InjuredCountPerAgeGroupPieWidget data={data} />;
       break;

@@ -37,6 +37,7 @@ export type IWidgetDataType =
   | IWidgetInjuredByYearData
   | IWidgetAccidentsByYearData
   | IWidgetVisionZeroImageData
+  | IWidgetAccidentsByHourBarData
   | IWidgetMostSevereAccidentsTableData;
 
 export interface ILocationMeta {
@@ -46,6 +47,15 @@ export interface ILocationMeta {
     road_segment_name: string;
   };
   location_text: string;
+}
+export interface IWidgetAccidentsByHourBarData {
+  items: {
+    accident_hour: number;
+    hour: number;
+  }[];
+  text: {
+    title: string;
+  };
 }
 export interface IWidgetInjuredCountPerAgeGroupPieData {
   items: {
@@ -99,12 +109,18 @@ export interface IWidgetAccidentsByYearData {
     accident_year: number;
     count: number;
   }[];
+  text: {
+    title: string;
+  };
 }
 export interface IWidgetInjuredByYearData {
   items: {
     accident_year: number;
     count: number;
   }[];
+  text: {
+    title: string;
+  };
 }
 export interface IWidgetStreetViewData {
   items: IPoint;
