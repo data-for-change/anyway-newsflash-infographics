@@ -409,7 +409,15 @@ export default {
     {
       name: 'injured_count_per_age_group',
       rank: 14,
-      data: { items: { '25-64': 106, '00-14': 14, '15-24': 58, unknown: 6, '65+': 6 } },
+      data: {
+        items: [
+          { age_group: '0 - 14', count: 14},
+          { age_group: '15 - 24', count: 58},
+          { age_group: '25 - 64', count: 106},
+          { age_group: '65+', count: 6},
+          { age_group: 'unknown', count: 6},
+        ],
+      },
     },
     { name: 'vision_zero', rank: 15, data: { items: ['vision_zero_2_plus_1'] } },
   ],
