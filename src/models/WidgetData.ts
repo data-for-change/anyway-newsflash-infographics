@@ -27,6 +27,7 @@ export interface IWidgetBase {
 }
 
 export type IWidgetDataType =
+  | IWidgetInjuredCountPerAgeGroupPieData
   | IWidgetMostSevereAccidentsData
   | IWidgetAccidentsHeatMapData
   | IWidgetAccidentsByDayNightData
@@ -46,13 +47,18 @@ export interface ILocationMeta {
   };
   location_text: string;
 }
-
+export interface IWidgetInjuredCountPerAgeGroupPieData {
+  items: {
+    age_group: string;
+    count: number;
+  }[];
+}
 export interface IWidgetMostSevereAccidentsData {
   items: IPointAccident[];
 }
 export interface IWidgetMostSevereAccidentsTableData {
   items: {
-    accident_year: 2019;
+    accident_year: number;
     date: string;
     hour: string;
     injured_count: number;
@@ -119,13 +125,13 @@ export interface IWidgetAccidentsByDayNightData {
 
 export interface IWidgetHeadOnCollisionsComparisonData {
   items: {
-    all_roads_fatal_accidents: { 
-      desc: string; 
-      count: number; 
+    all_roads_fatal_accidents: {
+      desc: string;
+      count: number;
     }[];
-    specific_road_segment_fatal_accidents: { 
-      desc: string; 
-      count: number; 
+    specific_road_segment_fatal_accidents: {
+      desc: string;
+      count: number;
     }[];
   };
 }
