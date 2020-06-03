@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
 import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-import red from '@material-ui/core/colors/red';
 import { fontFamilyString } from '../../style';
 
 interface IProps {
   data: Array<object>;
   xLabel: string;
   yLabel: string | number;
+  innerRadius?: string
 }
 // hardcoded colors, will be changed
-const COLORS = [red[100], red[200], red[300], red[400], red[500], red[600], red[700], red[800], red[900]];
+const COLORS = ['#b71c1c', '#e53935', '#d90000', '#890505', '#6a6a6a'];
 const RADIAN = Math.PI / 180;
 
 const renderCustomizedLabel = (props: any) => {
@@ -67,7 +67,7 @@ const renderCustomizedLabel = (props: any) => {
   );
 };
 
-export const PieChartView: FC<IProps> = ({ data, yLabel, xLabel }) => {
+export const PieChartView: FC<IProps> = ( { data, yLabel, xLabel, innerRadius } ) => {
   return (
     <ResponsiveContainer width={'100%'} height={'100%'}>
       <PieChart>
@@ -76,6 +76,7 @@ export const PieChartView: FC<IProps> = ({ data, yLabel, xLabel }) => {
           dataKey={yLabel}
           nameKey={xLabel}
           outerRadius={'60%'}
+          innerRadius={innerRadius}
           minAngle={15}
           label={renderCustomizedLabel}
           labelLine={false}
