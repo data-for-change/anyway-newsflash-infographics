@@ -28,6 +28,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "lint": "eslint src/**/*.ts src/**/*.tsx",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "sb": "start-storybook -p 9009 -s public",
