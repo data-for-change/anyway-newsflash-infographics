@@ -29,9 +29,9 @@ interface IProps {
 const getWidgetByType = (widget: any, segmentText: string) => {
   const { name, data } = widget;
   let widgetComponent;
-  switch ( name ) {
+  switch (name) {
     case 'accidents_count_by_hour': {
-      widgetComponent = <AccidentsCountByHourBarWidget data={ data } />;
+      widgetComponent = <AccidentsCountByHourBarWidget data={data} />;
       break;
     }
     case 'injured_count_per_age_group': {
@@ -46,6 +46,10 @@ const getWidgetByType = (widget: any, segmentText: string) => {
       widgetComponent = <MostSevereAccidentsTableWidget data={data} />;
       break;
     }
+    // case 'most_severe_accidents_percentage': {
+    //   widgetComponent = <MostSevereAccidentsPercentageWidget data={data} />;
+    //   break;
+    // }
     case 'accidents_heat_map': {
       widgetComponent = <HeatMap data={data.items} center={{ lat: 32.0853, lng: 34.7818 }} />;
       break;
@@ -58,6 +62,10 @@ const getWidgetByType = (widget: any, segmentText: string) => {
       widgetComponent = <CountBySeverityTextWidget data={data} segmentText={segmentText} />;
       break;
     }
+    // case 'accident_count_by_severity_percentage': {
+    //   widgetComponent = <CountBySeverityPercentageWidget data={data} segmentText={segmentText} />;
+    //   break;
+    // }
     case 'accident_count_by_accident_type': {
       // example of pie widget
       widgetComponent = <CountByTypePieWidget data={data} />;

@@ -1,5 +1,5 @@
 import { defaultWidgetsCollectionData, mockHTTPCall } from './mocks/mock.service';
-import { ILocationData } from '../models/WidgetData';
+import { ILocationData, IWidgetBase } from '../models/WidgetData';
 import axios from 'axios';
 
 export function fetchDefaultWidgets(): Promise<any> {
@@ -22,7 +22,8 @@ export const fetchWidgets = async (id: number, yearAgo?: number): Promise<any | 
     const verifiedData = {
       meta: response.data.meta,
       widgets: getVerifiedWidgetsData(response.data.widgets),
-    }
+    };
+    verifiedData.widgets = addWidgetsVariants(verifiedData.widgets);
     return verifiedData;
   } catch (error) {
     console.log(error);
@@ -36,20 +37,32 @@ function getVerifiedWidgetsData(widgets: Array<any>) {
     // test name property
     let isValid = widget && widget.name && typeof widget.name === 'string';
     // test data property
-    isValid = isValid && widget.data
-    if(Array.isArray(widget.data)) {
+    isValid = isValid && widget.data;
+    if (Array.isArray(widget.data)) {
       isValid = isValid && widget.data.length > 0;
     } else {
-      isValid = isValid && typeof widget.data === 'object'
+      isValid = isValid && typeof widget.data === 'object';
     }
     // TODO
     // add checks per widget (switch) here
-
-
-    if(!isValid) {
+    if (!isValid) {
       console.warn(`Invalid widget ${widget.name} [index: ${index}]: `, widget);
     }
     return isValid;
   });
   return verifiedWidgets;
+}
+
+// for future use
+function addWidgetsVariants(widgets: Array<IWidgetBase>) {
+  const index = widgets.findIndex((w) => !w.name.includes('_percentage'));
+  if (index >= 0) {
+    // create variant
+    const widget = widgets[index];
+    const widgetVariant = { ...widget };
+    widgetVariant.name = widget.name + '_percentage';
+    // add variant after original widget
+    widgets = widgets.splice(1, 0, widgetVariant);
+  }
+  return widgets;
 }
