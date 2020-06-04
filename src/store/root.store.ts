@@ -57,6 +57,7 @@ export default class RootStore {
 
   @computed
   get newsFlashWidgetsMetaString(): string {
+    if (!this.newsFlashWidgetsMeta.location_info) return '';
     let { resolution, road1, road_segment_name } = this.newsFlashWidgetsMeta.location_info;
     return `${resolution ? resolution : ''} ${road1 ? road1 : ''} ${road_segment_name ? road_segment_name : ''}`;
   }
