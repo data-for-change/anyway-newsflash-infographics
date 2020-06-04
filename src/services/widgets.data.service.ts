@@ -55,7 +55,7 @@ function getVerifiedWidgetsData(widgets: Array<any>) {
 
 // for future use
 function addWidgetsVariants(widgets: Array<IWidgetBase>) {
-  const index = widgets.findIndex((w) => !w.name.includes('_percentage'));
+  const index = widgets.findIndex((w) => w.name === 'head_on_collisions_comparison');
   if (index >= 0) {
     // create variant
     const widget = widgets[index];
