@@ -1,13 +1,14 @@
 import { saveAs } from 'file-saver';
 import html2canvas from 'html2canvas';
 import domtoimage from 'dom-to-image';
-import { cardHeight } from '../style';
+import { cardHeight, cardWidth } from '../style';
+
+const SCALE = 2;
 
 const widgetToImage = (fileName: string, widgetElement: HTMLElement) => {
   const containMap = widgetElement.querySelector('canvas, .leaflet-container');
   console.log(`Download image using ${containMap ? 'Html2Canvas' : 'DomToImage'}`);
-  
-  if(containMap) {
+  if (containMap) {
     usingHtml2Canvas(fileName, widgetElement);
   } else {
     usingDomToImage(fileName, widgetElement);
@@ -34,8 +35,21 @@ const usingHtml2Canvas = (fileName: string, widgetElement: HTMLElement) => {
 // Uses canvas. OK for Html/SVG, buggy for maps
 // https://github.com/tsayen/dom-to-image
 const usingDomToImage = (fileName: string, widgetElement: HTMLElement) => {
+  const filter = (widgetElement: any) => {
+    return widgetElement.tagName !== 'BUTTON';
+  };
+  const style = {
+    transform: `scale(${SCALE})`,
+    transformOrigin: '100% 0%',
+    borderRadius: '4px',
+  };
   domtoimage
-    .toBlob(widgetElement, { height: cardHeight })
+    .toBlob(widgetElement, {
+      height: cardHeight * SCALE,
+      width: cardWidth * SCALE,
+      filter: filter,
+      style,
+    })
     .then(function (blob: any) {
       window.saveAs(blob, `${fileName}.png`);
     });
