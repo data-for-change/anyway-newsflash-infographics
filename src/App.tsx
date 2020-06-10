@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
 import { Footer } from './components/templates/Footer';
 import { Box, createStyles, makeStyles, Theme, ThemeProvider } from '@material-ui/core';
 import { StoreContext, useStore } from './store/storeConfig';
@@ -38,7 +37,6 @@ const App: React.FC = () => {
               <Route exact path="/" component={HomePage} />
               <Route path='/popup-redirect' component = {PopUpRedirect}></Route>
               <Route path="/newsflash/:id" component={HomePage} />
-              <Route path="/about" component={AboutPage} />
             </Switch>
           </Box>
           <Box height={footerHeight} display="flex">
