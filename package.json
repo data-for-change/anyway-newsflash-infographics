@@ -28,6 +28,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "lint": "eslint src/**/*.ts src/**/*.tsx",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "sb": "start-storybook -p 9009 -s public",
@@ -43,7 +44,9 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app"
+      "react-app",
+      "prettier",
+      "prettier/react"
     ]
   },
   "browserslist": {
@@ -77,10 +80,23 @@
     "@types/react-leaflet": "^2.5.0",
     "@types/react-router-dom": "^5.1.3",
     "@types/recharts": "^1.8.9",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.11.0",
+    "eslint": "6.8.0",
+    "eslint-config-prettier": "6.11.0",
     "husky": "4.2.5",
-    "lint-staged": "10.2.6",
+    "lint-staged": "10.2.8",
     "prettier": "2.0.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix"
+    ],
+    "*.{html,css,scss,stylus,js,ts,tsx,json,yml,md}": [
+      "prettier --write"
+    ]
   }
 }
