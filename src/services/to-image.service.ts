@@ -1,7 +1,9 @@
 import { saveAs } from 'file-saver';
 import html2canvas from 'html2canvas';
 import domtoimage from 'dom-to-image';
-import { cardHeight } from '../style';
+import { cardHeight, cardWidth } from '../style';
+
+const SCALE = 2;
 
 const removeMapControllers = (el: HTMLDocument) => {
   const elementList = el.querySelectorAll(
@@ -24,6 +26,7 @@ const usingHtml2Canvas = (fileName: string, widgetElement: HTMLElement) => {
   html2canvas(widgetElement, {
     useCORS: true, // to allow loading maps
     imageTimeout: 3000,
+    scale: SCALE,
     onclone: (el) => removeMapControllers(el),
   })
     .then(function (canvas) {
@@ -40,9 +43,21 @@ const usingDomToImage = (fileName: string, widgetElement: HTMLElement) => {
   const filter = (widgetElement: any) => {
     return widgetElement.tagName !== 'BUTTON';
   };
-  domtoimage.toBlob(widgetElement, { height: cardHeight, filter: filter }).then(function (blob: any) {
-    window.saveAs(blob, `${fileName}.png`);
-  });
+  const style = {
+    transform: `scale(${SCALE})`,
+    transformOrigin: '100% 0%',
+    borderRadius: '4px',
+  };
+  domtoimage
+    .toBlob(widgetElement, {
+      height: cardHeight * SCALE,
+      width: cardWidth * SCALE,
+      filter: filter,
+      style,
+    })
+    .then(function (blob: any) {
+      window.saveAs(blob, `${fileName}.png`);
+    });
 };
 
 export default widgetToImage;
