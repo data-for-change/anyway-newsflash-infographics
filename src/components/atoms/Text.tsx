@@ -23,7 +23,7 @@ const Text: FC<IProps> = ({ type, children }) => {
   switch (type) {
     case TextType.PAGE_TITLE:
       return (
-        <Typography variant="body1" component="h1">
+        <Typography variant="h4" component="h1">
           {children}
         </Typography>
       )
