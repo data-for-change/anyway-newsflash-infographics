@@ -13,12 +13,13 @@ const useStyles = makeStyles({
     width: cardWidth
   },
   bar: {
-    height: '24px',
+    height: 'inherit',
     display: 'flex',
+    flexDirection: 'row',
     width: 'inherit',
     color: highlightDarkColor,
-    padding: '16px 0',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   close: {
     color: closeButtonColor,
@@ -39,7 +40,9 @@ const SectionDialog: FC<IProps> = ({title, children}) => {
         <Box className={classes.dialog}>
           <AnywayAppBar>
             <Box className={classes.bar}>
+              <>
               {title}
+              </>
               <IconButton onClick={toggle} className={classes.close}>
                 <CloseIcon>close the dialog</CloseIcon>
               </IconButton>
