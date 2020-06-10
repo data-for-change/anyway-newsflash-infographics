@@ -23,7 +23,6 @@ const useStyles = makeStyles({
     flexGrow: 1,
     display: 'flex',
     alignItems: 'center',
-    paddingRight: '150px',
     border: `1px solid ${borderColor}`,
   },
 });
