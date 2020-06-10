@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import MaterialDialog from '@material-ui/core/Dialog';
 
 interface IProps {
