@@ -54,7 +54,7 @@ const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText }) => {
         {isCountZero ? (
           <Box className={classes.countZeroBox}>
             <Text type={TextType.WIDGET_CONTENT}>
-              <span className={classes.countZeroText}>בקטע כביש זה לא התרחשו תאונות</span>
+              <span className={classes.countZeroText}>חסרים נתונים</span>
             </Text>
           </Box>
         ) : (
