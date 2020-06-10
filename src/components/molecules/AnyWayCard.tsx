@@ -8,7 +8,14 @@ import { Logo } from '../atoms/Logo';
 import LamasImage from '../../assets/cbs.png';
 import AnywayImage from '../../assets/anyway.png';
 import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
-import { fontFamilyString, cardWidth, cardHeight, cardPadding, cardContentHeight, cardActionsHeight } from '../../style';
+import {
+  fontFamilyString,
+  cardWidth,
+  cardHeight,
+  cardPadding,
+  cardContentHeight,
+  cardActionsHeight,
+} from '../../style';
 
 interface IProps {
   widgetName: string;
@@ -33,12 +40,15 @@ const useStyles = makeStyles({
     boxSizing: 'border-box',
     height: cardActionsHeight,
     padding: 0,
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'flex-end',
   },
   logoSpace: {
     display: 'inline',
     margin: '10px',
+  },
+  logoContainer: {
+    marginRight: 'auto',
   },
   button: {
     '&:hover': {
@@ -51,7 +61,7 @@ const AnyWayCard: FC<IProps> = ({ widgetName, children }) => {
   const classes = useStyles();
   const widget = useRef<HTMLDivElement>(null);
   const imgDownloadHandler = () => {
-    if(widget && widget.current) {
+    if (widget && widget.current) {
       widgetToImage(widgetName, widget.current);
     }
   };
@@ -63,7 +73,7 @@ const AnyWayCard: FC<IProps> = ({ widgetName, children }) => {
         <AnyWayButton className={classes.button} disableRipple={true} onClick={imgDownloadHandler}>
           <GetAppOutlinedIcon />
         </AnyWayButton>
-        <div>
+        <div className={classes.logoContainer}>
           <div className={classes.logoSpace}>
             <Logo src={LamasImage} alt={'Lamas'} height={'30px'} />
           </div>
