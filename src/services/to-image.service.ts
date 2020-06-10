@@ -21,6 +21,7 @@ const usingHtml2Canvas = (fileName: string, widgetElement: HTMLElement) => {
   html2canvas(widgetElement, {
     useCORS: true, // to allow loading maps
     imageTimeout: 3000,
+    scale: SCALE,
     ignoreElements: (AnyWayButtton) => false,
   })
     .then(function (canvas) {
