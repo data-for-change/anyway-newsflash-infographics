@@ -3,12 +3,20 @@ import logoHasdna from '../../assets/hasadna.png';
 import { makeStyles } from '@material-ui/core/styles';
 import { AnywayLink } from '../atoms/';
 import { Box } from '@material-ui/core';
-import { borderColor } from '../../style';
+import { borderColor, onLinkColor, onLinkColorHover } from '../../style';
+import ThankYouDialog from './ThankYouDialog';
 
 interface IProps {}
 const useStyles = makeStyles({
   logo: {
     height: '30px',
+  },
+  link: {
+    color: `${onLinkColor}`,
+    textDecoration: 'none',
+    '&:hover': {
+      color: `${onLinkColorHover}`,
+    },
   },
   footer: {
     position: 'relative',
@@ -32,11 +40,9 @@ export const Footer: FC<IProps> = () => {
           אודות
         </Box>
       </AnywayLink>
-      <AnywayLink to="/thank-you">
-        <Box p={2} component="span">
-          תודות
-        </Box>
-      </AnywayLink>
+      <Box className={classes.link} p={2} component="span">
+        <ThankYouDialog />
+      </Box>
     </footer>
   );
 };
