@@ -411,11 +411,11 @@ export default {
       rank: 14,
       data: {
         items: [
-          { age_group: '0 - 14', count: 14},
-          { age_group: '15 - 24', count: 58},
-          { age_group: '25 - 64', count: 106},
-          { age_group: '65+', count: 6},
-          { age_group: 'unknown', count: 6},
+          { age_group: '0 - 14', count: 14 },
+          { age_group: '15 - 24', count: 58 },
+          { age_group: '25 - 64', count: 106 },
+          { age_group: '65+', count: 6 },
+          { age_group: 'unknown', count: 6 },
         ],
       },
     },

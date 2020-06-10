@@ -29,9 +29,9 @@ interface IProps {
 const getWidgetByType = (widget: any, segmentText: string) => {
   const { name, data } = widget;
   let widgetComponent;
-  switch ( name ) {
+  switch (name) {
     case 'accidents_count_by_hour': {
-      widgetComponent = <AccidentsCountByHourBarWidget data={ data } />;
+      widgetComponent = <AccidentsCountByHourBarWidget data={data} />;
       break;
     }
     case 'injured_count_per_age_group': {

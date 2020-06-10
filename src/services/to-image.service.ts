@@ -5,6 +5,12 @@ import { cardHeight, cardWidth } from '../style';
 
 const SCALE = 2;
 
+const removeMapControllers = (el: HTMLDocument) => {
+  const elementList = el.querySelectorAll(
+    '.leaflet-control-container, .gmnoprint, .gm-fullscreen-control, .gm-iv-address, .gm-style-cc',
+  );
+  Array.from(elementList).forEach((el) => el.remove());
+};
 const widgetToImage = (fileName: string, widgetElement: HTMLElement) => {
   const containMap = widgetElement.querySelector('canvas, .leaflet-container');
   console.log(`Download image using ${containMap ? 'Html2Canvas' : 'DomToImage'}`);
@@ -14,7 +20,6 @@ const widgetToImage = (fileName: string, widgetElement: HTMLElement) => {
     usingDomToImage(fileName, widgetElement);
   }
 };
-
 // Uses canvas. OK for maps, buggy for other elements
 // https://github.com/niklasvh/html2canvas
 const usingHtml2Canvas = (fileName: string, widgetElement: HTMLElement) => {
@@ -22,7 +27,7 @@ const usingHtml2Canvas = (fileName: string, widgetElement: HTMLElement) => {
     useCORS: true, // to allow loading maps
     imageTimeout: 3000,
     scale: SCALE,
-    ignoreElements: (AnyWayButtton) => false,
+    onclone: (el) => removeMapControllers(el),
   })
     .then(function (canvas) {
       console.log(canvas);
@@ -32,7 +37,6 @@ const usingHtml2Canvas = (fileName: string, widgetElement: HTMLElement) => {
       saveAs(blob, `${fileName}.png`);
     });
 };
-
 // Uses canvas. OK for Html/SVG, buggy for maps
 // https://github.com/tsayen/dom-to-image
 const usingDomToImage = (fileName: string, widgetElement: HTMLElement) => {
