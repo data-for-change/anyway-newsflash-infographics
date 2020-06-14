@@ -1,7 +1,7 @@
-export const roadImage = (roadNumber: number) => {
-
-  let svg = `
-  <svg
+//preparation of svg template - temporary
+const RoadNumberSvgImage = (roadNumber: number) => {
+  return `
+		<svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -51,7 +51,7 @@ export const roadImage = (roadNumber: number) => {
     </g>
   </g>
   <text x="50%" y ="50%" dominant-baseline="middle" text-anchor="middle" font-family="Verdana" font-size="300%" fill="red">${roadNumber}</text>
-</svg>` ;
-
-return svg
-}
+</svg>
+	`;
+};
+export default RoadNumberSvgImage;
