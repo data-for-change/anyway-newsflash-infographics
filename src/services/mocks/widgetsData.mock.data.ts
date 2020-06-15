@@ -1,8 +1,7 @@
 export default {
   meta: {
     location_info: { resolution: 'אחר', road1: 90, road_segment_name: 'צומת טבריה - צומת כפר נחום' },
-    location_text:
-      'בשעה 08:51 התקבל דיווח במוקד 101 של מד"א במרחב ירדן על גבר שככל הנראה התמוטט על רקע רפואי במהלך רחיפה בטרקטורון ממונע, נפל לכנרת וחולץ ע"י סירת דייגים לחוף אמנון',
+    location_text: 'כביש 90 במקטע צומת טבריה - צומת כפר נחום',
   },
   widgets: [
     {
@@ -411,11 +410,11 @@ export default {
       rank: 14,
       data: {
         items: [
-          { age_group: '0 - 14', count: 14},
-          { age_group: '15 - 24', count: 58},
-          { age_group: '25 - 64', count: 106},
-          { age_group: '65+', count: 6},
-          { age_group: 'unknown', count: 6},
+          { age_group: '0 - 14', count: 14 },
+          { age_group: '15 - 24', count: 58 },
+          { age_group: '25 - 64', count: 106 },
+          { age_group: '65+', count: 6 },
+          { age_group: 'unknown', count: 6 },
         ],
       },
     },

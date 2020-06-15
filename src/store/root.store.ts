@@ -8,7 +8,7 @@ import { SourceFilterEnum } from '../models/SourceFilter';
 import { fetchNews } from '../services/news.data.service';
 import SettingsStore from './settings.store';
 import { IPoint } from '../models/Point';
-import {fetchUserLoginStatus} from '../services/user.service';
+import { fetchUserLoginStatus } from '../services/user.service';
 
 // todo: move all map defaults to one place
 const DEFAULT_LOCATION = { latitude: 32.0853, longitude: 34.7818 };
@@ -16,7 +16,7 @@ const DEFAULT_LOCATION_META = {
   location_info: {
     resolution: '',
     road1: 0,
-    road_segment_name: ''
+    road_segment_name: '',
   },
   location_text: '',
 };
@@ -26,7 +26,7 @@ export default class RootStore {
 
   @observable newsFlashCollection: Array<INewsFlash> = [];
   @observable isUserAuthenticated: boolean = false;
-  @observable userName :string = '';
+  @observable userName: string = '';
   @observable activeNewsFlashId: number = 0; // active newsflash id
   @observable newsFlashFetchLimit: number = 0;
   @observable newsFlashWidgetsMeta: ILocationMeta = DEFAULT_LOCATION_META;
@@ -42,12 +42,12 @@ export default class RootStore {
     // init app data
     initService().then((initData) => {
       console.log(initData);
-      if(initData.newsFlashCollection) {
-        this.newsFlashCollection = initData.newsFlashCollection
+      if (initData.newsFlashCollection) {
+        this.newsFlashCollection = initData.newsFlashCollection;
       }
-      if(initData.newsFlashWidgetsData) {
-        this.newsFlashWidgetsData = initData.newsFlashWidgetsData.widgets
-        this.newsFlashWidgetsMeta = initData.newsFlashWidgetsData.meta
+      if (initData.newsFlashWidgetsData) {
+        this.newsFlashWidgetsData = initData.newsFlashWidgetsData.widgets;
+        this.newsFlashWidgetsMeta = initData.newsFlashWidgetsData.meta;
       }
       this.appInitialized = true;
     });
@@ -57,8 +57,8 @@ export default class RootStore {
 
   @computed
   get newsFlashWidgetsMetaString(): string {
-    let { resolution, road1, road_segment_name } = this.newsFlashWidgetsMeta.location_info;
-    return `${resolution ? resolution : ''} ${road1 ? road1 : ''} ${road_segment_name ? road_segment_name : ''}`;
+    let { location_text } = this.newsFlashWidgetsMeta;
+    return location_text ? location_text : '';
   }
 
   @computed
@@ -78,12 +78,10 @@ export default class RootStore {
     return this.newsFlashCollection.find((item) => item.id === this.activeNewsFlashId);
   }
 
-  @action checkuserstatus():void{
-
-  }
+  @action checkuserstatus(): void {}
 
   @action
-  filterNewsFlashCollection (source?: SourceFilterEnum): void {
+  filterNewsFlashCollection(source?: SourceFilterEnum): void {
     this.newsFlashLoading = true;
     fetchNews(source, this.newsFlashFetchLimit).then((data: any) => {
       this.newsFlashLoading = false;
@@ -104,18 +102,19 @@ export default class RootStore {
   }
 
   @action
-  getUserLoginDetails(){
-    fetchUserLoginStatus().then(userData => {
-      this.isUserAuthenticated = userData.authenticated;
-      this.userName = userData.userName;
-    }).catch(err=>console.log(err));
-
+  getUserLoginDetails() {
+    fetchUserLoginStatus()
+      .then((userData) => {
+        this.isUserAuthenticated = userData.authenticated;
+        this.userName = userData.userName;
+      })
+      .catch((err) => console.log(err));
   }
 
   @action
   selectNewsFlash(id: number): void {
     this.activeNewsFlashId = id;
-    this.fetchSelectedNewsFlashWidgets(id, this.newsFlashWidgetsTimerFilter)
+    this.fetchSelectedNewsFlashWidgets(id, this.newsFlashWidgetsTimerFilter);
   }
 
   @action

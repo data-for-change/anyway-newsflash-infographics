@@ -6,7 +6,7 @@ interface IProps {
   data: Array<object>;
   xLabel: string;
   yLabel: string | number;
-  innerRadius?: string
+  innerRadius?: string;
 }
 // hardcoded colors, will be changed
 const COLORS = ['#b71c1c', '#e53935', '#d90000', '#890505', '#6a6a6a'];
@@ -52,22 +52,14 @@ const renderCustomizedLabel = (props: any) => {
       {/* for text wrapping in svg - use foreignObject
       make sure to give foreignObject height and width, or inner element will not be displayed
       https://stackoverflow.com/questions/4991171/auto-line-wrapping-in-svg-text */}
-      <foreignObject
-        fontFamily={fontFamilyString}
-        fontWeight={700}
-        fontSize={14}
-        x={ex}
-        y={ey}
-        height={76}
-        width={60}
-      >
+      <foreignObject fontFamily={fontFamilyString} fontWeight={700} fontSize={14} x={ex} y={ey} height={76} width={60}>
         <div style={textLabelStyle}>{name}</div>
       </foreignObject>
     </g>
   );
 };
 
-export const PieChartView: FC<IProps> = ( { data, yLabel, xLabel, innerRadius } ) => {
+export const PieChartView: FC<IProps> = ({ data, yLabel, xLabel, innerRadius }) => {
   return (
     <ResponsiveContainer width={'100%'} height={'100%'}>
       <PieChart>

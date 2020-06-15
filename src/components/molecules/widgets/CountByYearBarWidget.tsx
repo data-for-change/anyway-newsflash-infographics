@@ -9,7 +9,7 @@ interface IProps {
   data: IWidgetAccidentsByYearData;
 }
 
-const CountByYearBarWidget: FC<IProps> = ( { data } ) => {
+const CountByYearBarWidget: FC<IProps> = ({ data }) => {
   const { items, text } = data;
   return <BarChartView data={items} xLabel={ACCIDENT_YEAR} yLabel={COUNT} textLabel={text.title} />;
 };
