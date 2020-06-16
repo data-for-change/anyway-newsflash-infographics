@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const TextView: FC<IProps> = ({ data, segmentText }) => {
   const classes = useStyles();
   const { items } = data;
+  //checking availability of two or more types
   const isSummaryText =
     [items.severity_fatal_count, items.severity_light_count, items.severity_severe_count].filter(Boolean).length >= 2;
   return (
