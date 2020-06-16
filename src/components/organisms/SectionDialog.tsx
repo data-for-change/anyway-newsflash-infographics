@@ -1,4 +1,4 @@
-import React, { FC, useState} from 'react';
+import React, { FC } from 'react';
 import { Dialog, AnywayAppBar } from '../atoms';
 import { Box, makeStyles, IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
@@ -8,10 +8,10 @@ import { highlightDarkColor, closeButtonColor, cardWidth } from '../../style';
 interface IProps {
   title: string;
   isShowing: boolean;
-  toggle : () => any;
+  toggle: () => any;
 }
 const useStyles = makeStyles({
-  dialog:{
+  dialog: {
     width: cardWidth
   },
   bar: {
