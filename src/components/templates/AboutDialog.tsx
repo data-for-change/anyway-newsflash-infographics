@@ -2,14 +2,18 @@ import React, { FC } from 'react';
 import SectionDialog from '../organisms/SectionDialog';
 import { Text, TextType } from '../atoms';
 
-interface IProps {}
+interface IProps {
+  isShowing: boolean;
+  toggle: () => any;
+}
 
-const AboutDialog: FC<IProps> = () => {
+const AboutDialog: FC<IProps> = ({ isShowing, toggle }) => {
   return (
-    <SectionDialog title="אודות">
+    <SectionDialog title="אודות" isShowing={isShowing} toggle={toggle}>
       <Text type={TextType.CONTENT}>
         <p>
-        האתגר הבא של ANYWAY הוא ליצור גנרטור אוטומטי שישרת ויעצים עיתונאים, בלוגרים, מובילי דעת קהל, מובילי קהילות וכו׳ בעידן עיתונות הדאטה.
+          האתגר הבא של ANYWAY הוא ליצור גנרטור אוטומטי שישרת ויעצים עיתונאים, בלוגרים, מובילי דעת קהל, מובילי קהילות
+          וכו׳ בעידן עיתונות הדאטה.
         </p>
         <p>
           האינפוגרפיקות שיווצרו ישתמשו בנתונים סטטיסטיים על מנת להעשיר את הדיווחים והכתבות. כל אינפוגרפיקה תיווצר במיוחד
