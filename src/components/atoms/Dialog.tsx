@@ -3,12 +3,12 @@ import MaterialDialog from '@material-ui/core/Dialog';
 
 interface IProps {
   isShowing: boolean;
-  onClose: () => any;
+  toggle: () => any;
 }
 
-const Dialog: FC<IProps> = ({ isShowing, onClose, children }) => {
+const Dialog: FC<IProps> = ({ isShowing, toggle, children }) => {
   return (
-    <MaterialDialog open={isShowing} onClose={onClose}>
+    <MaterialDialog open={isShowing} onClose={toggle}>
       {children}
     </MaterialDialog>
   );
