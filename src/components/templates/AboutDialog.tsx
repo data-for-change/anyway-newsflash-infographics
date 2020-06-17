@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import SectionDialog from '../organisms/SectionDialog';
+import DialogWithHeader from '../organisms/DialogWithHeader';
 import { Text, TextType } from '../atoms';
 
 interface IProps {
@@ -9,7 +9,7 @@ interface IProps {
 
 const AboutDialog: FC<IProps> = ({ isShowing, toggle }) => {
   return (
-    <SectionDialog title="אודות" isShowing={isShowing} toggle={toggle}>
+    <DialogWithHeader title="אודות" isShowing={isShowing} toggle={toggle}>
       <Text type={TextType.CONTENT}>
         <p>
           האתגר הבא של ANYWAY הוא ליצור גנרטור אוטומטי שישרת ויעצים עיתונאים, בלוגרים, מובילי דעת קהל, מובילי קהילות
@@ -27,7 +27,7 @@ const AboutDialog: FC<IProps> = ({ isShowing, toggle }) => {
           </a>
         </p>
       </Text>
-    </SectionDialog>
+    </DialogWithHeader>
   );
 };
 

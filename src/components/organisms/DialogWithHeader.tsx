@@ -27,7 +27,7 @@ const useStyles = makeStyles({
     color: closeButtonColor,
   },
 });
-const SectionDialog: FC<IProps> = ({ toggle, isShowing, title, children }) => {
+const DialogWithHeader: FC<IProps> = ({ toggle, isShowing, title, children }) => {
   const classes = useStyles();
   return (
     <Dialog isShowing={isShowing} toggle={toggle}>
@@ -48,4 +48,4 @@ const SectionDialog: FC<IProps> = ({ toggle, isShowing, title, children }) => {
   );
 };
 
-export default SectionDialog;
+export default DialogWithHeader;

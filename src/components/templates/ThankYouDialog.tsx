@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import SectionDialog from '../organisms/SectionDialog';
+import DialogWithHeader from '../organisms/DialogWithHeader';
 import { Text, TextType } from '../atoms';
 
 interface IProps {
@@ -12,12 +12,12 @@ const ThankYouDialog: FC<IProps> = ({ isShowing, toggle }) => {
   const sortedNames = namesArr.sort((a, b) => a.split(' ')[1].localeCompare(b.split(' ')[1], 'he'));
   const names = sortedNames.join(', ');
   return (
-    <SectionDialog isShowing={isShowing} toggle={toggle} title="תודות">
+    <DialogWithHeader isShowing={isShowing} toggle={toggle} title="תודות">
       <Text type={TextType.CONTENT}>
         הפרויקט פותח על ידי:
         <p>{names}</p>
       </Text>
-    </SectionDialog>
+    </DialogWithHeader>
   );
 };
 
