@@ -38,3 +38,13 @@ export const fontFamilyString = [
   'Arial',
   'sans-serif',
 ].join(',');
+
+//road number icon
+//temporary colors && font
+export const roadIconColors = {
+  red: 'red',
+  blue: 'blue',
+  green: 'green',
+  brown: 'brown',
+};
+export const roadIconFont = 'Roboto';
