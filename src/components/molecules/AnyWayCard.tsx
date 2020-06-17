@@ -40,15 +40,10 @@ const useStyles = makeStyles({
     boxSizing: 'border-box',
     height: cardActionsHeight,
     padding: 0,
-    justifyContent: 'flex-end',
     alignItems: 'flex-end',
   },
-  logoSpace: {
-    display: 'inline',
-    margin: '10px',
-  },
-  logoContainer: {
-    marginRight: 'auto',
+  actionsSpace: {
+    flex: 1,
   },
   button: {
     '&:hover': {
@@ -73,12 +68,9 @@ const AnyWayCard: FC<IProps> = ({ widgetName, children }) => {
         <AnyWayButton className={classes.button} disableRipple={true} onClick={imgDownloadHandler}>
           <GetAppOutlinedIcon />
         </AnyWayButton>
-        <div className={classes.logoContainer}>
-          <div className={classes.logoSpace}>
-            <Logo src={LamasImage} alt={'Lamas'} height={'30px'} />
-          </div>
-          <Logo src={AnywayImage} alt={'Anyway'} height={'20px'} />
-        </div>
+        <div className={classes.actionsSpace}></div>
+        <Logo src={LamasImage} alt={'Lamas'} height={'30px'} />
+        <Logo src={AnywayImage} alt={'Anyway'} height={'20px'} />
       </CardActions>
     </Card>
   );
