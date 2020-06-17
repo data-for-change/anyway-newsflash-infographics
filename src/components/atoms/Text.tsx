@@ -23,38 +23,38 @@ const Text: FC<IProps> = ({ type, children }) => {
   switch (type) {
     case TextType.PAGE_TITLE:
       return (
-        <Typography variant="body1" component="h1">
+        <Typography variant="h4" component="h1">
           {children}
         </Typography>
-      )
+      );
 
     case TextType.CONTENT_TITLE:
       return (
         <Typography variant="body1" component="h2">
           {children}
         </Typography>
-      )
+      );
 
     case TextType.CONTENT:
       return (
         <Typography variant="body1" component="p">
           {children}
         </Typography>
-      )
+      );
 
     case TextType.NEWS_FLASH_TITLE:
       return (
         <Typography variant="body1" component="p">
           {children}
         </Typography>
-      )
+      );
 
     case TextType.NEWS_FLASH_CONTENT:
       return (
         <Typography variant="body1" component="p">
           {children}
         </Typography>
-      )
+      );
 
     case TextType.NEWS_FLASH_DATETIME:
       return (
@@ -67,14 +67,14 @@ const Text: FC<IProps> = ({ type, children }) => {
         <Typography variant="body1" component="h2">
           {children}
         </Typography>
-      )
+      );
 
     case TextType.WIDGET_CONTENT:
       return (
         <Typography variant="body1" component="p">
           {children}
         </Typography>
-      )
+      );
     // todo: convert to Typography item
     case TextType.WIDGET_TABLE_TITLE:
       return <h4>{children}</h4>;

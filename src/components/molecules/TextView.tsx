@@ -52,6 +52,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 const TextView: FC<IProps> = ({ data, segmentText }) => {
   const classes = useStyles();
   const { items } = data;
+  //checking availability of two or more types
+  const isSummaryText =
+    [items.severity_fatal_count, items.severity_light_count, items.severity_severe_count].filter(Boolean).length >= 2;
   return (
     <div className={classes.root}>
       <img alt="Road Number" src={roadNumberIcon} className={classes.large} />
@@ -79,33 +82,40 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
         </span>
       </Text>
       <div>
-        <Text type={TextType.WIDGET_CONTENT}>
-          {items.severity_fatal_count && (
-            <span className={classes.bottomText}>
-              <span className={classes.highlightAlert}> {items.severity_fatal_count}</span>
-              <span>קטלניות</span>
-            </span>
-          )}
-        </Text>
-        <Text type={TextType.WIDGET_CONTENT}>
-          {items.severity_severe_count && (
-            <span className={classes.bottomText}>
-              <span className={classes.highlightWarn}>{items.severity_severe_count}</span>
-              <span>קשות</span>
-            </span>
-          )}
-        </Text>
-        <Text type={TextType.WIDGET_CONTENT}>
-          {items.severity_light_count && (
-            <span className={classes.bottomText}>
-              <span>
-                {(items.severity_fatal_count || items.severity_severe_count) && <span> ו- </span>}
-                {items.severity_light_count}
-              </span>
-              <span>קלות</span>
-            </span>
-          )}
-        </Text>
+        {isSummaryText ? (
+          <>
+            <Text type={TextType.WIDGET_CONTENT}>
+              {items.severity_fatal_count ? (
+                <span className={classes.bottomText}>
+                  <span className={classes.highlightAlert}>{items.severity_fatal_count}</span>
+                  <span>{items.severity_fatal_count > 1 ? 'קטלניות' : 'קטלנית'}</span>
+                </span>
+              ) : null}
+            </Text>
+            <Text type={TextType.WIDGET_CONTENT}>
+              {items.severity_severe_count ? (
+                <span className={classes.bottomText}>
+                  <span className={classes.highlightWarn}>
+                    {items.severity_light_count ? null : <span> ו- </span>}
+                    {items.severity_severe_count}
+                  </span>
+                  <span>{items.severity_severe_count > 1 ? 'קשות' : 'קשה'}</span>
+                </span>
+              ) : null}
+            </Text>
+            <Text type={TextType.WIDGET_CONTENT}>
+              {items.severity_light_count ? (
+                <span className={classes.bottomText}>
+                  <span>
+                    {items.severity_fatal_count || items.severity_severe_count ? <span> ו- </span> : null}
+                    {items.severity_light_count}
+                  </span>
+                  <span>{items.severity_light_count > 1 ? 'קלות' : 'קלה'}</span>
+                </span>
+              ) : null}
+            </Text>
+          </>
+        ) : null}
       </div>
     </div>
   );

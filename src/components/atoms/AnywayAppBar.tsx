@@ -18,8 +18,10 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const AnywayAppBar: FC = ({ children }) => {
+const AnywayAppBar: FC = ({ children }) => {
   const classes = useStyles();
 
   return <AppBar className={classes.root}>{children}</AppBar>;
 };
+
+export default AnywayAppBar;
