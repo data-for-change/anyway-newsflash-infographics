@@ -34,7 +34,7 @@ const SectionDialog: FC<IProps> = ({ toggle, isShowing, title, children }) => {
       <Box className={classes.dialog}>
         <AnywayAppBar>
           <Box className={classes.bar}>
-            <>{title}</>
+            {title}
             <IconButton className={classes.close}>
               <CloseIcon>close the dialog</CloseIcon>
             </IconButton>
