@@ -21,7 +21,6 @@ const useStyles = makeStyles({
     },
     justifyContent: 'space-evenly',
     flexGrow: 1,
-    maxWidth: 319
   },
   footer: {
     flexGrow: 1,
