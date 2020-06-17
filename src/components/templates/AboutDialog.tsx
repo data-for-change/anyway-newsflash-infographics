@@ -4,12 +4,12 @@ import { Text, TextType } from '../atoms';
 
 interface IProps {
   isShowing: boolean;
-  toggle: () => any;
+  onClose: () => any;
 }
 
-const AboutDialog: FC<IProps> = ({ isShowing, toggle }) => {
+const AboutDialog: FC<IProps> = ({ isShowing, onClose }) => {
   return (
-    <DialogWithHeader title="אודות" isShowing={isShowing} toggle={toggle}>
+    <DialogWithHeader title="אודות" isShowing={isShowing} onClose={onClose}>
       <Text type={TextType.CONTENT}>
         <p>
           האתגר הבא של ANYWAY הוא ליצור גנרטור אוטומטי שישרת ויעצים עיתונאים, בלוגרים, מובילי דעת קהל, מובילי קהילות

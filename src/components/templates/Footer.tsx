@@ -46,9 +46,9 @@ export const Footer: FC<IProps> = () => {
           <img src={logoHasdna} alt="logo-hasadna" className={classes.logo} />
         </a>
         <Box onClick={toggleAbout}>אודות</Box>
-        <AboutDialog isShowing={isShowingAbout} toggle={toggleAbout} />
+        <AboutDialog isShowing={isShowingAbout} onClose={toggleAbout} />
         <Box onClick={toggleThank}>תודות</Box>
-        <ThankYouDialog isShowing={isShowingThank} toggle={toggleThank} />
+        <ThankYouDialog isShowing={isShowingThank} onClose={toggleThank} />
       </Box>
     </footer>
   );

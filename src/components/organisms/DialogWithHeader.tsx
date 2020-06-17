@@ -8,7 +8,7 @@ import { highlightDarkColor, closeButtonColor, cardWidth } from '../../style';
 interface IProps {
   title: string;
   isShowing: boolean;
-  toggle: () => any;
+  onClose: () => any;
 }
 const useStyles = makeStyles({
   dialog: {
@@ -27,10 +27,10 @@ const useStyles = makeStyles({
     color: closeButtonColor,
   },
 });
-const DialogWithHeader: FC<IProps> = ({ toggle, isShowing, title, children }) => {
+const DialogWithHeader: FC<IProps> = ({ onClose, isShowing, title, children }) => {
   const classes = useStyles();
   return (
-    <Dialog isShowing={isShowing} toggle={toggle}>
+    <Dialog isShowing={isShowing} onClose={onClose}>
       <Box className={classes.dialog}>
         <AnywayAppBar>
           <Box className={classes.bar}>
