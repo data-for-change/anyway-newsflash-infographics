@@ -1,15 +1,38 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core';
-import road90 from '../assets/road90.svg.png';
+import React, { FC } from 'react';
+import RoadNumberSvg from '../components/atoms/RoadNumberSvg';
+import { roadIconColors as colors } from '../style';
 
-const useStyles = makeStyles({
-  root: {
-    width: '56px',
-    height: '40px',
-  },
-});
-const RoadNumberImage = () => {
-  const classes = useStyles();
-  return <img src={road90} className={classes.root} />;
+interface IProps {
+  roadNumber: number;
+}
+
+const getRoadColor = (roadNumber: number) => {
+  let numLength = roadNumber.toString().length;
+  let color;
+  switch (numLength) {
+    case 1: {
+      color = colors.blue;
+      break;
+    }
+    case 2: {
+      color = colors.red;
+      break;
+    }
+    case 3: {
+      color = colors.green;
+      break;
+    }
+    case 4: {
+      color = colors.brown;
+      break;
+    }
+    default:
+      color = colors.red;
+  }
+  return color;
+};
+const RoadNumberImage: FC<IProps> = ({ roadNumber }) => {
+  const roadColor = getRoadColor(roadNumber);
+  return <RoadNumberSvg roadColor={roadColor} roadNumber={roadNumber} />;
 };
 export default RoadNumberImage;

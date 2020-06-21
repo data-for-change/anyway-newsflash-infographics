@@ -1,57 +1,46 @@
-//preparation of svg template - temporary
-const RoadNumberSvgImage = (roadNumber: number) => {
-  return `
-		<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   id="svg6542"
-   version="1.1"
-   viewBox="0 0 181.76876 132.55625"
-   height="501"
-   width="687">
-  <defs
-     id="defs6536" />
-  <metadata
-     id="metadata6539">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+import React, { FC } from 'react';
+import { roadIconFont } from '../../style';
 
-  <g
-     transform="translate(-26.506611,-24.923271)"
-     id="layer1">
-    <rect
-       ry="23.8125"
-       rx="23.8125"
-       y="25.055563"
-       x="26.638903"
-       height="132.29167"
-       width="181.50415"
-       id="rect7087"
-       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.26458335;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-    <path
-       id="rect7162"
-       transform="matrix(0.26458334,0,0,0.26458334,26.638903,25.055563)"
-       d="M 90,30 C 56.760001,30 30,56.760001 30,90 v 320 c 0,33.24 26.760001,60 60,60 h 506 c 33.24,0 60,-26.76 60,-60 V 90 C 656,56.760001 629.24,30 596,30 Z M 343,67 588,97 618,250 588,403 343,433 96,403 68,250 96,97 Z"
-       style="opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.5;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-    <g
-       id="text7197"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:76.02970123px;line-height:125%;font-family:Helvetica;-inkscape-font-specification:'Helvetica Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.26458335px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       aria-label="90">
-    </g>
-  </g>
-  <text x="50%" y ="50%" dominant-baseline="middle" text-anchor="middle" font-family="Verdana" font-size="300%" fill="red">${roadNumber}</text>
-</svg>
-	`;
+const WIDTH = '56px';
+const HEIGHT = '40px';
+
+interface IProps {
+  roadNumber: number;
+  roadColor: string;
+}
+//need to emprove scg icon(background color)
+const RoadNumberSvgImage: FC<IProps> = ({ roadNumber, roadColor }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      version="1.0"
+      width={WIDTH}
+      height={HEIGHT}
+      viewBox="0 0 640.000000 467.000000"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <metadata xmlns="http://www.w3.org/2000/svg">
+        Created by potrace 1.16, written by Peter Selinger 2001-2019
+      </metadata>
+      <g transform="translate(0.000000,467.000000) scale(0.100000,-0.100000)" stroke="none">
+        <path d="M635 4649 c-297 -72 -544 -321 -615 -619 -19 -83 -20 -115 -20 -1695 0 -1568 1 -1612 20 -1692 73 -307 315 -550 620 -623 84 -20 106 -20 2560 -20 2454 0 2476 0 2560 20 305 73 547 316 620 623 19 80 20 124 20 1692 0 1568 -1 1612 -20 1692 -73 307 -315 550 -620 623 -84 20 -105 20 -2565 19 -2423 0 -2482 -1 -2560 -20z m5145 -17 c100 -31 232 -101 307 -162 125 -103 228 -262 275 -426 l23 -79 0 -1630 0 -1630 -23 -79 c-83 -287 -301 -505 -588 -588 l-79 -23 -2495 0 -2495 0 -79 23 c-287 83 -505 301 -588 588 l-23 79 0 1630 0 1630 23 78 c41 144 115 270 217 372 124 124 281 206 453 235 26 4 1161 7 2522 6 l2475 -1 75 -23z" />
+        <path
+          d="M696 4365 c-187 -52 -341 -207 -391 -395 -22 -83 -22 -3187 0 -3270 23 -89 75 -179 140 -245 70 -71 143 -115 239 -144 l68 -21 2447 0 c2114 0 2453 2 2501 15 189 50 345 206 395 395 13 47 15 281 15 1635 0 1354 -2 1588 -15 1635 -50 189 -206 345 -395 395 -79 21 -4927 21 -5004 0z m2812 -360 c733 -90 1040 -128 1472 -180 256 -31 474 -60 485 -64 18 -8 36 -86 159 -717 l139 -708 -139 -709 c-123 -632 -141 -710 -159 -718 -11 -4 -229 -33 -485 -64 -256 -31 -663 -80 -905 -110 -242 -30 -539 -66 -660 -81 l-220 -26 -875 107 c-1373 167 -1411 172 -1419 181 -4 5 -65 326 -136 714 l-128 705 128 705 c71 388 134 710 140 715 7 6 196 32 421 59 225 28 726 89 1114 137 388 47 722 87 743 88 21 0 167 -15 325 -34z"
+          fill={roadColor}
+        />
+      </g>
+      <text
+        x="50%"
+        y="50%"
+        dominantBaseline="middle"
+        textAnchor="middle"
+        fontFamily={roadIconFont}
+        fontSize="250"
+        fill={roadColor}
+      >
+        {roadNumber}
+      </text>
+    </svg>
+  );
 };
 export default RoadNumberSvgImage;
