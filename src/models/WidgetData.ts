@@ -160,10 +160,7 @@ export interface IWidgetVisionZeroImageData {
 }
 
 export interface IWidgetTopRoadSegmentsAccidentsPerKm {
-  items: {
-    road__num_accidents: number;
-    road_length: number;
-  }[];
+  items: {}[];
   text: {
     title: string;
   };
