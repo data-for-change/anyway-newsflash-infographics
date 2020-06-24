@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, useRef, useState } from 'react';
 import { Card, CardContent, CardActions } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import RoadImage from '../../assets/road-image.png';
@@ -8,6 +8,9 @@ import { Logo } from '../atoms/Logo';
 import LamasImage from '../../assets/cbs.png';
 import AnywayImage from '../../assets/anyway.png';
 import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
+import CardEditor from '../organisms/CardEditor';
+import SettingsOverscanIcon from '@material-ui/icons/SettingsOverscan';
+
 import {
   fontFamilyString,
   cardWidth,
@@ -53,6 +56,10 @@ const useStyles = makeStyles({
 });
 
 const AnyWayCard: FC<IProps> = ({ widgetName, children }) => {
+  const [isOpen, setOpen] = useState(false);
+  const handleCardEditorOpen = () => setOpen(true);
+  const handleCardEditorClose = () => setOpen(false);
+
   const classes = useStyles();
   const widget = useRef<HTMLDivElement>(null);
   const imgDownloadHandler = () => {
@@ -68,6 +75,10 @@ const AnyWayCard: FC<IProps> = ({ widgetName, children }) => {
         <AnyWayButton className={classes.button} disableRipple={true} onClick={imgDownloadHandler}>
           <GetAppOutlinedIcon />
         </AnyWayButton>
+        <AnyWayButton className={classes.button} disableRipple={true} onClick={handleCardEditorOpen}>
+          <SettingsOverscanIcon />
+        </AnyWayButton>
+        <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} />
         <div className={classes.actionsSpace}></div>
         <Logo src={LamasImage} alt={'Lamas'} height={'30px'} />
         <Logo src={AnywayImage} alt={'Anyway'} height={'20px'} />
