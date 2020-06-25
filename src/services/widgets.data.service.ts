@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export function fetchDefaultWidgets(): Promise<any> {
   // @ts-ignore
-  return mockHTTPCall<ILocationData>(defaultWidgetsCollectionData);
+  return mockHTTPCall<ILocationData>(defaultWidgetsCollectionData).then((res: any) => processWidgetsFetchResponse(res));
 }
 
 const NEWS_FLASH_API: string = '/api/infographics-data';
@@ -19,16 +19,21 @@ export const fetchWidgets = async (id: number, yearAgo?: number): Promise<any | 
     //temp - long response time of server- keep console.log to see out url
     console.log(widgetsUrl);
     const response = await axios.get(widgetsUrl);
-    const verifiedData = {
-      meta: response.data.meta,
-      widgets: getVerifiedWidgetsData(response.data.widgets),
-    };
-    verifiedData.widgets = addWidgetsVariants(verifiedData.widgets);
-    return verifiedData;
+    return processWidgetsFetchResponse(response);
   } catch (error) {
     console.log(error);
   }
 };
+
+function processWidgetsFetchResponse(response: any) {
+  console.log(response);
+  const result = {
+    meta: response.meta,
+    widgets: getVerifiedWidgetsData(response.widgets),
+  };
+  result.widgets = addWidgetsVariants(result.widgets);
+  return result;
+}
 
 // return array of valid widgets data (invalid widget objects will be removed!)
 function getVerifiedWidgetsData(widgets: Array<any>) {
@@ -62,7 +67,7 @@ function addWidgetsVariants(widgets: Array<IWidgetBase>) {
     const widgetVariant = { ...widget };
     widgetVariant.name = widget.name + '_percentage';
     // add variant after original widget
-    widgets = widgets.splice(1, 0, widgetVariant);
+    widgets.splice(index, 0, widgetVariant);
   }
   return widgets;
 }

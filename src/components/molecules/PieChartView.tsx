@@ -1,19 +1,21 @@
 import React, { FC } from 'react';
-import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { ResponsiveContainer, PieChart, Pie, Cell, PieLabelRenderProps } from 'recharts';
 import { fontFamilyString } from '../../style';
 
 interface IProps {
   data: Array<object>;
   xLabel: string;
-  yLabel: string | number;
+  yLabel: string;
   innerRadius?: string;
+  usePercent?: boolean;
 }
 // hardcoded colors, will be changed
 const COLORS = ['#b71c1c', '#e53935', '#d90000', '#890505', '#6a6a6a'];
 const RADIAN = Math.PI / 180;
 
-const renderCustomizedLabel = (props: any) => {
-  const { cx, cy, midAngle, innerRadius, outerRadius, value, /*fill,*/ name } = props;
+const renderCustomizedLabel = (props: any, usePercent = false) => {
+  const { cx, cy, midAngle, innerRadius, percent, outerRadius, value, name } = props;
+  const labelText = usePercent ? `${Math.round(percent * 100)}%` : value;
 
   const radius = innerRadius + (outerRadius - innerRadius) * 0.7;
   const xCountLabel = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -36,9 +38,6 @@ const renderCustomizedLabel = (props: any) => {
 
   return (
     <g>
-      {/* { line with bullet - old style } */}
-      {/* <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
-      <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" /> */}
       <text
         x={xCountLabel}
         y={yCountLabel}
@@ -47,7 +46,7 @@ const renderCustomizedLabel = (props: any) => {
         dominantBaseline="central"
         fontFamily={fontFamilyString}
       >
-        {value}
+        {labelText}
       </text>
       {/* for text wrapping in svg - use foreignObject
       make sure to give foreignObject height and width, or inner element will not be displayed
@@ -59,7 +58,11 @@ const renderCustomizedLabel = (props: any) => {
   );
 };
 
-export const PieChartView: FC<IProps> = ({ data, yLabel, xLabel, innerRadius }) => {
+const renderLabelCount = (props: PieLabelRenderProps) => renderCustomizedLabel(props);
+const renderLabelPercent = (props: PieLabelRenderProps) => renderCustomizedLabel(props, true);
+
+export const PieChartView: FC<IProps> = ({ data, yLabel, xLabel, innerRadius, usePercent }) => {
+  const labelFn = usePercent ? renderLabelPercent : renderLabelCount;
   return (
     <ResponsiveContainer width={'100%'} height={'100%'}>
       <PieChart>
@@ -70,7 +73,7 @@ export const PieChartView: FC<IProps> = ({ data, yLabel, xLabel, innerRadius }) 
           outerRadius={'60%'}
           innerRadius={innerRadius}
           minAngle={15}
-          label={renderCustomizedLabel}
+          label={labelFn}
           labelLine={false}
         >
           {data.map((entry: any, index: any) => (

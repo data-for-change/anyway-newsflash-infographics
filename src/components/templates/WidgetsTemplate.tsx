@@ -80,7 +80,7 @@ const getWidgetByType = (widget: any, segmentText: string) => {
       break;
     }
     case 'head_on_collisions_comparison_percentage': {
-      widgetComponent = <HeadOnCollisionsComparisonWidget data={data} segmetText={segmentText} />;
+      widgetComponent = <HeadOnCollisionsComparisonWidget data={data} segmetText={segmentText} usePercent={true} />;
       break;
     }
     case 'vision_zero': {
