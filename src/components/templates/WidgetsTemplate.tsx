@@ -16,6 +16,7 @@ import MostSevereAccidentsTableWidget from '../molecules/widgets/MostSevereAccid
 import HeadOnCollisionsComparisonWidget from '../molecules/widgets/HeadOnCollisionsComparisonWidget';
 import InjuredCountPerAgeGroupPieWidget from '../molecules/widgets/InjuredCountPerAgeGroupPieWidget';
 import AccidentsCountByHourBarWidget from '../molecules/widgets/AccidentsCountByHourBarWidget';
+import TopRoadSegmentsAccidentsPerKm from '../molecules/widgets/TopRoadSegmentsAccidentsPerKm';
 import HeatMap from '../molecules/HeatMap';
 import ErrorBoundary from '../atoms/ErrorBoundary';
 import { MetaTag } from '../atoms';
@@ -81,6 +82,10 @@ const getWidgetByType = (widget: any, segmentText: string) => {
     }
     case 'vision_zero': {
       widgetComponent = <StaticImageViewWidget data={data} />;
+      break;
+    }
+    case 'top_road_segments_accidents_per_km': {
+      widgetComponent = <TopRoadSegmentsAccidentsPerKm data={data} segmentText={segmentText} />;
       break;
     }
     default: {

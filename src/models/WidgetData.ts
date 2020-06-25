@@ -38,7 +38,8 @@ export type IWidgetDataType =
   | IWidgetAccidentsByYearData
   | IWidgetVisionZeroImageData
   | IWidgetAccidentsByHourBarData
-  | IWidgetMostSevereAccidentsTableData;
+  | IWidgetMostSevereAccidentsTableData
+  | IWidgetTopRoadSegmentsAccidentsPerKm;
 
 export interface ILocationMeta {
   location_info: {
@@ -156,4 +157,11 @@ export interface IWidgetVisionZeroImageData {
   items: {
     image_src: string;
   }[];
+}
+
+export interface IWidgetTopRoadSegmentsAccidentsPerKm {
+  items: {}[];
+  text: {
+    title: string;
+  };
 }
