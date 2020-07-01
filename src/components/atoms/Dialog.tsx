@@ -4,11 +4,12 @@ import MaterialDialog from '@material-ui/core/Dialog';
 interface IProps {
   isShowing: boolean;
   onClose: () => any;
+  fullWidth?: boolean;
 }
 
-const Dialog: FC<IProps> = ({ isShowing, onClose, children }) => {
+const Dialog: FC<IProps> = ({ isShowing, onClose, children, fullWidth }) => {
   return (
-    <MaterialDialog open={isShowing} onClose={onClose}>
+    <MaterialDialog fullWidth={fullWidth} maxWidth={'md'} open={isShowing} onClose={onClose}>
       {children}
     </MaterialDialog>
   );

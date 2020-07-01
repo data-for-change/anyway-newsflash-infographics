@@ -1,4 +1,4 @@
-import React, { FC, useState} from 'react';
+import React, { FC, useState } from 'react';
 import logoHasdna from '../../assets/hasadna.png';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
@@ -33,11 +33,11 @@ export const Footer: FC<IProps> = () => {
   const [isShowingAbout, setIsShowingAbout] = useState(false);
   const [isShowingThank, setIsShowingThank] = useState(false);
   const toggleAbout = () => {
-    setIsShowingAbout(!isShowingAbout)
-  }
+    setIsShowingAbout(!isShowingAbout);
+  };
   const toggleThank = () => {
-    setIsShowingThank(!isShowingThank)
-  }
+    setIsShowingThank(!isShowingThank);
+  };
   const classes = useStyles();
   return (
     <footer className={classes.footer}>

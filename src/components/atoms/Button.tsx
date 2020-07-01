@@ -1,8 +1,16 @@
 import React, { FC } from 'react';
+import { Button as MaterialButton, ButtonProps, IconButton } from '@material-ui/core';
 
-interface IProps {
-  onClick: () => any;
+interface IProps extends ButtonProps {
+  props: ButtonProps;
 }
 
-const Button: FC<IProps> = ({ onClick, children }) => <button onClick={onClick}>{children}</button>;
+// todo: make standard buttons for entire app
+const StandardButton: FC<IProps> = ({ props }) => <MaterialButton {...props} />;
+
+const Button = {
+  standard: StandardButton,
+  icon: IconButton,
+};
+
 export default Button;

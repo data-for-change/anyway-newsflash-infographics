@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { WidgetCountBySeverityTextData } from '../../../models/WidgetData';
+import { IWidgetCountBySeverityTextData } from '../../../models/WidgetData';
 import TextView from '../TextView';
 
 interface IProps {
-  data: WidgetCountBySeverityTextData;
+  data: IWidgetCountBySeverityTextData;
   segmentText: string;
 }
-const CountBySeverityTextWidget: FC<IProps> = ( { data, segmentText }) => {
+const CountBySeverityTextWidget: FC<IProps> = ({ data, segmentText }) => {
   return <TextView data={data} segmentText={segmentText} />;
 };
 export default CountBySeverityTextWidget;

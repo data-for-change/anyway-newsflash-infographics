@@ -1,15 +1,15 @@
 import React, { FC, useCallback } from 'react';
 import { Box, makeStyles } from '@material-ui/core';
-import News from '../organisms/News';
+import News from './News';
 import { NewsFlashFilterPanel } from '../molecules/NewsFlashFilterPanel';
-import OverlayLoader  from '../molecules/OverlayLoader';
+import OverlayLoader from '../molecules/OverlayLoader';
 import { borderColor } from '../../style';
 import { Text, TextType, ErrorBoundary } from '../atoms';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
 import { InfinitScroll } from '../atoms';
-import SideBarMap from '../molecules/SideBarMap'
+import SideBarMap from '../molecules/SideBarMap';
 const INFINITE_SCROLL_FETCH_SIZE = 5;
 
 interface IProps {}
@@ -46,20 +46,19 @@ const SideBar: FC<IProps> = () => {
         </ErrorBoundary>
 
         <InfinitScroll onScrollEnd={fetchMoreNewsItems}>
-            <OverlayLoader show={loading}/>
-            <News />
+          <OverlayLoader show={loading} />
+          <News />
         </InfinitScroll>
       </Box>
       <Box flexShrink={0} flexGrow={0} p={1}>
         <Text type={TextType.CONTENT_TITLE} children={mapTitle} />
       </Box>
       <Box flexBasis={300} flexShrink={0} px={1} pb={1}>
-        {
-          location &&
+        {location && (
           <ErrorBoundary>
             <SideBarMap items={[location]} />
           </ErrorBoundary>
-        }
+        )}
       </Box>
     </Box>
   );

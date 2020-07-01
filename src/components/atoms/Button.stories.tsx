@@ -6,4 +6,4 @@ export default {
   title: 'Buttons',
 };
 
-export const ButtonPrimary = () => <Button onClick={action('clicked')}>Button Primary</Button>;
+// export const ButtonPrimary = () => <Button.standard onClick={action('clicked')}>Button Primary</Button>;

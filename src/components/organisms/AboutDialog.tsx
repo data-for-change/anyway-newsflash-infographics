@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import DialogWithHeader from '../organisms/DialogWithHeader';
+import DialogWithHeader from '../molecules/DialogWithHeader';
 import { Text, TextType } from '../atoms';
 
 interface IProps {
