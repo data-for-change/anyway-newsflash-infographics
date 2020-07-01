@@ -12,6 +12,7 @@ const AboutDialog: FC<IProps> = ({ isShowing, onClose }) => {
     <DialogWithHeader title="אודות" isShowing={isShowing} onClose={onClose}>
       <Text type={TextType.CONTENT}>
         <p>
+          {isShowing}
           האתגר הבא של ANYWAY הוא ליצור גנרטור אוטומטי שישרת ויעצים עיתונאים, בלוגרים, מובילי דעת קהל, מובילי קהילות
           וכו׳ בעידן עיתונות הדאטה.
         </p>

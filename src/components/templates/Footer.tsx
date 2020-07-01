@@ -1,4 +1,4 @@
-import React, { FC, useState} from 'react';
+import React, { FC, useState } from 'react';
 import logoHasdna from '../../assets/hasadna.png';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
@@ -27,17 +27,20 @@ const useStyles = makeStyles({
     display: 'flex',
     border: `1px solid ${borderColor}`,
   },
+  link: {
+    cursor: 'pointer',
+  },
 });
 
 export const Footer: FC<IProps> = () => {
   const [isShowingAbout, setIsShowingAbout] = useState(false);
   const [isShowingThank, setIsShowingThank] = useState(false);
   const toggleAbout = () => {
-    setIsShowingAbout(!isShowingAbout)
-  }
+    setIsShowingAbout(!isShowingAbout);
+  };
   const toggleThank = () => {
-    setIsShowingThank(!isShowingThank)
-  }
+    setIsShowingThank(!isShowingThank);
+  };
   const classes = useStyles();
   return (
     <footer className={classes.footer}>
@@ -45,9 +48,13 @@ export const Footer: FC<IProps> = () => {
         <a href="https://www.hasadna.org.il/" target="_blank" rel="noopener noreferrer">
           <img src={logoHasdna} alt="logo-hasadna" className={classes.logo} />
         </a>
-        <Box onClick={toggleAbout}>אודות</Box>
+        <Box className={classes.link} onClick={toggleAbout}>
+          אודות
+        </Box>
         <AboutDialog isShowing={isShowingAbout} onClose={toggleAbout} />
-        <Box onClick={toggleThank}>תודות</Box>
+        <Box className={classes.link} onClick={toggleThank}>
+          תודות
+        </Box>
         <ThankYouDialog isShowing={isShowingThank} onClose={toggleThank} />
       </Box>
     </footer>

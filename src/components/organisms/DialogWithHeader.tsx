@@ -2,8 +2,7 @@ import React, { FC } from 'react';
 import { Dialog, AnywayAppBar } from '../atoms';
 import { Box, makeStyles, IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import { highlightDarkColor, closeButtonColor, cardWidth } from '../../style';
-
+import { highlightDarkColor, closeButtonColor, primaryColor } from '../../style';
 
 interface IProps {
   title: string;
@@ -12,19 +11,21 @@ interface IProps {
 }
 const useStyles = makeStyles({
   dialog: {
-    width: cardWidth
+    width: '600px',
   },
   bar: {
-    height: 'inherit',
     display: 'flex',
-    flexDirection: 'row',
     width: 'inherit',
-    color: highlightDarkColor,
+    color: primaryColor,
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    fontSize: '17px',
   },
   close: {
     color: closeButtonColor,
+  },
+  content: {
+    padding: '22px 28px',
   },
 });
 const DialogWithHeader: FC<IProps> = ({ onClose, isShowing, title, children }) => {
@@ -32,15 +33,16 @@ const DialogWithHeader: FC<IProps> = ({ onClose, isShowing, title, children }) =
   return (
     <Dialog isShowing={isShowing} onClose={onClose}>
       <Box className={classes.dialog}>
+        {/* <AnywayAppBar className={classes.header}> */}
         <AnywayAppBar>
           <Box className={classes.bar}>
             {title}
-            <IconButton className={classes.close}>
+            <IconButton onClick={onClose} className={classes.close}>
               <CloseIcon>close the dialog</CloseIcon>
             </IconButton>
           </Box>
         </AnywayAppBar>
-        <Box display="flex" flexDirection="column" p={2}>
+        <Box className={classes.content} display="flex" flexDirection="column" p={2}>
           {children}
         </Box>
       </Box>
