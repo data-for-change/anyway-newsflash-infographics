@@ -78,6 +78,10 @@ export default class RootStore {
     return this.newsFlashCollection.find((item) => item.id === this.activeNewsFlashId);
   }
 
+  getWidgetsDataByName(name: string): IWidgetBase | undefined {
+    return this.newsFlashWidgetsData.find((item) => item.name === name);
+  }
+
   @action checkuserstatus(): void {}
 
   @action
