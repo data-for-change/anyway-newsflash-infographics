@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import { Footer } from './components/templates/Footer';
+import { Footer } from './components/organisms/Footer';
 import { Box, createStyles, makeStyles, Theme, ThemeProvider } from '@material-ui/core';
 import { StoreContext, useStore } from './store/storeConfig';
 import Header from './components/molecules/Header';

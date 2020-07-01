@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import WidgetsTemplate from '../components/templates/WidgetsTemplate';
+import WidgetsTemplate from '../components/organisms/WidgetsTemplate';
 import { Box } from '@material-ui/core';
-import SideBar from '../components/templates/SideBar';
+import SideBar from '../components/organisms/SideBar';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { RouteComponentProps } from 'react-router';
 import { borderColor } from '../style';
@@ -40,7 +40,7 @@ const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
         <SideBar />
       </Box>
       <Box flexGrow={5} className={classes.widgetBox} position="relative">
-        <OverlayLoader show={loading}/>
+        <OverlayLoader show={loading} />
         <FilterBar />
         <WidgetsTemplate id={id} />
       </Box>

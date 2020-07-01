@@ -8,7 +8,7 @@ import { Logo } from '../atoms/Logo';
 import LamasImage from '../../assets/cbs.png';
 import AnywayImage from '../../assets/anyway.png';
 import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
-import CardEditor from '../organisms/CardEditor';
+import CardEditor from '../organisms/CardEditorDialog';
 import SettingsOverscanIcon from '@material-ui/icons/SettingsOverscan';
 
 import {

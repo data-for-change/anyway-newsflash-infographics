@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { WidgetCountBySeverityTextData } from '../../models/WidgetData';
+import { IWidgetCountBySeverityTextData } from '../../models/WidgetData';
 import { Text, TextType } from '../atoms';
 import { Theme, makeStyles } from '@material-ui/core';
 import roadNumberIcon from '../../assets/road90.svg.png';
 import { highlightBasicColor, highlightDarkColor, highlightAlertColor, highlightWarnColor } from '../../style';
 
 interface IProps {
-  data: WidgetCountBySeverityTextData;
+  data: IWidgetCountBySeverityTextData;
   segmentText: string;
 }
 const useStyles = makeStyles((theme: Theme) => ({
