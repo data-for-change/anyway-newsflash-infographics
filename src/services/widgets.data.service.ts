@@ -28,8 +28,8 @@ export const fetchWidgets = async (id: number, yearAgo?: number): Promise<any | 
 function processWidgetsFetchResponse(response: any) {
   console.log(response);
   const result = {
-    meta: response.meta,
-    widgets: getVerifiedWidgetsData(response.widgets),
+    meta: response.data.meta,
+    widgets: getVerifiedWidgetsData(response.data.widgets),
   };
   result.widgets = addWidgetsVariants(result.widgets);
   return result;
