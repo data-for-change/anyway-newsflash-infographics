@@ -39,10 +39,10 @@ const AnyWaySlider = ({ onChange }: any) => {
         onChange={onChange}
         aria-labelledby="discrete-slider"
         valueLabelDisplay="auto"
-        step={0.5}
+        step={0.1}
         marks={marks}
         min={1}
-        max={3}
+        max={2}
       />
     </div>
   );
