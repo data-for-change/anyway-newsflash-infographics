@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Dialog, AnywayAppBar } from '../atoms';
 import { Box, makeStyles, IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import { highlightDarkColor, closeButtonColor } from '../../style';
+import { closeButtonColor, primaryColor, fontFamilyString } from '../../style';
 
 interface IProps {
   title: string;
@@ -11,17 +11,27 @@ interface IProps {
   fullWidth?: boolean;
 }
 const useStyles = makeStyles({
+  dialog: {
+    fontFamily: fontFamilyString,
+    width: '600px',
+  },
   bar: {
-    height: 'inherit',
     display: 'flex',
-    flexDirection: 'row',
     width: 'inherit',
-    color: highlightDarkColor,
+    color: primaryColor,
     justifyContent: 'space-between',
     alignItems: 'center',
+    fontSize: '17px',
   },
   close: {
     color: closeButtonColor,
+  },
+  content: {
+    padding: '22px 28px',
+  },
+  '.about-content': {
+    backgroundColor: 'pink',
+    marginBottom: '12px',
   },
 });
 const DialogWithHeader: FC<IProps> = ({ onClose, isShowing, title, fullWidth, children }) => {
@@ -31,12 +41,14 @@ const DialogWithHeader: FC<IProps> = ({ onClose, isShowing, title, fullWidth, ch
       <AnywayAppBar>
         <Box className={classes.bar}>
           {title}
-          <IconButton className={classes.close}>
+          <IconButton onClick={onClose} className={classes.close}>
             <CloseIcon>close the dialog</CloseIcon>
           </IconButton>
         </Box>
       </AnywayAppBar>
-      <Box p={2}>{children}</Box>
+      <Box className={classes.content} display="flex" flexDirection="column" p={2}>
+        {children}
+      </Box>
     </Dialog>
   );
 };

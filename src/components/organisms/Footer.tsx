@@ -22,6 +22,9 @@ const useStyles = makeStyles({
     justifyContent: 'space-evenly',
     flexGrow: 1,
   },
+  link: {
+    cursor: 'pointer',
+  },
   footer: {
     flexGrow: 1,
     display: 'flex',
@@ -45,9 +48,13 @@ export const Footer: FC<IProps> = () => {
         <a href="https://www.hasadna.org.il/" target="_blank" rel="noopener noreferrer">
           <img src={logoHasdna} alt="logo-hasadna" className={classes.logo} />
         </a>
-        <Box onClick={toggleAbout}>אודות</Box>
+        <Box className={classes.link} onClick={toggleAbout}>
+          אודות
+        </Box>
         <AboutDialog isShowing={isShowingAbout} onClose={toggleAbout} />
-        <Box onClick={toggleThank}>תודות</Box>
+        <Box className={classes.link} onClick={toggleThank}>
+          תודות
+        </Box>
         <ThankYouDialog isShowing={isShowingThank} onClose={toggleThank} />
       </Box>
     </footer>
