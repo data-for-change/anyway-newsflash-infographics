@@ -9,7 +9,7 @@ interface IProps {
 
 const Dialog: FC<IProps> = ({ isShowing, onClose, children, fullWidth }) => {
   return (
-    <MaterialDialog fullWidth={fullWidth} maxWidth={'md'} open={isShowing} onClose={onClose}>
+    <MaterialDialog fullWidth={fullWidth} maxWidth={'lg'} open={isShowing} onClose={onClose}>
       {children}
     </MaterialDialog>
   );
