@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Card, CardContent, CardActions } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import RoadImage from '../../assets/road-image.png';
@@ -22,6 +22,7 @@ interface IProps {
   widgetName: string;
   actionButtons?: boolean;
   layoutOptions?: CardLayoutOptions;
+  getCardRef?: (element: HTMLElement) => any;
 }
 
 const getSize = (options: CardLayoutOptions | undefined): number =>
@@ -73,16 +74,16 @@ const useStyles = makeStyles({
   },
 });
 
-const AnyWayCard: FC<IProps> = ({ widgetName, children, layoutOptions, actionButtons = true }) => {
+const AnyWayCard: FC<IProps> = ({ widgetName, children, layoutOptions, getCardRef, actionButtons = true }) => {
+  const [element, setElement] = useState({});
   const [isOpen, setOpen] = useState(false);
   const handleCardEditorOpen = () => setOpen(true);
   const handleCardEditorClose = () => setOpen(false);
 
   const classes = useStyles(layoutOptions);
-  const widget = useRef<HTMLDivElement>(null);
   const imgDownloadHandler = () => {
-    if (widget && widget.current) {
-      widgetToImage(widgetName, widget.current);
+    if (element && element instanceof HTMLElement) {
+      widgetToImage(widgetName, element);
     }
   };
   const buttons = !actionButtons ? null : (
@@ -95,17 +96,26 @@ const AnyWayCard: FC<IProps> = ({ widgetName, children, layoutOptions, actionBut
       </AnyWayButton>
     </>
   );
+
+  const refFn = (element: HTMLDivElement) => {
+    setElement(element);
+    if (getCardRef) {
+      getCardRef(element); // send ref to parent
+    }
+  };
   return (
-    <Card ref={widget} className={classes.root} variant="outlined">
-      <CardContent className={classes.content}>{children}</CardContent>
-      <CardActions className={classes.actions}>
-        {buttons}
-        <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} />
-        <div className={classes.actionsSpace}></div>
-        <Logo src={LamasImage} alt={'Lamas'} height={'30px'} />
-        <Logo src={AnywayImage} alt={'Anyway'} height={'20px'} />
-      </CardActions>
-    </Card>
+    <div ref={refFn}>
+      <Card className={classes.root} variant="outlined">
+        <CardContent className={classes.content}>{children}</CardContent>
+        <CardActions className={classes.actions}>
+          {buttons}
+          <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} />
+          <div className={classes.actionsSpace}></div>
+          <Logo src={LamasImage} alt={'Lamas'} height={'30px'} />
+          <Logo src={AnywayImage} alt={'Anyway'} height={'20px'} />
+        </CardActions>
+      </Card>
+    </div>
   );
 };
 export default AnyWayCard;
