@@ -45,16 +45,16 @@ export const Footer: FC<IProps> = () => {
   return (
     <footer className={classes.footer}>
       <Box className={classes.links}>
-        <Box mr="6px">
+        <Box mr={1}>
           <a href="https://www.hasadna.org.il/" target="_blank" rel="noopener noreferrer">
             <img src={logoHasdna} alt="logo-hasadna" className={classes.logo} />
           </a>
         </Box>
-        <Box mr="6px" pl="6px" className={classes.linkItem} onClick={toggleAbout}>
+        <Box mr={1} pl={1} className={classes.linkItem} onClick={toggleAbout}>
           <Text type={TextType.CONTENT_TITLE}>אודות</Text>
         </Box>
         <AboutDialog isShowing={isShowingAbout} onClose={toggleAbout} />
-        <Box mr="6px" pl="6px" className={classes.linkItem} onClick={toggleThank}>
+        <Box mr={1} pl={1} className={classes.linkItem} onClick={toggleThank}>
           <Text type={TextType.CONTENT_TITLE}>תודות</Text>
         </Box>
         <ThankYouDialog isShowing={isShowingThank} onClose={toggleThank} />
