@@ -11,7 +11,6 @@ interface IProps {}
 const useStyles = makeStyles({
   logo: {
     height: '30px',
-    marginRight: '0.5rem',
   },
   links: {
     display: 'flex',
@@ -29,8 +28,6 @@ const useStyles = makeStyles({
     border: `1px solid ${borderColor}`,
   },
   linkItem: {
-    marginRight: '0.5rem',
-    paddingLeft: '0.5rem',
     borderLeft: `2px solid ${borderColor}`,
   },
 });
@@ -48,14 +45,16 @@ export const Footer: FC<IProps> = () => {
   return (
     <footer className={classes.footer}>
       <Box className={classes.links}>
-        <a href="https://www.hasadna.org.il/" target="_blank" rel="noopener noreferrer">
-          <img src={logoHasdna} alt="logo-hasadna" className={classes.logo} />
-        </a>
-        <Box className={classes.linkItem} onClick={toggleAbout}>
+        <Box mr="6px">
+          <a href="https://www.hasadna.org.il/" target="_blank" rel="noopener noreferrer">
+            <img src={logoHasdna} alt="logo-hasadna" className={classes.logo} />
+          </a>
+        </Box>
+        <Box mr="6px" pl="6px" className={classes.linkItem} onClick={toggleAbout}>
           <Text type={TextType.CONTENT_TITLE}>אודות</Text>
         </Box>
         <AboutDialog isShowing={isShowingAbout} onClose={toggleAbout} />
-        <Box className={classes.linkItem} onClick={toggleThank}>
+        <Box mr="6px" pl="6px" className={classes.linkItem} onClick={toggleThank}>
           <Text type={TextType.CONTENT_TITLE}>תודות</Text>
         </Box>
         <ThankYouDialog isShowing={isShowingThank} onClose={toggleThank} />
