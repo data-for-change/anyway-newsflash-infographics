@@ -1,9 +1,8 @@
 import { saveAs } from 'file-saver';
 import html2canvas from 'html2canvas';
 import domtoimage from 'dom-to-image';
-import { cardHeight, cardWidth } from '../style';
 
-const SCALE = 2;
+const DEFAULT_SCALE = 1;
 
 const removeMapControllers = (el: HTMLDocument) => {
   const elementList = el.querySelectorAll(
@@ -11,22 +10,22 @@ const removeMapControllers = (el: HTMLDocument) => {
   );
   Array.from(elementList).forEach((el) => el.remove());
 };
-const widgetToImage = (fileName: string, widgetElement: HTMLElement) => {
+const widgetToImage = (fileName: string, widgetElement: HTMLElement, scale = DEFAULT_SCALE) => {
   const containMap = widgetElement.querySelector('canvas, .leaflet-container');
   console.log(`Download image using ${containMap ? 'Html2Canvas' : 'DomToImage'}`);
   if (containMap) {
-    usingHtml2Canvas(fileName, widgetElement);
+    usingHtml2Canvas(fileName, widgetElement, scale);
   } else {
-    usingDomToImage(fileName, widgetElement);
+    usingDomToImage(fileName, widgetElement, scale);
   }
 };
 // Uses canvas. OK for maps, buggy for other elements
 // https://github.com/niklasvh/html2canvas
-const usingHtml2Canvas = (fileName: string, widgetElement: HTMLElement) => {
+const usingHtml2Canvas = (fileName: string, widgetElement: HTMLElement, scale: number) => {
   html2canvas(widgetElement, {
     useCORS: true, // to allow loading maps
     imageTimeout: 3000,
-    scale: SCALE,
+    scale,
     onclone: (el) => removeMapControllers(el),
   })
     .then(function (canvas) {
@@ -37,21 +36,18 @@ const usingHtml2Canvas = (fileName: string, widgetElement: HTMLElement) => {
       saveAs(blob, `${fileName}.png`);
     });
 };
-// Uses canvas. OK for Html/SVG, buggy for maps
-// https://github.com/tsayen/dom-to-image
-const usingDomToImage = (fileName: string, widgetElement: HTMLElement) => {
+// Uses SVG foreignObject. OK for Html/SVG, buggy for maps
+// https://github.com/tsayen/dom-to-image#how-it-works
+const usingDomToImage = (fileName: string, widgetElement: HTMLElement, scale: number) => {
   const filter = (widgetElement: any) => {
     return widgetElement.tagName !== 'BUTTON';
   };
   const style = {
-    transform: `scale(${SCALE})`,
+    transform: `scale(${scale})`,
     transformOrigin: '100% 0%',
-    borderRadius: '4px',
   };
   domtoimage
     .toBlob(widgetElement, {
-      height: cardHeight * SCALE,
-      width: cardWidth * SCALE,
       filter: filter,
       style,
     })
