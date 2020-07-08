@@ -3,7 +3,7 @@ import {onLinkColor, onLinkColorHover} from '../../style';
 import Text, {TextType} from "../atoms/Text";
 import React from "react";
 import {openSignInWindow} from "../../services/signInWindow";
-import {getAuthServerUrl, getServerUrl} from "../../utils/utils";
+import {getAuthServerUrl} from "../../utils/utils";
 import {AnyWayButton} from "../atoms/AnyWayButton";
 
 

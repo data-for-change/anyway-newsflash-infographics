@@ -1,5 +1,5 @@
 import axios from "axios";
-import {getAuthServerUrl, getServerUrl} from "../utils/utils";
+import {getAuthServerUrl} from "../utils/utils";
 
 interface UserStatus {
   authenticated : boolean,
