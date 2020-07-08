@@ -2,9 +2,9 @@ import {makeStyles} from '@material-ui/core/styles';
 import {onLinkColor, onLinkColorHover} from '../../style';
 import Text, {TextType} from "../atoms/Text";
 import React from "react";
-import {getServerUrl} from "../../utils/utils";
+import {getAuthServerUrl} from "../../utils/utils";
 
-const LINK = `${getServerUrl()}/auth/logout`;
+const LINK = `${getAuthServerUrl()}/auth/logout`;
 
 
 const useStyles = makeStyles({
