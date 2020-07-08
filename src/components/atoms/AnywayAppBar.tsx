@@ -5,7 +5,6 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      minWidth: '100vw',
       position: 'relative',
       flexGrow: 1,
       backgroundColor: '#fafafa',
