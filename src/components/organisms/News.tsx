@@ -31,7 +31,7 @@ const News: FC = () => {
               return (
                 <AnywayLink key={news.id} to={`/newsflash/${news.id}`}>
                   <Box border={1} borderColor={borderColor} p={1} className={className}>
-                    <Text type={TextType.NEWS_FLASH_TITLE} children={`${date}, ${news.source}`} />
+                    <Text type={TextType.NEWS_FLASH_TITLE} children={`${date}, ${news.display_source}`} />
                     <Text type={TextType.NEWS_FLASH_CONTENT} children={news.title} />
                   </Box>
                 </AnywayLink>

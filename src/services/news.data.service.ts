@@ -9,6 +9,12 @@ const errorNews: INewsFlash = {
   id: -1,
   title: 'Error fetching News',
   date: null,
+  accident: false,
+  author: '',
+  link: '',
+  description: '',
+  display_source: '',
+  location: '',
 };
 
 const NEWS_FLASH_API: string = '/api/news-flash';
