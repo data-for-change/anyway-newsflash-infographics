@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   root: {
-    width: 150,
+    padding: 10,
   },
 });
 const marks = [
@@ -19,14 +19,6 @@ const marks = [
   {
     value: 2,
     label: 'x2',
-  },
-  {
-    value: 2.5,
-    label: 'x2.5',
-  },
-  {
-    value: 3,
-    label: 'x3',
   },
 ];
 const AnyWaySlider = ({ onChange }: any) => {
