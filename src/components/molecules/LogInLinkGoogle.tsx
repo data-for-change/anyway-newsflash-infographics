@@ -3,11 +3,11 @@ import {onLinkColor, onLinkColorHover} from '../../style';
 import Text, {TextType} from "../atoms/Text";
 import React from "react";
 import {openSignInWindow} from "../../services/signInWindow";
-import {getAuthServerUrl} from "../../utils/utils";
+import {authServerUrl} from "../../utils/utils";
 import {AnyWayButton} from "../atoms/AnyWayButton";
 
 
-const LINK = `${getAuthServerUrl()}/auth/google-login`;
+const LINK = `${authServerUrl}/auth/google-login`;
 
 
 const useStyles = makeStyles({
