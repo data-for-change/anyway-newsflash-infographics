@@ -4,9 +4,10 @@ import { IWidgetMostSevereAccidentsTableData } from '../../../models/WidgetData'
 
 interface IProps {
   data: IWidgetMostSevereAccidentsTableData;
+  roadNumber: number;
 }
-const MostSevereAccidentsTableWidget: FC<IProps> = ({ data }) => {
-  return <TableView data={data} />;
+const MostSevereAccidentsTableWidget: FC<IProps> = ({ data, roadNumber }) => {
+  return <TableView data={data} roadNumber={roadNumber} />;
 };
 
 export default MostSevereAccidentsTableWidget;

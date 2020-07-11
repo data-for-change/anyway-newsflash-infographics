@@ -2,12 +2,12 @@ import React, { FC } from 'react';
 import { IWidgetCountBySeverityTextData } from '../../models/WidgetData';
 import { Text, TextType } from '../atoms';
 import { Theme, makeStyles } from '@material-ui/core';
-import roadNumberIcon from '../../assets/road90.svg.png';
 import { highlightBasicColor, highlightDarkColor, highlightAlertColor, highlightWarnColor } from '../../style';
-
+import RoadNumberImage from '../../services/get-road-image.service';
 interface IProps {
   data: IWidgetCountBySeverityTextData;
   segmentText: string;
+  roadNumber: number;
 }
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -19,10 +19,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& span': {
       marginLeft: 10,
     },
-  },
-  large: {
-    width: theme.spacing(7),
-    height: theme.spacing(5),
   },
   mainText: {
     fontSize: 19,
@@ -49,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: highlightWarnColor,
   },
 }));
-const TextView: FC<IProps> = ({ data, segmentText }) => {
+const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
   const classes = useStyles();
   const { items } = data;
   //checking availability of two or more types
@@ -57,7 +53,7 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
     [items.severity_fatal_count, items.severity_light_count, items.severity_severe_count].filter(Boolean).length >= 2;
   return (
     <div className={classes.root}>
-      <img alt="Road Number" src={roadNumberIcon} className={classes.large} />
+      <RoadNumberImage roadNumber={roadNumber} />
       <Text type={TextType.WIDGET_TITLE}>
         <span className={classes.mainText}>
           {items.end_year === items.start_year ? (
@@ -74,7 +70,6 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
             </>
           )}
           <br />
-          <span>במקטע</span>
           <span>{segmentText}</span>
           <span>התרחשו</span>
           <span className={classes.highlightDark}>{items.total_accidents_count}</span>

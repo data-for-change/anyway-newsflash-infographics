@@ -62,6 +62,14 @@ export default class RootStore {
   }
 
   @computed
+  get newsFlashWidgetsMetaNumber(): number {
+    let {
+      location_info: { road1 },
+    } = this.newsFlashWidgetsMeta;
+    return road1;
+  }
+
+  @computed
   get activeNewsFlashLocation() {
     let location: IPoint = DEFAULT_LOCATION; // default location
     if (this.activeNewsFlash) {

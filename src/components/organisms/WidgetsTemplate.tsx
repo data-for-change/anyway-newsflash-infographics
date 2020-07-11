@@ -24,9 +24,14 @@ const WidgetsTemplate: FC<IProps> = ({ id }) => {
   }, [id, store]);
 
   const widgetsData = store.newsFlashWidgetsData;
-
   const widgetCards = widgetsData.map((widget, index) => {
-    const widgetComponent = <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaString} />;
+    const widgetComponent = (
+      <WidgetWrapper
+        widget={widget}
+        segmentText={store.newsFlashWidgetsMetaString}
+        roadNumber={store.newsFlashWidgetsMetaNumber}
+      />
+    );
     if (!widgetComponent) {
       return null;
     }
