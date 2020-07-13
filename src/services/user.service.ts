@@ -1,5 +1,5 @@
 import axios from "axios";
-import {getServerUrl} from "../utils/utils";
+import {authServerUrl} from "../utils/utils";
 
 interface UserStatus {
   authenticated : boolean,
@@ -11,7 +11,7 @@ interface UserStatus {
     try {
       const response = await axios({
         method: 'get',
-        url: `${getServerUrl()}/auth/google-login/success`,
+        url: `${authServerUrl}/auth/google-login/success`,
         withCredentials: true,
       });
 

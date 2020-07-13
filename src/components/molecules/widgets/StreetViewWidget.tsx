@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { getAPIKey } from '../../../utils/utils';
+import { apiKey } from '../../../utils/utils';
 import ReactStreetview from 'react-streetview';
 import { makeStyles } from '@material-ui/core';
 import { IWidgetStreetViewData } from '../../../models/WidgetData';
@@ -27,7 +27,7 @@ const StreetViewWidget: FC<IProps> = ( {data} ) => {
 
   return (
     <div className={classes.root}>
-      <ReactStreetview apiKey={getAPIKey()} streetViewPanoramaOptions={streetViewPanoramaOptions} />
+      <ReactStreetview apiKey={apiKey} streetViewPanoramaOptions={streetViewPanoramaOptions} />
     </div>
   );
 };
