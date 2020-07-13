@@ -5,34 +5,20 @@ import { roadIconColors as colors } from '../style';
 interface IProps {
   roadNumber: number;
 }
-
-const getRoadColor = (roadNumber: number) => {
-  let numLength = roadNumber.toString().length;
+const HIGH_WAY_ROAD_NUMBERS = [1, 2, 4, 5, 6, 9, 16, 20, 22, 50, 70, 77, 431, 471, 531];
+const getColor = (roadNumber: number) => {
   let color;
-  switch (numLength) {
-    case 1: {
-      color = colors.blue;
-      break;
-    }
-    case 2: {
-      color = colors.red;
-      break;
-    }
-    case 3: {
-      color = colors.green;
-      break;
-    }
-    case 4: {
-      color = colors.brown;
-      break;
-    }
-    default:
-      color = colors.red;
-  }
+  const highWayRoadNumber = HIGH_WAY_ROAD_NUMBERS.includes(roadNumber);
+  const numLength = roadNumber.toString().length;
+
+  if (highWayRoadNumber) color = colors.blue;
+  if (numLength === 1 || 2) color = colors.red;
+  else if (numLength === 3) color = colors.green;
+  else color = colors.black;
   return color;
 };
 const RoadNumberImage: FC<IProps> = ({ roadNumber }) => {
-  const roadColor = getRoadColor(roadNumber);
-  return <RoadNumberSvg roadColor={roadColor} roadNumber={roadNumber} />;
+  const roadColor = getColor(roadNumber);
+  return roadNumber ? <RoadNumberSvg roadColor={roadColor} roadNumber={roadNumber} /> : null;
 };
 export default RoadNumberImage;

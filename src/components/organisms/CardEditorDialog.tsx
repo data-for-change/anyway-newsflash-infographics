@@ -23,7 +23,11 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
   const store = useStore();
   const widget = store.getWidgetsDataByName(widgetName);
   const widgetComponent = !widget ? null : (
-    <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaString} />
+    <WidgetWrapper
+      widget={widget}
+      segmentText={store.newsFlashWidgetsMetaString}
+      roadNumber={store.newsFlashWidgetsMetaNumber}
+    />
   );
 
   // const widgetRef = useRef<HTMLDivElement>(null);
