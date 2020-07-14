@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import logoHasdna from '../../assets/hasadna.png';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
+import { Text, TextType } from '../atoms';
 import { borderColor, onLinkColor, onLinkColorHover } from '../../style';
 import ThankYouDialog from './ThankYouDialog';
 import AboutDialog from './AboutDialog';
@@ -49,11 +50,11 @@ export const Footer: FC<IProps> = () => {
           <img src={logoHasdna} alt="logo-hasadna" className={classes.logo} />
         </a>
         <Box className={classes.link} onClick={toggleAbout}>
-          אודות
+          <Text type={TextType.CONTENT}>אודות</Text>
         </Box>
         <AboutDialog isShowing={isShowingAbout} onClose={toggleAbout} />
         <Box className={classes.link} onClick={toggleThank}>
-          תודות
+          <Text type={TextType.CONTENT}>תודות</Text>
         </Box>
         <ThankYouDialog isShowing={isShowingThank} onClose={toggleThank} />
       </Box>

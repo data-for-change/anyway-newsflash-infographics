@@ -1,22 +1,14 @@
 import React, { FC } from 'react';
 import DialogWithHeader from '../molecules/DialogWithHeader';
 import { Text, TextType } from '../atoms';
-import { fontFamilyString } from '../../style';
-import { makeStyles } from '@material-ui/core';
+import { Box, makeStyles } from '@material-ui/core';
+
+const maxWidth = 'sm';
 
 interface IProps {
   isShowing: boolean;
   onClose: () => any;
 }
-
-const useStyles = makeStyles({
-  content: {
-    fontFamily: fontFamilyString,
-    '& p': {
-      marginBottom: '10px',
-    },
-  },
-});
 
 const ThankYouDialog: FC<IProps> = ({ isShowing, onClose }) => {
   const namesArr = [
@@ -36,11 +28,12 @@ const ThankYouDialog: FC<IProps> = ({ isShowing, onClose }) => {
   ];
   const sortedNames = namesArr.sort((a, b) => a.split(' ')[1].localeCompare(b.split(' ')[1], 'he'));
   const names = sortedNames.join(', ');
-  const classes = useStyles();
   return (
-    <DialogWithHeader isShowing={isShowing} onClose={onClose} title="תודות">
-      <article className={classes.content}>
-        <p>הפרויקט פותח על ידי:</p>
+    <DialogWithHeader isShowing={isShowing} onClose={onClose} title="תודות" maxWidth={maxWidth}>
+      <article>
+        <Box mb={1}>
+          <Text type={TextType.CONTENT_TITLE}>הפרויקט פותח על ידי:</Text>
+        </Box>
         <Text type={TextType.CONTENT}>{names}</Text>
       </article>
     </DialogWithHeader>

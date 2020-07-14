@@ -5,11 +5,12 @@ interface IProps {
   isShowing: boolean;
   onClose: () => any;
   fullWidth?: boolean;
+  maxWidth?: any;
 }
 
-const Dialog: FC<IProps> = ({ isShowing, onClose, children, fullWidth }) => {
+const Dialog: FC<IProps> = ({ isShowing, onClose, children, fullWidth, maxWidth }) => {
   return (
-    <MaterialDialog fullWidth={fullWidth} maxWidth={'lg'} open={isShowing} onClose={onClose}>
+    <MaterialDialog fullWidth={fullWidth} maxWidth={maxWidth} open={isShowing} onClose={onClose}>
       {children}
     </MaterialDialog>
   );
