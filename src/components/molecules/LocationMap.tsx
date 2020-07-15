@@ -4,7 +4,8 @@ import L, { LatLng } from 'leaflet';
 import { apiKey, uniquePoints } from '../../utils/utils';
 import { IPoint } from '../../models/Point';
 import ReactLeafletGoogleLayer from 'react-leaflet-google-layer';
-import AnywayMostSevereAccidentsMarker from '../atoms/AnywayMostSevereAccidentsMarker'
+import AnywayMostSevereAccidentsMarker from '../atoms/AnywayMostSevereAccidentsMarker';
+import { TooltipOffset } from '../atoms/TooltipMarker';
 const INITIAL_ZOOM = parseInt(process.env.REACT_APP_DEFAULT_MAP_ZOOM!);
 const WRAPPER_STYLES = { height: '100%', width: '100%' };
 const DEFAULT_BOUNDS = [
@@ -13,17 +14,17 @@ const DEFAULT_BOUNDS = [
 ];
 
 interface IProps {
-  items: IPoint[] | any ;
-  center?: { lat: number; lng: number; };
+  items: IPoint[] | any;
+  center?: { lat: number; lng: number };
 }
 
-const LocationMap: FC<IProps> = ( { items, center } ) => {
+const LocationMap: FC<IProps> = ({ items, center }) => {
   let markers = items.map((x: IPoint, i: number) => {
-    if ( x.latitude !== null && x.longitude !== null ) {
-      let toolTipRight = ( i % 2 === 0 ) ? true : false;
+    if (x.latitude !== null && x.longitude !== null) {
+      const tooltipOffset = i % 2 === 0 ? TooltipOffset.RIGHT : TooltipOffset.LEFT;
       return (
         <div key={i}>
-          <AnywayMostSevereAccidentsMarker markerdata={ x } markerside={ toolTipRight } />
+          <AnywayMostSevereAccidentsMarker data={x} tooltipOffset={tooltipOffset} />
         </div>
       );
     }
