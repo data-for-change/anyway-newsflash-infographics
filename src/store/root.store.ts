@@ -11,6 +11,7 @@ import { IPoint } from '../models/Point';
 import { fetchUserLoginStatus } from '../services/user.service';
 
 // todo: move all map defaults to one place
+const DEFAULT_TIME_FILTER = 5;
 const DEFAULT_LOCATION = { latitude: 32.0853, longitude: 34.7818 };
 const DEFAULT_LOCATION_META = {
   location_info: {
@@ -31,7 +32,7 @@ export default class RootStore {
   @observable newsFlashFetchLimit: number = 0;
   @observable newsFlashWidgetsMeta: ILocationMeta = DEFAULT_LOCATION_META;
   @observable newsFlashWidgetsData: Array<IWidgetBase> = [];
-  @observable newsFlashWidgetsTimerFilter = 0; // newsflash time filter (in years ago, 0- no filter)
+  @observable newsFlashWidgetsTimerFilter = DEFAULT_TIME_FILTER; // newsflash time filter (in years ago, 5 is the default)
   @observable newsFlashLoading: boolean = false;
   @observable widgetBoxLoading: boolean = false;
 
@@ -137,7 +138,7 @@ export default class RootStore {
     }
   }
 
-  private fetchSelectedNewsFlashWidgets(id: number, filterValue = 0): void {
+  private fetchSelectedNewsFlashWidgets(id: number, filterValue: number): void {
     this.widgetBoxLoading = true;
 
     fetchWidgets(id, filterValue).then((response: any) => {
