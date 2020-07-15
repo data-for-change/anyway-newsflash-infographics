@@ -17,6 +17,10 @@ const useStyles = makeStyles({
   },
 });
 
+const reloadHomePage = () => {
+  document.location.href = '/';
+};
+
 const Header: FC = () => {
   const store: RootStore = useStore();
   const classes = useStyles();
@@ -36,7 +40,7 @@ const Header: FC = () => {
   }
   return (
     <AnywayAppBar>
-      <Logo src={AnywayImage} alt={'Anyway'} height={'30px'} />
+      <Logo src={AnywayImage} alt={'Anyway'} height={'30px'} onClick={reloadHomePage} />
       <Box className={classes.profileBox}>
         {authElement}
         <SignInIcon />

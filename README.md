@@ -70,7 +70,7 @@ It is following [Atomic Design](https://bradfrost.com/blog/post/atomic-web-desig
 - [axios](https://github.com/axios/axios)
 - [Storybook](https://storybook.js.org/)
 - [Material-UI](https://material-ui.com/)
-- [React-Vis](https://uber.github.io/react-vis/) - Graphs Data Visualization Components
+- [Recharts](https://recharts.org/en-US/) - A composable charting library built on React components
 
 ### Project directory structure <a id="directory-structure"></a>
 

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Map } from 'react-leaflet';
 import L, { LatLng } from 'leaflet';
-import { getAPIKey, uniquePoints } from '../../utils/utils';
+import { apiKey, uniquePoints } from '../../utils/utils';
 import { IPoint } from '../../models/Point';
 import ReactLeafletGoogleLayer from 'react-leaflet-google-layer';
 import AnywayMostSevereAccidentsMarker from '../atoms/AnywayMostSevereAccidentsMarker'
@@ -33,7 +33,7 @@ const LocationMap: FC<IProps> = ( { items, center } ) => {
 
   return (
     <Map center={center} bounds={bounds} zoom={INITIAL_ZOOM} style={WRAPPER_STYLES}>
-      <ReactLeafletGoogleLayer googleMapsLoaderConf={{ KEY: getAPIKey(), VERSION: '3.40.6' }} type="terrain" />
+      <ReactLeafletGoogleLayer googleMapsLoaderConf={{ KEY: apiKey, VERSION: '3.40.6' }} type="terrain" />
       {markers}
     </Map>
   );

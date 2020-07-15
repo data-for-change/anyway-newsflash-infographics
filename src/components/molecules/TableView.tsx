@@ -3,16 +3,13 @@ import { makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
 import { Text, TextType } from '../atoms';
 import { Table, TableBody, TableCell, TableHead, TableRow, Theme } from '@material-ui/core';
 import { IWidgetMostSevereAccidentsTableData } from '../../models/WidgetData';
-import roadNumberIcon from '../../assets/road90.svg.png';
-import {
-  highlightBasicColor,
-  tableHeadColor,
-  tableBackgroundColorMain,
-  tableBackgroundColorOdd,
-} from '../../style';
+import RoadNumberImage from '../../services/get-road-image.service';
+
+import { highlightBasicColor, tableHeadColor, tableBackgroundColorMain, tableBackgroundColorOdd } from '../../style';
 
 interface IProps {
   data: IWidgetMostSevereAccidentsTableData;
+  roadNumber: number;
 }
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -24,9 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     marginBottom: '10px',
   },
-  large: {
-    width: theme.spacing(7),
-    height: theme.spacing(5),
+  roadNumber: {
     marginLeft: '10px',
   },
   table: {},
@@ -65,13 +60,15 @@ const StyledTableRow = withStyles(() =>
   }),
 )(TableRow);
 
-const TableView: FC<IProps> = ( { data } ) => {
+const TableView: FC<IProps> = ({ data, roadNumber }) => {
   const classes = useStyles();
   const { items, text } = data;
   return (
     <div className={classes.root}>
       <div className={classes.title}>
-        <img alt="Road Number" src={roadNumberIcon} className={classes.large} />
+        <div className={classes.roadNumber}>
+          <RoadNumberImage roadNumber={roadNumber} />
+        </div>
         <Text type={TextType.WIDGET_TABLE_TITLE}>
           <span className={classes.mainText}>{text.title}</span>
         </Text>

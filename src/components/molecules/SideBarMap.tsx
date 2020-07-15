@@ -6,7 +6,7 @@ import L, { LatLng } from 'leaflet';
 
 import { makeStyles } from '@material-ui/core/styles';
 import ReactLeafletGoogleLayer from 'react-leaflet-google-layer';
-import { getAPIKey, uniquePoints } from '../../utils/utils';
+import { apiKey, uniquePoints } from '../../utils/utils';
 import AnywayMarker from '../atoms/AnywayMarker';
 
 const INITIAL_ZOOM = parseInt(process.env.REACT_APP_DEFAULT_MAP_ZOOM!);
@@ -36,7 +36,7 @@ const SideBarMap: FC<IProps> = ({  items }) => {
 
   return (
     <Map  bounds={bounds} zoom={INITIAL_ZOOM} className={classes.wrapper}>
-        <ReactLeafletGoogleLayer googleMapsLoaderConf={{ KEY: getAPIKey(), VERSION: '3.40.6' }} type="terrain" />
+        <ReactLeafletGoogleLayer googleMapsLoaderConf={{ KEY: apiKey, VERSION: '3.40.6' }} type="terrain" />
         <AnywayMarker markerdata={ items[0] }/>
     </Map>
   );
