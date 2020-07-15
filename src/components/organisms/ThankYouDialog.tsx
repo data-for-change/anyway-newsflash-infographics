@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import DialogWithHeader from '../molecules/DialogWithHeader';
 import { Text, TextType } from '../atoms';
-import { Box, makeStyles } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
 const maxWidth = 'sm';
 
