@@ -16,8 +16,6 @@ export enum TooltipOffset {
   TOPLEFT,
 }
 const getLabelVertical = (offset: TooltipOffset): number => {
-  console.log(offset);
-
   switch (offset) {
     case TooltipOffset.LEFT:
     case TooltipOffset.BOTTOMLEFT:

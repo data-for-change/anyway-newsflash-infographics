@@ -29,7 +29,6 @@ const usingHtml2Canvas = (fileName: string, widgetElement: HTMLElement, scale: n
     onclone: (el) => removeMapControllers(el),
   })
     .then(function (canvas) {
-      console.log(canvas);
       return canvas.toDataURL('image/png', 1.0);
     })
     .then(function (blob) {

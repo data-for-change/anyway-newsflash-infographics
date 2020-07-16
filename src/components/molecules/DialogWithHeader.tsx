@@ -23,7 +23,7 @@ const useStyles = makeStyles({
     color: closeButtonColor,
   },
 });
-const DialogWithHeader: FC<IProps> = ({ onClose, isShowing, title, fullWidth, children, maxWidth }) => {
+const DialogWithHeader: FC<IProps> = ({ onClose, isShowing, title, fullWidth, children, maxWidth = 'lg' }) => {
   const classes = useStyles();
   return (
     <Dialog isShowing={isShowing} onClose={onClose} fullWidth={fullWidth} maxWidth={maxWidth}>
