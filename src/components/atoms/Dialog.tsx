@@ -5,7 +5,7 @@ interface IProps {
   isShowing: boolean;
   onClose: () => any;
   fullWidth?: boolean;
-  maxWidth?: any;
+  maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
 }
 
 const Dialog: FC<IProps> = ({ isShowing, onClose, children, fullWidth, maxWidth }) => {

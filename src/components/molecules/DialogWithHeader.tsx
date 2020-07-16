@@ -9,7 +9,7 @@ interface IProps {
   isShowing: boolean;
   onClose: () => any;
   fullWidth?: boolean;
-  maxWidth?: any;
+  maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
 }
 const useStyles = makeStyles({
   bar: {
