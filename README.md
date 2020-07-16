@@ -36,7 +36,7 @@ Want to file a bug, contribute some code, or improve documentation? Excellent! P
 ### First thing first
 
 - Join our [Slack Channel](https://app.slack.com/client/T02G85W3A/CLWT1CLDQ). contact Yuval or Atalya to get invitation.
-- Optional: installing [ZenHub](https://chrome.google.com/webstore/detail/zenhub-for-github/ogcgkffhplmphkaahpmffcafajaocjbd) would make it easier to look at our project [board](https://github.com/hasadna/anyway-newsflash-infographics#workspaces/anyway-5e00f3aa79454c5108bf2370/).
+- Optional: install [ZenHub](https://chrome.google.com/webstore/detail/zenhub-for-github/ogcgkffhplmphkaahpmffcafajaocjbd), so you can see our project [board](https://github.com/hasadna/anyway-newsflash-infographics#workspaces/anyway-5e00f3aa79454c5108bf2370/).
 
 ### Diving in <a id="diving"></a>
 
