@@ -6,19 +6,19 @@ interface IProps {
   roadNumber: number;
 }
 const HIGH_WAY_ROAD_NUMBERS = [1, 2, 4, 5, 6, 9, 16, 20, 22, 50, 70, 77, 431, 471, 531];
-const getColor = (roadNumber: number) => {
-  let color;
+const getIconStyle = (roadNumber: number) => {
+  let style;
   const highWayRoadNumber = HIGH_WAY_ROAD_NUMBERS.includes(roadNumber);
-  const numLength = roadNumber.toString().length;
+  const numLength: number = roadNumber.toString().length;
+  if (highWayRoadNumber) style = { color: colors.blue, size: '80' };
+  else if (numLength === 1 || numLength === 2) style = { color: colors.red, size: '80' };
+  else if (numLength === 3) style = { color: colors.green, size: '65' };
+  else style = { color: colors.black, size: '50' };
 
-  if (highWayRoadNumber) color = colors.blue;
-  if (numLength === 1 || 2) color = colors.red;
-  else if (numLength === 3) color = colors.green;
-  else color = colors.black;
-  return color;
+  return style;
 };
 const RoadNumberImage: FC<IProps> = ({ roadNumber }) => {
-  const roadColor = getColor(roadNumber);
-  return roadNumber ? <RoadNumberSvg roadColor={roadColor} roadNumber={roadNumber} /> : null;
+  const iconStyle = getIconStyle(roadNumber);
+  return roadNumber ? <RoadNumberSvg iconStyle={iconStyle} roadNumber={roadNumber} /> : null;
 };
 export default RoadNumberImage;
