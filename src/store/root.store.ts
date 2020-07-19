@@ -137,6 +137,14 @@ export default class RootStore {
       this.fetchSelectedNewsFlashWidgets(this.activeNewsFlashId, filterValue);
     }
   }
+  @action
+  changeLanguage(lngCode: string): void {
+    //temporary code. will convert to i18next function in following lines once it is set up in the project
+    console.log("changing language to", lngCode);
+    // i18next.changeLanguage(lngCode).then((t) => {
+    //   t('key'); //
+    // });
+  }
 
   private fetchSelectedNewsFlashWidgets(id: number, filterValue: number): void {
     this.widgetBoxLoading = true;
