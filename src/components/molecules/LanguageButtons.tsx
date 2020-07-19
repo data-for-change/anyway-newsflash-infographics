@@ -40,6 +40,7 @@ const LanguageButtons: FC = () => {
       {languages.map((language) => {
         return (
           <AnyWayButton
+            //todo - button should be disabled if it represents the current language
             className={classes.link}
             onClick={() => {
               store.changeLanguage(language.value);
