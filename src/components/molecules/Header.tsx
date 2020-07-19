@@ -10,9 +10,10 @@ import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
 import UserProfileHeader from './UserProfileHeader';
 import { makeStyles } from '@material-ui/core/styles';
+import LanguageButtons from '../molecules/LanguageButtons';
 
 const useStyles = makeStyles({
-  profileBox: {
+  settingsBox: {
     display: 'flex',
   },
 });
@@ -41,7 +42,8 @@ const Header: FC = () => {
   return (
     <AnywayAppBar>
       <Logo src={AnywayImage} alt={'Anyway'} height={'30px'} onClick={reloadHomePage} />
-      <Box className={classes.profileBox}>
+      <Box className={classes.settingsBox}>
+        <LanguageButtons />
         {authElement}
         <SignInIcon />
       </Box>
