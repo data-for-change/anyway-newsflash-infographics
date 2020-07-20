@@ -3,7 +3,10 @@ import WidgetsTemplate from '../components/organisms/WidgetsTemplate';
 import { Box } from '@material-ui/core';
 import SideBar from '../components/organisms/SideBar';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import { RouteComponentProps } from 'react-router';
+import {
+  RouteComponentProps,
+  //  Redirect
+} from 'react-router';
 import { borderColor } from '../style';
 import FilterBar from '../components/organisms/FilterBar';
 import OverlayLoader from '../components/molecules/OverlayLoader';
@@ -30,10 +33,12 @@ const useStyles = makeStyles({
 
 const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
   const classes = useStyles();
-  const id = match.params.id ? parseInt(match.params.id) : null;
   const store: RootStore = useStore();
+  const newId = store?.newsFlashCollection[store.newsFlashCollection.length - 1]?.id;
+  const id = match.params.id ? parseInt(match.params.id) : newId;
+  console.log('id', id);
   const loading = store.widgetBoxLoading;
-
+  console.log('newId', newId);
   return (
     <Box display="flex" flexGrow={1} className={classes.mainBox}>
       <Box flexGrow={1} maxWidth={319} display="flex" borderLeft={1} borderColor={borderColor}>
