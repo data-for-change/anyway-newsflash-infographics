@@ -45,10 +45,6 @@ export default class RootStore {
       console.log(initData);
       if (initData.newsFlashCollection) {
         this.newsFlashCollection = initData.newsFlashCollection;
-        console.log(
-          'RootStore -> constructor -> this.newsFlashCollection',
-          this.newsFlashCollection[this.newsFlashCollection.length - 1].id,
-        );
       }
       if (initData.newsFlashWidgetsData) {
         this.newsFlashWidgetsData = initData.newsFlashWidgetsData.widgets;
@@ -88,11 +84,6 @@ export default class RootStore {
 
   @computed
   get activeNewsFlash() {
-    if (this.appInitialized) {
-      console.log('initialized');
-    } else {
-      console.log('not inite');
-    }
     return this.newsFlashCollection.find((item) => item.id === this.activeNewsFlashId);
   }
 
