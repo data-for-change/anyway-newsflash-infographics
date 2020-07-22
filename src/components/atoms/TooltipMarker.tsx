@@ -15,23 +15,52 @@ export enum TooltipOffset {
   LEFT,
   TOPLEFT,
 }
-const getLabelVertical = (offset: TooltipOffset): number => {
+
+const getLabelPosition = (offset: TooltipOffset): string => {
+  const x = getLabelXPosition(offset);
+  const y = getLabelYPosition(offset);
+  return `translate(${x},${y})`;
+};
+
+const getLabelXPosition = (offset: TooltipOffset): string => {
   switch (offset) {
-    case TooltipOffset.LEFT:
-    case TooltipOffset.BOTTOMLEFT:
-    case TooltipOffset.TOPLEFT:
-      return 16;
-    case TooltipOffset.RIGHT:
+    case TooltipOffset.TOP:
+    case TooltipOffset.BOTTOM:
+      return '75%';
     case TooltipOffset.BOTTOMRIGHT:
     case TooltipOffset.TOPRIGHT:
-      return -87;
+      return '120%';
+    case TooltipOffset.RIGHT:
+      return '135%';
+    case TooltipOffset.TOPLEFT:
+    case TooltipOffset.BOTTOMLEFT:
+      return '8px';
     default:
-      return 0;
+      return '0';
   }
 };
 
+const getLabelYPosition = (offset: TooltipOffset): string => {
+  switch (offset) {
+    case TooltipOffset.TOP:
+    case TooltipOffset.TOPLEFT:
+    case TooltipOffset.TOPRIGHT:
+      return '-27px';
+    case TooltipOffset.BOTTOM:
+      return '40px';
+    case TooltipOffset.BOTTOMLEFT:
+    case TooltipOffset.BOTTOMRIGHT:
+      return '32px';
+    default:
+      return '0';
+  }
+};
 const getLabelFlexFlow = (offset: TooltipOffset): string => {
   switch (offset) {
+    case TooltipOffset.TOP:
+      return 'column-reverse';
+    case TooltipOffset.BOTTOM:
+      return 'column';
     case TooltipOffset.RIGHT:
     case TooltipOffset.BOTTOMRIGHT:
     case TooltipOffset.TOPRIGHT:
@@ -43,10 +72,20 @@ const getLabelFlexFlow = (offset: TooltipOffset): string => {
 
 const getLabelArrowRotation = (offset: TooltipOffset): string => {
   switch (offset) {
+    case TooltipOffset.TOP:
+      return 'rotate(90deg)';
     case TooltipOffset.RIGHT:
-    case TooltipOffset.BOTTOMRIGHT:
-    case TooltipOffset.TOPRIGHT:
       return 'rotate(180deg)';
+    case TooltipOffset.TOPRIGHT:
+      return 'translate(6px, 13px) rotate(135deg)';
+    case TooltipOffset.TOPLEFT:
+      return 'translate(-6px, 13px) rotate(45deg)';
+    case TooltipOffset.BOTTOM:
+      return 'rotate(270deg)';
+    case TooltipOffset.BOTTOMRIGHT:
+      return 'translate(6px, -13px) rotate(-135deg)';
+    case TooltipOffset.BOTTOMLEFT:
+      return 'translate(-6px, -13px) rotate(-45deg)';
     default:
       return 'none';
   }
@@ -60,8 +99,9 @@ const useStyles = makeStyles({
   },
   root: {
     position: 'absolute',
-    right: (offset: TooltipOffset) => getLabelVertical(offset),
+    right: 16,
     bottom: 0,
+    transform: (offset: TooltipOffset) => getLabelPosition(offset),
     display: 'flex',
     flexFlow: (offset: TooltipOffset) => getLabelFlexFlow(offset),
     alignItems: 'center',
@@ -79,7 +119,7 @@ const useStyles = makeStyles({
     display: 'inline-flex',
     borderStyle: 'solid',
     borderWidth: '5px 0 5px 20px',
-    borderColor: 'transparent transparent transparent #000000',
+    borderColor: 'transparent black transparent black',
     transform: (offset: TooltipOffset) => getLabelArrowRotation(offset),
   },
 });
