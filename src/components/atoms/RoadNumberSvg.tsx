@@ -6,7 +6,7 @@ const HEIGHT = '40px';
 
 interface IProps {
   roadNumber: number;
-  iconStyle: { color: string; size: string };
+  iconStyle: { color: string; size: number };
 }
 
 const RoadNumberSvgImage: FC<IProps> = ({ roadNumber, iconStyle }) => {
