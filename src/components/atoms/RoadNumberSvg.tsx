@@ -6,10 +6,11 @@ const HEIGHT = '40px';
 
 interface IProps {
   roadNumber: number;
-  roadColor: string;
+  iconStyle: { color: string; size: number };
 }
 
-const RoadNumberSvgImage: FC<IProps> = ({ roadNumber, roadColor }) => {
+const RoadNumberSvgImage: FC<IProps> = ({ roadNumber, iconStyle }) => {
+  const { color, size } = iconStyle;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -41,19 +42,19 @@ const RoadNumberSvgImage: FC<IProps> = ({ roadNumber, roadColor }) => {
         ry="23.8125"
       />
       <path
-        style={{ fill: roadColor }}
+        style={{ fill: color }}
         d="m 23.944793,8.0697922 c -8.79475,0 -15.8750008,7.0802508 -15.8750008,15.8750008 v 84.666667 c 0,8.79475 7.0802508,15.875 15.8750008,15.875 H 157.82396 c 8.79475,0 15.875,-7.08025 15.875,-15.875 V 23.944793 c 0,-8.79475 -7.08025,-15.8750008 -15.875,-15.8750008 z m 66.939585,9.7895838 64.822922,7.9375 7.9375,40.481251 -7.9375,40.481253 -64.822922,7.9375 -65.352085,-7.9375 -7.408334,-40.481253 7.408334,-40.481251 z"
       />
       <g>
         <text
           x="50%"
-          y="57%"
+          y="56%"
           dominantBaseline="middle"
           textAnchor="middle"
           fontFamily={roadIconFont}
-          fontSize="80"
+          fontSize={size}
           fontWeight="800"
-          fill={roadColor}
+          fill={color}
         >
           {roadNumber}
         </text>
