@@ -13,7 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import LanguageButtons from '../molecules/LanguageButtons';
 
 const useStyles = makeStyles({
-  settingsBox: {
+  settings: {
     display: 'flex',
   },
 });
@@ -41,8 +41,8 @@ const Header: FC = () => {
   }
   return (
     <AnywayAppBar>
-      <Logo src={AnywayImage} alt={'Anyway'} height={'30px'} onClick={reloadHomePage} />
-      <Box className={classes.settingsBox}>
+      <Logo src={AnywayImage} alt={'Anyway'} height={'30'} onClick={reloadHomePage} />
+      <Box className={classes.settings}>
         <LanguageButtons />
         {authElement}
         <SignInIcon />
