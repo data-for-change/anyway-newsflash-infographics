@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { Card, CardContent, CardActions } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import RoadImage from '../../assets/road-image.png';
@@ -10,7 +10,6 @@ import AnywayImage from '../../assets/anyway.png';
 import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
 import CardEditor from '../organisms/CardEditorDialog';
 import SettingsOverscanIcon from '@material-ui/icons/SettingsOverscan';
-
 import { fontFamilyString, cardWidth, cardHeight, cardPadding, cardFooterHeight } from '../../style';
 
 const DEFAULTE_SIZE = 1;
@@ -77,15 +76,26 @@ const useStyles = makeStyles({
 const AnyWayCard: FC<IProps> = ({ widgetName, children, layoutOptions, getCardRef, actionButtons = true }) => {
   const [element, setElement] = useState({});
   const [isOpen, setOpen] = useState(false);
+  useEffect(() => {
+    if (element && element instanceof HTMLElement) {
+      const elm = element.querySelector('.leaflet-google-mutant');
+      if (elm && elm instanceof HTMLElement) {
+        elm.style.height = `${getContentHeight(layoutOptions)}px`;
+      }
+    }
+  });
+
   const handleCardEditorOpen = () => setOpen(true);
   const handleCardEditorClose = () => setOpen(false);
 
   const classes = useStyles(layoutOptions);
+
   const imgDownloadHandler = () => {
     if (element && element instanceof HTMLElement) {
       widgetToImage(widgetName, element);
     }
   };
+
   const buttons = !actionButtons ? null : (
     <>
       <AnyWayButton className={classes.button} disableRipple={true} onClick={imgDownloadHandler}>
