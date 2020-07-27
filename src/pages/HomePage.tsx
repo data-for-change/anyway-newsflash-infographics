@@ -34,6 +34,10 @@ const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
   const initialId = store?.newsFlashCollection[0]?.id;
   const id = match.params.id ? parseInt(match.params.id) : initialId;
   const loading = store.widgetBoxLoading;
+  if (!id) {
+    return <Redirect to={`/newsflash/${initialId}`} />;
+  }
+
   return (
     <Box display="flex" flexGrow={1} className={classes.mainBox}>
       <Box flexGrow={1} maxWidth={319} display="flex" borderLeft={1} borderColor={borderColor}>
@@ -42,7 +46,7 @@ const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
       <Box flexGrow={5} className={classes.widgetBox} position="relative">
         <OverlayLoader show={loading} />
         <FilterBar />
-        {id ? <WidgetsTemplate id={id} /> : <Redirect to={`/newsflash/${initialId}`} />}
+        <WidgetsTemplate id={id} />
       </Box>
     </Box>
   );
