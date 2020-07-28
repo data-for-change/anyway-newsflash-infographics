@@ -17,8 +17,7 @@ const useStyles = makeStyles({
     cursor: 'pointer',
   },
 });
-
-const languages = [
+const LANGUAGES = [
   {
     buttonText: 'English',
     value: 'en',
