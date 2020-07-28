@@ -22,6 +22,9 @@ const useStyles = makeStyles({
     },
     justifyContent: 'flex-start',
   },
+  link: {
+    cursor: 'pointer',
+  },
   footer: {
     flexGrow: 1,
     display: 'flex',

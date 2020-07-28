@@ -33,15 +33,12 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
   // const widgetRef = useRef<HTMLDivElement>(null);
   const getCardRef = (element: HTMLElement) => setCardElement(element);
   const imgDownloadHandler = () => {
-    console.log(cardElement);
-
     if (cardElement && cardElement instanceof HTMLElement) {
       widgetToImage(widgetName, cardElement);
     }
   };
 
   const handleSizeChange = (event: any, newSize: number | number[]) => {
-    console.log(newSize);
     setSize(newSize as number);
   };
   const layoutHandler = () => {

@@ -1,84 +1,42 @@
-import React, { FC } from 'react';
-import ReactDOMServer from 'react-dom/server';
+import React, { FC, useState } from 'react';
 import L from 'leaflet';
 import { Marker, Popup } from 'react-leaflet';
-import { makeStyles } from '@material-ui/core';
-import { dateFormat } from '../../utils/time.utils';
-import MapIcon from '../atoms/AnywayMapIcon'
+import MapIcon from '../atoms/AnywayMapIcon';
+import TooltipMarker, { TooltipOffset } from './TooltipMarker';
 
 interface IProps {
-  markerdata: any;
-  markerside: any;
+  data: any;
+  tooltipOffset: TooltipOffset;
 }
-const useStyles = makeStyles({
-  icon: {
-    width: 0,
-    height: 0,
-    backgroundColor: 'transparent',
-  },
-  mapLabel: (side) => ({
-    position: 'absolute',
-    right: side ? -72 : 2,
-    bottom: '0px',
-    display: 'flex',
-    alignItems: 'center',
-    marginRight: side ? '-15px' : '15px',
-    transform: side ? 'scaleX(-1)' : '',
-  }),
-  mapLabelContent: (side) => ({
-    position: 'relative',
-    order: 1,
-    padding: ' 1px 3px',
-    borderRadius: '5px 7px 7px 5px',
-    whiteSpace: 'nowrap',
-    color: '#FFFFFF',
-    backgroundColor: '#000000',
-    transform: side ? 'scaleX(-1)' : '',
-  }),
-  mapLabelArrow: {
-    display: 'inline-flex',
-    borderStyle: 'solid',
-    borderWidth: '5px 0 5px 20px',
-    borderColor: 'transparent transparent transparent #000000',
-  },
-});
-const TooltipIcon = ({ markerData, side }: any) => {
-  const classes = useStyles(side);
 
-  // const { accident_timestamp, accident_severity, accident_type = '' } = markerData;
-  // const { accident_timestamp, accident_severity, accident_type = '' } = markerData;
-  // const typeStr = accident_type === '' ? '' : `, ${accident_type}`;
+const AnywayMostSevereAccidentsMarker: FC<IProps> = ({ data, tooltipOffset = TooltipOffset.LEFT }) => {
+  const [offset, setOffset] = useState(tooltipOffset);
+  const { latitude, longitude, accident_severity, accident_timestamp } = data;
+  const position: L.LatLng = new L.LatLng(latitude, longitude);
 
-  // temp: make string short - skip desription
-  // const iconText = `${dateFormat(accident_timestamp)} - ${accident_severity}${typeStr}`;
-  const iconText: any = `${dateFormat(markerData.accident_timestamp)}`;
-
-  return (
-    <div className={classes.mapLabel}>
-      <div className={classes.mapLabelContent}>{iconText}</div>
-      <div className={classes.mapLabelArrow}></div>
-    </div>
-  );
-};
-
-const AnywayMostSevereAccidentsMarker: FC<IProps> = ( { markerdata, markerside } ) => {
-  const { latitude, longitude, accident_severity, accident_timestamp } = markerdata;
-  const classes = useStyles();
-  const lPoint: L.LatLng = new L.LatLng(latitude, longitude);
-  const tooltipIcon = L.divIcon({
-    className: classes.icon,
-    html: ReactDOMServer.renderToString(<TooltipIcon side={markerside} markerData={markerdata} />),
-  });
-  const icon: L.Icon = MapIcon.getIconBySeverity( 'carIcon', markerdata.accident_severity );
-
-  return !accident_timestamp && !accident_severity ? null : (
+  const icon: L.Icon = MapIcon.getIconBySeverity('carIcon', data.accident_severity);
+  const isValid = accident_timestamp && accident_severity;
+  return !isValid ? null : (
     <>
-      <Marker icon={tooltipIcon} position={lPoint} />
-      <Marker icon={icon} position={lPoint}>
+      <TooltipMarker data={data} position={position} offset={offset} />
+      <Marker icon={icon} position={position}>
         {
           <Popup>
+            <div>Tooltip Location</div>
             <div>
-              {markerdata.accident_timestamp}, {markerdata.accident_severity}
+              <button onClick={setOffset.bind(null, TooltipOffset.TOPRIGHT)}>*</button>
+              <button onClick={setOffset.bind(null, TooltipOffset.TOP)}>*</button>
+              <button onClick={setOffset.bind(null, TooltipOffset.TOPLEFT)}>*</button>
+            </div>
+            <div>
+              <button onClick={setOffset.bind(null, TooltipOffset.RIGHT)}>*</button>
+              <button>X</button>
+              <button onClick={setOffset.bind(null, TooltipOffset.LEFT)}>*</button>
+            </div>
+            <div>
+              <button onClick={setOffset.bind(null, TooltipOffset.BOTTOMRIGHT)}>*</button>
+              <button onClick={setOffset.bind(null, TooltipOffset.BOTTOM)}>*</button>
+              <button onClick={setOffset.bind(null, TooltipOffset.BOTTOMLEFT)}>*</button>
             </div>
           </Popup>
         }
