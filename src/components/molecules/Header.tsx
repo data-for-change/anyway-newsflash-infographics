@@ -10,7 +10,7 @@ import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
 import UserProfileHeader from './UserProfileHeader';
 import { makeStyles } from '@material-ui/core/styles';
-import LanguageButtons from '../molecules/LanguageButtons';
+import LanguageMenu from './LanguageMenu';
 
 const useStyles = makeStyles({
   settings: {
@@ -43,7 +43,7 @@ const Header: FC = () => {
     <AnywayAppBar>
       <Logo src={AnywayImage} alt={'Anyway'} height={'30'} onClick={reloadHomePage} />
       <Box className={classes.settings}>
-        <LanguageButtons />
+        <LanguageMenu />
         {authElement}
         <SignInIcon />
       </Box>
