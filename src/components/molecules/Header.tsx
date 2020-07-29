@@ -41,7 +41,7 @@ const Header: FC = () => {
   }
   return (
     <AnywayAppBar>
-      <Logo src={AnywayImage} alt={'Anyway'} height={'30'} onClick={reloadHomePage} />
+      <Logo src={AnywayImage} alt={'Anyway'} height={30} onClick={reloadHomePage} />
       <Box className={classes.settings}>
         <LanguageMenu />
         {authElement}
