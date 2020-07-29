@@ -49,7 +49,6 @@ const LanguageMenu: FC = () => {
 
   return (
     <div>
-      {/* todo - add chevron? */}
       <AnyWayButton aria-controls="menu" aria-haspopup="true" onClick={openMenu} className={classes.link}>
         <img src={languageSelector} />
       </AnyWayButton>
