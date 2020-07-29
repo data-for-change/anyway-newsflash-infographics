@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 
 interface LogoProps {
   src: string;
@@ -6,6 +7,14 @@ interface LogoProps {
   height: string;
   onClick?: () => any;
 }
-export const Logo: FC<LogoProps> = ({ src, alt, height, onClick }) => (
-  <img src={src} alt={alt} height={`${height}`} onClick={onClick} />
-);
+
+const useStyles = makeStyles({
+  link: {
+    cursor: 'pointer',
+  },
+});
+
+export const Logo: FC<LogoProps> = ({ src, alt, height, onClick }) => {
+  const classes = useStyles();
+  return <img className={classes.link} src={src} alt={alt} height={`${height}`} onClick={onClick} />;
+};

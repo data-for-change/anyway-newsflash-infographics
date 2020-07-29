@@ -23,10 +23,21 @@ const AnywayMostSevereAccidentsMarker: FC<IProps> = ({ data, tooltipOffset = Too
         {
           <Popup>
             <div>Tooltip Location</div>
-            <button onClick={setOffset.bind(null, TooltipOffset.RIGHT)}>🠖</button>
-            <button onClick={setOffset.bind(null, TooltipOffset.LEFT)}>🠔</button>
-            {/* <button>🠕</button> */}
-            {/* <button>🠗</button> */}
+            <div>
+              <button onClick={setOffset.bind(null, TooltipOffset.TOPRIGHT)}>*</button>
+              <button onClick={setOffset.bind(null, TooltipOffset.TOP)}>*</button>
+              <button onClick={setOffset.bind(null, TooltipOffset.TOPLEFT)}>*</button>
+            </div>
+            <div>
+              <button onClick={setOffset.bind(null, TooltipOffset.RIGHT)}>*</button>
+              <button>X</button>
+              <button onClick={setOffset.bind(null, TooltipOffset.LEFT)}>*</button>
+            </div>
+            <div>
+              <button onClick={setOffset.bind(null, TooltipOffset.BOTTOMRIGHT)}>*</button>
+              <button onClick={setOffset.bind(null, TooltipOffset.BOTTOM)}>*</button>
+              <button onClick={setOffset.bind(null, TooltipOffset.BOTTOMLEFT)}>*</button>
+            </div>
           </Popup>
         }
       </Marker>
