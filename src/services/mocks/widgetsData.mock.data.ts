@@ -419,5 +419,18 @@ export default {
       },
     },
     { name: 'vision_zero', rank: 15, data: { items: ['vision_zero_2_plus_1'] } },
+    {
+      name: 'accident_count_by_car_type',
+      rank: 17,
+      data: {
+        items: [
+          { car_type: 'רכב פרטי', percentage_segment: 78, percentage_country: 74 },
+          { car_type: 'מסחרי/משאית', percentage_segment: 39, percentage_country: 34 },
+          { car_type: 'אופנוע', percentage_segment: 28, percentage_country: 15 },
+        ],
+        // TODO: remove text title
+        text: { title: 'תאונות לפי סוג מכונית אחוזים' },
+      },
+    },
   ],
 };
