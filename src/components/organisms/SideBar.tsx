@@ -34,6 +34,7 @@ const SideBar: FC<IProps> = () => {
   return (
     <Box display="flex" flexDirection="column" justifyContent="center" alignItems="stretch">
       <Box
+        position="relative"
         display="flex"
         flexDirection="column"
         flexGrow={1}
@@ -41,14 +42,17 @@ const SideBar: FC<IProps> = () => {
         border={1}
         borderColor={borderColor}
       >
-        <ErrorBoundary>
-          <NewsFlashFilterPanel />
-        </ErrorBoundary>
-
-        <InfinitScroll onScrollEnd={fetchMoreNewsItems}>
-          <OverlayLoader show={loading} />
-          <News />
-        </InfinitScroll>
+        <OverlayLoader show={loading} />
+        <Box>
+          <ErrorBoundary>
+            <NewsFlashFilterPanel />
+          </ErrorBoundary>
+        </Box>
+        <Box>
+          <InfinitScroll onScrollEnd={fetchMoreNewsItems}>
+            <News />
+          </InfinitScroll>
+        </Box>
       </Box>
       <Box flexShrink={0} flexGrow={0} p={1}>
         <Text type={TextType.CONTENT_TITLE} children={mapTitle} />
