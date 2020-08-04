@@ -28,6 +28,7 @@ const LanguageMenu: FC = () => {
   const closeMenu = () => {
     setAnchorEl(null);
   };
+  const location = useLocation();
 
   return (
     <div>
@@ -37,8 +38,8 @@ const LanguageMenu: FC = () => {
       <Menu
         items={LANGUAGES.map(language => (
           <AnywayLink
-          // todo - link to the current url with appropiate language code in it
-           to={language.value}
+          // todo - link to the current url with appropiate language code in it using language.value
+           to={location.pathname}
            >
             <Text type={TextType.CONTENT_TITLE}>{language.buttonText}</Text>
           </AnywayLink>
