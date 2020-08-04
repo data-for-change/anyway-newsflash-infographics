@@ -1,6 +1,6 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import backend from 'i18next-xhr-backend';
+import HttpApi from 'i18next-http-backend';
 
 const options = {
   fallbackLng: 'he',
@@ -15,7 +15,7 @@ const options = {
     wait: true,
   },
 };
-i18n.use(backend).use(initReactI18next).init(options);
+i18n.use(HttpApi).use(initReactI18next).init(options);
 
 export const textDirection = i18n.dir(); //return direction ltr/rtl
 

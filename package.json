@@ -10,7 +10,7 @@
     "file-saver": "^2.0.2",
     "html2canvas": "^1.0.0-rc.5",
     "i18next": "^19.6.3",
-    "i18next-xhr-backend": "^3.2.2",
+    "i18next-http-backend": "^1.0.17",
     "leaflet": "^1.6.0",
     "leaflet.heat": "^0.2.0",
     "mobx": "^5.15.4",
