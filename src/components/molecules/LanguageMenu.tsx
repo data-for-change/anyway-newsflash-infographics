@@ -1,23 +1,11 @@
 import React, { FC, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { onLinkColor, onLinkColorHover } from '../../style';
 import Menu from '../atoms/Menu';
 import languageSelector from '../../assets/language-selector.svg';
 import { AnyWayButton } from '../atoms/AnyWayButton';
 import { AnywayLink } from '../atoms';
 import { Text, TextType } from '../atoms';
+import { useLocation } from "react-router-dom";
 
-const useStyles = makeStyles({
-  link: {
-    color: `${onLinkColor}`,
-    textDecoration: 'none',
-    textTransform: 'none',
-    '&:hover': {
-      color: `${onLinkColorHover}`,
-    },
-    cursor: 'pointer',
-  },
-});
 const LANGUAGES = [
   {
     buttonText: 'English',
@@ -33,7 +21,6 @@ const LANGUAGES = [
   },
 ];
 const LanguageMenu: FC = () => {
-  const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = (event: any) => {
     setAnchorEl(event.currentTarget);
@@ -44,7 +31,7 @@ const LanguageMenu: FC = () => {
 
   return (
     <div>
-      <AnyWayButton aria-controls="menu" aria-haspopup="true" onClick={openMenu} className={classes.link}>
+      <AnyWayButton aria-controls="menu" aria-haspopup="true" onClick={openMenu}>
         <img alt="langauge selection" src={languageSelector} />
       </AnyWayButton>
       <Menu
