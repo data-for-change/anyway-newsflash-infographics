@@ -7,6 +7,7 @@ import { StoreContext, useStore } from './store/storeConfig';
 import Header from './components/molecules/Header';
 import 'leaflet/dist/leaflet.css';
 import PopUpRedirect from './services/PopUpRedirect';
+import HomePageRedirect from './pages/HomePageRedirect';
 
 // main components height - must add up to 100
 const headerHeight = '5vh';
@@ -34,9 +35,9 @@ const App: React.FC = () => {
           </Box>
           <Box height={pageContentHeight} className={classes.pageContent}>
             <Switch>
-              <Route exact path="/" component={HomePage} />
-              <Route path="/popup-redirect" component={PopUpRedirect}></Route>
+              <Route exact path="/" component={HomePageRedirect} />
               <Route path="/newsflash/:id" component={HomePage} />
+              <Route path="/popup-redirect" component={PopUpRedirect}></Route>
             </Switch>
           </Box>
           <Box height={footerHeight} display="flex">
