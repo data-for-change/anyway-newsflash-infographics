@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 interface LogoProps {
   src: string;
   alt: string;
-  height: string | number;
+  height: number;
   onClick?: () => any;
 }
 
