@@ -31,11 +31,12 @@ const useStyles = makeStyles({
 const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
   const classes = useStyles();
   const store: RootStore = useStore();
-  const initialId = store?.newsFlashCollection[0]?.id;
-  const id = match.params.id ? parseInt(match.params.id) : initialId;
+
+  const id = match.params.id ? parseInt(match.params.id) : null;
   const loading = store.widgetBoxLoading;
+
   if (!id) {
-    return <Redirect to={`/newsflash/${initialId}`} />;
+    return <Redirect to="/" />;
   }
 
   return (
