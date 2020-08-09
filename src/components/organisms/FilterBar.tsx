@@ -32,7 +32,7 @@ const FilterBar: FC<IProps> = () => {
         <Toolbar variant="dense">
           <Grid container>
             <Grid item xs={12} md={3}>
-              <SelectButton initialValue={0} onChange={onFilterChange} />
+              <SelectButton  onChange={onFilterChange} />
             </Grid>
             <Grid item xs={12} md={9} className={classes.locationMeta}>
               <Text type={TextType.CONTENT_TITLE}>{store.newsFlashWidgetsMetaString}</Text>

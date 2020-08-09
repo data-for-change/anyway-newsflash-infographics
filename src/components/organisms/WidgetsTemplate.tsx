@@ -12,16 +12,17 @@ import WidgetWrapper from '../molecules/widgets/WidgetWrapper';
 
 interface IProps {
   id: number | null;
+  filterValue: number | null;
 }
 
-const WidgetsTemplate: FC<IProps> = ({ id }) => {
+const WidgetsTemplate: FC<IProps> = ({ id,filterValue }) => {
   const store: RootStore = useStore();
 
   useEffect(() => {
     if (id) {
-      store.selectNewsFlash(id);
+      store.selectNewsFlash(id,filterValue);
     }
-  }, [id, store]);
+  }, [id, store,filterValue]);
 
   const widgetsData = store.newsFlashWidgetsData;
   const widgetCards = widgetsData.map((widget, index) => {

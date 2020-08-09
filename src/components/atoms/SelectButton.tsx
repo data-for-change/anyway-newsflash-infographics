@@ -5,10 +5,11 @@ import { MenuItem } from '@material-ui/core';
 import { FormControl } from '@material-ui/core';
 import { Select } from '@material-ui/core';
 import { CalendarTodayOutlined } from '@material-ui/icons';
+import {useHistory} from 'react-router';
+import {useStore} from "../../store/storeConfig";
 
 interface IProps {
   onChange: (value: number) => any;
-  initialValue: number;
 }
 
 const useStyles = makeStyles(() =>
@@ -21,17 +22,20 @@ const useStyles = makeStyles(() =>
   }),
 );
 
-const SelectButton: FC<IProps> = ({ onChange, initialValue }) => {
+const SelectButton: FC<IProps> = ({ onChange }) => {
   const classes = useStyles();
-  const [selectValue, setsSelectValue] = React.useState<string | number>(5);
+  const store = useStore();
   const [open, setOpen] = React.useState(false);
+  const history = useHistory();
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<{ value: unknown }>) => {
-      setsSelectValue(event.target.value as number);
       onChange(event.target.value as number);
+      const url : string = history.location.pathname;
+      const queryPrefix = url.indexOf('?') === -1 ? '?' : '&';
+      history.push(`${url}${queryPrefix}years_ago=${store.newsFlashWidgetsTimerFilter}`);
     },
-    [setsSelectValue, onChange],
+    [onChange]
   );
 
   const handleClose = () => {
@@ -55,7 +59,7 @@ const SelectButton: FC<IProps> = ({ onChange, initialValue }) => {
             open={open}
             onClose={handleClose}
             onOpen={handleOpen}
-            value={selectValue}
+            value={store.newsFlashWidgetsTimerFilter}
             onChange={handleChange}
           >
             <MenuItem value={1}>שנה אחרונה</MenuItem>

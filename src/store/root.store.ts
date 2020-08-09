@@ -125,8 +125,11 @@ export default class RootStore {
   }
 
   @action
-  selectNewsFlash(id: number): void {
+  selectNewsFlash(id: number, filterValue:number | null): void {
     this.activeNewsFlashId = id;
+    if(filterValue){
+      this.newsFlashWidgetsTimerFilter = filterValue;
+    }
     this.fetchSelectedNewsFlashWidgets(id, this.newsFlashWidgetsTimerFilter);
   }
 

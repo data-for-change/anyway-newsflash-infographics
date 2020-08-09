@@ -1,15 +1,17 @@
-import React, { FC } from 'react';
+import React, {FC, useEffect} from 'react';
 import WidgetsTemplate from '../components/organisms/WidgetsTemplate';
 import { Box } from '@material-ui/core';
 import SideBar from '../components/organisms/SideBar';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import { RouteComponentProps, Redirect } from 'react-router';
+import { RouteComponentProps, Redirect,useLocation } from 'react-router';
 import { borderColor } from '../style';
 import FilterBar from '../components/organisms/FilterBar';
 import OverlayLoader from '../components/molecules/OverlayLoader';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../store/storeConfig';
 import RootStore from '../store/root.store';
+import queryString from 'query-string';
+
 
 interface IProps {}
 
@@ -33,6 +35,8 @@ const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
   const store: RootStore = useStore();
 
   const id = match.params.id ? parseInt(match.params.id) : null;
+  const queryParam : string|null= useLocation().search;
+  const filterValue :number|null  = queryParam ? parseInt(queryString.parse(queryParam)["years_ago"] as string ): null;
   const loading = store.widgetBoxLoading;
 
   if (!id) {
@@ -47,7 +51,7 @@ const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
       <Box flexGrow={5} className={classes.widgetBox} position="relative">
         <OverlayLoader show={loading} />
         <FilterBar />
-        <WidgetsTemplate id={id} />
+        <WidgetsTemplate id={id} filterValue={filterValue} />
       </Box>
     </Box>
   );

@@ -37,7 +37,7 @@ const App: React.FC = () => {
             <Switch>
               <Route exact path="/" component={HomePageRedirect} />
               <Route path="/newsflash/:id" component={HomePage} />
-              <Route path="/popup-redirect" component={PopUpRedirect}></Route>
+              <Route path="/popup-redirect" component={PopUpRedirect}/>
             </Switch>
           </Box>
           <Box height={footerHeight} display="flex">
