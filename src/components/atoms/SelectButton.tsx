@@ -35,7 +35,7 @@ const SelectButton: FC<IProps> = ({ onChange }) => {
       const queryPrefix = url.indexOf('?') === -1 ? '?' : '&';
       history.push(`${url}${queryPrefix}years_ago=${store.newsFlashWidgetsTimerFilter}`);
     },
-    [onChange]
+    [onChange,history,store.newsFlashWidgetsTimerFilter]
   );
 
   const handleClose = () => {
