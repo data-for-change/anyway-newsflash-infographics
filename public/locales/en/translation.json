@@ -1,7 +1,11 @@
 {
+  "footer": {
+    "about": "About",
+    "acknowledgements": "Acknowledgements"
+  },
   "thankyoupage": {
-    "title": "Thank's",
-    "contenttitle": "This project developed by:",
+    "title": "Acknowledgements",
+    "contenttitle": "This project was developed by:",
     "names": ["Yuval Bar Levi", "Miki Shtenger", "Yael Louria", "Meital Lazorovich"]
   }
 }

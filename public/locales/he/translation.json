@@ -1,4 +1,8 @@
 {
+  "footer": {
+    "about": "אודות",
+    "acknowledgements": "תודות"
+  },
   "thankyoupage": {
     "title": "תודות",
     "contenttitle": ":הפרויקט פותח על ידי",

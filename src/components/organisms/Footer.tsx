@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import logoHasdna from '../../assets/hasadna.png';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
@@ -38,6 +39,7 @@ const useStyles = makeStyles({
 export const Footer: FC<IProps> = () => {
   const [isShowingAbout, setIsShowingAbout] = useState(false);
   const [isShowingThank, setIsShowingThank] = useState(false);
+  const { t } = useTranslation();
   const toggleAbout = () => {
     setIsShowingAbout(!isShowingAbout);
   };
@@ -54,11 +56,11 @@ export const Footer: FC<IProps> = () => {
           </a>
         </Box>
         <Box px={2} className={classes.linkItem} onClick={toggleAbout}>
-          <Text type={TextType.CONTENT_TITLE}>אודות</Text>
+          <Text type={TextType.CONTENT_TITLE}>{t('footer.about')}</Text>
         </Box>
         <AboutDialog isShowing={isShowingAbout} onClose={toggleAbout} />
         <Box px={2} className={classes.linkItem} onClick={toggleThank}>
-          <Text type={TextType.CONTENT_TITLE}>תודות</Text>
+          <Text type={TextType.CONTENT_TITLE}>{t('footer.acknowledgements')}</Text>
         </Box>
         <ThankYouDialog isShowing={isShowingThank} onClose={toggleThank} />
       </Box>
