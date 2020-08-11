@@ -30,11 +30,11 @@ const FilterBar: FC<IProps> = () => {
     <div className={classes.grow}>
       <AppBar position="static" color="transparent" elevation={0}>
         <Toolbar variant="dense">
-          <Grid container>
-            <Grid item xs={12} md={3}>
+          <Grid container spacing={2}>
+            <Grid item>
               <SelectButton initialValue={0} onChange={onFilterChange} />
             </Grid>
-            <Grid item xs={12} md={9} className={classes.locationMeta}>
+            <Grid item className={classes.locationMeta}>
               <Text type={TextType.CONTENT_TITLE}>{store.newsFlashWidgetsMetaString}</Text>
             </Grid>
           </Grid>
