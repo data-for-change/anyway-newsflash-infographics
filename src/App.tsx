@@ -31,7 +31,7 @@ const App: React.FC = () => {
       <ThemeProvider theme={store.settingsStore.theme}>
         <Router>
           <Box height={headerHeight} display="flex">
-            <Header/>
+            <Header />
           </Box>
           <Box height={pageContentHeight} className={classes.pageContent}>
             <Switch>
