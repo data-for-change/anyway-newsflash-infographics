@@ -17,7 +17,7 @@ const footerHeight = '7vh';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
+    rtl: {
       direction: 'rtl',
     },
     pageContent: {
@@ -36,7 +36,7 @@ const App: React.FC = () => {
     <StoreContext.Provider value={store}>
       <ThemeProvider theme={store.settingsStore.theme}>
         <Router>
-          <Box className={isRtl ? classes.root : ''}>
+          <Box className={isRtl ? classes.rtl : ''}>
             <Box height={headerHeight} display="flex">
               <Header />
             </Box>
