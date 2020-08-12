@@ -1,10 +1,10 @@
 import React, { FC, useState } from 'react';
 import Menu from '../atoms/Menu';
+import { useStore } from '../../store/storeConfig';
 import languageSelector from '../../assets/language-selector.svg';
 import { AnyWayButton } from '../atoms/AnyWayButton';
 import { AnywayLink } from '../atoms';
 import { Text, TextType } from '../atoms';
-import { useLocation } from "react-router-dom";
 
 const LANGUAGES = [
   {
@@ -20,6 +20,7 @@ const LANGUAGES = [
     value: 'ar',
   },
 ];
+
 const LanguageMenu: FC = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = (event: any) => {
@@ -28,7 +29,7 @@ const LanguageMenu: FC = () => {
   const closeMenu = () => {
     setAnchorEl(null);
   };
-  const location = useLocation();
+  const store = useStore();
 
   return (
     <div>
@@ -36,11 +37,14 @@ const LanguageMenu: FC = () => {
         <img alt="langauge selection" src={languageSelector} />
       </AnyWayButton>
       <Menu
-        items={LANGUAGES.map(language => (
+        items={LANGUAGES.map((language) => (
           <AnywayLink
-          // todo - link to the current url with appropiate language code in it using language.value
-           to={location.pathname}
-           >
+            to={
+              language.value === 'he'
+                ? `/newsflash/${store.activeNewsFlashId}`
+                : `/${language.value}/newsflash/${store.activeNewsFlashId}`
+            }
+          >
             <Text type={TextType.CONTENT_TITLE}>{language.buttonText}</Text>
           </AnywayLink>
         ))}

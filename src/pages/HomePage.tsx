@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import WidgetsTemplate from '../components/organisms/WidgetsTemplate';
 import { Box } from '@material-ui/core';
 import SideBar from '../components/organisms/SideBar';
@@ -15,6 +15,7 @@ interface IProps {}
 
 interface IRouteProps {
   id?: string;
+  lng?: string;
 }
 
 const useStyles = makeStyles({
@@ -34,6 +35,13 @@ const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
 
   const id = match.params.id ? parseInt(match.params.id) : null;
   const loading = store.widgetBoxLoading;
+  useEffect(() => {
+    if (match.params.lng) {
+      store.changeLanguage(match.params.lng);
+    } else {
+      store.changeLanguage('he');
+    }
+  }, [match.params.lng, store]);
 
   if (!id) {
     return <Redirect to="/" />;
