@@ -5,8 +5,8 @@ import { MenuItem } from '@material-ui/core';
 import { FormControl } from '@material-ui/core';
 import { Select } from '@material-ui/core';
 import { CalendarTodayOutlined } from '@material-ui/icons';
-import {useHistory} from 'react-router';
-import {useStore} from "../../store/storeConfig";
+import { useHistory } from 'react-router';
+import { useStore } from '../../store/storeConfig';
 
 interface IProps {
   onChange: (value: number) => any;
@@ -31,11 +31,11 @@ const SelectButton: FC<IProps> = ({ onChange }) => {
   const handleChange = useCallback(
     (event: React.ChangeEvent<{ value: unknown }>) => {
       onChange(event.target.value as number);
-      const url : string = history.location.pathname;
+      const url: string = history.location.pathname;
       const queryPrefix = url.indexOf('?') === -1 ? '?' : '&';
       history.push(`${url}${queryPrefix}years_ago=${store.newsFlashWidgetsTimerFilter}`);
     },
-    [onChange,history,store.newsFlashWidgetsTimerFilter]
+    [onChange, history, store.newsFlashWidgetsTimerFilter],
   );
 
   const handleClose = () => {
