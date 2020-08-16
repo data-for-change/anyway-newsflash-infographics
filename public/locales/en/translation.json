@@ -56,7 +56,7 @@
       "plural": "light"
     }
   },
-  "onUrban": "On urban roads (without junctions) throughout the country",
+  "onUrban": "On urban roads (without intersections) throughout the country",
   "cardEditor": {
     "title": "Card Editing",
     "mode": "Display Mode",
