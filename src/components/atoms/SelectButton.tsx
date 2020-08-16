@@ -5,6 +5,7 @@ import { MenuItem } from '@material-ui/core';
 import { FormControl } from '@material-ui/core';
 import { Select } from '@material-ui/core';
 import { CalendarTodayOutlined } from '@material-ui/icons';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   onChange: (value: number) => any;
@@ -23,6 +24,7 @@ const useStyles = makeStyles(() =>
 
 const SelectButton: FC<IProps> = ({ onChange, initialValue }) => {
   const classes = useStyles();
+  const { t } = useTranslation();
   const [selectValue, setsSelectValue] = React.useState<string | number>(5);
   const [open, setOpen] = React.useState(false);
 
@@ -58,10 +60,10 @@ const SelectButton: FC<IProps> = ({ onChange, initialValue }) => {
             value={selectValue}
             onChange={handleChange}
           >
-            <MenuItem value={1}>שנה אחרונה</MenuItem>
-            <MenuItem value={3}>3 שנים אחרונות</MenuItem>
-            <MenuItem value={5}>5 שנים אחרונות</MenuItem>
-            <MenuItem value={8}>8 שנים אחרונות</MenuItem>
+            <MenuItem value={1}>{t('filterBar.yearChoices.0')}</MenuItem>
+            <MenuItem value={3}>{t('filterBar.yearChoices.1')}</MenuItem>
+            <MenuItem value={5}>{t('filterBar.yearChoices.2')}</MenuItem>
+            <MenuItem value={8}>{t('filterBar.yearChoices.3')}</MenuItem>
           </Select>
         </FormControl>
       </ListItem>
