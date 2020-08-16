@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import DialogWithHeader from '../molecules/DialogWithHeader';
 import { Text, TextType } from '../atoms';
 import { Box } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 
 const maxWidth = 'sm';
 
@@ -11,30 +12,14 @@ interface IProps {
 }
 
 const ThankYouDialog: FC<IProps> = ({ isShowing, onClose }) => {
-  const namesArr = [
-    'יובל בר לוי',
-    'מיקי שטנגר',
-    'יעל לוריא',
-    'מיטל לזרוביץ׳',
-    'דניאל שלי',
-    'סרגי בקר',
-    'דרור רשף',
-    'אדל אנגל',
-    'כרמל פרדיס',
-    'עתליה אלון',
-    'יוגב בוארון בן-הר',
-    'אייל שער',
-    'אייל לוי',
-  ];
-  const sortedNames = namesArr.sort((a, b) => a.split(' ')[1].localeCompare(b.split(' ')[1], 'he'));
-  const names = sortedNames.join(', ');
+  const { t } = useTranslation();
   return (
-    <DialogWithHeader isShowing={isShowing} onClose={onClose} title="תודות" maxWidth={maxWidth}>
+    <DialogWithHeader isShowing={isShowing} onClose={onClose} title={t('thankYouDialog.title')} maxWidth={maxWidth}>
       <article>
         <Box mb={1}>
-          <Text type={TextType.CONTENT_TITLE}>הפרויקט פותח על ידי:</Text>
+          <Text type={TextType.CONTENT_TITLE}>{t('thankYouDialog.contentTitle')}</Text>
         </Box>
-        <Text type={TextType.CONTENT}>{names}</Text>
+        <Text type={TextType.CONTENT}>{t('thankYouDialog.names', { joinArrays: ', ' })}</Text>
       </article>
     </DialogWithHeader>
   );
