@@ -1,13 +1,12 @@
 import React, { FC, useCallback, useState } from 'react';
-import { makeStyles, createStyles, Divider, Grid } from '@material-ui/core';
+import { makeStyles, createStyles, Divider, Grid, Typography } from '@material-ui/core';
 import { AppBar, Toolbar } from '@material-ui/core';
 import SelectButton from '../atoms/SelectButton';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
 import { Text, TextType, Button } from '../atoms';
-import { AnyWayButton } from '../atoms/AnyWayButton';
-import { lightBlue } from '@material-ui/core/colors';
+import { onLinkColor } from '../../style';
 
 interface IProps {}
 
@@ -20,7 +19,7 @@ const useStyles = makeStyles(() =>
       display: 'flex',
       alignItems: 'center',
     },
-    showDescription: {
+    showDescriptionButton: {
       display: 'flex',
       alignItems: 'center',
     },
@@ -44,13 +43,16 @@ const FilterBar: FC<IProps> = () => {
             <Grid item className={classes.locationMeta}>
               <Text type={TextType.CONTENT_TITLE}>{store.newsFlashWidgetsMetaString}</Text>
             </Grid>
-            <Grid item className={classes.showDescription}>
-              <Button.Standard onClick={() => setIsDescOpen(!isDescOpen)}>הצג פרטים</Button.Standard>
+            <Grid item className={classes.showDescriptionButton}>
+              <Button.Standard onClick={() => setIsDescOpen(!isDescOpen)}>
+                {isDescOpen ? 'הסתר פרטים' : 'הצג פרטים'}
+              </Button.Standard>
             </Grid>
           </Grid>
         </Toolbar>
       </AppBar>
       <Divider />
+      {isDescOpen && <Typography>פרטים פרטים פרטים פרטים</Typography>}
     </div>
   );
 };
