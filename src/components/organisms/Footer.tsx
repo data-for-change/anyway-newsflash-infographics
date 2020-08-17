@@ -32,6 +32,7 @@ const useStyles = makeStyles({
   },
   linkItem: {
     borderLeft: `2px solid ${borderColor}`,
+    cursor: 'pointer',
   },
 });
 
