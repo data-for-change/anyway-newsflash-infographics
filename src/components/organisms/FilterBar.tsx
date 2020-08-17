@@ -1,11 +1,13 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { makeStyles, createStyles, Divider, Grid } from '@material-ui/core';
 import { AppBar, Toolbar } from '@material-ui/core';
 import SelectButton from '../atoms/SelectButton';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
-import { Text, TextType } from '../atoms';
+import { Text, TextType, Button } from '../atoms';
+import { AnyWayButton } from '../atoms/AnyWayButton';
+import { lightBlue } from '@material-ui/core/colors';
 
 interface IProps {}
 
@@ -18,6 +20,10 @@ const useStyles = makeStyles(() =>
       display: 'flex',
       alignItems: 'center',
     },
+    showDescription: {
+      display: 'flex',
+      alignItems: 'center',
+    },
   }),
 );
 
@@ -25,6 +31,7 @@ const FilterBar: FC<IProps> = () => {
   const store: RootStore = useStore();
   const classes = useStyles();
   const onFilterChange = useCallback((value: number) => store.changeTimeFilter(value), [store]);
+  const [isDescOpen, setIsDescOpen] = useState(false);
 
   return (
     <div className={classes.grow}>
@@ -36,6 +43,9 @@ const FilterBar: FC<IProps> = () => {
             </Grid>
             <Grid item className={classes.locationMeta}>
               <Text type={TextType.CONTENT_TITLE}>{store.newsFlashWidgetsMetaString}</Text>
+            </Grid>
+            <Grid item className={classes.showDescription}>
+              <Button.Standard onClick={() => setIsDescOpen(!isDescOpen)}>הצג פרטים</Button.Standard>
             </Grid>
           </Grid>
         </Toolbar>
