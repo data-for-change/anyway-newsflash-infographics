@@ -60,10 +60,10 @@ const SelectButton: FC<IProps> = ({ onChange, initialValue }) => {
             value={selectValue}
             onChange={handleChange}
           >
-            <MenuItem value={1}>{t('filterBar.yearChoices.0')}</MenuItem>
-            <MenuItem value={3}>{t('filterBar.yearChoices.1')}</MenuItem>
-            <MenuItem value={5}>{t('filterBar.yearChoices.2')}</MenuItem>
-            <MenuItem value={8}>{t('filterBar.yearChoices.3')}</MenuItem>
+            <MenuItem value={1}>{t('filterBar.Past Year')}</MenuItem>
+            <MenuItem value={3}>{t('filterBar.Last 3 Years')}</MenuItem>
+            <MenuItem value={5}>{t('filterBar.Last 5 Years')}</MenuItem>
+            <MenuItem value={8}>{t('filterBar.Last 8 Years')}</MenuItem>
           </Select>
         </FormControl>
       </ListItem>

@@ -34,7 +34,10 @@
     "linkUrl": "https://en.wikipedia.org/wiki/Vision_Zero"
   },
   "filterBar": {
-    "yearChoices": ["Past Year", "Last 3 Years", "Last 5 Years", "Last 8 Years"]
+    "Past Year": "Past Year",
+    "Last 3 Years": "Last 3 Years",
+    "Last 5 Years": "Last 5 Years",
+    "Last 8 Years": "last 8 years"
   },
   "textView": {
     "inYear": "In the year",
