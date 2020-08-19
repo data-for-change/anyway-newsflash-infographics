@@ -11,6 +11,9 @@ interface IProps {
   segmentText: string;
   roadNumber: number;
 }
+interface AProps {
+  accidentsCount: Number;
+}
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
@@ -47,17 +50,24 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: highlightWarnColor,
   },
 }));
-const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
+const AccidentsOccurred: FC<AProps> = ({ accidentsCount }) => {
   const classes = useStyles();
   const { t, i18n } = useTranslation();
-  const { items } = data;
-  const accidentsOccurredEls = [
+  const elements = [
     <span>{t('textView.occurred')}</span>,
-    <span className={classes.highlightDark}>{items.total_accidents_count}</span>,
+    <span className={classes.highlightDark}>{accidentsCount}</span>,
     <span>{t('textView.accidents')}</span>,
   ];
-  const [a, b, c] = accidentsOccurredEls;
-  const accidentsOccurredElsEn = [b, c, a];
+  // When the locale is English the last element needs to be first - x accidents occurred instead of occurred x accidents
+  const [a, b, c] = elements;
+  const elementsEnglish = [b, c, a];
+  return i18n.language === 'he' ? <>{elements}</> : <>{elementsEnglish}</>;
+};
+
+const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
+  const classes = useStyles();
+  const { t } = useTranslation();
+  const { items } = data;
   //checking availability of two or more types
   const isSummaryText =
     [items.severity_fatal_count, items.severity_light_count, items.severity_severe_count].filter(Boolean).length >= 2;
@@ -81,7 +91,7 @@ const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
           )}
           <br />
           <span>{t('textView.on') + segmentText}</span>
-          {i18n.language === 'he' ? accidentsOccurredEls : accidentsOccurredElsEn}
+          <AccidentsOccurred accidentsCount={items.total_accidents_count} />
         </span>
       </Text>
       <div>
