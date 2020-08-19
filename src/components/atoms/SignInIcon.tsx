@@ -5,7 +5,8 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       color: '#000',
-      marginRight: '5px'
+      marginRight: '5px',
+      cursor: 'default',
     },
   }),
 );
