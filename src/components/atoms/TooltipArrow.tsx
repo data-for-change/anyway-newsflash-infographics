@@ -1,45 +1,35 @@
 import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core';
-
-export enum ArrowDirection {
-  TOP,
-  TOPRIGHT,
-  RIGHT,
-  BOTTOMRIGHT,
-  BOTTOM,
-  BOTTOMLEFT,
-  LEFT,
-  TOPLEFT,
-}
+import { ClockPosition } from '../../utils/enum.utils';
 
 interface IProps {
-  type: ArrowDirection;
+  type: ClockPosition;
 }
 
-const getArrowDirection = (type: ArrowDirection) => {
+const getArrowDirection = (type: ClockPosition) => {
   switch (type) {
-    case ArrowDirection.TOP: {
+    case ClockPosition.TOP: {
       return 'rotate(-135deg)';
     }
-    case ArrowDirection.TOPRIGHT: {
+    case ClockPosition.TOPRIGHT: {
       return 'rotate(270deg)';
     }
-    case ArrowDirection.TOPLEFT: {
+    case ClockPosition.TOPLEFT: {
       return 'rotate(-180deg)';
     }
-    case ArrowDirection.RIGHT: {
+    case ClockPosition.RIGHT: {
       return 'rotate(-45deg)';
     }
-    case ArrowDirection.LEFT: {
+    case ClockPosition.LEFT: {
       return 'rotate(135deg)';
     }
-    case ArrowDirection.BOTTOM: {
+    case ClockPosition.BOTTOM: {
       return 'rotate(45deg)';
     }
-    case ArrowDirection.BOTTOMRIGHT: {
+    case ClockPosition.BOTTOMRIGHT: {
       return 'rotate(0deg)';
     }
-    case ArrowDirection.BOTTOMLEFT: {
+    case ClockPosition.BOTTOMLEFT: {
       return 'rotate(-270deg)';
     }
   }
@@ -48,10 +38,10 @@ const getArrowDirection = (type: ArrowDirection) => {
 const useStyles = makeStyles({
   arrow: {
     border: 'solid black',
-    borderWidth: '0 2px 2px 0',
+    borderWidth: '0 3px 3px 0',
     display: 'inline-block',
     padding: '6px',
-    transform: (type: ArrowDirection) => getArrowDirection(type),
+    transform: (type: ClockPosition) => getArrowDirection(type),
   },
 });
 const TooltipArrow: FC<IProps> = ({ type }) => {
