@@ -6,7 +6,6 @@ import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
 import { Text, TextType, Button } from '../atoms';
-import { onLinkColor } from '../../style';
 
 interface IProps {}
 
@@ -52,7 +51,13 @@ const FilterBar: FC<IProps> = () => {
         </Toolbar>
       </AppBar>
       <Divider />
-      {isDescOpen && <Typography>פרטים פרטים פרטים פרטים</Typography>}
+      {isDescOpen && (
+        <Typography>
+          {store.newsFlashCollection.map((news) => {
+            if (news.id === store.activeNewsFlashId) return news.title;
+          })}
+        </Typography>
+      )}
     </div>
   );
 };
