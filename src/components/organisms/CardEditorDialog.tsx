@@ -7,8 +7,7 @@ import { Box } from '@material-ui/core';
 import AnyWayCard, { CardLayoutOptions } from '../molecules/AnyWayCard';
 import { MetaTag, ErrorBoundary, Text, TextType, Button } from '../atoms';
 import widgetToImage from '../../services/to-image.service';
-
-const TITLE = 'עריכת כרטיס';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   isOpen: boolean;
@@ -20,6 +19,7 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
   const [cardElement, setCardElement] = useState({});
   const [landscape, setLandscape] = useState(false);
   const [size, setSize] = useState(1);
+  const { t } = useTranslation();
   const store = useStore();
   const widget = store.getWidgetsDataByName(widgetName);
   const widgetComponent = !widget ? null : (
@@ -50,22 +50,23 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
   };
 
   return (
-    <DialogWithHeader fullWidth={true} isShowing={isOpen} onClose={onClose} title={TITLE}>
+    <DialogWithHeader fullWidth={true} isShowing={isOpen} onClose={onClose} title={t('cardEditor.title')}>
       <Box display="flex">
         <Box px={2} display="flex" flexDirection="column" flexBasis={200} minWidth={200} boxSizing="border-box">
           <Box display="flex" flexDirection="column">
             <Text type={TextType.CONTENT_TITLE}>
-              מצב תצוגה:
-              {landscape ? 'לרוחב' : 'לאורך'}
+              {t('cardEditor.mode') + ':' + t(landscape ? 'cardEditor.landscape' : 'cardEditor.portrait')}
             </Text>
-            <Button.Standard onClick={layoutHandler}>הצג {landscape ? 'לאורך' : 'לרוחב'}</Button.Standard>
+            <Button.Standard onClick={layoutHandler}>
+              {t('cardEditor.display') + ' ' + t(landscape ? 'cardEditor.portrait' : 'cardEditor.landscape')}
+            </Button.Standard>
           </Box>
           <Box mt={2} display="flex" flexDirection="column">
-            <Text type={TextType.CONTENT_TITLE}>גודל</Text>
+            <Text type={TextType.CONTENT_TITLE}>{t('cardEditor.size')}</Text>
             <AnyWaySlider onChange={handleSizeChange} />
           </Box>
           <Box mt={2}>
-            <Button.Standard onClick={imgDownloadHandler}>הורד כתמונה</Button.Standard>
+            <Button.Standard onClick={imgDownloadHandler}>{t('cardEditor.download')}</Button.Standard>
           </Box>
         </Box>
         <Box px={2} display="flex" justifyContent="center" flexGrow={1}>
