@@ -58,7 +58,9 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
               {t('cardEditor.mode') + ':' + t(landscape ? 'cardEditor.landscape' : 'cardEditor.portrait')}
             </Text>
             <Button.Standard onClick={layoutHandler}>
-              {t('cardEditor.display') + ' ' + t(landscape ? 'cardEditor.portrait' : 'cardEditor.landscape')}
+              <Text type={TextType.CONTENT_TITLE}>
+                {t('cardEditor.display') + ' ' + t(landscape ? 'cardEditor.portrait' : 'cardEditor.landscape')}
+              </Text>
             </Button.Standard>
           </Box>
           <Box mt={2} display="flex" flexDirection="column">
@@ -66,7 +68,9 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
             <AnyWaySlider onChange={handleSizeChange} />
           </Box>
           <Box mt={2}>
-            <Button.Standard onClick={imgDownloadHandler}>{t('cardEditor.download')}</Button.Standard>
+            <Button.Standard onClick={imgDownloadHandler}>
+              <Text type={TextType.CONTENT_TITLE}>{t('cardEditor.download')}</Text>
+            </Button.Standard>
           </Box>
         </Box>
         <Box px={2} display="flex" justifyContent="center" flexGrow={1}>
