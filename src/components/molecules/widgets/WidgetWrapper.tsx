@@ -144,7 +144,11 @@ const WidgetWrapper: FC<IProps> = ({ widget, segmentText, roadNumber, options = 
     }
     case 'accident_count_by_car_type': {
       widgetComponent = (
-        <AccidentCountByCarTypeWidget data={data as IWidgetAccidentCountByCarType} roadNumber={roadNumber} />
+        <AccidentCountByCarTypeWidget
+          data={data as IWidgetAccidentCountByCarType}
+          roadNumber={roadNumber}
+          segmentText={segmentText}
+        />
       );
       break;
     }
