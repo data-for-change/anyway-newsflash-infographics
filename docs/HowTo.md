@@ -5,7 +5,7 @@
 
 
 
-### How To Open a PR ↸ <a id="openbug"></a> [🔼](#howtocontent)
+### How To Open a PR (Pull Request) ↸ <a id="openbug"></a> [🔼](#howtocontent)
 The following steps will guide you through PR process:
 Once your branch has been merged with development, resolved conflicts and push into GitHub, a PR (Pull Request)
 to be performed.

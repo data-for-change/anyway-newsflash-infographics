@@ -3,9 +3,11 @@ export const onLinkColor = '#0088cc';
 export const onLinkColorHover = '#00aaff';
 export const borderColor = '#D3D3D3';
 export const selectedNewsFlash = '#CECECE';
-export const sidBarWidth = 300;
 export const closeButtonColor = '4c4c4c';
+export const lightBackgroundColor = '#e2e2e2f0';
 
+export const defaultBorderRadius = 4;
+export const sidBarWidth = 300;
 // card
 export const cardHeight = 480;
 export const cardWidth = 370;

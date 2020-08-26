@@ -418,6 +418,18 @@ export default {
         ],
       },
     },
+    {
+      name: 'accident_count_by_driver_type',
+      rank: 16,
+      data: {
+        items: [
+          { driver_type: 'נהג פרטי', count: 146 },
+          { driver_type: 'נהג מקצועי', count: 28 },
+          { driver_type: 'לא ידוע', count: 3 },
+        ],
+      },
+    },
+
     { name: 'vision_zero', rank: 15, data: { items: ['vision_zero_2_plus_1'] } },
     {
       name: 'accident_count_by_car_type',

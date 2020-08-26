@@ -111,8 +111,8 @@ const AnyWayCard: FC<IProps> = ({ widgetName, children, layoutOptions, getCardRe
           {buttons}
           <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} />
           <div className={classes.actionsSpace}></div>
-          <Logo src={LamasImage} alt={'Lamas'} height={'30px'} />
-          <Logo src={AnywayImage} alt={'Anyway'} height={'20px'} />
+          <Logo src={LamasImage} alt={'Lamas'} height={30} />
+          <Logo src={AnywayImage} alt={'Anyway'} height={20} />
         </CardActions>
       </Card>
     </div>

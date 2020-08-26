@@ -177,10 +177,10 @@ export interface IWidgetAccidentCountByRoadLight {
   };
 }
 export interface IWidgetAccidentCountByDriverType {
-  items: {}[];
-  text: {
-    title: string;
-  };
+  items: {
+    driver_type: string;
+    count: number;
+  }[];
 }
 export interface IWidgetAccidentCountByCarType {
   items: {

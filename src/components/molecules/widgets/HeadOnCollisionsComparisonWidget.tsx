@@ -4,6 +4,7 @@ import { IWidgetHeadOnCollisionsComparisonData } from '../../../models/WidgetDat
 import { Box, makeStyles, Theme } from '@material-ui/core';
 import RoadNumberImage from '../../../services/get-road-image.service';
 import { cardContentHeight, highlightBasicColor } from '../../../style';
+import { useTranslation } from 'react-i18next';
 
 const ACCIDENT_TYPE = 'desc';
 const COUNT = 'count';
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePercent, roadNumber }) => {
   const classes = useStyles();
+  const { t } = useTranslation();
   const bigPieData = data.items.specific_road_segment_fatal_accidents;
   const smallPieData = data.items.all_roads_fatal_accidents;
   return (
@@ -45,7 +47,7 @@ const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePer
       <Box display="flex" height={SECONDARY_CONTENT_HEIGHT} width={'100%'}>
         <PieChartView data={smallPieData} xLabel={ACCIDENT_TYPE} yLabel={COUNT} usePercent={usePercent} />
         <Box flexBasis={280} display="flex" alignItems="center">
-          <span className={classes.textHighlight}>בכבישים עירוניים (ללא צמתים) בכל הארץ</span>
+          <span className={classes.textHighlight}>{t('onUrban')}</span>
         </Box>
       </Box>
     </Box>
