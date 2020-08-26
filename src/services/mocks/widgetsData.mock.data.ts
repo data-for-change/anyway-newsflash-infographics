@@ -428,7 +428,6 @@ export default {
           { car_type: 'מסחרי/משאית', percentage_segment: 39, percentage_country: 34 },
           { car_type: 'אופנוע', percentage_segment: 28, percentage_country: 15 },
         ],
-        // TODO: remove text title
         text: { title: 'תאונות לפי סוג מכונית אחוזים' },
       },
     },

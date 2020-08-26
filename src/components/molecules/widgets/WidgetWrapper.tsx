@@ -34,7 +34,7 @@ import StaticImageViewWidget from './StaticImageViewWidget';
 import TopRoadSegmentsAccidentsPerKm from './TopRoadSegmentsAccidentsPerKm';
 import AccidentCountByRoadLight from './AccidentCountByRoadLight';
 import AccidentCountByDriverType from './AccidentCountByDriverType';
-import AccidentCountByCarType from './AccidentCountByCarType';
+import AccidentCountByCarTypeWidget from './AccidentCountByCarTypeWidget';
 import { IPoint } from '../../../models/Point';
 
 interface IProps {
@@ -143,7 +143,9 @@ const WidgetWrapper: FC<IProps> = ({ widget, segmentText, roadNumber, options = 
       break;
     }
     case 'accident_count_by_car_type': {
-      widgetComponent = <AccidentCountByCarType data={data as IWidgetAccidentCountByCarType} roadNumber={roadNumber} />;
+      widgetComponent = (
+        <AccidentCountByCarTypeWidget data={data as IWidgetAccidentCountByCarType} roadNumber={roadNumber} />
+      );
       break;
     }
     default: {

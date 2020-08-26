@@ -183,7 +183,11 @@ export interface IWidgetAccidentCountByDriverType {
   };
 }
 export interface IWidgetAccidentCountByCarType {
-  items: {}[];
+  items: {
+    car_type: string;
+    percentage_segment: number;
+    percentage_country: number;
+  }[];
   text: {
     title: string;
   };
