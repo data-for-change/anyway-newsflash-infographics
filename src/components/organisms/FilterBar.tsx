@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from 'react';
-import { makeStyles, createStyles, Divider, Grid, Typography } from '@material-ui/core';
+import { makeStyles, createStyles, Divider, Grid } from '@material-ui/core';
 import { AppBar, Toolbar } from '@material-ui/core';
 import SelectButton from '../atoms/SelectButton';
 import { observer } from 'mobx-react-lite';
@@ -52,11 +52,11 @@ const FilterBar: FC<IProps> = () => {
       </AppBar>
       <Divider />
       {isDescOpen && (
-        <Typography>
+        <Text type={TextType.CONTENT}>
           {store.newsFlashCollection.map((news) => {
             if (news.id === store.activeNewsFlashId) return news.title;
           })}
-        </Typography>
+        </Text>
       )}
     </div>
   );
