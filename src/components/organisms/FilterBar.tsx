@@ -55,6 +55,7 @@ const FilterBar: FC<IProps> = () => {
         <Text type={TextType.CONTENT}>
           {store.newsFlashCollection.map((news) => {
             if (news.id === store.activeNewsFlashId) return news.title;
+            return '';
           })}
         </Text>
       )}
