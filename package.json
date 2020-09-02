@@ -17,6 +17,7 @@
     "mobx-react-lite": "^1.5.2",
     "normalize.css": "^8.0.1",
     "react": "^16.13.1",
+    "react-async-loader": "^0.1.2",
     "react-dom": "^16.13.1",
     "react-i18next": "^11.7.0",
     "react-leaflet": "^2.7.0",
@@ -24,7 +25,6 @@
     "react-leaflet-heatmap-layer": "^2.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.3.0",
-    "react-streetview": "^1.1.1",
     "recharts": "^1.8.5",
     "typescript": "^3.9.6"
   },
