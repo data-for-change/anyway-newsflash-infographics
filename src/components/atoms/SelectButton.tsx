@@ -1,4 +1,5 @@
 import React, { FC, useCallback } from 'react';
+import { Text, TextType } from '../atoms';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { ListItemIcon, List, ListItem } from '@material-ui/core';
 import { MenuItem } from '@material-ui/core';
@@ -60,10 +61,18 @@ const SelectButton: FC<IProps> = ({ onChange, initialValue }) => {
             value={selectValue}
             onChange={handleChange}
           >
-            <MenuItem value={1}>{t('filterBar.Past Year')}</MenuItem>
-            <MenuItem value={3}>{t('filterBar.Last 3 Years')}</MenuItem>
-            <MenuItem value={5}>{t('filterBar.Last 5 Years')}</MenuItem>
-            <MenuItem value={8}>{t('filterBar.Last 8 Years')}</MenuItem>
+            <MenuItem value={1}>
+              <Text type={TextType.CONTENT}>{t('filterBar.Past Year')}</Text>
+            </MenuItem>
+            <MenuItem value={3}>
+              <Text type={TextType.CONTENT}>{t('filterBar.Last 3 Years')}</Text>
+            </MenuItem>
+            <MenuItem value={5}>
+              <Text type={TextType.CONTENT}>{t('filterBar.Last 5 Years')}</Text>
+            </MenuItem>
+            <MenuItem value={8}>
+              <Text type={TextType.CONTENT}>{t('filterBar.Last 8 Years')}</Text>
+            </MenuItem>
           </Select>
         </FormControl>
       </ListItem>
