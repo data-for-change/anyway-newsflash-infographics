@@ -1,4 +1,3 @@
-// import React, { FC } from 'react';
 import React, { FC } from 'react';
 import { ResponsiveContainer, BarChart, LabelList, XAxis, Bar } from 'recharts';
 import { DoubleBarChartFillColorBar1, DoubleBarChartFillColorBar2 } from '../../style';
@@ -8,10 +7,9 @@ interface IProps {
   yLabel: string | number;
   xLabel1: string | number;
   xLabel2: string | number;
-  textLabel: string;
+  textLabel?: string;
 }
 const DoubleBarChartView: FC<IProps> = ({ data, xLabel1, xLabel2, yLabel }) => {
-  console.log('data double bar', data);
   return (
     <ResponsiveContainer width={'100%'} height={'70%'}>
       <BarChart data={data} margin={{ top: 20, bottom: 15 }}>

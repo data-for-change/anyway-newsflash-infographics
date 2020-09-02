@@ -25,7 +25,6 @@ const useStyle = makeStyles((theme: Theme) => ({
     textAlign: 'center',
   },
 }));
-// debugger
 const AccidentCountByCarType: FC<IProps> = ({ data, roadNumber, segmentText }) => {
   const classes = useStyle();
   const { items, text } = data;
