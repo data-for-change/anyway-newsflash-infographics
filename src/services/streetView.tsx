@@ -15,9 +15,8 @@ interface ReactStreetviewProps {
 class ReactStreetview extends React.Component<ReactStreetviewProps> {
   private streetView: google.maps.StreetViewPanorama | null;
 
-  constructor() {
-    // @ts-ignore
-    super();
+  constructor(props : ReactStreetviewProps) {
+    super(props);
     this.streetView = null;
   }
   initialize(canvas: any) {
