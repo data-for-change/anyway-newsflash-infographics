@@ -68,5 +68,6 @@
     "portrait": "Landscape",
     "size": "Size",
     "download": "Download as PNG"
-  }
+  },
+  "labelPosition": "Label Position"
 }
