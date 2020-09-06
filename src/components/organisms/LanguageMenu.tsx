@@ -34,7 +34,7 @@ const LanguageMenu: FC = () => {
   return (
     <div>
       <AnyWayButton aria-controls="menu" aria-haspopup="true" onClick={openMenu}>
-        <img alt="langauge selection" src={languageSelector} />
+        <img alt="language selection" src={languageSelector} />
       </AnyWayButton>
       <Menu
         items={LANGUAGES.map((language) => (
