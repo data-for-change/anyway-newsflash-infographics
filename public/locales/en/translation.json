@@ -1,0 +1,72 @@
+{
+  "footer": {
+    "about": "About",
+    "acknowledgements": "Acknowledgements"
+  },
+  "thankYouDialog": {
+    "title": "Acknowledgements",
+    "contentTitle": "This project was developed by:",
+    "names": [
+      "Yuval Bar Levi",
+      "Miki Stanger",
+      "Meital Lazarovich",
+      "Atalya Alon",
+      "Eyal Levy",
+      "Carmel Paradis",
+      "Daniel Shely",
+      "Dror Reshef",
+      "Sergey Bekker",
+      "Eyal Shaar",
+      "Yael Luria",
+      "Yogev Boaron Ben-Har",
+      "Tal Licht",
+      "Ron Fybish",
+      "Adele Angel",
+      "Moran Zivoni"
+    ]
+  },
+  "aboutDialog": {
+    "title": "About",
+    "content1": "ANYWAY’s next challenge is to form an automatic generator of infographics to empower and serve journalists, bloggers, public opinion leaders, community leaders etc. in the era of data journalism.",
+    "content2": "The generated infographics will enhance reporting and news writing with the use of statistics. Each infographic will be created for a real-time road accident related news flash and will provide a deeper insight into the story based on historical data.",
+    "content3": "This, we believe, will increase both the quantity and quality of articles dealing with road accidents, and will result in raising public awareness and creating pressure on decision makers to initiate infrastructure improvements in light of",
+    "linkText": "Vision Zero.",
+    "linkUrl": "https://en.wikipedia.org/wiki/Vision_Zero"
+  },
+  "filterBar": {
+    "Past Year": "Past Year",
+    "Last 3 Years": "Last 3 Years",
+    "Last 5 Years": "Last 5 Years",
+    "Last 8 Years": "last 8 years"
+  },
+  "textView": {
+    "inYear": "In the year",
+    "betweenYears": "Between the years",
+    "on": "on",
+    "occurred": "occurred",
+    "accidents": "accidents",
+    "fatal": {
+      "singular": "fatal",
+      "plural": "fatal"
+    },
+    "severe": {
+      "singular": "severe",
+      "plural": "severe"
+    },
+    "and": "and ",
+    "light": {
+      "singular": "light",
+      "plural": "light"
+    }
+  },
+  "onUrban": "On urban roads (without intersections) throughout the country",
+  "cardEditor": {
+    "title": "Card Editing",
+    "mode": "Display Mode",
+    "display": "Display",
+    "landscape": "Portrait",
+    "portrait": "Landscape",
+    "size": "Size",
+    "download": "Download as PNG"
+  }
+}
