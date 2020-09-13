@@ -4,15 +4,15 @@ import { DoubleBarChartFillColorBar1, DoubleBarChartFillColorBar2 } from '../../
 
 interface IProps {
   data: Array<object>;
-  yLabel: string | number;
-  xLabel1: string | number;
-  xLabel2: string | number;
-  textLabel?: string;
+  yLabel: string;
+  xLabel1: string;
+  xLabel2: string;
 }
+
 const DoubleBarChartView: FC<IProps> = ({ data, xLabel1, xLabel2, yLabel }) => {
   return (
-    <ResponsiveContainer width={'100%'} height={'70%'}>
-      <BarChart data={data} margin={{ top: 20, bottom: 15 }}>
+    <ResponsiveContainer>
+      <BarChart data={data}>
         <XAxis dataKey={yLabel} tickLine={false} axisLine={false} />
         <Bar dataKey={xLabel1} fill={DoubleBarChartFillColorBar1}>
           <LabelList dataKey={xLabel1} position="insideTop" />

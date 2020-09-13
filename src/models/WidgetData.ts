@@ -188,7 +188,4 @@ export interface IWidgetAccidentCountByCarType {
     percentage_segment: number;
     percentage_country: number;
   }[];
-  text: {
-    title?: string;
-  };
 }
