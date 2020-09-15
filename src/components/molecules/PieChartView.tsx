@@ -10,7 +10,7 @@ interface IProps {
   usePercent?: boolean;
 }
 // hardcoded colors, will be changed
-const COLORS = ['#b71c1c', '#e53935', '#d90000', '#890505', '#6a6a6a'];
+const COLORS = ['#b71c1c', '#647171', '#d90000', '#890505', '#6a6a6a'];
 const RADIAN = Math.PI / 180;
 
 const renderCustomizedLabel = (props: any, usePercent = false) => {
@@ -18,8 +18,6 @@ const renderCustomizedLabel = (props: any, usePercent = false) => {
   const labelText = usePercent ? `${Math.round(percent * 100)}%` : value;
 
   const radius = innerRadius + (outerRadius - innerRadius) * 0.7;
-  const xCountLabel = cx + radius * Math.cos(-midAngle * RADIAN);
-  const yCountLabel = cy + radius * Math.sin(-midAngle * RADIAN);
   const sin = Math.sin(-RADIAN * midAngle); // if sin >= 0 label is on top half
   const cos = Math.cos(-RADIAN * midAngle); // if cos >= 0 label is on right half
   // const sx = cx + outerRadius * cos;
@@ -29,33 +27,30 @@ const renderCustomizedLabel = (props: any, usePercent = false) => {
   const ex = mx + (cos >= 0 ? -1 : -1.5) * 25;
   const ey = my + (sin >= 0 ? -2 : -1) * 10;
 
-  const textLabelStyle = {
-    fontFamily: fontFamilyString,
-    fontWeight: 700,
-    fontSize: 14,
-    textAlign: 'center' as 'center',
-  };
-
-  return (
-    <g>
-      <text
-        x={xCountLabel}
-        y={yCountLabel}
-        fill="black"
-        textAnchor={xCountLabel > cx ? 'start' : 'end'}
-        dominantBaseline="central"
-        fontFamily={fontFamilyString}
-      >
-        {labelText}
-      </text>
-      {/* for text wrapping in svg - use foreignObject
-      make sure to give foreignObject height and width, or inner element will not be displayed
-      https://stackoverflow.com/questions/4991171/auto-line-wrapping-in-svg-text */}
-      <foreignObject fontFamily={fontFamilyString} fontWeight={700} fontSize={14} x={ex} y={ey} height={76} width={60}>
-        <div style={textLabelStyle}>{name}</div>
-      </foreignObject>
-    </g>
-  );
+  if ((name as string).includes('חזית')) {
+    return (
+      <g>
+        <text
+          x={usePercent ? '65%' : '60%'}
+          y={'35%'}
+          fill="black"
+          textAnchor={'start'}
+          dominantBaseline="central"
+          fontFamily={fontFamilyString}
+          fontSize={'250%'}
+        >
+          {labelText}
+        </text>
+        for text wrapping in svg - use foreignObject make sure to give foreignObject height and width, or inner element
+        will not be displayed https://stackoverflow.com/questions/4991171/auto-line-wrapping-in-svg-text
+        <foreignObject style={{ fontSize: '100%' }} x={'30%'} y={'46%'} height={'30%'} width={'35%'}>
+          {name}
+        </foreignObject>
+      </g>
+    );
+  } else {
+    return <React.Fragment></React.Fragment>;
+  }
 };
 
 const renderLabelCount = (props: PieLabelRenderProps) => renderCustomizedLabel(props);
@@ -70,8 +65,7 @@ export const PieChartView: FC<IProps> = ({ data, yLabel, xLabel, innerRadius, us
           data={data}
           dataKey={yLabel}
           nameKey={xLabel}
-          outerRadius={'60%'}
-          innerRadius={innerRadius}
+          innerRadius={'60%'}
           minAngle={15}
           label={labelFn}
           labelLine={false}
