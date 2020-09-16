@@ -11,12 +11,12 @@ interface IProps {
 }
 // hardcoded colors, will be changed
 const COLORS = ['#b71c1c', '#647171', '#d90000', '#890505', '#6a6a6a'];
-const RADIAN = Math.PI / 180;
+//const RADIAN = Math.PI / 180;
 
 const renderCustomizedLabel = (props: any, usePercent = false) => {
-  const { cx, cy, midAngle, innerRadius, percent, outerRadius, value, name } = props;
+  const { percent, value, name } = props;
   const labelText = usePercent ? `${Math.round(percent * 100)}%` : value;
-
+  /*
   const radius = innerRadius + (outerRadius - innerRadius) * 0.7;
   const sin = Math.sin(-RADIAN * midAngle); // if sin >= 0 label is on top half
   const cos = Math.cos(-RADIAN * midAngle); // if cos >= 0 label is on right half
@@ -25,7 +25,7 @@ const renderCustomizedLabel = (props: any, usePercent = false) => {
   const mx = cx + (outerRadius + 30) * cos;
   const my = cy + (outerRadius + 30) * sin;
   const ex = mx + (cos >= 0 ? -1 : -1.5) * 25;
-  const ey = my + (sin >= 0 ? -2 : -1) * 10;
+  const ey = my + (sin >= 0 ? -2 : -1) * 10;*/
 
   if ((name as string).includes('חזית')) {
     return (
