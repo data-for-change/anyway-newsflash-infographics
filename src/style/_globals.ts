@@ -6,6 +6,7 @@ export const selectedNewsFlash = '#CECECE';
 export const closeButtonColor = '4c4c4c';
 export const lightBackgroundColor = '#e2e2e2f0';
 
+export const tableHeadline = '#555454';
 export const defaultBorderRadius = 4;
 export const sidBarWidth = 300;
 // card

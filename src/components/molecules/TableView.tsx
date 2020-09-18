@@ -5,7 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableRow, Theme } from '@materi
 import { IWidgetMostSevereAccidentsTableData } from '../../models/WidgetData';
 import RoadNumberImage from '../../services/get-road-image.service';
 
-import { highlightBasicColor, tableHeadColor, tableBackgroundColorMain, tableBackgroundColorOdd } from '../../style';
+import { tableHeadline, tableHeadColor, tableBackgroundColorMain, tableBackgroundColorOdd } from '../../style';
 
 interface IProps {
   data: IWidgetMostSevereAccidentsTableData;
@@ -27,7 +27,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   table: {},
   mainText: {
     padding: '1px',
-    backgroundColor: highlightBasicColor,
+    fontSize: 26,
+    color: tableHeadline,
+    // backgroundColor: highlightBasicColor,
   },
 }));
 const StyledTableCell = withStyles((theme: Theme) =>
