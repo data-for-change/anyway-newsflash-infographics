@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import {ResponsiveContainer, PieChart, Pie, Cell, PieLabelRenderProps, PieProps} from 'recharts';
+import {ResponsiveContainer, PieChart, Pie, Cell} from 'recharts';
 import { fontFamilyString } from '../../style';
 
 interface IProps {
@@ -8,7 +8,7 @@ interface IProps {
   yLabel: string;
   innerRadius?: string;
   usePercent?: boolean;
-  customizedLabel? : PieProps["label"];
+  customizedLabel? : React.ReactElement;
 }
 // hardcoded colors, will be changed
 const COLORS = ['#b71c1c', '#647171', '#d90000', '#890505', '#6a6a6a'];
@@ -90,7 +90,7 @@ export const renderCollisionCustomizedLabel = (props: any, usePercent = false) =
 
 
 export const PieChartView: FC<IProps> = ({ data, yLabel, xLabel, innerRadius, usePercent }) => {
-  const labelFn = usePercent ?
+  const labelFn : (props: any, usePercent?: boolean) => (JSX.Element | null) = renderCollisionCustomizedLabel;
   return (
     <ResponsiveContainer width={'100%'} height={'100%'}>
       <PieChart>
