@@ -72,6 +72,9 @@ It is following [Atomic Design](https://bradfrost.com/blog/post/atomic-web-desig
 - [Material-UI](https://material-ui.com/)
 - [Recharts](https://recharts.org/en-US/) - A composable charting library built on React components
 
+Also,to upload google maps API script for the street view component, the 'react-async-loader' library was used  as described in 
+https://github.com/edmund-dev/react-async-loader/blob/master/example/GoogleMap.jsx.
+
 ### Project directory structure <a id="directory-structure"></a>
 
 ```
