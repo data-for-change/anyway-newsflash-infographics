@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { IWidgetCountBySeverityTextData } from '../../models/WidgetData';
 import { Text, TextType } from '../atoms';
 import { Theme, makeStyles } from '@material-ui/core';
-import { highlightBasicColor, highlightDarkColor, highlightAlertColor, highlightWarnColor } from '../../style';
+import { highlightAlertColor, borderColor } from '../../style';
 import RoadNumberImage from '../../services/get-road-image.service';
 import { useTranslation } from 'react-i18next';
 
@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
+    textAlign: 'center',
     height: '100%',
     justifyContent: 'space-evenly',
     letterSpacing: 1,
@@ -27,27 +28,18 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   mainText: {
     fontSize: 19,
-    lineHeight: '32px',
-    padding: '5px',
-    backgroundColor: highlightBasicColor,
   },
   bottomText: {
     fontSize: 22,
-    padding: '5px 0 5px 5px',
-    backgroundColor: highlightBasicColor,
+    display: 'flex',
+    flexDirection: 'column',
   },
-  highlightDark: {
-    padding: '5px',
-    color: highlightBasicColor,
-    backgroundColor: highlightDarkColor,
+  border: {
+    borderBottom: `5px solid ${borderColor}`,
   },
+
   highlightAlert: {
-    padding: '5px',
-    backgroundColor: highlightAlertColor,
-  },
-  highlightWarn: {
-    padding: '5px',
-    backgroundColor: highlightWarnColor,
+    color: highlightAlertColor,
   },
 }));
 const AccidentsOccurred: FC<AProps> = ({ accidentsCount }) => {
@@ -55,7 +47,7 @@ const AccidentsOccurred: FC<AProps> = ({ accidentsCount }) => {
   const { t, i18n } = useTranslation();
   const elements = [
     <span>{t('textView.occurred')}</span>,
-    <span className={classes.highlightDark}>{accidentsCount}</span>,
+    <span className={classes.highlightAlert}>{accidentsCount}</span>,
     <span>{t('textView.accidents')}</span>,
   ];
   // When the locale is English the last element needs to be first - x accidents occurred instead of occurred x accidents
@@ -101,7 +93,7 @@ const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
               {items.severity_fatal_count ? (
                 <span className={classes.bottomText}>
                   <span className={classes.highlightAlert}>{items.severity_fatal_count}</span>
-                  <span>
+                  <span className={classes.border}>
                     {items.severity_fatal_count > 1 ? t('textView.fatal.plural') : t('textView.fatal.singular')}
                   </span>
                 </span>
@@ -110,11 +102,8 @@ const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
             <Text type={TextType.WIDGET_CONTENT}>
               {items.severity_severe_count ? (
                 <span className={classes.bottomText}>
-                  <span className={classes.highlightWarn}>
-                    {items.severity_light_count ? null : <span>{t('textView.and')}</span>}
-                    {items.severity_severe_count}
-                  </span>
-                  <span>
+                  <span className={classes.highlightAlert}>{items.severity_severe_count}</span>
+                  <span className={classes.border}>
                     {items.severity_severe_count > 1 ? t('textView.severe.plural') : t('textView.severe.singular')}
                   </span>
                 </span>
@@ -123,12 +112,7 @@ const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
             <Text type={TextType.WIDGET_CONTENT}>
               {items.severity_light_count ? (
                 <span className={classes.bottomText}>
-                  <span>
-                    {items.severity_fatal_count || items.severity_severe_count ? (
-                      <span>{t('textView.and')}</span>
-                    ) : null}
-                    {items.severity_light_count}
-                  </span>
+                  <span className={classes.highlightAlert}>{items.severity_light_count}</span>
                   <span>
                     {items.severity_light_count > 1 ? t('textView.light.plural') : t('textView.light.singular')}
                   </span>
