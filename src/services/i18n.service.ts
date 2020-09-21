@@ -4,7 +4,6 @@ import HttpApi from 'i18next-http-backend';
 
 const options = {
   fallbackLng: 'he',
-  lng: 'he',
   supportedLngs: ['he', 'en', 'ar'],
   debug: true,
   interpolation: {

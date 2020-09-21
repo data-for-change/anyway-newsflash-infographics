@@ -57,7 +57,7 @@ const SideBar: FC<IProps> = () => {
       <Box flexShrink={0} flexGrow={0} p={1}>
         <Text type={TextType.CONTENT_TITLE} children={mapTitle} />
       </Box>
-      <Box flexBasis={300} flexShrink={0} px={1} pb={1}>
+      <Box flexBasis={200} flexShrink={0} px={1} pb={1}>
         {location && (
           <ErrorBoundary>
             <SideBarMap items={[location]} />

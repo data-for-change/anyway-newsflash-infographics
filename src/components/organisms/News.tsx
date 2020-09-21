@@ -29,7 +29,7 @@ const News: FC = () => {
               const className = news.id === store.activeNewsFlashId ? classes.activeNewsFlash : '';
               const date = news.date == null ? '' : new Date(news.date.replace(/-/g, '/')).toLocaleDateString();
               return (
-                <AnywayLink key={news.id} to={`/newsflash/${news.id}`}>
+                <AnywayLink key={news.id} to={`${store.currentLanguageRouteString}/newsflash/${news.id}`}>
                   <Box border={1} borderColor={borderColor} p={1} className={className}>
                     <Text type={TextType.NEWS_FLASH_TITLE} children={`${date}, ${news.display_source}`} />
                     <Text type={TextType.NEWS_FLASH_CONTENT} children={news.title} />

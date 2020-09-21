@@ -1,10 +1,12 @@
 import React, { FC, useCallback } from 'react';
+import { Text, TextType } from '../atoms';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { ListItemIcon, List, ListItem } from '@material-ui/core';
 import { MenuItem } from '@material-ui/core';
 import { FormControl } from '@material-ui/core';
 import { Select } from '@material-ui/core';
 import { CalendarTodayOutlined } from '@material-ui/icons';
+import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
 import { useStore } from '../../store/storeConfig';
 
@@ -25,6 +27,7 @@ const useStyles = makeStyles(() =>
 const SelectButton: FC<IProps> = ({ onChange }) => {
   const classes = useStyles();
   const store = useStore();
+  const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);
   const history = useHistory();
 
@@ -62,10 +65,18 @@ const SelectButton: FC<IProps> = ({ onChange }) => {
             value={store.newsFlashWidgetsTimerFilter}
             onChange={handleChange}
           >
-            <MenuItem value={1}>שנה אחרונה</MenuItem>
-            <MenuItem value={3}>3 שנים אחרונות</MenuItem>
-            <MenuItem value={5}>5 שנים אחרונות</MenuItem>
-            <MenuItem value={8}>8 שנים אחרונות</MenuItem>
+            <MenuItem value={1}>
+              <Text type={TextType.CONTENT}>{t('filterBar.Past Year')}</Text>
+            </MenuItem>
+            <MenuItem value={3}>
+              <Text type={TextType.CONTENT}>{t('filterBar.Last 3 Years')}</Text>
+            </MenuItem>
+            <MenuItem value={5}>
+              <Text type={TextType.CONTENT}>{t('filterBar.Last 5 Years')}</Text>
+            </MenuItem>
+            <MenuItem value={8}>
+              <Text type={TextType.CONTENT}>{t('filterBar.Last 8 Years')}</Text>
+            </MenuItem>
           </Select>
         </FormControl>
       </ListItem>

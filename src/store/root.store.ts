@@ -9,6 +9,7 @@ import { fetchNews } from '../services/news.data.service';
 import SettingsStore from './settings.store';
 import { IPoint } from '../models/Point';
 import { fetchUserLoginStatus } from '../services/user.service';
+import i18next from '../services/i18n.service';
 
 // todo: move all map defaults to one place
 const DEFAULT_TIME_FILTER = 5;
@@ -35,7 +36,7 @@ export default class RootStore {
   @observable newsFlashWidgetsTimerFilter = DEFAULT_TIME_FILTER; // newsflash time filter (in years ago, 5 is the default)
   @observable newsFlashLoading: boolean = false;
   @observable widgetBoxLoading: boolean = false;
-
+  @observable currentLanguageRouteString: string = '';
   // domain stores
   settingsStore: SettingsStore;
 
@@ -139,11 +140,11 @@ export default class RootStore {
   }
   @action
   changeLanguage(lngCode: string): void {
-    //temporary code. will convert to i18next function in following lines once it is set up in the project
-    console.log("changing language to", lngCode);
-    // i18next.changeLanguage(lngCode).then((t) => {
-    //   t('key'); //
-    // });
+    i18next.changeLanguage(lngCode).then(() => {
+      lngCode === 'he'
+        ? (this.currentLanguageRouteString = '')
+        : (this.currentLanguageRouteString = `/${i18next.language}`);
+    });
   }
 
   private fetchSelectedNewsFlashWidgets(id: number, filterValue: number): void {

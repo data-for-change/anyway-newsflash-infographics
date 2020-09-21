@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import React, {FC} from 'react';
 import { apiKey } from '../../../utils/utils';
-import ReactStreetview from 'react-streetview';
+import ReactStreetview from '../../../services/streetView';
 import { makeStyles } from '@material-ui/core';
 import { IWidgetStreetViewData } from '../../../models/WidgetData';
 
@@ -20,14 +20,13 @@ const StreetViewWidget: FC<IProps> = ( {data} ) => {
   const {latitude, longitude} = data.items
 
   const streetViewPanoramaOptions = {
-    position: {lat: latitude, lng: longitude },
     pov: { heading: 100, pitch: 0 },
     zoom: 1,
   };
 
   return (
     <div className={classes.root}>
-      <ReactStreetview apiKey={apiKey} streetViewPanoramaOptions={streetViewPanoramaOptions} />
+      <ReactStreetview apiKey={apiKey} position ={{lat :latitude,lng:longitude}} streetViewPanoramaOptions={streetViewPanoramaOptions} />
     </div>
   );
 };

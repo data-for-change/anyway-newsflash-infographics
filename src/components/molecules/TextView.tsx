@@ -4,10 +4,15 @@ import { Text, TextType } from '../atoms';
 import { Theme, makeStyles } from '@material-ui/core';
 import { highlightBasicColor, highlightDarkColor, highlightAlertColor, highlightWarnColor } from '../../style';
 import RoadNumberImage from '../../services/get-road-image.service';
+import { useTranslation } from 'react-i18next';
+
 interface IProps {
   data: IWidgetCountBySeverityTextData;
   segmentText: string;
   roadNumber: number;
+}
+interface AProps {
+  accidentsCount: Number;
 }
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -45,8 +50,23 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: highlightWarnColor,
   },
 }));
+const AccidentsOccurred: FC<AProps> = ({ accidentsCount }) => {
+  const classes = useStyles();
+  const { t, i18n } = useTranslation();
+  const elements = [
+    <span>{t('textView.occurred')}</span>,
+    <span className={classes.highlightDark}>{accidentsCount}</span>,
+    <span>{t('textView.accidents')}</span>,
+  ];
+  // When the locale is English the last element needs to be first - x accidents occurred instead of occurred x accidents
+  const [a, b, c] = elements;
+  const elementsEnglish = [b, c, a];
+  return i18n.language === 'he' ? <>{elements}</> : <>{elementsEnglish}</>;
+};
+
 const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
   const classes = useStyles();
+  const { t } = useTranslation();
   const { items } = data;
   //checking availability of two or more types
   const isSummaryText =
@@ -58,22 +78,20 @@ const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
         <span className={classes.mainText}>
           {items.end_year === items.start_year ? (
             <>
-              <span> בשנה</span>
+              <span>{t('textView.inYear')}</span>
               <span>{items.end_year}</span>{' '}
             </>
           ) : (
             <>
-              <span>בין השנים</span>
+              <span>{t('textView.betweenYears')}</span>
               <span>
                 {items.end_year} - {items.start_year}{' '}
               </span>{' '}
             </>
           )}
           <br />
-          <span>{segmentText}</span>
-          <span>התרחשו</span>
-          <span className={classes.highlightDark}>{items.total_accidents_count}</span>
-          <span>תאונות</span>
+          <span>{t('textView.on') + segmentText}</span>
+          <AccidentsOccurred accidentsCount={items.total_accidents_count} />
         </span>
       </Text>
       <div>
@@ -83,7 +101,9 @@ const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
               {items.severity_fatal_count ? (
                 <span className={classes.bottomText}>
                   <span className={classes.highlightAlert}>{items.severity_fatal_count}</span>
-                  <span>{items.severity_fatal_count > 1 ? 'קטלניות' : 'קטלנית'}</span>
+                  <span>
+                    {items.severity_fatal_count > 1 ? t('textView.fatal.plural') : t('textView.fatal.singular')}
+                  </span>
                 </span>
               ) : null}
             </Text>
@@ -91,10 +111,12 @@ const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
               {items.severity_severe_count ? (
                 <span className={classes.bottomText}>
                   <span className={classes.highlightWarn}>
-                    {items.severity_light_count ? null : <span> ו- </span>}
+                    {items.severity_light_count ? null : <span>{t('textView.and')}</span>}
                     {items.severity_severe_count}
                   </span>
-                  <span>{items.severity_severe_count > 1 ? 'קשות' : 'קשה'}</span>
+                  <span>
+                    {items.severity_severe_count > 1 ? t('textView.severe.plural') : t('textView.severe.singular')}
+                  </span>
                 </span>
               ) : null}
             </Text>
@@ -102,10 +124,14 @@ const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
               {items.severity_light_count ? (
                 <span className={classes.bottomText}>
                   <span>
-                    {items.severity_fatal_count || items.severity_severe_count ? <span> ו- </span> : null}
+                    {items.severity_fatal_count || items.severity_severe_count ? (
+                      <span>{t('textView.and')}</span>
+                    ) : null}
                     {items.severity_light_count}
                   </span>
-                  <span>{items.severity_light_count > 1 ? 'קלות' : 'קלה'}</span>
+                  <span>
+                    {items.severity_light_count > 1 ? t('textView.light.plural') : t('textView.light.singular')}
+                  </span>
                 </span>
               ) : null}
             </Text>

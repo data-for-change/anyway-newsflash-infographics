@@ -10,7 +10,7 @@ import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
 import UserProfileHeader from './UserProfileHeader';
 import { makeStyles } from '@material-ui/core/styles';
-import LanguageMenu from './LanguageMenu';
+import LanguageMenu from '../organisms/LanguageMenu';
 
 const useStyles = makeStyles({
   settings: {

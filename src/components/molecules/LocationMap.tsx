@@ -5,7 +5,7 @@ import { apiKey, uniquePoints } from '../../utils/utils';
 import { IPoint } from '../../models/Point';
 import ReactLeafletGoogleLayer from 'react-leaflet-google-layer';
 import AnywayMostSevereAccidentsMarker from '../atoms/AnywayMostSevereAccidentsMarker';
-import { TooltipOffset } from '../atoms/TooltipMarker';
+import { ClockPosition } from '../../utils/enum.utils';
 const INITIAL_ZOOM = parseInt(process.env.REACT_APP_DEFAULT_MAP_ZOOM!);
 const WRAPPER_STYLES = { height: '100%', width: '100%' };
 const DEFAULT_BOUNDS = [
@@ -21,7 +21,7 @@ interface IProps {
 const LocationMap: FC<IProps> = ({ items, center }) => {
   let markers = items.map((x: IPoint, i: number) => {
     if (x.latitude !== null && x.longitude !== null) {
-      const tooltipOffset = i % 2 === 0 ? TooltipOffset.RIGHT : TooltipOffset.LEFT;
+      const tooltipOffset = i % 2 === 0 ? ClockPosition.RIGHT : ClockPosition.LEFT;
       return (
         <div key={i}>
           <AnywayMostSevereAccidentsMarker data={x} tooltipOffset={tooltipOffset} />

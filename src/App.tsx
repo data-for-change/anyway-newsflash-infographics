@@ -16,6 +16,9 @@ const footerHeight = '7vh';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    rtl: {
+      direction: 'rtl',
+    },
     pageContent: {
       overflow: 'auto',
     },
@@ -30,18 +33,20 @@ const App: React.FC = () => {
     <StoreContext.Provider value={store}>
       <ThemeProvider theme={store.settingsStore.theme}>
         <Router>
-          <Box height={headerHeight} display="flex">
-            <Header />
-          </Box>
-          <Box height={pageContentHeight} className={classes.pageContent}>
-            <Switch>
-              <Route exact path="/" component={HomePageRedirect} />
-              <Route path="/newsflash/:id" component={HomePage} />
-              <Route path="/popup-redirect" component={PopUpRedirect}/>
-            </Switch>
-          </Box>
-          <Box height={footerHeight} display="flex">
-            <Footer />
+          <Box>
+            <Box height={headerHeight} display="flex">
+              <Header />
+            </Box>
+            <Box height={pageContentHeight} className={classes.pageContent}>
+              <Switch>
+                <Route exact path="/" component={HomePageRedirect} />
+                <Route path="/:lng?/newsflash/:id" component={HomePage} />
+                <Route path="/popup-redirect" component={PopUpRedirect}></Route>
+              </Switch>
+            </Box>
+            <Box height={footerHeight} display="flex">
+              <Footer />
+            </Box>
           </Box>
         </Router>
       </ThemeProvider>

@@ -4,87 +4,77 @@ import L from 'leaflet';
 import { Marker } from 'react-leaflet';
 import { makeStyles } from '@material-ui/core';
 import { dateFormat } from '../../utils/time.utils';
+import { ClockPosition } from '../../utils/enum.utils';
 
-export enum TooltipOffset {
-  TOP,
-  TOPRIGHT,
-  RIGHT,
-  BOTTOMRIGHT,
-  BOTTOM,
-  BOTTOMLEFT,
-  LEFT,
-  TOPLEFT,
-}
-
-const getLabelPosition = (offset: TooltipOffset): string => {
+const getLabelPosition = (offset: ClockPosition): string => {
   const x = getLabelXPosition(offset);
   const y = getLabelYPosition(offset);
   return `translate(${x},${y})`;
 };
 
-const getLabelXPosition = (offset: TooltipOffset): string => {
+const getLabelXPosition = (offset: ClockPosition): string => {
   switch (offset) {
-    case TooltipOffset.TOP:
-    case TooltipOffset.BOTTOM:
+    case ClockPosition.TOP:
+    case ClockPosition.BOTTOM:
       return '75%';
-    case TooltipOffset.BOTTOMRIGHT:
-    case TooltipOffset.TOPRIGHT:
+    case ClockPosition.BOTTOMRIGHT:
+    case ClockPosition.TOPRIGHT:
       return '120%';
-    case TooltipOffset.RIGHT:
+    case ClockPosition.RIGHT:
       return '135%';
-    case TooltipOffset.TOPLEFT:
-    case TooltipOffset.BOTTOMLEFT:
+    case ClockPosition.TOPLEFT:
+    case ClockPosition.BOTTOMLEFT:
       return '8px';
     default:
       return '0';
   }
 };
 
-const getLabelYPosition = (offset: TooltipOffset): string => {
+const getLabelYPosition = (offset: ClockPosition): string => {
   switch (offset) {
-    case TooltipOffset.TOP:
-    case TooltipOffset.TOPLEFT:
-    case TooltipOffset.TOPRIGHT:
+    case ClockPosition.TOP:
+    case ClockPosition.TOPLEFT:
+    case ClockPosition.TOPRIGHT:
       return '-27px';
-    case TooltipOffset.BOTTOM:
+    case ClockPosition.BOTTOM:
       return '40px';
-    case TooltipOffset.BOTTOMLEFT:
-    case TooltipOffset.BOTTOMRIGHT:
+    case ClockPosition.BOTTOMLEFT:
+    case ClockPosition.BOTTOMRIGHT:
       return '32px';
     default:
       return '0';
   }
 };
-const getLabelFlexFlow = (offset: TooltipOffset): string => {
+const getLabelFlexFlow = (offset: ClockPosition): string => {
   switch (offset) {
-    case TooltipOffset.TOP:
+    case ClockPosition.TOP:
       return 'column-reverse';
-    case TooltipOffset.BOTTOM:
+    case ClockPosition.BOTTOM:
       return 'column';
-    case TooltipOffset.RIGHT:
-    case TooltipOffset.BOTTOMRIGHT:
-    case TooltipOffset.TOPRIGHT:
+    case ClockPosition.RIGHT:
+    case ClockPosition.BOTTOMRIGHT:
+    case ClockPosition.TOPRIGHT:
       return 'row-reverse';
     default:
       return 'initial';
   }
 };
 
-const getLabelArrowRotation = (offset: TooltipOffset): string => {
+const getLabelArrowRotation = (offset: ClockPosition): string => {
   switch (offset) {
-    case TooltipOffset.TOP:
+    case ClockPosition.TOP:
       return 'rotate(90deg)';
-    case TooltipOffset.RIGHT:
+    case ClockPosition.RIGHT:
       return 'rotate(180deg)';
-    case TooltipOffset.TOPRIGHT:
+    case ClockPosition.TOPRIGHT:
       return 'translate(6px, 13px) rotate(135deg)';
-    case TooltipOffset.TOPLEFT:
+    case ClockPosition.TOPLEFT:
       return 'translate(-6px, 13px) rotate(45deg)';
-    case TooltipOffset.BOTTOM:
+    case ClockPosition.BOTTOM:
       return 'rotate(270deg)';
-    case TooltipOffset.BOTTOMRIGHT:
+    case ClockPosition.BOTTOMRIGHT:
       return 'translate(6px, -13px) rotate(-135deg)';
-    case TooltipOffset.BOTTOMLEFT:
+    case ClockPosition.BOTTOMLEFT:
       return 'translate(-6px, -13px) rotate(-45deg)';
     default:
       return 'none';
@@ -101,9 +91,9 @@ const useStyles = makeStyles({
     position: 'absolute',
     right: 16,
     bottom: 0,
-    transform: (offset: TooltipOffset) => getLabelPosition(offset),
+    transform: (offset: ClockPosition) => getLabelPosition(offset),
     display: 'flex',
-    flexFlow: (offset: TooltipOffset) => getLabelFlexFlow(offset),
+    flexFlow: (offset: ClockPosition) => getLabelFlexFlow(offset),
     alignItems: 'center',
   },
   content: () => ({
@@ -120,7 +110,7 @@ const useStyles = makeStyles({
     borderStyle: 'solid',
     borderWidth: '5px 0 5px 20px',
     borderColor: 'transparent black transparent black',
-    transform: (offset: TooltipOffset) => getLabelArrowRotation(offset),
+    transform: (offset: ClockPosition) => getLabelArrowRotation(offset),
   },
 });
 const TooltipMarker = ({ data, position, offset }: any) => {

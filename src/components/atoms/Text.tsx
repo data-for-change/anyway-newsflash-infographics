@@ -1,5 +1,7 @@
-import React, { FC } from 'react';
-import Typography from '@material-ui/core/Typography';
+import React, { FC, ElementType } from 'react';
+import MaterialTypography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 
 export enum TextType {
   PAGE_TITLE,
@@ -15,9 +17,45 @@ export enum TextType {
   WIDGET_TABLE_HEADER,
 }
 
+interface TProps {
+  variant:
+    | 'h1'
+    | 'h2'
+    | 'h3'
+    | 'h4'
+    | 'h5'
+    | 'h6'
+    | 'subtitle1'
+    | 'subtitle2'
+    | 'body1'
+    | 'body2'
+    | 'caption'
+    | 'button'
+    | 'overline'
+    | 'srOnly'
+    | 'inherit';
+  component: ElementType;
+}
 interface IProps {
   type: TextType;
 }
+
+const useStyles = makeStyles({
+  ltr: {
+    direction: 'ltr',
+  },
+});
+
+const Typography: FC<TProps> = ({ component, variant, children }) => {
+  const { i18n } = useTranslation();
+  const isLtr = i18n.dir() === 'ltr';
+  const classes = useStyles();
+  return (
+    <MaterialTypography className={isLtr ? classes.ltr : ''} variant={variant} component={component}>
+      {children}
+    </MaterialTypography>
+  );
+};
 
 const Text: FC<IProps> = ({ type, children }) => {
   switch (type) {
