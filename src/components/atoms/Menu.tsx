@@ -13,7 +13,7 @@ const Menu: FC<IProps> = ({ items, anchorEl, handleClose }) => {
       <MaterialMenu id="menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
         {items.map((item, index) => {
           return (
-            <MenuItem key={index}>
+            <MenuItem onClick={handleClose} key={index}>
               {item}
             </MenuItem>
           );
