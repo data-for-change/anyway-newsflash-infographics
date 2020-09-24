@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import {ResponsiveContainer, PieChart, Pie, Cell} from 'recharts';
+import React, {FC, useCallback} from 'react';
+import {ResponsiveContainer, PieChart, Pie, Cell, PieLabelRenderProps} from 'recharts';
 import { fontFamilyString } from '../../style';
 
 interface IProps {
@@ -7,8 +7,9 @@ interface IProps {
   xLabel: string;
   yLabel: string;
   innerRadius?: string;
+  outerRadius?: string;
   usePercent?: boolean;
-  customizedLabel? : React.ReactElement;
+  customizedLabel? : (props: any,usePercent?: boolean) => JSX.Element | null;
 }
 // hardcoded colors, will be changed
 const COLORS = ['#b71c1c', '#647171', '#d90000', '#890505', '#6a6a6a'];
@@ -31,8 +32,8 @@ export const renderCollisionCustomizedLabel = (props: any, usePercent = false) =
         >
           {labelText}
         </text>
-        for text wrapping in svg - use foreignObject make sure to give foreignObject height and width, or inner element
-        will not be displayed https://stackoverflow.com/questions/4991171/auto-line-wrapping-in-svg-text
+      {/*  for text wrapping in svg - use foreignObject make sure to give foreignObject height and width, or inner element
+        will not be displayed https://stackoverflow.com/questions/4991171/auto-line-wrapping-in-svg-text*/}
         <foreignObject style={{ fontSize: '100%' }} x={'30%'} y={'46%'} height={'30%'} width={'35%'}>
           {name}
         </foreignObject>
@@ -43,7 +44,7 @@ export const renderCollisionCustomizedLabel = (props: any, usePercent = false) =
   }
 };
 
- const renderCustomizedLabel = (props: any, usePercent = false) => {
+ export const renderCustomizedLabel = (props: any, usePercent = false) => {
   const { cx, cy, midAngle, innerRadius, percent, outerRadius, value, name } = props;
   const labelText = usePercent ? `${Math.round(percent * 100)}%` : value;
 
@@ -82,15 +83,18 @@ export const renderCollisionCustomizedLabel = (props: any, usePercent = false) =
       make sure to give foreignObject height and width, or inner element will not be displayed
       https://stackoverflow.com/questions/4991171/auto-line-wrapping-in-svg-text */}
       <foreignObject fontFamily={fontFamilyString} fontWeight={700} fontSize={14} x={ex} y={ey} height={76} width={60}>
-        <div style={textLabelStyle}>{name}</div>
+        <div style={textLabelStyle}>{name ? name :'0'}</div>
       </foreignObject>
     </g>
   );
 };
 
 
-export const PieChartView: FC<IProps> = ({ data, yLabel, xLabel, innerRadius, usePercent }) => {
-  const labelFn : (props: any, usePercent?: boolean) => (JSX.Element | null) = renderCollisionCustomizedLabel;
+export const PieChartView: FC<IProps> = ({ data, yLabel, xLabel, innerRadius,
+                                           outerRadius = 90,usePercent ,
+                                         customizedLabel =renderCustomizedLabel}) => {
+  const renderLabelCount = useCallback((props: PieLabelRenderProps) => customizedLabel(props,),[]);
+  const renderLabelPercent = useCallback((props: PieLabelRenderProps) => customizedLabel(props, true),[]);
   return (
     <ResponsiveContainer width={'100%'} height={'100%'}>
       <PieChart>
@@ -98,9 +102,10 @@ export const PieChartView: FC<IProps> = ({ data, yLabel, xLabel, innerRadius, us
           data={data}
           dataKey={yLabel}
           nameKey={xLabel}
-          innerRadius={'60%'}
+          innerRadius={innerRadius}
+          outerRadius={'80%'}
           minAngle={15}
-          label={labelFn}
+          label={usePercent ? renderLabelPercent: renderLabelCount}
           labelLine={false}
         >
           {data.map((entry: any, index: any) => (

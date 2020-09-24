@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Text, TextType } from '../../atoms';
-import PieChartView from '../PieChartView';
+import PieChartView, {renderCollisionCustomizedLabel} from '../PieChartView';
 import { IWidgetHeadOnCollisionsComparisonData } from '../../../models/WidgetData';
 import { Box, makeStyles, Theme } from '@material-ui/core';
 import RoadNumberImage from '../../../services/get-road-image.service';
@@ -11,8 +11,9 @@ const ACCIDENT_TYPE = 'desc';
 const COUNT = 'count';
 const MAIN_CONTENT_HEIGHT = 250;
 const SECONDARY_CONTENT_HEIGHT = cardContentHeight - MAIN_CONTENT_HEIGHT;
-const proportion: number = SECONDARY_CONTENT_HEIGHT / MAIN_CONTENT_HEIGHT;
+const PROPORTION: number = SECONDARY_CONTENT_HEIGHT / MAIN_CONTENT_HEIGHT;
 const ROAD_NUMBER_REGEX: string = 'כביש [0-9]+';
+const PRIMARY_FONT_SIZE = 14;
 
 interface IProps {
   data: IWidgetHeadOnCollisionsComparisonData;
@@ -54,15 +55,17 @@ const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePer
             <span>{descSegment}</span>
           </Box>
         </Box>
-        <PieChartView data={bigPieData} xLabel={ACCIDENT_TYPE} yLabel={COUNT} usePercent={usePercent} />
+        <PieChartView innerRadius={'60%'} data={bigPieData} xLabel={ACCIDENT_TYPE} yLabel={COUNT} usePercent={usePercent}
+                      customizedLabel={renderCollisionCustomizedLabel}/>
       </Box>
       <Box
         display="flex"
         height={SECONDARY_CONTENT_HEIGHT}
         width={'100%'}
-        fontSize={(proportion * 14).toString() + 'px'}
+        fontSize={(PROPORTION * PRIMARY_FONT_SIZE).toString() + 'px'}
       >
-        <PieChartView data={smallPieData} xLabel={ACCIDENT_TYPE} yLabel={COUNT} usePercent={usePercent} />
+        <PieChartView innerRadius={'60%'} data={smallPieData} xLabel={ACCIDENT_TYPE} yLabel={COUNT} usePercent={usePercent}
+                      customizedLabel={renderCollisionCustomizedLabel}/>
         <Box justifyContent={'center'} flexBasis={280} display="flex" flexDirection="column" alignItems="start">
           <div className={classes.textHighlight}>
             <Text type={TextType.CONTENT}>{t('onUrban.road')}</Text>
