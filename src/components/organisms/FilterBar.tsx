@@ -1,10 +1,12 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useState, useEffect } from 'react';
 import { makeStyles, createStyles, Divider, Grid } from '@material-ui/core';
 import { AppBar, Toolbar } from '@material-ui/core';
 import SelectButton from '../atoms/SelectButton';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
+import { useLocation } from 'react-router';
+import queryString from 'query-string';
 import { Text, TextType, Button } from '../atoms';
 
 interface IProps {}
@@ -31,13 +33,23 @@ const FilterBar: FC<IProps> = () => {
   const onFilterChange = useCallback((value: number) => store.changeTimeFilter(value), [store]);
   const [isDescOpen, setIsDescOpen] = useState(false);
 
+  const queryParam: string | null = useLocation().search;
+  useEffect(() => {
+    const filterValFromUrl: number | null = queryParam
+      ? parseInt(queryString.parse(queryParam)['years_ago'] as string)
+      : null;
+    if (filterValFromUrl) {
+      store.changeTimeFilter(filterValFromUrl);
+    }
+  }, [queryParam, store]);
+
   return (
     <div className={classes.grow}>
       <AppBar position="static" color="transparent" elevation={0}>
         <Toolbar variant="dense">
           <Grid container spacing={2}>
             <Grid item>
-              <SelectButton initialValue={0} onChange={onFilterChange} />
+              <SelectButton onChange={onFilterChange} />
             </Grid>
             <Grid item className={classes.locationMeta}>
               <Text type={TextType.CONTENT_TITLE}>{store.newsFlashWidgetsMetaString}</Text>
