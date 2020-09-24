@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import { Footer } from './components/organisms/Footer';
@@ -8,6 +8,7 @@ import Header from './components/molecules/Header';
 import 'leaflet/dist/leaflet.css';
 import PopUpRedirect from './services/PopUpRedirect';
 import HomePageRedirect from './pages/HomePageRedirect';
+import OverlayLoader from './components/molecules/OverlayLoader';
 
 // main components height - must add up to 100
 const headerHeight = '5vh';
@@ -30,27 +31,29 @@ const App: React.FC = () => {
   const store = useStore();
 
   return (
-    <StoreContext.Provider value={store}>
-      <ThemeProvider theme={store.settingsStore.theme}>
-        <Router>
-          <Box>
-            <Box height={headerHeight} display="flex">
-              <Header />
+    <Suspense fallback={<OverlayLoader show />}>
+      <StoreContext.Provider value={store}>
+        <ThemeProvider theme={store.settingsStore.theme}>
+          <Router>
+            <Box>
+              <Box height={headerHeight} display="flex">
+                <Header />
+              </Box>
+              <Box height={pageContentHeight} className={classes.pageContent}>
+                <Switch>
+                  <Route exact path="/" component={HomePageRedirect} />
+                  <Route path="/:lng?/newsflash/:id" component={HomePage} />
+                  <Route path="/popup-redirect" component={PopUpRedirect}></Route>
+                </Switch>
+              </Box>
+              <Box height={footerHeight} display="flex">
+                <Footer />
+              </Box>
             </Box>
-            <Box height={pageContentHeight} className={classes.pageContent}>
-              <Switch>
-                <Route exact path="/" component={HomePageRedirect} />
-                <Route path="/:lng?/newsflash/:id" component={HomePage} />
-                <Route path="/popup-redirect" component={PopUpRedirect}></Route>
-              </Switch>
-            </Box>
-            <Box height={footerHeight} display="flex">
-              <Footer />
-            </Box>
-          </Box>
-        </Router>
-      </ThemeProvider>
-    </StoreContext.Provider>
+          </Router>
+        </ThemeProvider>
+      </StoreContext.Provider>
+    </Suspense>
   );
 };
 export default App;
