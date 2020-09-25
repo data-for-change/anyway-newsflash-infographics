@@ -46,9 +46,11 @@ const AccidentsOccurred: FC<AProps> = ({ accidentsCount }) => {
   const classes = useStyles();
   const { t, i18n } = useTranslation();
   const elements = [
-    <span>{t('textView.occurred')}</span>,
-    <span className={classes.highlightAlert}>{accidentsCount}</span>,
-    <span>{t('textView.accidents')}</span>,
+    <span key={1}>{t('textView.occurred')}</span>,
+    <span key={2} className={classes.highlightAlert}>
+      {accidentsCount}
+    </span>,
+    <span key={3}>{t('textView.accidents')}</span>,
   ];
   // When the locale is English the last element needs to be first - x accidents occurred instead of occurred x accidents
   const [a, b, c] = elements;
