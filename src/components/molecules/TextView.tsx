@@ -5,6 +5,10 @@ import { Theme, makeStyles } from '@material-ui/core';
 import { highlightAlertColor, borderColor } from '../../style';
 import RoadNumberImage from '../../services/get-road-image.service';
 import { useTranslation } from 'react-i18next';
+import Person from '../../assets/Person.png';
+import Ambulance from '../../assets/Ambulance.png';
+import Crutches from '../../assets/Crutches.png';
+import Box from '@material-ui/core/Box';
 
 interface IProps {
   data: IWidgetCountBySeverityTextData;
@@ -22,22 +26,26 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: '100%',
     justifyContent: 'space-evenly',
     letterSpacing: 1,
-    '& span': {
-      marginLeft: 10,
-    },
   },
   mainText: {
     fontSize: 19,
+    '& span': {
+      marginLeft: 10,
+    },
   },
   bottomText: {
     fontSize: 22,
     display: 'flex',
     flexDirection: 'column',
+    width: '40%',
   },
   border: {
     borderBottom: `5px solid ${borderColor}`,
   },
-
+  image: {
+    height: '60px',
+    width: 'auto',
+  },
   highlightAlert: {
     color: highlightAlertColor,
   },
@@ -93,32 +101,43 @@ const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
           <>
             <Text type={TextType.WIDGET_CONTENT}>
               {items.severity_fatal_count ? (
-                <span className={classes.bottomText}>
-                  <span className={classes.highlightAlert}>{items.severity_fatal_count}</span>
-                  <span className={classes.border}>
-                    {items.severity_fatal_count > 1 ? t('textView.fatal.plural') : t('textView.fatal.singular')}
+                <Box display="flex" justifyContent="center" pt={1} pb={1} className={classes.border}>
+                  <Box width="40%">
+                    <img src={Person} className={classes.image} alt="red person" />
+                  </Box>
+                  <span className={classes.bottomText}>
+                    <span className={classes.highlightAlert}>{items.severity_fatal_count}</span>
+                    <span>
+                      {items.severity_fatal_count > 1 ? t('textView.fatal.plural') : t('textView.fatal.singular')}
+                    </span>
                   </span>
-                </span>
+                </Box>
               ) : null}
             </Text>
             <Text type={TextType.WIDGET_CONTENT}>
               {items.severity_severe_count ? (
-                <span className={classes.bottomText}>
-                  <span className={classes.highlightAlert}>{items.severity_severe_count}</span>
-                  <span className={classes.border}>
+                <Box display="flex" justifyContent="center" pt={1} pb={1} className={classes.border}>
+                  <Box width="40%">
+                    <img src={Ambulance} className={classes.image} alt="ambulance" />
+                  </Box>
+                  <span className={classes.bottomText}>
+                    <span className={classes.highlightAlert}>{items.severity_severe_count}</span>
                     {items.severity_severe_count > 1 ? t('textView.severe.plural') : t('textView.severe.singular')}
                   </span>
-                </span>
+                </Box>
               ) : null}
             </Text>
             <Text type={TextType.WIDGET_CONTENT}>
               {items.severity_light_count ? (
-                <span className={classes.bottomText}>
-                  <span className={classes.highlightAlert}>{items.severity_light_count}</span>
-                  <span>
+                <Box display="flex" justifyContent="center" pt={1} pb={1}>
+                  <Box width="40%">
+                    <img src={Crutches} className={classes.image} alt="crutches" />
+                  </Box>
+                  <span className={classes.bottomText}>
+                    <span className={classes.highlightAlert}>{items.severity_light_count}</span>
                     {items.severity_light_count > 1 ? t('textView.light.plural') : t('textView.light.singular')}
                   </span>
-                </span>
+                </Box>
               ) : null}
             </Text>
           </>
