@@ -17,12 +17,13 @@ const useStyles = makeStyles(() =>
       flexGrow: 1,
     },
     locationMeta: {
-      display: 'flex',
-      alignItems: 'center',
+      alignSelf: 'flex-start',
     },
     showDescriptionButton: {
-      display: 'flex',
-      alignItems: 'center',
+      alignSelf: 'baseline',
+    },
+    detailsMeta: {
+      paddingTop: '10px',
     },
   }),
 );
@@ -47,30 +48,36 @@ const FilterBar: FC<IProps> = () => {
     <div className={classes.grow}>
       <AppBar position="static" color="transparent" elevation={0}>
         <Toolbar variant="dense">
-          <Grid container spacing={2}>
+          <Grid container spacing={2} alignItems="baseline">
             <Grid item>
               <SelectButton onChange={onFilterChange} />
             </Grid>
-            <Grid item className={classes.locationMeta}>
-              <Text type={TextType.CONTENT_TITLE}>{store.newsFlashWidgetsMetaString}</Text>
-            </Grid>
-            <Grid item className={classes.showDescriptionButton}>
-              <Button.Standard onClick={() => setIsDescOpen(!isDescOpen)}>
-                {isDescOpen ? 'הסתר פרטים' : 'הצג פרטים'}
-              </Button.Standard>
+            <Grid item>
+              <Grid item container spacing={2}>
+                <Grid item className={classes.locationMeta}>
+                  <Text type={TextType.CONTENT_TITLE}>{store.newsFlashWidgetsMetaString}</Text>
+                </Grid>
+                <Grid item className={classes.showDescriptionButton}>
+                  <Button.Standard onClick={() => setIsDescOpen(!isDescOpen)}>
+                    {isDescOpen ? 'הסתר פרטים' : 'הצג פרטים'}
+                  </Button.Standard>
+                </Grid>
+              </Grid>
+              <Grid item className={classes.detailsMeta}>
+                {isDescOpen && (
+                  <Text type={TextType.CONTENT}>
+                    {store.newsFlashCollection.map((news) => {
+                      if (news.id === store.activeNewsFlashId) return news.title;
+                      return '';
+                    })}
+                  </Text>
+                )}
+              </Grid>
             </Grid>
           </Grid>
         </Toolbar>
       </AppBar>
       <Divider />
-      {isDescOpen && (
-        <Text type={TextType.CONTENT}>
-          {store.newsFlashCollection.map((news) => {
-            if (news.id === store.activeNewsFlashId) return news.title;
-            return '';
-          })}
-        </Text>
-      )}
     </div>
   );
 };
