@@ -22,22 +22,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    textAlign: 'center',
     height: '100%',
     justifyContent: 'space-evenly',
     letterSpacing: 1,
-  },
-  mainText: {
-    fontSize: 19,
-    '& span': {
-      marginLeft: 10,
-    },
-  },
-  bottomText: {
-    fontSize: 22,
-    display: 'flex',
-    flexDirection: 'column',
-    width: '40%',
   },
   border: {
     borderBottom: `5px solid ${borderColor}`,
@@ -54,16 +41,24 @@ const AccidentsOccurred: FC<AProps> = ({ accidentsCount }) => {
   const classes = useStyles();
   const { t, i18n } = useTranslation();
   const elements = [
-    <span key={1}>{t('textView.occurred')}</span>,
-    <span key={2} className={classes.highlightAlert}>
+    <Box mr={1.2} key={1}>
+      {t('textView.occurred')}
+    </Box>,
+    <Box mr={1.2} key={2} className={classes.highlightAlert}>
       {accidentsCount}
-    </span>,
-    <span key={3}>{t('textView.accidents')}</span>,
+    </Box>,
+    <Box mr={1.2} key={3}>
+      {t('textView.accidents')}
+    </Box>,
   ];
   // When the locale is English the last element needs to be first - x accidents occurred instead of occurred x accidents
   const [a, b, c] = elements;
   const elementsEnglish = [b, c, a];
-  return i18n.language === 'he' ? <>{elements}</> : <>{elementsEnglish}</>;
+  return (
+    <Box display="flex" justifyContent="center">
+      {i18n.language === 'he' ? elements : elementsEnglish}
+    </Box>
+  );
 };
 
 const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
@@ -77,66 +72,65 @@ const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
     <div className={classes.root}>
       <RoadNumberImage roadNumber={roadNumber} />
       <Text type={TextType.WIDGET_TITLE}>
-        <span className={classes.mainText}>
+        <Box textAlign="center" fontSize={19}>
           {items.end_year === items.start_year ? (
             <>
-              <span>{t('textView.inYear')}</span>
-              <span>{items.end_year}</span>{' '}
+              <Box mr={1.2}>{t('textView.inYear')}</Box>
+              <Box mr={1.2}>{items.end_year}</Box>{' '}
             </>
           ) : (
             <>
-              <span>{t('textView.betweenYears')}</span>
-              <span>
+              <Box mr={1.2}>{t('textView.betweenYears')}</Box>
+              <Box mr={1.2}>
                 {items.end_year} - {items.start_year}{' '}
-              </span>{' '}
+              </Box>{' '}
             </>
           )}
-          <br />
-          <span>{t('textView.on') + segmentText}</span>
+          <Box mr={1.2}>{t('textView.on') + segmentText}</Box>
           <AccidentsOccurred accidentsCount={items.total_accidents_count} />
-        </span>
+        </Box>
       </Text>
       <div>
         {isSummaryText ? (
           <>
             <Text type={TextType.WIDGET_CONTENT}>
               {items.severity_fatal_count ? (
-                <Box display="flex" justifyContent="center" pt={1} pb={1} className={classes.border}>
-                  <Box width="40%">
+                <Box display="flex" py={1} className={classes.border}>
+                  <Box flex={1}>
                     <img src={Person} className={classes.image} alt="red person" />
                   </Box>
-                  <span className={classes.bottomText}>
+                  <Box flex={1} display="flex" fontSize={22} flexDirection="column">
                     <span className={classes.highlightAlert}>{items.severity_fatal_count}</span>
                     <span>
                       {items.severity_fatal_count > 1 ? t('textView.fatal.plural') : t('textView.fatal.singular')}
                     </span>
-                  </span>
+                  </Box>
                 </Box>
               ) : null}
             </Text>
             <Text type={TextType.WIDGET_CONTENT}>
               {items.severity_severe_count ? (
-                <Box display="flex" justifyContent="center" pt={1} pb={1} className={classes.border}>
-                  <Box width="40%">
+                <Box display="flex" py={1} className={classes.border}>
+                  <Box flex={1}>
                     <img src={Ambulance} className={classes.image} alt="ambulance" />
                   </Box>
-                  <span className={classes.bottomText}>
+                  <Box flex={1} display="flex" fontSize={22} flexDirection="column">
                     <span className={classes.highlightAlert}>{items.severity_severe_count}</span>
                     {items.severity_severe_count > 1 ? t('textView.severe.plural') : t('textView.severe.singular')}
-                  </span>
+                  </Box>
                 </Box>
               ) : null}
             </Text>
             <Text type={TextType.WIDGET_CONTENT}>
               {items.severity_light_count ? (
-                <Box display="flex" justifyContent="center" pt={1} pb={1}>
-                  <Box width="40%">
+                <Box display="flex" py={1}>
+                  <Box flex={1}>
                     <img src={Crutches} className={classes.image} alt="crutches" />
                   </Box>
-                  <span className={classes.bottomText}>
+                  <Box flex={1} display="flex" fontSize={22} flexDirection="column">
                     <span className={classes.highlightAlert}>{items.severity_light_count}</span>
                     {items.severity_light_count > 1 ? t('textView.light.plural') : t('textView.light.singular')}
-                  </span>
+                  </Box>
                 </Box>
               ) : null}
             </Text>
