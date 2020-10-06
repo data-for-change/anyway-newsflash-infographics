@@ -24,6 +24,8 @@ export const highlightWarnColor = '#C36A1A';
 
 // charts
 export const barChartFillColor = '#c43a31';
+export const DoubleBarChartFillColorBar1 = '#c43a31';
+export const DoubleBarChartFillColorBar2 = '#F2BB0A';
 
 // table colors
 export const tableHeadColor = '#222b64';
