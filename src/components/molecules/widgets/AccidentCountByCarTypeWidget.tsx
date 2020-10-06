@@ -2,8 +2,6 @@ import React, { FC } from 'react';
 import { IWidgetAccidentCountByCarType } from '../../../models/WidgetData';
 import DoubleBarChartView from '../DoubleBarChartView';
 import { Box, makeStyles, Theme } from '@material-ui/core';
-import { highlightBasicColor } from '../../../style';
-
 import RoadNumberImage from '../../../services/get-road-image.service';
 
 const CAR_TYPE = 'car_type';
@@ -18,10 +16,6 @@ interface IProps {
 const useStyle = makeStyles((theme: Theme) => ({
   roadNumber: {
     padding: theme.spacing(1),
-  },
-  textHighlight: {
-    backgroundColor: highlightBasicColor,
-    textAlign: 'center',
   },
   chartWrapper: {
     height: '80%',
@@ -41,7 +35,7 @@ const AccidentCountByCarType: FC<IProps> = ({ data, roadNumber, segmentText }) =
         <div className={classes.roadNumber}>
           <RoadNumberImage roadNumber={roadNumber} />
         </div>
-        <span className={classes.textHighlight}>{segmentText}</span>
+        <Box textAlign="center">{segmentText}</Box>
       </Box>
       <Box className={classes.chartWrapper}>
         <DoubleBarChartView data={items} yLabel={CAR_TYPE} xLabel1={PERCENTAGE_SEGMENT} xLabel2={PERCENTAGE_COUNTRY} />

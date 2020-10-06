@@ -4,8 +4,8 @@ import { Text, TextType } from '../atoms';
 import { Table, TableBody, TableCell, TableHead, TableRow, Theme } from '@material-ui/core';
 import { IWidgetMostSevereAccidentsTableData } from '../../models/WidgetData';
 import RoadNumberImage from '../../services/get-road-image.service';
-
-import { highlightBasicColor, tableHeadColor, tableBackgroundColorMain, tableBackgroundColorOdd } from '../../style';
+import { tableHeadColor, tableBackgroundColorMain, tableBackgroundColorOdd } from '../../style';
+import Box from '@material-ui/core/Box';
 
 interface IProps {
   data: IWidgetMostSevereAccidentsTableData;
@@ -25,10 +25,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginLeft: '10px',
   },
   table: {},
-  mainText: {
-    padding: '1px',
-    backgroundColor: highlightBasicColor,
-  },
 }));
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -70,7 +66,7 @@ const TableView: FC<IProps> = ({ data, roadNumber }) => {
           <RoadNumberImage roadNumber={roadNumber} />
         </div>
         <Text type={TextType.WIDGET_TABLE_TITLE}>
-          <span className={classes.mainText}>{text.title}</span>
+          <Box p={0.125}>{text.title}</Box>
         </Text>
       </div>
       <Table className={classes.table} size="small" aria-label="a dense table">

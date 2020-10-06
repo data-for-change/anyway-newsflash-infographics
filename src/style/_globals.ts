@@ -16,12 +16,6 @@ export const cardPadding = 16;
 export const cardFooterHeight = 48;
 export const cardContentHeight = cardHeight - cardFooterHeight - 2 * cardPadding;
 
-// text highlight colors
-export const highlightBasicColor = '#ECED4B';
-export const highlightDarkColor = 'black';
-export const highlightAlertColor = '#D6391A';
-export const highlightWarnColor = '#C36A1A';
-
 // charts
 export const barChartFillColor = '#c43a31';
 export const DoubleBarChartFillColorBar1 = '#c43a31';

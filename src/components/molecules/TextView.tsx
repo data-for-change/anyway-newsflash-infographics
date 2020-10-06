@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { IWidgetCountBySeverityTextData } from '../../models/WidgetData';
 import { Text, TextType } from '../atoms';
 import { Theme, makeStyles } from '@material-ui/core';
-import { highlightAlertColor, borderColor } from '../../style';
+import { borderColor, roadIconColors } from '../../style';
 import RoadNumberImage from '../../services/get-road-image.service';
 import { useTranslation } from 'react-i18next';
 
@@ -37,9 +37,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   border: {
     borderBottom: `5px solid ${borderColor}`,
   },
-
-  highlightAlert: {
-    color: highlightAlertColor,
+  alertColor: {
+    color: roadIconColors.red,
   },
 }));
 const AccidentsOccurred: FC<AProps> = ({ accidentsCount }) => {
@@ -47,7 +46,7 @@ const AccidentsOccurred: FC<AProps> = ({ accidentsCount }) => {
   const { t, i18n } = useTranslation();
   const elements = [
     <span>{t('textView.occurred')}</span>,
-    <span className={classes.highlightAlert}>{accidentsCount}</span>,
+    <span className={classes.alertColor}>{accidentsCount}</span>,
     <span>{t('textView.accidents')}</span>,
   ];
   // When the locale is English the last element needs to be first - x accidents occurred instead of occurred x accidents
@@ -92,7 +91,7 @@ const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
             <Text type={TextType.WIDGET_CONTENT}>
               {items.severity_fatal_count ? (
                 <span className={classes.bottomText}>
-                  <span className={classes.highlightAlert}>{items.severity_fatal_count}</span>
+                  <span className={classes.alertColor}>{items.severity_fatal_count}</span>
                   <span className={classes.border}>
                     {items.severity_fatal_count > 1 ? t('textView.fatal.plural') : t('textView.fatal.singular')}
                   </span>
@@ -102,7 +101,7 @@ const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
             <Text type={TextType.WIDGET_CONTENT}>
               {items.severity_severe_count ? (
                 <span className={classes.bottomText}>
-                  <span className={classes.highlightAlert}>{items.severity_severe_count}</span>
+                  <span className={classes.alertColor}>{items.severity_severe_count}</span>
                   <span className={classes.border}>
                     {items.severity_severe_count > 1 ? t('textView.severe.plural') : t('textView.severe.singular')}
                   </span>
@@ -112,7 +111,7 @@ const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
             <Text type={TextType.WIDGET_CONTENT}>
               {items.severity_light_count ? (
                 <span className={classes.bottomText}>
-                  <span className={classes.highlightAlert}>{items.severity_light_count}</span>
+                  <span className={classes.alertColor}>{items.severity_light_count}</span>
                   <span>
                     {items.severity_light_count > 1 ? t('textView.light.plural') : t('textView.light.singular')}
                   </span>
