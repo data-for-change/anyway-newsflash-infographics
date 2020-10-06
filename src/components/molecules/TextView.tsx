@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderBottom: `5px solid ${borderColor}`,
   },
   image: {
-    height: '60px',
+    height: theme.spacing(7.5),
     width: 'auto',
   },
   highlightAlert: {
@@ -96,14 +96,16 @@ const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
             <Text type={TextType.WIDGET_CONTENT}>
               {items.severity_fatal_count ? (
                 <Box display="flex" py={1} className={classes.border}>
-                  <Box flex={1}>
+                  <Box flex={1} display="flex" justifyContent="center">
                     <img src={Person} className={classes.image} alt="red person" />
                   </Box>
-                  <Box flex={1} display="flex" fontSize={22} flexDirection="column">
-                    <span className={classes.highlightAlert}>{items.severity_fatal_count}</span>
-                    <span>
-                      {items.severity_fatal_count > 1 ? t('textView.fatal.plural') : t('textView.fatal.singular')}
-                    </span>
+                  <Box flex={1} display="flex" justifyContent="center">
+                    <Box display="flex" fontSize={22} flexDirection="column" alignItems="center">
+                      <span className={classes.highlightAlert}>{items.severity_fatal_count}</span>
+                      <span>
+                        {items.severity_fatal_count > 1 ? t('textView.fatal.plural') : t('textView.fatal.singular')}
+                      </span>
+                    </Box>
                   </Box>
                 </Box>
               ) : null}
@@ -111,12 +113,14 @@ const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
             <Text type={TextType.WIDGET_CONTENT}>
               {items.severity_severe_count ? (
                 <Box display="flex" py={1} className={classes.border}>
-                  <Box flex={1}>
+                  <Box flex={1} display="flex" justifyContent="center">
                     <img src={Ambulance} className={classes.image} alt="ambulance" />
                   </Box>
-                  <Box flex={1} display="flex" fontSize={22} flexDirection="column">
-                    <span className={classes.highlightAlert}>{items.severity_severe_count}</span>
-                    {items.severity_severe_count > 1 ? t('textView.severe.plural') : t('textView.severe.singular')}
+                  <Box flex={1} display="flex" justifyContent="center">
+                    <Box display="flex" fontSize={22} flexDirection="column" alignItems="center">
+                      <span className={classes.highlightAlert}>{items.severity_severe_count}</span>
+                      {items.severity_severe_count > 1 ? t('textView.severe.plural') : t('textView.severe.singular')}
+                    </Box>
                   </Box>
                 </Box>
               ) : null}
@@ -124,12 +128,14 @@ const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
             <Text type={TextType.WIDGET_CONTENT}>
               {items.severity_light_count ? (
                 <Box display="flex" py={1}>
-                  <Box flex={1}>
+                  <Box flex={1} display="flex" justifyContent="center">
                     <img src={Crutches} className={classes.image} alt="crutches" />
                   </Box>
-                  <Box flex={1} display="flex" fontSize={22} flexDirection="column">
-                    <span className={classes.highlightAlert}>{items.severity_light_count}</span>
-                    {items.severity_light_count > 1 ? t('textView.light.plural') : t('textView.light.singular')}
+                  <Box flex={1} display="flex" justifyContent="center">
+                    <Box display="flex" fontSize={22} flexDirection="column" alignItems="center">
+                      <span className={classes.highlightAlert}>{items.severity_light_count}</span>
+                      {items.severity_light_count > 1 ? t('textView.light.plural') : t('textView.light.singular')}
+                    </Box>
                   </Box>
                 </Box>
               ) : null}
