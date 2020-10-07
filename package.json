@@ -52,7 +52,17 @@
       "react-app",
       "prettier",
       "prettier/react"
-    ]
+    ],
+    "rules": {
+      "max-lines": [
+        2,
+        {
+          "max": 200,
+          "skipBlankLines": true,
+          "skipComments": true
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [
