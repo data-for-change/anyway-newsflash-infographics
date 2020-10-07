@@ -61,16 +61,7 @@ const FilterBar: FC<IProps> = () => {
                 </Grid>
               </Grid>
               <Grid item>
-                <Box mt={1}>
-                  {isDescOpen && (
-                    <Text type={TextType.CONTENT}>
-                      {store.newsFlashCollection.map((news) => {
-                        if (news.id === store.activeNewsFlashId) return news.title;
-                        return '';
-                      })}
-                    </Text>
-                  )}
-                </Box>
+                <Box mt={1}>{isDescOpen && <Text type={TextType.CONTENT}>{store.activeNewsFlash?.title}</Text>}</Box>
               </Grid>
             </Grid>
           </Grid>
