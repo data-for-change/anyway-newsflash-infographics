@@ -8,6 +8,7 @@ import RootStore from '../../store/root.store';
 import { useLocation } from 'react-router';
 import queryString from 'query-string';
 import { Text, TextType, Button } from '../atoms';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {}
 
@@ -29,6 +30,7 @@ const FilterBar: FC<IProps> = () => {
   const store: RootStore = useStore();
   const classes = useStyles();
   const onFilterChange = useCallback((value: number) => store.changeTimeFilter(value), [store]);
+  const { t } = useTranslation();
   const [isDescOpen, setIsDescOpen] = useState(false);
 
   const queryParam: string | null = useLocation().search;
@@ -56,7 +58,7 @@ const FilterBar: FC<IProps> = () => {
                 </Grid>
                 <Grid item className={classes.showDescriptionButton}>
                   <Button.Standard size="small" onClick={() => setIsDescOpen(!isDescOpen)}>
-                    {isDescOpen ? 'הסתר פרטים' : 'הצג פרטים'}
+                    {isDescOpen ? t('filterBar.Hide Details') : t('filterBar.Show Details')}
                   </Button.Standard>
                 </Grid>
               </Grid>
