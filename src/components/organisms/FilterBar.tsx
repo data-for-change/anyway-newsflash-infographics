@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState, useEffect } from 'react';
-import { makeStyles, createStyles, Divider, Grid } from '@material-ui/core';
+import { makeStyles, createStyles, Divider, Grid, Box } from '@material-ui/core';
 import { AppBar, Toolbar } from '@material-ui/core';
 import SelectButton from '../atoms/SelectButton';
 import { observer } from 'mobx-react-lite';
@@ -21,9 +21,6 @@ const useStyles = makeStyles(() =>
     },
     showDescriptionButton: {
       alignSelf: 'baseline',
-    },
-    detailsMeta: {
-      paddingTop: '10px',
     },
   }),
 );
@@ -58,20 +55,22 @@ const FilterBar: FC<IProps> = () => {
                   <Text type={TextType.CONTENT_TITLE}>{store.newsFlashWidgetsMetaString}</Text>
                 </Grid>
                 <Grid item className={classes.showDescriptionButton}>
-                  <Button.Standard onClick={() => setIsDescOpen(!isDescOpen)}>
+                  <Button.Standard size="small" onClick={() => setIsDescOpen(!isDescOpen)}>
                     {isDescOpen ? 'הסתר פרטים' : 'הצג פרטים'}
                   </Button.Standard>
                 </Grid>
               </Grid>
-              <Grid item className={classes.detailsMeta}>
-                {isDescOpen && (
-                  <Text type={TextType.CONTENT}>
-                    {store.newsFlashCollection.map((news) => {
-                      if (news.id === store.activeNewsFlashId) return news.title;
-                      return '';
-                    })}
-                  </Text>
-                )}
+              <Grid item>
+                <Box mt={1}>
+                  {isDescOpen && (
+                    <Text type={TextType.CONTENT}>
+                      {store.newsFlashCollection.map((news) => {
+                        if (news.id === store.activeNewsFlashId) return news.title;
+                        return '';
+                      })}
+                    </Text>
+                  )}
+                </Box>
               </Grid>
             </Grid>
           </Grid>
