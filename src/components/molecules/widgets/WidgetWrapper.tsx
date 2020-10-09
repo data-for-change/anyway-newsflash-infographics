@@ -6,7 +6,6 @@ import {
   IWidgetInjuredCountPerAgeGroupPieData,
   IWidgetMostSevereAccidentsData,
   IWidgetMostSevereAccidentsTableData,
-  IWidgetStreetViewData,
   IWidgetCountBySeverityTextData,
   IWidgetAccidentsByTypeData,
   IWidgetAccidentsByYearData,
@@ -23,7 +22,6 @@ import InjuredCountPerAgeGroupPieWidget from './InjuredCountPerAgeGroupPieWidget
 import MostSevereAccidentsMapWidget from './MostSevereAccidentsMapWidget';
 import MostSevereAccidentsTableWidget from './MostSevereAccidentsTableWidget';
 import HeatMap from '../HeatMap';
-import StreetViewWidget from './StreetViewWidget';
 import CountBySeverityTextWidget from './CountBySeverityTextWidget';
 import CountByTypePieWidget from './CountByTypePieWidget';
 import CountByYearBarWidget from './CountByYearBarWidget';
@@ -68,6 +66,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, segmentText, options = {} }) => {
       widgetComponent = <HeatMap data={data.items as IPoint[]} center={{ lat: 32.0853, lng: 34.7818 }} />;
       break;
     }
+    // remove street_view until fixed
     // case WidgetName.street_view: {
     //   widgetComponent = <StreetViewWidget data={data as IWidgetStreetViewData} />;
     //   break;
