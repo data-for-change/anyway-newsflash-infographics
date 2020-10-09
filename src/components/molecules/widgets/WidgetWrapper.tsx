@@ -68,10 +68,10 @@ const WidgetWrapper: FC<IProps> = ({ widget, segmentText, options = {} }) => {
       widgetComponent = <HeatMap data={data.items as IPoint[]} center={{ lat: 32.0853, lng: 34.7818 }} />;
       break;
     }
-    case WidgetName.street_view: {
-      widgetComponent = <StreetViewWidget data={data as IWidgetStreetViewData} />;
-      break;
-    }
+    // case WidgetName.street_view: {
+    //   widgetComponent = <StreetViewWidget data={data as IWidgetStreetViewData} />;
+    //   break;
+    // }
     case WidgetName.accident_count_by_severity: {
       widgetComponent = (
         <CountBySeverityTextWidget data={data as IWidgetCountBySeverityTextData} segmentText={segmentText} />

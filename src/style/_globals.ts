@@ -15,7 +15,6 @@ export const cardPadding = 16;
 // card content and actions (footer)
 export const cardHeaderHeight = 70;
 export const cardFooterHeight = 50;
-export const cardContentHeight = cardHeight - cardFooterHeight - 2 * cardPadding;
 
 // text highlight colors
 export const highlightBasicColor = '#ECED4B';

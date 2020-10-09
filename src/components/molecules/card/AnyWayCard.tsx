@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Card, CardContent, CardActions } from '@material-ui/core';
+import { Card, CardContent, CardActions, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import RoadImage from '../../../assets/road-image.png';
 import LamasImage from '../../../assets/cbs.png';
@@ -11,9 +11,15 @@ import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
 import CardEditor from '../../organisms/CardEditorDialog';
 import SettingsOverscanIcon from '@material-ui/icons/SettingsOverscan';
 
-import { fontFamilyString, cardWidth, cardHeight, cardPadding, cardFooterHeight } from '../../../style';
+import { fontFamilyString, cardPadding, cardFooterHeight } from '../../../style';
 import CardHeader from './CardHeader';
-import { getWidgetTitle, getWidgetVariant } from '../../../services/widgets.style.service';
+import {
+  FooterVariant,
+  getWidgetTitle,
+  getWidgetVariant,
+  HeaderVariant,
+} from '../../../services/widgets.style.service';
+import { getSizes } from './card.util';
 
 const DEFAULTE_SIZE = 1;
 export interface CardLayoutOptions {
@@ -28,37 +34,19 @@ interface IProps {
   getCardRef?: (element: HTMLElement) => any;
 }
 
-const getSize = (options: CardLayoutOptions | undefined): number =>
-  options && options.size ? options.size : DEFAULTE_SIZE;
-
-const getCardWidth = (options: CardLayoutOptions | undefined) => {
-  const baseValue = options && options.landscape ? cardHeight : cardWidth;
-  return baseValue * getSize(options);
-};
-
-const getCardHeight = (options: CardLayoutOptions | undefined) => {
-  const baseValue = options && options.landscape ? cardWidth : cardHeight;
-  return baseValue * getSize(options);
-};
-
-const getContentHeight = (options: CardLayoutOptions | undefined) => {
-  // todo: pass baseHeight from component
-  const height = getCardHeight(options);
-  return height - cardFooterHeight - 2 * cardPadding;
-};
+const getSizeFactor = (options: CardLayoutOptions | undefined): number =>
+  options?.size ? options.size : DEFAULTE_SIZE;
 
 const useStyles = makeStyles({
   root: {
     fontFamily: fontFamilyString,
     position: 'relative', // for meta tags
-    width: (options) => getCardWidth(options),
-    height: (options: CardLayoutOptions | undefined) => getCardHeight(options),
     padding: cardPadding,
     backgroundImage: `url(${RoadImage})`,
     boxSizing: 'border-box',
   },
   content: {
-    height: (options: CardLayoutOptions | undefined) => getContentHeight(options),
+    height: '100%',
     boxSizing: 'border-box',
     padding: 0,
   },
@@ -91,11 +79,11 @@ const AnyWayCard: FC<IProps> = ({
   const handleCardEditorOpen = () => setOpen(true);
   const handleCardEditorClose = () => setOpen(false);
   const variant = getWidgetVariant(widgetName);
+  const factor = getSizeFactor(layoutOptions);
+  const sizes = getSizes(variant, factor);
   const title = getWidgetTitle(widgetName);
-  // Todo: get content height
-  // refactor card footer to files
 
-  const classes = useStyles(layoutOptions);
+  const classes = useStyles();
   const imgDownloadHandler = () => {
     if (element && element instanceof HTMLElement) {
       widgetToImage(widgetName, element);
@@ -118,18 +106,37 @@ const AnyWayCard: FC<IProps> = ({
       getCardRef(element); // send ref to parent
     }
   };
+
   return (
     <div ref={refFn}>
       <Card className={classes.root} variant="outlined">
-        <CardHeader variant={variant.header} text={title} road={roadNumber}></CardHeader>
-        <CardContent className={classes.content}>{children}</CardContent>
-        <CardActions className={classes.actions}>
-          {buttons}
-          <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} />
-          <div className={classes.actionsSpace}></div>
-          <Logo src={LamasImage} alt={'Lamas'} height={30} />
-          <Logo src={AnywayImage} alt={'Anyway'} height={20} />
-        </CardActions>
+        <Box height={sizes.height} width={sizes.width}>
+          {/* HEADER */}
+          {variant.header !== HeaderVariant.None && (
+            <Box height={sizes.headerHeight} width="100%">
+              <CardHeader variant={variant.header} text={title} road={roadNumber}></CardHeader>
+            </Box>
+          )}
+
+          {/* CONTENT */}
+          <Box height={sizes.contentHeight} width="100%">
+            <CardContent className={classes.content}>{children}</CardContent>
+          </Box>
+
+          {/* FOOTER */}
+          {/* Todo: refactor footer as a seperate component */}
+          {variant.footer !== FooterVariant.None && (
+            <Box height={sizes.footerHeight} width="100%">
+              <CardActions className={classes.actions}>
+                {buttons}
+                <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} />
+                <div className={classes.actionsSpace}></div>
+                <Logo src={LamasImage} alt={'Lamas'} height={30} />
+                <Logo src={AnywayImage} alt={'Anyway'} height={20} />
+              </CardActions>
+            </Box>
+          )}
+        </Box>
       </Card>
     </div>
   );

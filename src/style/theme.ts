@@ -3,6 +3,15 @@ import { fontFamilyString } from './_globals';
 
 const defaultThemeOptions: ThemeOptions = {
   palette: {},
+  overrides: {
+    MuiCardContent: {
+      root: {
+        '&:last-child': {
+          paddingBottom: 0,
+        },
+      },
+    },
+  },
   typography: {
     fontFamily: fontFamilyString,
     body1: {
@@ -13,8 +22,8 @@ const defaultThemeOptions: ThemeOptions = {
       fontSize: 14,
       fontWeight: 700,
       height: '100%',
-      width: '100%'
-    }
+      width: '100%',
+    },
   },
 };
 

@@ -3,13 +3,13 @@ import { Text, TextType } from '../../atoms';
 import PieChartView from '../PieChartView';
 import { IWidgetHeadOnCollisionsComparisonData } from '../../../models/WidgetData';
 import { Box, makeStyles, Theme } from '@material-ui/core';
-import { cardContentHeight, highlightBasicColor } from '../../../style';
+import { highlightBasicColor } from '../../../style';
 import { useTranslation } from 'react-i18next';
 
 const ACCIDENT_TYPE = 'desc';
 const COUNT = 'count';
 const MAIN_CONTENT_HEIGHT = 250;
-const SECONDARY_CONTENT_HEIGHT = cardContentHeight - MAIN_CONTENT_HEIGHT;
+const SECONDARY_CONTENT_HEIGHT = 130;
 
 interface IProps {
   data: IWidgetHeadOnCollisionsComparisonData;

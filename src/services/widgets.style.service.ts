@@ -12,18 +12,18 @@ export enum FooterVariant {
   Logo,
 }
 
-export interface WidgetVariant {
+export interface CardVariant {
   header: HeaderVariant;
   footer: FooterVariant;
   // backgroundImage
 }
 
 // === widgets variants === //
-const widgetVariants: { [index: string]: WidgetVariant } = {
+const widgetVariants: { [index: string]: CardVariant } = {
   defaultVariant: { header: HeaderVariant.None, footer: FooterVariant.Logo },
   [WidgetName.accidents_count_by_hour]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
   [WidgetName.injured_count_per_age_group]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
-  [WidgetName.most_severe_accidents]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
+  [WidgetName.most_severe_accidents]: { header: HeaderVariant.None, footer: FooterVariant.Logo },
   [WidgetName.most_severe_accidents_table]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
   // [WidgetName.accidents_heat_map]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
   // [WidgetName.street_view]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
@@ -49,7 +49,9 @@ export function getWidgetVariant(widgetName: string) {
 // === widgets variants - header titles === //
 const widgetHeaderTitles: { [index: string]: string } = {
   defaultTitle: '',
-  [WidgetName.accidents_count_by_hour]: '', // todo: add all title strings (use i18n)
+  [WidgetName.accidents_count_by_hour]: 'accidents count by hour', // todo: add all title strings (use i18n)
+  [WidgetName.injured_count_per_age_group]: 'injured count per age group',
+  [WidgetName.most_severe_accidents_table]: 'most severe accidents table',
 };
 
 export function getWidgetTitle(widgetName: string) {
