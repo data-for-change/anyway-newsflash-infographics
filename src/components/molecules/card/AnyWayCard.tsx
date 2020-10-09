@@ -1,17 +1,19 @@
 import React, { FC, useState } from 'react';
 import { Card, CardContent, CardActions } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import RoadImage from '../../assets/road-image.png';
-import widgetToImage from '../../services/to-image.service';
-import { AnyWayButton } from '../atoms/AnyWayButton';
-import { Logo } from '../atoms/Logo';
-import LamasImage from '../../assets/cbs.png';
-import AnywayImage from '../../assets/anyway.png';
+import RoadImage from '../../../assets/road-image.png';
+import LamasImage from '../../../assets/cbs.png';
+import AnywayImage from '../../../assets/anyway.png';
+import widgetToImage from '../../../services/to-image.service';
+import { AnyWayButton } from '../../atoms/AnyWayButton';
+import { Logo } from '../../atoms/Logo';
 import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
-import CardEditor from '../organisms/CardEditorDialog';
+import CardEditor from '../../organisms/CardEditorDialog';
 import SettingsOverscanIcon from '@material-ui/icons/SettingsOverscan';
 
-import { fontFamilyString, cardWidth, cardHeight, cardPadding, cardFooterHeight } from '../../style';
+import { fontFamilyString, cardWidth, cardHeight, cardPadding, cardFooterHeight } from '../../../style';
+import CardHeader from './CardHeader';
+import { getWidgetTitle, getWidgetVariant } from '../../../services/widgets.style.service';
 
 const DEFAULTE_SIZE = 1;
 export interface CardLayoutOptions {
@@ -20,6 +22,7 @@ export interface CardLayoutOptions {
 }
 interface IProps {
   widgetName: string;
+  roadNumber: number;
   actionButtons?: boolean;
   layoutOptions?: CardLayoutOptions;
   getCardRef?: (element: HTMLElement) => any;
@@ -39,6 +42,7 @@ const getCardHeight = (options: CardLayoutOptions | undefined) => {
 };
 
 const getContentHeight = (options: CardLayoutOptions | undefined) => {
+  // todo: pass baseHeight from component
   const height = getCardHeight(options);
   return height - cardFooterHeight - 2 * cardPadding;
 };
@@ -74,11 +78,22 @@ const useStyles = makeStyles({
   },
 });
 
-const AnyWayCard: FC<IProps> = ({ widgetName, children, layoutOptions, getCardRef, actionButtons = true }) => {
+const AnyWayCard: FC<IProps> = ({
+  widgetName,
+  roadNumber,
+  children,
+  layoutOptions,
+  getCardRef,
+  actionButtons = true,
+}) => {
   const [element, setElement] = useState({});
   const [isOpen, setOpen] = useState(false);
   const handleCardEditorOpen = () => setOpen(true);
   const handleCardEditorClose = () => setOpen(false);
+  const variant = getWidgetVariant(widgetName);
+  const title = getWidgetTitle(widgetName);
+  // Todo: get content height
+  // refactor card footer to files
 
   const classes = useStyles(layoutOptions);
   const imgDownloadHandler = () => {
@@ -106,6 +121,7 @@ const AnyWayCard: FC<IProps> = ({ widgetName, children, layoutOptions, getCardRe
   return (
     <div ref={refFn}>
       <Card className={classes.root} variant="outlined">
+        <CardHeader variant={variant.header} text={title} road={roadNumber}></CardHeader>
         <CardContent className={classes.content}>{children}</CardContent>
         <CardActions className={classes.actions}>
           {buttons}

@@ -3,7 +3,7 @@ import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
 import { observer } from 'mobx-react-lite';
 import { Grid } from '../atoms';
-import AnyWayCard from '../molecules/AnyWayCard';
+import AnyWayCard from '../molecules/card/AnyWayCard';
 import ErrorBoundary from '../atoms/ErrorBoundary';
 import { MetaTag } from '../atoms';
 import { Text, TextType } from '../atoms';
@@ -25,19 +25,13 @@ const WidgetsTemplate: FC<IProps> = ({ id }) => {
 
   const widgetsData = store.newsFlashWidgetsData;
   const widgetCards = widgetsData.map((widget, index) => {
-    const widgetComponent = (
-      <WidgetWrapper
-        widget={widget}
-        segmentText={store.newsFlashWidgetsMetaString}
-        roadNumber={store.newsFlashWidgetsMetaNumber}
-      />
-    );
+    const widgetComponent = <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaString} />;
     if (!widgetComponent) {
       return null;
     }
     return (
       <Box m={2} key={index}>
-        <AnyWayCard widgetName={widget.name}>
+        <AnyWayCard widgetName={widget.name} roadNumber={store.newsFlashWidgetsMetaNumber}>
           <MetaTag>{widget.name}</MetaTag>
           <ErrorBoundary>{widgetComponent}</ErrorBoundary>
         </AnyWayCard>

@@ -3,7 +3,6 @@ import { Text, TextType } from '../../atoms';
 import PieChartView from '../PieChartView';
 import { IWidgetHeadOnCollisionsComparisonData } from '../../../models/WidgetData';
 import { Box, makeStyles, Theme } from '@material-ui/core';
-import RoadNumberImage from '../../../services/get-road-image.service';
 import { cardContentHeight, highlightBasicColor } from '../../../style';
 import { useTranslation } from 'react-i18next';
 
@@ -16,20 +15,16 @@ interface IProps {
   data: IWidgetHeadOnCollisionsComparisonData;
   segmetText: string;
   usePercent?: boolean;
-  roadNumber: number;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  roadNumber: {
-    padding: theme.spacing(2),
-  },
   textHighlight: {
     backgroundColor: highlightBasicColor,
     textAlign: 'center',
   },
 }));
 
-const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePercent, roadNumber }) => {
+const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePercent }) => {
   const classes = useStyles();
   const { t } = useTranslation();
   const bigPieData = data.items.specific_road_segment_fatal_accidents;
@@ -38,9 +33,6 @@ const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePer
     <Box display="flex" flexDirection="column">
       <Box display="flex" height={MAIN_CONTENT_HEIGHT} width={'100%'}>
         <Box flexBasis={120} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-          <div className={classes.roadNumber}>
-            <RoadNumberImage roadNumber={roadNumber} />
-          </div>
           <span className={classes.textHighlight}>{segmetText}</span>
         </Box>
         <PieChartView data={bigPieData} xLabel={ACCIDENT_TYPE} yLabel={COUNT} usePercent={usePercent} />

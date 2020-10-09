@@ -3,13 +3,11 @@ import { IWidgetCountBySeverityTextData } from '../../models/WidgetData';
 import { Text, TextType } from '../atoms';
 import { Theme, makeStyles } from '@material-ui/core';
 import { highlightAlertColor, borderColor } from '../../style';
-import RoadNumberImage from '../../services/get-road-image.service';
 import { useTranslation } from 'react-i18next';
 
 interface IProps {
   data: IWidgetCountBySeverityTextData;
   segmentText: string;
-  roadNumber: number;
 }
 interface AProps {
   accidentsCount: Number;
@@ -56,7 +54,7 @@ const AccidentsOccurred: FC<AProps> = ({ accidentsCount }) => {
   return i18n.language === 'he' ? <>{elements}</> : <>{elementsEnglish}</>;
 };
 
-const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
+const TextView: FC<IProps> = ({ data, segmentText }) => {
   const classes = useStyles();
   const { t } = useTranslation();
   const { items } = data;
@@ -65,7 +63,6 @@ const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
     [items.severity_fatal_count, items.severity_light_count, items.severity_severe_count].filter(Boolean).length >= 2;
   return (
     <div className={classes.root}>
-      <RoadNumberImage roadNumber={roadNumber} />
       <Text type={TextType.WIDGET_TITLE}>
         <span className={classes.mainText}>
           {items.end_year === items.start_year ? (
