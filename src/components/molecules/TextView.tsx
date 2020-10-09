@@ -3,7 +3,6 @@ import { IWidgetCountBySeverityTextData } from '../../models/WidgetData';
 import { Text, TextType } from '../atoms';
 import { Theme, makeStyles } from '@material-ui/core';
 import { highlightAlertColor, borderColor } from '../../style';
-import RoadNumberImage from '../../services/get-road-image.service';
 import { useTranslation } from 'react-i18next';
 import Person from '../../assets/Person.png';
 import Ambulance from '../../assets/Ambulance.png';
@@ -13,7 +12,6 @@ import Box from '@material-ui/core/Box';
 interface IProps {
   data: IWidgetCountBySeverityTextData;
   segmentText: string;
-  roadNumber: number;
 }
 interface AProps {
   accidentsCount: Number;
@@ -61,7 +59,7 @@ const AccidentsOccurred: FC<AProps> = ({ accidentsCount }) => {
   );
 };
 
-const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
+const TextView: FC<IProps> = ({ data, segmentText }) => {
   const classes = useStyles();
   const { t } = useTranslation();
   const { items } = data;
@@ -70,7 +68,6 @@ const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
     [items.severity_fatal_count, items.severity_light_count, items.severity_severe_count].filter(Boolean).length >= 2;
   return (
     <div className={classes.root}>
-      <RoadNumberImage roadNumber={roadNumber} />
       <Text type={TextType.WIDGET_TITLE}>
         <Box textAlign="center" fontSize={19}>
           {items.end_year === items.start_year ? (

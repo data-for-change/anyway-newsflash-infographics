@@ -9,12 +9,12 @@ export const lightBackgroundColor = '#e2e2e2f0';
 export const defaultBorderRadius = 4;
 export const sidBarWidth = 300;
 // card
-export const cardHeight = 480;
-export const cardWidth = 370;
+export const cardHeight = 500;
+export const cardWidth = 500;
 export const cardPadding = 16;
 // card content and actions (footer)
-export const cardFooterHeight = 48;
-export const cardContentHeight = cardHeight - cardFooterHeight - 2 * cardPadding;
+export const cardHeaderHeight = 70;
+export const cardFooterHeight = 50;
 
 // text highlight colors
 export const highlightBasicColor = '#ECED4B';
