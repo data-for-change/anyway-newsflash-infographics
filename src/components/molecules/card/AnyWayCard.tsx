@@ -1,17 +1,16 @@
 import React, { FC, useState } from 'react';
 import { Card, CardContent, CardActions, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import RoadImage from '../../../assets/road-image.png';
 import LamasImage from '../../../assets/cbs.png';
 import AnywayImage from '../../../assets/anyway.png';
 import widgetToImage from '../../../services/to-image.service';
 import { AnyWayButton } from '../../atoms/AnyWayButton';
-import { Logo } from '../../atoms/Logo';
+import { Logo } from '../../atoms';
 import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
 import CardEditor from '../../organisms/CardEditorDialog';
 import SettingsOverscanIcon from '@material-ui/icons/SettingsOverscan';
 
-import { fontFamilyString, cardPadding, cardFooterHeight } from '../../../style';
+import { fontFamilyString, cardFooterHeight } from '../../../style';
 import CardHeader from './CardHeader';
 import {
   FooterVariant,
@@ -20,6 +19,7 @@ import {
   HeaderVariant,
 } from '../../../services/widgets.style.service';
 import { getSizes } from './card.util';
+import CardBackgroundImage from './CardBackgroundImage';
 
 const DEFAULTE_SIZE = 1;
 export interface CardLayoutOptions {
@@ -41,9 +41,8 @@ const useStyles = makeStyles({
   root: {
     fontFamily: fontFamilyString,
     position: 'relative', // for meta tags
-    padding: cardPadding,
-    backgroundImage: `url(${RoadImage})`,
     boxSizing: 'border-box',
+    zIndex: -2, // lower than background image
   },
   content: {
     height: '100%',
@@ -110,7 +109,10 @@ const AnyWayCard: FC<IProps> = ({
   return (
     <div ref={refFn}>
       <Card className={classes.root} variant="outlined">
-        <Box height={sizes.height} width={sizes.width}>
+        <Box height={sizes.height} width={sizes.width} position="relative" padding={3}>
+          {/* BACKGROUND IMAGE */}
+          <CardBackgroundImage variant={variant.header} />
+
           {/* HEADER */}
           {variant.header !== HeaderVariant.None && (
             <Box height={sizes.headerHeight} width="100%">
