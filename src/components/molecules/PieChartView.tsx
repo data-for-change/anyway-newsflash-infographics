@@ -1,5 +1,5 @@
 import React, {FC, useCallback} from 'react';
-import {ResponsiveContainer, PieChart, Pie, Cell, PieLabelRenderProps} from 'recharts';
+import {ResponsiveContainer, PieChart, Pie, Cell, PieLabelRenderProps, LabelList, Label} from 'recharts';
 import { fontFamilyString } from '../../style';
 
 interface IProps {
@@ -48,23 +48,17 @@ export const renderCollisionCustomizedLabel = (props: any, usePercent = false) =
   const { cx, cy, midAngle, innerRadius, percent, outerRadius, value, name } = props;
   const labelText = usePercent ? `${Math.round(percent * 100)}%` : value;
 
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.7;
-  const xCountLabel = cx + radius * Math.cos(-midAngle * RADIAN);
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const xCountLabel = cx + radius  * Math.cos(-midAngle * RADIAN);
   const yCountLabel = cy + radius * Math.sin(-midAngle * RADIAN);
-  const sin = Math.sin(-RADIAN * midAngle); // if sin >= 0 label is on top half
-  const cos = Math.cos(-RADIAN * midAngle); // if cos >= 0 label is on right half
-  // const sx = cx + outerRadius * cos;
-  // const sy = cy + outerRadius * sin;
-  const mx = cx + (outerRadius + 30) * cos;
-  const my = cy + (outerRadius + 30) * sin;
-  const ex = mx + (cos >= 0 ? -1 : -1.5) * 25;
-  const ey = my + (sin >= 0 ? -2 : -1) * 10;
+
 
   const textLabelStyle = {
     fontFamily: fontFamilyString,
     fontWeight: 700,
-    fontSize: 14,
-    textAlign: 'center' as 'center',
+    fontSize: 0.3*radius,
+    color:'white',
+    textAlign: "center" as "center"
   };
 
   return (
@@ -72,19 +66,21 @@ export const renderCollisionCustomizedLabel = (props: any, usePercent = false) =
       <text
         x={xCountLabel}
         y={yCountLabel}
-        fill="black"
+        fill="white"
         textAnchor={xCountLabel > cx ? 'start' : 'end'}
         dominantBaseline="central"
         fontFamily={fontFamilyString}
       >
-        {labelText}
+        {`${labelText}\n${name}`}
       </text>
       {/* for text wrapping in svg - use foreignObject
       make sure to give foreignObject height and width, or inner element will not be displayed
       https://stackoverflow.com/questions/4991171/auto-line-wrapping-in-svg-text */}
-      <foreignObject fontFamily={fontFamilyString} fontWeight={700} fontSize={14} x={ex} y={ey} height={76} width={60}>
-        <div style={textLabelStyle}>{name ? name :'0'}</div>
-      </foreignObject>
+      {/*<foreignObject  fill={'white'} dominantBaseline={'left'} textAnchor={xCountLabel > cx ? 'start' : 'end'}
+                     x={xCountLabel/2}
+                      y={yCountLabel} dy={'10%'} height={'20%'} width={'30%'}>
+        <p style={textLabelStyle}>{name}</p>
+      </foreignObject>*/}
     </g>
   );
 };

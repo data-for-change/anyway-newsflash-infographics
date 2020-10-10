@@ -55,8 +55,8 @@ const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePer
             <span>{descSegment}</span>
           </Box>
         </Box>
-        <PieChartView innerRadius={'60%'} data={bigPieData} xLabel={ACCIDENT_TYPE} yLabel={COUNT} usePercent={usePercent}
-                      customizedLabel={renderCollisionCustomizedLabel}/>
+        <PieChartView  data={bigPieData} xLabel={ACCIDENT_TYPE} yLabel={COUNT} usePercent={usePercent}
+                      />
       </Box>
       <Box
         display="flex"
@@ -64,8 +64,8 @@ const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePer
         width={'100%'}
         fontSize={(PROPORTION * PRIMARY_FONT_SIZE).toString() + 'px'}
       >
-        <PieChartView innerRadius={'60%'} data={smallPieData} xLabel={ACCIDENT_TYPE} yLabel={COUNT} usePercent={usePercent}
-                      customizedLabel={renderCollisionCustomizedLabel}/>
+        <PieChartView  data={smallPieData} xLabel={ACCIDENT_TYPE} yLabel={COUNT} usePercent={usePercent}
+                      />
         <Box justifyContent={'center'} flexBasis={280} display="flex" flexDirection="column" alignItems="start">
           <div className={classes.textHighlight}>
             <Text type={TextType.CONTENT}>{t('onUrban.road')}</Text>
