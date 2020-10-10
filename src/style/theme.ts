@@ -18,6 +18,9 @@ const defaultThemeOptions: ThemeOptions = {
       fontSize: 14,
       fontWeight: 700,
     },
+    h3: {
+      fontSize: 20,
+    },
     overline: {
       fontSize: 14,
       fontWeight: 700,
