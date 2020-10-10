@@ -43,7 +43,8 @@ export type IWidgetDataType =
   | IWidgetMostSevereAccidentsTableData
   | IWidgetTopRoadSegmentsAccidentsPerKm
   | IWidgetAccidentCountByRoadLight
-  | IWidgetAccidentCountByDriverType;
+  | IWidgetAccidentCountByDriverType
+  | IWidgetAccidentCountByCarType;
 
 export interface ILocationMeta {
   location_info: {
@@ -179,5 +180,12 @@ export interface IWidgetAccidentCountByDriverType {
   items: {
     driver_type: string;
     count: number;
+  }[];
+}
+export interface IWidgetAccidentCountByCarType {
+  items: {
+    car_type: string;
+    percentage_segment: number;
+    percentage_country: number;
   }[];
 }

@@ -84,7 +84,7 @@ export default class RootStore {
   }
 
   @computed
-  get activeNewsFlash() {
+  get activeNewsFlash(): INewsFlash | undefined {
     return this.newsFlashCollection.find((item) => item.id === this.activeNewsFlashId);
   }
 

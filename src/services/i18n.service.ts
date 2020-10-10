@@ -10,7 +10,6 @@ const options = {
     escapeValue: false,
   },
   react: {
-    useSuspense: false,
     wait: true,
   },
 };

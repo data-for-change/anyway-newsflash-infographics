@@ -3,14 +3,13 @@ import { Text, TextType } from '../../atoms';
 import PieChartView, {renderCollisionCustomizedLabel} from '../PieChartView';
 import { IWidgetHeadOnCollisionsComparisonData } from '../../../models/WidgetData';
 import { Box, makeStyles, Theme } from '@material-ui/core';
-import RoadNumberImage from '../../../services/get-road-image.service';
-import { cardContentHeight } from '../../../style';
+import { highlightBasicColor } from '../../../style';
 import { useTranslation } from 'react-i18next';
 
 const ACCIDENT_TYPE = 'desc';
 const COUNT = 'count';
 const MAIN_CONTENT_HEIGHT = 250;
-const SECONDARY_CONTENT_HEIGHT = cardContentHeight - MAIN_CONTENT_HEIGHT;
+const SECONDARY_CONTENT_HEIGHT = 130;
 const PROPORTION: number = SECONDARY_CONTENT_HEIGHT / MAIN_CONTENT_HEIGHT;
 const ROAD_NUMBER_REGEX: string = 'כביש [0-9]+';
 const PRIMARY_FONT_SIZE = 14;
@@ -19,21 +18,15 @@ interface IProps {
   data: IWidgetHeadOnCollisionsComparisonData;
   segmetText: string;
   usePercent?: boolean;
-  roadNumber: number;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  roadNumber: {
-    padding: theme.spacing(2),
-    display: 'flex',
-    flexDirection: 'column',
-  },
   textHighlight: {
     color: '#8a1212',
   },
 }));
 
-const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePercent, roadNumber }) => {
+const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePercent }) => {
   const classes = useStyles();
   const { t } = useTranslation();
   const bigPieData = data.items.specific_road_segment_fatal_accidents;
@@ -44,12 +37,6 @@ const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePer
     <Box display="flex" flexDirection="column">
       <Box display="flex" height={MAIN_CONTENT_HEIGHT} width={'100%'}>
         <Box flexBasis={120} display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-          <div className={classes.roadNumber}>
-            <div className={classes.textHighlight}>
-              <Text type={TextType.PAGE_TITLE}> כביש </Text>
-            </div>
-            <RoadNumberImage roadNumber={roadNumber} />
-          </div>
           <Box display="flex" flexDirection="column">
             <span className={classes.textHighlight}>{roadNumberSegment == null ? null : roadNumberSegment[0]}</span>
             <span>{descSegment}</span>
