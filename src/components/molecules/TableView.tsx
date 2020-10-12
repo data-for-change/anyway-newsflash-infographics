@@ -4,7 +4,6 @@ import { Text, TextType } from '../atoms';
 import { Table, TableBody, TableCell, TableHead, TableRow, Theme } from '@material-ui/core';
 import { IWidgetMostSevereAccidentsTableData } from '../../models/WidgetData';
 import { tableHeadColor, tableBackgroundColorMain, tableBackgroundColorOdd } from '../../style';
-import Box from '@material-ui/core/Box';
 
 interface IProps {
   data: IWidgetMostSevereAccidentsTableData;
@@ -57,9 +56,7 @@ const TableView: FC<IProps> = ({ data }) => {
   return (
     <div className={classes.root}>
       <div className={classes.title}>
-        <Text type={TextType.WIDGET_TABLE_TITLE}>
-          <Box>{text.title}</Box>
-        </Text>
+        <Text type={TextType.WIDGET_TABLE_TITLE}>{text.title}</Text>
       </div>
       <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
