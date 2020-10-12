@@ -66,7 +66,7 @@ const TableView: FC<IProps> = ({ data, roadNumber }) => {
           <RoadNumberImage roadNumber={roadNumber} />
         </div>
         <Text type={TextType.WIDGET_TABLE_TITLE}>
-          <Box p={0.125}>{text.title}</Box>
+          <Box>{text.title}</Box>
         </Text>
       </div>
       <Table className={classes.table} size="small" aria-label="a dense table">

@@ -41,13 +41,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 const AccidentsOccurred: FC<AProps> = ({ accidentsCount }) => {
   const { t, i18n } = useTranslation();
   const elements = [
-    <Box mr={1.2} key={1}>
+    <Box mr={1} key={1}>
       {t('textView.occurred')}
     </Box>,
-    <Box mr={1.2} key={2} color={red}>
+    <Box mr={1} key={2} color={red}>
       {accidentsCount}
     </Box>,
-    <Box mr={1.2} key={3}>
+    <Box mr={1} key={3}>
       {t('textView.accidents')}
     </Box>,
   ];
@@ -75,18 +75,18 @@ const TextView: FC<IProps> = ({ data, segmentText, roadNumber }) => {
         <Box textAlign="center" fontSize={19}>
           {items.end_year === items.start_year ? (
             <>
-              <Box mr={1.2}>{t('textView.inYear')}</Box>
-              <Box mr={1.2}>{items.end_year}</Box>{' '}
+              <Box mr={1}>{t('textView.inYear')}</Box>
+              <Box mr={1}>{items.end_year}</Box>{' '}
             </>
           ) : (
             <>
-              <Box mr={1.2}>{t('textView.betweenYears')}</Box>
-              <Box mr={1.2}>
+              <Box mr={1}>{t('textView.betweenYears')}</Box>
+              <Box mr={1}>
                 {items.end_year} - {items.start_year}{' '}
               </Box>{' '}
             </>
           )}
-          <Box mr={1.2}>{t('textView.on') + segmentText}</Box>
+          <Box mr={1}>{t('textView.on') + segmentText}</Box>
           <AccidentsOccurred accidentsCount={items.total_accidents_count} />
         </Box>
       </Text>
