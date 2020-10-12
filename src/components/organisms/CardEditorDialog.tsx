@@ -4,7 +4,7 @@ import AnyWaySlider from '../atoms/AnyWaySlider';
 import { useStore } from '../../store/storeConfig';
 import WidgetWrapper from '../molecules/widgets/WidgetWrapper';
 import { Box } from '@material-ui/core';
-import AnyWayCard, { CardLayoutOptions } from '../molecules/AnyWayCard';
+import AnyWayCard, { CardLayoutOptions } from '../molecules/card/AnyWayCard';
 import { MetaTag, ErrorBoundary, Text, TextType, Button } from '../atoms';
 import widgetToImage from '../../services/to-image.service';
 import { useTranslation } from 'react-i18next';
@@ -22,12 +22,10 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
   const { t } = useTranslation();
   const store = useStore();
   const widget = store.getWidgetsDataByName(widgetName);
+  const roadNumber = store.newsFlashWidgetsMetaNumber;
+
   const widgetComponent = !widget ? null : (
-    <WidgetWrapper
-      widget={widget}
-      segmentText={store.newsFlashWidgetsMetaString}
-      roadNumber={store.newsFlashWidgetsMetaNumber}
-    />
+    <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaString} />
   );
 
   // const widgetRef = useRef<HTMLDivElement>(null);
@@ -74,7 +72,13 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
           </Box>
         </Box>
         <Box px={2} display="flex" justifyContent="center" flexGrow={1}>
-          <AnyWayCard getCardRef={getCardRef} widgetName={widgetName} actionButtons={false} layoutOptions={options}>
+          <AnyWayCard
+            getCardRef={getCardRef}
+            widgetName={widgetName}
+            roadNumber={roadNumber}
+            actionButtons={false}
+            layoutOptions={options}
+          >
             <MetaTag>{widgetName}</MetaTag>
             <ErrorBoundary>{widgetComponent}</ErrorBoundary>
           </AnyWayCard>

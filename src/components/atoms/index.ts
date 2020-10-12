@@ -9,3 +9,4 @@ export { default as Loader } from './Loader';
 export { default as InfinitScroll } from './InfinitScroll';
 export { default as Dialog } from './Dialog';
 export { default as AnywayAppBar } from './AnywayAppBar';
+export { default as Logo } from './Logo';

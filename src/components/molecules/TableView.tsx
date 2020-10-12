@@ -3,13 +3,11 @@ import { makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
 import { Text, TextType } from '../atoms';
 import { Table, TableBody, TableCell, TableHead, TableRow, Theme } from '@material-ui/core';
 import { IWidgetMostSevereAccidentsTableData } from '../../models/WidgetData';
-import RoadNumberImage from '../../services/get-road-image.service';
 import { tableHeadColor, tableBackgroundColorMain, tableBackgroundColorOdd } from '../../style';
 import Box from '@material-ui/core/Box';
 
 interface IProps {
   data: IWidgetMostSevereAccidentsTableData;
-  roadNumber: number;
 }
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -20,9 +18,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     alignItems: 'center',
     marginBottom: '10px',
-  },
-  roadNumber: {
-    marginLeft: '10px',
   },
   table: {},
 }));
@@ -56,15 +51,12 @@ const StyledTableRow = withStyles(() =>
   }),
 )(TableRow);
 
-const TableView: FC<IProps> = ({ data, roadNumber }) => {
+const TableView: FC<IProps> = ({ data }) => {
   const classes = useStyles();
   const { items, text } = data;
   return (
     <div className={classes.root}>
       <div className={classes.title}>
-        <div className={classes.roadNumber}>
-          <RoadNumberImage roadNumber={roadNumber} />
-        </div>
         <Text type={TextType.WIDGET_TABLE_TITLE}>
           <Box>{text.title}</Box>
         </Text>

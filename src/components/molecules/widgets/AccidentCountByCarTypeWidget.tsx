@@ -2,27 +2,21 @@ import React, { FC } from 'react';
 import { IWidgetAccidentCountByCarType } from '../../../models/WidgetData';
 import DoubleBarChartView from '../DoubleBarChartView';
 import { Box, makeStyles, Theme } from '@material-ui/core';
-import RoadNumberImage from '../../../services/get-road-image.service';
-
 const CAR_TYPE = 'car_type';
 const PERCENTAGE_SEGMENT = 'percentage_segment';
 const PERCENTAGE_COUNTRY = 'percentage_country';
 
 interface IProps {
   data: IWidgetAccidentCountByCarType;
-  roadNumber: number;
   segmentText: string;
 }
 const useStyle = makeStyles((theme: Theme) => ({
-  roadNumber: {
-    padding: theme.spacing(1),
-  },
   chartWrapper: {
     height: '80%',
     width: '100%',
   },
 }));
-const AccidentCountByCarType: FC<IProps> = ({ data, roadNumber, segmentText }) => {
+const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
   const classes = useStyle();
   const { items } = data;
   return (
@@ -32,9 +26,6 @@ const AccidentCountByCarType: FC<IProps> = ({ data, roadNumber, segmentText }) =
         <span>במקטע לעומת ממוצע ארצי בכבישים מאותו הסוג</span>
       </Box>
       <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center">
-        <div className={classes.roadNumber}>
-          <RoadNumberImage roadNumber={roadNumber} />
-        </div>
         <Box textAlign="center">{segmentText}</Box>
       </Box>
       <Box className={classes.chartWrapper}>
