@@ -8,14 +8,14 @@
 
 1. [ About the project ](#about)
 1. [ Want to help? ](#help)
-    1. [ Diving in ](#diving)
-    1. [ Technical Overview ](#technical-overview)
-    1. [3nd party libraries](#2nd-party-libraries)
-    1. [ Project directory structure ](#directory-structure)
-    1. [ Contribution Guidelines ](#contribution-guidelines)
-        * [Branch naming](#branch-naming)
-        * [Pull request naming](#pr-naming)
-        * [Opening issues](#issues)
+   1. [ Diving in ](#diving)
+   1. [ Technical Overview ](#technical-overview)
+   1. [3nd party libraries](#2nd-party-libraries)
+   1. [ Project directory structure ](#directory-structure)
+   1. [ Contribution Guidelines ](#contribution-guidelines)
+      - [Branch naming](#branch-naming)
+      - [Pull request naming](#pr-naming)
+      - [Opening issues](#issues)
 1. [ Server code ](#server-code)
 1. [ Server API ](#server-api)
 1. [ CI/CD ](#cicd)
@@ -34,6 +34,7 @@ Learn more about our [Vision](https://github.com/hasadna/anyway-newsflash-infogr
 Want to file a bug, contribute some code, or improve documentation? Excellent! Please follow these steps
 
 ### First thing first
+
 - Contact us - email would be great :) anyway@anyway.co.il
 - After we've got your mail, you'll able to join our [Slack Channel](https://app.slack.com/client/T02G85W3A/CLWT1CLDQ). For any issues - contact Yuval or Atalya to get invitation.
 - Optional: install [ZenHub](https://chrome.google.com/webstore/detail/zenhub-for-github/ogcgkffhplmphkaahpmffcafajaocjbd), so you can see our project [board](https://github.com/hasadna/anyway-newsflash-infographics#workspaces/anyway-5e00f3aa79454c5108bf2370/).
@@ -72,7 +73,7 @@ It is following [Atomic Design](https://bradfrost.com/blog/post/atomic-web-desig
 - [Material-UI](https://material-ui.com/)
 - [Recharts](https://recharts.org/en-US/) - A composable charting library built on React components
 
-Also,to upload google maps API script for the street view component, the 'react-async-loader' library was used  as described in 
+Also,to upload google maps API script for the street view component, the 'react-async-loader' library was used as described in
 https://github.com/edmund-dev/react-async-loader/blob/master/example/GoogleMap.jsx.
 
 ### Project directory structure <a id="directory-structure"></a>
@@ -123,17 +124,17 @@ When `TYPE` can be:
 
 Branching system:
 _master_ - used for production <br>
-_development_ - anything else <br>
+_dev_ - anything else <br>
 \* For the initial start, Use git clone command to download the repository to your computer (With `write` privileges there is no need to fork the repo)
 
 A standard procedure for working on an issue would be to: <a id="issues"></a>
 
-1. `git pull development`
-2. Create new branch from `development` , like: `refactor-137-making-pie-chart-generic-component`
+1. `git pull dev`
+2. Create new branch from `dev` , like: `refactor-137-making-pie-chart-generic-component`
 3. Work - commit - repeat
-4. Git pull at `development`
-5. On your branch: `git merge development` and solve conflicts if they exist
-6. Push branch and open PR to `development`.
+4. Git pull at `dev`
+5. On your branch: `git merge dev` and solve conflicts if they exist
+6. Push branch and open PR to `dev`.
 7. Get a code review approval / reject
 8. After approval, merge your PR
 9. GitHub will automatically delete the branch, after the merge is done. (they can still be restored).
@@ -155,7 +156,7 @@ See [API document](https://docs.google.com/document/d/1Hv5ItvwM3z9nn95LjlsYHL-o1
 We use [github actions](https://github.com/marketplace?type=actions) for the following flows:
 
 1. [on-push CI](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3ACI) - provide per-PR CI testing
-2. [deploy-development](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development) continous deployment of `development` branch to https://anyway-newsflash-infographics.web.app/
+2. [deploy-development](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development) continous deployment of `dev` branch to https://anyway-newsflash-infographics.web.app/
 3. [deploy-master]() - TBD
 
 Note: see the flows status badge at the top of this file
@@ -166,7 +167,7 @@ Since [Create React App](https://github.com/facebook/create-react-app) uses webp
 You can safely use [named imports](https://stackoverflow.com/questions/36795819/when-should-i-use-curly-braces-for-es6-import/36796281#36796281)
 when working with [Material UI components](https://material-ui.com/guides/minimizing-bundle-size/#how-to-reduce-the-bundle-size).
 
-### Git Scripts <a id="git-scripts"></a> [🔼](#migdalor)
+### Git Scripts <a id="git-scripts"></a>
 
 Git scripts include in `package.json` to make working with git easier:
 
