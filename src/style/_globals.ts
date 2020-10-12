@@ -11,7 +11,6 @@ export const sidBarWidth = 300;
 // card
 export const cardHeight = 500;
 export const cardWidth = 500;
-export const cardPadding = 16;
 // card content and actions (footer)
 export const cardHeaderHeight = 70;
 export const cardFooterHeight = 50;

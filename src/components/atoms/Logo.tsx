@@ -14,7 +14,9 @@ const useStyles = makeStyles({
   },
 });
 
-export const Logo: FC<LogoProps> = ({ src, alt, height, onClick }) => {
+const Logo: FC<LogoProps> = ({ src, alt, height, onClick }) => {
   const classes = useStyles();
   return <img className={classes.link} src={src} alt={alt} height={`${height}`} onClick={onClick} />;
 };
+
+export default Logo;
