@@ -8,14 +8,14 @@
 
 1. [ About the project ](#about)
 1. [ Want to help? ](#help)
-    1. [ Diving in ](#diving)
-    1. [ Technical Overview ](#technical-overview)
-    1. [3nd party libraries](#2nd-party-libraries)
-    1. [ Project directory structure ](#directory-structure)
-    1. [ Contribution Guidelines ](#contribution-guidelines)
-        * [Branch naming](#branch-naming)
-        * [Pull request naming](#pr-naming)
-        * [Opening issues](#issues)
+   1. [ Diving in ](#diving)
+   1. [ Technical Overview ](#technical-overview)
+   1. [3nd party libraries](#2nd-party-libraries)
+   1. [ Project directory structure ](#directory-structure)
+   1. [ Contribution Guidelines ](#contribution-guidelines)
+      - [Branch naming](#branch-naming)
+      - [Pull request naming](#pr-naming)
+      - [Opening issues](#issues)
 1. [ Server code ](#server-code)
 1. [ Server API ](#server-api)
 1. [ CI/CD ](#cicd)
@@ -34,6 +34,7 @@ Learn more about our [Vision](https://github.com/hasadna/anyway-newsflash-infogr
 Want to file a bug, contribute some code, or improve documentation? Excellent! Please follow these steps
 
 ### First thing first
+
 - Contact us - email would be great :) anyway@anyway.co.il
 - After we've got your mail, you'll able to join our [Slack Channel](https://app.slack.com/client/T02G85W3A/CLWT1CLDQ). For any issues - contact Yuval or Atalya to get invitation.
 - Optional: install [ZenHub](https://chrome.google.com/webstore/detail/zenhub-for-github/ogcgkffhplmphkaahpmffcafajaocjbd), so you can see our project [board](https://github.com/hasadna/anyway-newsflash-infographics#workspaces/anyway-5e00f3aa79454c5108bf2370/).
@@ -72,7 +73,7 @@ It is following [Atomic Design](https://bradfrost.com/blog/post/atomic-web-desig
 - [Material-UI](https://material-ui.com/)
 - [Recharts](https://recharts.org/en-US/) - A composable charting library built on React components
 
-Also,to upload google maps API script for the street view component, the 'react-async-loader' library was used  as described in 
+Also,to upload google maps API script for the street view component, the 'react-async-loader' library was used as described in
 https://github.com/edmund-dev/react-async-loader/blob/master/example/GoogleMap.jsx.
 
 ### Project directory structure <a id="directory-structure"></a>

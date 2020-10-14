@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { IWidgetCountBySeverityTextData } from '../../models/WidgetData';
 import { Text, TextType } from '../atoms';
 import { Theme, makeStyles } from '@material-ui/core';
-import { highlightAlertColor, borderColor } from '../../style';
+import { borderColor, roadIconColors } from '../../style';
 import { useTranslation } from 'react-i18next';
 import Person from '../../assets/Person.png';
 import Ambulance from '../../assets/Ambulance.png';
@@ -16,6 +16,9 @@ interface IProps {
 interface AProps {
   accidentsCount: Number;
 }
+
+const red = roadIconColors.red;
+
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
@@ -31,21 +34,18 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: theme.spacing(7.5),
     width: 'auto',
   },
-  highlightAlert: {
-    color: highlightAlertColor,
-  },
 }));
+
 const AccidentsOccurred: FC<AProps> = ({ accidentsCount }) => {
-  const classes = useStyles();
   const { t, i18n } = useTranslation();
   const elements = [
-    <Box mr={1.2} key={1}>
+    <Box mr={1} key={1}>
       {t('textView.occurred')}
     </Box>,
-    <Box mr={1.2} key={2} className={classes.highlightAlert}>
+    <Box mr={1} key={2} color={red}>
       {accidentsCount}
     </Box>,
-    <Box mr={1.2} key={3}>
+    <Box mr={1} key={3}>
       {t('textView.accidents')}
     </Box>,
   ];
@@ -72,18 +72,18 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
         <Box textAlign="center" fontSize={19}>
           {items.end_year === items.start_year ? (
             <>
-              <Box mr={1.2}>{t('textView.inYear')}</Box>
-              <Box mr={1.2}>{items.end_year}</Box>{' '}
+              <Box mr={1}>{t('textView.inYear')}</Box>
+              <Box mr={1}>{items.end_year}</Box>{' '}
             </>
           ) : (
             <>
-              <Box mr={1.2}>{t('textView.betweenYears')}</Box>
-              <Box mr={1.2}>
+              <Box mr={1}>{t('textView.betweenYears')}</Box>
+              <Box mr={1}>
                 {items.end_year} - {items.start_year}{' '}
               </Box>{' '}
             </>
           )}
-          <Box mr={1.2}>{t('textView.on') + segmentText}</Box>
+          <Box mr={1}>{t('textView.on') + segmentText}</Box>
           <AccidentsOccurred accidentsCount={items.total_accidents_count} />
         </Box>
       </Text>
@@ -98,7 +98,7 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
                   </Box>
                   <Box flex={1} display="flex" justifyContent="center">
                     <Box display="flex" fontSize={22} flexDirection="column" alignItems="center">
-                      <span className={classes.highlightAlert}>{items.severity_fatal_count}</span>
+                      <Box color={red}>{items.severity_fatal_count}</Box>
                       <span>
                         {items.severity_fatal_count > 1 ? t('textView.fatal.plural') : t('textView.fatal.singular')}
                       </span>
@@ -115,7 +115,7 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
                   </Box>
                   <Box flex={1} display="flex" justifyContent="center">
                     <Box display="flex" fontSize={22} flexDirection="column" alignItems="center">
-                      <span className={classes.highlightAlert}>{items.severity_severe_count}</span>
+                      <Box color={red}>{items.severity_severe_count}</Box>
                       {items.severity_severe_count > 1 ? t('textView.severe.plural') : t('textView.severe.singular')}
                     </Box>
                   </Box>
@@ -130,7 +130,7 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
                   </Box>
                   <Box flex={1} display="flex" justifyContent="center">
                     <Box display="flex" fontSize={22} flexDirection="column" alignItems="center">
-                      <span className={classes.highlightAlert}>{items.severity_light_count}</span>
+                      <Box color={red}>{items.severity_light_count}</Box>
                       {items.severity_light_count > 1 ? t('textView.light.plural') : t('textView.light.singular')}
                     </Box>
                   </Box>

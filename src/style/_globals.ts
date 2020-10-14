@@ -15,12 +15,6 @@ export const cardWidth = 500;
 export const cardHeaderHeight = 70;
 export const cardFooterHeight = 50;
 
-// text highlight colors
-export const highlightBasicColor = '#ECED4B';
-export const highlightDarkColor = 'black';
-export const highlightAlertColor = '#D6391A';
-export const highlightWarnColor = '#C36A1A';
-
 // charts
 export const barChartFillColor = '#c43a31';
 export const DoubleBarChartFillColorBar1 = '#c43a31';
