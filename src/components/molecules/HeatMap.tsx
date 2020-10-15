@@ -6,8 +6,8 @@ import { IPoint } from '../../models/Point';
 import L, { LatLng } from 'leaflet';
 
 import { makeStyles } from '@material-ui/core/styles';
-import ReactLeafletGoogleLayer from 'react-leaflet-google-layer';
-import { apiKey, uniquePoints } from '../../utils/utils';
+import { uniquePoints } from '../../utils/utils';
+import GoogleMapsLayer from './map/GoogleMapsLayer';
 
 const INITIAL_ZOOM = parseInt(process.env.REACT_APP_DEFAULT_MAP_ZOOM!);
 const useStyles = makeStyles({
@@ -29,7 +29,6 @@ interface IProps {
 const HeatMap: FC<IProps> = ({ data, center }) => {
   const classes = useStyles();
 
-
   const isDataValid = data && uniquePoints(data).length > 1;
   if (!isDataValid) {
     return null;
@@ -46,7 +45,7 @@ const HeatMap: FC<IProps> = ({ data, center }) => {
         latitudeExtractor={(m: any) => m.latitude}
         intensityExtractor={(m: any) => parseFloat(m.latitude)}
       />
-      <ReactLeafletGoogleLayer googleMapsLoaderConf={{ KEY: apiKey, VERSION: '3.40.6' }} type="terrain" />
+      <GoogleMapsLayer />
     </Map>
   );
 };
