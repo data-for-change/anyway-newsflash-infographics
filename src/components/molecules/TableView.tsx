@@ -3,8 +3,7 @@ import { makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
 import { Text, TextType } from '../atoms';
 import { Table, TableBody, TableCell, TableHead, TableRow, Theme } from '@material-ui/core';
 import { IWidgetMostSevereAccidentsTableData } from '../../models/WidgetData';
-
-import { highlightBasicColor, tableHeadColor, tableBackgroundColorMain, tableBackgroundColorOdd } from '../../style';
+import { tableHeadColor, tableBackgroundColorMain, tableBackgroundColorOdd } from '../../style';
 
 interface IProps {
   data: IWidgetMostSevereAccidentsTableData;
@@ -20,10 +19,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: '10px',
   },
   table: {},
-  mainText: {
-    padding: '1px',
-    backgroundColor: highlightBasicColor,
-  },
 }));
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
@@ -61,9 +56,7 @@ const TableView: FC<IProps> = ({ data }) => {
   return (
     <div className={classes.root}>
       <div className={classes.title}>
-        <Text type={TextType.WIDGET_TABLE_TITLE}>
-          <span className={classes.mainText}>{text.title}</span>
-        </Text>
+        <Text type={TextType.WIDGET_TABLE_TITLE}>{text.title}</Text>
       </div>
       <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
