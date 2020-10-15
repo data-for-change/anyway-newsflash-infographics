@@ -5,9 +5,9 @@ import { IPoint } from '../../models/Point';
 import L, { LatLng } from 'leaflet';
 
 import { makeStyles } from '@material-ui/core/styles';
-import ReactLeafletGoogleLayer from 'react-leaflet-google-layer';
-import { apiKey, uniquePoints } from '../../utils/utils';
+import { uniquePoints } from '../../utils/utils';
 import AnywayMarker from '../atoms/AnywayMarker';
+import GoogleMapsLayer from './map/GoogleMapsLayer';
 
 const INITIAL_ZOOM = parseInt(process.env.REACT_APP_DEFAULT_MAP_ZOOM!);
 const useStyles = makeStyles({
@@ -25,7 +25,7 @@ interface IProps {
   items: IPoint[];
 }
 
-const SideBarMap: FC<IProps> = ({  items }) => {
+const SideBarMap: FC<IProps> = ({ items }) => {
   const classes = useStyles();
 
   const isDataValid = items[0] && uniquePoints(items).length === 1;
@@ -35,16 +35,17 @@ const SideBarMap: FC<IProps> = ({  items }) => {
   const bounds = getBounds(items);
 
   return (
-    <Map  bounds={bounds} zoom={INITIAL_ZOOM} className={classes.wrapper}>
-        <ReactLeafletGoogleLayer googleMapsLoaderConf={{ KEY: apiKey, VERSION: '3.40.6' }} type="terrain" />
-        <AnywayMarker markerdata={ items[0] }/>
+    <Map bounds={bounds} zoom={INITIAL_ZOOM} className={classes.wrapper}>
+      <GoogleMapsLayer />
+
+      <AnywayMarker markerdata={items[0]} />
     </Map>
   );
 };
-const getBounds = ( items: IPoint[] ) => {
-    let bound: LatLng[] = DEFAULT_BOUNDS;
-    const p = items[0];
-    bound = [L.latLng(p.latitude + 0.01, p.longitude + 0.01), L.latLng(p.latitude - 0.01, p.longitude - 0.01)];
+const getBounds = (items: IPoint[]) => {
+  let bound: LatLng[] = DEFAULT_BOUNDS;
+  const p = items[0];
+  bound = [L.latLng(p.latitude + 0.01, p.longitude + 0.01), L.latLng(p.latitude - 0.01, p.longitude - 0.01)];
 
   return L.latLngBounds(bound);
 };
