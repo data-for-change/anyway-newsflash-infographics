@@ -26,7 +26,9 @@ const AboutDialog: FC<IProps> = ({ isShowing, onClose }) => {
           <Text type={TextType.CONTENT}>
             {t('aboutDialog.content3')}
             &nbsp;
-            <a href={t('aboutDialog.linkUrl')}>{t('aboutDialog.linkText')}</a>
+            <a href={t('aboutDialog.linkUrl')} target="blank">
+              {t('aboutDialog.linkText')}
+            </a>
           </Text>
         </Box>
       </article>
