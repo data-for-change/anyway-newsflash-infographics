@@ -8,14 +8,14 @@
 
 1. [ About the project ](#about)
 1. [ Want to help? ](#help)
-    1. [ Diving in ](#diving)
-    1. [ Technical Overview ](#technical-overview)
-    1. [3nd party libraries](#2nd-party-libraries)
-    1. [ Project directory structure ](#directory-structure)
-    1. [ Contribution Guidelines ](#contribution-guidelines)
-        * [Branch naming](#branch-naming)
-        * [Pull request naming](#pr-naming)
-        * [Opening issues](#issues)
+   1. [ Diving in ](#diving)
+   1. [ Technical Overview ](#technical-overview)
+   1. [ 3nd party libraries](#2nd-party-libraries)
+   1. [ Project directory structure ](#directory-structure)
+   1. [ Contribution Guidelines ](#contribution-guidelines)
+      - [Branch naming](#branch-naming)
+      - [Pull request naming](#pr-naming)
+      - [Opening issues](#issues)
 1. [ Server code ](#server-code)
 1. [ Server API ](#server-api)
 1. [ CI/CD ](#cicd)
@@ -34,6 +34,7 @@ Learn more about our [Vision](https://github.com/hasadna/anyway-newsflash-infogr
 Want to file a bug, contribute some code, or improve documentation? Excellent! Please follow these steps
 
 ### First thing first
+
 - Contact us - email would be great :) anyway@anyway.co.il
 - After we've got your mail, you'll able to join our [Slack Channel](https://app.slack.com/client/T02G85W3A/CLWT1CLDQ). For any issues - contact Yuval or Atalya to get invitation.
 - Optional: install [ZenHub](https://chrome.google.com/webstore/detail/zenhub-for-github/ogcgkffhplmphkaahpmffcafajaocjbd), so you can see our project [board](https://github.com/hasadna/anyway-newsflash-infographics#workspaces/anyway-5e00f3aa79454c5108bf2370/).
@@ -63,6 +64,22 @@ It is following [Atomic Design](https://bradfrost.com/blog/post/atomic-web-desig
 - Templates and Pages are state-aware
 - Molecules may contain other Molecules or Atoms. Atoms does not contain other Atoms.
 
+##### Map keys
+
+We use different google maps API keys for different environment.
+Staging / Production key are limited to our domain, and included in the repo `.env.production`.
+For using the map in development, You'll need to use a different key.
+
+Steps:
+
+1. Get development API key from frontend team leader / dev advocate
+1. create a file named `.env.local` in your root directory (next to `.env`)
+1. Set key-value in the following format:
+
+```
+REACT_APP_GOOGLE_MAP_KEY='THE_API_KEY_HERE'
+```
+
 3rd Party libraries included: <a id="2nd-party-libraries"></a>
 
 - [React Router](https://reacttraining.com/react-router/web/guides/quick-start)
@@ -71,8 +88,9 @@ It is following [Atomic Design](https://bradfrost.com/blog/post/atomic-web-desig
 - [Storybook](https://storybook.js.org/)
 - [Material-UI](https://material-ui.com/)
 - [Recharts](https://recharts.org/en-US/) - A composable charting library built on React components
+- [Leaflet](https://leafletjs.com/) Interactive maps
 
-Also,to upload google maps API script for the street view component, the 'react-async-loader' library was used  as described in 
+Also,to upload google maps API script for the street view component, the 'react-async-loader' library was used as described in
 https://github.com/edmund-dev/react-async-loader/blob/master/example/GoogleMap.jsx.
 
 ### Project directory structure <a id="directory-structure"></a>

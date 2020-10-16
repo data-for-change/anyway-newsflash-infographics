@@ -13,7 +13,6 @@ html,
 body,
 #root {
   height: 100%;
-  direction: rtl;
   font-weight: 700;
   letter-spacing: normal;
 }

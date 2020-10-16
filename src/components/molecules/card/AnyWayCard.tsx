@@ -42,7 +42,7 @@ const useStyles = makeStyles({
     fontFamily: fontFamilyString,
     position: 'relative', // for meta tags
     boxSizing: 'border-box',
-    zIndex: -2, // lower than background image
+    zIndex: 0, // lower than background image
   },
   content: {
     height: '100%',
