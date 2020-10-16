@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { Text, TextType } from '../../atoms';
-import PieChartView, {renderCollisionCustomizedLabel} from '../PieChartView';
+import PieChartView, { renderCollisionCustomizedLabel } from '../PieChartView';
 import { IWidgetHeadOnCollisionsComparisonData } from '../../../models/WidgetData';
-import { Box, makeStyles, Theme } from '@material-ui/core';
+import { Box, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
 const ACCIDENT_TYPE = 'desc';
@@ -19,24 +19,44 @@ interface IProps {
   usePercent?: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   textHighlight: {
     color: '#8a1212',
-    textAlign:'end'
-
   },
-  segmentDesc:{
-    color:'gray',
-    textAlign:'end'
+  segmentDesc: {
+    color: '#647171',
   },
-  secondaryContent:{
-    display: 'flex',
-    height :SECONDARY_CONTENT_HEIGHT,
-    width :'80%',
+  timeRange: {
     position: 'relative',
-    bottom: '30%',
-    left:'3%'
-
+    bottom: '25%',
+    right: '10%',
+    color: '#647171',
+  },
+  primaryContent: {
+    display: 'flex',
+    height: MAIN_CONTENT_HEIGHT,
+    width: '100%',
+  },
+  primaryDesc: {
+    display: 'flex',
+    flexDirection: 'column',
+    paddingRight: '10%',
+    paddingTop: '7%',
+  },
+  secondaryContent: {
+    display: 'flex',
+    height: SECONDARY_CONTENT_HEIGHT,
+    width: '80%',
+    position: 'relative',
+    bottom: '25%',
+    left: '5%',
+    fontSize: `${(PROPORTION * PRIMARY_FONT_SIZE).toString()} px`
+  },
+  secondaryDesc: {
+    paddingRight: '20%',
+    justifyContent: 'center',
+    display: 'flex',
+    flexDirection: 'column',
   },
 }));
 
@@ -49,31 +69,45 @@ const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePer
   const descSegment: string = roadNumberSegment == null ? '' : segmetText.substr(roadNumberSegment[0].length);
   return (
     <Box height={'100%'} display="flex" flexDirection="column">
-      <Box display="flex" height={MAIN_CONTENT_HEIGHT} width={'100%'}>
-          <Box  display="flex" flexDirection="column">
-            <span className={classes.textHighlight}>{roadNumberSegment == null ? null : roadNumberSegment[0]}</span>
-            <span className={classes.segmentDesc} >{descSegment}</span>
+      <Box className={classes.primaryContent}>
+        <Box className={classes.primaryDesc}>
+          <Box className={classes.textHighlight}>
+            <Text type={TextType.CONTENT_TITLE}>{roadNumberSegment == null ? null : roadNumberSegment[0]}</Text>
           </Box>
-        <PieChartView customizedLabel={renderCollisionCustomizedLabel} data={bigPieData} xLabel={ACCIDENT_TYPE} yLabel={COUNT} usePercent={usePercent}
+          <Box className={classes.segmentDesc}>
+            <Text type={TextType.CONTENT}>{descSegment}</Text>
+          </Box>
+        </Box>
+        <PieChartView
+          width={'60%'}
+          outerRadius={'115%'}
+          labelProps={{ customizedLabel: renderCollisionCustomizedLabel, labelFontSize: '120%' }}
+          data={bigPieData}
+          xLabel={ACCIDENT_TYPE}
+          yLabel={COUNT}
+          usePercent={usePercent}
         />
       </Box>
-      <Box
-       className={classes.secondaryContent}
-        fontSize={(PROPORTION * PRIMARY_FONT_SIZE).toString() + 'px'}
-      >
-        <Box justifyContent={'center'}  display="flex" flexDirection="column">
-          <div  className={classes.textHighlight}>
-            <Text type={TextType.CONTENT}>{t('onUrban.road')}</Text>
+      <Box className={classes.secondaryContent} >
+        <Box className={classes.secondaryDesc}>
+          <div className={classes.textHighlight}>
+            <Text type={TextType.CONTENT_TITLE}>{t('onUrban.road')}</Text>
           </div>
           <div className={classes.segmentDesc}>
-          <Text  type={TextType.CONTENT}>{t('onUrban.location')}</Text>
+            <Text type={TextType.CONTENT}>{t('onUrban.location')}</Text>
           </div>
         </Box>
 
-          <PieChartView customizedLabel={renderCollisionCustomizedLabel} data={smallPieData} xLabel={ACCIDENT_TYPE} yLabel={COUNT} usePercent={usePercent}
-          />
+        <PieChartView
+          width={'90%'}
+          labelProps={{ customizedLabel: renderCollisionCustomizedLabel, labelFontSize: '100%' }}
+          data={smallPieData}
+          xLabel={ACCIDENT_TYPE}
+          yLabel={COUNT}
+          usePercent={usePercent}
+          outerRadius={'100%'}
+        />
       </Box>
-      <Text type={TextType.CONTENT}>{'* בין השנים 2015-2019'}</Text>
     </Box>
   );
 };
