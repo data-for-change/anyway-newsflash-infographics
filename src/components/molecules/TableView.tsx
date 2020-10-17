@@ -5,7 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableRow, Theme } from '@materi
 import { IWidgetMostSevereAccidentsTableData } from '../../models/WidgetData';
 import RoadNumberImage from '../../services/get-road-image.service';
 
-import { tableHeadline, tableHeadColor, tableBackgroundColorMain, tableBackgroundColorOdd } from '../../style';
+import { tableHeadline, tableHeadColor, highlightAlertColor } from '../../style';
 
 interface IProps {
   data: IWidgetMostSevereAccidentsTableData;
@@ -27,11 +27,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   table: {},
   mainText: {
     padding: '1px',
-    fontSize: 26,
+    fontSize: 20,
     color: tableHeadline,
-    // backgroundColor: highlightBasicColor,
   },
 }));
+
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -47,17 +47,14 @@ const StyledTableCell = withStyles((theme: Theme) =>
     },
     head: {
       backgroundColor: tableHeadColor,
-      color: theme.palette.common.white,
+      color: theme.palette.common.black,
     },
   }),
 )(TableCell);
 const StyledTableRow = withStyles(() =>
   createStyles({
     root: {
-      backgroundColor: tableBackgroundColorMain,
-      '&:nth-of-type(odd)': {
-        backgroundColor: tableBackgroundColorOdd,
-      },
+      backgroundColor: 'white',
     },
   }),
 )(TableRow);
@@ -65,6 +62,15 @@ const StyledTableRow = withStyles(() =>
 const TableView: FC<IProps> = ({ data, roadNumber }) => {
   const classes = useStyles();
   const { items, text } = data;
+  const maxKilled = Math.max.apply(
+    Math,
+    items.map((item) => item.killed_count),
+  );
+  const maxInjured = Math.max.apply(
+    Math,
+    items.map((item) => item.injured_count),
+  );
+
   return (
     <div className={classes.root}>
       <div className={classes.title}>
@@ -107,12 +113,24 @@ const TableView: FC<IProps> = ({ data, roadNumber }) => {
               <StyledTableCell align="right">
                 <Text type={TextType.WIDGET_TABLE_CONTENT}>{item.type}</Text>
               </StyledTableCell>
-              <StyledTableCell align="right">
-                <Text type={TextType.WIDGET_TABLE_CONTENT}>{item.killed_count}</Text>
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                <Text type={TextType.WIDGET_TABLE_CONTENT}>{item.injured_count}</Text>
-              </StyledTableCell>
+              {item.killed_count === maxKilled ? (
+                <StyledTableCell align="right" style={{ backgroundColor: highlightAlertColor }}>
+                  <Text type={TextType.WIDGET_TABLE_CONTENT}> {item.killed_count}</Text>
+                </StyledTableCell>
+              ) : (
+                <StyledTableCell align="right">
+                  <Text type={TextType.WIDGET_TABLE_CONTENT}>{item.killed_count}</Text>
+                </StyledTableCell>
+              )}
+              {item.injured_count === maxInjured ? (
+                <StyledTableCell align="right" style={{ backgroundColor: highlightAlertColor }}>
+                  <Text type={TextType.WIDGET_TABLE_CONTENT}>{item.injured_count}</Text>
+                </StyledTableCell>
+              ) : (
+                <StyledTableCell align="right">
+                  <Text type={TextType.WIDGET_TABLE_CONTENT}>{item.injured_count}</Text>
+                </StyledTableCell>
+              )}
             </StyledTableRow>
           ))}
         </TableBody>
