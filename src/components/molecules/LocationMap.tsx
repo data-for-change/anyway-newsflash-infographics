@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { Map } from 'react-leaflet';
 import L, { LatLng } from 'leaflet';
-import { apiKey, uniquePoints } from '../../utils/utils';
+import { uniquePoints } from '../../utils/utils';
 import { IPoint } from '../../models/Point';
-import ReactLeafletGoogleLayer from 'react-leaflet-google-layer';
 import AnywayMostSevereAccidentsMarker from '../atoms/AnywayMostSevereAccidentsMarker';
 import { ClockPosition } from '../../utils/enum.utils';
+import GoogleMapsLayer from './map/GoogleMapsLayer';
 const INITIAL_ZOOM = parseInt(process.env.REACT_APP_DEFAULT_MAP_ZOOM!);
 const WRAPPER_STYLES = { height: '100%', width: '100%' };
 const DEFAULT_BOUNDS = [
@@ -34,7 +34,7 @@ const LocationMap: FC<IProps> = ({ items, center }) => {
 
   return (
     <Map center={center} bounds={bounds} zoom={INITIAL_ZOOM} style={WRAPPER_STYLES}>
-      <ReactLeafletGoogleLayer googleMapsLoaderConf={{ KEY: apiKey, VERSION: '3.40.6' }} type="terrain" />
+      <GoogleMapsLayer />
       {markers}
     </Map>
   );

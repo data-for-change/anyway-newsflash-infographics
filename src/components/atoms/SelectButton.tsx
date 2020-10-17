@@ -7,34 +7,36 @@ import { FormControl } from '@material-ui/core';
 import { Select } from '@material-ui/core';
 import { CalendarTodayOutlined } from '@material-ui/icons';
 import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router';
+import { useStore } from '../../store/storeConfig';
 
 interface IProps {
   onChange: (value: number) => any;
-  initialValue: number;
 }
 
 const useStyles = makeStyles(() =>
   createStyles({
     formControl: {
-      minWidth: 120,
-      maxWidth: 300,
       textAlign: 'right',
     },
   }),
 );
 
-const SelectButton: FC<IProps> = ({ onChange, initialValue }) => {
+const SelectButton: FC<IProps> = ({ onChange }) => {
   const classes = useStyles();
+  const store = useStore();
   const { t } = useTranslation();
-  const [selectValue, setsSelectValue] = React.useState<string | number>(5);
   const [open, setOpen] = React.useState(false);
+  const history = useHistory();
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<{ value: unknown }>) => {
-      setsSelectValue(event.target.value as number);
       onChange(event.target.value as number);
+      const url: string = history.location.pathname;
+      const queryPrefix = url.indexOf('?') === -1 ? '?' : '&';
+      history.push(`${url}${queryPrefix}years_ago=${store.newsFlashWidgetsTimerFilter}`);
     },
-    [setsSelectValue, onChange],
+    [onChange, history, store.newsFlashWidgetsTimerFilter],
   );
 
   const handleClose = () => {
@@ -58,7 +60,7 @@ const SelectButton: FC<IProps> = ({ onChange, initialValue }) => {
             open={open}
             onClose={handleClose}
             onOpen={handleOpen}
-            value={selectValue}
+            value={store.newsFlashWidgetsTimerFilter}
             onChange={handleChange}
           >
             <MenuItem value={1}>

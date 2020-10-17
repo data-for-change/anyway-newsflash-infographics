@@ -10,21 +10,16 @@ export const tableHeadline = '#555454';
 export const defaultBorderRadius = 4;
 export const sidBarWidth = 300;
 // card
-export const cardHeight = 480;
-export const cardWidth = 370;
-export const cardPadding = 16;
+export const cardHeight = 500;
+export const cardWidth = 500;
 // card content and actions (footer)
-export const cardFooterHeight = 48;
-export const cardContentHeight = cardHeight - cardFooterHeight - 2 * cardPadding;
-
-// text highlight colors
-export const highlightBasicColor = '#ECED4B';
-export const highlightDarkColor = 'black';
-export const highlightAlertColor = '#D6391A';
-export const highlightWarnColor = '#C36A1A';
+export const cardHeaderHeight = 70;
+export const cardFooterHeight = 50;
 
 // charts
 export const barChartFillColor = '#c43a31';
+export const DoubleBarChartFillColorBar1 = '#c43a31';
+export const DoubleBarChartFillColorBar2 = '#F2BB0A';
 
 // table colors
 export const tableHeadColor = '#A2A2A2';

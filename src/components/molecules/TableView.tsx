@@ -3,13 +3,10 @@ import { makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
 import { Text, TextType } from '../atoms';
 import { Table, TableBody, TableCell, TableHead, TableRow, Theme } from '@material-ui/core';
 import { IWidgetMostSevereAccidentsTableData } from '../../models/WidgetData';
-import RoadNumberImage from '../../services/get-road-image.service';
-
-import { tableHeadline, tableHeadColor, highlightAlertColor } from '../../style';
+import { tableHeadline, tableHeadColor } from '../../style';
 
 interface IProps {
   data: IWidgetMostSevereAccidentsTableData;
-  roadNumber: number;
 }
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -20,9 +17,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     alignItems: 'center',
     marginBottom: '10px',
-  },
-  roadNumber: {
-    marginLeft: '10px',
   },
   table: {},
   mainText: {
@@ -59,7 +53,7 @@ const StyledTableRow = withStyles(() =>
   }),
 )(TableRow);
 
-const TableView: FC<IProps> = ({ data, roadNumber }) => {
+const TableView: FC<IProps> = ({ data }) => {
   const classes = useStyles();
   const { items, text } = data;
   const maxKilled = Math.max.apply(
@@ -74,12 +68,7 @@ const TableView: FC<IProps> = ({ data, roadNumber }) => {
   return (
     <div className={classes.root}>
       <div className={classes.title}>
-        <div className={classes.roadNumber}>
-          <RoadNumberImage roadNumber={roadNumber} />
-        </div>
-        <Text type={TextType.WIDGET_TABLE_TITLE}>
-          <span className={classes.mainText}>{text.title}</span>
-        </Text>
+        <Text type={TextType.WIDGET_TABLE_TITLE}>{text.title}</Text>
       </div>
       <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
@@ -114,7 +103,7 @@ const TableView: FC<IProps> = ({ data, roadNumber }) => {
                 <Text type={TextType.WIDGET_TABLE_CONTENT}>{item.type}</Text>
               </StyledTableCell>
               {item.killed_count === maxKilled ? (
-                <StyledTableCell align="right" style={{ backgroundColor: highlightAlertColor }}>
+                <StyledTableCell align="right" style={{ backgroundColor: 'red' }}>
                   <Text type={TextType.WIDGET_TABLE_CONTENT}> {item.killed_count}</Text>
                 </StyledTableCell>
               ) : (
@@ -123,7 +112,7 @@ const TableView: FC<IProps> = ({ data, roadNumber }) => {
                 </StyledTableCell>
               )}
               {item.injured_count === maxInjured ? (
-                <StyledTableCell align="right" style={{ backgroundColor: highlightAlertColor }}>
+                <StyledTableCell align="right" style={{ backgroundColor: 'red' }}>
                   <Text type={TextType.WIDGET_TABLE_CONTENT}>{item.injured_count}</Text>
                 </StyledTableCell>
               ) : (

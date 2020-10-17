@@ -37,7 +37,9 @@
     "Past Year": "שנה אחרונה",
     "Last 3 Years": "3 שנים אחרונות",
     "Last 5 Years": "5 שנים אחרונות",
-    "Last 8 Years": "8 שנים אחרונות"
+    "Last 8 Years": "8 שנים אחרונות",
+    "Show Details": "הצג פרטים",
+    "Hide Details": "הסתר פרטים"
   },
   "textView": {
     "inYear": "בשנה",
@@ -53,7 +55,6 @@
       "singular": "קשה",
       "plural": "קשות"
     },
-    "and": "ו-",
     "light": {
       "singular": "קלה",
       "plural": "קלות"
@@ -68,5 +69,6 @@
     "portrait": "לאורך",
     "size": "גודל",
     "download": "הורד כתמונה"
-  }
+  },
+  "labelPosition": "מיקום תווית"
 }

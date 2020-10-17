@@ -53,7 +53,6 @@
       "singular": "severe",
       "plural": "severe"
     },
-    "and": "and ",
     "light": {
       "singular": "light",
       "plural": "light"
@@ -68,5 +67,6 @@
     "portrait": "Landscape",
     "size": "Size",
     "download": "Download as PNG"
-  }
+  },
+  "labelPosition": "Label Position"
 }

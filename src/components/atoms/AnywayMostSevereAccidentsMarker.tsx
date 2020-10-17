@@ -6,9 +6,10 @@ import { Marker, Popup } from 'react-leaflet';
 import MapIcon from '../atoms/AnywayMapIcon';
 import TooltipMarker from './TooltipMarker';
 import { AnyWayButton } from '../atoms/AnyWayButton';
+import { Text, TextType } from '../atoms';
 import TooltipArrow from './TooltipArrow';
 import { ClockPosition } from '../../utils/enum.utils';
-
+import { useTranslation } from 'react-i18next';
 import { defaultBorderRadius, lightBackgroundColor } from '../../style';
 interface IProps {
   data: any;
@@ -51,6 +52,7 @@ const useStyles = makeStyles({
 });
 const AnywayMostSevereAccidentsMarker: FC<IProps> = ({ data, tooltipOffset = ClockPosition.LEFT }) => {
   const classes = useStyles();
+  const { t } = useTranslation();
   const [offset, setOffset] = useState(tooltipOffset);
   const { latitude, longitude, accident_severity, accident_timestamp } = data;
   const position: L.LatLng = new L.LatLng(latitude, longitude);
@@ -63,7 +65,9 @@ const AnywayMostSevereAccidentsMarker: FC<IProps> = ({ data, tooltipOffset = Clo
       <Marker icon={icon} position={position}>
         {
           <Popup className={classes.root}>
-            <div className={classes.tooltipTitle}>Tooltip Location</div>
+            <div className={classes.tooltipTitle}>
+              <Text type={TextType.CONTENT}>{t('labelPosition')}</Text>
+            </div>
             <div className={classes.arrowContainer}>
               <AnyWayButton className={classes.button} onClick={setOffset.bind(null, ClockPosition.TOPRIGHT)}>
                 <TooltipArrow type={ClockPosition.TOPRIGHT} />

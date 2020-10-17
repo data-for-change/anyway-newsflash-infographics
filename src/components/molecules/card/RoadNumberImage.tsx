@@ -1,11 +1,9 @@
 import React, { FC } from 'react';
-import RoadNumberSvg from '../components/atoms/RoadNumberSvg';
-import { roadIconColors as colors } from '../style';
+import RoadNumberSvg from '../../atoms/RoadNumberSvg';
+import { roadIconColors as colors } from '../../../style';
 
-interface IProps {
-  roadNumber: number;
-}
 const HIGH_WAY_ROAD_NUMBERS = [1, 2, 4, 5, 6, 9, 16, 20, 22, 50, 70, 77, 431, 471, 531];
+
 const getIconStyle = (roadNumber: number) => {
   let style = { color: colors.black, size: 50 };
   const highWayRoadNumber = HIGH_WAY_ROAD_NUMBERS.includes(roadNumber);
@@ -19,8 +17,14 @@ const getIconStyle = (roadNumber: number) => {
   }
   return style;
 };
+
+interface IProps {
+  roadNumber: number;
+}
+
 const RoadNumberImage: FC<IProps> = ({ roadNumber }) => {
   const iconStyle = getIconStyle(roadNumber);
   return roadNumber ? <RoadNumberSvg iconStyle={iconStyle} roadNumber={roadNumber} /> : null;
 };
+
 export default RoadNumberImage;

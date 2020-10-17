@@ -1,7 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { AnywayAppBar } from '../atoms';
-import { Logo } from '../atoms/Logo';
+import { AnywayAppBar, Logo } from '../atoms';
 import AnywayImage from '../../assets/anyway.png';
 import { SignInIcon } from '../atoms/SignInIcon';
 import LogInLinkGoogle from './LogInLinkGoogle';

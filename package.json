@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "@types/query-string": "^6.3.0",
     "axios": "^0.19.2",
     "dom-to-image": "^2.6.0",
     "file-saver": "^2.0.2",
@@ -16,6 +17,7 @@
     "mobx": "^5.15.4",
     "mobx-react-lite": "^1.5.2",
     "normalize.css": "^8.0.1",
+    "query-string": "^6.13.1",
     "react": "^16.13.1",
     "react-async-loader": "^0.1.2",
     "react-dom": "^16.13.1",
@@ -50,7 +52,17 @@
       "react-app",
       "prettier",
       "prettier/react"
-    ]
+    ],
+    "rules": {
+      "max-lines": [
+        2,
+        {
+          "max": 200,
+          "skipBlankLines": true,
+          "skipComments": true
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [
@@ -75,6 +87,7 @@
     "@testing-library/user-event": "^7.2.1",
     "@types/dom-to-image": "^2.6.1",
     "@types/file-saver": "^2.0.1",
+    "@types/googlemaps": "^3.39.13",
     "@types/html2canvas": "0.0.35",
     "@types/jest": "^24.9.1",
     "@types/node": "^12.12.48",

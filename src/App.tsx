@@ -8,6 +8,7 @@ import Header from './components/molecules/Header';
 import 'leaflet/dist/leaflet.css';
 import PopUpRedirect from './services/PopUpRedirect';
 import HomePageRedirect from './pages/HomePageRedirect';
+import { useTranslation } from 'react-i18next';
 
 // main components height - must add up to 100
 const headerHeight = '5vh';
@@ -26,6 +27,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const App: React.FC = () => {
+  const { i18n } = useTranslation();
+  const isRtl = i18n.dir() === 'rtl';
   const classes = useStyles();
   const store = useStore();
 
@@ -33,7 +36,7 @@ const App: React.FC = () => {
     <StoreContext.Provider value={store}>
       <ThemeProvider theme={store.settingsStore.theme}>
         <Router>
-          <Box>
+          <Box className={isRtl ? classes.rtl : ''}>
             <Box height={headerHeight} display="flex">
               <Header />
             </Box>
