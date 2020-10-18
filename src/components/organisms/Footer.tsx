@@ -18,9 +18,6 @@ const useStyles = makeStyles({
     alignItems: 'center',
     color: `${onLinkColor}`,
     textDecoration: 'none',
-    '&:hover': {
-      color: `${onLinkColorHover}`,
-    },
     justifyContent: 'flex-start',
   },
   link: {
@@ -34,6 +31,9 @@ const useStyles = makeStyles({
   linkItem: {
     borderLeft: `2px solid ${borderColor}`,
     cursor: 'pointer',
+    '&:hover': {
+      color: `${onLinkColorHover}`,
+    },
   },
 });
 
