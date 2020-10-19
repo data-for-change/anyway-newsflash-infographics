@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderBottom: `5px solid ${borderColor}`,
   },
   image: {
-    height: theme.spacing(7.5),
+    height: theme.spacing(11),
     width: 'auto',
   },
 }));
@@ -69,7 +69,7 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
   return (
     <div className={classes.root}>
       <Text type={TextType.WIDGET_TITLE}>
-        <Box textAlign="center" fontSize={19}>
+        <Box textAlign="center" fontSize={24} fontWeight={700}>
           {items.end_year === items.start_year ? (
             <>
               <Box mr={1}>{t('textView.inYear')}</Box>
@@ -87,7 +87,7 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
           <AccidentsOccurred accidentsCount={items.total_accidents_count} />
         </Box>
       </Text>
-      <div>
+      <Box px={3}>
         {isSummaryText ? (
           <>
             <Text type={TextType.WIDGET_CONTENT}>
@@ -97,7 +97,7 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
                     <img src={Person} className={classes.image} alt="red person" />
                   </Box>
                   <Box flex={1} display="flex" justifyContent="center">
-                    <Box display="flex" fontSize={22} flexDirection="column" alignItems="center">
+                    <Box display="flex" fontSize={32} flexDirection="column" alignItems="center">
                       <Box color={red}>{items.severity_fatal_count}</Box>
                       <span>
                         {items.severity_fatal_count > 1 ? t('textView.fatal.plural') : t('textView.fatal.singular')}
@@ -114,7 +114,7 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
                     <img src={Ambulance} className={classes.image} alt="ambulance" />
                   </Box>
                   <Box flex={1} display="flex" justifyContent="center">
-                    <Box display="flex" fontSize={22} flexDirection="column" alignItems="center">
+                    <Box display="flex" fontSize={32} flexDirection="column" alignItems="center">
                       <Box color={red}>{items.severity_severe_count}</Box>
                       {items.severity_severe_count > 1 ? t('textView.severe.plural') : t('textView.severe.singular')}
                     </Box>
@@ -129,7 +129,7 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
                     <img src={Crutches} className={classes.image} alt="crutches" />
                   </Box>
                   <Box flex={1} display="flex" justifyContent="center">
-                    <Box display="flex" fontSize={22} flexDirection="column" alignItems="center">
+                    <Box display="flex" fontSize={32} flexDirection="column" alignItems="center">
                       <Box color={red}>{items.severity_light_count}</Box>
                       {items.severity_light_count > 1 ? t('textView.light.plural') : t('textView.light.singular')}
                     </Box>
@@ -139,7 +139,7 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
             </Text>
           </>
         ) : null}
-      </div>
+      </Box>
     </div>
   );
 };
