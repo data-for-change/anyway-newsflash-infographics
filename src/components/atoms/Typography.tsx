@@ -6,7 +6,7 @@ interface IText {
 }
 
 // for styles of each variant - see 'theme.ts'
-const Text: IText = {
+const Typography: IText = {
   Title1: ({ children }) => (
     <Typo variant="body1" component="h2">
       {children}
@@ -49,4 +49,4 @@ const Text: IText = {
   ),
 };
 
-export default Text;
+export default Typography;
