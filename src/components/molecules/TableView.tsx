@@ -8,7 +8,7 @@ import { tableHeadColor, tableBackgroundColorMain, tableBackgroundColorOdd } fro
 interface IProps {
   data: IWidgetMostSevereAccidentsTableData;
 }
-const useStyles = makeStyles((theme: Theme) => ({
+export const UseTableStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   table: {},
 }));
-const StyledTableCell = withStyles((theme: Theme) =>
+export const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
     root: {
       textAlign: 'center',
@@ -39,7 +39,7 @@ const StyledTableCell = withStyles((theme: Theme) =>
     },
   }),
 )(TableCell);
-const StyledTableRow = withStyles(() =>
+export const StyledTableRow = withStyles(() =>
   createStyles({
     root: {
       backgroundColor: tableBackgroundColorMain,
@@ -51,7 +51,7 @@ const StyledTableRow = withStyles(() =>
 )(TableRow);
 
 const TableView: FC<IProps> = ({ data }) => {
-  const classes = useStyles();
+  const classes = UseTableStyles();
   const { items, text } = data;
   return (
     <div className={classes.root}>
