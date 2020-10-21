@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import DialogWithHeader from '../molecules/DialogWithHeader';
-import { Text, TextType } from '../atoms';
+import { Typography } from '../atoms';
 import { Box } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
@@ -17,17 +17,17 @@ const AboutDialog: FC<IProps> = ({ isShowing, onClose }) => {
     <DialogWithHeader title={t('aboutDialog.title')} isShowing={isShowing} onClose={onClose} maxWidth={maxWidth}>
       <article>
         <Box mb={1}>
-          <Text type={TextType.CONTENT}>{t('aboutDialog.content1')}</Text>
+          <Typography.Body5>{t('aboutDialog.content1')}</Typography.Body5>
         </Box>
         <Box mb={1}>
-          <Text type={TextType.CONTENT}>{t('aboutDialog.content2')}</Text>
+          <Typography.Body5>{t('aboutDialog.content2')}</Typography.Body5>
         </Box>
         <Box>
-          <Text type={TextType.CONTENT}>
+          <Typography.Body5>
             {t('aboutDialog.content3')}
             &nbsp;
             <a href={t('aboutDialog.linkUrl')}>{t('aboutDialog.linkText')}</a>
-          </Text>
+          </Typography.Body5>
         </Box>
       </article>
     </DialogWithHeader>

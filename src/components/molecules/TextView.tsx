@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { IWidgetCountBySeverityTextData } from '../../models/WidgetData';
-import { Text, TextType } from '../atoms';
+import { Typography } from '../atoms';
 import { Theme, makeStyles } from '@material-ui/core';
 import { borderColor, roadIconColors } from '../../style';
 import { useTranslation } from 'react-i18next';
@@ -40,13 +40,13 @@ const AccidentsOccurred: FC<AProps> = ({ accidentsCount }) => {
   const { t, i18n } = useTranslation();
   const elements = [
     <Box mr={1} key={1}>
-      {t('textView.occurred')}
+      <Typography.Body1>{t('textView.occurred')}</Typography.Body1>
     </Box>,
     <Box mr={1} key={2} color={red}>
       {accidentsCount}
     </Box>,
     <Box mr={1} key={3}>
-      {t('textView.accidents')}
+      <Typography.Body1>{t('textView.accidents')}</Typography.Body1>
     </Box>,
   ];
   // When the locale is English the last element needs to be first - x accidents occurred instead of occurred x accidents
@@ -68,75 +68,95 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
     [items.severity_fatal_count, items.severity_light_count, items.severity_severe_count].filter(Boolean).length >= 2;
   return (
     <div className={classes.root}>
-      <Text type={TextType.WIDGET_TITLE}>
-        <Box textAlign="center" fontSize={24} fontWeight={700}>
-          {items.end_year === items.start_year ? (
-            <>
-              <Box mr={1}>{t('textView.inYear')}</Box>
-              <Box mr={1}>{items.end_year}</Box>{' '}
-            </>
-          ) : (
-            <>
-              <Box mr={1}>{t('textView.betweenYears')}</Box>
-              <Box mr={1}>
+      <Box textAlign="center">
+        {items.end_year === items.start_year ? (
+          <>
+            <Box mr={1}>
+              <Typography.Body1>{t('textView.inYear')}</Typography.Body1>
+            </Box>
+            <Box mr={1}>
+              <Typography.Body1>{items.end_year}</Typography.Body1>
+            </Box>{' '}
+          </>
+        ) : (
+          <>
+            <Box mr={1}>
+              <Typography.Body1>{t('textView.betweenYears')}</Typography.Body1>
+            </Box>
+            <Box mr={1}>
+              <Typography.Body1>
                 {items.end_year} - {items.start_year}{' '}
-              </Box>{' '}
-            </>
-          )}
-          <Box mr={1}>{t('textView.on') + segmentText}</Box>
-          <AccidentsOccurred accidentsCount={items.total_accidents_count} />
+              </Typography.Body1>
+            </Box>{' '}
+          </>
+        )}
+        <Box mr={1}>
+          <Typography.Body1>{t('textView.on') + segmentText}</Typography.Body1>
         </Box>
-      </Text>
+        <AccidentsOccurred accidentsCount={items.total_accidents_count} />
+      </Box>
       <Box px={3}>
         {isSummaryText ? (
           <>
-            <Text type={TextType.WIDGET_CONTENT}>
-              {items.severity_fatal_count ? (
-                <Box display="flex" py={1} className={classes.border}>
-                  <Box flex={1} display="flex" justifyContent="center">
-                    <img src={Person} className={classes.image} alt="red person" />
-                  </Box>
-                  <Box flex={1} display="flex" justifyContent="center">
-                    <Box display="flex" fontSize={32} flexDirection="column" alignItems="center">
-                      <Box color={red}>{items.severity_fatal_count}</Box>
-                      <span>
-                        {items.severity_fatal_count > 1 ? t('textView.fatal.plural') : t('textView.fatal.singular')}
-                      </span>
+            {items.severity_fatal_count ? (
+              <Box display="flex" py={1} className={classes.border}>
+                <Box flex={1} display="flex" justifyContent="center">
+                  <img src={Person} className={classes.image} alt="red person" />
+                </Box>
+                <Box flex={1} display="flex" justifyContent="center">
+                  <Box display="flex" flexDirection="column" alignItems="center">
+                    <Box color={red}>
+                      <Typography.Title1>{items.severity_fatal_count}</Typography.Title1>
                     </Box>
+                    <span>
+                      {items.severity_fatal_count > 1 ? (
+                        <Typography.Title1>{t('textView.fatal.plural')}</Typography.Title1>
+                      ) : (
+                        <Typography.Title1>{t('textView.fatal.singular')}</Typography.Title1>
+                      )}
+                    </span>
                   </Box>
                 </Box>
-              ) : null}
-            </Text>
-            <Text type={TextType.WIDGET_CONTENT}>
-              {items.severity_severe_count ? (
-                <Box display="flex" py={1} className={classes.border}>
-                  <Box flex={1} display="flex" justifyContent="center">
-                    <img src={Ambulance} className={classes.image} alt="ambulance" />
-                  </Box>
-                  <Box flex={1} display="flex" justifyContent="center">
-                    <Box display="flex" fontSize={32} flexDirection="column" alignItems="center">
-                      <Box color={red}>{items.severity_severe_count}</Box>
-                      {items.severity_severe_count > 1 ? t('textView.severe.plural') : t('textView.severe.singular')}
+              </Box>
+            ) : null}
+            {items.severity_severe_count ? (
+              <Box display="flex" py={1} className={classes.border}>
+                <Box flex={1} display="flex" justifyContent="center">
+                  <img src={Ambulance} className={classes.image} alt="ambulance" />
+                </Box>
+                <Box flex={1} display="flex" justifyContent="center">
+                  <Box display="flex" flexDirection="column" alignItems="center">
+                    <Box color={red}>
+                      <Typography.Title1>{items.severity_severe_count}</Typography.Title1>
                     </Box>
+                    {items.severity_severe_count > 1 ? (
+                      <Typography.Title1>{t('textView.severe.plural')}</Typography.Title1>
+                    ) : (
+                      <Typography.Title1>{t('textView.severe.singular')}</Typography.Title1>
+                    )}
                   </Box>
                 </Box>
-              ) : null}
-            </Text>
-            <Text type={TextType.WIDGET_CONTENT}>
-              {items.severity_light_count ? (
-                <Box display="flex" py={1}>
-                  <Box flex={1} display="flex" justifyContent="center">
-                    <img src={Crutches} className={classes.image} alt="crutches" />
-                  </Box>
-                  <Box flex={1} display="flex" justifyContent="center">
-                    <Box display="flex" fontSize={32} flexDirection="column" alignItems="center">
-                      <Box color={red}>{items.severity_light_count}</Box>
-                      {items.severity_light_count > 1 ? t('textView.light.plural') : t('textView.light.singular')}
+              </Box>
+            ) : null}
+            {items.severity_light_count ? (
+              <Box display="flex" py={1}>
+                <Box flex={1} display="flex" justifyContent="center">
+                  <img src={Crutches} className={classes.image} alt="crutches" />
+                </Box>
+                <Box flex={1} display="flex" justifyContent="center">
+                  <Box display="flex" flexDirection="column" alignItems="center">
+                    <Box color={red}>
+                      <Typography.Title1>{items.severity_light_count}</Typography.Title1>
                     </Box>
+                    {items.severity_light_count > 1 ? (
+                      <Typography.Title1>{t('textView.light.plural')}</Typography.Title1>
+                    ) : (
+                      <Typography.Title1>{t('textView.light.singular')}</Typography.Title1>
+                    )}
                   </Box>
                 </Box>
-              ) : null}
-            </Text>
+              </Box>
+            ) : null}
           </>
         ) : null}
       </Box>

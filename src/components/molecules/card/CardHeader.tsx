@@ -4,7 +4,7 @@ import { HeaderVariant } from '../../../services/widgets.style.service';
 import RoadNumberImage from './RoadNumberImage';
 import LamasImage from '../../../assets/cbs.png';
 import AnywayImage from '../../../assets/anyway.png';
-import { Text, TextType, Logo } from '../../atoms';
+import { Typography, Logo } from '../../atoms';
 
 interface IProps {
   variant: HeaderVariant;
@@ -20,7 +20,7 @@ const CardHeader: FC<IProps> = ({ variant, text, road }) => {
         <Box display="flex" alignItems="center" flex={1}>
           <RoadNumberImage roadNumber={road} />
           <Box flex={1} textAlign="center">
-            <Text type={TextType.WIDGET_TITLE}>{text}</Text>
+            <Typography.Body1>{text}</Typography.Body1>
           </Box>
         </Box>
       );

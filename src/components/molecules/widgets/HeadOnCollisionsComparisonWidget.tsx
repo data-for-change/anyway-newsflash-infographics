@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Text, TextType } from '../../atoms';
+import { Typography } from '../../atoms';
 import PieChartView from '../PieChartView';
 import { IWidgetHeadOnCollisionsComparisonData } from '../../../models/WidgetData';
 import { Box } from '@material-ui/core';
@@ -32,7 +32,7 @@ const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePer
         <PieChartView data={smallPieData} xLabel={ACCIDENT_TYPE} yLabel={COUNT} usePercent={usePercent} />
         <Box flexBasis={280} display="flex" alignItems="center">
           <Box textAlign="center">
-            <Text type={TextType.CONTENT}>{t('onUrban')}</Text>
+            <Typography.Body5>{t('onUrban')}</Typography.Body5>
           </Box>
         </Box>
       </Box>
