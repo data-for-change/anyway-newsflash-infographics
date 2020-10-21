@@ -4,7 +4,7 @@ import News from './News';
 import { NewsFlashFilterPanel } from '../molecules/NewsFlashFilterPanel';
 import OverlayLoader from '../molecules/OverlayLoader';
 import { borderColor } from '../../style';
-import { Text, TextType, ErrorBoundary } from '../atoms';
+import { Typography, ErrorBoundary } from '../atoms';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
@@ -55,7 +55,7 @@ const SideBar: FC<IProps> = () => {
         </Box>
       </Box>
       <Box flexShrink={0} flexGrow={0} p={1}>
-        <Text type={TextType.CONTENT_TITLE} children={mapTitle} />
+        <Typography.Body4 children={mapTitle} />
       </Box>
       <Box flexBasis={200} flexShrink={0} px={1} pb={1}>
         {location && (

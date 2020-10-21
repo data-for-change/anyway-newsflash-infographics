@@ -8,7 +8,7 @@ import { AnyWayButton } from '../atoms/AnyWayButton';
 import RootStore from '../../store/root.store';
 import { useStore } from '../../store/storeConfig';
 import { SourceFilterEnum } from '../../models/SourceFilter';
-import { Text, TextType } from '../atoms';
+import { Typography } from '../atoms';
 
 const useStyles = makeStyles({
   image: {
@@ -44,7 +44,7 @@ export const NewsFlashFilterPanel: React.FC = () => {
           store.filterNewsFlashCollection(SourceFilterEnum.all);
         }}
       >
-        <Text type={TextType.CONTENT_TITLE}>הכל</Text>
+        <Typography.Title2>הכל</Typography.Title2>
       </AnyWayButton>
       <AnyWayButton
         className={classes.button}
@@ -54,9 +54,12 @@ export const NewsFlashFilterPanel: React.FC = () => {
       >
         <img className={classes.image} src={ynetLogo} alt="Ynet" />
       </AnyWayButton>
-      <AnyWayButton className={classes.button} onClick={() => {
+      <AnyWayButton
+        className={classes.button}
+        onClick={() => {
           store.filterNewsFlashCollection(SourceFilterEnum.walla);
-        }}>
+        }}
+      >
         <img className={classes.image} src={wallaLogo} alt="Walla" />
       </AnyWayButton>
       <AnyWayButton
