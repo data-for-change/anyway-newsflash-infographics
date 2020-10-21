@@ -43,7 +43,7 @@ const Typography: IText = {
     </Typo>
   ),
   Body6: ({ children }) => (
-    <Typo variant="h6" component="span">
+    <Typo variant="h6" component="p">
       {children}
     </Typo>
   ),
