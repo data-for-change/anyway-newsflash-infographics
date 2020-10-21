@@ -15,11 +15,11 @@ const defaultThemeOptions: ThemeOptions = {
   typography: {
     fontFamily: fontFamilyString,
     // title variants (like: card headers)
-    body1: {
+    subtitle1: {
       fontSize: 24,
       fontWeight: 700,
     },
-    body2: {
+    subtitle2: {
       fontSize: 22,
       fontWeight: 700,
     },

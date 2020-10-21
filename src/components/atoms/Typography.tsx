@@ -8,12 +8,12 @@ interface IText {
 // for styles of each variant - see 'theme.ts'
 const Typography: IText = {
   Title1: ({ children }) => (
-    <Typo variant="body1" component="h2">
+    <Typo variant="subtitle1" component="h2">
       {children}
     </Typo>
   ),
   Title2: ({ children }) => (
-    <Typo variant="body2" component="h3">
+    <Typo variant="subtitle2" component="h3">
       {children}
     </Typo>
   ),
@@ -43,7 +43,7 @@ const Typography: IText = {
     </Typo>
   ),
   Body6: ({ children }) => (
-    <Typo variant="h6" component="p">
+    <Typo variant="h6" component="span">
       {children}
     </Typo>
   ),
