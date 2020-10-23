@@ -4,13 +4,14 @@ import PieChartView, { renderCollisionCustomizedLabel } from '../PieChartView';
 import { IWidgetHeadOnCollisionsComparisonData } from '../../../models/WidgetData';
 import { Box, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
+import RootStore from '../../../store/root.store';
+import { useStore } from '../../../store/storeConfig';
 
 const ACCIDENT_TYPE = 'desc';
 const COUNT = 'count';
 const MAIN_CONTENT_HEIGHT = 250;
 const SECONDARY_CONTENT_HEIGHT = 190;
 const PROPORTION: number = SECONDARY_CONTENT_HEIGHT / MAIN_CONTENT_HEIGHT;
-const ROAD_NUMBER_REGEX: string = 'כביש [0-9]+';
 const PRIMARY_FONT_SIZE = 14;
 
 interface IProps {
@@ -50,7 +51,7 @@ const useStyles = makeStyles(() => ({
     position: 'relative',
     bottom: '25%',
     left: '5%',
-    fontSize: `${(PROPORTION * PRIMARY_FONT_SIZE).toString()} px`
+    fontSize: `${(PROPORTION * PRIMARY_FONT_SIZE).toString()} px`,
   },
   secondaryDesc: {
     paddingRight: '20%',
@@ -62,17 +63,18 @@ const useStyles = makeStyles(() => ({
 
 const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePercent }) => {
   const classes = useStyles();
+  const store: RootStore = useStore();
   const { t } = useTranslation();
   const bigPieData = data.items.specific_road_segment_fatal_accidents;
   const smallPieData = data.items.all_roads_fatal_accidents;
-  const roadNumberSegment: string[] | null = segmetText.match(ROAD_NUMBER_REGEX);
-  const descSegment: string = roadNumberSegment == null ? '' : segmetText.substr(roadNumberSegment[0].length);
+  const roadNumberSegment: string = ` כביש ${store.newsFlashWidgetsMetaNumber}`;
+  const descSegment: string = roadNumberSegment == null ? '' : segmetText.substr(roadNumberSegment.length);
   return (
     <Box height={'100%'} display="flex" flexDirection="column">
       <Box className={classes.primaryContent}>
         <Box className={classes.primaryDesc}>
           <Box className={classes.textHighlight}>
-            <Typography.Body5>{roadNumberSegment == null ? null : roadNumberSegment[0]}</Typography.Body5>
+            <Typography.Body5>{roadNumberSegment == null ? null : roadNumberSegment}</Typography.Body5>
           </Box>
           <Box className={classes.segmentDesc}>
             <Typography.Body5>{descSegment}</Typography.Body5>
@@ -88,7 +90,7 @@ const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePer
           usePercent={usePercent}
         />
       </Box>
-      <Box className={classes.secondaryContent} >
+      <Box className={classes.secondaryContent}>
         <Box className={classes.secondaryDesc}>
           <div className={classes.textHighlight}>
             <Typography.Body5>{t('onUrban.road')}</Typography.Body5>
