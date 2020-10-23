@@ -7,7 +7,7 @@ import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
 import { useLocation } from 'react-router';
 import queryString from 'query-string';
-import { Text, TextType, Button } from '../atoms';
+import { Typography, Button } from '../atoms';
 import { useTranslation } from 'react-i18next';
 
 interface IProps {}
@@ -54,7 +54,7 @@ const FilterBar: FC<IProps> = () => {
             <Grid item>
               <Grid item container spacing={2}>
                 <Grid item className={classes.locationMeta}>
-                  <Text type={TextType.CONTENT_TITLE}>{store.newsFlashWidgetsMetaString}</Text>
+                  <Typography.Body2>{store.newsFlashWidgetsMetaString}</Typography.Body2>
                 </Grid>
                 <Grid item className={classes.showDescriptionButton}>
                   <Button.Standard size="small" onClick={() => setIsDescOpen(!isDescOpen)}>
@@ -63,7 +63,7 @@ const FilterBar: FC<IProps> = () => {
                 </Grid>
               </Grid>
               <Grid item>
-                <Box mt={1}>{isDescOpen && <Text type={TextType.CONTENT}>{store.activeNewsFlash?.title}</Text>}</Box>
+                <Box mt={1}>{isDescOpen && <Typography.Body1>{store.activeNewsFlash?.title}</Typography.Body1>}</Box>
               </Grid>
             </Grid>
           </Grid>

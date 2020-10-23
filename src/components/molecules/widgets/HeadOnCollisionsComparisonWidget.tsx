@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Text, TextType } from '../../atoms';
+import { Typography } from '../../atoms';
 import PieChartView, { renderCollisionCustomizedLabel } from '../PieChartView';
 import { IWidgetHeadOnCollisionsComparisonData } from '../../../models/WidgetData';
 import { Box, makeStyles } from '@material-ui/core';
@@ -72,10 +72,10 @@ const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePer
       <Box className={classes.primaryContent}>
         <Box className={classes.primaryDesc}>
           <Box className={classes.textHighlight}>
-            <Text type={TextType.CONTENT_TITLE}>{roadNumberSegment == null ? null : roadNumberSegment[0]}</Text>
+            <Typography.Body5>{roadNumberSegment == null ? null : roadNumberSegment[0]}</Typography.Body5>
           </Box>
           <Box className={classes.segmentDesc}>
-            <Text type={TextType.CONTENT}>{descSegment}</Text>
+            <Typography.Body5>{descSegment}</Typography.Body5>
           </Box>
         </Box>
         <PieChartView
@@ -91,10 +91,10 @@ const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePer
       <Box className={classes.secondaryContent} >
         <Box className={classes.secondaryDesc}>
           <div className={classes.textHighlight}>
-            <Text type={TextType.CONTENT_TITLE}>{t('onUrban.road')}</Text>
+            <Typography.Body5>{t('onUrban.road')}</Typography.Body5>
           </div>
           <div className={classes.segmentDesc}>
-            <Text type={TextType.CONTENT}>{t('onUrban.location')}</Text>
+            <Typography.Body5>{t('onUrban.location')} </Typography.Body5>
           </div>
         </Box>
 
