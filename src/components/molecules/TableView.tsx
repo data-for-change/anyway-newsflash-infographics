@@ -3,7 +3,7 @@ import { makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
 import { Text, TextType } from '../atoms';
 import { Table, TableBody, TableCell, TableHead, TableRow, Theme } from '@material-ui/core';
 import { IWidgetMostSevereAccidentsTableData } from '../../models/WidgetData';
-import { tableHeadline, tableHeadColor } from '../../style';
+import { roadIconColors, tableHeadColor } from '../../style';
 
 interface IProps {
   data: IWidgetMostSevereAccidentsTableData;
@@ -19,11 +19,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: '10px',
   },
   table: {},
-  mainText: {
-    padding: '1px',
-    fontSize: 20,
-    color: tableHeadline,
-  },
 }));
 
 const StyledTableCell = withStyles((theme: Theme) =>
@@ -103,7 +98,7 @@ const TableView: FC<IProps> = ({ data }) => {
                 <Text type={TextType.WIDGET_TABLE_CONTENT}>{item.type}</Text>
               </StyledTableCell>
               {item.killed_count === maxKilled ? (
-                <StyledTableCell align="right" style={{ backgroundColor: 'red' }}>
+                <StyledTableCell align="right" style={{ backgroundColor: roadIconColors.red }}>
                   <Text type={TextType.WIDGET_TABLE_CONTENT}> {item.killed_count}</Text>
                 </StyledTableCell>
               ) : (
@@ -112,7 +107,7 @@ const TableView: FC<IProps> = ({ data }) => {
                 </StyledTableCell>
               )}
               {item.injured_count === maxInjured ? (
-                <StyledTableCell align="right" style={{ backgroundColor: 'red' }}>
+                <StyledTableCell align="right" style={{ backgroundColor: roadIconColors.red }}>
                   <Text type={TextType.WIDGET_TABLE_CONTENT}>{item.injured_count}</Text>
                 </StyledTableCell>
               ) : (
