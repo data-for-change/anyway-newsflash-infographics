@@ -1,11 +1,10 @@
-import {makeStyles} from '@material-ui/core/styles';
-import {onLinkColor, onLinkColorHover} from '../../style';
-import Text, {TextType} from "../atoms/Text";
-import React from "react";
-import {authServerUrl} from "../../utils/utils";
+import { makeStyles } from '@material-ui/core/styles';
+import { onLinkColor, onLinkColorHover } from '../../style';
+import { Typography } from '../atoms';
+import React from 'react';
+import { authServerUrl } from '../../utils/utils';
 
 const LINK = `${authServerUrl}/auth/logout`;
-
 
 const useStyles = makeStyles({
   link: {
@@ -16,26 +15,25 @@ const useStyles = makeStyles({
     },
     cursor: 'pointer',
   },
-  profile:
-    {
-      color:"black"
-    }
+  profile: {
+    color: 'black',
+  },
 });
 
 interface IUserProfileHeader {
-  name: string
+  name: string;
 }
-const UserProfileHeader  :React.FC<IUserProfileHeader> = ({name})=>{
+const UserProfileHeader: React.FC<IUserProfileHeader> = ({ name }) => {
   const classes = useStyles();
 
-  return(
+  return (
     <div className={classes.profile}>
-    <a className={classes.link}  href={LINK}>
-      <Text type={TextType.CONTENT_TITLE} >LOGOUT</Text>
-    </a>
-      <Text  type={TextType.CONTENT_TITLE}>{`שלום ${name}`}</Text>
+      <a className={classes.link} href={LINK}>
+        <Typography.Body1>LOGOUT</Typography.Body1>
+      </a>
+      <Typography.Body1>{`שלום ${name}`}</Typography.Body1>
     </div>
-  )
-}
+  );
+};
 
-export  default UserProfileHeader;
+export default UserProfileHeader;

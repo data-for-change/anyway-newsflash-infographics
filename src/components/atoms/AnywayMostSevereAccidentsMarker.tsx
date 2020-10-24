@@ -6,7 +6,7 @@ import { Marker, Popup } from 'react-leaflet';
 import MapIcon from '../atoms/AnywayMapIcon';
 import TooltipMarker from './TooltipMarker';
 import { AnyWayButton } from '../atoms/AnyWayButton';
-import { Text, TextType } from '../atoms';
+import { Typography } from '../atoms';
 import TooltipArrow from './TooltipArrow';
 import { ClockPosition } from '../../utils/enum.utils';
 import { useTranslation } from 'react-i18next';
@@ -66,7 +66,7 @@ const AnywayMostSevereAccidentsMarker: FC<IProps> = ({ data, tooltipOffset = Clo
         {
           <Popup className={classes.root}>
             <div className={classes.tooltipTitle}>
-              <Text type={TextType.CONTENT}>{t('labelPosition')}</Text>
+              <Typography.Body4>{t('labelPosition')}</Typography.Body4>
             </div>
             <div className={classes.arrowContainer}>
               <AnyWayButton className={classes.button} onClick={setOffset.bind(null, ClockPosition.TOPRIGHT)}>

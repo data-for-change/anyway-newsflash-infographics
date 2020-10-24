@@ -1,5 +1,5 @@
 import React, { FC, useCallback } from 'react';
-import { Text, TextType } from '../atoms';
+import { Typography } from '../atoms';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { ListItemIcon, List, ListItem } from '@material-ui/core';
 import { MenuItem } from '@material-ui/core';
@@ -64,16 +64,16 @@ const SelectButton: FC<IProps> = ({ onChange }) => {
             onChange={handleChange}
           >
             <MenuItem value={1}>
-              <Text type={TextType.CONTENT}>{t('filterBar.Past Year')}</Text>
+              <Typography.Body4>{t('filterBar.Past Year')}</Typography.Body4>
             </MenuItem>
             <MenuItem value={3}>
-              <Text type={TextType.CONTENT}>{t('filterBar.Last 3 Years')}</Text>
+              <Typography.Body4>{t('filterBar.Last 3 Years')}</Typography.Body4>
             </MenuItem>
             <MenuItem value={5}>
-              <Text type={TextType.CONTENT}>{t('filterBar.Last 5 Years')}</Text>
+              <Typography.Body4>{t('filterBar.Last 5 Years')}</Typography.Body4>
             </MenuItem>
             <MenuItem value={8}>
-              <Text type={TextType.CONTENT}>{t('filterBar.Last 8 Years')}</Text>
+              <Typography.Body4>{t('filterBar.Last 8 Years')}</Typography.Body4>
             </MenuItem>
           </Select>
         </FormControl>

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
-import { Text, TextType } from '../atoms';
+import { Typography } from '../atoms';
 import { Table, TableBody, TableCell, TableHead, TableRow, Theme } from '@material-ui/core';
 import { IWidgetMostSevereAccidentsTableData } from '../../models/WidgetData';
 import { roadIconColors, tableHeadColor } from '../../style';
@@ -63,25 +63,25 @@ const TableView: FC<IProps> = ({ data }) => {
   return (
     <div className={classes.root}>
       <div className={classes.title}>
-        <Text type={TextType.WIDGET_TABLE_TITLE}>{text.title}</Text>
+        <Typography.Body4>{text.title}</Typography.Body4>
       </div>
       <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
           <StyledTableRow>
             <StyledTableCell>
-              <Text type={TextType.WIDGET_TABLE_HEADER}>תאריך</Text>
+              <Typography.Body6>תאריך</Typography.Body6>
             </StyledTableCell>
             <StyledTableCell align="right">
-              <Text type={TextType.WIDGET_TABLE_HEADER}>שעה</Text>
+              <Typography.Body6>שעה</Typography.Body6>
             </StyledTableCell>
             <StyledTableCell align="right">
-              <Text type={TextType.WIDGET_TABLE_HEADER}>סוג תאונה</Text>
+              <Typography.Body6>סוג תאונה</Typography.Body6>
             </StyledTableCell>
             <StyledTableCell align="right">
-              <Text type={TextType.WIDGET_TABLE_HEADER}>הרוגים</Text>
+              <Typography.Body6>הרוגים</Typography.Body6>
             </StyledTableCell>
             <StyledTableCell align="right">
-              <Text type={TextType.WIDGET_TABLE_HEADER}>פצועים קשה</Text>
+              <Typography.Body6>פצועים קשה</Typography.Body6>
             </StyledTableCell>
           </StyledTableRow>
         </TableHead>
@@ -89,30 +89,30 @@ const TableView: FC<IProps> = ({ data }) => {
           {items.map((item, index) => (
             <StyledTableRow key={index}>
               <StyledTableCell component="th" scope="row">
-                <Text type={TextType.WIDGET_TABLE_CONTENT}>{item.date}</Text>
+                <Typography.Body6>{item.date}</Typography.Body6>
               </StyledTableCell>
               <StyledTableCell align="right">
-                <Text type={TextType.WIDGET_TABLE_CONTENT}>{item.hour}</Text>
+                <Typography.Body6>{item.hour}</Typography.Body6>
               </StyledTableCell>
               <StyledTableCell align="right">
-                <Text type={TextType.WIDGET_TABLE_CONTENT}>{item.type}</Text>
+                <Typography.Body6>{item.type}</Typography.Body6>
               </StyledTableCell>
               {item.killed_count === maxKilled ? (
                 <StyledTableCell align="right" style={{ backgroundColor: roadIconColors.red }}>
-                  <Text type={TextType.WIDGET_TABLE_CONTENT}> {item.killed_count}</Text>
+                  <Typography.Body6> {item.killed_count}</Typography.Body6>
                 </StyledTableCell>
               ) : (
                 <StyledTableCell align="right">
-                  <Text type={TextType.WIDGET_TABLE_CONTENT}>{item.killed_count}</Text>
+                  <Typography.Body6>{item.killed_count}</Typography.Body6>
                 </StyledTableCell>
               )}
               {item.injured_count === maxInjured ? (
                 <StyledTableCell align="right" style={{ backgroundColor: roadIconColors.red }}>
-                  <Text type={TextType.WIDGET_TABLE_CONTENT}>{item.injured_count}</Text>
+                  <Typography.Body6>{item.injured_count}</Typography.Body6>
                 </StyledTableCell>
               ) : (
                 <StyledTableCell align="right">
-                  <Text type={TextType.WIDGET_TABLE_CONTENT}>{item.injured_count}</Text>
+                  <Typography.Body6>{item.injured_count}</Typography.Body6>
                 </StyledTableCell>
               )}
             </StyledTableRow>

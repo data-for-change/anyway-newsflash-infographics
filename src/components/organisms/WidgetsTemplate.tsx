@@ -6,7 +6,7 @@ import { Grid } from '../atoms';
 import AnyWayCard from '../molecules/card/AnyWayCard';
 import ErrorBoundary from '../atoms/ErrorBoundary';
 import { MetaTag } from '../atoms';
-import { Text, TextType } from '../atoms';
+import { Typography } from '../atoms';
 import { Box } from '@material-ui/core';
 import WidgetWrapper from '../molecules/widgets/WidgetWrapper';
 
@@ -39,7 +39,7 @@ const WidgetsTemplate: FC<IProps> = ({ id }) => {
     );
   });
 
-  const NoDataText = <Text type={TextType.CONTENT_TITLE}>אין נתונים להצגה</Text>;
+  const NoDataText = <Typography.Body4>אין נתונים להצגה</Typography.Body4>;
 
   return <Grid.Container>{widgetsData && widgetsData.length > 0 ? widgetCards : NoDataText} </Grid.Container>;
 };
