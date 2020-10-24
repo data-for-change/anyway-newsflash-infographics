@@ -16,6 +16,7 @@ import {
   IWidgetTopRoadSegmentsAccidentsPerKm,
   IWidgetAccidentCountByDriverType,
   IWidgetAccidentCountByCarType,
+  IWidgetRainAccidentsBySeverityTable,
 } from '../../../models/WidgetData';
 import AccidentsCountByHourBarWidget from './AccidentsCountByHourBarWidget';
 import InjuredCountPerAgeGroupPieWidget from './InjuredCountPerAgeGroupPieWidget';
@@ -33,6 +34,7 @@ import TopRoadSegmentsAccidentsPerKm from './TopRoadSegmentsAccidentsPerKm';
 import AccidentCountByRoadLight from './AccidentCountByRoadLight';
 import AccidentCountByDriverType from './AccidentCountByDriverType';
 import AccidentCountByCarTypeWidget from './AccidentCountByCarTypeWidget';
+import RainAccidentsBySeverityTable from './RainAccidentsBySeverityTable';
 import { IPoint } from '../../../models/Point';
 import { WidgetName } from '../../../models/WidgetName';
 
@@ -98,7 +100,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, segmentText, options = {} }) => {
       widgetComponent = (
         <HeadOnCollisionsComparisonWidget
           data={data as IWidgetHeadOnCollisionsComparisonData}
-          segmetText={segmentText}
+          segmentText={segmentText}
         />
       );
       break;
@@ -107,7 +109,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, segmentText, options = {} }) => {
       widgetComponent = (
         <HeadOnCollisionsComparisonWidget
           data={data as IWidgetHeadOnCollisionsComparisonData}
-          segmetText={segmentText}
+          segmentText={segmentText}
           usePercent={true}
         />
       );
@@ -137,6 +139,10 @@ const WidgetWrapper: FC<IProps> = ({ widget, segmentText, options = {} }) => {
       widgetComponent = (
         <AccidentCountByCarTypeWidget data={data as IWidgetAccidentCountByCarType} segmentText={segmentText} />
       );
+      break;
+    }
+    case WidgetName.rain_accidents_by_severity: {
+      widgetComponent = <RainAccidentsBySeverityTable data={data as IWidgetRainAccidentsBySeverityTable} />;
       break;
     }
     default: {

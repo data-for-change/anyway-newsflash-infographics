@@ -16,7 +16,7 @@ const PRIMARY_FONT_SIZE = 14;
 
 interface IProps {
   data: IWidgetHeadOnCollisionsComparisonData;
-  segmetText: string;
+  segmentText: string;
   usePercent?: boolean;
 }
 
@@ -61,14 +61,14 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePercent }) => {
+const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmentText, usePercent }) => {
   const classes = useStyles();
   const store: RootStore = useStore();
   const { t } = useTranslation();
   const bigPieData = data.items.specific_road_segment_fatal_accidents;
   const smallPieData = data.items.all_roads_fatal_accidents;
   const roadNumberSegment: string = ` כביש ${store.newsFlashWidgetsMetaNumber}`;
-  const descSegment: string = roadNumberSegment == null ? '' : segmetText.substr(roadNumberSegment.length);
+  const descSegment: string = roadNumberSegment == null ? '' : segmentText.substr(roadNumberSegment.length);
   return (
     <Box height={'100%'} display="flex" flexDirection="column">
       <Box className={classes.primaryContent}>

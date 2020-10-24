@@ -4,7 +4,7 @@
 //   data: {
 //     text: Array<string>;  // text items - title, text content etc.
 //     items: object | Array<any>;    // data items - points, events, image name, chart ticks etc.
-//     addionals?: any       // optional - any additional data
+//     addison's?: any       // optional - any additional data
 //   };
 //   meta: {
 //     category: string;     // one per widget
@@ -44,7 +44,8 @@ export type IWidgetDataType =
   | IWidgetTopRoadSegmentsAccidentsPerKm
   | IWidgetAccidentCountByRoadLight
   | IWidgetAccidentCountByDriverType
-  | IWidgetAccidentCountByCarType;
+  | IWidgetAccidentCountByCarType
+  | IWidgetRainAccidentsBySeverityTable;
 
 export interface ILocationMeta {
   location_info: {
@@ -58,6 +59,17 @@ export interface IWidgetAccidentsByHourBarData {
   items: {
     accident_hour: number;
     hour: number;
+  }[];
+  text: {
+    title: string;
+  };
+}
+export interface IWidgetRainAccidentsBySeverityTable {
+  items: {
+    severity: number;
+    severity_hebrew: string;
+    amount_of_accidents_caused_by_rain: number;
+    accidents_caused_by_rain_percentage: number;
   }[];
   text: {
     title: string;

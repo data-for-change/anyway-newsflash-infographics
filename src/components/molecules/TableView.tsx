@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import { makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
 import { Typography } from '../atoms';
 import { Table, TableBody, TableCell, TableHead, TableRow, Theme } from '@material-ui/core';
-import { IWidgetMostSevereAccidentsTableData } from '../../models/WidgetData';
+import { IWidgetMostSevereAccidentsTableData, IWidgetRainAccidentsBySeverityTable } from '../../models/WidgetData';
 import { tableHeadColor, tableBackgroundColorMain, tableBackgroundColorOdd } from '../../style';
 
 interface IProps {
-  data: IWidgetMostSevereAccidentsTableData;
+  data: IWidgetMostSevereAccidentsTableData | IWidgetRainAccidentsBySeverityTable;
 }
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -53,6 +53,7 @@ const StyledTableRow = withStyles(() =>
 const TableView: FC<IProps> = ({ data }) => {
   const classes = useStyles();
   const { items, text } = data;
+
   return (
     <div className={classes.root}>
       <div className={classes.title}>
@@ -79,7 +80,7 @@ const TableView: FC<IProps> = ({ data }) => {
           </StyledTableRow>
         </TableHead>
         <TableBody>
-          {items.map((item, index) => (
+          {items.map((item: any, index: any) => (
             <StyledTableRow key={index}>
               <StyledTableCell component="th" scope="row">
                 <Typography.Body6>{item.date}</Typography.Body6>
