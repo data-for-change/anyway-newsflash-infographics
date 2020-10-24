@@ -3,7 +3,7 @@ import { makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
 import { Typography } from '../atoms';
 import { Table, TableBody, TableCell, TableHead, TableRow, Theme } from '@material-ui/core';
 import { IWidgetMostSevereAccidentsTableData } from '../../models/WidgetData';
-import { tableHeadColor, tableBackgroundColorMain, tableBackgroundColorOdd } from '../../style';
+import { roadIconColors, tableHeadColor } from '../../style';
 
 interface IProps {
   data: IWidgetMostSevereAccidentsTableData;
@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   table: {},
 }));
+
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -35,17 +36,14 @@ const StyledTableCell = withStyles((theme: Theme) =>
     },
     head: {
       backgroundColor: tableHeadColor,
-      color: theme.palette.common.white,
+      color: theme.palette.common.black,
     },
   }),
 )(TableCell);
 const StyledTableRow = withStyles(() =>
   createStyles({
     root: {
-      backgroundColor: tableBackgroundColorMain,
-      '&:nth-of-type(odd)': {
-        backgroundColor: tableBackgroundColorOdd,
-      },
+      backgroundColor: 'white',
     },
   }),
 )(TableRow);
@@ -53,6 +51,15 @@ const StyledTableRow = withStyles(() =>
 const TableView: FC<IProps> = ({ data }) => {
   const classes = useStyles();
   const { items, text } = data;
+  const maxKilled = Math.max.apply(
+    Math,
+    items.map((item) => item.killed_count),
+  );
+  const maxInjured = Math.max.apply(
+    Math,
+    items.map((item) => item.injured_count),
+  );
+
   return (
     <div className={classes.root}>
       <div className={classes.title}>
@@ -90,12 +97,24 @@ const TableView: FC<IProps> = ({ data }) => {
               <StyledTableCell align="right">
                 <Typography.Body6>{item.type}</Typography.Body6>
               </StyledTableCell>
-              <StyledTableCell align="right">
-                <Typography.Body6>{item.killed_count}</Typography.Body6>
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                <Typography.Body6>{item.injured_count}</Typography.Body6>
-              </StyledTableCell>
+              {item.killed_count === maxKilled ? (
+                <StyledTableCell align="right" style={{ backgroundColor: roadIconColors.red }}>
+                  <Typography.Body6> {item.killed_count}</Typography.Body6>
+                </StyledTableCell>
+              ) : (
+                <StyledTableCell align="right">
+                  <Typography.Body6>{item.killed_count}</Typography.Body6>
+                </StyledTableCell>
+              )}
+              {item.injured_count === maxInjured ? (
+                <StyledTableCell align="right" style={{ backgroundColor: roadIconColors.red }}>
+                  <Typography.Body6>{item.injured_count}</Typography.Body6>
+                </StyledTableCell>
+              ) : (
+                <StyledTableCell align="right">
+                  <Typography.Body6>{item.injured_count}</Typography.Body6>
+                </StyledTableCell>
+              )}
             </StyledTableRow>
           ))}
         </TableBody>

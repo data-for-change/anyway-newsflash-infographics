@@ -62,8 +62,9 @@
   },
   "onUrban": {
     "road": "בכבישים עירוניים (ללא צמתים)",
-    "location" : "בכל הארץ"
-  },  "cardEditor": {
+    "location": "בכל הארץ"
+  },
+  "cardEditor": {
     "title": "עריכת כרטיס",
     "mode": "מצב תצוגה",
     "display": "הצג",

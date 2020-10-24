@@ -46,12 +46,8 @@ export const renderCollisionCustomizedLabel = (props: any, fontSize = '100%', us
       {/*  for text wrapping in svg - use foreignObject make sure to give foreignObject height and width, or inner element
         will not be displayed https://stackoverflow.com/questions/4991171/auto-line-wrapping-in-svg-text*/}
       <foreignObject style={collisionLabelStyle} fill={'white'} x={ex} y={ey} width={outerRadius * TEXT_RELATIVE_WIDTH}>
-        <p>
-          {labelText}
-        </p>
-        <p>
-          {name}
-        </p>
+        <p>{labelText}</p>
+        <p>{name}</p>
       </foreignObject>
     </g>
   );
