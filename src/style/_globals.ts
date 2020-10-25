@@ -1,4 +1,5 @@
 export const primaryColor = '#3f51b5';
+export const lighterWidgetText = '#464a47';
 export const onLinkColor = '#0088cc';
 export const onLinkColorHover = '#00aaff';
 export const borderColor = '#D3D3D3';

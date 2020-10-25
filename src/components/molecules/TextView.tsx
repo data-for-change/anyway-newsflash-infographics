@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { IWidgetCountBySeverityTextData } from '../../models/WidgetData';
 import { Typography } from '../atoms';
 import { Theme, makeStyles } from '@material-ui/core';
-import { borderColor, roadIconColors } from '../../style';
+import { borderColor, roadIconColors, lighterWidgetText } from '../../style';
 import { useTranslation } from 'react-i18next';
 import Person from '../../assets/Person.png';
 import Ambulance from '../../assets/Ambulance.png';
@@ -63,12 +63,14 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
   const classes = useStyles();
   const { t } = useTranslation();
   const { items } = data;
+  const { i18n } = useTranslation();
+  const isRtl = i18n.dir() === 'rtl';
   //checking availability of two or more types
   const isSummaryText =
     [items.severity_fatal_count, items.severity_light_count, items.severity_severe_count].filter(Boolean).length >= 2;
   return (
     <div className={classes.root}>
-      <Box textAlign="center">
+      <Box color={lighterWidgetText} textAlign="center">
         {items.end_year === items.start_year ? (
           <>
             <Box mr={1}>
@@ -95,15 +97,15 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
         </Box>
         <AccidentsOccurred accidentsCount={items.total_accidents_count} />
       </Box>
-      <Box px={3}>
+      <Box color="text.secondary" px={8}>
         {isSummaryText ? (
           <>
             {items.severity_fatal_count ? (
               <Box display="flex" py={1} className={classes.border}>
-                <Box flex={1} display="flex" justifyContent="center">
+                <Box flex={1} display="flex" justifyContent="center" pr={isRtl ? 3 : 0} pl={isRtl ? 0 : 3}>
                   <img src={Person} className={classes.image} alt="red person" />
                 </Box>
-                <Box flex={1} display="flex" justifyContent="center">
+                <Box flex={1} display="flex" justifyContent="center" pl={isRtl ? 3 : 0} pr={isRtl ? 0 : 3}>
                   <Box display="flex" flexDirection="column" alignItems="center">
                     <Box color={red}>
                       <Typography.Title1>{items.severity_fatal_count}</Typography.Title1>
@@ -121,10 +123,10 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
             ) : null}
             {items.severity_severe_count ? (
               <Box display="flex" py={1} className={classes.border}>
-                <Box flex={1} display="flex" justifyContent="center">
+                <Box flex={1} display="flex" justifyContent="center" pr={isRtl ? 3 : 0} pl={isRtl ? 0 : 3}>
                   <img src={Ambulance} className={classes.image} alt="ambulance" />
                 </Box>
-                <Box flex={1} display="flex" justifyContent="center">
+                <Box flex={1} display="flex" justifyContent="center" pl={isRtl ? 3 : 0} pr={isRtl ? 0 : 3}>
                   <Box display="flex" flexDirection="column" alignItems="center">
                     <Box color={red}>
                       <Typography.Title1>{items.severity_severe_count}</Typography.Title1>
@@ -140,10 +142,10 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
             ) : null}
             {items.severity_light_count ? (
               <Box display="flex" py={1}>
-                <Box flex={1} display="flex" justifyContent="center">
+                <Box flex={1} display="flex" justifyContent="center" pr={isRtl ? 3 : 0} pl={isRtl ? 0 : 3}>
                   <img src={Crutches} className={classes.image} alt="crutches" />
                 </Box>
-                <Box flex={1} display="flex" justifyContent="center">
+                <Box flex={1} display="flex" justifyContent="center" pl={isRtl ? 3 : 0} pr={isRtl ? 0 : 3}>
                   <Box display="flex" flexDirection="column" alignItems="center">
                     <Box color={red}>
                       <Typography.Title1>{items.severity_light_count}</Typography.Title1>
