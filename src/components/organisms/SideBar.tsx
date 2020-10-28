@@ -17,6 +17,12 @@ interface IProps {}
 const useStyles = makeStyles({
   newsContainer: {
     overflow: 'auto',
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
+    border: 1,
+    borderColor: borderColor,
   },
 });
 
@@ -33,26 +39,16 @@ const SideBar: FC<IProps> = () => {
 
   return (
     <Box display="flex" flexDirection="column" justifyContent="center" alignItems="stretch">
-      <Box
-        position="relative"
-        display="flex"
-        flexDirection="column"
-        flexGrow={1}
-        className={classes.newsContainer}
-        border={1}
-        borderColor={borderColor}
-      >
+      <Box className={classes.newsContainer}>
         <OverlayLoader show={loading} />
         <Box>
           <ErrorBoundary>
             <NewsFlashFilterPanel />
           </ErrorBoundary>
         </Box>
-        <Box>
-          <InfinitScroll onScrollEnd={fetchMoreNewsItems}>
-            <News />
-          </InfinitScroll>
-        </Box>
+        <InfinitScroll onScrollEnd={fetchMoreNewsItems}>
+          <News />
+        </InfinitScroll>
       </Box>
       <Box flexShrink={0} flexGrow={0} p={1}>
         <Typography.Body4 children={mapTitle} />
