@@ -29,6 +29,7 @@ const useStyles = makeStyles({
     flexDirection: 'row',
     flexShrink: 0,
     justifyContent: 'space-evenly',
+    borderBottom: `1px solid ${borderColor}`,
   },
 });
 export const NewsFlashFilterPanel: React.FC = () => {
