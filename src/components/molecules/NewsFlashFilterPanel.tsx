@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import classnames from 'classnames';
 import { Box, makeStyles } from '@material-ui/core';
 import { borderColor, onLinkColor } from '../../style';
 import ynetLogo from '../../assets/ynet-website-logo.svg';
@@ -23,9 +24,6 @@ const useStyles = makeStyles({
   },
 
   buttonClicked: {
-    height: '50px',
-    marginLeft: '10px',
-    width: '50px',
     border: `2px solid ${borderColor}`,
     borderColor: onLinkColor,
   },
@@ -46,14 +44,13 @@ export const NewsFlashFilterPanel: React.FC = () => {
   const store: RootStore = useStore();
   const [activeFilter, setActiveFilter] = useState(SourceFilterEnum.all);
 
-  const isClicked = (sourceType: SourceFilterEnum) =>
-    activeFilter === sourceType ? classes.buttonClicked : classes.button;
-
   return (
     // will be convert to filterButtonsMap instead of code duplicate for the filter button
     <Box className={classes.container}>
       <AnyWayButton
-        className={isClicked(SourceFilterEnum.all)}
+        className={
+          activeFilter === SourceFilterEnum.all ? classnames(classes.buttonClicked, classes.button) : classes.button
+        }
         onClick={() => {
           store.filterNewsFlashCollection(SourceFilterEnum.all);
           setActiveFilter(SourceFilterEnum.all);
@@ -62,7 +59,9 @@ export const NewsFlashFilterPanel: React.FC = () => {
         <Typography.Title2>הכל</Typography.Title2>
       </AnyWayButton>
       <AnyWayButton
-        className={isClicked(SourceFilterEnum.ynet)}
+        className={
+          activeFilter === SourceFilterEnum.ynet ? classnames(classes.buttonClicked, classes.button) : classes.button
+        }
         onClick={() => {
           store.filterNewsFlashCollection(SourceFilterEnum.ynet);
           setActiveFilter(SourceFilterEnum.ynet);
@@ -71,7 +70,9 @@ export const NewsFlashFilterPanel: React.FC = () => {
         <img className={classes.image} src={ynetLogo} alt="Ynet" />
       </AnyWayButton>
       <AnyWayButton
-        className={isClicked(SourceFilterEnum.walla)}
+        className={
+          activeFilter === SourceFilterEnum.walla ? classnames(classes.buttonClicked, classes.button) : classes.button
+        }
         onClick={() => {
           store.filterNewsFlashCollection(SourceFilterEnum.walla);
           setActiveFilter(SourceFilterEnum.walla);
@@ -80,7 +81,9 @@ export const NewsFlashFilterPanel: React.FC = () => {
         <img className={classes.image} src={wallaLogo} alt="Walla" />
       </AnyWayButton>
       <AnyWayButton
-        className={isClicked(SourceFilterEnum.mda)}
+        className={
+          activeFilter === SourceFilterEnum.mda ? classnames(classes.buttonClicked, classes.button) : classes.button
+        }
         onClick={() => {
           store.filterNewsFlashCollection(SourceFilterEnum.mda);
           setActiveFilter(SourceFilterEnum.mda);
