@@ -63,7 +63,7 @@ const TableView: FC<IProps> = ({ data }) => {
   return (
     <div className={classes.root}>
       <div className={classes.title}>
-        <Typography.Body4>{text.title}</Typography.Body4>
+        <Typography.Body4>{text?.title}</Typography.Body4>
       </div>
       <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
