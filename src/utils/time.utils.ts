@@ -6,7 +6,6 @@ export function dateFormat(date: Date | string): string {
     if (typeof date === 'string') {
       date = new Date(date.replace(/\s/, 'T'));
     }
-    debugger;
     dateStr = new Intl.DateTimeFormat('he-il').format(date);
   }
   return dateStr;
