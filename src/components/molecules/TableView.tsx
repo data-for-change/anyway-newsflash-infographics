@@ -56,7 +56,7 @@ const TableView: FC<IProps> = ({ data }) => {
   return (
     <div className={classes.root}>
       <div className={classes.title}>
-        <Text type={TextType.WIDGET_TABLE_TITLE}>{text.title}</Text>
+        <Text type={TextType.WIDGET_TABLE_TITLE}>{}</Text>
       </div>
       <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
