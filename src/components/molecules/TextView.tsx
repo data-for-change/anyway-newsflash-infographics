@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { IWidgetCountBySeverityTextData } from '../../models/WidgetData';
 import { Typography } from '../atoms';
 import { Theme, makeStyles } from '@material-ui/core';
-import { borderColor, roadIconColors } from '../../style';
+import { borderColor, roadIconColors, lighterWidgetText } from '../../style';
 import { useTranslation } from 'react-i18next';
 import Person from '../../assets/Person.png';
 import Ambulance from '../../assets/Ambulance.png';
@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: '100%',
     justifyContent: 'space-evenly',
     letterSpacing: 1,
+    padding: `0 ${theme.spacing(6)}px`,
   },
   border: {
     borderBottom: `5px solid ${borderColor}`,
@@ -68,7 +69,7 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
     [items.severity_fatal_count, items.severity_light_count, items.severity_severe_count].filter(Boolean).length >= 2;
   return (
     <div className={classes.root}>
-      <Box textAlign="center">
+      <Box color={lighterWidgetText} textAlign="center">
         {items.end_year === items.start_year ? (
           <>
             <Box mr={1}>
@@ -95,7 +96,7 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
         </Box>
         <AccidentsOccurred accidentsCount={items.total_accidents_count} />
       </Box>
-      <Box px={3}>
+      <Box color="text.secondary" px={6}>
         {isSummaryText ? (
           <>
             {items.severity_fatal_count ? (
