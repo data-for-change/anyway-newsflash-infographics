@@ -5,7 +5,7 @@ import { useStore } from '../../store/storeConfig';
 import WidgetWrapper from '../molecules/widgets/WidgetWrapper';
 import { Box } from '@material-ui/core';
 import AnyWayCard, { CardLayoutOptions } from '../molecules/card/AnyWayCard';
-import { MetaTag, ErrorBoundary, Text, TextType, Button } from '../atoms';
+import { MetaTag, ErrorBoundary, Typography, Button } from '../atoms';
 import widgetToImage from '../../services/to-image.service';
 import { useTranslation } from 'react-i18next';
 
@@ -52,22 +52,22 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
       <Box display="flex">
         <Box px={2} display="flex" flexDirection="column" flexBasis={200} minWidth={200} boxSizing="border-box">
           <Box display="flex" flexDirection="column">
-            <Text type={TextType.CONTENT_TITLE}>
+            <Typography.Body5>
               {t('cardEditor.mode') + ':' + t(landscape ? 'cardEditor.landscape' : 'cardEditor.portrait')}
-            </Text>
+            </Typography.Body5>
             <Button.Standard onClick={layoutHandler}>
-              <Text type={TextType.CONTENT_TITLE}>
+              <Typography.Body5>
                 {t('cardEditor.display') + ' ' + t(landscape ? 'cardEditor.portrait' : 'cardEditor.landscape')}
-              </Text>
+              </Typography.Body5>
             </Button.Standard>
           </Box>
           <Box mt={2} display="flex" flexDirection="column">
-            <Text type={TextType.CONTENT_TITLE}>{t('cardEditor.size')}</Text>
+            <Typography.Body5>{t('cardEditor.size')}</Typography.Body5>
             <AnyWaySlider onChange={handleSizeChange} />
           </Box>
           <Box mt={2}>
             <Button.Standard onClick={imgDownloadHandler}>
-              <Text type={TextType.CONTENT_TITLE}>{t('cardEditor.download')}</Text>
+              <Typography.Body5>{t('cardEditor.download')}</Typography.Body5>
             </Button.Standard>
           </Box>
         </Box>

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import logoHasdna from '../../assets/hasadna.png';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
-import { Text, TextType } from '../atoms';
+import { Typography } from '../atoms';
 import { borderColor, onLinkColor, onLinkColorHover } from '../../style';
 import ThankYouDialog from './ThankYouDialog';
 import AboutDialog from './AboutDialog';
@@ -57,11 +57,11 @@ export const Footer: FC<IProps> = () => {
           </a>
         </Box>
         <Box px={2} className={classes.linkItem} onClick={toggleAbout}>
-          <Text type={TextType.CONTENT_TITLE}>{t('footer.about')}</Text>
+          <Typography.Body5>{t('footer.about')}</Typography.Body5>
         </Box>
         <AboutDialog isShowing={isShowingAbout} onClose={toggleAbout} />
         <Box px={2} className={classes.linkItem} onClick={toggleThank}>
-          <Text type={TextType.CONTENT_TITLE}>{t('footer.acknowledgements')}</Text>
+          <Typography.Body5>{t('footer.acknowledgements')}</Typography.Body5>
         </Box>
         <ThankYouDialog isShowing={isShowingThank} onClose={toggleThank} />
       </Box>

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { AnywayLink, Text, TextType } from '../atoms';
+import { AnywayLink, Typography } from '../atoms';
 import { Box, makeStyles } from '@material-ui/core';
 import { borderColor, selectedNewsFlash } from '../../style';
 import { useStore } from '../../store/storeConfig';
@@ -31,15 +31,19 @@ const News: FC = () => {
               return (
                 <AnywayLink key={news.id} to={`${store.currentLanguageRouteString}/newsflash/${news.id}`}>
                   <Box border={1} borderColor={borderColor} p={1} className={className}>
-                    <Text type={TextType.NEWS_FLASH_TITLE} children={`${date}, ${news.display_source}`} />
-                    <Text type={TextType.NEWS_FLASH_CONTENT} children={news.title} />
+                    <p>
+                      <Typography.Body5>
+                        {date}, {news.display_source}
+                      </Typography.Body5>
+                    </p>
+                    <Typography.Body5>{news.title}</Typography.Body5>
                   </Box>
                 </AnywayLink>
               );
             })
           ) : (
             <Box p={1}>
-              <Text type={TextType.NEWS_FLASH_CONTENT}>לא נמצאו תוצאות מהמקור המבוקש</Text>
+              <Typography.Body4>לא נמצאו תוצאות מהמקור המבוקש</Typography.Body4>
             </Box>
           )}
         </Box>

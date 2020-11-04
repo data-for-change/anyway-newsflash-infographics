@@ -4,7 +4,7 @@ import { useStore } from '../../store/storeConfig';
 import languageSelector from '../../assets/language-selector.svg';
 import { AnyWayButton } from '../atoms/AnyWayButton';
 import { AnywayLink } from '../atoms';
-import { Text, TextType } from '../atoms';
+import { Typography } from '../atoms';
 
 const LANGUAGES = [
   {
@@ -45,7 +45,7 @@ const LanguageMenu: FC = () => {
                 : `/${language.value}/newsflash/${store.activeNewsFlashId}`
             }
           >
-            <Text type={TextType.CONTENT_TITLE}>{language.buttonText}</Text>
+            <Typography.Body5>{language.buttonText}</Typography.Body5>
           </AnywayLink>
         ))}
         handleClose={closeMenu}

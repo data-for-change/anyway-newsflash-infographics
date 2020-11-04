@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Dialog, Text, TextType } from '../atoms';
+import { Dialog, Typography } from '../atoms';
 import { Box, makeStyles, createStyles, Theme, IconButton, DialogTitle } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { closeButtonColor, primaryColor } from '../../style';
@@ -37,7 +37,7 @@ const DialogWithHeader: FC<IProps> = ({ onClose, isShowing, title, fullWidth, ch
     <Dialog isShowing={isShowing} onClose={onClose} fullWidth={fullWidth} maxWidth={maxWidth}>
       <DialogTitle className={classes.dialogHeader}>
         <Box className={classes.bar}>
-          <Text type={TextType.CONTENT_TITLE}>{title}</Text>
+          <Typography.Body4>{title}</Typography.Body4>
           <IconButton onClick={onClose} className={classes.close}>
             <CloseIcon>close the dialog</CloseIcon>
           </IconButton>
