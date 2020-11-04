@@ -1,6 +1,6 @@
 import React, { FC, useCallback } from 'react';
 import { ResponsiveContainer, PieChart, Pie, Cell, PieLabelRenderProps } from 'recharts';
-import { fontFamilyString, collisionPieChartColors, collisionPieLabelStyleColor } from '../../style';
+import { fontFamilyString, pieChartColors, pieLabelStyleColor } from '../../style';
 
 const TEXT_RELATIVE_WIDTH = 0.8;
 interface ILabelProps {
@@ -21,7 +21,7 @@ interface IProps {
 
 // hardcoded colors, will be changed
 //TODO CHANGE COLORS
-const COLORS = collisionPieChartColors;
+const COLORS = pieChartColors;
 const RADIAN = Math.PI / 180;
 
 export const renderCollisionCustomizedLabel = (props: any, fontSize = '100%', usePercent = false) => {
@@ -34,7 +34,7 @@ export const renderCollisionCustomizedLabel = (props: any, fontSize = '100%', us
   const ey = cy + outerRadius * 0.4 * sin - 20;
 
   const collisionLabelStyle = {
-    color: collisionPieLabelStyleColor,
+    color: pieLabelStyleColor,
     textAlign: 'center' as 'center',
     fontWeight: 'normal' as 'normal',
     fontSize: fontSize,

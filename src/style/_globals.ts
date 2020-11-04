@@ -21,8 +21,8 @@ export const cardHeaderHeight = 70;
 export const cardFooterHeight = 50;
 
 //pie
-export const collisionPieChartColors = ['#AE0721', '#818386', '#d90000', '#890505', '#6a6a6a'];
-export const collisionPieLabelStyleColor = '#ffffff';
+export const pieChartColors = ['#AE0721', '#818386', '#d90000', '#890505', '#6a6a6a'];
+export const pieLabelStyleColor = '#ffffff';
 
 // charts
 export const barChartFillColor = '#c43a31';
@@ -33,7 +33,7 @@ export const DoubleBarChartFillColorBar2 = '#F2BB0A';
 export const tableHeadColor = '#A2A2A2';
 export const tableBackgroundColorMain = '#d2d2d2';
 export const tableBackgroundColorOdd = '#f5f5f5';
-export const sizeSmallBorderColor = '#0000001f'; //table inner cells border color
+export const tableCellBorderColor = '#0000001f'; //table inner cells border color
 export const tableBackgroundColorRow = '#ffffff';
 
 export const fontFamilyString = [
