@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: '100%',
     justifyContent: 'space-evenly',
     letterSpacing: 1,
+    padding: `0 ${theme.spacing(6)}px`,
   },
   border: {
     borderBottom: `5px solid ${borderColor}`,
@@ -63,8 +64,6 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
   const classes = useStyles();
   const { t } = useTranslation();
   const { items } = data;
-  const { i18n } = useTranslation();
-  const isRtl = i18n.dir() === 'rtl';
   //checking availability of two or more types
   const isSummaryText =
     [items.severity_fatal_count, items.severity_light_count, items.severity_severe_count].filter(Boolean).length >= 2;
@@ -97,15 +96,15 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
         </Box>
         <AccidentsOccurred accidentsCount={items.total_accidents_count} />
       </Box>
-      <Box color="text.secondary" px={8}>
+      <Box color="text.secondary" px={6}>
         {isSummaryText ? (
           <>
             {items.severity_fatal_count ? (
               <Box display="flex" py={1} className={classes.border}>
-                <Box flex={1} display="flex" justifyContent="center" pr={isRtl ? 3 : 0} pl={isRtl ? 0 : 3}>
+                <Box flex={1} display="flex" justifyContent="center">
                   <img src={Person} className={classes.image} alt="red person" />
                 </Box>
-                <Box flex={1} display="flex" justifyContent="center" pl={isRtl ? 3 : 0} pr={isRtl ? 0 : 3}>
+                <Box flex={1} display="flex" justifyContent="center">
                   <Box display="flex" flexDirection="column" alignItems="center">
                     <Box color={red}>
                       <Typography.Title1>{items.severity_fatal_count}</Typography.Title1>
@@ -123,10 +122,10 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
             ) : null}
             {items.severity_severe_count ? (
               <Box display="flex" py={1} className={classes.border}>
-                <Box flex={1} display="flex" justifyContent="center" pr={isRtl ? 3 : 0} pl={isRtl ? 0 : 3}>
+                <Box flex={1} display="flex" justifyContent="center">
                   <img src={Ambulance} className={classes.image} alt="ambulance" />
                 </Box>
-                <Box flex={1} display="flex" justifyContent="center" pl={isRtl ? 3 : 0} pr={isRtl ? 0 : 3}>
+                <Box flex={1} display="flex" justifyContent="center">
                   <Box display="flex" flexDirection="column" alignItems="center">
                     <Box color={red}>
                       <Typography.Title1>{items.severity_severe_count}</Typography.Title1>
@@ -142,10 +141,10 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
             ) : null}
             {items.severity_light_count ? (
               <Box display="flex" py={1}>
-                <Box flex={1} display="flex" justifyContent="center" pr={isRtl ? 3 : 0} pl={isRtl ? 0 : 3}>
+                <Box flex={1} display="flex" justifyContent="center">
                   <img src={Crutches} className={classes.image} alt="crutches" />
                 </Box>
-                <Box flex={1} display="flex" justifyContent="center" pl={isRtl ? 3 : 0} pr={isRtl ? 0 : 3}>
+                <Box flex={1} display="flex" justifyContent="center">
                   <Box display="flex" flexDirection="column" alignItems="center">
                     <Box color={red}>
                       <Typography.Title1>{items.severity_light_count}</Typography.Title1>
