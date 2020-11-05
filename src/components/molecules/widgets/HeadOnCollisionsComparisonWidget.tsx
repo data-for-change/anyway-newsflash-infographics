@@ -3,6 +3,7 @@ import { Typography } from '../../atoms';
 import PieChartView, { renderCollisionCustomizedLabel } from '../PieChartView';
 import { IWidgetHeadOnCollisionsComparisonData } from '../../../models/WidgetData';
 import { Box, makeStyles } from '@material-ui/core';
+import { textHighlightColor, segmentDescColor, timeRangeColor } from '../../../style';
 import { useTranslation } from 'react-i18next';
 import RootStore from '../../../store/root.store';
 import { useStore } from '../../../store/storeConfig';
@@ -22,16 +23,16 @@ interface IProps {
 
 const useStyles = makeStyles(() => ({
   textHighlight: {
-    color: '#8a1212',
+    color: textHighlightColor,
   },
   segmentDesc: {
-    color: '#647171',
+    color: segmentDescColor,
   },
   timeRange: {
     position: 'relative',
     bottom: '25%',
     right: '10%',
-    color: '#647171',
+    color: timeRangeColor,
   },
   primaryContent: {
     display: 'flex',
