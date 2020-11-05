@@ -1,6 +1,218 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img src="./src/assets/anyway.png" alt="ANYWAY" style="width:auto;height:50px;" align="right" />
 
-## Available Scripts
+[![deploy-development](https://github.com/hasadna/anyway-newsflash-infographics/workflows/deploy-development/badge.svg)](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development) [![CI](https://github.com/hasadna/anyway-newsflash-infographics/workflows/CI/badge.svg)](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3ACI)
+
+# ANYWAY: Newsflash InfoGraphics
+
+### Table of Contents
+
+1. [ About the project ](#about)
+1. [ Want to help? ](#help)
+   1. [ Diving in ](#diving)
+   1. [ Technical Overview ](#technical-overview)
+   1. [ 3nd party libraries](#2nd-party-libraries)
+   1. [ Project directory structure ](#directory-structure)
+   1. [ Contribution Guidelines ](#contribution-guidelines)
+      - [Branch naming](#branch-naming)
+      - [Pull request naming](#pr-naming)
+      - [Opening issues](#issues)
+1. [ Server code ](#server-code)
+1. [ Server API ](#server-api)
+1. [ CI/CD ](#cicd)
+1. [ Bundle size ](#bundle-size)
+1. [ Git Scripts ](#git-scripts)
+1. [ VScode & prettier ](#formatting)
+1. [ Mock Server ](#mock-server)
+1. [ Available Scripts ](#available-scripts)
+
+## About this project: <a id="about"></a>
+
+Learn more about our [Vision](https://github.com/hasadna/anyway-newsflash-infographics/blob/development/docs/Vision.md)
+
+## Want to help? <a id="help"></a>
+
+Want to file a bug, contribute some code, or improve documentation? Excellent! Please follow these steps
+
+### First thing first
+
+- Contact us - email would be great :) anyway@anyway.co.il
+- After we've got your mail, you'll able to join our [Slack Channel](https://app.slack.com/client/T02G85W3A/CLWT1CLDQ). For any issues - contact Yuval or Atalya to get invitation.
+- Optional: install [ZenHub](https://chrome.google.com/webstore/detail/zenhub-for-github/ogcgkffhplmphkaahpmffcafajaocjbd), so you can see our project [board](https://github.com/hasadna/anyway-newsflash-infographics#workspaces/anyway-5e00f3aa79454c5108bf2370/).
+
+### Diving in <a id="diving"></a>
+
+- For improving documentation:
+  - see issues marked as [documentation](https://github.com/hasadna/anyway-newsflash-infographics/issues?q=is%3Aopen+is%3Aissue+label%3Adocumentation) and contact Yuval for guidance
+  - This is a [good summary](https://medium.com/@kvosswinkel/coding-like-a-journalist-ee52360a16bc) for things to keep in mind when writing technical docs
+- For feature development, bug fixing etc:
+  - Read the [Technical Overview](https://github.com/hasadna/anyway-newsflash-infographics#technical-overview)
+    and [Project directory structure](https://github.com/hasadna/anyway-newsflash-infographics#project-directory-structure) sections
+  - Contact one of the project's leaders, which can help you getting into things easily
+  - Select one of the issues marked as [good first issue](https://github.com/hasadna/anyway-newsflash-infographics/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
+  - Read [Contribution Guidelines](https://github.com/hasadna/anyway-newsflash-infographics#contribution-guidelines) before start working on an issue
+- If you have any question - feel free to contact Yuval or Atalya from AnyWAY Project
+
+### Technical Overview <a id="technical-overview"></a>
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+It is following [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) guidelines with the following changes:
+
+- There are no "Organisms" components.
+- Atoms and Molecules are not state-aware (do not know MobX store exist)
+- Templates and Pages are state-aware
+- Molecules may contain other Molecules or Atoms. Atoms does not contain other Atoms.
+
+##### Map keys
+
+We use different google maps API keys for different environment.
+Staging / Production key are limited to our domain, and included in the repo `.env.production`.
+For using the map in development, You'll need to use a different key.
+
+Steps:
+
+1. Get development API key from frontend team leader / dev advocate
+1. create a file named `.env.local` in your root directory (next to `.env`)
+1. Set key-value in the following format:
+
+```
+REACT_APP_GOOGLE_MAP_KEY='THE_API_KEY_HERE'
+```
+
+3rd Party libraries included: <a id="2nd-party-libraries"></a>
+
+- [React Router](https://reacttraining.com/react-router/web/guides/quick-start)
+- [MobX](https://mobx.js.org/) - using [react-mobx-lite](https://github.com/mobxjs/mobx-react-lite) with [hooks](https://mobx-react.js.org/libraries)
+- [axios](https://github.com/axios/axios)
+- [Storybook](https://storybook.js.org/)
+- [Material-UI](https://material-ui.com/)
+- [Recharts](https://recharts.org/en-US/) - A composable charting library built on React components
+- [Leaflet](https://leafletjs.com/) Interactive maps
+
+Also,to upload google maps API script for the street view component, the 'react-async-loader' library was used as described in
+https://github.com/edmund-dev/react-async-loader/blob/master/example/GoogleMap.jsx.
+
+### Project directory structure <a id="directory-structure"></a>
+
+```
+.
++-- assets          // images, icons, audio etc.
++-- components      // internal components (anything other than page component)
+|   +-- atoms
+|   +-- molecules
+|   +-- organisms
+|   +-- templates
++-- hooks           // common reusable hooks
++-- models          // typescript interfaces and classes
++-- pages           // page components
++-- services        // REST API, websocket, storage etc.
++-- store           // MobX stores
++-- style           // css-in-js code and wrappers
+|   +-- _globals.ts // sizes, colors etc. - can be divided as project grow
+|   +-- theme.ts
++-- utils
++-- App.tsx
++-- index.html
++-- index.css      // global styles (like fonts or reset/normalize css code)
+```
+
+### Contribution Guidelines <a id="contribution-guidelines"></a>
+
+Branch naming convention is as following <a id="branch-naming"></a>
+
+```
+TYPE-ISSUE_ID-DESCRIPTION
+
+examples:
+feat-113-add-newsflash-location-on-map
+fix-114-newsflash-location-not-accurate
+```
+
+When `TYPE` can be:
+
+- **feat** - is a new feature
+- **doc** - documentation only changes
+- **cicd** - changes related to CI/CD system
+- **fix** - a bug fix
+- **refactor** - code change that neither fixes a bug nor adds a feature
+
+**All PRs must include commit message with the changes description!** <a id="pr-naming"></a>
+
+Branching system:
+_master_ - used for production <br>
+_dev_ - anything else <br>
+\* For the initial start, Use git clone command to download the repository to your computer (With `write` privileges there is no need to fork the repo)
+
+A standard procedure for working on an issue would be to: <a id="issues"></a>
+
+1. `git pull dev`
+2. Create new branch from `dev` , like: `refactor-137-making-pie-chart-generic-component`
+3. Work - commit - repeat
+4. Git pull at `dev`
+5. On your branch: `git merge dev` and solve conflicts if they exist
+6. Push branch and open PR to `dev`.
+7. Get a code review approval / reject
+8. After approval, merge your PR
+9. GitHub will automatically delete the branch, after the merge is done. (they can still be restored).
+
+### Server code <a id="server-code"></a>
+
+We have app server (written in [express](https://expressjs.com/), a node.js-based framework) which supports 2 functions:
+
+- Cache API requests (from the backend data cluster)
+- Provide user management capabilities
+  [Our server repo](https://github.com/hasadna/anyway-newsflash-infographics-backend)
+
+### Server API <a id="server-api"></a>
+
+See [API document](https://docs.google.com/document/d/1Hv5ItvwM3z9nn95LjlsYHL-o18V8PgWrrQOKIPiPymU)
+
+### CICD <a id="cicd"></a>
+
+We use [github actions](https://github.com/marketplace?type=actions) for the following flows:
+
+1. [on-push CI](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3ACI) - provide per-PR CI testing
+2. [deploy-development](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development) continous deployment of `dev` branch to https://anyway-newsflash-infographics.web.app/
+3. [deploy-master]() - TBD
+
+Note: see the flows status badge at the top of this file
+
+### About bundle size <a id="bundle-size"></a>
+
+Since [Create React App](https://github.com/facebook/create-react-app) uses webpack under the hood,
+You can safely use [named imports](https://stackoverflow.com/questions/36795819/when-should-i-use-curly-braces-for-es6-import/36796281#36796281)
+when working with [Material UI components](https://material-ui.com/guides/minimizing-bundle-size/#how-to-reduce-the-bundle-size).
+
+### Git Scripts <a id="git-scripts"></a>
+
+Git scripts include in `package.json` to make working with git easier:
+
+- `git:prune` - Remove tracking branches no longer on remote (run it around once a week)
+- `git:merged` - Lists branches that have been merged into `dev`
+
+### VScode & prettier <a id="formatting"></a>
+
+Our `package.json` already include `prettier` section.
+If you have your own settings for `VScode prettier extension`, make sure to use the project config.
+
+We use `singleQuote` as default. If having trouble with making the VScode extension use single quotes, please use the following config:
+
+```
+{
+  "prettier.jsxSingleQuote": true,
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "single",
+  "prettier.singleQuote": true
+}
+```
+
+## Mock Server <a id="mock-server"></a>
+
+Mock server can be found under https://anyway-mock-server.herokuapp.com/api.
+The server caching all responses from each unique request.
+
+## Available Scripts <a name="available-scripts"></a>
 
 In the project directory, you can run:
 
@@ -27,18 +239,6 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### `npm run sb`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Run [storybook](https://storybook.js.org/docs/configurations/cli-options/#for-start-storybook) locally.

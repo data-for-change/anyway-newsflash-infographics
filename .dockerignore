@@ -1,0 +1,12 @@
+# This should contain all files created during `npm run build`
+# All files will be created in the image build process and won't needed to be copied to the docker image
+node_modules
+build
+
+# Items that don't need to be in a Docker image.
+# files related to docker build itself and additional files which not used in the app
+.dockerignore
+Dockerfile
+Dockerfile.prod
+README.md
+.editorconfig
