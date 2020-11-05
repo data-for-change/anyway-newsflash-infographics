@@ -5,8 +5,10 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "@types/classnames": "^2.2.11",
     "@types/query-string": "^6.3.0",
     "axios": "^0.19.2",
+    "classnames": "^2.2.6",
     "dom-to-image": "^2.6.0",
     "file-saver": "^2.0.2",
     "html2canvas": "^1.0.0-rc.5",
