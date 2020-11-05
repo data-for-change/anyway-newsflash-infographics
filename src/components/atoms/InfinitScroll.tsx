@@ -28,7 +28,7 @@ const InfinitScroll: FC<IProps> = ({ children, onScrollEnd }) => {
         onScrollEnd();
       }
     }
-  }, [scrollList, onScrollEnd]);
+  }, [scrollList, onScrollEnd, store.newsFlashLoading]);
 
   useEffect(() => {
     if (scrollList.current) {
