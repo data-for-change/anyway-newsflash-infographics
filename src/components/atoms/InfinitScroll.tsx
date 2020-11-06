@@ -2,8 +2,10 @@ import React, { FC, useEffect, useCallback, useRef } from 'react';
 import { makeStyles } from '@material-ui/core';
 import { useStore } from '../../store/storeConfig';
 
+const INFINITE_SCROLLING_OFFSET: number = 30;
+
 function isScrollEnd(element: HTMLDivElement) {
-  return element.scrollTop + element.clientHeight > element.scrollHeight - 30;
+  return element.scrollTop + element.clientHeight > element.scrollHeight - INFINITE_SCROLLING_OFFSET;
 }
 
 const useStyles = makeStyles({
