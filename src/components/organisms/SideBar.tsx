@@ -50,7 +50,7 @@ const SideBar: FC<IProps> = () => {
           <News />
         </InfinitScroll>
       </Box>
-      <Box flexShrink={0} flexGrow={0} p={1}>
+      <Box borderTop={`1px solid ${borderColor}`} flexShrink={0} flexGrow={0} p={1}>
         <Typography.Body4 children={mapTitle} />
       </Box>
       <Box flexBasis={200} flexShrink={0} px={1} pb={1}>

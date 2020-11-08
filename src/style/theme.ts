@@ -17,7 +17,7 @@ const defaultThemeOptions: ThemeOptions = {
     // title variants (like: card headers)
     subtitle1: {
       fontSize: 24,
-      fontWeight: 700,
+      fontWeight: 500,
     },
     subtitle2: {
       fontSize: 22,

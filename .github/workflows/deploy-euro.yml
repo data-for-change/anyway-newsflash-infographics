@@ -3,7 +3,7 @@ name: deploy-development
 on:
   push:
     branches:
-      - dev
+      - euro
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
       - name: Deploy
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting:dev
+          args: deploy --only hosting:euro
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           PROJECT_ID: anyway-newsflash-infographics

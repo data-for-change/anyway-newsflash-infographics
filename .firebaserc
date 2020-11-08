@@ -1,0 +1,17 @@
+{
+  "targets": {
+    "anyway-newsflash-infographics": {
+      "hosting": {
+        "dev": [
+          "anyway-infographics-staging"
+        ],
+        "euro": [
+          "anyway-infographics-euro"
+        ],
+        "master": [
+          "anyway-infographics"
+        ]
+      }
+    }
+  }
+}

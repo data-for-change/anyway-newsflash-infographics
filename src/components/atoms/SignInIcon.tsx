@@ -1,10 +1,11 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import { signInIconColor } from '../../style';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      color: '#000',
+      color: signInIconColor,
       marginRight: '5px',
       cursor: 'default',
     },
