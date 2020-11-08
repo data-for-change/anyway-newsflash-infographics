@@ -1,17 +1,17 @@
 import React, { FC } from 'react';
 import L from 'leaflet';
-import { Marker, Popup } from 'react-leaflet';
-import MapIcon from './AnywayMapIcon'
+import { Marker as MapMarker, Popup } from 'react-leaflet';
+import { MapIcon } from '../atoms';
 
 interface IProps {
   markerdata: any;
 }
 
-const AnywayMarker: FC<IProps> = ( { markerdata } ) => {
+const Marker: FC<IProps> = ({ markerdata }) => {
   const lPoint: L.LatLng = new L.LatLng(markerdata.latitude, markerdata.longitude);
-  const icon: L.Icon = MapIcon.getIconBySeverity( 'standardIcon', markerdata.accident_severity );
+  const icon: L.Icon = MapIcon.getIconBySeverity('standardIcon', markerdata.accident_severity);
   return (
-    <Marker position={lPoint} icon={icon}>
+    <MapMarker position={lPoint} icon={icon}>
       {
         <Popup>
           <div>
@@ -19,8 +19,8 @@ const AnywayMarker: FC<IProps> = ( { markerdata } ) => {
           </div>
         </Popup>
       }
-    </Marker>
+    </MapMarker>
   );
 };
 
-export default AnywayMarker;
+export default Marker;
