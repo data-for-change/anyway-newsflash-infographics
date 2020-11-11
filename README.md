@@ -137,6 +137,12 @@ When `TYPE` can be:
 - **fix** - a bug fix
 - **refactor** - code change that neither fixes a bug nor adds a feature
 
+PR title convention is as following 
+```
+[TYPE-ISSUE_ID]-DESCRIPTION
+examples:
+[Feat-113] Add newsflash location on map
+```
 **All PRs must include commit message with the changes description!** <a id="pr-naming"></a>
 
 Branching system:
