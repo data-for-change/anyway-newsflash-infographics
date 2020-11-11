@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Dialog, Typography } from '../atoms';
 import { Box, makeStyles, createStyles, Theme, IconButton, DialogTitle } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import { closeButtonColor, primaryColor } from '../../style';
+import { closeButtonColor, primaryColor, borderColor } from '../../style';
 
 interface IProps {
   title: string;
@@ -15,9 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     dialogHeader: {
       padding: theme.spacing(0, 1.5, 0, 3),
-      paddingBottom: 0,
-      boxShadow:
-        '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
+      borderBottom: `2px solid ${borderColor}`,
     },
     bar: {
       display: 'flex',
