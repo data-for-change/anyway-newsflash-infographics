@@ -1,6 +1,6 @@
 import React, { FC, useCallback } from 'react';
 import { ResponsiveContainer, PieChart, Pie, Cell, PieLabelRenderProps } from 'recharts';
-import { fontFamilyString, pieChartColors, solidWhite } from '../../style';
+import { fontFamilyString, pieChartColors, whiteColor } from '../../style';
 
 const TEXT_RELATIVE_WIDTH = 0.8;
 interface ILabelProps {
@@ -34,7 +34,7 @@ export const renderCollisionCustomizedLabel = (props: any, fontSize = '100%', us
   const ey = cy + outerRadius * 0.4 * sin - 20;
 
   const collisionLabelStyle = {
-    color: solidWhite,
+    color: whiteColor,
     textAlign: 'center' as 'center',
     fontWeight: 'normal' as 'normal',
     fontSize: fontSize,
