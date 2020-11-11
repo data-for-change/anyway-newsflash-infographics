@@ -1,12 +1,10 @@
 export const blackColor = '#000';
 export const whiteColor = '#ffffff';
 export const noColor = 'transparent';
-
 //blue base collection
 export const primaryBlueViolet = '#3f51b5';
 export const skyBlue = '#00aaff';
 export const oceanBlue = '#0088cc';
-
 //white-Gray base collection
 export const bambooCharcoal = '#464a47';
 export const cloud = '#D3D3D3';
@@ -18,11 +16,10 @@ export const pebble = '#555454';
 export const silverGray = '#A2A2A2';
 export const smokeWhite = '#f5f5f5';
 export const silverSpoon = '#647171';
-
+export const blackColorTransparency = '#0000001f';
 //red base collection
 export const rose = '#c43a31';
 export const honey = '#F2BB0A';
-export const blackColorTransparency = '#0000001f';
 export const cherryJam = '#8a1212';
 
 export const defaultBorderRadius = 4;
