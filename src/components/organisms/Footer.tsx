@@ -4,7 +4,7 @@ import logoHasdna from '../../assets/hasadna.png';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import { Typography } from '../atoms';
-import { borderColor, onLinkColor, onLinkColorHover } from '../../style';
+import { cloud, oceanBlue, skyBlue } from '../../style';
 import ThankYouDialog from './ThankYouDialog';
 import AboutDialog from './AboutDialog';
 
@@ -16,10 +16,10 @@ const useStyles = makeStyles({
   links: {
     display: 'flex',
     alignItems: 'center',
-    color: `${onLinkColor}`,
+    color: `${oceanBlue}`,
     textDecoration: 'none',
     '&:hover': {
-      color: `${onLinkColorHover}`,
+      color: `${skyBlue}`,
     },
     justifyContent: 'flex-start',
   },
@@ -29,10 +29,10 @@ const useStyles = makeStyles({
   footer: {
     flexGrow: 1,
     display: 'flex',
-    border: `1px solid ${borderColor}`,
+    border: `1px solid ${cloud}`,
   },
   linkItem: {
-    borderLeft: `2px solid ${borderColor}`,
+    borderLeft: `2px solid ${cloud}`,
     cursor: 'pointer',
   },
 });

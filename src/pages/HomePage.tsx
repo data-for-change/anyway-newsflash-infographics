@@ -4,7 +4,7 @@ import { Box } from '@material-ui/core';
 import SideBar from '../components/organisms/SideBar';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { RouteComponentProps, Redirect } from 'react-router';
-import { borderColor } from '../style';
+import { cloud } from '../style';
 import FilterBar from '../components/organisms/FilterBar';
 import OverlayLoader from '../components/molecules/OverlayLoader';
 import { observer } from 'mobx-react-lite';
@@ -49,7 +49,7 @@ const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
 
   return (
     <Box display="flex" flexGrow={1} className={classes.mainBox}>
-      <Box flexGrow={1} maxWidth={319} display="flex" borderLeft={1} borderColor={borderColor}>
+      <Box flexGrow={1} maxWidth={319} display="flex" borderLeft={1} borderColor={cloud}>
         <SideBar />
       </Box>
       <Box flexGrow={5} className={classes.widgetBox} position="relative">

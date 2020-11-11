@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Dialog, AnywayAppBar, Typography } from '../atoms';
 import { Box, makeStyles, IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import { closeButtonColor, primaryColor } from '../../style';
+import { shadow, primaryBlueViolet } from '../../style';
 
 interface IProps {
   title: string;
@@ -15,12 +15,12 @@ const useStyles = makeStyles({
   bar: {
     display: 'flex',
     width: 'inherit',
-    color: primaryColor,
+    color: primaryBlueViolet,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   close: {
-    color: closeButtonColor,
+    color: shadow,
   },
 });
 const DialogWithHeader: FC<IProps> = ({ onClose, isShowing, title, fullWidth, children, maxWidth = 'lg' }) => {

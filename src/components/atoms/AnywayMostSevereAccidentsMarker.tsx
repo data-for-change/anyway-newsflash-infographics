@@ -10,7 +10,7 @@ import { Typography } from '../atoms';
 import TooltipArrow from './TooltipArrow';
 import { ClockPosition } from '../../utils/enum.utils';
 import { useTranslation } from 'react-i18next';
-import { defaultBorderRadius, lightBackgroundColor } from '../../style';
+import { defaultBorderRadius, mercury } from '../../style';
 interface IProps {
   data: any;
   tooltipOffset: ClockPosition;
@@ -20,14 +20,14 @@ const useStyles = makeStyles({
   root: {
     '& .leaflet-popup-content-wrapper': {
       borderRadius: defaultBorderRadius,
-      backgroundColor: lightBackgroundColor,
+      backgroundColor: mercury,
     },
     '& .leaflet-popup-content': {
       width: 130,
       margin: '14px 0 0 0',
     },
     '& .leaflet-popup-tip': {
-      backgroundColor: lightBackgroundColor,
+      backgroundColor: mercury,
     },
   },
   button: {

@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { onLinkColor, onLinkColorHover } from '../../style';
+import { oceanBlue, skyBlue } from '../../style';
 import { Typography } from '../atoms';
 import React from 'react';
 import { openSignInWindow } from '../../services/signInWindow';
@@ -10,10 +10,10 @@ const LINK = `${authServerUrl}/auth/google-login`;
 
 const useStyles = makeStyles({
   link: {
-    color: `${onLinkColor}`,
+    color: `${oceanBlue}`,
     textDecoration: 'none',
     '&:hover': {
-      color: `${onLinkColorHover}`,
+      color: `${skyBlue}`,
     },
     cursor: 'pointer',
   },

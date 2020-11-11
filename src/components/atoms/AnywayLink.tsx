@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link, LinkProps } from 'react-router-dom';
-import { onLinkColor } from '../../style';
-import { onLinkColorHover } from '../../style';
+import { oceanBlue } from '../../style';
+import { skyBlue } from '../../style';
 
 const useStyles = makeStyles({
   link: {
-    color: `${onLinkColor}`,
+    color: `${oceanBlue}`,
     textDecoration: 'none',
     '&:hover': {
-      color: `${onLinkColorHover}`,
+      color: `${skyBlue}`,
     },
   },
 });
@@ -19,7 +19,6 @@ interface IProps extends LinkProps {
 
 const AnyWayLink: FC<IProps> = ({ ...props }) => {
   const classes = useStyles();
-  return <Link className={classes.link} {...props} />
-
+  return <Link className={classes.link} {...props} />;
 };
 export default AnyWayLink;

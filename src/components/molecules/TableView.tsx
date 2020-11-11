@@ -3,7 +3,7 @@ import { makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
 import { Typography } from '../atoms';
 import { Table, TableBody, TableCell, TableHead, TableRow, Theme } from '@material-ui/core';
 import { IWidgetMostSevereAccidentsTableData } from '../../models/WidgetData';
-import { roadIconColors, tableHeadColor, tableCellBorderColor, tableBackgroundColorRow } from '../../style';
+import { roadIconColors, silverGray, blackColorTransparency, solidWhite } from '../../style';
 
 interface IProps {
   data: IWidgetMostSevereAccidentsTableData;
@@ -29,13 +29,13 @@ const StyledTableCell = withStyles((theme: Theme) =>
     },
     sizeSmall: {
       padding: '5px 0px',
-      border: `1px solid ${tableCellBorderColor}`,
+      border: `1px solid ${blackColorTransparency}`,
       '&:last-child': {
         padding: 0,
       },
     },
     head: {
-      backgroundColor: tableHeadColor,
+      backgroundColor: silverGray,
       color: theme.palette.common.black,
     },
   }),
@@ -43,7 +43,7 @@ const StyledTableCell = withStyles((theme: Theme) =>
 const StyledTableRow = withStyles(() =>
   createStyles({
     root: {
-      backgroundColor: tableBackgroundColorRow,
+      backgroundColor: solidWhite,
     },
   }),
 )(TableRow);

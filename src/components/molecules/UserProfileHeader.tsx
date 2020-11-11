@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { onLinkColor, onLinkColorHover } from '../../style';
+import { oceanBlue, skyBlue } from '../../style';
 import { Typography } from '../atoms';
 import React from 'react';
 import { authServerUrl } from '../../utils/utils';
@@ -8,10 +8,10 @@ const LINK = `${authServerUrl}/auth/logout`;
 
 const useStyles = makeStyles({
   link: {
-    color: `${onLinkColor}`,
+    color: `${oceanBlue}`,
     textDecoration: 'none',
     '&:hover': {
-      color: `${onLinkColorHover}`,
+      color: `${skyBlue}`,
     },
     cursor: 'pointer',
   },

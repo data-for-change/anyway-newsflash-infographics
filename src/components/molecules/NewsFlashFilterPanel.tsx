@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
 import { Box, makeStyles } from '@material-ui/core';
-import { borderColor, onLinkColor } from '../../style';
+import { cloud, oceanBlue } from '../../style';
 import ynetLogo from '../../assets/ynet-website-logo.svg';
 import wallaLogo from '../../assets/walla-logo.svg';
 import madaLogo from '../../assets/mada-logo.svg';
@@ -20,12 +20,12 @@ const useStyles = makeStyles({
     height: '50px',
     marginLeft: '10px',
     width: '50px',
-    border: `1px solid ${borderColor}`,
+    border: `1px solid ${cloud}`,
   },
 
   buttonClicked: {
-    border: `2px solid ${borderColor}`,
-    borderColor: onLinkColor,
+    border: `2px solid ${cloud}`,
+    borderColor: oceanBlue,
   },
 
   container: {
@@ -36,7 +36,7 @@ const useStyles = makeStyles({
     flexDirection: 'row',
     flexShrink: 0,
     justifyContent: 'space-evenly',
-    borderBottom: `1px solid ${borderColor}`,
+    borderBottom: `1px solid ${cloud}`,
   },
 });
 
