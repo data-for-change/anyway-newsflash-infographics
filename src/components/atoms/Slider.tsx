@@ -1,5 +1,5 @@
 import React from 'react';
-import Slider from '@material-ui/core/Slider';
+import MatSlider from '@material-ui/core/Slider';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -21,12 +21,12 @@ const marks = [
     label: 'x2',
   },
 ];
-const AnyWaySlider = ({ onChange }: any) => {
+const Slider = ({ onChange }: any) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Slider
+      <MatSlider
         defaultValue={1}
         onChange={onChange}
         aria-labelledby="discrete-slider"
@@ -39,4 +39,4 @@ const AnyWaySlider = ({ onChange }: any) => {
     </div>
   );
 };
-export default AnyWaySlider;
+export default Slider;

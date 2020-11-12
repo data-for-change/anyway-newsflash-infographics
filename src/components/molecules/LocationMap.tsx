@@ -3,7 +3,7 @@ import { Map } from 'react-leaflet';
 import L, { LatLng } from 'leaflet';
 import { uniquePoints } from '../../utils/utils';
 import { IPoint } from '../../models/Point';
-import AnywayMostSevereAccidentsMarker from '../atoms/AnywayMostSevereAccidentsMarker';
+import { MostSevereAccidentsMarker } from '../atoms';
 import { ClockPosition } from '../../utils/enum.utils';
 import GoogleMapsLayer from './map/GoogleMapsLayer';
 const INITIAL_ZOOM = parseInt(process.env.REACT_APP_DEFAULT_MAP_ZOOM!);
@@ -24,7 +24,7 @@ const LocationMap: FC<IProps> = ({ items, center }) => {
       const tooltipOffset = i % 2 === 0 ? ClockPosition.RIGHT : ClockPosition.LEFT;
       return (
         <div key={i}>
-          <AnywayMostSevereAccidentsMarker data={x} tooltipOffset={tooltipOffset} />
+          <MostSevereAccidentsMarker data={x} tooltipOffset={tooltipOffset} />
         </div>
       );
     }

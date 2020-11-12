@@ -128,7 +128,9 @@ examples:
 feat-113-add-newsflash-location-on-map
 fix-114-newsflash-location-not-accurate
 ```
-Pull Request (PR) title convention is as following 
+
+Pull Request (PR) title convention is as following
+
 ```
 [TYPE-ISSUE_ID]-DESCRIPTION
 
@@ -144,7 +146,6 @@ When `TYPE` can be:
 - **cicd** - changes related to CI/CD system
 - **fix** - a bug fix
 - **refactor** - code change that neither fixes a bug nor adds a feature
-
 
 **All PRs must include commit message with the changes description!** <a id="pr-naming"></a>
 
