@@ -43,7 +43,7 @@
   },
   "textView": {
     "inYear": "בשנה",
-    "betweenYears": "בין השנים",
+    "inYears": "בשנים",
     "on": "ב",
     "occurred": "התרחשו",
     "accidents": "תאונות",

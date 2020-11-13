@@ -72,23 +72,15 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
       <Box color={lighterWidgetText} textAlign="center">
         {items.end_year === items.start_year ? (
           <>
-            <Box mr={1}>
-              <Typography.Body1>{t('textView.inYear')}</Typography.Body1>
-            </Box>
-            <Box mr={1}>
-              <Typography.Body1>{items.end_year}</Typography.Body1>
-            </Box>{' '}
+            <Typography.Body1>{t('textView.inYear')} </Typography.Body1>
+            <Typography.Body1>{items.end_year}</Typography.Body1>
           </>
         ) : (
           <>
-            <Box mr={1}>
-              <Typography.Body1>{t('textView.betweenYears')}</Typography.Body1>
-            </Box>
-            <Box mr={1}>
-              <Typography.Body1>
-                {items.end_year} - {items.start_year}{' '}
-              </Typography.Body1>
-            </Box>{' '}
+            <Typography.Body1>{t('textView.inYears')} </Typography.Body1>
+            <Typography.Body1>
+              {items.start_year} - {items.end_year}
+            </Typography.Body1>
           </>
         )}
         <Box mr={1}>
