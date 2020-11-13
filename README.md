@@ -13,7 +13,7 @@
    1. [ 3nd party libraries](#2nd-party-libraries)
    1. [ Project directory structure ](#directory-structure)
    1. [ Contribution Guidelines ](#contribution-guidelines)
-      - [Branch naming](#branch-naming)
+      - [Branch and PR naming](#branch-naming)
       - [Pull request naming](#pr-naming)
       - [Opening issues](#issues)
 1. [ Server code ](#server-code)
@@ -127,6 +127,16 @@ TYPE-ISSUE_ID-DESCRIPTION
 examples:
 feat-113-add-newsflash-location-on-map
 fix-114-newsflash-location-not-accurate
+```
+
+Pull Request (PR) title convention is as following
+
+```
+[TYPE-ISSUE_ID]-DESCRIPTION
+
+example:
+[Feat-113] Add newsflash location on map
+[Fix-114] Newsflash location not accurate
 ```
 
 When `TYPE` can be:
