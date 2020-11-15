@@ -15,10 +15,10 @@ const DoubleBarChartView: FC<IProps> = ({ data, xLabel1, xLabel2, yLabel }) => {
       <BarChart data={data}>
         <XAxis dataKey={yLabel} tickLine={false} axisLine={false} />
         <Bar dataKey={xLabel1} fill={DoubleBarChartFillColorBar1}>
-          <LabelList dataKey={xLabel1} position="insideTop" />
+          <LabelList dataKey={xLabel1} position="top" />
         </Bar>
         <Bar dataKey={xLabel2} fill={DoubleBarChartFillColorBar2}>
-          <LabelList dataKey={xLabel2} position="insideTop" />
+          <LabelList dataKey={xLabel2} position="top" />
         </Bar>
       </BarChart>
     </ResponsiveContainer>
