@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link, LinkProps } from 'react-router-dom';
-import { oceanBlue } from '../../style';
-import { skyBlue } from '../../style';
+import { oceanBlue, skyBlue } from '../../style';
 
 const useStyles = makeStyles({
   link: {

@@ -1,8 +1,8 @@
 export const blackColor = '#000';
 export const whiteColor = '#ffffff';
-export const noColor = 'transparent';
+export const transparentColor = 'transparent';
 //blue base collection
-export const primaryBlueViolet = '#3f51b5';
+export const blueViolet = '#3f51b5';
 export const skyBlue = '#00aaff';
 export const oceanBlue = '#0088cc';
 //white-Gray base collection

@@ -5,7 +5,7 @@ import { Marker } from 'react-leaflet';
 import { makeStyles } from '@material-ui/core';
 import { dateFormat } from '../../utils/time.utils';
 import { ClockPosition } from '../../utils/enum.utils';
-import { noColor, whiteColor, blackColor, tooltipMarkerBorderColorArrow } from '../../style';
+import { transparentColor, whiteColor, blackColor, tooltipMarkerBorderColorArrow } from '../../style';
 
 const getLabelPosition = (offset: ClockPosition): string => {
   const x = getLabelXPosition(offset);
@@ -86,7 +86,7 @@ const useStyles = makeStyles({
   icon: {
     width: 0,
     height: 0,
-    backgroundColor: noColor,
+    backgroundColor: transparentColor,
   },
   root: {
     position: 'absolute',
