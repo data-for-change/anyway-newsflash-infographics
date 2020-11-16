@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { AnywayLink, Typography } from '../atoms';
 import { Box, makeStyles } from '@material-ui/core';
-import { cloud, americanSilver } from '../../style';
+import { silverSmokeColor } from '../../style';
 import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
 import { observer } from 'mobx-react-lite';
@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     overflow: 'auto',
   },
   activeNewsFlash: {
-    backgroundColor: americanSilver,
+    backgroundColor: silverSmokeColor,
   },
 });
 
@@ -30,7 +30,7 @@ const News: FC = () => {
               const date = news.date == null ? '' : new Date(news.date.replace(/-/g, '/')).toLocaleDateString();
               return (
                 <AnywayLink key={news.id} to={`${store.currentLanguageRouteString}/newsflash/${news.id}`}>
-                  <Box border={1} borderColor={cloud} p={1} className={className}>
+                  <Box border={1} borderColor={silverSmokeColor} p={1} className={className}>
                     <p>
                       <Typography.Body5>
                         {date}, {news.display_source}

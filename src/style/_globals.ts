@@ -2,25 +2,20 @@ export const blackColor = '#000';
 export const whiteColor = '#ffffff';
 export const transparentColor = 'transparent';
 //blue base collection
-export const blueViolet = '#3f51b5';
-export const skyBlue = '#00aaff';
-export const oceanBlue = '#0088cc';
+export const blueVioletColor = '#3f51b5';
+export const skyBlueColor = '#00aaff';
+export const oceanBlueColor = '#0088cc';
 //white-Gray base collection
-export const bambooCharcoal = '#464a47';
-export const cloud = '#D3D3D3';
-export const americanSilver = '#CECECE';
-export const shadow = '4c4c4c';
-export const mercury = '#e2e2e2f0';
-export const solidWhite = '#fafafa';
-export const pebble = '#555454';
-export const silverGray = '#A2A2A2';
-export const smokeWhite = '#f5f5f5';
-export const silverSpoon = '#647171';
-export const blackColorTransparency = '#0000001f';
+export const shadowColor = '#4c4c4c';
+export const smokeWhiteColor = '#f5f5f5';
+//silver-Gray base collection
+export const silverSmokeColor = '#D3D3D3';
+export const silverGrayColor = '#A2A2A2';
+export const silverSpoonColor = '#647171';
 //red base collection
-export const rose = '#c43a31';
-export const honey = '#F2BB0A';
-export const cherryJam = '#8a1212';
+export const roseColor = '#c43a31';
+export const cherryJamColor = '#8a1212';
+export const honeyColor = '#F2BB0A';
 
 export const defaultBorderRadius = 4;
 export const sidBarWidth = 300;

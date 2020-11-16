@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link, LinkProps } from 'react-router-dom';
-import { oceanBlue, skyBlue } from '../../style';
+import { oceanBlueColor, skyBlueColor } from '../../style';
 
 const useStyles = makeStyles({
   link: {
-    color: `${oceanBlue}`,
+    color: `${oceanBlueColor}`,
     textDecoration: 'none',
     '&:hover': {
-      color: `${skyBlue}`,
+      color: `${skyBlueColor}`,
     },
   },
 });

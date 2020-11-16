@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import { solidWhite } from '../../style';
+import { smokeWhiteColor } from '../../style';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       position: 'relative',
       flexGrow: 1,
-      backgroundColor: solidWhite,
+      backgroundColor: smokeWhiteColor,
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',

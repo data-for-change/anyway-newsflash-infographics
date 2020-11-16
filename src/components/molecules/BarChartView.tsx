@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { ResponsiveContainer, BarChart, LabelList, XAxis, Label, Bar } from 'recharts';
-import { rose } from '../../style';
+import { roseColor } from '../../style';
 import { fontFamilyString } from '../../style';
 
 interface IProps {
@@ -17,7 +17,7 @@ const BarChartView: FC<IProps> = ({ data, xLabel, yLabel, textLabel }) => {
         <XAxis dataKey="none" tickLine={false} axisLine={false}>
           <Label value={textLabel} offset={1} position="bottom" fontFamily={fontFamilyString} />
         </XAxis>
-        <Bar dataKey={yLabel} fill={rose}>
+        <Bar dataKey={yLabel} fill={roseColor}>
           <LabelList dataKey={xLabel} position={'insideBottom'} angle={-90} offset={20} />
           <LabelList dataKey={yLabel} position="top" />
         </Bar>
