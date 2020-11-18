@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link, LinkProps } from 'react-router-dom';
+import { Link as RouterLink, LinkProps } from 'react-router-dom';
 import { oceanBlueColor, skyBlueColor } from '../../style';
 
 const useStyles = makeStyles({
@@ -16,8 +16,8 @@ interface IProps extends LinkProps {
   to: string;
 }
 
-const AnyWayLink: FC<IProps> = ({ ...props }) => {
+const Link: FC<IProps> = ({ ...props }) => {
   const classes = useStyles();
-  return <Link className={classes.link} {...props} />;
+  return <RouterLink className={classes.link} {...props} />;
 };
-export default AnyWayLink;
+export default Link;

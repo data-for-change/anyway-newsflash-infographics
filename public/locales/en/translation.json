@@ -11,7 +11,7 @@
       "Miki Stanger",
       "Meital Lazarovich",
       "Atalya Alon",
-      "Eyal Levy",
+      "Eyal Levi",
       "Carmel Paradis",
       "Daniel Shely",
       "Dror Reshef",
@@ -41,7 +41,7 @@
   },
   "textView": {
     "inYear": "In the year",
-    "betweenYears": "Between the years",
+    "inYears": "In the years",
     "on": "on",
     "occurred": "occurred",
     "accidents": "accidents",

@@ -18,10 +18,10 @@ const useStyles = makeStyles({
     alignItems: 'center',
     color: `${oceanBlueColor}`,
     textDecoration: 'none',
+    justifyContent: 'flex-start',
     '&:hover': {
       color: `${skyBlueColor}`,
     },
-    justifyContent: 'flex-start',
   },
   link: {
     cursor: 'pointer',
@@ -34,6 +34,9 @@ const useStyles = makeStyles({
   linkItem: {
     borderLeft: `2px solid ${silverSmokeColor}`,
     cursor: 'pointer',
+    '&:hover': {
+      color: `${skyBlueColor}`,
+    },
   },
 });
 
