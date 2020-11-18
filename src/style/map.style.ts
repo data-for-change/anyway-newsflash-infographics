@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // created using https://mapstyle.withgoogle.com/
 export const MAP_STYLE = [
   {
@@ -33,15 +35,6 @@ export const MAP_STYLE = [
     ],
   },
   {
-    featureType: 'administrative',
-    elementType: 'geometry',
-    stylers: [
-      {
-        visibility: 'off',
-      },
-    ],
-  },
-  {
     featureType: 'administrative.land_parcel',
     elementType: 'labels.text.fill',
     stylers: [
@@ -51,10 +44,19 @@ export const MAP_STYLE = [
     ],
   },
   {
-    featureType: 'poi',
+    featureType: 'landscape',
     stylers: [
       {
-        visibility: 'off',
+        color: '#e1e1e1',
+      },
+    ],
+  },
+  {
+    featureType: 'landscape',
+    elementType: 'geometry',
+    stylers: [
+      {
+        color: '#e4e4e7',
       },
     ],
   },
@@ -73,6 +75,14 @@ export const MAP_STYLE = [
     stylers: [
       {
         color: '#757575',
+      },
+    ],
+  },
+  {
+    featureType: 'poi.business',
+    stylers: [
+      {
+        visibility: 'off',
       },
     ],
   },
@@ -108,7 +118,19 @@ export const MAP_STYLE = [
     elementType: 'labels.icon',
     stylers: [
       {
-        visibility: 'off',
+        visibility: 'on',
+      },
+      {
+        weight: 0.5,
+      },
+    ],
+  },
+  {
+    featureType: 'road.arterial',
+    elementType: 'geometry',
+    stylers: [
+      {
+        color: '#d7d7d7',
       },
     ],
   },
@@ -126,7 +148,7 @@ export const MAP_STYLE = [
     elementType: 'geometry',
     stylers: [
       {
-        color: '#dadada',
+        color: '#c4c4c4',
       },
     ],
   },
@@ -179,7 +201,7 @@ export const MAP_STYLE = [
     elementType: 'geometry',
     stylers: [
       {
-        color: '#c9c9c9',
+        color: '#beddf9',
       },
     ],
   },
