@@ -11,15 +11,15 @@ import { Box } from '@material-ui/core';
 import WidgetWrapper from '../molecules/widgets/WidgetWrapper';
 
 interface IProps {
-  id: number | null;
+  id?: number | string;
 }
 
 const WidgetsTemplate: FC<IProps> = ({ id }) => {
   const store: RootStore = useStore();
 
   useEffect(() => {
-    if (id) {
-      store.selectNewsFlash(id);
+    if (id && typeof id === 'number') {
+      store.selectNewsFlash(id as number);
     }
   }, [id, store]);
 
