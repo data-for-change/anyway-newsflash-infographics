@@ -4,8 +4,6 @@ import { INewsFlash } from '../models/NewFlash';
 import { demoNewsFlash } from './mocks/newsFlash.mock.data';
 import { showDemoCards } from '../utils/utils';
 
-const demo = demoNewsFlash;
-const showDemo = showDemoCards;
 const demoNewsflashIndex = 2;
 
 const errorNews: INewsFlash = {
@@ -50,8 +48,8 @@ export function fetchNews(source = '', count = 5): Promise<any> {
 }
 
 function addDemoNewsflash(data: Array<any>) {
-  if (showDemo) {
-    data.splice(demoNewsflashIndex, 1, demo);
+  if (showDemoCards) {
+    data.splice(demoNewsflashIndex, 1, demoNewsFlash);
   }
   return data;
 }
