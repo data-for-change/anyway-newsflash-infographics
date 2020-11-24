@@ -15,6 +15,10 @@ interface IProps {
 }
 interface AProps {
   accidentsCount: Number;
+  singleType: string | undefined;
+}
+interface SProps {
+  severity: string;
 }
 
 const red = roadIconColors.red;
@@ -37,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const AccidentsOccurred: FC<AProps> = ({ accidentsCount }) => {
+const AccidentsOccurred: FC<AProps> = ({ accidentsCount, singleType }) => {
   const { t, i18n } = useTranslation();
   const elements = [
     <Box mr={1} key={1}>
@@ -49,13 +53,33 @@ const AccidentsOccurred: FC<AProps> = ({ accidentsCount }) => {
     <Box mr={1} key={3}>
       <Typography.Body1>{t('textView.accidents')}</Typography.Body1>
     </Box>,
+    singleType && (
+      <Box mr={1} key={4}>
+        <Typography.Body1>
+          {accidentsCount > 1 ? t(`textView.${singleType}.plural`) : t(`textView.${singleType}.plural`)}{' '}
+        </Typography.Body1>
+      </Box>
+    ),
   ];
   // When the locale is English the last element needs to be first - x accidents occurred instead of occurred x accidents
-  const [a, b, c] = elements;
-  const elementsEnglish = [b, c, a];
+  const [a, b, c, d] = elements;
+  const elementsEnglish = [b, d, c, a];
   return (
     <Box display="flex" justifyContent="center">
       {i18n.language === 'he' ? elements : elementsEnglish}
+    </Box>
+  );
+};
+
+const SeverityImage: FC<SProps> = ({ severity }) => {
+  const classes = useStyles();
+  interface SeverityTypesImages {
+    [index: string]: string;
+  }
+  const imgBySeverity: SeverityTypesImages = { fatal: Person, severe: Ambulance, light: Crutches };
+  return (
+    <Box flex={1} display="flex" justifyContent="center">
+      <img src={imgBySeverity[severity]} className={classes.image} alt={imgBySeverity[severity]} />
     </Box>
   );
 };
@@ -64,9 +88,28 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
   const classes = useStyles();
   const { t } = useTranslation();
   const { items } = data;
+  const { severity_fatal_count, severity_light_count, severity_severe_count } = items;
+  const accidentTypesArr = [severity_fatal_count, severity_light_count, severity_severe_count];
+
   //checking availability of two or more types
-  const isSummaryText =
-    [items.severity_fatal_count, items.severity_light_count, items.severity_severe_count].filter(Boolean).length >= 2;
+  const isSummaryBreakdown = accidentTypesArr.filter(Boolean).length >= 2;
+  // e.g. if there are only accidents types of severity_fatal_count will return the strinf "fatal"
+  const findSingleType = () => {
+    if (!isSummaryBreakdown) {
+      for (const [key, value] of Object.entries(items)) {
+        if (key.split('_')[0] === 'severity') {
+          if (!value) {
+            return;
+          } else {
+            return key.split('_')[1];
+          }
+        }
+      }
+    }
+  };
+
+  const singleType = findSingleType();
+
   return (
     <div className={classes.root}>
       <Box color={lighterWidgetText} textAlign="center">
@@ -86,23 +129,21 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
         <Box mr={1}>
           <Typography.Body1>{t('textView.on') + segmentText}</Typography.Body1>
         </Box>
-        <AccidentsOccurred accidentsCount={items.total_accidents_count} />
+        <AccidentsOccurred singleType={singleType} accidentsCount={items.total_accidents_count} />
       </Box>
       <Box color="text.secondary" px={6}>
-        {isSummaryText ? (
+        {isSummaryBreakdown ? (
           <>
-            {items.severity_fatal_count ? (
+            {severity_fatal_count ? (
               <Box display="flex" py={1} className={classes.border}>
-                <Box flex={1} display="flex" justifyContent="center">
-                  <img src={Person} className={classes.image} alt="red person" />
-                </Box>
+                <SeverityImage severity="fatal" />
                 <Box flex={1} display="flex" justifyContent="center">
                   <Box display="flex" flexDirection="column" alignItems="center">
                     <Box color={red}>
-                      <Typography.Title1>{items.severity_fatal_count}</Typography.Title1>
+                      <Typography.Title1>{severity_fatal_count}</Typography.Title1>
                     </Box>
                     <span>
-                      {items.severity_fatal_count > 1 ? (
+                      {severity_fatal_count > 1 ? (
                         <Typography.Title1>{t('textView.fatal.plural')}</Typography.Title1>
                       ) : (
                         <Typography.Title1>{t('textView.fatal.singular')}</Typography.Title1>
@@ -112,17 +153,15 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
                 </Box>
               </Box>
             ) : null}
-            {items.severity_severe_count ? (
+            {severity_severe_count ? (
               <Box display="flex" py={1} className={classes.border}>
-                <Box flex={1} display="flex" justifyContent="center">
-                  <img src={Ambulance} className={classes.image} alt="ambulance" />
-                </Box>
+                <SeverityImage severity="severe" />
                 <Box flex={1} display="flex" justifyContent="center">
                   <Box display="flex" flexDirection="column" alignItems="center">
                     <Box color={red}>
-                      <Typography.Title1>{items.severity_severe_count}</Typography.Title1>
+                      <Typography.Title1>{severity_severe_count}</Typography.Title1>
                     </Box>
-                    {items.severity_severe_count > 1 ? (
+                    {severity_severe_count > 1 ? (
                       <Typography.Title1>{t('textView.severe.plural')}</Typography.Title1>
                     ) : (
                       <Typography.Title1>{t('textView.severe.singular')}</Typography.Title1>
@@ -131,17 +170,15 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
                 </Box>
               </Box>
             ) : null}
-            {items.severity_light_count ? (
+            {severity_light_count ? (
               <Box display="flex" py={1}>
-                <Box flex={1} display="flex" justifyContent="center">
-                  <img src={Crutches} className={classes.image} alt="crutches" />
-                </Box>
+                <SeverityImage severity="light" />
                 <Box flex={1} display="flex" justifyContent="center">
                   <Box display="flex" flexDirection="column" alignItems="center">
                     <Box color={red}>
-                      <Typography.Title1>{items.severity_light_count}</Typography.Title1>
+                      <Typography.Title1>{severity_light_count}</Typography.Title1>
                     </Box>
-                    {items.severity_light_count > 1 ? (
+                    {severity_light_count > 1 ? (
                       <Typography.Title1>{t('textView.light.plural')}</Typography.Title1>
                     ) : (
                       <Typography.Title1>{t('textView.light.singular')}</Typography.Title1>
@@ -151,7 +188,9 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
               </Box>
             ) : null}
           </>
-        ) : null}
+        ) : (
+          singleType && <SeverityImage severity={singleType} />
+        )}
       </Box>
     </div>
   );
