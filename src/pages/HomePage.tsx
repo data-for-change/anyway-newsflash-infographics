@@ -10,6 +10,7 @@ import OverlayLoader from '../components/molecules/OverlayLoader';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../store/storeConfig';
 import RootStore from '../store/root.store';
+import { handleNewsflashId } from '../utils/utils';
 
 interface IProps {}
 
@@ -32,8 +33,7 @@ const useStyles = makeStyles({
 const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
   const classes = useStyles();
   const store: RootStore = useStore();
-
-  const id = match.params.id ? parseInt(match.params.id) : null;
+  const id: number | string | undefined = handleNewsflashId(match.params.id);
   const loading = store.widgetBoxLoading;
   useEffect(() => {
     if (match.params.lng) {

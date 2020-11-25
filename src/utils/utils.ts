@@ -31,3 +31,13 @@ export const authServerUrl =
 
 //function return api key depends on the env it running on
 export const mapApiKey = process.env.REACT_APP_GOOGLE_MAP_KEY ? process.env.REACT_APP_GOOGLE_MAP_KEY : '';
+
+export const showDemoCards = process.env.REACT_APP_SHOW_DEMO_CARDS === 'true';
+
+export function handleNewsflashId(id?: string) {
+  let newsFlashId: string | number | undefined = id;
+  if (id) {
+    newsFlashId = id !== 'demo' ? parseInt(id) : 'demo';
+  }
+  return newsFlashId;
+}

@@ -1,6 +1,10 @@
+import axios from 'axios';
 import { INewsFlash } from '../models/NewFlash';
 // import {mockHTTPCall, newsFlashCollectionData} from './mocks/mock.service';
-import axios from 'axios';
+import { demoNewsFlash } from './mocks/newsFlash.mock.data';
+import { showDemoCards } from '../utils/utils';
+
+const demoNewsflashIndex = 2;
 
 const errorNews: INewsFlash = {
   lat: -1,
@@ -39,8 +43,15 @@ export function fetchNews(source = '', count = 5): Promise<any> {
   // return mockHTTPCall<Array<INewsFlash | any>>(newsFlashCollectionData);
   return axios
     .get(url)
-    .then((res) => res.data)
+    .then((res) => addDemoNewsflash(res.data))
     .catch(onErrorFetchNewsFlash);
+}
+
+function addDemoNewsflash(data: Array<any>) {
+  if (showDemoCards) {
+    data.splice(demoNewsflashIndex, 1, demoNewsFlash);
+  }
+  return data;
 }
 
 function onErrorFetchNewsFlash() {

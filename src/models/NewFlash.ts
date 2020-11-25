@@ -1,7 +1,7 @@
 // dummy - replace with real model interface
 export interface INewsFlash {
   [index: string]: any;
-  id: number;
+  id: number | string;
   accident: boolean;
   author: string;
   date: string | null;
