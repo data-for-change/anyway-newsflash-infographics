@@ -9,6 +9,7 @@ import { useLocation } from 'react-router';
 import queryString from 'query-string';
 import { Typography, Button } from '../atoms';
 import { useTranslation } from 'react-i18next';
+import { DEMO_ID } from '../../utils/utils';
 
 interface IProps {}
 
@@ -54,7 +55,9 @@ const FilterBar: FC<IProps> = () => {
             <Grid item>
               <Grid item container spacing={2}>
                 <Grid item className={classes.locationMeta}>
-                  <Typography.Body2>{store.newsFlashWidgetsMetaString}</Typography.Body2>
+                  <Typography.Body2>
+                    {store.activeNewsFlashId !== DEMO_ID && store.newsFlashWidgetsMetaString}
+                  </Typography.Body2>
                 </Grid>
                 <Grid item className={classes.showDescriptionButton}>
                   <Button.Standard size="small" onClick={() => setIsDescOpen(!isDescOpen)}>

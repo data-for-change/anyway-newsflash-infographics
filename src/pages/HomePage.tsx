@@ -56,7 +56,7 @@ const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
 
   return (
     <Box display="flex" flexGrow={1} className={classes.mainBox}>
-      <Box flexGrow={1} maxWidth={319} display="flex" borderLeft={1} borderColor={borderColor}>
+      <Box flexGrow={1} width={319} display="flex" borderLeft={1} borderColor={borderColor}>
         <SideBar />
       </Box>
       <Box flexGrow={5} className={classes.widgetBox} position="relative">
