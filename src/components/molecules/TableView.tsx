@@ -81,7 +81,7 @@ const TableView: FC<IProps> = ({ data }) => {
               <Typography.Body6>הרוגים</Typography.Body6>
             </StyledTableCell>
             <StyledTableCell align="right">
-              <Typography.Body6>פצועים קשה</Typography.Body6>
+              <Typography.Body6>פצועים</Typography.Body6>
             </StyledTableCell>
           </StyledTableRow>
         </TableHead>
