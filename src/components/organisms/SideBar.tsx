@@ -3,7 +3,7 @@ import { Box, makeStyles } from '@material-ui/core';
 import News from './News';
 import { NewsFlashFilterPanel } from '../molecules/NewsFlashFilterPanel';
 import OverlayLoader from '../molecules/OverlayLoader';
-import { borderColor } from '../../style';
+import { silverSmokeColor } from '../../style';
 import { Typography, ErrorBoundary } from '../atoms';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store/storeConfig';
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     flexGrow: 1,
     border: 1,
-    borderColor: borderColor,
+    borderColor: silverSmokeColor,
   },
 });
 
@@ -50,7 +50,7 @@ const SideBar: FC<IProps> = () => {
           <News />
         </InfinitScroll>
       </Box>
-      <Box borderTop={`1px solid ${borderColor}`} flexShrink={0} flexGrow={0} p={1}>
+      <Box borderTop={`1px solid ${silverSmokeColor}`} flexShrink={0} flexGrow={0} p={1}>
         <Typography.Body4 children={mapTitle} />
       </Box>
       <Box flexBasis={200} flexShrink={0} px={1} pb={1}>
