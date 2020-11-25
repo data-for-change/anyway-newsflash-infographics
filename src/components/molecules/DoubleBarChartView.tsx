@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { ResponsiveContainer, BarChart, LabelList, XAxis, Bar } from 'recharts';
-import { DoubleBarChartFillColorBar1, DoubleBarChartFillColorBar2 } from '../../style';
+import { roseColor, honeyColor } from '../../style';
 
 interface IProps {
   data: Array<object>;
@@ -14,10 +14,10 @@ const DoubleBarChartView: FC<IProps> = ({ data, xLabel1, xLabel2, yLabel }) => {
     <ResponsiveContainer>
       <BarChart data={data}>
         <XAxis dataKey={yLabel} tickLine={false} axisLine={false} />
-        <Bar dataKey={xLabel1} fill={DoubleBarChartFillColorBar1}>
+        <Bar dataKey={xLabel1} fill={roseColor}>
           <LabelList dataKey={xLabel1} position="top" />
         </Bar>
-        <Bar dataKey={xLabel2} fill={DoubleBarChartFillColorBar2}>
+        <Bar dataKey={xLabel2} fill={honeyColor}>
           <LabelList dataKey={xLabel2} position="top" />
         </Bar>
       </BarChart>
