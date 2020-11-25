@@ -1,15 +1,14 @@
 import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link as RouterLink, LinkProps } from 'react-router-dom';
-import { onLinkColor } from '../../style';
-import { onLinkColorHover } from '../../style';
+import { oceanBlueColor, skyBlueColor } from '../../style';
 
 const useStyles = makeStyles({
   link: {
-    color: `${onLinkColor}`,
+    color: `${oceanBlueColor}`,
     textDecoration: 'none',
     '&:hover': {
-      color: `${onLinkColorHover}`,
+      color: `${skyBlueColor}`,
     },
   },
 });
