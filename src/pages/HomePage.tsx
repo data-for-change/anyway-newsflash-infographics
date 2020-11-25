@@ -11,6 +11,7 @@ import { observer } from 'mobx-react-lite';
 import { useStore } from '../store/storeConfig';
 import RootStore from '../store/root.store';
 import { handleNewsflashId } from '../utils/utils';
+import DemoPage from "./DemoPage";
 
 interface IProps {}
 
@@ -55,7 +56,7 @@ const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
       <Box flexGrow={5} className={classes.widgetBox} position="relative">
         <OverlayLoader show={loading} />
         <FilterBar />
-        <WidgetsTemplate id={id} />
+        { id !== 'demo' ? <WidgetsTemplate id={id} /> : <DemoPage/>}
       </Box>
     </Box>
   );

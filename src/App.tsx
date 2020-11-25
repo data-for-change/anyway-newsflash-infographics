@@ -8,7 +8,6 @@ import Header from './components/molecules/Header';
 import 'leaflet/dist/leaflet.css';
 import PopUpRedirect from './services/PopUpRedirect';
 import HomePageRedirect from './pages/HomePageRedirect';
-import DemoPage from './pages/DemoPage';
 import { useTranslation } from 'react-i18next';
 
 // main components height - must add up to 100
@@ -43,7 +42,6 @@ const App: React.FC = () => {
             </Box>
             <Box height={pageContentHeight} className={classes.pageContent}>
               <Switch>
-                <Route path="/:lng?/newsflash/demo" component={DemoPage} />
                 <Route exact path="/" component={HomePageRedirect} />
                 <Route path="/:lng?/newsflash/:id" component={HomePage} />
                 <Route path="/popup-redirect" component={PopUpRedirect}></Route>
