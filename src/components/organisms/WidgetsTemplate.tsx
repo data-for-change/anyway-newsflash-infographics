@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
 import { observer } from 'mobx-react-lite';
@@ -10,11 +10,7 @@ import { Typography } from '../atoms';
 import { Box } from '@material-ui/core';
 import WidgetWrapper from '../molecules/widgets/WidgetWrapper';
 
-interface IProps {
-  id?: number | string;
-}
-
-const WidgetsTemplate: FC<IProps> = ({ id }) => {
+const WidgetsTemplate: FC = () => {
   const store: RootStore = useStore();
 
   const widgetsData = store.newsFlashWidgetsData;

@@ -10,7 +10,7 @@ import OverlayLoader from '../components/molecules/OverlayLoader';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../store/storeConfig';
 import RootStore from '../store/root.store';
-import {DEMO_ID, handleNewsflashId} from '../utils/utils';
+import { DEMO_ID, handleNewsflashId } from '../utils/utils';
 
 interface IProps {}
 
@@ -60,7 +60,7 @@ const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
       <Box flexGrow={5} className={classes.widgetBox} position="relative">
         <OverlayLoader show={loading} />
         <FilterBar />
-        { id !== DEMO_ID  && <WidgetsTemplate id={id} />}
+        {id !== DEMO_ID && <WidgetsTemplate />}
       </Box>
     </Box>
   );
