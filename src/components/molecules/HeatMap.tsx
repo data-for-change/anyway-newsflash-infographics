@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Map } from 'react-leaflet';
 // @ts-ignore
 import HeatmapLayer from 'react-leaflet-heatmap-layer';
@@ -24,10 +24,19 @@ const DEFAULT_BOUNDS = [
 interface IProps {
   data: IPoint[];
   center?: { lat: number; lng: number };
+  layoutOptions?: any;
 }
 
-const HeatMap: FC<IProps> = ({ data, center }) => {
+const HeatMap: FC<IProps> = ({ data, center, layoutOptions }) => {
   const classes = useStyles();
+
+  const mapRef = React.createRef<any>();
+  useEffect(() => {
+    const map = mapRef.current.leafletElement;
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 100);
+  }, [layoutOptions, mapRef]);
 
   const isDataValid = data && uniquePoints(data).length > 1;
   if (!isDataValid) {
@@ -36,7 +45,7 @@ const HeatMap: FC<IProps> = ({ data, center }) => {
   const bounds = getBounds(data);
 
   return (
-    <Map center={center} bounds={bounds} zoom={INITIAL_ZOOM} className={classes.wrapper}>
+    <Map center={center} bounds={bounds} zoom={INITIAL_ZOOM} className={classes.wrapper} ref={mapRef}>
       <HeatmapLayer
         fitBoundsOnLoad
         fitBoundsOnUpdate

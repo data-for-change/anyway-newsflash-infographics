@@ -23,10 +23,6 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
   const widget = store.getWidgetsDataByName(widgetName);
   const roadNumber = store.newsFlashWidgetsMetaNumber;
 
-  const widgetComponent = !widget ? null : (
-    <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaString} />
-  );
-
   // const widgetRef = useRef<HTMLDivElement>(null);
   const getCardRef = (element: HTMLElement) => setCardElement(element);
   const imgDownloadHandler = () => {
@@ -45,6 +41,9 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
     landscape,
     size,
   };
+  const widgetComponent = !widget ? null : (
+    <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaString} options={options} />
+  );
 
   return (
     <DialogWithHeader fullWidth={true} isShowing={isOpen} onClose={onClose} title={t('cardEditor.title')}>
