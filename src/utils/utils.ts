@@ -33,11 +33,12 @@ export const authServerUrl =
 export const mapApiKey = process.env.REACT_APP_GOOGLE_MAP_KEY ? process.env.REACT_APP_GOOGLE_MAP_KEY : '';
 
 export const showDemoCards = process.env.REACT_APP_SHOW_DEMO_CARDS === 'true';
-
+// demo id as it wil be appeared in url route
+export const DEMO_ID = 'demo';
 export function handleNewsflashId(id?: string) {
   let newsFlashId: string | number | undefined = id;
   if (id) {
-    newsFlashId = id !== 'demo' ? parseInt(id) : 'demo';
+    newsFlashId = id !== DEMO_ID ? parseInt(id) : DEMO_ID;
   }
   return newsFlashId;
 }
