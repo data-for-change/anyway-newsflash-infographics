@@ -10,6 +10,7 @@ import SettingsStore from './settings.store';
 import { IPoint } from '../models/Point';
 import { fetchUserLoginStatus } from '../services/user.service';
 import i18next from '../services/i18n.service';
+import {DEMO_ID} from "../utils/utils";
 
 // todo: move all map defaults to one place
 const DEFAULT_TIME_FILTER = 5;
@@ -29,7 +30,7 @@ export default class RootStore {
   @observable newsFlashCollection: Array<INewsFlash> = [];
   @observable isUserAuthenticated: boolean = false;
   @observable userName: string = '';
-  @observable activeNewsFlashId: number = 0; // active newsflash id
+  @observable activeNewsFlashId: number | string = 0; // active newsflash id
   @observable newsFlashFetchLimit: number = 0;
   @observable newsFlashWidgetsMeta: ILocationMeta = DEFAULT_LOCATION_META;
   @observable newsFlashWidgetsData: Array<IWidgetBase> = [];
@@ -74,11 +75,13 @@ export default class RootStore {
   @computed
   get activeNewsFlashLocation() {
     let location: IPoint = DEFAULT_LOCATION; // default location
-    if (this.activeNewsFlash) {
+    if (this.activeNewsFlash && this.activeNewsFlash.id !== DEMO_ID) {
       location = {
         latitude: this.activeNewsFlash.lat,
         longitude: this.activeNewsFlash.lon,
       };
+    } else {
+      location = DEFAULT_LOCATION;
     }
     return location;
   }
@@ -126,16 +129,18 @@ export default class RootStore {
   }
 
   @action
-  selectNewsFlash(id: number): void {
+  selectNewsFlash(id: number | string): void {
     this.activeNewsFlashId = id;
-    this.fetchSelectedNewsFlashWidgets(id, this.newsFlashWidgetsTimerFilter);
+    if ( id !== DEMO_ID) {
+      this.fetchSelectedNewsFlashWidgets(id as number , this.newsFlashWidgetsTimerFilter);
+    }
   }
 
   @action
   changeTimeFilter(filterValue: number): void {
     if (this.newsFlashWidgetsTimerFilter !== filterValue) {
       this.newsFlashWidgetsTimerFilter = filterValue;
-      this.fetchSelectedNewsFlashWidgets(this.activeNewsFlashId, filterValue);
+      this.fetchSelectedNewsFlashWidgets(this.activeNewsFlashId as number, filterValue);
     }
   }
   @action

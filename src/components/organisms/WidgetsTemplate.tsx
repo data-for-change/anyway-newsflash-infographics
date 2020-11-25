@@ -17,12 +17,6 @@ interface IProps {
 const WidgetsTemplate: FC<IProps> = ({ id }) => {
   const store: RootStore = useStore();
 
-  useEffect(() => {
-    if (id && typeof id === 'number') {
-      store.selectNewsFlash(id as number);
-    }
-  }, [id, store]);
-
   const widgetsData = store.newsFlashWidgetsData;
   const widgetCards = widgetsData.map((widget, index) => {
     const widgetComponent = <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaString} />;
