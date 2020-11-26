@@ -35,7 +35,7 @@ const HeatMap: FC<IProps> = ({ data, center, layoutOptions }) => {
     const map = mapRef.current.leafletElement;
     setTimeout(() => {
       map.invalidateSize();
-    }, 100);
+    });
   }, [layoutOptions, mapRef]);
 
   const isDataValid = data && uniquePoints(data).length > 1;

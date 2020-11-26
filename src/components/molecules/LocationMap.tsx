@@ -37,7 +37,7 @@ const LocationMap: FC<IProps> = ({ items, center, layoutOptions }) => {
     const map = mapRef.current.leafletElement;
     setTimeout(() => {
       map.invalidateSize();
-    }, 100);
+    });
   }, [layoutOptions, mapRef]);
 
   return (
