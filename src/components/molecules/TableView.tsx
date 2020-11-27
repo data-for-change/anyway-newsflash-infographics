@@ -6,7 +6,7 @@ import { IWidgetMostSevereAccidentsTableData, IWidgetRainAccidentsBySeverityTabl
 import { tableHeadColor, tableBackgroundColorMain, tableBackgroundColorOdd } from '../../style';
 
 interface IProps {
-  data: IWidgetMostSevereAccidentsTableData | IWidgetRainAccidentsBySeverityTable;
+  data: IWidgetMostSevereAccidentsTableData;
 }
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

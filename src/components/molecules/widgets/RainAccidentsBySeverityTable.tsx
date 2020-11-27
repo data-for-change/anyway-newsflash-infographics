@@ -49,6 +49,7 @@ const dataMck = {
   },
 };
 const RainAccidentsBySeverityTable: FC<IProps> = ({ data }) => {
-  return <TableView data={dataMck} />;
+  // return <TableView data={dataMck} />;
+  return null;
 };
 export default RainAccidentsBySeverityTable;
