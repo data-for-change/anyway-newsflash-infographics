@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core';
-import { ClockPosition } from '../../utils/enum.utils';
+import { ClockPosition } from '../../models/ClockPosition';
 import { blackColor } from '../../style';
 
 interface IProps {
