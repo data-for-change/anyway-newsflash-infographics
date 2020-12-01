@@ -19,6 +19,8 @@ export interface CardVariant {
 }
 
 // === widgets variants === //
+// determine the footer and  header style for each card
+// See `HeaderVariant` and `FooterVariant` enums
 const widgetVariants: { [index: string]: CardVariant } = {
   defaultVariant: { header: HeaderVariant.None, footer: FooterVariant.Logo },
   [WidgetName.accidents_count_by_hour]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
