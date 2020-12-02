@@ -1,4 +1,3 @@
-import { showDemoCards } from '../../utils/utils';
 import newsFlashCollectionData from './newsFlash.mock.data';
 import defaultWidgetsCollectionData from './widgetsData.mock.data';
 import demoCardsNewsFlash from './demoCardsNewsflash.mock.data';
