@@ -79,6 +79,8 @@ export default class RootStore {
         latitude: this.activeNewsFlash.lat,
         longitude: this.activeNewsFlash.lon,
       };
+    } else {
+      location = DEFAULT_LOCATION;
     }
     return location;
   }

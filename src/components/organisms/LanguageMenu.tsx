@@ -3,8 +3,7 @@ import Menu from '../atoms/Menu';
 import { useStore } from '../../store/storeConfig';
 import languageSelector from '../../assets/language-selector.svg';
 import { AnyWayButton } from '../atoms/AnyWayButton';
-import { AnywayLink } from '../atoms';
-import { Typography } from '../atoms';
+import { Link, Typography } from '../atoms';
 
 const LANGUAGES = [
   {
@@ -38,7 +37,7 @@ const LanguageMenu: FC = () => {
       </AnyWayButton>
       <Menu
         items={LANGUAGES.map((language) => (
-          <AnywayLink
+          <Link
             to={
               language.value === 'he'
                 ? `/newsflash/${store.activeNewsFlashId}`
@@ -46,7 +45,7 @@ const LanguageMenu: FC = () => {
             }
           >
             <Typography.Body5>{language.buttonText}</Typography.Body5>
-          </AnywayLink>
+          </Link>
         ))}
         handleClose={closeMenu}
         anchorEl={anchorEl}

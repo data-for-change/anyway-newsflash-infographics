@@ -3,14 +3,11 @@ import { makeStyles } from '@material-ui/core';
 import L from 'leaflet';
 import { Marker, Popup } from 'react-leaflet';
 
-import MapIcon from '../atoms/AnywayMapIcon';
-import TooltipMarker from './TooltipMarker';
-import { AnyWayButton } from '../atoms/AnyWayButton';
-import { Typography } from '../atoms';
-import TooltipArrow from './TooltipArrow';
-import { ClockPosition } from '../../utils/enum.utils';
+import { AnyWayButton } from './AnyWayButton';
+import { Typography, MapIcon, TooltipMarker, TooltipArrow } from '.';
+import { ClockPosition } from '../../models/ClockPosition';
 import { useTranslation } from 'react-i18next';
-import { defaultBorderRadius, lightBackgroundColor } from '../../style';
+import { defaultBorderRadius, silverSmokeColor } from '../../style';
 interface IProps {
   data: any;
   tooltipOffset: ClockPosition;
@@ -20,14 +17,14 @@ const useStyles = makeStyles({
   root: {
     '& .leaflet-popup-content-wrapper': {
       borderRadius: defaultBorderRadius,
-      backgroundColor: lightBackgroundColor,
+      backgroundColor: silverSmokeColor,
     },
     '& .leaflet-popup-content': {
       width: 130,
       margin: '14px 0 0 0',
     },
     '& .leaflet-popup-tip': {
-      backgroundColor: lightBackgroundColor,
+      backgroundColor: silverSmokeColor,
     },
   },
   button: {
@@ -50,7 +47,7 @@ const useStyles = makeStyles({
     margin: '0 10px',
   },
 });
-const AnywayMostSevereAccidentsMarker: FC<IProps> = ({ data, tooltipOffset = ClockPosition.LEFT }) => {
+const MostSevereAccidentsMarker: FC<IProps> = ({ data, tooltipOffset = ClockPosition.LEFT }) => {
   const classes = useStyles();
   const { t } = useTranslation();
   const [offset, setOffset] = useState(tooltipOffset);
@@ -106,4 +103,4 @@ const AnywayMostSevereAccidentsMarker: FC<IProps> = ({ data, tooltipOffset = Clo
   );
 };
 
-export default AnywayMostSevereAccidentsMarker;
+export default MostSevereAccidentsMarker;

@@ -12,12 +12,13 @@ import { IconTypes, SeverityTypes } from '../../models/Map';
 const STANDARD_ICON_SIZE = { iconSize: [25, 41], iconAnchor: [0, 0], popupAnchor: [1, -34], shadowSize: [41, 41] };
 const CAR_ICON_SIZE = { iconSize: [25, 25], iconAnchor: [10, 15], popupAnchor: [0, -4], shadowSize: [41, 41] };
 
-const createLeafletIcon = ( image: string, iconSize: any, shadow?: string ) => {
+const createLeafletIcon = (image: string, iconSize: any, shadow?: string) => {
   const icon = new L.Icon({
     iconUrl: image,
     shadowUrl: shadow,
     iconSize: L.point(iconSize.iconSize[0], iconSize.iconSize[1]),
-    iconAnchor: L.point(iconSize.iconAnchor[0], iconSize.iconAnchor[1]),
+    // point of the icon which will correspond to marker's location
+    iconAnchor: [17, 46],
     popupAnchor: L.point(iconSize.popupAnchor[0], iconSize.popupAnchor[1]),
     shadowSize: L.point(iconSize.shadowSize[0], iconSize.shadowSize[1]),
   });
@@ -36,14 +37,17 @@ const MapIcon = {
     red: createLeafletIcon(carRedIcon, CAR_ICON_SIZE),
   },
   getIconBySeverity: (type: IconTypes, severity: SeverityTypes) => {
-    const light = 'קלה'
-    const severe = 'קשה'
-    switch(severity) {
-      case light: return MapIcon[type].yellow;
-      case severe: return MapIcon[type].orange;
-      default: return MapIcon[type].red;
+    const light = 'קלה';
+    const severe = 'קשה';
+    switch (severity) {
+      case light:
+        return MapIcon[type].yellow;
+      case severe:
+        return MapIcon[type].orange;
+      default:
+        return MapIcon[type].red;
     }
-  }
+  },
 };
 
-export default MapIcon
+export default MapIcon;

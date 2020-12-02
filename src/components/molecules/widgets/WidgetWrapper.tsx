@@ -55,7 +55,9 @@ const WidgetWrapper: FC<IProps> = ({ widget, segmentText, options = {} }) => {
       break;
     }
     case WidgetName.most_severe_accidents: {
-      widgetComponent = <MostSevereAccidentsMapWidget data={data as IWidgetMostSevereAccidentsData} />;
+      widgetComponent = (
+        <MostSevereAccidentsMapWidget data={data as IWidgetMostSevereAccidentsData} layoutOptions={options} />
+      );
       break;
     }
     case WidgetName.most_severe_accidents_table: {
@@ -63,7 +65,9 @@ const WidgetWrapper: FC<IProps> = ({ widget, segmentText, options = {} }) => {
       break;
     }
     case WidgetName.accidents_heat_map: {
-      widgetComponent = <HeatMap data={data.items as IPoint[]} center={{ lat: 32.0853, lng: 34.7818 }} />;
+      widgetComponent = (
+        <HeatMap data={data.items as IPoint[]} center={{ lat: 32.0853, lng: 34.7818 }} layoutOptions={options} />
+      );
       break;
     }
     // remove street_view until fixed

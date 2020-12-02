@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Map } from 'react-leaflet';
 import L, { LatLng } from 'leaflet';
 import { uniquePoints } from '../../utils/utils';
 import { IPoint } from '../../models/Point';
-import AnywayMostSevereAccidentsMarker from '../atoms/AnywayMostSevereAccidentsMarker';
-import { ClockPosition } from '../../utils/enum.utils';
+import { MostSevereAccidentsMarker } from '../atoms';
+import { ClockPosition } from '../../models/ClockPosition';
 import GoogleMapsLayer from './map/GoogleMapsLayer';
 const INITIAL_ZOOM = parseInt(process.env.REACT_APP_DEFAULT_MAP_ZOOM!);
 const WRAPPER_STYLES = { height: '100%', width: '100%' };
@@ -16,24 +16,32 @@ const DEFAULT_BOUNDS = [
 interface IProps {
   items: IPoint[] | any;
   center?: { lat: number; lng: number };
+  layoutOptions?: any;
 }
 
-const LocationMap: FC<IProps> = ({ items, center }) => {
+const LocationMap: FC<IProps> = ({ items, center, layoutOptions }) => {
   let markers = items.map((x: IPoint, i: number) => {
     if (x.latitude !== null && x.longitude !== null) {
       const tooltipOffset = i % 2 === 0 ? ClockPosition.RIGHT : ClockPosition.LEFT;
       return (
         <div key={i}>
-          <AnywayMostSevereAccidentsMarker data={x} tooltipOffset={tooltipOffset} />
+          <MostSevereAccidentsMarker data={x} tooltipOffset={tooltipOffset} />
         </div>
       );
     }
     return null;
   });
   const bounds = getBounds(items);
+  const mapRef = React.createRef<any>();
+  useEffect(() => {
+    const map = mapRef.current.leafletElement;
+    setTimeout(() => {
+      map.invalidateSize();
+    });
+  }, [layoutOptions, mapRef]);
 
   return (
-    <Map center={center} bounds={bounds} zoom={INITIAL_ZOOM} style={WRAPPER_STYLES}>
+    <Map center={center} bounds={bounds} zoom={INITIAL_ZOOM} style={WRAPPER_STYLES} ref={mapRef}>
       <GoogleMapsLayer />
       {markers}
     </Map>

@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core';
-import { ClockPosition } from '../../utils/enum.utils';
+import { ClockPosition } from '../../models/ClockPosition';
+import { blackColor } from '../../style';
 
 interface IProps {
   type: ClockPosition;
@@ -37,7 +38,7 @@ const getArrowDirection = (type: ClockPosition) => {
 
 const useStyles = makeStyles({
   arrow: {
-    border: 'solid black',
+    border: `solid ${blackColor}`,
     borderWidth: '0 3px 3px 0',
     display: 'inline-block',
     padding: '6px',

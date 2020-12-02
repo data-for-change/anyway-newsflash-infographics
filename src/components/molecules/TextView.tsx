@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { IWidgetCountBySeverityTextData } from '../../models/WidgetData';
 import { Typography } from '../atoms';
 import { Theme, makeStyles } from '@material-ui/core';
-import { borderColor, roadIconColors, lighterWidgetText } from '../../style';
+import { silverSmokeColor, roadIconColors, shadowColor } from '../../style';
 import { useTranslation } from 'react-i18next';
 import Person from '../../assets/Person.png';
 import Ambulance from '../../assets/Ambulance.png';
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: `0 ${theme.spacing(6)}px`,
   },
   border: {
-    borderBottom: `5px solid ${borderColor}`,
+    borderBottom: `5px solid ${silverSmokeColor}`,
   },
   image: {
     height: theme.spacing(11),
@@ -69,26 +69,18 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
     [items.severity_fatal_count, items.severity_light_count, items.severity_severe_count].filter(Boolean).length >= 2;
   return (
     <div className={classes.root}>
-      <Box color={lighterWidgetText} textAlign="center">
+      <Box color={shadowColor} textAlign="center">
         {items.end_year === items.start_year ? (
           <>
-            <Box mr={1}>
-              <Typography.Body1>{t('textView.inYear')}</Typography.Body1>
-            </Box>
-            <Box mr={1}>
-              <Typography.Body1>{items.end_year}</Typography.Body1>
-            </Box>{' '}
+            <Typography.Body1>{t('textView.inYear')} </Typography.Body1>
+            <Typography.Body1>{items.end_year}</Typography.Body1>
           </>
         ) : (
           <>
-            <Box mr={1}>
-              <Typography.Body1>{t('textView.betweenYears')}</Typography.Body1>
-            </Box>
-            <Box mr={1}>
-              <Typography.Body1>
-                {items.end_year} - {items.start_year}{' '}
-              </Typography.Body1>
-            </Box>{' '}
+            <Typography.Body1>{t('textView.inYears')} </Typography.Body1>
+            <Typography.Body1>
+              {items.start_year} - {items.end_year}
+            </Typography.Body1>
           </>
         )}
         <Box mr={1}>

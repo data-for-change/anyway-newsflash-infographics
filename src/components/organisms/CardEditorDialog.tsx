@@ -1,11 +1,10 @@
 import React, { FC, useState } from 'react';
 import DialogWithHeader from '../molecules/DialogWithHeader';
-import AnyWaySlider from '../atoms/AnyWaySlider';
 import { useStore } from '../../store/storeConfig';
 import WidgetWrapper from '../molecules/widgets/WidgetWrapper';
 import { Box } from '@material-ui/core';
 import AnyWayCard, { CardLayoutOptions } from '../molecules/card/AnyWayCard';
-import { MetaTag, ErrorBoundary, Typography, Button } from '../atoms';
+import { MetaTag, ErrorBoundary, Typography, Button, Slider } from '../atoms';
 import widgetToImage from '../../services/to-image.service';
 import { useTranslation } from 'react-i18next';
 
@@ -23,10 +22,6 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
   const store = useStore();
   const widget = store.getWidgetsDataByName(widgetName);
   const roadNumber = store.newsFlashWidgetsMetaNumber;
-
-  const widgetComponent = !widget ? null : (
-    <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaString} />
-  );
 
   // const widgetRef = useRef<HTMLDivElement>(null);
   const getCardRef = (element: HTMLElement) => setCardElement(element);
@@ -46,6 +41,9 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
     landscape,
     size,
   };
+  const widgetComponent = !widget ? null : (
+    <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaString} options={options} />
+  );
 
   return (
     <DialogWithHeader fullWidth={true} isShowing={isOpen} onClose={onClose} title={t('cardEditor.title')}>
@@ -63,7 +61,7 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
           </Box>
           <Box mt={2} display="flex" flexDirection="column">
             <Typography.Body5>{t('cardEditor.size')}</Typography.Body5>
-            <AnyWaySlider onChange={handleSizeChange} />
+            <Slider onChange={handleSizeChange} />
           </Box>
           <Box mt={2}>
             <Button.Standard onClick={imgDownloadHandler}>

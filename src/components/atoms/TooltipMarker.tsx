@@ -4,7 +4,8 @@ import L from 'leaflet';
 import { Marker } from 'react-leaflet';
 import { makeStyles } from '@material-ui/core';
 import { dateFormat } from '../../utils/time.utils';
-import { ClockPosition } from '../../utils/enum.utils';
+import { ClockPosition } from '../../models/ClockPosition';
+import { transparentColor, whiteColor, blackColor, tooltipMarkerBorderColorArrow } from '../../style';
 
 const getLabelPosition = (offset: ClockPosition): string => {
   const x = getLabelXPosition(offset);
@@ -85,7 +86,7 @@ const useStyles = makeStyles({
   icon: {
     width: 0,
     height: 0,
-    backgroundColor: 'transparent',
+    backgroundColor: transparentColor,
   },
   root: {
     position: 'absolute',
@@ -102,14 +103,14 @@ const useStyles = makeStyles({
     padding: ' 1px 3px',
     borderRadius: '5px 7px 7px 5px',
     whiteSpace: 'nowrap',
-    color: 'white',
-    backgroundColor: 'black',
+    color: whiteColor,
+    backgroundColor: blackColor,
   }),
   arrow: {
     display: 'inline-flex',
     borderStyle: 'solid',
     borderWidth: '5px 0 5px 20px',
-    borderColor: 'transparent black transparent black',
+    borderColor: tooltipMarkerBorderColorArrow,
     transform: (offset: ClockPosition) => getLabelArrowRotation(offset),
   },
 });
