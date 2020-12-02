@@ -31,7 +31,11 @@ const WidgetsTemplate: FC<IProps> = ({ id }) => {
     }
     return (
       <Box m={2} key={index}>
-        <AnyWayCard widgetName={widget.name} roadNumber={store.newsFlashWidgetsMetaNumber}>
+        <AnyWayCard
+          widgetName={widget.name}
+          roadNumber={store.newsFlashWidgetsMetaNumber}
+          title={widget.data?.text?.title}
+        >
           <MetaTag>{widget.name}</MetaTag>
           <ErrorBoundary>{widgetComponent}</ErrorBoundary>
         </AnyWayCard>

@@ -11,40 +11,18 @@
 //     tags: Array<string>;  // zero or more per widget
 //   };
 // }
-
 import { IPoint, IPointAccident } from './Point';
-
+import { IWidgetDataType } from './WidgetDataType';
 export interface ILocationData {
   meta: ILocationMeta;
   widgets: IWidgetBase[];
 }
-
 export interface IWidgetBase {
   rank: number; // order? (not in use)
   name: string; // unique - used as identifier
   data: IWidgetDataType;
   meta?: {};
 }
-
-export type IWidgetDataType =
-  | IWidgetInjuredCountPerAgeGroupPieData
-  | IWidgetMostSevereAccidentsData
-  | IWidgetAccidentsHeatMapData
-  | IWidgetAccidentsByDayNightData
-  | IWidgetHeadOnCollisionsComparisonData
-  | IWidgetCountBySeverityTextData
-  | IWidgetCountBySeverityData
-  | IWidgetAccidentsByTypeData
-  | IWidgetInjuredByYearData
-  | IWidgetStreetViewData
-  | IWidgetAccidentsByYearData
-  | IWidgetVisionZeroImageData
-  | IWidgetAccidentsByHourBarData
-  | IWidgetMostSevereAccidentsTableData
-  | IWidgetTopRoadSegmentsAccidentsPerKm
-  | IWidgetAccidentCountByRoadLight
-  | IWidgetAccidentCountByDriverType
-  | IWidgetAccidentCountByCarType;
 
 export interface ILocationMeta {
   location_info: {
@@ -68,9 +46,15 @@ export interface IWidgetInjuredCountPerAgeGroupPieData {
     age_group: string;
     count: number;
   }[];
+  text: {
+    title: string;
+  };
 }
 export interface IWidgetMostSevereAccidentsData {
   items: IPointAccident[];
+  text: {
+    title: string;
+  };
 }
 export interface IWidgetMostSevereAccidentsTableData {
   items: {
@@ -87,6 +71,9 @@ export interface IWidgetMostSevereAccidentsTableData {
 }
 export interface IWidgetAccidentsHeatMapData {
   items: IPoint[];
+  text: {
+    title: string;
+  };
 }
 export interface IWidgetCountBySeverityTextData {
   items: {
@@ -97,18 +84,27 @@ export interface IWidgetCountBySeverityTextData {
     end_year: string;
     total_accidents_count: number;
   };
+  text: {
+    title: string;
+  };
 }
 export interface IWidgetCountBySeverityData {
   items: {
     accident_severity: string;
     count: number;
   }[];
+  text: {
+    title: string;
+  };
 }
 export interface IWidgetAccidentsByTypeData {
   items: {
     accident_type: string;
     count: number;
   }[];
+  text: {
+    title: string;
+  };
 }
 export interface IWidgetAccidentsByYearData {
   items: {
@@ -130,12 +126,18 @@ export interface IWidgetInjuredByYearData {
 }
 export interface IWidgetStreetViewData {
   items: IPoint;
+  text: {
+    title: string;
+  };
 }
 
 export interface IWidgetVisionZeroImageData {
   items: {
     image_src: string;
   }[];
+  text: {
+    title: string;
+  };
 }
 
 export interface IWidgetAccidentsByDayNightData {
@@ -143,6 +145,9 @@ export interface IWidgetAccidentsByDayNightData {
     day_night: string;
     count: number;
   }[];
+  text: {
+    title: string;
+  };
 }
 
 export interface IWidgetHeadOnCollisionsComparisonData {
@@ -156,12 +161,18 @@ export interface IWidgetHeadOnCollisionsComparisonData {
       count: number;
     }[];
   };
+  text: {
+    title: string;
+  };
 }
 
 export interface IWidgetVisionZeroImageData {
   items: {
     image_src: string;
   }[];
+  text: {
+    title: string;
+  };
 }
 
 export interface IWidgetTopRoadSegmentsAccidentsPerKm {
@@ -181,6 +192,9 @@ export interface IWidgetAccidentCountByDriverType {
     driver_type: string;
     count: number;
   }[];
+  text: {
+    title: string;
+  };
 }
 export interface IWidgetAccidentCountByCarType {
   items: {
@@ -188,4 +202,7 @@ export interface IWidgetAccidentCountByCarType {
     percentage_segment: number;
     percentage_country: number;
   }[];
+  text: {
+    title: string;
+  };
 }
