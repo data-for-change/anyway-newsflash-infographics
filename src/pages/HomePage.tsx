@@ -10,8 +10,8 @@ import OverlayLoader from '../components/molecules/OverlayLoader';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../store/storeConfig';
 import RootStore from '../store/root.store';
-import { DEMO_ID, handleNewsflashId } from '../utils/utils';
 import DemoPage from './DemoPage';
+import { Route, Switch } from 'react-router-dom';
 
 interface IProps {}
 
@@ -34,8 +34,9 @@ const useStyles = makeStyles({
 const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
   const classes = useStyles();
   const store: RootStore = useStore();
-  const id: number | string | undefined = handleNewsflashId(match.params.id);
+  const id = match.params.id ? parseInt(match.params.id) : null;
   const loading = store.widgetBoxLoading;
+
   useEffect(() => {
     if (id) {
       store.selectNewsFlash(id);
@@ -62,7 +63,11 @@ const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
       <Box flexGrow={5} className={classes.widgetBox} position="relative">
         <OverlayLoader show={loading} />
         <FilterBar />
-        {id !== DEMO_ID ? <WidgetsTemplate /> : <DemoPage />}
+        {/* main Content */}
+        <Switch>
+          <Route path="/:lng?/newsflash/999" component={DemoPage} />
+          <Route path="/:lng?/newsflash/:id" component={WidgetsTemplate} />
+        </Switch>
       </Box>
     </Box>
   );
