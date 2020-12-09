@@ -49,4 +49,4 @@ export const roadIconColors = {
   black: '#000000',
 };
 
-export const tooltipMarkerBorderColorArrow = 'transparent #fff transparent #fff';
+export const tooltipMarkerBorderColorArrow = 'transparent #000000 transparent #000000';
