@@ -10,6 +10,7 @@
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "dom-to-image": "^2.6.0",
+    "env-cmd": "^10.1.0",
     "file-saver": "^2.0.2",
     "html2canvas": "^1.0.0-rc.7",
     "i18next": "^19.8.3",
@@ -35,6 +36,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:staging": "env-cmd -f .env.staging react-scripts build",
+    "build:demo": "env-cmd -f .env.demo react-scripts build",
     "lint": "eslint src/**/*.ts src/**/*.tsx",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

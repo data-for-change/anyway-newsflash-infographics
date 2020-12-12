@@ -17,7 +17,8 @@ const createLeafletIcon = (image: string, iconSize: any, shadow?: string) => {
     iconUrl: image,
     shadowUrl: shadow,
     iconSize: L.point(iconSize.iconSize[0], iconSize.iconSize[1]),
-    iconAnchor: L.point(iconSize.iconAnchor[0], iconSize.iconAnchor[1]),
+    // point of the icon which will correspond to marker's location
+    iconAnchor: [17, 46],
     popupAnchor: L.point(iconSize.popupAnchor[0], iconSize.popupAnchor[1]),
     shadowSize: L.point(iconSize.shadowSize[0], iconSize.shadowSize[1]),
   });
