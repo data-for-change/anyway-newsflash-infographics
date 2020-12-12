@@ -1,9 +1,9 @@
-name: deploy-euro
+name: deploy-demo
 
 on:
   push:
     branches:
-      - euro
+      - demo
 
 jobs:
   build:
@@ -14,7 +14,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@master
         with:
-          node-version: '10.x'
+          node-version: '12.x'
       - name: Install Dependencies
         run: npm install
       - name: Build
@@ -22,7 +22,7 @@ jobs:
       - name: Deploy
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting:euro
+          args: deploy --only hosting:demo
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           PROJECT_ID: anyway-newsflash-infographics
