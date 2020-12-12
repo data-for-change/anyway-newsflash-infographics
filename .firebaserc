@@ -5,8 +5,8 @@
         "dev": [
           "anyway-infographics-staging"
         ],
-        "euro": [
-          "anyway-infographics-euro"
+        "demo": [
+          "anyway-infographics-demo"
         ],
         "master": [
           "anyway-infographics"

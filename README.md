@@ -178,13 +178,20 @@ We have app server (written in [express](https://expressjs.com/), a node.js-base
 
 See [API document](https://docs.google.com/document/d/1Hv5ItvwM3z9nn95LjlsYHL-o18V8PgWrrQOKIPiPymU)
 
-### CICD <a id="cicd"></a>
+### CICD And Environmnets<a id="cicd"></a>
+
+Active Environments:
+
+- Staging - to be used internannly by Anyway teams
+- Production - Contains ready cards
+- Demo - Contains ready cards & Demo Cards
 
 We use [github actions](https://github.com/marketplace?type=actions) for the following flows:
 
 1. [on-push CI](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3ACI) - provide per-PR CI testing
-2. [deploy-development](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development) continous deployment of `dev` branch to https://anyway-newsflash-infographics.web.app/
-3. [deploy-master]() - TBD
+1. [deploy-dev](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continous deployment of `dev` branch to Staging Environmnet - https://anyway-infographics-staging.web.app/
+1. [deploy-master](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continous deployment of `master` branch to Production Environmnet - https://anyway-infographics.web.app/
+1. [deploy-demo](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continous deployment of `demo` branch to Demo Environmnet - https://anyway-infographics-demo.web.app/
 
 Note: see the flows status badge at the top of this file
 
