@@ -1,6 +1,7 @@
-import { defaultWidgetsCollectionData, mockHTTPCall } from './mocks/mock.service';
+import { defaultWidgetsCollectionData, getDemoWidgetData, mockHTTPCall } from './mocks/mock.service';
 import { ILocationData, IWidgetBase } from '../models/WidgetData';
 import axios from 'axios';
+import { DEMO_ID, showDemoCards } from '../utils/utils';
 
 export function fetchDefaultWidgets(): Promise<any> {
   // @ts-ignore
@@ -9,7 +10,11 @@ export function fetchDefaultWidgets(): Promise<any> {
 
 const NEWS_FLASH_API: string = '/api/infographics-data';
 
-export const fetchWidgets = async (id: number, yearAgo?: number): Promise<any | undefined> => {
+export const fetchWidgets = async (id: number, yearAgo?: number): Promise<ILocationData | undefined> => {
+  if (showDemoCards && id === DEMO_ID) {
+    return getDemoWidgetData();
+  }
+
   try {
     const query = [`news_flash_id=${id}`];
     if (yearAgo) {

@@ -1,6 +1,7 @@
-import { INewsFlash } from '../models/NewFlash';
-// import {mockHTTPCall, newsFlashCollectionData} from './mocks/mock.service';
 import axios from 'axios';
+import { INewsFlash } from '../models/NewFlash';
+import { showDemoCards } from '../utils/utils';
+import { addDemoNewsflash } from './mocks/mock.service';
 
 const errorNews: INewsFlash = {
   lat: -1,
@@ -37,10 +38,14 @@ export function fetchNews(source = '', count = 5): Promise<any> {
 
   const url = `${NEWS_FLASH_API}?${query.join('&')}`;
   // return mockHTTPCall<Array<INewsFlash | any>>(newsFlashCollectionData);
-  return axios
-    .get(url)
-    .then((res) => res.data)
-    .catch(onErrorFetchNewsFlash);
+  return (
+    axios
+      .get(url)
+      .then((res) => res.data)
+      // if showDemoCards - add demoNewsflash to newsflash data
+      .then((data) => (showDemoCards ? addDemoNewsflash(data) : data))
+      .catch(onErrorFetchNewsFlash)
+  );
 }
 
 function onErrorFetchNewsFlash() {

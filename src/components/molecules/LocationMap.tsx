@@ -4,7 +4,7 @@ import L, { LatLng } from 'leaflet';
 import { uniquePoints } from '../../utils/utils';
 import { IPoint } from '../../models/Point';
 import { MostSevereAccidentsMarker } from '../atoms';
-import { ClockPosition } from '../../utils/enum.utils';
+import { ClockPosition } from '../../models/ClockPosition';
 import GoogleMapsLayer from './map/GoogleMapsLayer';
 const INITIAL_ZOOM = parseInt(process.env.REACT_APP_DEFAULT_MAP_ZOOM!);
 const WRAPPER_STYLES = { height: '100%', width: '100%' };

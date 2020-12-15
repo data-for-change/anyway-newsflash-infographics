@@ -5,7 +5,7 @@ import { Marker, Popup } from 'react-leaflet';
 
 import { AnyWayButton } from './AnyWayButton';
 import { Typography, MapIcon, TooltipMarker, TooltipArrow } from '.';
-import { ClockPosition } from '../../utils/enum.utils';
+import { ClockPosition } from '../../models/ClockPosition';
 import { useTranslation } from 'react-i18next';
 import { defaultBorderRadius, silverSmokeColor } from '../../style';
 interface IProps {
