@@ -22,20 +22,18 @@ import { getSizes } from './card.util';
 import CardBackgroundImage from './CardBackgroundImage';
 
 const DEFAULTE_SIZE = 1;
-export interface CardLayoutOptions {
-  landscape?: boolean;
+export interface CardSizeOptions {
   size?: number;
 }
 interface IProps {
   widgetName: string;
   roadNumber: number;
   actionButtons?: boolean;
-  layoutOptions?: CardLayoutOptions;
+  sizeOptions?: CardSizeOptions;
   getCardRef?: (element: HTMLElement) => any;
 }
 
-const getSizeFactor = (options: CardLayoutOptions | undefined): number =>
-  options?.size ? options.size : DEFAULTE_SIZE;
+const getSizeFactor = (options: CardSizeOptions | undefined): number => (options?.size ? options.size : DEFAULTE_SIZE);
 
 const useStyles = makeStyles({
   root: {
@@ -69,7 +67,7 @@ const AnyWayCard: FC<IProps> = ({
   widgetName,
   roadNumber,
   children,
-  layoutOptions,
+  sizeOptions,
   getCardRef,
   actionButtons = true,
 }) => {
@@ -78,7 +76,7 @@ const AnyWayCard: FC<IProps> = ({
   const handleCardEditorOpen = () => setOpen(true);
   const handleCardEditorClose = () => setOpen(false);
   const variant = getWidgetVariant(widgetName);
-  const factor = getSizeFactor(layoutOptions);
+  const factor = getSizeFactor(sizeOptions);
   const sizes = getSizes(variant, factor);
   const title = getWidgetTitle(widgetName);
 

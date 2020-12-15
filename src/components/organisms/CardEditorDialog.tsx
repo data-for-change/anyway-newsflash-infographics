@@ -3,7 +3,7 @@ import DialogWithHeader from '../molecules/DialogWithHeader';
 import { useStore } from '../../store/storeConfig';
 import WidgetWrapper from '../molecules/widgets/WidgetWrapper';
 import { Box } from '@material-ui/core';
-import AnyWayCard, { CardLayoutOptions } from '../molecules/card/AnyWayCard';
+import AnyWayCard, { CardSizeOptions } from '../molecules/card/AnyWayCard';
 import { MetaTag, ErrorBoundary, Typography, Button, Slider } from '../atoms';
 import widgetToImage from '../../services/to-image.service';
 import { useTranslation } from 'react-i18next';
@@ -16,7 +16,6 @@ interface IProps {
 
 const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
   const [cardElement, setCardElement] = useState({});
-  const [landscape, setLandscape] = useState(false);
   const [size, setSize] = useState(1);
   const { t } = useTranslation();
   const store = useStore();
@@ -34,15 +33,12 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
   const handleSizeChange = (event: any, newSize: number | number[]) => {
     setSize(newSize as number);
   };
-  const layoutHandler = () => {
-    setLandscape(!landscape);
-  };
-  const options: CardLayoutOptions = {
-    landscape,
+
+  const sizeOptions: CardSizeOptions = {
     size,
   };
   const widgetComponent = !widget ? null : (
-    <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaString} options={options} />
+    <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaString} sizeOptions={sizeOptions.size} />
   );
 
   return (
@@ -50,14 +46,14 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
       <Box display="flex">
         <Box px={2} display="flex" flexDirection="column" flexBasis={200} minWidth={200} boxSizing="border-box">
           <Box display="flex" flexDirection="column">
-            <Typography.Body5>
-              {t('cardEditor.mode') + ':' + t(landscape ? 'cardEditor.landscape' : 'cardEditor.portrait')}
-            </Typography.Body5>
-            <Button.Standard onClick={layoutHandler}>
+            {/* <Typography.Body5> */}
+            {/* {t('cardEditor.mode') + ':' + t(landscape ? 'cardEditor.landscape' : 'cardEditor.')} */}
+            {/* </Typography.Body5> */}
+            {/* <Button.Standard onClick={layoutHandler}>
               <Typography.Body5>
                 {t('cardEditor.display') + ' ' + t(landscape ? 'cardEditor.portrait' : 'cardEditor.landscape')}
               </Typography.Body5>
-            </Button.Standard>
+            </Button.Standard> */}
           </Box>
           <Box mt={2} display="flex" flexDirection="column">
             <Typography.Body5>{t('cardEditor.size')}</Typography.Body5>
@@ -75,7 +71,7 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
             widgetName={widgetName}
             roadNumber={roadNumber}
             actionButtons={false}
-            layoutOptions={options}
+            sizeOptions={sizeOptions}
           >
             <MetaTag>{widgetName}</MetaTag>
             <ErrorBoundary>{widgetComponent}</ErrorBoundary>
