@@ -8,7 +8,7 @@ import { Typography, Logo } from '../../atoms';
 
 interface IProps {
   variant: HeaderVariant;
-  text: string;
+  text: string | undefined;
   road: number;
 }
 const CardHeader: FC<IProps> = ({ variant, text, road }) => {
