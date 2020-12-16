@@ -7,7 +7,7 @@ const GoogleMapsLayer: FC = ({ children }) => {
   return (
     <ReactLeafletGoogleLayer
       googleMapsLoaderConf={{ KEY: mapApiKey, VERSION: '3.40.6' }}
-      type="terrain"
+      type="roadmap"
       styles={MAP_STYLE}
     />
   );
