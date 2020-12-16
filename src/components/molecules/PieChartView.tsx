@@ -116,6 +116,7 @@ export const PieChartView: FC<IProps> = ({
     (props: PieLabelRenderProps) => labelProps.customizedLabel(props, labelProps.labelFontSize, true),
     [labelProps],
   );
+
   return (
     <ResponsiveContainer width={width} height={'100%'}>
       <PieChart>
@@ -125,7 +126,6 @@ export const PieChartView: FC<IProps> = ({
           nameKey={xLabel}
           innerRadius={innerRadius}
           outerRadius={outerRadius}
-          minAngle={15}
           label={usePercent ? renderLabelPercent : renderLabelCount}
           labelLine={false}
         >
