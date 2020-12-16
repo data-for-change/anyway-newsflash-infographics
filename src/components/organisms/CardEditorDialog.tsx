@@ -12,9 +12,10 @@ interface IProps {
   isOpen: boolean;
   onClose: () => void;
   widgetName: string;
+  comment: string;
 }
 
-const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
+const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, comment }) => {
   const [cardElement, setCardElement] = useState({});
   const [landscape, setLandscape] = useState(false);
   const [size, setSize] = useState(1);
@@ -42,7 +43,7 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
     size,
   };
   const widgetComponent = !widget ? null : (
-    <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaString} options={options} />
+    <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaLocation} options={options} />
   );
 
   return (
@@ -76,6 +77,7 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
             roadNumber={roadNumber}
             actionButtons={false}
             layoutOptions={options}
+            dateComment={comment}
           >
             <MetaTag>{widgetName}</MetaTag>
             <ErrorBoundary>{widgetComponent}</ErrorBoundary>

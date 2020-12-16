@@ -53,6 +53,7 @@ export interface ILocationMeta {
     road_segment_name: string;
   };
   location_text: string;
+  dates_comment: string;
 }
 export interface IWidgetAccidentsByHourBarData {
   items: {

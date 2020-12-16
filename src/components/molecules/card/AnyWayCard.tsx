@@ -1,16 +1,12 @@
-import React, { FC, useState } from 'react';
-import { Card, CardContent, CardActions, Box } from '@material-ui/core';
+import React, {FC, useState} from 'react';
+import { Card, CardContent, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import LamasImage from '../../../assets/cbs.png';
-import AnywayImage from '../../../assets/anyway.png';
 import widgetToImage from '../../../services/to-image.service';
 import { AnyWayButton } from '../../atoms/AnyWayButton';
-import { Logo } from '../../atoms';
 import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
-import CardEditor from '../../organisms/CardEditorDialog';
 import SettingsOverscanIcon from '@material-ui/icons/SettingsOverscan';
 
-import { fontFamilyString, cardFooterHeight } from '../../../style';
+import { fontFamilyString } from '../../../style';
 import CardHeader from './CardHeader';
 import {
   FooterVariant,
@@ -20,6 +16,7 @@ import {
 } from '../../../services/widgets.style.service';
 import { getSizes } from './card.util';
 import CardBackgroundImage from './CardBackgroundImage';
+import CardFooter from "./CardFooter";
 
 const DEFAULTE_SIZE = 1;
 export interface CardLayoutOptions {
@@ -32,6 +29,7 @@ interface IProps {
   actionButtons?: boolean;
   layoutOptions?: CardLayoutOptions;
   getCardRef?: (element: HTMLElement) => any;
+  dateComment : string;
 }
 
 const getSizeFactor = (options: CardLayoutOptions | undefined): number =>
@@ -49,15 +47,6 @@ const useStyles = makeStyles({
     boxSizing: 'border-box',
     padding: 0,
   },
-  actions: {
-    boxSizing: 'border-box',
-    height: cardFooterHeight,
-    padding: 0,
-    alignItems: 'flex-end',
-  },
-  actionsSpace: {
-    flex: 1,
-  },
   button: {
     '&:hover': {
       backgroundColor: 'transparent',
@@ -72,6 +61,7 @@ const AnyWayCard: FC<IProps> = ({
   layoutOptions,
   getCardRef,
   actionButtons = true,
+  dateComment
 }) => {
   const [element, setElement] = useState({});
   const [isOpen, setOpen] = useState(false);
@@ -128,18 +118,11 @@ const AnyWayCard: FC<IProps> = ({
           {/* FOOTER */}
           {/* Todo: refactor footer as a seperate component */}
           {variant.footer !== FooterVariant.None && (
-            <Box height={sizes.footerHeight} width="100%">
-              <CardActions className={classes.actions}>
-                {buttons}
-                <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} />
-                <div className={classes.actionsSpace}></div>
-                <Logo src={LamasImage} alt={'Lamas'} height={30} />
-                <Logo src={AnywayImage} alt={'Anyway'} height={20} />
-              </CardActions>
-            </Box>
-          )}
+          <CardFooter dateComment={dateComment} onCloseEditor={handleCardEditorClose} isEditorOpen={isOpen} widgetName={widgetName} sizes={sizes}/>
+            )}
         </Box>
       </Card>
+      {buttons}
     </div>
   );
 };
