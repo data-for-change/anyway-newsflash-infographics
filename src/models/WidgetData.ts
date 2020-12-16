@@ -20,7 +20,7 @@ export interface ILocationData {
 }
 export interface IWidgetDataBase {
   text: {
-    title: string;
+    title?: string;
   };
 }
 export interface IWidgetBase {
