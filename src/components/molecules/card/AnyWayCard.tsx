@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, { FC, useState } from 'react';
 import { Card, CardContent, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import widgetToImage from '../../../services/to-image.service';
@@ -16,7 +16,8 @@ import {
 } from '../../../services/widgets.style.service';
 import { getSizes } from './card.util';
 import CardBackgroundImage from './CardBackgroundImage';
-import CardFooter from "./CardFooter";
+import CardFooter from './CardFooter';
+import CardEditor from '../../organisms/CardEditorDialog';
 
 const DEFAULTE_SIZE = 1;
 export interface CardLayoutOptions {
@@ -29,7 +30,7 @@ interface IProps {
   actionButtons?: boolean;
   layoutOptions?: CardLayoutOptions;
   getCardRef?: (element: HTMLElement) => any;
-  dateComment : string;
+  dateComment: string;
 }
 
 const getSizeFactor = (options: CardLayoutOptions | undefined): number =>
@@ -61,7 +62,7 @@ const AnyWayCard: FC<IProps> = ({
   layoutOptions,
   getCardRef,
   actionButtons = true,
-  dateComment
+  dateComment,
 }) => {
   const [element, setElement] = useState({});
   const [isOpen, setOpen] = useState(false);
@@ -97,8 +98,8 @@ const AnyWayCard: FC<IProps> = ({
   };
 
   return (
-    <div ref={refFn}>
-      <Card className={classes.root} variant="outlined">
+    <>
+      <Card ref={refFn} className={classes.root} variant="outlined">
         <Box height={sizes.height} width={sizes.width} position="relative" padding={3}>
           {/* BACKGROUND IMAGE */}
           <CardBackgroundImage variant={variant.header} />
@@ -106,7 +107,7 @@ const AnyWayCard: FC<IProps> = ({
           {/* HEADER */}
           {variant.header !== HeaderVariant.None && (
             <Box height={sizes.headerHeight} width="100%">
-              <CardHeader variant={variant.header} text={title} road={roadNumber}></CardHeader>
+              <CardHeader variant={variant.header} text={title} road={roadNumber} />
             </Box>
           )}
 
@@ -116,14 +117,16 @@ const AnyWayCard: FC<IProps> = ({
           </Box>
 
           {/* FOOTER */}
-          {/* Todo: refactor footer as a seperate component */}
           {variant.footer !== FooterVariant.None && (
-          <CardFooter dateComment={dateComment} onCloseEditor={handleCardEditorClose} isEditorOpen={isOpen} widgetName={widgetName} sizes={sizes}/>
-            )}
+            <Box height={sizes.footerHeight} width="100%">
+              <CardFooter dateComment={dateComment} />
+            </Box>
+          )}
+          <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} />
         </Box>
       </Card>
       {buttons}
-    </div>
+    </>
   );
 };
 export default AnyWayCard;

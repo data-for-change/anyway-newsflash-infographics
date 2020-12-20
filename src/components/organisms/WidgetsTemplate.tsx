@@ -23,8 +23,8 @@ const WidgetsTemplate: FC = () => {
       <Box m={2} key={index}>
         <AnyWayCard
           widgetName={widget.name}
-          dateComment={store.newsFlashWidgetsMetaComment}
-          roadNumber={store.newsFlashWidgetsMetaNumber}
+          dateComment={store.newsFlashWidgetsMetaDateComment}
+          roadNumber={store.newsFlashWidgetsMetaRoadNumber}
         >
           <MetaTag>{widget.name}</MetaTag>
           <ErrorBoundary>{widgetComponent}</ErrorBoundary>

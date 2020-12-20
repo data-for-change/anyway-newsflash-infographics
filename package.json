@@ -46,12 +46,6 @@
     "git:prune": "git remote prune origin",
     "git:merged": "git branch --merged development"
   },
-  "prettier": {
-    "singleQuote": true,
-    "arrowParens": "always",
-    "trailingComma": "all",
-    "printWidth": 120
-  },
   "eslintConfig": {
     "extends": [
       "react-app",

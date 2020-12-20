@@ -25,148 +25,148 @@ const DEFAULT_LOCATION_META = {
 };
 
 export default class RootStore {
-                 appInitialized = false;
+  appInitialized = false;
 
-                 @observable newsFlashCollection: Array<INewsFlash> = [];
-                 @observable isUserAuthenticated: boolean = false;
-                 @observable userName: string = '';
-                 @observable activeNewsFlashId: number = 0; // active newsflash id
-                 @observable newsFlashFetchLimit: number = 0;
-                 @observable newsFlashWidgetsMeta: ILocationMeta = DEFAULT_LOCATION_META;
-                 @observable newsFlashWidgetsData: Array<IWidgetBase> = [];
-                 @observable newsFlashWidgetsTimerFilter = DEFAULT_TIME_FILTER; // newsflash time filter (in years ago, 5 is the default)
-                 @observable newsFlashLoading: boolean = false;
-                 @observable widgetBoxLoading: boolean = false;
-                 @observable currentLanguageRouteString: string = '';
-                 // domain stores
-                 settingsStore: SettingsStore;
+  @observable newsFlashCollection: Array<INewsFlash> = [];
+  @observable isUserAuthenticated: boolean = false;
+  @observable userName: string = '';
+  @observable activeNewsFlashId: number = 0; // active newsflash id
+  @observable newsFlashFetchLimit: number = 0;
+  @observable newsFlashWidgetsMeta: ILocationMeta = DEFAULT_LOCATION_META;
+  @observable newsFlashWidgetsData: Array<IWidgetBase> = [];
+  @observable newsFlashWidgetsTimerFilter = DEFAULT_TIME_FILTER; // newsflash time filter (in years ago, 5 is the default)
+  @observable newsFlashLoading: boolean = false;
+  @observable widgetBoxLoading: boolean = false;
+  @observable currentLanguageRouteString: string = '';
+  // domain stores
+  settingsStore: SettingsStore;
 
-                 constructor() {
-                   // init app data
-                   initService().then((initData) => {
-                     console.log(initData);
-                     if (initData.newsFlashCollection) {
-                       this.newsFlashCollection = initData.newsFlashCollection;
-                     }
-                     if (initData.newsFlashWidgetsData) {
-                       this.newsFlashWidgetsData = initData.newsFlashWidgetsData.widgets;
-                       this.newsFlashWidgetsMeta = initData.newsFlashWidgetsData.meta;
-                     }
-                     this.appInitialized = true;
-                   });
-                   // settings store - settings of the app such as num of results returned etc.
-                   this.settingsStore = new SettingsStore(this);
-                 }
+  constructor() {
+    // init app data
+    initService().then((initData) => {
+      console.log(initData);
+      if (initData.newsFlashCollection) {
+        this.newsFlashCollection = initData.newsFlashCollection;
+      }
+      if (initData.newsFlashWidgetsData) {
+        this.newsFlashWidgetsData = initData.newsFlashWidgetsData.widgets;
+        this.newsFlashWidgetsMeta = initData.newsFlashWidgetsData.meta;
+      }
+      this.appInitialized = true;
+    });
+    // settings store - settings of the app such as num of results returned etc.
+    this.settingsStore = new SettingsStore(this);
+  }
 
-                 @computed
-                 get newsFlashWidgetsMetaLocation(): string {
-                   let { location_text } = this.newsFlashWidgetsMeta;
-                   return location_text ? location_text : '';
-                 }
+  @computed
+  get newsFlashWidgetsMetaLocation(): string {
+    let { location_text } = this.newsFlashWidgetsMeta;
+    return location_text ? location_text : '';
+  }
 
-                 @computed
-                 get newsFlashWidgetsMetaNumber(): number {
-                   let {
-                     location_info: { road1 },
-                   } = this.newsFlashWidgetsMeta;
-                   return road1;
-                 }
+  @computed
+  get newsFlashWidgetsMetaRoadNumber(): number {
+    let {
+      location_info: { road1 },
+    } = this.newsFlashWidgetsMeta;
+    return road1;
+  }
 
-                 @computed
-                 get newsFlashWidgetsMetaComment(): string {
-                   let { dates_comment } = this.newsFlashWidgetsMeta;
-                   return dates_comment;
-                 }
+  @computed
+  get newsFlashWidgetsMetaDateComment(): string {
+    let { dates_comment } = this.newsFlashWidgetsMeta;
+    return dates_comment;
+  }
 
-                 @computed
-                 get activeNewsFlashLocation() {
-                   let location: IPoint = DEFAULT_LOCATION; // default location
-                   if (this.activeNewsFlash) {
-                     location = {
-                       latitude: this.activeNewsFlash.lat,
-                       longitude: this.activeNewsFlash.lon,
-                     };
-                   } else {
-                     location = DEFAULT_LOCATION;
-                   }
-                   return location;
-                 }
+  @computed
+  get activeNewsFlashLocation() {
+    let location: IPoint = DEFAULT_LOCATION; // default location
+    if (this.activeNewsFlash) {
+      location = {
+        latitude: this.activeNewsFlash.lat,
+        longitude: this.activeNewsFlash.lon,
+      };
+    } else {
+      location = DEFAULT_LOCATION;
+    }
+    return location;
+  }
 
-                 @computed
-                 get activeNewsFlash(): INewsFlash | undefined {
-                   return this.newsFlashCollection.find((item) => item.id === this.activeNewsFlashId);
-                 }
+  @computed
+  get activeNewsFlash(): INewsFlash | undefined {
+    return this.newsFlashCollection.find((item) => item.id === this.activeNewsFlashId);
+  }
 
-                 getWidgetsDataByName(name: string): IWidgetBase | undefined {
-                   return this.newsFlashWidgetsData.find((item) => item.name === name);
-                 }
+  getWidgetsDataByName(name: string): IWidgetBase | undefined {
+    return this.newsFlashWidgetsData.find((item) => item.name === name);
+  }
 
-                 @action checkuserstatus(): void {}
+  @action checkuserstatus(): void {}
 
-                 @action
-                 filterNewsFlashCollection(source?: SourceFilterEnum): void {
-                   this.newsFlashLoading = true;
-                   fetchNews(source, this.newsFlashFetchLimit).then((data: any) => {
-                     this.newsFlashLoading = false;
-                     if (data) {
-                       this.newsFlashCollection = data;
-                     } else {
-                       console.error(`filterNewsFlashCollection(source:${source}) invalid data:`, data);
-                     }
-                   });
-                 }
+  @action
+  filterNewsFlashCollection(source?: SourceFilterEnum): void {
+    this.newsFlashLoading = true;
+    fetchNews(source, this.newsFlashFetchLimit).then((data: any) => {
+      this.newsFlashLoading = false;
+      if (data) {
+        this.newsFlashCollection = data;
+      } else {
+        console.error(`filterNewsFlashCollection(source:${source}) invalid data:`, data);
+      }
+    });
+  }
 
-                 @action
-                 infiniteFetchLimit(count: number): void {
-                   this.newsFlashFetchLimit += count;
-                   const { newsFlashCollection, newsFlashFetchLimit } = this;
-                   if (newsFlashCollection.length < newsFlashFetchLimit - count) return;
-                   this.filterNewsFlashCollection();
-                 }
+  @action
+  infiniteFetchLimit(count: number): void {
+    this.newsFlashFetchLimit += count;
+    const { newsFlashCollection, newsFlashFetchLimit } = this;
+    if (newsFlashCollection.length < newsFlashFetchLimit - count) return;
+    this.filterNewsFlashCollection();
+  }
 
-                 @action
-                 getUserLoginDetails() {
-                   fetchUserLoginStatus()
-                     .then((userData) => {
-                       this.isUserAuthenticated = userData.authenticated;
-                       this.userName = userData.userName;
-                     })
-                     .catch((err) => console.log(err));
-                 }
+  @action
+  getUserLoginDetails() {
+    fetchUserLoginStatus()
+      .then((userData) => {
+        this.isUserAuthenticated = userData.authenticated;
+        this.userName = userData.userName;
+      })
+      .catch((err) => console.log(err));
+  }
 
-                 @action
-                 selectNewsFlash(id: number): void {
-                   this.activeNewsFlashId = id;
-                   this.fetchSelectedNewsFlashWidgets(id, this.newsFlashWidgetsTimerFilter);
-                 }
+  @action
+  selectNewsFlash(id: number): void {
+    this.activeNewsFlashId = id;
+    this.fetchSelectedNewsFlashWidgets(id, this.newsFlashWidgetsTimerFilter);
+  }
 
-                 @action
-                 changeTimeFilter(filterValue: number): void {
-                   if (this.newsFlashWidgetsTimerFilter !== filterValue) {
-                     this.newsFlashWidgetsTimerFilter = filterValue;
-                     this.fetchSelectedNewsFlashWidgets(this.activeNewsFlashId, filterValue);
-                   }
-                 }
-                 @action
-                 changeLanguage(lngCode: string): void {
-                   i18next.changeLanguage(lngCode).then(() => {
-                     lngCode === 'he'
-                       ? (this.currentLanguageRouteString = '')
-                       : (this.currentLanguageRouteString = `/${i18next.language}`);
-                   });
-                 }
+  @action
+  changeTimeFilter(filterValue: number): void {
+    if (this.newsFlashWidgetsTimerFilter !== filterValue) {
+      this.newsFlashWidgetsTimerFilter = filterValue;
+      this.fetchSelectedNewsFlashWidgets(this.activeNewsFlashId, filterValue);
+    }
+  }
+  @action
+  changeLanguage(lngCode: string): void {
+    i18next.changeLanguage(lngCode).then(() => {
+      lngCode === 'he'
+        ? (this.currentLanguageRouteString = '')
+        : (this.currentLanguageRouteString = `/${i18next.language}`);
+    });
+  }
 
-                 private fetchSelectedNewsFlashWidgets(id: number, filterValue: number): void {
-                   this.widgetBoxLoading = true;
+  private fetchSelectedNewsFlashWidgets(id: number, filterValue: number): void {
+    this.widgetBoxLoading = true;
 
-                   fetchWidgets(id, filterValue).then((response: any) => {
-                     this.widgetBoxLoading = false;
-                     if (response && response.widgets && response.meta) {
-                       this.newsFlashWidgetsMeta = response.meta;
-                       this.newsFlashWidgetsData = response.widgets;
-                     } else {
-                       console.error(`fetchWidgets(id:${id}) invalid response:`, response);
-                     }
-                   });
-                 }
-               }
+    fetchWidgets(id, filterValue).then((response: any) => {
+      this.widgetBoxLoading = false;
+      if (response && response.widgets && response.meta) {
+        this.newsFlashWidgetsMeta = response.meta;
+        this.newsFlashWidgetsData = response.widgets;
+      } else {
+        console.error(`fetchWidgets(id:${id}) invalid response:`, response);
+      }
+    });
+  }
+}

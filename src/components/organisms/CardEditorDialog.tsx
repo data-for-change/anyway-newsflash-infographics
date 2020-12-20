@@ -12,17 +12,17 @@ interface IProps {
   isOpen: boolean;
   onClose: () => void;
   widgetName: string;
-  comment: string;
 }
 
-const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, comment }) => {
+const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
   const [cardElement, setCardElement] = useState({});
   const [landscape, setLandscape] = useState(false);
   const [size, setSize] = useState(1);
   const { t } = useTranslation();
   const store = useStore();
   const widget = store.getWidgetsDataByName(widgetName);
-  const roadNumber = store.newsFlashWidgetsMetaNumber;
+  const roadNumber = store.newsFlashWidgetsMetaRoadNumber;
+  const dateComment = store.newsFlashWidgetsMetaDateComment;
 
   // const widgetRef = useRef<HTMLDivElement>(null);
   const getCardRef = (element: HTMLElement) => setCardElement(element);
@@ -77,7 +77,7 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, comment }) => {
             roadNumber={roadNumber}
             actionButtons={false}
             layoutOptions={options}
-            dateComment={comment}
+            dateComment={dateComment}
           >
             <MetaTag>{widgetName}</MetaTag>
             <ErrorBoundary>{widgetComponent}</ErrorBoundary>
