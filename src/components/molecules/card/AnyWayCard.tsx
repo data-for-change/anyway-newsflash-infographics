@@ -8,12 +8,7 @@ import SettingsOverscanIcon from '@material-ui/icons/SettingsOverscan';
 
 import { fontFamilyString } from '../../../style';
 import CardHeader from './CardHeader';
-import {
-  FooterVariant,
-  getWidgetTitle,
-  getWidgetVariant,
-  HeaderVariant,
-} from '../../../services/widgets.style.service';
+import { FooterVariant, getWidgetVariant, HeaderVariant } from '../../../services/widgets.style.service';
 import { getSizes } from './card.util';
 import CardBackgroundImage from './CardBackgroundImage';
 import CardFooter from './CardFooter';
@@ -30,6 +25,7 @@ interface IProps {
   actionButtons?: boolean;
   layoutOptions?: CardLayoutOptions;
   getCardRef?: (element: HTMLElement) => any;
+  title: string | undefined;
   dateComment: string;
 }
 
@@ -62,6 +58,7 @@ const AnyWayCard: FC<IProps> = ({
   layoutOptions,
   getCardRef,
   actionButtons = true,
+  title,
   dateComment,
 }) => {
   const [element, setElement] = useState({});
@@ -71,7 +68,6 @@ const AnyWayCard: FC<IProps> = ({
   const variant = getWidgetVariant(widgetName);
   const factor = getSizeFactor(layoutOptions);
   const sizes = getSizes(variant, factor);
-  const title = getWidgetTitle(widgetName);
 
   const classes = useStyles();
   const imgDownloadHandler = () => {
@@ -122,7 +118,7 @@ const AnyWayCard: FC<IProps> = ({
               <CardFooter dateComment={dateComment} />
             </Box>
           )}
-          <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} />
+          <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} text={title} />
         </Box>
       </Card>
       {buttons}
