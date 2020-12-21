@@ -61,6 +61,13 @@ const TableView: FC<IProps> = ({ data }) => {
     items.map((item) => item.injured_count),
   );
 
+  const accidentsByAscDate = [...items];
+  accidentsByAscDate.sort((a, b) => {
+    let aa = a.date.split('/').reverse().join();
+    let bb = b.date.split('/').reverse().join();
+    return aa > bb ? -1 : aa < bb ? 1 : 0;
+  });
+
   return (
     <div className={classes.root}>
       <div className={classes.title}>
@@ -90,7 +97,7 @@ const TableView: FC<IProps> = ({ data }) => {
           </StyledTableRow>
         </TableHead>
         <TableBody>
-          {items.map((item, index) => (
+          {accidentsByAscDate.map((item, index) => (
             <StyledTableRow key={index}>
               <StyledTableCell component="th" scope="row">
                 <Typography.Body6>{item.date}</Typography.Body6>
