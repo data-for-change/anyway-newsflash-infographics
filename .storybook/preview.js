@@ -3,6 +3,7 @@ import { Box, createStyles, makeStyles, createMuiTheme, ThemeProvider } from '@m
 import OverlayLoader from '../src/components/molecules/OverlayLoader';
 import { defaultThemeOptions } from '../src/style/theme';
 
+const customTheme = createMuiTheme(defaultThemeOptions);
 const useStyles = makeStyles(() =>
   createStyles({
     rtl: {
@@ -10,7 +11,6 @@ const useStyles = makeStyles(() =>
     },
   }),
 );
-const customTheme = createMuiTheme(defaultThemeOptions);
 
 function StoryApp(Story) {
   const classes = useStyles();

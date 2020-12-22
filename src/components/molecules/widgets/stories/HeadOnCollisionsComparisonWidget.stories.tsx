@@ -8,8 +8,8 @@ export default {
 const data = {
   items: {
     specific_road_segment_fatal_accidents: [
-      { desc: '\u05d7\u05d6\u05d9\u05ea\u05d9\u05d5\u05ea', count: 0 },
-      { desc: '\u05d0\u05d7\u05e8\u05d5\u05ea', count: 0 },
+      { desc: '\u05d7\u05d6\u05d9\u05ea\u05d9\u05d5\u05ea', count: 170 },
+      { desc: '\u05d0\u05d7\u05e8\u05d5\u05ea', count: 150 },
     ],
     all_roads_fatal_accidents: [
       { desc: '\u05d7\u05d6\u05d9\u05ea\u05d9\u05d5\u05ea', count: 178 },
