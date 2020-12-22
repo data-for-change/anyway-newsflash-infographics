@@ -47,18 +47,3 @@ export function getWidgetVariant(widgetName: string) {
   const variant = widgetVariants[widgetName];
   return variant || widgetVariants.defaultVariant;
 }
-
-// === widgets variants - header titles === //
-const widgetHeaderTitles: { [index: string]: string } = {
-  defaultTitle: '',
-  [WidgetName.accidents_count_by_hour]: 'accidents count by hour', // todo: add all title strings (use i18n)
-  [WidgetName.injured_count_per_age_group]: 'injured count per age group',
-  [WidgetName.most_severe_accidents_table]: 'most severe accidents table',
-  [WidgetName.head_on_collisions_comparison]: 'תאונות קטלניות ע"פ סוג',
-  [WidgetName.head_on_collisions_comparison_percentage]: 'תאונות קטלניות ע"פ סוג',
-};
-
-export function getWidgetTitle(widgetName: string) {
-  const title = widgetHeaderTitles[widgetName];
-  return title || widgetHeaderTitles.defaultTitle;
-}

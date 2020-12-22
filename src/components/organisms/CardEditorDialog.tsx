@@ -12,9 +12,10 @@ interface IProps {
   isOpen: boolean;
   onClose: () => void;
   widgetName: string;
+  text: string | undefined;
 }
 
-const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
+const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
   const [cardElement, setCardElement] = useState({});
   const [landscape, setLandscape] = useState(false);
   const [size, setSize] = useState(1);
@@ -76,6 +77,7 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName }) => {
             roadNumber={roadNumber}
             actionButtons={false}
             layoutOptions={options}
+            title={text}
           >
             <MetaTag>{widgetName}</MetaTag>
             <ErrorBoundary>{widgetComponent}</ErrorBoundary>
