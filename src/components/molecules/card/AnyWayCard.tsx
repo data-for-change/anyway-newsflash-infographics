@@ -12,12 +12,7 @@ import SettingsOverscanIcon from '@material-ui/icons/SettingsOverscan';
 
 import { fontFamilyString, cardFooterHeight } from '../../../style';
 import CardHeader from './CardHeader';
-import {
-  FooterVariant,
-  getWidgetTitle,
-  getWidgetVariant,
-  HeaderVariant,
-} from '../../../services/widgets.style.service';
+import { FooterVariant, getWidgetVariant, HeaderVariant } from '../../../services/widgets.style.service';
 import { getSizes } from './card.util';
 import CardBackgroundImage from './CardBackgroundImage';
 
@@ -32,6 +27,7 @@ interface IProps {
   actionButtons?: boolean;
   layoutOptions?: CardLayoutOptions;
   getCardRef?: (element: HTMLElement) => any;
+  title: string | undefined;
 }
 
 const getSizeFactor = (options: CardLayoutOptions | undefined): number =>
@@ -72,6 +68,7 @@ const AnyWayCard: FC<IProps> = ({
   layoutOptions,
   getCardRef,
   actionButtons = true,
+  title,
 }) => {
   const [element, setElement] = useState({});
   const [isOpen, setOpen] = useState(false);
@@ -80,7 +77,6 @@ const AnyWayCard: FC<IProps> = ({
   const variant = getWidgetVariant(widgetName);
   const factor = getSizeFactor(layoutOptions);
   const sizes = getSizes(variant, factor);
-  const title = getWidgetTitle(widgetName);
 
   const classes = useStyles();
   const imgDownloadHandler = () => {
@@ -131,7 +127,7 @@ const AnyWayCard: FC<IProps> = ({
             <Box height={sizes.footerHeight} width="100%">
               <CardActions className={classes.actions}>
                 {buttons}
-                <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} />
+                <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} text={title} />
                 <div className={classes.actionsSpace}></div>
                 <Logo src={LamasImage} alt={'Lamas'} height={30} />
                 <Logo src={AnywayImage} alt={'Anyway'} height={20} />
