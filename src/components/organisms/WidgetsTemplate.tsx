@@ -14,8 +14,10 @@ const WidgetsTemplate: FC = () => {
   const store: RootStore = useStore();
 
   const widgetsData = store.newsFlashWidgetsData;
-  const widgetCards = widgetsData.map((widget, index) => {
-    const widgetComponent = <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaString} />;
+  const widgetCards = widgetsData.map((widget, index, sizeOptions) => {
+    const widgetComponent = (
+      <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaString} sizeOptions={sizeOptions} />
+    );
     if (!widgetComponent) {
       return null;
     }

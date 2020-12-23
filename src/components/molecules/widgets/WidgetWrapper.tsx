@@ -39,7 +39,7 @@ import { WidgetName } from '../../../models/WidgetName';
 interface IProps {
   widget: IWidgetBase;
   segmentText: string;
-  sizeOptions?: any;
+  sizeOptions: any;
 }
 
 const WidgetWrapper: FC<IProps> = ({ widget, segmentText, sizeOptions }) => {

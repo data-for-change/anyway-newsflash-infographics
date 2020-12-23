@@ -5,7 +5,7 @@ import { IWidgetMostSevereAccidentsData } from '../../../models/WidgetData';
 const CENTER = { lat: 32.0853, lng: 34.7818 };
 interface IProps {
   data: IWidgetMostSevereAccidentsData;
-  sizeOptions?: any;
+  sizeOptions: number;
 }
 const MostSevereAccidentsMapWidget: FC<IProps> = ({ data, sizeOptions }) => {
   const { items } = data;
