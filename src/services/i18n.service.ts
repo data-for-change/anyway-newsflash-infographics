@@ -15,6 +15,4 @@ const options = {
 };
 i18n.use(HttpApi).use(initReactI18next).init(options);
 
-export const textDirection = i18n.dir(); //return direction ltr/rtl
-
 export default i18n;

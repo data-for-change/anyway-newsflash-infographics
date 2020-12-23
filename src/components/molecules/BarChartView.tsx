@@ -7,7 +7,7 @@ interface IProps {
   data: Array<object>;
   xLabel: string | number;
   yLabel: string | number;
-  textLabel: string;
+  textLabel?: string;
 }
 
 const BarChartView: FC<IProps> = ({ data, xLabel, yLabel, textLabel }) => {
