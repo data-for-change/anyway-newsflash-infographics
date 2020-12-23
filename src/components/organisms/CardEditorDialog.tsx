@@ -22,7 +22,8 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
   const { t } = useTranslation();
   const store = useStore();
   const widget = store.getWidgetsDataByName(widgetName);
-  const roadNumber = store.newsFlashWidgetsMetaNumber;
+  const roadNumber = store.newsFlashWidgetsMetaRoadNumber;
+  const dateComment = store.newsFlashWidgetsMetaDateComment;
 
   // const widgetRef = useRef<HTMLDivElement>(null);
   const getCardRef = (element: HTMLElement) => setCardElement(element);
@@ -43,7 +44,7 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
     size,
   };
   const widgetComponent = !widget ? null : (
-    <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaString} options={options} />
+    <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaLocation} options={options} />
   );
 
   return (
@@ -77,6 +78,7 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
             roadNumber={roadNumber}
             actionButtons={false}
             layoutOptions={options}
+            dateComment={dateComment}
             title={text}
           >
             <MetaTag>{widgetName}</MetaTag>

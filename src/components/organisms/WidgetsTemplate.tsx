@@ -15,7 +15,7 @@ const WidgetsTemplate: FC = () => {
 
   const widgetsData = store.newsFlashWidgetsData;
   const widgetCards = widgetsData.map((widget, index) => {
-    const widgetComponent = <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaString} />;
+    const widgetComponent = <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaLocation} />;
     if (!widgetComponent) {
       return null;
     }
@@ -23,8 +23,9 @@ const WidgetsTemplate: FC = () => {
       <Box m={2} key={index}>
         <AnyWayCard
           widgetName={widget.name}
-          roadNumber={store.newsFlashWidgetsMetaNumber}
           title={widget.data?.text?.title}
+          dateComment={store.newsFlashWidgetsMetaDateComment}
+          roadNumber={store.newsFlashWidgetsMetaRoadNumber}
         >
           <MetaTag>{widget.name}</MetaTag>
           <ErrorBoundary>{widgetComponent}</ErrorBoundary>
