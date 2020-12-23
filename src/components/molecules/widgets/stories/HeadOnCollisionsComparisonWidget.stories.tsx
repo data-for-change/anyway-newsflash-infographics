@@ -22,6 +22,6 @@ const data = {
   },
 };
 
-export const common = () => <HeadOnCollisionsComparisonWidget data={data} segmetText="almog" />;
+export const common = () => <HeadOnCollisionsComparisonWidget data={data} segmetText="segmetText" />;
 
-export const usePercent = () => <HeadOnCollisionsComparisonWidget data={data} segmetText="almog" usePercent />;
+export const usePercent = () => <HeadOnCollisionsComparisonWidget data={data} segmetText="segmetText" usePercent />;
