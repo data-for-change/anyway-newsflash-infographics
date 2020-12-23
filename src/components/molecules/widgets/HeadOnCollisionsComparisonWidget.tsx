@@ -50,7 +50,7 @@ const useStyles = makeStyles(() => ({
     height: SECONDARY_CONTENT_HEIGHT,
     width: '80%',
     position: 'relative',
-    bottom: '25%',
+    bottom: '10%',
     left: '5%',
     fontSize: `${(PROPORTION * PRIMARY_FONT_SIZE).toString()} px`,
   },
