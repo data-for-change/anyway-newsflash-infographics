@@ -46,7 +46,6 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
     <DialogWithHeader fullWidth={true} isShowing={isOpen} onClose={onClose} title={t('cardEditor.title')}>
       <Box display="flex">
         <Box px={2} display="flex" flexDirection="column" flexBasis={200} minWidth={200} boxSizing="border-box">
-          <Box display="flex" flexDirection="column"></Box>
           <Box mt={2} display="flex" flexDirection="column">
             <Typography.Body5>{t('cardEditor.size')}</Typography.Body5>
             <Slider onChange={handleSizeChange} />
