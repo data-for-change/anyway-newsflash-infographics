@@ -4,6 +4,7 @@ import { Typography } from '../atoms';
 import { Table, TableBody, TableCell, TableHead, TableRow, Theme } from '@material-ui/core';
 import { IWidgetMostSevereAccidentsTableData } from '../../models/WidgetData';
 import { silverGrayColor, transparentColor, whiteColor } from '../../style';
+import { toJsDateFormat } from '../../utils/time.utils';
 
 interface IProps {
   data: IWidgetMostSevereAccidentsTableData;
@@ -62,11 +63,7 @@ const TableView: FC<IProps> = ({ data }) => {
   );
 
   const accidentsByAscDate = [...items];
-  accidentsByAscDate.sort((a, b) => {
-    let aa = a.date.split('/').reverse().join();
-    let bb = b.date.split('/').reverse().join();
-    return aa > bb ? -1 : aa < bb ? 1 : 0;
-  });
+  accidentsByAscDate.sort((a, b) => toJsDateFormat(b.date, b.hour) - toJsDateFormat(a.date, a.hour));
 
   return (
     <div className={classes.root}>
