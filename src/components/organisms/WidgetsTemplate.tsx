@@ -12,10 +12,11 @@ import WidgetWrapper from '../molecules/widgets/WidgetWrapper';
 
 const WidgetsTemplate: FC = () => {
   const store: RootStore = useStore();
-
   const widgetsData = store.newsFlashWidgetsData;
-  const widgetCards = widgetsData.map((widget, index) => {
-    const widgetComponent = <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaLocation} />;
+  const widgetCards = widgetsData.map((widget, index, sizeOptions) => {
+    const widgetComponent = (
+      <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaLocation} sizeOptions={sizeOptions} />
+    );
     if (!widgetComponent) {
       return null;
     }

@@ -5,10 +5,10 @@ import { IWidgetMostSevereAccidentsData } from '../../../models/WidgetData';
 const CENTER = { lat: 32.0853, lng: 34.7818 };
 interface IProps {
   data: IWidgetMostSevereAccidentsData;
-  layoutOptions?: any;
+  sizeOptions: number;
 }
-const MostSevereAccidentsMapWidget: FC<IProps> = ({ data, layoutOptions }) => {
+const MostSevereAccidentsMapWidget: FC<IProps> = ({ data, sizeOptions }) => {
   const { items } = data;
-  return <LocationMap items={items} center={CENTER} layoutOptions={layoutOptions} />;
+  return <LocationMap items={items} center={CENTER} sizeOptions={sizeOptions} />;
 };
 export default MostSevereAccidentsMapWidget;

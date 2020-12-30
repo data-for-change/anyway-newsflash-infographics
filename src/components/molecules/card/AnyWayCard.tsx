@@ -15,22 +15,20 @@ import CardFooter from './CardFooter';
 import CardEditor from '../../organisms/CardEditorDialog';
 
 const DEFAULTE_SIZE = 1;
-export interface CardLayoutOptions {
-  landscape?: boolean;
+export interface CardSizeOptions {
   size?: number;
 }
 interface IProps {
   widgetName: string;
   roadNumber: number;
   actionButtons?: boolean;
-  layoutOptions?: CardLayoutOptions;
+  sizeOptions?: CardSizeOptions;
   getCardRef?: (element: HTMLElement) => any;
   title: string | undefined;
   dateComment: string;
 }
 
-const getSizeFactor = (options: CardLayoutOptions | undefined): number =>
-  options?.size ? options.size : DEFAULTE_SIZE;
+const getSizeFactor = (options: CardSizeOptions | undefined): number => (options?.size ? options.size : DEFAULTE_SIZE);
 
 const useStyles = makeStyles({
   root: {
@@ -55,7 +53,7 @@ const AnyWayCard: FC<IProps> = ({
   widgetName,
   roadNumber,
   children,
-  layoutOptions,
+  sizeOptions,
   getCardRef,
   actionButtons = true,
   title,
@@ -66,7 +64,7 @@ const AnyWayCard: FC<IProps> = ({
   const handleCardEditorOpen = () => setOpen(true);
   const handleCardEditorClose = () => setOpen(false);
   const variant = getWidgetVariant(widgetName);
-  const factor = getSizeFactor(layoutOptions);
+  const factor = getSizeFactor(sizeOptions);
   const sizes = getSizes(variant, factor);
 
   const classes = useStyles();

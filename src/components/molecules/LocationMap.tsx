@@ -16,10 +16,10 @@ const DEFAULT_BOUNDS = [
 interface IProps {
   items: IPoint[] | any;
   center?: { lat: number; lng: number };
-  layoutOptions?: any;
+  sizeOptions?: number;
 }
 
-const LocationMap: FC<IProps> = ({ items, center, layoutOptions }) => {
+const LocationMap: FC<IProps> = ({ items, center, sizeOptions }) => {
   let markers = items.map((x: IPoint, i: number) => {
     if (x.latitude !== null && x.longitude !== null) {
       const tooltipOffset = i % 2 === 0 ? ClockPosition.RIGHT : ClockPosition.LEFT;
@@ -38,7 +38,7 @@ const LocationMap: FC<IProps> = ({ items, center, layoutOptions }) => {
     setTimeout(() => {
       map.invalidateSize();
     });
-  }, [layoutOptions, mapRef]);
+  }, [sizeOptions, mapRef]);
 
   return (
     <Map center={center} bounds={bounds} zoom={INITIAL_ZOOM} style={WRAPPER_STYLES} ref={mapRef}>
