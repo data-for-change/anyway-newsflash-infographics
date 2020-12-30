@@ -39,8 +39,8 @@ function processWidgetsFetchResponse(response: any) {
   if (showOnlyOperCards) {
     result.widgets = getOperWidgetData(response.data.widgets);
   }
-  result.widgets = getVerifiedWidgetsData(result.widgets);
-  result.widgets = addWidgetsVariants(result.widgets);
+  let verifiedWidgets = getVerifiedWidgetsData(result.widgets);
+  result.widgets = addWidgetsVariants(verifiedWidgets);
   return result;
 }
 

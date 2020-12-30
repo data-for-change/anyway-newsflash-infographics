@@ -2,7 +2,7 @@ export const operationalCards = [
   'accident_count_by_severity',
   'most_severe_accidents_table',
 
-  //LEFT widget on comments to see behavior
+  //widget on comments to see behavior >> rendering only 2 widgets
 
   //   'most_severe_accidents',
   //   'head_on_collisions_comparison',
