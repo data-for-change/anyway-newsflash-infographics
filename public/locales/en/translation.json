@@ -37,7 +37,9 @@
     "Past Year": "Past Year",
     "Last 3 Years": "Last 3 Years",
     "Last 5 Years": "Last 5 Years",
-    "Last 8 Years": "last 8 years"
+    "Last 8 Years": "last 8 years",
+    "Show Details": "Show Details",
+    "Hide Details": "Hide Details"
   },
   "textView": {
     "inYear": "In the year",

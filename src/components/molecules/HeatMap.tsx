@@ -24,10 +24,10 @@ const DEFAULT_BOUNDS = [
 interface IProps {
   data: IPoint[];
   center?: { lat: number; lng: number };
-  layoutOptions?: any;
+  sizeOptions?: number;
 }
 
-const HeatMap: FC<IProps> = ({ data, center, layoutOptions }) => {
+const HeatMap: FC<IProps> = ({ data, center, sizeOptions }) => {
   const classes = useStyles();
 
   const mapRef = React.createRef<any>();
@@ -36,7 +36,7 @@ const HeatMap: FC<IProps> = ({ data, center, layoutOptions }) => {
     setTimeout(() => {
       map.invalidateSize();
     });
-  }, [layoutOptions, mapRef]);
+  }, [sizeOptions, mapRef]);
 
   const isDataValid = data && uniquePoints(data).length > 1;
   if (!isDataValid) {
