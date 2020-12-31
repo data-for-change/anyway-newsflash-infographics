@@ -89,9 +89,11 @@ const AnyWayCard: FC<IProps> = ({
         <SettingsOverscanIcon />
       </AnyWayButton>
       <Tooltip title={LOREM_IPSUM} placement="top" aria-label="info">
-        <AnyWayButton className={`${classes.button} ${classes.hidden}`} disableRipple={true} onClick={() => {}}>
-          <InfoOutlinedIcon />
-        </AnyWayButton>
+        <span>
+          <AnyWayButton className={`${classes.button} ${classes.hidden}`} disableRipple={true} onClick={() => {}}>
+            <InfoOutlinedIcon />
+          </AnyWayButton>
+        </span>
       </Tooltip>
     </>
   );
