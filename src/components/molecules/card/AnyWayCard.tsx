@@ -51,6 +51,9 @@ const useStyles = makeStyles({
       backgroundColor: 'transparent',
     },
   },
+  hidden: {
+    display: 'none',
+  },
 });
 
 const AnyWayCard: FC<IProps> = ({
@@ -86,7 +89,7 @@ const AnyWayCard: FC<IProps> = ({
         <SettingsOverscanIcon />
       </AnyWayButton>
       <Tooltip title={LOREM_IPSUM} placement="top" aria-label="info">
-        <AnyWayButton className={classes.button} disableRipple={true} onClick={() => {}}>
+        <AnyWayButton className={`${classes.button} ${classes.hidden}`} disableRipple={true} onClick={() => {}}>
           <InfoOutlinedIcon />
         </AnyWayButton>
       </Tooltip>
