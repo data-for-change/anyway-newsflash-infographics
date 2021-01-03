@@ -32,16 +32,15 @@ export const fetchWidgets = async (id: number, yearAgo?: number): Promise<ILocat
 };
 
 function processWidgetsFetchResponse(response: any) {
-  const result = {
-    meta: response.data.meta,
-    widgets: response.data.widgets,
-  };
+  const meta = response.data.meta;
+  let widgets = response.data.widgets;
+
   if (showOnlyOperCards) {
-    result.widgets = getOperWidgetData(response.data.widgets);
+    widgets = getOperWidgetData(widgets);
   }
-  let verifiedWidgets = getVerifiedWidgetsData(result.widgets);
-  result.widgets = addWidgetsVariants(verifiedWidgets);
-  return result;
+  widgets = getVerifiedWidgetsData(widgets);
+  widgets = addWidgetsVariants(widgets);
+  return { meta, widgets };
 }
 
 function getOperWidgetData(widgets: Array<any>) {
