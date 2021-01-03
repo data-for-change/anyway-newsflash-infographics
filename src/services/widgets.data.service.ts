@@ -44,8 +44,7 @@ function processWidgetsFetchResponse(response: any) {
 }
 
 function getOperWidgetData(widgets: Array<any>) {
-  const widgetsToShow = widgets.filter((widget) => operationalCards.includes(widget.name));
-  return widgetsToShow;
+  return widgets.filter((widget) => operationalCards.includes(widget.name));
 }
 // return array of valid widgets data (invalid widget objects will be removed!)
 function getVerifiedWidgetsData(widgets: Array<any>) {
