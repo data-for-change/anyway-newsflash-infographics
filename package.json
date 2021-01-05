@@ -7,7 +7,7 @@
     "@material-ui/icons": "^4.9.1",
     "@types/classnames": "^2.2.11",
     "@types/query-string": "^6.3.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "dom-to-image": "^2.6.0",
     "env-cmd": "^10.1.0",
