@@ -8,6 +8,7 @@ import SettingsOverscanIcon from '@material-ui/icons/SettingsOverscan';
 
 import { fontFamilyString } from '../../../style';
 import CardHeader from './CardHeader';
+import SocialShare from '../../atoms/SocialShare';
 import { FooterVariant, getWidgetVariant, HeaderVariant } from '../../../services/widgets.style.service';
 import { getSizes } from './card.util';
 import CardBackgroundImage from './CardBackgroundImage';
@@ -119,7 +120,12 @@ const AnyWayCard: FC<IProps> = ({
           <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} text={title} />
         </Box>
       </Card>
-      {buttons}
+      <Box display="flex" justifyContent="space-between">
+        <Box>{buttons}</Box>
+        <Box>
+          <SocialShare />
+        </Box>
+      </Box>
     </>
   );
 };
