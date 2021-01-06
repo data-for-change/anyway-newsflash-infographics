@@ -21,6 +21,7 @@ const DEFAULT_LOCATION_META = {
     road_segment_name: '',
   },
   location_text: '',
+  dates_comment: '',
 };
 
 export default class RootStore {
@@ -58,17 +59,23 @@ export default class RootStore {
   }
 
   @computed
-  get newsFlashWidgetsMetaString(): string {
+  get newsFlashWidgetsMetaLocation(): string {
     let { location_text } = this.newsFlashWidgetsMeta;
     return location_text ? location_text : '';
   }
 
   @computed
-  get newsFlashWidgetsMetaNumber(): number {
+  get newsFlashWidgetsMetaRoadNumber(): number {
     let {
       location_info: { road1 },
     } = this.newsFlashWidgetsMeta;
     return road1;
+  }
+
+  @computed
+  get newsFlashWidgetsMetaDateComment(): string {
+    let { dates_comment } = this.newsFlashWidgetsMeta;
+    return dates_comment;
   }
 
   @computed

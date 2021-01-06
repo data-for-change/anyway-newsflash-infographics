@@ -1,37 +1,34 @@
 import React, { FC, useState } from 'react';
-import { Card, CardContent, CardActions, Box } from '@material-ui/core';
+import { Card, CardContent, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import LamasImage from '../../../assets/cbs.png';
-import AnywayImage from '../../../assets/anyway.png';
 import widgetToImage from '../../../services/to-image.service';
 import { AnyWayButton } from '../../atoms/AnyWayButton';
-import { Logo } from '../../atoms';
 import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
-import CardEditor from '../../organisms/CardEditorDialog';
 import SettingsOverscanIcon from '@material-ui/icons/SettingsOverscan';
 
-import { fontFamilyString, cardFooterHeight } from '../../../style';
+import { fontFamilyString } from '../../../style';
 import CardHeader from './CardHeader';
 import { FooterVariant, getWidgetVariant, HeaderVariant } from '../../../services/widgets.style.service';
 import { getSizes } from './card.util';
 import CardBackgroundImage from './CardBackgroundImage';
+import CardFooter from './CardFooter';
+import CardEditor from '../../organisms/CardEditorDialog';
 
 const DEFAULTE_SIZE = 1;
-export interface CardLayoutOptions {
-  landscape?: boolean;
+export interface CardSizeOptions {
   size?: number;
 }
 interface IProps {
   widgetName: string;
   roadNumber: number;
   actionButtons?: boolean;
-  layoutOptions?: CardLayoutOptions;
+  sizeOptions?: CardSizeOptions;
   getCardRef?: (element: HTMLElement) => any;
   title: string | undefined;
+  dateComment: string;
 }
 
-const getSizeFactor = (options: CardLayoutOptions | undefined): number =>
-  options?.size ? options.size : DEFAULTE_SIZE;
+const getSizeFactor = (options: CardSizeOptions | undefined): number => (options?.size ? options.size : DEFAULTE_SIZE);
 
 const useStyles = makeStyles({
   root: {
@@ -45,15 +42,6 @@ const useStyles = makeStyles({
     boxSizing: 'border-box',
     padding: 0,
   },
-  actions: {
-    boxSizing: 'border-box',
-    height: cardFooterHeight,
-    padding: 0,
-    alignItems: 'flex-end',
-  },
-  actionsSpace: {
-    flex: 1,
-  },
   button: {
     '&:hover': {
       backgroundColor: 'transparent',
@@ -65,17 +53,18 @@ const AnyWayCard: FC<IProps> = ({
   widgetName,
   roadNumber,
   children,
-  layoutOptions,
+  sizeOptions,
   getCardRef,
   actionButtons = true,
   title,
+  dateComment,
 }) => {
   const [element, setElement] = useState({});
   const [isOpen, setOpen] = useState(false);
   const handleCardEditorOpen = () => setOpen(true);
   const handleCardEditorClose = () => setOpen(false);
   const variant = getWidgetVariant(widgetName);
-  const factor = getSizeFactor(layoutOptions);
+  const factor = getSizeFactor(sizeOptions);
   const sizes = getSizes(variant, factor);
 
   const classes = useStyles();
@@ -103,8 +92,8 @@ const AnyWayCard: FC<IProps> = ({
   };
 
   return (
-    <div ref={refFn}>
-      <Card className={classes.root} variant="outlined">
+    <>
+      <Card ref={refFn} className={classes.root} variant="outlined">
         <Box height={sizes.height} width={sizes.width} position="relative" padding={3}>
           {/* BACKGROUND IMAGE */}
           <CardBackgroundImage variant={variant.header} />
@@ -112,7 +101,7 @@ const AnyWayCard: FC<IProps> = ({
           {/* HEADER */}
           {variant.header !== HeaderVariant.None && (
             <Box height={sizes.headerHeight} width="100%">
-              <CardHeader variant={variant.header} text={title} road={roadNumber}></CardHeader>
+              <CardHeader variant={variant.header} text={title} road={roadNumber} />
             </Box>
           )}
 
@@ -122,21 +111,16 @@ const AnyWayCard: FC<IProps> = ({
           </Box>
 
           {/* FOOTER */}
-          {/* Todo: refactor footer as a seperate component */}
           {variant.footer !== FooterVariant.None && (
             <Box height={sizes.footerHeight} width="100%">
-              <CardActions className={classes.actions}>
-                {buttons}
-                <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} text={title} />
-                <div className={classes.actionsSpace}></div>
-                <Logo src={LamasImage} alt={'Lamas'} height={30} />
-                <Logo src={AnywayImage} alt={'Anyway'} height={20} />
-              </CardActions>
+              <CardFooter dateComment={dateComment} />
             </Box>
           )}
+          <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} text={title} />
         </Box>
       </Card>
-    </div>
+      {buttons}
+    </>
   );
 };
 export default AnyWayCard;

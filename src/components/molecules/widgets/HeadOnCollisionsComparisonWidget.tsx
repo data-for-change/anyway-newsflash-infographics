@@ -68,7 +68,7 @@ const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePer
   const { t } = useTranslation();
   const bigPieData = data.items.specific_road_segment_fatal_accidents;
   const smallPieData = data.items.all_roads_fatal_accidents;
-  const roadNumberSegment: string = ` כביש ${store.newsFlashWidgetsMetaNumber}`;
+  const roadNumberSegment: string = ` כביש ${store.newsFlashWidgetsMetaRoadNumber}`;
   const descSegment: string = roadNumberSegment == null ? '' : segmetText.substr(roadNumberSegment.length);
   return (
     <Box height={'100%'} display="flex" flexDirection="column">

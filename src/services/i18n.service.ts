@@ -6,6 +6,7 @@ const options = {
   fallbackLng: 'he',
   supportedLngs: ['he', 'en', 'ar'],
   debug: true,
+  lng: 'he',
   interpolation: {
     escapeValue: false,
   },

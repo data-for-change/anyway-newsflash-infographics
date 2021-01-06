@@ -21,14 +21,9 @@ export const loginPopUpDim = {
   height: window.screen.height / 1.8,
 };
 //server url can be on dev or the heroku server
-export const serverUrl =
-  process.env.REACT_APP_MOCK_DEV_MODE === 'true' ? process.env.REACT_APP_BASE_URL_DEV : process.env.REACT_APP_BASE_URL;
+export const serverUrl = process.env.REACT_APP_BASE_URL;
 
-export const authServerUrl =
-  process.env.REACT_APP_MOCK_DEV_MODE === 'true'
-    ? process.env.REACT_APP_BASE_URL_DEV
-    : process.env.REACT_APP_AUTH_BASE_URL;
-
+export const authServerUrl = serverUrl;
 //function return api key depends on the env it running on
 export const mapApiKey = process.env.REACT_APP_GOOGLE_MAP_KEY ? process.env.REACT_APP_GOOGLE_MAP_KEY : '';
 

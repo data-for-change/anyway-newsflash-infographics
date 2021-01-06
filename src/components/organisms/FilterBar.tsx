@@ -54,7 +54,7 @@ const FilterBar: FC<IProps> = () => {
             <Grid item>
               <Grid item container spacing={2}>
                 <Grid item className={classes.locationMeta}>
-                  <Typography.Body2>{store.newsFlashWidgetsMetaString}</Typography.Body2>
+                  <Typography.Body2>{store.newsFlashWidgetsMetaLocation}</Typography.Body2>
                 </Grid>
                 <Grid item className={classes.showDescriptionButton}>
                   <Button.Standard size="small" onClick={() => setIsDescOpen(!isDescOpen)}>

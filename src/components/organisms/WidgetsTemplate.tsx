@@ -12,10 +12,11 @@ import WidgetWrapper from '../molecules/widgets/WidgetWrapper';
 
 const WidgetsTemplate: FC = () => {
   const store: RootStore = useStore();
-
   const widgetsData = store.newsFlashWidgetsData;
-  const widgetCards = widgetsData.map((widget, index) => {
-    const widgetComponent = <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaString} />;
+  const widgetCards = widgetsData.map((widget, index, sizeOptions) => {
+    const widgetComponent = (
+      <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaLocation} sizeOptions={sizeOptions} />
+    );
     if (!widgetComponent) {
       return null;
     }
@@ -23,8 +24,9 @@ const WidgetsTemplate: FC = () => {
       <Box m={2} key={index}>
         <AnyWayCard
           widgetName={widget.name}
-          roadNumber={store.newsFlashWidgetsMetaNumber}
           title={widget.data?.text?.title}
+          dateComment={store.newsFlashWidgetsMetaDateComment}
+          roadNumber={store.newsFlashWidgetsMetaRoadNumber}
         >
           <MetaTag>{widget.name}</MetaTag>
           <ErrorBoundary>{widgetComponent}</ErrorBoundary>

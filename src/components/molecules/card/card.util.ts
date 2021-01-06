@@ -1,7 +1,7 @@
 import { CardVariant, FooterVariant, HeaderVariant } from '../../../services/widgets.style.service';
 import { cardFooterHeight, cardHeaderHeight, cardHeight, cardWidth } from '../../../style';
 
-interface CardSizes {
+export interface CardSizes {
   height: number;
   width: number;
   headerHeight: number;
