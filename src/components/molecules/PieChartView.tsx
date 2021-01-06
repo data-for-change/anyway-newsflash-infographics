@@ -129,7 +129,6 @@ export const PieChartView: FC<IProps> = ({
           label={usePercent ? renderLabelPercent : renderLabelCount}
           labelLine={false}
           startAngle={-270}
-          endAngle={360}
         >
           {data.map((entry: any, index: any) => (
             <Cell key={index} fill={COLORS[index % COLORS.length]} />
