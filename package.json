@@ -7,7 +7,7 @@
     "@material-ui/icons": "^4.9.1",
     "@types/classnames": "^2.2.11",
     "@types/query-string": "^6.3.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "dom-to-image": "^2.6.0",
     "env-cmd": "^10.1.0",
@@ -41,10 +41,10 @@
     "lint": "eslint src/**/*.ts src/**/*.tsx",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sb": "start-storybook -p 9009 -s public",
-    "build-sb": "build-storybook -s public",
     "git:prune": "git remote prune origin",
-    "git:merged": "git branch --merged development"
+    "git:merged": "git branch --merged development",
+    "sb": "start-storybook -p 6006 -s public",
+    "build-sb": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [
@@ -76,11 +76,12 @@
     ]
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^5.3.21",
-    "@storybook/addon-links": "^5.3.21",
-    "@storybook/addons": "^5.3.21",
-    "@storybook/preset-create-react-app": "^1.5.2",
-    "@storybook/react": "^5.3.21",
+    "@storybook/addon-actions": "^6.1.11",
+    "@storybook/addon-essentials": "^6.1.11",
+    "@storybook/addon-links": "^6.1.11",
+    "@storybook/node-logger": "^6.1.11",
+    "@storybook/preset-create-react-app": "^3.1.5",
+    "@storybook/react": "^6.1.11",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",

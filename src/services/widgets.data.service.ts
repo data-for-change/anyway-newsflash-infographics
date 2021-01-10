@@ -1,7 +1,8 @@
 import { defaultWidgetsCollectionData, getDemoWidgetData, mockHTTPCall } from './mocks/mock.service';
 import { ILocationData, IWidgetBase } from '../models/WidgetData';
 import axios from 'axios';
-import { DEMO_ID, showDemoCards } from '../utils/utils';
+import { DEMO_ID, showDemoCards, showOnlyOperCards } from '../utils/utils';
+import { operationalCards } from '../const/cards.const';
 
 export function fetchDefaultWidgets(): Promise<any> {
   // @ts-ignore
@@ -31,15 +32,20 @@ export const fetchWidgets = async (id: number, yearAgo?: number): Promise<ILocat
 };
 
 function processWidgetsFetchResponse(response: any) {
-  console.log(response);
-  const result = {
-    meta: response.data.meta,
-    widgets: getVerifiedWidgetsData(response.data.widgets),
-  };
-  result.widgets = addWidgetsVariants(result.widgets);
-  return result;
+  const meta = response.data.meta;
+  let widgets = response.data.widgets;
+
+  if (showOnlyOperCards) {
+    widgets = getOperWidgetData(widgets);
+  }
+  widgets = getVerifiedWidgetsData(widgets);
+  widgets = addWidgetsVariants(widgets);
+  return { meta, widgets };
 }
 
+function getOperWidgetData(widgets: Array<any>) {
+  return widgets.filter((widget) => operationalCards.includes(widget.name));
+}
 // return array of valid widgets data (invalid widget objects will be removed!)
 function getVerifiedWidgetsData(widgets: Array<any>) {
   const verifiedWidgets = widgets.filter((widget, index) => {
