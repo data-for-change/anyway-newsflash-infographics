@@ -156,3 +156,11 @@ export interface IWidgetAccidentCountByCarType extends IWidgetDataBase {
     percentage_country: number;
   }[];
 }
+export interface IWidgetInjuredAccidentsWithPedestrians extends IWidgetDataBase {
+  items: {
+    YEAR: number;
+    KILLED_INJURY_SEVERITY_COUNT: string | number;
+    SEVERE_INJURY_SEVERITY_COUNT: string | number;
+    LIGHT_INJURY_SEVERITY_COUNT: string | number;
+  }[];
+}

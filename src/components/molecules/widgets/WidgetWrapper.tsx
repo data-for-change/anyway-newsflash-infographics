@@ -16,6 +16,7 @@ import {
   IWidgetTopRoadSegmentsAccidentsPerKm,
   IWidgetAccidentCountByDriverType,
   IWidgetAccidentCountByCarType,
+  IWidgetInjuredAccidentsWithPedestrians,
 } from '../../../models/WidgetData';
 import AccidentsCountByHourBarWidget from './AccidentsCountByHourBarWidget';
 import InjuredCountPerAgeGroupPieWidget from './InjuredCountPerAgeGroupPieWidget';
@@ -33,6 +34,7 @@ import TopRoadSegmentsAccidentsPerKm from './TopRoadSegmentsAccidentsPerKm';
 import AccidentCountByRoadLight from './AccidentCountByRoadLight';
 import AccidentCountByDriverType from './AccidentCountByDriverType';
 import AccidentCountByCarTypeWidget from './AccidentCountByCarTypeWidget';
+import InjuredAccidentsWithPedestrians from './InjuredAccidentsWithPedestrians';
 import { IPoint } from '../../../models/Point';
 import { WidgetName } from '../../../models/WidgetName';
 
@@ -140,6 +142,15 @@ const WidgetWrapper: FC<IProps> = ({ widget, segmentText, sizeOptions }) => {
     case WidgetName.accident_count_by_car_type: {
       widgetComponent = (
         <AccidentCountByCarTypeWidget data={data as IWidgetAccidentCountByCarType} segmentText={segmentText} />
+      );
+      break;
+    }
+    case WidgetName.injured_accidents_with_pedestrians: {
+      widgetComponent = (
+        <InjuredAccidentsWithPedestrians
+          data={data as IWidgetInjuredAccidentsWithPedestrians}
+          segmentText={segmentText}
+        />
       );
       break;
     }
