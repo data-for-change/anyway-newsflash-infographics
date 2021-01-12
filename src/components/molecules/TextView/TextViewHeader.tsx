@@ -50,7 +50,7 @@ const AccidentsOccurred: FC<AProps> = ({ accidentsCount, singleType }) => {
 
 const TextViewHeader: React.FC<IProps> = ({ data: { items }, segmentText, singleType }) => {
   const { t } = useTranslation();
-  const segmentPresentationVal : string= segmentText.replace(roadRegexp,'');
+  const segmentPresentationVal: string = segmentText.replace(roadRegexp, '');
   return (
     <>
       {items.end_year === items.start_year ? (
