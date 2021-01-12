@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState, useEffect } from 'react';
+import React, { FC, useCallback, useState, useEffect, useMemo } from 'react';
 import { makeStyles, createStyles, Divider, Grid, Box } from '@material-ui/core';
 import { AppBar, Toolbar } from '@material-ui/core';
 import SelectButton from '../atoms/SelectButton';
@@ -43,6 +43,10 @@ const FilterBar: FC<IProps> = () => {
     }
   }, [queryParam, store]);
 
+  const titleAndDescriptionMisatch = useMemo(() => {
+    return store.activeNewsFlash?.title !== store.activeNewsFlash?.description;
+  }, [store.activeNewsFlash]);
+
   return (
     <div className={classes.grow}>
       <AppBar position="static" color="transparent" elevation={0}>
@@ -65,10 +69,13 @@ const FilterBar: FC<IProps> = () => {
               {isDescOpen && (
                 <Grid item>
                   <Box mt={1}>
-                    <Typography.Body1>
-                      {store.activeNewsFlash?.description || store.activeNewsFlash?.title}
-                    </Typography.Body1>
+                    <Typography.Body1>{store.activeNewsFlash?.title}</Typography.Body1>
                   </Box>
+                  {titleAndDescriptionMisatch && (
+                    <Box mt={1}>
+                      <Typography.Body3>{store.activeNewsFlash?.description}</Typography.Body3>
+                    </Box>
+                  )}
                 </Grid>
               )}
             </Grid>
