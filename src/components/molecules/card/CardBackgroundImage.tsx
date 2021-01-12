@@ -17,10 +17,11 @@ const useStyles = makeStyles({
     zIndex: -1,
     top: 0,
     right: 0,
+    marginInlineStart: (variant) => (variant === HeaderVariant.Label ? '8px' : 0),
   },
 });
 const CardBackgroundImage: FC<IProps> = ({ variant }) => {
-  const classes = useStyles();
+  const classes = useStyles(variant);
   let src;
   let height;
 
