@@ -5,16 +5,11 @@ import { shadowColor, silverSmokeColor } from '../../../style';
 import Box from '@material-ui/core/Box';
 import TextViewList from './TextViewList';
 import TextViewHeader from './TextViewHeader';
-import Person from '../../../assets/Person.png';
-import Ambulance from '../../../assets/Ambulance.png';
-import Crutches from '../../../assets/Crutches.png';
+import SeverityImage from './SeverityImage';
 
 interface IProps {
   data: IWidgetCountBySeverityTextData;
   segmentText: string;
-}
-interface SProps {
-  severity: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -42,19 +37,6 @@ const extractCount = ({ severity_fatal_count, severity_light_count, severity_sev
   else {
     return null;
   }
-};
-
-const SeverityImage: FC<SProps> = ({ severity }) => {
-  const classes = useStyles();
-  interface SeverityTypesImages {
-    [index: string]: string;
-  }
-  const imgBySeverity: SeverityTypesImages = { fatal: Person, severe: Ambulance, light: Crutches };
-  return (
-    <Box flex={1} display="flex" justifyContent="center">
-      <img src={imgBySeverity[severity]} className={classes.image} alt={imgBySeverity[severity]} />
-    </Box>
-  );
 };
 
 const TextView: FC<IProps> = ({ data, segmentText }) => {
