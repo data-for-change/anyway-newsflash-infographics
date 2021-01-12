@@ -66,7 +66,11 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
         <TextViewHeader singleType={singleType} data={data} segmentText={segmentText} />
       </Box>
       <Box color="text.secondary" px={6}>
-        {countsData ? <TextViewList data={countsData} /> : <SeverityImage severity={singleType as string} />}
+        {countsData ? (
+          <TextViewList data={countsData} />
+        ) : (
+          singleType && <SeverityImage severity={singleType as string} />
+        )}
       </Box>
     </div>
   );
