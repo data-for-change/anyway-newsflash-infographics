@@ -38,12 +38,14 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     height: MAIN_CONTENT_HEIGHT,
     width: '100%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    fontSize: `${(PROPORTION * PRIMARY_FONT_SIZE).toString()}px`,
   },
   primaryDesc: {
     display: 'flex',
     flexDirection: 'column',
-    paddingRight: '10%',
-    paddingTop: '7%',
+    width: '30%',
   },
   secondaryContent: {
     display: 'flex',
@@ -51,14 +53,13 @@ const useStyles = makeStyles(() => ({
     width: '80%',
     position: 'relative',
     bottom: '10%',
-    left: '5%',
-    fontSize: `${(PROPORTION * PRIMARY_FONT_SIZE).toString()} px`,
+    fontSize: `${(PROPORTION * PRIMARY_FONT_SIZE).toString()}px`,
   },
   secondaryDesc: {
-    paddingRight: '20%',
     justifyContent: 'center',
     display: 'flex',
     flexDirection: 'column',
+    width: '30%',
   },
 }));
 
@@ -71,18 +72,18 @@ const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePer
   const roadNumberSegment: string = ` כביש ${store.newsFlashWidgetsMetaRoadNumber}`;
   const descSegment: string = roadNumberSegment == null ? '' : segmetText.substr(roadNumberSegment.length);
   return (
-    <Box height={'100%'} display="flex" flexDirection="column">
+    <Box height={'100%'} display="flex" flexDirection="column" mr={'80px'}>
       <Box className={classes.primaryContent}>
         <Box className={classes.primaryDesc}>
           <Box className={classes.textHighlight}>
-            <Typography.Body5>{roadNumberSegment == null ? null : roadNumberSegment}</Typography.Body5>
+            <Typography.Body2>{roadNumberSegment == null ? null : roadNumberSegment}</Typography.Body2>
           </Box>
           <Box className={classes.segmentDesc}>
-            <Typography.Body5>{descSegment}</Typography.Body5>
+            <Typography.Body3>{descSegment}</Typography.Body3>
           </Box>
         </Box>
         <PieChartView
-          width={'60%'}
+          width={'80%'}
           outerRadius={'115%'}
           labelProps={{ customizedLabel: renderCollisionCustomizedLabel, labelFontSize: '120%' }}
           data={bigPieData}
@@ -94,7 +95,7 @@ const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePer
       <Box className={classes.secondaryContent}>
         <Box className={classes.secondaryDesc}>
           <div className={classes.textHighlight}>
-            <Typography.Body5>{t('onUrban.road')}</Typography.Body5>
+            <Typography.Body3>{t('onUrban.road')}</Typography.Body3>
           </div>
           <div className={classes.segmentDesc}>
             <Typography.Body5>{t('onUrban.location')} </Typography.Body5>
@@ -102,7 +103,7 @@ const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePer
         </Box>
 
         <PieChartView
-          width={'90%'}
+          width={'70%'}
           labelProps={{ customizedLabel: renderCollisionCustomizedLabel, labelFontSize: '100%' }}
           data={smallPieData}
           xLabel={ACCIDENT_TYPE}
