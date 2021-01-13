@@ -1,6 +1,7 @@
 import React, { FC, useCallback } from 'react';
 import { ResponsiveContainer, PieChart, Pie, Cell, PieLabelRenderProps } from 'recharts';
 import { fontFamilyString, pieChartColors, whiteColor } from '../../style';
+import { makeStyles } from '@material-ui/core';
 
 const TEXT_RELATIVE_WIDTH = 0.8;
 interface ILabelProps {
@@ -20,9 +21,15 @@ interface IProps {
 }
 
 // hardcoded colors, will be changed
-//TODO CHANGE COLORS
+// TODO: CHANGE COLORS
 const COLORS = pieChartColors;
 const RADIAN = Math.PI / 180;
+const PIE_SHADOW_ID = 'pie-shadow';
+const useStyles = makeStyles({
+  shadow: {
+    filter: `url(#${PIE_SHADOW_ID})`,
+  },
+});
 
 export const renderCollisionCustomizedLabel = (props: any, fontSize = '100%', usePercent = false) => {
   const { percent, value, name, cx, cy, outerRadius, midAngle } = props;
@@ -117,9 +124,17 @@ export const PieChartView: FC<IProps> = ({
     [labelProps],
   );
 
+  const classes = useStyles();
+
   return (
     <ResponsiveContainer width={width} height={'100%'}>
       <PieChart>
+        <defs>
+          {/* svg drop shadow support. stdDeviation is blur */}
+          <filter id={PIE_SHADOW_ID}>
+            <feDropShadow dx="-2" dy="-2" stdDeviation="5" />
+          </filter>
+        </defs>
         <Pie
           data={data}
           dataKey={yLabel}
@@ -129,6 +144,8 @@ export const PieChartView: FC<IProps> = ({
           label={usePercent ? renderLabelPercent : renderLabelCount}
           labelLine={false}
           startAngle={-270}
+          stroke="none"
+          className={classes.shadow}
         >
           {data.map((entry: any, index: any) => (
             <Cell key={index} fill={COLORS[index % COLORS.length]} />
