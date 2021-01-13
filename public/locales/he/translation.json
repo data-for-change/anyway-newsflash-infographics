@@ -47,21 +47,21 @@
     "on": "ב",
     "occurred": "התרחשו",
     "accidents": "תאונות",
-    "fatal": {
+    "severity_fatal_count": {
       "singular": "קטלנית",
       "plural": "קטלניות"
     },
-    "severe": {
+    "severity_severe_count": {
       "singular": "קשה",
       "plural": "קשות"
     },
-    "light": {
+    "severity_light_count": {
       "singular": "קלה",
       "plural": "קלות"
     }
   },
   "onUrban": {
-    "road": "בכבישים עירוניים (ללא צמתים)",
+    "road": "בכבישים בין עירוניים (ללא צמתים)",
     "location": "בכל הארץ"
   },
   "cardEditor": {

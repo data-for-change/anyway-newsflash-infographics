@@ -3,8 +3,10 @@ import { Card, CardContent, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import widgetToImage from '../../../services/to-image.service';
 import { AnyWayButton } from '../../atoms/AnyWayButton';
+import Tooltip from '@material-ui/core/Tooltip';
 import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
 import SettingsOverscanIcon from '@material-ui/icons/SettingsOverscan';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 
 import { fontFamilyString } from '../../../style';
 import CardHeader from './CardHeader';
@@ -16,6 +18,8 @@ import CardFooter from './CardFooter';
 import CardEditor from '../../organisms/CardEditorDialog';
 
 const DEFAULTE_SIZE = 1;
+const LOREM_IPSUM =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquet mi vitae tristique laoreet. Integer at ante id lectus varius.';
 export interface CardSizeOptions {
   size?: number;
 }
@@ -47,6 +51,9 @@ const useStyles = makeStyles({
     '&:hover': {
       backgroundColor: 'transparent',
     },
+  },
+  hidden: {
+    display: 'none',
   },
 });
 
@@ -82,6 +89,13 @@ const AnyWayCard: FC<IProps> = ({
       <AnyWayButton className={classes.button} disableRipple={true} onClick={handleCardEditorOpen}>
         <SettingsOverscanIcon />
       </AnyWayButton>
+      <Tooltip title={LOREM_IPSUM} placement="top" aria-label="info">
+        <span>
+          <AnyWayButton className={`${classes.button} ${classes.hidden}`} disableRipple={true} onClick={() => {}}>
+            <InfoOutlinedIcon />
+          </AnyWayButton>
+        </span>
+      </Tooltip>
     </>
   );
 
