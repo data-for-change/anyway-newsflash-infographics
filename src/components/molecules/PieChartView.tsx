@@ -132,7 +132,7 @@ export const PieChartView: FC<IProps> = ({
         <defs>
           {/* svg drop shadow support. stdDeviation is blur */}
           <filter id={PIE_SHADOW_ID}>
-            <feDropShadow dx="-2" dy="-2" stdDeviation="5" />
+            <feDropShadow dx="-4" dy="1" stdDeviation="3.5" />
           </filter>
         </defs>
         <Pie
