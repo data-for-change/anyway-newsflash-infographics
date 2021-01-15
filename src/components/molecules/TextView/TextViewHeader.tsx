@@ -32,7 +32,7 @@ const AccidentsOccurred: FC<AProps> = ({ accidentsCount, singleType }) => {
     singleType && (
       <Box mr={1} key={4}>
         <Typography.Body1>
-          {accidentsCount > 1 ? t(`textView.${singleType}.plural`) : t(`textView.${singleType}.F`)}{' '}
+          {accidentsCount > 1 ? t(`textView.${singleType}.plural`) : t(`textView.${singleType}.singular`)}{' '}
         </Typography.Body1>
       </Box>
     ),
