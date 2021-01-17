@@ -76,9 +76,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, segmentText, sizeOptions }) => {
     //   break;
     // }
     case WidgetName.accident_count_by_severity: {
-      widgetComponent = (
-        <CountBySeverityTextWidget data={data as IWidgetCountBySeverityTextData} segmentText={segmentText} />
-      );
+      widgetComponent = <CountBySeverityTextWidget data={data as IWidgetCountBySeverityTextData} />;
       break;
     }
     case WidgetName.accident_count_by_accident_type: {
