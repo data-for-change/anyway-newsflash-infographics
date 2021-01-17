@@ -32,7 +32,7 @@ const AccidentsOccurred: FC<AProps> = ({ accidentsCount, singleType }) => {
     singleType && (
       <Box mr={1} key={4}>
         <Typography.Body1>
-          {accidentsCount > 1 ? t(`textView.${singleType}.plural`) : t(`textView.${singleType}.plural`)}{' '}
+          {accidentsCount > 1 ? t(`textView.${singleType}.plural`) : t(`textView.${singleType}.singular`)}{' '}
         </Typography.Body1>
       </Box>
     ),
@@ -48,7 +48,7 @@ const AccidentsOccurred: FC<AProps> = ({ accidentsCount, singleType }) => {
 };
 
 const TextViewHeader: React.FC<IProps> = ({ data: { items }, segmentText, singleType }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <>
       {items.end_year === items.start_year ? (
@@ -65,7 +65,7 @@ const TextViewHeader: React.FC<IProps> = ({ data: { items }, segmentText, single
         </>
       )}
       <Box mr={1}>
-        <Typography.Body1>{segmentText}</Typography.Body1>
+        <Typography.Body1>{`${t('textView.on')}${i18n.language === 'en' ? ' ' : ''}${segmentText}`}</Typography.Body1>
       </Box>
       <Box>
         <AccidentsOccurred singleType={singleType} accidentsCount={items.total_accidents_count} />
