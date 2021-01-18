@@ -43,7 +43,7 @@ export const fontFamilyString = [
 //road number icon && font
 export const roadIconFont = 'sans-serif';
 export const roadIconColors = {
-  red: '#ff0000',
+  red: '#ae0721',
   blue: '#0000FE',
   green: '#007E00',
   black: '#000000',
