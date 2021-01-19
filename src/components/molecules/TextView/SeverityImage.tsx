@@ -10,15 +10,16 @@ interface SProps {
 }
 
 const useStyles = makeStyles((theme) => ({
-
-  root:{
-    display : 'flex',
-    justifyContent:'center',
-    alignItems : 'flex-end',
-    paddingRight : '10px'
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    paddingRight: theme.spacing(1.25),
+    width: '50%',
+    height: '100%',
   },
   image: {
-    height: theme.spacing(8),
+    height: '80%',
     width: 'auto',
   },
 }));

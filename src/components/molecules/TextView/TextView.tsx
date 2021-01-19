@@ -14,23 +14,24 @@ interface IProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
+    position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
+    width: '100%',
     justifyContent: 'center',
     letterSpacing: 1,
-    padding: theme.spacing(0,6)
   },
   header: {
-    width:'82.51%',
-    height:'20.76%',
-    marginRight: '5%',
-    padding: '0 0 0 9.8%',
+    width: '70.51%',
+    height: '20.76%',
+    margin: '20% 6% 4.1% 0',
   },
-  list :{
-    width: '130%'
-  }
-
+  list: {
+    width: '80%',
+    height: '100%',
+    marginRight: theme.spacing(12),
+  },
 }));
 
 const extractCount = ({ severity_fatal_count, severity_light_count, severity_severe_count }: any) => {
@@ -65,19 +66,16 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
 
   return (
     <div className={classes.root}>
-      <Box className={classes.header} color={shadowColor} textAlign="center">
-        <TextViewHeader  singleType={singleType} data={data} segmentText={segmentText} />
+      <Box my={'30px'} className={classes.header} color={shadowColor} textAlign="center">
+        <TextViewHeader singleType={singleType} data={data} segmentText={segmentText} />
       </Box>
-      <Box color="text.secondary" px={6}>
-        {countsData ? (
-          <Box  className={classes.list}>
+      {countsData ? (
+        <Box color="text.secondary" className={classes.list}>
           <TextViewList data={countsData} />
-          </Box>
-
-        ) : (
-          singleType && <SeverityImage severity={singleType as string} />
-        )}
-      </Box>
+        </Box>
+      ) : (
+        singleType && <SeverityImage severity={singleType as string} />
+      )}
     </div>
   );
 };
