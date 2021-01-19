@@ -136,9 +136,7 @@ const AnyWayCard: FC<IProps> = ({
       </Card>
       <Box display="flex" justifyContent="space-between">
         <Box>{buttons}</Box>
-        <Box>
-          <SocialShare />
-        </Box>
+        <SocialShare />
       </Box>
     </>
   );
