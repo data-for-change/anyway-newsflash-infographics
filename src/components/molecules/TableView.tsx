@@ -3,7 +3,7 @@ import { makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
 import { Typography } from '../atoms';
 import { Table, TableBody, TableCell, TableHead, TableRow, Theme } from '@material-ui/core';
 import { IWidgetMostSevereAccidentsTableData } from '../../models/WidgetData';
-import { silverGrayColor, transparentColor, whiteColor } from '../../style';
+import { silverGrayColor, transparentColor, whiteColor, blackColor } from '../../style';
 import { toJsDateFormat } from '../../utils/time.utils';
 
 interface IProps {
@@ -19,7 +19,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     marginBottom: '10px',
   },
-  table: {},
+  table: {
+    border: `1px solid ${blackColor}`,
+    borderCollapse: 'separate',
+  },
 }));
 
 const StyledTableCell = withStyles((theme: Theme) =>
