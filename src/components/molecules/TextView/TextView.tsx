@@ -22,15 +22,29 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'center',
     letterSpacing: 1,
   },
-  header: {
+  headerBase: {
     width: '70.51%',
     height: '20.76%',
-    margin: '20% 6% 4.1% 0',
+    alignSelf: 'center',
   },
   list: {
     width: '80%',
     height: '100%',
     marginRight: theme.spacing(12),
+  },
+  singleType: {
+    height: '40%',
+    width: 'auto',
+    alignSelf: 'center',
+    position: 'relative',
+    bottom: '20%',
+  },
+  headerSingleType: {
+    position: 'relative',
+    bottom: '25%',
+  },
+  headerList: {
+    margin: '20% 6% 4.1% 0',
   },
 }));
 
@@ -66,7 +80,12 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
 
   return (
     <div className={classes.root}>
-      <Box my={'30px'} className={classes.header} color={shadowColor} textAlign="center">
+      <Box
+        my={'30px'}
+        className={`${classes.headerBase} ${singleType ? `${classes.headerSingleType}` : `${classes.headerList}`}`}
+        color={shadowColor}
+        textAlign="center"
+      >
         <TextViewHeader singleType={singleType} data={data} segmentText={segmentText} />
       </Box>
       {countsData ? (
@@ -74,7 +93,11 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
           <TextViewList data={countsData} />
         </Box>
       ) : (
-        singleType && <SeverityImage severity={singleType as string} />
+        singleType && (
+          <Box className={classes.singleType}>
+            <SeverityImage severity={singleType as string} />
+          </Box>
+        )
       )}
     </div>
   );
