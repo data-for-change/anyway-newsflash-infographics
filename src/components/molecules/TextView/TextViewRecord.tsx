@@ -3,6 +3,7 @@ import Box from '@material-ui/core/Box';
 import { roadIconColors, silverSmokeColor } from '../../../style';
 import SeverityImage from './SeverityImage';
 import { makeStyles } from '@material-ui/core/styles';
+import { Typography } from '../../atoms';
 
 interface IProps {
   numOfAccidents: number;
@@ -18,10 +19,19 @@ const useStyles = makeStyles(() => ({
     width: '80%',
     height: '20%',
   },
+  text: {
+    position: 'relative',
+    top: '15%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    lineHeight: '0.5',
+    justifyContent: 'center',
+  },
   acNum: {
     color: roadIconColors.red,
-    fontSize: '30px',
     fontWeight: 'bold',
+    fontSize: '200%',
     fontFamily: 'Alef',
   },
 }));
@@ -31,11 +41,9 @@ const TextViewRecord: React.FC<IProps> = ({ isLast, numOfAccidents, severityDesc
   return (
     <Box className={classes.root} py={1} borderBottom={isLast ? '' : `5px solid ${silverSmokeColor}`}>
       <SeverityImage severity={imgSrc} />
-      <Box lineHeight={'1.1'} display="flex" flexDirection="column" alignItems="center" justifyContent={'center'}>
+      <Box className={classes.text}>
         <Box className={classes.acNum}>{numOfAccidents}</Box>
-        <Box fontWeight={'normal'} fontSize={'27px'} fontFamily={'Alef'}>
-          {severityDesc}
-        </Box>
+        <Typography.Title1>{severityDesc}</Typography.Title1>
       </Box>
     </Box>
   );

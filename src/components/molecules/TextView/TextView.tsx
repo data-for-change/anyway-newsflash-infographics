@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { IWidgetCountBySeverityTextData } from '../../../models/WidgetData';
 import { Theme, makeStyles } from '@material-ui/core';
-import { shadowColor } from '../../../style';
+import { textViewHeader } from '../../../style';
 import Box from '@material-ui/core/Box';
 import TextViewList from './TextViewList';
 import TextViewHeader from './TextViewHeader';
@@ -15,6 +15,7 @@ interface IProps {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     position: 'relative',
+    top: '10%',
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   list: {
     width: '80%',
     height: '100%',
-    marginRight: theme.spacing(12),
+    paddingRight: theme.spacing(12),
   },
   singleType: {
     height: '40%',
@@ -38,13 +39,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignSelf: 'center',
     position: 'relative',
     bottom: '20%',
+    margin: theme.spacing(2),
   },
   headerSingleType: {
     position: 'relative',
-    bottom: '25%',
+    bottom: '20%',
   },
   headerList: {
-    margin: '20% 6% 4.1% 0',
+    margin: '0 6% 0 0',
   },
 }));
 
@@ -83,7 +85,7 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
       <Box
         my={'30px'}
         className={`${classes.headerBase} ${singleType ? `${classes.headerSingleType}` : `${classes.headerList}`}`}
-        color={shadowColor}
+        color={textViewHeader}
         textAlign="center"
       >
         <TextViewHeader singleType={singleType} data={data} segmentText={segmentText} />
