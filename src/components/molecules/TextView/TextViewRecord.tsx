@@ -12,7 +12,7 @@ interface IProps {
   isLast?: boolean;
 }
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     justifyContent: 'space-around',
@@ -21,7 +21,7 @@ const useStyles = makeStyles(() => ({
   },
   text: {
     position: 'relative',
-    top: '15%',
+    top: theme.spacing(2),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
