@@ -50,10 +50,11 @@ const WidgetWrapper: FC<IProps> = ({ widget, segmentText, sizeOptions }) => {
       widgetComponent = <AccidentsCountByHourBarWidget data={data as IWidgetAccidentsByHourBarData} />;
       break;
     }
-    case WidgetName.injured_count_per_age_group: {
-      widgetComponent = <InjuredCountPerAgeGroupPieWidget data={data as IWidgetInjuredCountPerAgeGroupPieData} />;
-      break;
-    }
+    // Temp - until server issues has been staged
+    // case WidgetName.injured_count_per_age_group: {
+    //   widgetComponent = <InjuredCountPerAgeGroupPieWidget data={data as IWidgetInjuredCountPerAgeGroupPieData} />;
+    //   break;
+    // }
     case WidgetName.most_severe_accidents: {
       widgetComponent = (
         <MostSevereAccidentsMapWidget data={data as IWidgetMostSevereAccidentsData} sizeOptions={sizeOptions} />
