@@ -3,7 +3,7 @@ import {
   IWidgetAccidentCountByRoadLight,
   IWidgetBase,
   IWidgetAccidentsByHourBarData,
-  IWidgetInjuredCountPerAgeGroupPieData,
+  // IWidgetInjuredCountPerAgeGroupPieData,
   IWidgetMostSevereAccidentsData,
   IWidgetMostSevereAccidentsTableData,
   IWidgetCountBySeverityTextData,
@@ -18,7 +18,7 @@ import {
   IWidgetAccidentCountByCarType,
 } from '../../../models/WidgetData';
 import AccidentsCountByHourBarWidget from './AccidentsCountByHourBarWidget';
-import InjuredCountPerAgeGroupPieWidget from './InjuredCountPerAgeGroupPieWidget';
+// import InjuredCountPerAgeGroupPieWidget from './InjuredCountPerAgeGroupPieWidget';
 import MostSevereAccidentsMapWidget from './MostSevereAccidentsMapWidget';
 import MostSevereAccidentsTableWidget from './MostSevereAccidentsTableWidget';
 import HeatMap from '../HeatMap';
