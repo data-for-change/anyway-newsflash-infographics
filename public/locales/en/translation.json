@@ -47,15 +47,15 @@
     "on": "on",
     "occurred": "occurred",
     "accidents": "accidents",
-    "severity_fatal_count": {
+    "fatal": {
       "singular": "fatal",
       "plural": "fatal"
     },
-    "severity_severe_count": {
+    "severe": {
       "singular": "severe",
       "plural": "severe"
     },
-    "severity_light_count": {
+    "light": {
       "singular": "light",
       "plural": "light"
     }
