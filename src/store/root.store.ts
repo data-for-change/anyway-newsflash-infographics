@@ -60,8 +60,14 @@ export default class RootStore {
 
   @computed
   get newsFlashWidgetsMetaLocation(): string {
-    let { location_text } = this.newsFlashWidgetsMeta;
+    const { location_text } = this.newsFlashWidgetsMeta;
     return location_text ? location_text : '';
+  }
+
+  @computed
+  get newsFlashWidgetsMetaSegmentName(): string {
+    const { road_segment_name } =  this.newsFlashWidgetsMeta.location_info;
+    return road_segment_name ? road_segment_name : '';
   }
 
   @computed

@@ -3,7 +3,7 @@ import {
   IWidgetAccidentCountByRoadLight,
   IWidgetBase,
   IWidgetAccidentsByHourBarData,
-  IWidgetInjuredCountPerAgeGroupPieData,
+  // IWidgetInjuredCountPerAgeGroupPieData,
   IWidgetMostSevereAccidentsData,
   IWidgetMostSevereAccidentsTableData,
   IWidgetCountBySeverityTextData,
@@ -18,7 +18,7 @@ import {
   IWidgetAccidentCountByCarType,
 } from '../../../models/WidgetData';
 import AccidentsCountByHourBarWidget from './AccidentsCountByHourBarWidget';
-import InjuredCountPerAgeGroupPieWidget from './InjuredCountPerAgeGroupPieWidget';
+// import InjuredCountPerAgeGroupPieWidget from './InjuredCountPerAgeGroupPieWidget';
 import MostSevereAccidentsMapWidget from './MostSevereAccidentsMapWidget';
 import MostSevereAccidentsTableWidget from './MostSevereAccidentsTableWidget';
 import HeatMap from '../HeatMap';
@@ -38,11 +38,12 @@ import { WidgetName } from '../../../models/WidgetName';
 
 interface IProps {
   widget: IWidgetBase;
-  segmentText: string;
+  locationText: string;
   sizeOptions: any;
+  segmentText: string;
 }
 
-const WidgetWrapper: FC<IProps> = ({ widget, segmentText, sizeOptions }) => {
+const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentText }) => {
   const { name, data } = widget;
   let widgetComponent;
   switch (name) {
@@ -50,10 +51,11 @@ const WidgetWrapper: FC<IProps> = ({ widget, segmentText, sizeOptions }) => {
       widgetComponent = <AccidentsCountByHourBarWidget data={data as IWidgetAccidentsByHourBarData} />;
       break;
     }
-    case WidgetName.injured_count_per_age_group: {
-      widgetComponent = <InjuredCountPerAgeGroupPieWidget data={data as IWidgetInjuredCountPerAgeGroupPieData} />;
-      break;
-    }
+    // Temp - until server issues has been staged
+    // case WidgetName.injured_count_per_age_group: {
+    //   widgetComponent = <InjuredCountPerAgeGroupPieWidget data={data as IWidgetInjuredCountPerAgeGroupPieData} />;
+    //   break;
+    // }
     case WidgetName.most_severe_accidents: {
       widgetComponent = (
         <MostSevereAccidentsMapWidget data={data as IWidgetMostSevereAccidentsData} sizeOptions={sizeOptions} />
@@ -77,7 +79,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, segmentText, sizeOptions }) => {
     // }
     case WidgetName.accident_count_by_severity: {
       widgetComponent = (
-        <CountBySeverityTextWidget data={data as IWidgetCountBySeverityTextData} segmentText={segmentText} />
+        <CountBySeverityTextWidget segmentText={segmentText} data={data as IWidgetCountBySeverityTextData} />
       );
       break;
     }
@@ -102,7 +104,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, segmentText, sizeOptions }) => {
       widgetComponent = (
         <HeadOnCollisionsComparisonWidget
           data={data as IWidgetHeadOnCollisionsComparisonData}
-          segmetText={segmentText}
+          segmetText={locationText}
         />
       );
       break;
@@ -111,7 +113,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, segmentText, sizeOptions }) => {
       widgetComponent = (
         <HeadOnCollisionsComparisonWidget
           data={data as IWidgetHeadOnCollisionsComparisonData}
-          segmetText={segmentText}
+          segmetText={locationText}
           usePercent={true}
         />
       );
@@ -123,13 +125,13 @@ const WidgetWrapper: FC<IProps> = ({ widget, segmentText, sizeOptions }) => {
     }
     case WidgetName.top_road_segments_accidents_per_km: {
       widgetComponent = (
-        <TopRoadSegmentsAccidentsPerKm data={data as IWidgetTopRoadSegmentsAccidentsPerKm} segmentText={segmentText} />
+        <TopRoadSegmentsAccidentsPerKm data={data as IWidgetTopRoadSegmentsAccidentsPerKm} segmentText={locationText} />
       );
       break;
     }
     case WidgetName.accident_count_by_road_light: {
       widgetComponent = (
-        <AccidentCountByRoadLight data={data as IWidgetAccidentCountByRoadLight} segmentText={segmentText} />
+        <AccidentCountByRoadLight data={data as IWidgetAccidentCountByRoadLight} segmentText={locationText} />
       );
       break;
     }
@@ -139,7 +141,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, segmentText, sizeOptions }) => {
     }
     case WidgetName.accident_count_by_car_type: {
       widgetComponent = (
-        <AccidentCountByCarTypeWidget data={data as IWidgetAccidentCountByCarType} segmentText={segmentText} />
+        <AccidentCountByCarTypeWidget data={data as IWidgetAccidentCountByCarType} segmentText={locationText} />
       );
       break;
     }
