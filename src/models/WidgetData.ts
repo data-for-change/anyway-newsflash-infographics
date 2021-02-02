@@ -158,9 +158,9 @@ export interface IWidgetAccidentCountByCarType extends IWidgetDataBase {
 }
 export interface IWidgetInjuredAccidentsWithPedestrians extends IWidgetDataBase {
   items: {
-    YEAR: number;
-    KILLED_INJURY_SEVERITY_COUNT: string | number;
-    SEVERE_INJURY_SEVERITY_COUNT: string | number;
-    LIGHT_INJURY_SEVERITY_COUNT: string | number;
+    year: number;
+    killed_injury_severity_count: number;
+    severe_injury_severity_count: number;
+    light_injury_severity_count: number;
   }[];
 }
