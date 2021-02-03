@@ -42,7 +42,7 @@ const useStyles = makeStyles({
     borderWidth: '0 3px 3px 0',
     display: 'inline-block',
     padding: '6px',
-    transform: (type: ClockPosition) => getArrowDirection(type),
+    transform: (type) => getArrowDirection(type as ClockPosition),
   },
 });
 const TooltipArrow: FC<IProps> = ({ type }) => {
