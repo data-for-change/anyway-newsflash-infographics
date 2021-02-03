@@ -20,8 +20,6 @@ interface IProps {
   labelProps?: ILabelProps;
 }
 
-// hardcoded colors, will be changed
-// TODO: CHANGE COLORS
 const COLORS = pieChartColors;
 const RADIAN = Math.PI / 180;
 const PIE_SHADOW_ID = 'pie-shadow';
@@ -130,7 +128,6 @@ export const PieChartView: FC<IProps> = ({
     <ResponsiveContainer width={width} height={'100%'}>
       <PieChart>
         <defs>
-          {/* svg drop shadow support. stdDeviation is blur */}
           <filter id={PIE_SHADOW_ID}>
             <feDropShadow dx="-4" dy="1" stdDeviation="3.5" />
           </filter>
