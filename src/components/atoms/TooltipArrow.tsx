@@ -37,16 +37,16 @@ const getArrowDirection = (type: ClockPosition) => {
 };
 
 const useStyles = makeStyles({
-  arrow: {
+  arrow: (props: { type: ClockPosition }) => ({
     border: `solid ${blackColor}`,
     borderWidth: '0 3px 3px 0',
     display: 'inline-block',
     padding: '6px',
-    transform: (type: ClockPosition) => getArrowDirection(type),
-  },
+    transform: getArrowDirection(props.type),
+  }),
 });
-const TooltipArrow: FC<IProps> = ({ type }) => {
-  const classes = useStyles(type);
+const TooltipArrow: FC<IProps> = (props) => {
+  const classes = useStyles(props);
   return <i className={classes.arrow}></i>;
 };
 export default TooltipArrow;
