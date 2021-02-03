@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core';
 
 const TEXT_RELATIVE_WIDTH = 0.8;
 interface ILabelProps {
-  customizedLabel: (props: any, fontSize?: string, usePercent?: boolean) => JSX.Element | null;
+  customizedLabel: (props: any, fontSize?: string, usePercent?: boolean, single?: boolean) => JSX.Element | null;
   labelFontSize?: string;
 }
 
@@ -29,30 +29,58 @@ const useStyles = makeStyles({
   },
 });
 
-export const renderCollisionCustomizedLabel = (props: any, fontSize = '100%', usePercent = false) => {
+export const renderCollisionCustomizedLabel = (props: any, fontSize = '100%', usePercent = false, single = false) => {
   const { percent, value, name, cx, cy, outerRadius, midAngle } = props;
-  const labelText = usePercent ? `${Math.round(percent * 100)}%` : value;
   const sin = Math.sin(-RADIAN * midAngle); // if sin >= 0 label is on top half
   const cos = Math.cos(-RADIAN * midAngle);
-  //adjustment to the label position inside the pie charts
-  const ex = cx + outerRadius * 0.5 * cos + (cos >= 0 ? -1 : -1.5) * 20;
-  const ey = cy + outerRadius * 0.4 * sin - 20;
+  const labelText = usePercent ? `${Math.round(percent * 100)}%` : value;
+
+  const singleSliceLabelPosition = {
+    x: cx - outerRadius / 2,
+    y: cy - outerRadius / 2,
+    height: outerRadius,
+    width: outerRadius,
+  };
+
+  const sliceLabelPosition = {
+    x: cx + outerRadius * 0.5 * cos + (cos >= 0 ? -1 : -1.5) * 20,
+    y: cy + outerRadius * 0.4 * sin - 20,
+    height: outerRadius * TEXT_RELATIVE_WIDTH,
+    width: outerRadius * TEXT_RELATIVE_WIDTH,
+  };
+
+  const position = single ? singleSliceLabelPosition : sliceLabelPosition;
 
   const collisionLabelStyle = {
     color: whiteColor,
     textAlign: 'center' as 'center',
     fontWeight: 'normal' as 'normal',
     fontSize: fontSize,
-    height: '20%',
+  };
+
+  const wrapperStyle = {
+    display: 'flex',
+    flexDirection: 'column' as 'column',
+    height: '100%',
+    justifyContent: 'center',
   };
 
   return (
     <g>
       {/*  for text wrapping in svg - use foreignObject make sure to give foreignObject height and width, or inner element
         will not be displayed https://stackoverflow.com/questions/4991171/auto-line-wrapping-in-svg-text*/}
-      <foreignObject style={collisionLabelStyle} fill={'white'} x={ex} y={ey} width={outerRadius * TEXT_RELATIVE_WIDTH}>
-        <p>{labelText}</p>
-        <p>{name}</p>
+      <foreignObject
+        style={collisionLabelStyle}
+        fill={'white'}
+        x={Math.round(position.x)}
+        y={Math.round(position.y)}
+        height={position.height}
+        width={position.width}
+      >
+        <div style={single ? wrapperStyle : undefined}>
+          <p>{labelText}</p>
+          <p>{name}</p>
+        </div>
       </foreignObject>
     </g>
   );
@@ -113,13 +141,10 @@ export const PieChartView: FC<IProps> = ({
   usePercent,
   labelProps = { customizedLabel: renderCustomizedLabel },
 }) => {
-  const renderLabelCount = useCallback(
-    (props: PieLabelRenderProps) => labelProps.customizedLabel(props, labelProps.labelFontSize),
-    [labelProps],
-  );
-  const renderLabelPercent = useCallback(
-    (props: PieLabelRenderProps) => labelProps.customizedLabel(props, labelProps.labelFontSize, true),
-    [labelProps],
+  const renderLabel = useCallback(
+    (props: PieLabelRenderProps) =>
+      labelProps.customizedLabel(props, labelProps.labelFontSize, usePercent, data.length === 1),
+    [labelProps, usePercent, data],
   );
 
   const classes = useStyles();
@@ -138,11 +163,12 @@ export const PieChartView: FC<IProps> = ({
           nameKey={xLabel}
           innerRadius={innerRadius}
           outerRadius={outerRadius}
-          label={usePercent ? renderLabelPercent : renderLabelCount}
+          label={renderLabel}
           labelLine={false}
           startAngle={-270}
           stroke="none"
           className={classes.shadow}
+          isAnimationActive={false}
         >
           {data.map((entry: any, index: any) => (
             <Cell key={index} fill={COLORS[index % COLORS.length]} />

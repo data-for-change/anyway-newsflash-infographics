@@ -40,7 +40,6 @@ const useStyles = makeStyles(() => ({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'space-between',
-    fontSize: `${(PROPORTION * PRIMARY_FONT_SIZE).toString()}px`,
   },
   primaryDesc: {
     display: 'flex',
@@ -53,7 +52,6 @@ const useStyles = makeStyles(() => ({
     width: '80%',
     position: 'relative',
     bottom: '10%',
-    fontSize: `${(PROPORTION * PRIMARY_FONT_SIZE).toString()}px`,
   },
   secondaryDesc: {
     justifyContent: 'center',
