@@ -17,6 +17,7 @@ import {
   IWidgetAccidentCountByRoadLight,
   IWidgetAccidentCountByDriverType,
   IWidgetAccidentCountByCarType,
+  IWidgetInjuredAccidentsWithPedestrians,
 } from './WidgetData';
 
 export type IWidgetDataType =
@@ -37,4 +38,5 @@ export type IWidgetDataType =
   | IWidgetTopRoadSegmentsAccidentsPerKm
   | IWidgetAccidentCountByRoadLight
   | IWidgetAccidentCountByDriverType
-  | IWidgetAccidentCountByCarType;
+  | IWidgetAccidentCountByCarType
+  | IWidgetInjuredAccidentsWithPedestrians;
