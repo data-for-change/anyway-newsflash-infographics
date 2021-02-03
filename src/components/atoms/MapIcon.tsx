@@ -9,7 +9,7 @@ import carRedIcon from '../../assets/map/car-red-marker.png';
 import shadowIcon from '../../assets/map/marker-shadow.png';
 import { IconTypes, SeverityTypes } from '../../models/Map';
 
-const STANDARD_ICON_SIZE = { iconSize: [25, 41], iconAnchor: [0, 0], popupAnchor: [1, -34], shadowSize: [41, 41] };
+const STANDARD_ICON_SIZE = { iconSize: [25, 41], iconAnchor: [17, 46], popupAnchor: [1, -34], shadowSize: [41, 41] };
 const CAR_ICON_SIZE = { iconSize: [25, 25], iconAnchor: [10, 15], popupAnchor: [0, -4], shadowSize: [41, 41] };
 
 const createLeafletIcon = (image: string, iconSize: any, shadow?: string) => {
@@ -18,7 +18,7 @@ const createLeafletIcon = (image: string, iconSize: any, shadow?: string) => {
     shadowUrl: shadow,
     iconSize: L.point(iconSize.iconSize[0], iconSize.iconSize[1]),
     // point of the icon which will correspond to marker's location
-    iconAnchor: [17, 46],
+    iconAnchor: L.point(iconSize.iconAnchor[0], iconSize.iconAnchor[1]),
     popupAnchor: L.point(iconSize.popupAnchor[0], iconSize.popupAnchor[1]),
     shadowSize: L.point(iconSize.shadowSize[0], iconSize.shadowSize[1]),
   });

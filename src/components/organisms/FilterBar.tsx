@@ -62,9 +62,13 @@ const FilterBar: FC<IProps> = () => {
                   </Button.Standard>
                 </Grid>
               </Grid>
-              <Grid item>
-                <Box mt={1}>{isDescOpen && <Typography.Body1>{store.activeNewsFlash?.title}</Typography.Body1>}</Box>
-              </Grid>
+              {isDescOpen && (
+                <Grid item>
+                  <Box mt={1}>
+                    <Typography.Body3>{store.activeNewsFlash?.description}</Typography.Body3>
+                  </Box>
+                </Grid>
+              )}
             </Grid>
           </Grid>
         </Toolbar>

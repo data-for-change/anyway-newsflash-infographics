@@ -40,7 +40,12 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
     size,
   };
   const widgetComponent = !widget ? null : (
-    <WidgetWrapper widget={widget} segmentText={store.newsFlashWidgetsMetaLocation} sizeOptions={sizeOptions.size} />
+    <WidgetWrapper
+      segmentText={store.newsFlashWidgetsMetaSegmentName}
+      widget={widget}
+      locationText={store.newsFlashWidgetsMetaLocation}
+      sizeOptions={sizeOptions.size}
+    />
   );
 
   return (
