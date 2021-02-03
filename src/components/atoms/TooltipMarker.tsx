@@ -88,15 +88,15 @@ const useStyles = makeStyles({
     height: 0,
     backgroundColor: transparentColor,
   },
-  root: (props: { offset: ClockPosition }) => ({
+  root: {
     position: 'absolute',
     right: 16,
     bottom: 0,
-    transform: getLabelPosition(props.offset),
+    transform: (offset) => getLabelPosition(offset as ClockPosition),
     display: 'flex',
-    flexFlow: getLabelFlexFlow(props.offset),
+    flexFlow: (offset) => getLabelFlexFlow(offset as ClockPosition),
     alignItems: 'center',
-  }),
+  },
   content: () => ({
     position: 'relative',
     order: 1,
@@ -106,17 +106,16 @@ const useStyles = makeStyles({
     color: whiteColor,
     backgroundColor: blackColor,
   }),
-  arrow: (props: { offset: ClockPosition }) => ({
+  arrow: {
     display: 'inline-flex',
     borderStyle: 'solid',
     borderWidth: '5px 0 5px 20px',
     borderColor: tooltipMarkerBorderColorArrow,
-    transform: getLabelArrowRotation(props.offset),
-  }),
+    transform: (offset) => getLabelArrowRotation(offset as ClockPosition),
+  },
 });
-const TooltipMarker = (props: any) => {
-  const { data, position } = props;
-  const classes = useStyles(props);
+const TooltipMarker = ({ data, position, offset }: any) => {
+  const classes = useStyles(offset);
   // const { accident_timestamp, accident_severity, accident_type = '' } = markerData;
   // const { accident_timestamp, accident_severity, accident_type = '' } = markerData;
   // const typeStr = accident_type === '' ? '' : `, ${accident_type}`;
