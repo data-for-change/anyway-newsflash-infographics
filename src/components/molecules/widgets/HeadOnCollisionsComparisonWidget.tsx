@@ -12,8 +12,6 @@ const ACCIDENT_TYPE = 'desc';
 const COUNT = 'count';
 const MAIN_CONTENT_HEIGHT = 250;
 const SECONDARY_CONTENT_HEIGHT = 190;
-const PROPORTION: number = SECONDARY_CONTENT_HEIGHT / MAIN_CONTENT_HEIGHT;
-const PRIMARY_FONT_SIZE = 14;
 
 interface IProps {
   data: IWidgetHeadOnCollisionsComparisonData;
