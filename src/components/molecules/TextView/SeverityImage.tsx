@@ -10,8 +10,16 @@ interface SProps {
 }
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    paddingRight: theme.spacing(1),
+    width: '50%',
+    height: '100%',
+  },
   image: {
-    height: theme.spacing(11),
+    height: '80%',
     width: 'auto',
   },
 }));
@@ -23,7 +31,7 @@ const SeverityImage: FC<SProps> = ({ severity }) => {
   }
   const imgBySeverity: SeverityTypesImages = { fatal: Person, severe: Ambulance, light: Crutches };
   return (
-    <Box flex={1} display="flex" justifyContent="center">
+    <Box className={classes.root}>
       <img src={imgBySeverity[severity]} className={classes.image} alt={imgBySeverity[severity]} />
     </Box>
   );

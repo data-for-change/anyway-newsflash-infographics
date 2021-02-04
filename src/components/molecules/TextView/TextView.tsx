@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { IWidgetCountBySeverityTextData } from '../../../models/WidgetData';
 import { Theme, makeStyles } from '@material-ui/core';
-import { shadowColor, silverSmokeColor } from '../../../style';
+import { textViewHeaderColor } from '../../../style';
 import Box from '@material-ui/core/Box';
 import TextViewList from './TextViewList';
 import TextViewHeader from './TextViewHeader';
@@ -14,19 +14,39 @@ interface IProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
+    position: 'relative',
+    top: '10%',
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
-    justifyContent: 'space-evenly',
+    width: '100%',
+    justifyContent: 'center',
     letterSpacing: 1,
-    padding: `0 ${theme.spacing(6)}px`,
   },
-  border: {
-    borderBottom: `5px solid ${silverSmokeColor}`,
+  headerBase: {
+    width: '70%',
+    height: '20%',
+    alignSelf: 'center',
   },
-  image: {
-    height: theme.spacing(11),
+  list: {
+    width: '80%',
+    height: '100%',
+    paddingRight: theme.spacing(12),
+  },
+  singleTypeImage: {
+    height: '40%',
     width: 'auto',
+    alignSelf: 'center',
+    position: 'relative',
+    bottom: '20%',
+    margin: theme.spacing(2),
+  },
+  headerSingleType: {
+    position: 'relative',
+    bottom: '20%',
+  },
+  headerList: {
+    marginRight: theme.spacing(4),
   },
 }));
 
@@ -62,16 +82,24 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
 
   return (
     <div className={classes.root}>
-      <Box color={shadowColor} textAlign="center">
+      <Box
+        className={`${classes.headerBase} ${singleType ? `${classes.headerSingleType}` : `${classes.headerList}`}`}
+        color={textViewHeaderColor}
+        textAlign="center"
+      >
         <TextViewHeader singleType={singleType} data={data} segmentText={segmentText} />
       </Box>
-      <Box color="text.secondary" px={6}>
-        {countsData ? (
+      {countsData ? (
+        <Box color="text.secondary" className={classes.list}>
           <TextViewList data={countsData} />
-        ) : (
-          singleType && <SeverityImage severity={singleType as string} />
-        )}
-      </Box>
+        </Box>
+      ) : (
+        singleType && (
+          <Box className={classes.singleTypeImage}>
+            <SeverityImage severity={singleType as string} />
+          </Box>
+        )
+      )}
     </div>
   );
 };

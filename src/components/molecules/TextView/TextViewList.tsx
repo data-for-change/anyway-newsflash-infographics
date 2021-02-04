@@ -18,18 +18,19 @@ const TextViewList: React.FC<IProps> = ({ data }) => {
           imgSrc={'fatal'}
         />
       )}
-      {data.severity_light_count && (
-        <TextViewRecord
-          numOfAccidents={data.severity_light_count}
-          severityDesc={t(`textView.light.${data.severity_light_count > 1 ? 'plural' : 'singular'}`)}
-          imgSrc={'light'}
-        />
-      )}
       {data.severity_severe_count && (
         <TextViewRecord
           numOfAccidents={data.severity_severe_count}
           severityDesc={t(`textView.severe.${data.severity_severe_count > 1 ? 'plural' : 'singular'}`)}
           imgSrc={'severe'}
+        />
+      )}
+      {data.severity_light_count && (
+        <TextViewRecord
+          isLast={true}
+          numOfAccidents={data.severity_light_count}
+          severityDesc={t(`textView.light.${data.severity_light_count > 1 ? 'plural' : 'singular'}`)}
+          imgSrc={'light'}
         />
       )}
     </>

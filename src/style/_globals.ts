@@ -7,6 +7,7 @@ export const skyBlueColor = '#00aaff';
 export const oceanBlueColor = '#0088cc';
 //white-Gray base collection
 export const shadowColor = '#4c4c4c';
+export const textViewHeaderColor = '#5a5b5e';
 export const smokeWhiteColor = '#f5f5f5';
 //silver-Gray base collection
 export const silverSmokeColor = '#D3D3D3';
@@ -45,7 +46,7 @@ export const fontFamilyString = [
 //road number icon && font
 export const roadIconFont = 'sans-serif';
 export const roadIconColors = {
-  red: '#ff0000',
+  red: '#ae0721',
   blue: '#0000FE',
   green: '#007E00',
   black: '#000000',
