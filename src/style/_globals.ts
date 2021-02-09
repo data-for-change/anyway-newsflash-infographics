@@ -17,6 +17,8 @@ export const silverSpoonColor = '#647171';
 export const roseColor = '#c43a31';
 export const cherryJamColor = '#8a1212';
 export const honeyColor = '#F2BB0A';
+//Stacked chart
+export const yellowColor = '#ffdd22';
 
 export const defaultBorderRadius = 4;
 export const sidBarWidth = 300;
