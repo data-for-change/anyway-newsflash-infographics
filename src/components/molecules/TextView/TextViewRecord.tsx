@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    lineHeight: '0.5',
+    lineHeight: 0.5,
     justifyContent: 'center',
   },
   acNum: {
@@ -40,7 +40,7 @@ const TextViewRecord: React.FC<IProps> = ({ isLast, numOfAccidents, severityDesc
   const classes = useStyles();
   return (
     <Box className={classes.root} py={1} borderBottom={isLast ? '' : `5px solid ${silverSmokeColor}`}>
-      <SeverityImage severity={imgSrc} />
+      <SeverityImage inRecord severity={imgSrc} />
       <Box className={classes.text}>
         <Box className={classes.acNum}>{numOfAccidents}</Box>
         <Typography.Title1>{severityDesc}</Typography.Title1>
