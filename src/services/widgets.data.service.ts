@@ -34,12 +34,12 @@ export const fetchWidgets = async (id: number, yearAgo?: number): Promise<ILocat
 function processWidgetsFetchResponse(response: any) {
   const meta = response.data.meta;
   let widgets = response.data.widgets;
+  widgets = getVerifiedWidgetsData(widgets);
+  widgets = addWidgetsVariants(widgets);
 
   if (showOnlyOperCards) {
     widgets = getOperWidgetData(widgets);
   }
-  widgets = getVerifiedWidgetsData(widgets);
-  widgets = addWidgetsVariants(widgets);
   return { meta, widgets };
 }
 
