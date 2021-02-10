@@ -17,7 +17,7 @@ const useStyles = makeStyles<Theme, IProps>((theme) => ({
     zIndex: -1,
     top: 0,
     right: 0,
-    marginInlineStart: (props) => (props.variant === HeaderVariant.Label ? `${theme.spacing(1)}px` : 0),
+    marginInlineStart: (props) => (props.variant === HeaderVariant.Label ? theme.spacing(1) : 0),
   },
 }));
 
