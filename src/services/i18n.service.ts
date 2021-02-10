@@ -6,6 +6,7 @@ const options = {
   fallbackLng: 'he',
   supportedLngs: ['he', 'en', 'ar'],
   debug: true,
+  lng: 'he',
   interpolation: {
     escapeValue: false,
   },
@@ -14,7 +15,5 @@ const options = {
   },
 };
 i18n.use(HttpApi).use(initReactI18next).init(options);
-
-export const textDirection = i18n.dir(); //return direction ltr/rtl
 
 export default i18n;

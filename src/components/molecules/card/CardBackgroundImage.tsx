@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 import React, { FC } from 'react';
 import { HeaderVariant } from '../../../services/widgets.style.service';
 import CardBackgrounRoadImage from '../../../assets/card-bg-road.png';
@@ -11,16 +11,18 @@ interface IProps {
   variant: HeaderVariant;
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles<Theme, IProps>((theme) => ({
   img: {
     position: 'absolute',
     zIndex: -1,
     top: 0,
     right: 0,
+    marginInlineStart: (props) => (props.variant === HeaderVariant.Label ? theme.spacing(1) : 0),
   },
-});
+}));
+
 const CardBackgroundImage: FC<IProps> = ({ variant }) => {
-  const classes = useStyles();
+  const classes = useStyles({ variant });
   let src;
   let height;
 

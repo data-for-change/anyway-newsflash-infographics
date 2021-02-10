@@ -29,7 +29,7 @@ const widgetVariants: { [index: string]: CardVariant } = {
   [WidgetName.most_severe_accidents_table]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
   // [WidgetName.accidents_heat_map]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
   // [WidgetName.street_view]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
-  [WidgetName.accident_count_by_severity]: { header: HeaderVariant.Label, footer: FooterVariant.Logo },
+  [WidgetName.accident_count_by_severity]: { header: HeaderVariant.Logo, footer: FooterVariant.None },
   [WidgetName.accident_count_by_accident_type]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
   [WidgetName.accident_count_by_accident_year]: { header: HeaderVariant.Logo, footer: FooterVariant.None },
   [WidgetName.injured_count_by_accident_year]: { header: HeaderVariant.Logo, footer: FooterVariant.None },
@@ -46,19 +46,4 @@ const widgetVariants: { [index: string]: CardVariant } = {
 export function getWidgetVariant(widgetName: string) {
   const variant = widgetVariants[widgetName];
   return variant || widgetVariants.defaultVariant;
-}
-
-// === widgets variants - header titles === //
-const widgetHeaderTitles: { [index: string]: string } = {
-  defaultTitle: '',
-  [WidgetName.accidents_count_by_hour]: 'accidents count by hour', // todo: add all title strings (use i18n)
-  [WidgetName.injured_count_per_age_group]: 'injured count per age group',
-  [WidgetName.most_severe_accidents_table]: 'most severe accidents table',
-  [WidgetName.head_on_collisions_comparison]: 'תאונות קטלניות ע"פ סוג',
-  [WidgetName.head_on_collisions_comparison_percentage]: 'תאונות קטלניות ע"פ סוג',
-};
-
-export function getWidgetTitle(widgetName: string) {
-  const title = widgetHeaderTitles[widgetName];
-  return title || widgetHeaderTitles.defaultTitle;
 }

@@ -18,7 +18,7 @@
       - [Opening issues](#issues)
 1. [ Server code ](#server-code)
 1. [ Server API ](#server-api)
-1. [ CI/CD ](#cicd)
+1. [ Environments and CI/CD ](#cicd)
 1. [ Bundle size ](#bundle-size)
 1. [ Git Scripts ](#git-scripts)
 1. [ VScode & prettier ](#formatting)

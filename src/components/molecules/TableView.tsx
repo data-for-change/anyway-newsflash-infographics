@@ -3,7 +3,8 @@ import { makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
 import { Typography } from '../atoms';
 import { Table, TableBody, TableCell, TableHead, TableRow, Theme } from '@material-ui/core';
 import { IWidgetMostSevereAccidentsTableData } from '../../models/WidgetData';
-import { roadIconColors, silverGrayColor, transparentColor, whiteColor } from '../../style';
+import { silverGrayColor, transparentColor, whiteColor, blackColor } from '../../style';
+import { toJsDateFormat } from '../../utils/time.utils';
 
 interface IProps {
   data: IWidgetMostSevereAccidentsTableData;
@@ -18,7 +19,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     marginBottom: '10px',
   },
-  table: {},
+  table: {
+    border: `1px solid ${blackColor}`,
+    borderCollapse: 'separate',
+  },
 }));
 
 const StyledTableCell = withStyles((theme: Theme) =>
@@ -51,6 +55,7 @@ const StyledTableRow = withStyles(() =>
 const TableView: FC<IProps> = ({ data }) => {
   const classes = useStyles();
   const { items, text } = data;
+
   const maxKilled = Math.max.apply(
     Math,
     items.map((item) => item.killed_count),
@@ -59,6 +64,9 @@ const TableView: FC<IProps> = ({ data }) => {
     Math,
     items.map((item) => item.injured_count),
   );
+
+  const accidentsByAscDate = [...items];
+  accidentsByAscDate.sort((a, b) => toJsDateFormat(b.date, b.hour) - toJsDateFormat(a.date, a.hour));
 
   return (
     <div className={classes.root}>
@@ -78,15 +86,18 @@ const TableView: FC<IProps> = ({ data }) => {
               <Typography.Body6>סוג תאונה</Typography.Body6>
             </StyledTableCell>
             <StyledTableCell align="right">
-              <Typography.Body6>הרוגים</Typography.Body6>
+              <Typography.Body6>הרוג</Typography.Body6>
             </StyledTableCell>
             <StyledTableCell align="right">
-              <Typography.Body6>פצועים קשה</Typography.Body6>
+              <Typography.Body6>קשה</Typography.Body6>
+            </StyledTableCell>
+            <StyledTableCell align="right">
+              <Typography.Body6>קל</Typography.Body6>
             </StyledTableCell>
           </StyledTableRow>
         </TableHead>
         <TableBody>
-          {items.map((item, index) => (
+          {accidentsByAscDate.map((item, index) => (
             <StyledTableRow key={index}>
               <StyledTableCell component="th" scope="row">
                 <Typography.Body6>{item.date}</Typography.Body6>
@@ -98,7 +109,7 @@ const TableView: FC<IProps> = ({ data }) => {
                 <Typography.Body6>{item.type}</Typography.Body6>
               </StyledTableCell>
               {item.killed_count === maxKilled ? (
-                <StyledTableCell align="right" style={{ backgroundColor: roadIconColors.red }}>
+                <StyledTableCell align="right">
                   <Typography.Body6> {item.killed_count}</Typography.Body6>
                 </StyledTableCell>
               ) : (
@@ -107,7 +118,7 @@ const TableView: FC<IProps> = ({ data }) => {
                 </StyledTableCell>
               )}
               {item.injured_count === maxInjured ? (
-                <StyledTableCell align="right" style={{ backgroundColor: roadIconColors.red }}>
+                <StyledTableCell align="right">
                   <Typography.Body6>{item.injured_count}</Typography.Body6>
                 </StyledTableCell>
               ) : (
