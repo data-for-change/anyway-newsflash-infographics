@@ -2,7 +2,6 @@ import React from 'react';
 import TextViewRecord from './TextViewRecord';
 import { useTranslation } from 'react-i18next';
 
-
 interface IProps {
   data: any;
 }
