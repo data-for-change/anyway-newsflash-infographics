@@ -1,28 +1,49 @@
 import React from 'react';
 import Box from '@material-ui/core/Box';
-import { Typography } from '../../atoms';
 import { roadIconColors, silverSmokeColor } from '../../../style';
 import SeverityImage from './SeverityImage';
+import { makeStyles } from '@material-ui/core/styles';
+import { Typography } from '../../atoms';
 
 interface IProps {
   numOfAccidents: number;
   severityDesc: string;
   imgSrc: string;
+  isLast?: boolean;
 }
 
-const red = roadIconColors.red;
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    width: '80%',
+    height: '20%',
+  },
+  text: {
+    position: 'relative',
+    top: theme.spacing(2),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    lineHeight: '0.5',
+    justifyContent: 'center',
+  },
+  acNum: {
+    color: roadIconColors.red,
+    fontWeight: 'bold',
+    fontSize: '200%',
+    fontFamily: 'Alef',
+  },
+}));
 
-const TextViewRecord: React.FC<IProps> = ({ numOfAccidents, severityDesc, imgSrc }) => {
+const TextViewRecord: React.FC<IProps> = ({ isLast, numOfAccidents, severityDesc, imgSrc }) => {
+  const classes = useStyles();
   return (
-    <Box display="flex" py={1} borderBottom={`5px solid ${silverSmokeColor}`}>
+    <Box className={classes.root} py={1} borderBottom={isLast ? '' : `5px solid ${silverSmokeColor}`}>
       <SeverityImage severity={imgSrc} />
-      <Box flex={1} display="flex" justifyContent="center">
-        <Box display="flex" flexDirection="column" alignItems="center">
-          <Box color={red}>
-            <Typography.Title1>{numOfAccidents}</Typography.Title1>
-          </Box>
-          <Typography.Title1>{severityDesc}</Typography.Title1>
-        </Box>
+      <Box className={classes.text}>
+        <Box className={classes.acNum}>{numOfAccidents}</Box>
+        <Typography.Title1>{severityDesc}</Typography.Title1>
       </Box>
     </Box>
   );

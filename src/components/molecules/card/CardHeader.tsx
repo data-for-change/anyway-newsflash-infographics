@@ -28,9 +28,14 @@ const CardHeader: FC<IProps> = ({ variant, text, road }) => {
     case HeaderVariant.Logo:
       headerContent = (
         <Box display="flex" flex={1}>
-          <RoadNumberImage roadNumber={road} />
-          <Box display="flex" flex={1} justifyContent="flex-end" alignItems="flex-end" height={30}>
-            <Logo src={LamasImage} alt={'Lamas'} height={30} />
+          <Box position={'relative'} top={'40%'}>
+            <RoadNumberImage roadNumber={road} />
+          </Box>
+          <Box ml={'7%'} display="flex" flex={1} justifyContent="flex-end" alignItems="flex-end" height={30}>
+            <Box height={'100%'} ml={'2.5%'}>
+              {' '}
+              <Logo src={LamasImage} alt={'Lamas'} height={30} />
+            </Box>
             <Logo src={AnywayImage} alt={'Anyway'} height={20} />
           </Box>
         </Box>
