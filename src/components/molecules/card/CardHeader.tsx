@@ -19,7 +19,7 @@ const CardHeader: FC<IProps> = ({ variant, text, road }) => {
       headerContent = (
         <Box display="flex" alignItems="center" flex={1}>
           <RoadNumberImage roadNumber={road} />
-          <Box flex={1} textAlign="center">
+          <Box flex={1} px={2} textAlign="center">
             <Typography.Body1>{text}</Typography.Body1>
           </Box>
         </Box>

@@ -10,15 +10,6 @@ interface IProps {
   data: IWidgetMostSevereAccidentsTableData;
 }
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  title: {
-    display: 'flex',
-    alignItems: 'center',
-    marginBottom: '10px',
-  },
   table: {
     border: `1px solid ${blackColor}`,
     borderCollapse: 'separate',
@@ -69,68 +60,63 @@ const TableView: FC<IProps> = ({ data }) => {
   accidentsByAscDate.sort((a, b) => toJsDateFormat(b.date, b.hour) - toJsDateFormat(a.date, a.hour));
 
   return (
-    <div className={classes.root}>
-      <div className={classes.title}>
-        <Typography.Body4>{text?.title}</Typography.Body4>
-      </div>
-      <Table className={classes.table} size="small" aria-label="a dense table">
-        <TableHead>
-          <StyledTableRow>
-            <StyledTableCell>
-              <Typography.Body6>תאריך</Typography.Body6>
+    <Table className={classes.table} size="small" aria-label="a dense table">
+      <TableHead>
+        <StyledTableRow>
+          <StyledTableCell>
+            <Typography.Body6>תאריך</Typography.Body6>
+          </StyledTableCell>
+          <StyledTableCell align="right">
+            <Typography.Body6>שעה</Typography.Body6>
+          </StyledTableCell>
+          <StyledTableCell align="right">
+            <Typography.Body6>סוג תאונה</Typography.Body6>
+          </StyledTableCell>
+          <StyledTableCell align="right">
+            <Typography.Body6>הרוג</Typography.Body6>
+          </StyledTableCell>
+          <StyledTableCell align="right">
+            <Typography.Body6>קשה</Typography.Body6>
+          </StyledTableCell>
+          <StyledTableCell align="right">
+            <Typography.Body6>קל</Typography.Body6>
+          </StyledTableCell>
+        </StyledTableRow>
+      </TableHead>
+      <TableBody>
+        {accidentsByAscDate.map((item, index) => (
+          <StyledTableRow key={index}>
+            <StyledTableCell component="th" scope="row">
+              <Typography.Body6>{item.date}</Typography.Body6>
             </StyledTableCell>
             <StyledTableCell align="right">
-              <Typography.Body6>שעה</Typography.Body6>
+              <Typography.Body6>{item.hour}</Typography.Body6>
             </StyledTableCell>
             <StyledTableCell align="right">
-              <Typography.Body6>סוג תאונה</Typography.Body6>
+              <Typography.Body6>{item.type}</Typography.Body6>
             </StyledTableCell>
-            <StyledTableCell align="right">
-              <Typography.Body6>הרוג</Typography.Body6>
-            </StyledTableCell>
-            <StyledTableCell align="right">
-              <Typography.Body6>קשה</Typography.Body6>
-            </StyledTableCell>
-            <StyledTableCell align="right">
-              <Typography.Body6>קל</Typography.Body6>
-            </StyledTableCell>
+            {item.killed_count === maxKilled ? (
+              <StyledTableCell align="right">
+                <Typography.Body6> {item.killed_count}</Typography.Body6>
+              </StyledTableCell>
+            ) : (
+              <StyledTableCell align="right">
+                <Typography.Body6>{item.killed_count}</Typography.Body6>
+              </StyledTableCell>
+            )}
+            {item.injured_count === maxInjured ? (
+              <StyledTableCell align="right">
+                <Typography.Body6>{item.injured_count}</Typography.Body6>
+              </StyledTableCell>
+            ) : (
+              <StyledTableCell align="right">
+                <Typography.Body6>{item.injured_count}</Typography.Body6>
+              </StyledTableCell>
+            )}
           </StyledTableRow>
-        </TableHead>
-        <TableBody>
-          {accidentsByAscDate.map((item, index) => (
-            <StyledTableRow key={index}>
-              <StyledTableCell component="th" scope="row">
-                <Typography.Body6>{item.date}</Typography.Body6>
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                <Typography.Body6>{item.hour}</Typography.Body6>
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                <Typography.Body6>{item.type}</Typography.Body6>
-              </StyledTableCell>
-              {item.killed_count === maxKilled ? (
-                <StyledTableCell align="right">
-                  <Typography.Body6> {item.killed_count}</Typography.Body6>
-                </StyledTableCell>
-              ) : (
-                <StyledTableCell align="right">
-                  <Typography.Body6>{item.killed_count}</Typography.Body6>
-                </StyledTableCell>
-              )}
-              {item.injured_count === maxInjured ? (
-                <StyledTableCell align="right">
-                  <Typography.Body6>{item.injured_count}</Typography.Body6>
-                </StyledTableCell>
-              ) : (
-                <StyledTableCell align="right">
-                  <Typography.Body6>{item.injured_count}</Typography.Body6>
-                </StyledTableCell>
-              )}
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
+        ))}
+      </TableBody>
+    </Table>
   );
 };
 export default TableView;
