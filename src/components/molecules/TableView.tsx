@@ -3,7 +3,7 @@ import { makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
 import { Typography } from '../atoms';
 import { Table, TableBody, TableCell, TableHead, TableRow, Theme } from '@material-ui/core';
 import { IWidgetMostSevereAccidentsTableData } from '../../models/WidgetData';
-import { silverGrayColor, transparentColor, whiteColor, blackColor } from '../../style';
+import { silverGrayColor, blackColor } from '../../style';
 import { toJsDateFormat } from '../../utils/time.utils';
 
 interface IProps {
@@ -12,6 +12,7 @@ interface IProps {
 const useStyles = makeStyles((theme: Theme) => ({
   table: {
     border: `1px solid ${blackColor}`,
+    borderBottom: 0,
     borderCollapse: 'separate',
   },
 }));
@@ -20,13 +21,12 @@ const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
     root: {
       textAlign: 'center',
-      padding: 0,
+      padding: theme.spacing(0.7, 0),
+      borderBottom: `1px solid ${blackColor}`,
     },
     sizeSmall: {
-      padding: '5px 0px',
-      border: `1px solid ${transparentColor}`,
       '&:last-child': {
-        padding: 0,
+        padding: theme.spacing(0.7, 1),
       },
     },
     head: {
@@ -38,23 +38,14 @@ const StyledTableCell = withStyles((theme: Theme) =>
 const StyledTableRow = withStyles(() =>
   createStyles({
     root: {
-      backgroundColor: whiteColor,
+      // styles can be added here
     },
   }),
 )(TableRow);
 
 const TableView: FC<IProps> = ({ data }) => {
   const classes = useStyles();
-  const { items, text } = data;
-
-  const maxKilled = Math.max.apply(
-    Math,
-    items.map((item) => item.killed_count),
-  );
-  const maxInjured = Math.max.apply(
-    Math,
-    items.map((item) => item.injured_count),
-  );
+  const { items } = data;
 
   const accidentsByAscDate = [...items];
   accidentsByAscDate.sort((a, b) => toJsDateFormat(b.date, b.hour) - toJsDateFormat(a.date, a.hour));
@@ -64,29 +55,29 @@ const TableView: FC<IProps> = ({ data }) => {
       <TableHead>
         <StyledTableRow>
           <StyledTableCell>
-            <Typography.Body6>תאריך</Typography.Body6>
+            <Typography.Body5>תאריך</Typography.Body5>
           </StyledTableCell>
           <StyledTableCell align="right">
-            <Typography.Body6>שעה</Typography.Body6>
+            <Typography.Body5>שעה</Typography.Body5>
           </StyledTableCell>
           <StyledTableCell align="right">
-            <Typography.Body6>סוג תאונה</Typography.Body6>
+            <Typography.Body5>סוג תאונה</Typography.Body5>
           </StyledTableCell>
           <StyledTableCell align="right">
-            <Typography.Body6>הרוג</Typography.Body6>
+            <Typography.Body5>הרוג</Typography.Body5>
           </StyledTableCell>
           <StyledTableCell align="right">
-            <Typography.Body6>קשה</Typography.Body6>
+            <Typography.Body5>קשה</Typography.Body5>
           </StyledTableCell>
           <StyledTableCell align="right">
-            <Typography.Body6>קל</Typography.Body6>
+            <Typography.Body5>קל</Typography.Body5>
           </StyledTableCell>
         </StyledTableRow>
       </TableHead>
       <TableBody>
         {accidentsByAscDate.map((item, index) => (
           <StyledTableRow key={index}>
-            <StyledTableCell component="th" scope="row">
+            <StyledTableCell scope="row">
               <Typography.Body6>{item.date}</Typography.Body6>
             </StyledTableCell>
             <StyledTableCell align="right">
@@ -95,24 +86,15 @@ const TableView: FC<IProps> = ({ data }) => {
             <StyledTableCell align="right">
               <Typography.Body6>{item.type}</Typography.Body6>
             </StyledTableCell>
-            {item.killed_count === maxKilled ? (
-              <StyledTableCell align="right">
-                <Typography.Body6> {item.killed_count}</Typography.Body6>
-              </StyledTableCell>
-            ) : (
-              <StyledTableCell align="right">
-                <Typography.Body6>{item.killed_count}</Typography.Body6>
-              </StyledTableCell>
-            )}
-            {item.injured_count === maxInjured ? (
-              <StyledTableCell align="right">
-                <Typography.Body6>{item.injured_count}</Typography.Body6>
-              </StyledTableCell>
-            ) : (
-              <StyledTableCell align="right">
-                <Typography.Body6>{item.injured_count}</Typography.Body6>
-              </StyledTableCell>
-            )}
+            <StyledTableCell align="right">
+              <Typography.Body6>{item.killed_count}</Typography.Body6>
+            </StyledTableCell>
+            <StyledTableCell align="right">
+              <Typography.Body6>{item.severe_injured_count}</Typography.Body6>
+            </StyledTableCell>
+            <StyledTableCell align="right">
+              <Typography.Body6>{item.light_injured_count}</Typography.Body6>
+            </StyledTableCell>
           </StyledTableRow>
         ))}
       </TableBody>

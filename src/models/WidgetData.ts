@@ -59,8 +59,9 @@ export interface IWidgetMostSevereAccidentsTableData extends IWidgetDataBase {
     accident_year: number;
     date: string;
     hour: string;
-    injured_count: number;
     killed_count: number;
+    severe_injured_count: number;
+    light_injured_count: number;
     type: string;
   }[];
 }
