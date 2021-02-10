@@ -4,6 +4,7 @@ import LamasImage from '../../../assets/cbs.png';
 import AnywayImage from '../../../assets/anyway.png';
 import { makeStyles } from '@material-ui/core/styles';
 import { cardFooterHeight } from '../../../style';
+import { Box } from '@material-ui/core';
 
 interface IProps {
   dateComment: string;
@@ -30,6 +31,7 @@ const CardFooter: React.FC<IProps> = ({ dateComment }) => {
       <Typography.Body3>
         <div className={classes.comment}>{dateComment}</div>
       </Typography.Body3>
+      <Box display="flex" flex={1} />
       <Logo src={LamasImage} alt={'Lamas'} height={30} />
       <Logo src={AnywayImage} alt={'Anyway'} height={20} />
     </div>
