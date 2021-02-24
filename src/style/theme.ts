@@ -16,7 +16,7 @@ const defaultThemeOptions: ThemeOptions = {
     fontFamily: fontFamilyString,
     // title variants (like: card headers)
     subtitle1: {
-      fontSize: 24,
+      fontSize: 29,
       fontWeight: 500,
     },
     subtitle2: {
@@ -26,6 +26,7 @@ const defaultThemeOptions: ThemeOptions = {
     // body variants (like: newsflash data, widget contents etc)
     h1: {
       fontSize: 20,
+      fontColor: '#818386',
       fontWeight: 700,
     },
     h2: {

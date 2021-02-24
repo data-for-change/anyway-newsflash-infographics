@@ -59,8 +59,9 @@ export interface IWidgetMostSevereAccidentsTableData extends IWidgetDataBase {
     accident_year: number;
     date: string;
     hour: string;
-    injured_count: number;
     killed_count: number;
+    severe_injured_count: number;
+    light_injured_count: number;
     type: string;
   }[];
 }
@@ -154,5 +155,13 @@ export interface IWidgetAccidentCountByCarType extends IWidgetDataBase {
     car_type: string;
     percentage_segment: number;
     percentage_country: number;
+  }[];
+}
+export interface IWidgetInjuredAccidentsWithPedestrians extends IWidgetDataBase {
+  items: {
+    year: number;
+    killed_injury_severity_count: number;
+    severe_injury_severity_count: number;
+    light_injury_severity_count: number;
   }[];
 }

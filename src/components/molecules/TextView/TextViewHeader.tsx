@@ -23,7 +23,7 @@ const AccidentsOccurred: FC<AProps> = ({ accidentsCount, singleType }) => {
     <Box mr={1} key={1}>
       <Typography.Body1>{t('textView.occurred')}</Typography.Body1>
     </Box>,
-    <Box mr={1} key={2} color={red}>
+    <Box fontSize={'180%'} mr={1} key={2} color={red} position={'relative'} bottom={'12px'} fontWeight={'bold'}>
       {accidentsCount}
     </Box>,
     <Box mr={1} key={3}>
@@ -52,19 +52,19 @@ const TextViewHeader: React.FC<IProps> = ({ data: { items }, segmentText, single
   return (
     <>
       {items.end_year === items.start_year ? (
-        <>
+        <Box mb={1}>
           <Typography.Body1>{t('textView.inYear')} </Typography.Body1>
           <Typography.Body1>{items.end_year}</Typography.Body1>
-        </>
+        </Box>
       ) : (
-        <>
+        <Box mb={1}>
           <Typography.Body1>{t('textView.inYears')} </Typography.Body1>
           <Typography.Body1>
             {items.start_year} - {items.end_year}
           </Typography.Body1>
-        </>
+        </Box>
       )}
-      <Box mr={1}>
+      <Box mb={1}>
         <Typography.Body1>{`${t('textView.on')}${i18n.language === 'en' ? ' ' : ''}${segmentText}`}</Typography.Body1>
       </Box>
       <Box>
