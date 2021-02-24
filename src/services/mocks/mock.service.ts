@@ -1,16 +1,8 @@
-import newsFlashCollectionData from './newsFlash.mock.data';
-import defaultWidgetsCollectionData from './widgetsData.mock.data';
 import demoCardsNewsFlash from './demoCardsNewsflash.mock.data';
 import demoCardsWidgetsData from './demoCardsWidgetsData.mock.data';
 import { ILocationData } from '../../models/WidgetData';
 
 const demoNewsflashIndex = 2; // add demo newsflash in this index
-
-export {
-  newsFlashCollectionData,
-  defaultWidgetsCollectionData,
-  // add more mock data here
-};
 
 export function mockHTTPCall<T>(mockData: T): Promise<{ data: T }> {
   return new Promise(function (resolve) {

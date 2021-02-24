@@ -1,18 +1,13 @@
 import axios from 'axios';
 import { fetchNews } from './news.data.service';
-import { fetchDefaultWidgets } from './widgets.data.service';
 import L from 'leaflet';
-import {serverUrl} from "../utils/utils";
+import { serverUrl } from '../utils/utils';
 
 export function initService(): Promise<any> {
   setAxiosDefaults();
   setLocationMapDefaults();
 
-  const promiseArray = [
-    fetchNews('', 10),
-    fetchDefaultWidgets(),
-    /* add promises here */
-  ];
+  const promiseArray = [fetchNews()];
 
   return Promise.all(promiseArray).then((promiseCollection) => ({
     // return object - resolved data from all promises

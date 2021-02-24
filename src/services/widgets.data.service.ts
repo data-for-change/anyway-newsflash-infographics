@@ -1,13 +1,8 @@
-import { defaultWidgetsCollectionData, getDemoWidgetData, mockHTTPCall } from './mocks/mock.service';
+import { getDemoWidgetData } from './mocks/mock.service';
 import { ILocationData, IWidgetBase } from '../models/WidgetData';
 import axios from 'axios';
 import { DEMO_ID, showDemoCards, showOnlyOperCards } from '../utils/utils';
 import { operationalCards } from '../const/cards.const';
-
-export function fetchDefaultWidgets(): Promise<any> {
-  // @ts-ignore
-  return mockHTTPCall<ILocationData>(defaultWidgetsCollectionData).then((res: any) => processWidgetsFetchResponse(res));
-}
 
 const NEWS_FLASH_API: string = '/api/infographics-data';
 
