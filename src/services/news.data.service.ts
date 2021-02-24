@@ -20,24 +20,19 @@ const errorNews: INewsFlash = {
 
 const NEWS_FLASH_API: string = '/api/news-flash';
 
-// export  function mockFetchNews(source = '', count = 5, useMockData = false): Promise<any> {
-//   console.log('== mockFetchNews ==', source, count);
-//   return  mockHTTPCall<Array<INewsFlash | any>>(newsFlashCollectionData);
-// }
-
-export function fetchNews(source = '', count = 5): Promise<any> {
+export function fetchNews(source = '', limit = 100): Promise<any> {
   const query = [];
   if (source) {
     query.push(`source=${source}`);
   }
-  if (count) {
-    query.push(`news_flash_count=${count}`);
+  if (limit) {
+    query.push(`limit=${limit}`);
   }
   // temporary according to request from Atalya
   query.push('road_segment_only=true&interurban_only=true');
 
   const url = `${NEWS_FLASH_API}?${query.join('&')}`;
-  // return mockHTTPCall<Array<INewsFlash | any>>(newsFlashCollectionData);
+
   return (
     axios
       .get(url)
