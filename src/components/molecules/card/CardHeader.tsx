@@ -11,16 +11,26 @@ interface IProps {
   text: string | undefined;
   road: number;
 }
-const CardHeader: FC<IProps> = ({ variant, text, road }) => {
+const CardHeader: FC<IProps> = ({ variant, road, text }) => {
   let headerContent = null;
+  let textLine1;
+  let textLine2;
+  const textWordsArr = text?.split(' ');
+  const textWordLength = textWordsArr?.length;
+  if (textWordLength && textWordLength > 5) {
+    const indexToSplit = textWordLength / 2;
+    textLine1 = textWordsArr?.slice(0, indexToSplit).join(' ');
+    textLine2 = textWordsArr?.slice(indexToSplit).join(' ');
+  }
 
   switch (variant) {
     case HeaderVariant.Centered:
       headerContent = (
         <Box display="flex" alignItems="center" flex={1}>
           <RoadNumberImage roadNumber={road} />
-          <Box flex={1} textAlign="center">
-            <Typography.Body1>{text}</Typography.Body1>
+          <Box display="flex" flexDirection="column" flex={1} textAlign="center">
+            <Typography.Body1>{textLine1 ? textLine1 : text}</Typography.Body1>
+            {textLine2 && <Typography.Body1>{textLine2}</Typography.Body1>}
           </Box>
         </Box>
       );
