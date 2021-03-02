@@ -13,7 +13,7 @@ interface IProps {
 }
 const CardHeader: FC<IProps> = ({ variant, road, text }) => {
   let headerContent = null;
-  let textLine1;
+  let textLine1 = text;
   let textLine2;
   const textWordsArr = text?.split(' ');
   const textWordLength = textWordsArr?.length;
@@ -29,7 +29,7 @@ const CardHeader: FC<IProps> = ({ variant, road, text }) => {
         <Box display="flex" alignItems="center" flex={1}>
           <RoadNumberImage roadNumber={road} />
           <Box flex={1} px={2} textAlign="center">
-            <Typography.Body1>{textLine1 ? textLine1 : text}</Typography.Body1>
+            <Typography.Body1>{textLine1}</Typography.Body1>
             {textLine2 && <Typography.Body1>{textLine2}</Typography.Body1>}
           </Box>
         </Box>
