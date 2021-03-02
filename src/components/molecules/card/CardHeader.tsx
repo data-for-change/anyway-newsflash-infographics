@@ -6,6 +6,8 @@ import LamasImage from '../../../assets/cbs.png';
 import AnywayImage from '../../../assets/anyway.png';
 import { Typography, Logo } from '../../atoms';
 
+const MAX_WORDS_PER_TITLE_LINE = 5;
+
 interface IProps {
   variant: HeaderVariant;
   text: string | undefined;
@@ -17,8 +19,8 @@ const CardHeader: FC<IProps> = ({ variant, text, road }) => {
   let textLine2;
   const textWordsArr = text?.split(' ');
   const textWordLength = textWordsArr?.length;
-  if (textWordLength && textWordLength > 5) {
-    const indexToSplit = textWordLength / 2;
+  if (textWordLength && textWordLength > MAX_WORDS_PER_TITLE_LINE) {
+    const indexToSplit = Math.floor(textWordLength / 2);
     textLine1 = textWordsArr?.slice(0, indexToSplit).join(' ');
     textLine2 = textWordsArr?.slice(indexToSplit).join(' ');
   }
