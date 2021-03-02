@@ -11,7 +11,7 @@ interface IProps {
   text: string | undefined;
   road: number;
 }
-const CardHeader: FC<IProps> = ({ variant, road, text }) => {
+const CardHeader: FC<IProps> = ({ variant, text, road }) => {
   let headerContent = null;
   let textLine1 = text;
   let textLine2;
