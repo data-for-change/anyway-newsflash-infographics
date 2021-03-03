@@ -1,3 +1,6 @@
+import { Box } from '@material-ui/core';
+
+export { Box };
 export { default as Grid } from './Grid';
 export { default as Button } from './Button';
 export { default as Link } from './Link';

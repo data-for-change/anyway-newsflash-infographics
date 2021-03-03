@@ -43,14 +43,6 @@ const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
     }
   }, [id, store]);
 
-  useEffect(() => {
-    if (match.params.lng) {
-      store.changeLanguage(match.params.lng);
-    } else {
-      store.changeLanguage('he');
-    }
-  }, [match.params.lng, store]);
-
   if (!id) {
     return <Redirect to="/" />;
   }
@@ -65,8 +57,8 @@ const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
         <FilterBar />
         {/* main Content */}
         <Switch>
-          <Route path="/:lng?/newsflash/999" component={DemoPage} />
-          <Route path="/:lng?/newsflash/:id" component={WidgetsTemplate} />
+          <Route path="/newsflash/999" component={DemoPage} />
+          <Route path="/newsflash/:id" component={WidgetsTemplate} />
         </Switch>
       </Box>
     </Box>

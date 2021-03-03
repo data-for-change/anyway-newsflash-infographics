@@ -48,7 +48,7 @@ const App: FC = () => {
             <Box height={pageContentHeight} className={classes.pageContent}>
               <Switch>
                 <Route exact path="/" component={HomePageRedirect} />
-                <Route path="/:lng?/newsflash/:id" component={HomePage} />
+                <Route path="/newsflash/:id" component={HomePage} />
                 <Route path="/popup-redirect" component={PopUpRedirect}></Route>
               </Switch>
             </Box>

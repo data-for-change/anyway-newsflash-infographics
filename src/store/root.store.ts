@@ -37,7 +37,7 @@ export default class RootStore {
   @observable newsFlashWidgetsTimerFilter = DEFAULT_TIME_FILTER; // newsflash time filter (in years ago, 5 is the default)
   @observable newsFlashLoading: boolean = false;
   @observable widgetBoxLoading: boolean = false;
-  @observable currentLanguageRouteString: string = '';
+  @observable currentLanguage: string = 'he';
   // domain stores
   settingsStore: SettingsStore;
 
@@ -66,7 +66,7 @@ export default class RootStore {
 
   @computed
   get newsFlashWidgetsMetaSegmentName(): string {
-    const { road_segment_name } =  this.newsFlashWidgetsMeta.location_info;
+    const { road_segment_name } = this.newsFlashWidgetsMeta.location_info;
     return road_segment_name ? road_segment_name : '';
   }
 
@@ -143,29 +143,27 @@ export default class RootStore {
   @action
   selectNewsFlash(id: number): void {
     this.activeNewsFlashId = id;
-    this.fetchSelectedNewsFlashWidgets(id, this.newsFlashWidgetsTimerFilter);
+    this.fetchSelectedNewsFlashWidgets(id, this.currentLanguage, this.newsFlashWidgetsTimerFilter);
   }
 
   @action
   changeTimeFilter(filterValue: number): void {
     if (this.newsFlashWidgetsTimerFilter !== filterValue) {
       this.newsFlashWidgetsTimerFilter = filterValue;
-      this.fetchSelectedNewsFlashWidgets(this.activeNewsFlashId, filterValue);
+      this.fetchSelectedNewsFlashWidgets(this.activeNewsFlashId, this.currentLanguage, filterValue);
     }
   }
   @action
   changeLanguage(lngCode: string): void {
     i18next.changeLanguage(lngCode).then(() => {
-      lngCode === 'he'
-        ? (this.currentLanguageRouteString = '')
-        : (this.currentLanguageRouteString = `/${i18next.language}`);
+      this.currentLanguage = i18next.language;
+      this.fetchSelectedNewsFlashWidgets(this.activeNewsFlashId, i18next.language, this.newsFlashWidgetsTimerFilter);
     });
   }
 
-  private fetchSelectedNewsFlashWidgets(id: number, filterValue: number): void {
+  private fetchSelectedNewsFlashWidgets(id: number, lang: string, filterValue: number): void {
     this.widgetBoxLoading = true;
-
-    fetchWidgets(id, filterValue).then((response: any) => {
+    fetchWidgets(id, lang, filterValue).then((response: any) => {
       this.widgetBoxLoading = false;
       if (response && response.widgets && response.meta) {
         this.newsFlashWidgetsMeta = response.meta;

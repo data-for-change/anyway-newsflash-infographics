@@ -1,10 +1,21 @@
 import React, { FC, useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+
 import Menu from '../atoms/Menu';
 import { useStore } from '../../store/storeConfig';
 import languageSelector from '../../assets/language-selector.svg';
 import { AnyWayButton } from '../atoms/AnyWayButton';
-import { Link, Typography } from '../atoms';
+import { Typography, Box } from '../atoms';
+import { oceanBlueColor, skyBlueColor } from '../../style';
 
+const useStyles = makeStyles({
+  item: {
+    color: `${oceanBlueColor}`,
+    '&:hover': {
+      color: `${skyBlueColor}`,
+    },
+  },
+});
 const LANGUAGES = [
   {
     buttonText: 'English',
@@ -21,6 +32,7 @@ const LANGUAGES = [
 ];
 
 const LanguageMenu: FC = () => {
+  const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = (event: any) => {
     setAnchorEl(event.currentTarget);
@@ -30,25 +42,23 @@ const LanguageMenu: FC = () => {
   };
   const store = useStore();
 
+  const languageHandler = (language: string) => {
+    store.changeLanguage(language);
+  };
+
   return (
     <div>
-      <AnyWayButton aria-controls="menu" aria-haspopup="true" onClick={openMenu}>
+      <AnyWayButton onClick={openMenu}>
         <img alt="language selection" src={languageSelector} />
       </AnyWayButton>
       <Menu
-        items={LANGUAGES.map((language) => (
-          <Link
-            to={
-              language.value === 'he'
-                ? `/newsflash/${store.activeNewsFlashId}`
-                : `/${language.value}/newsflash/${store.activeNewsFlashId}`
-            }
-          >
-            <Typography.Body5>{language.buttonText}</Typography.Body5>
-          </Link>
-        ))}
         handleClose={closeMenu}
         anchorEl={anchorEl}
+        items={LANGUAGES.map((language) => (
+          <Box className={classes.item} onClick={languageHandler.bind(null, language.value)}>
+            <Typography.Body5>{language.buttonText}</Typography.Body5>
+          </Box>
+        ))}
       />
     </div>
   );
