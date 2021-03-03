@@ -77,10 +77,12 @@ export const renderCollisionCustomizedLabel = (props: any, fontSize = '100%', us
         height={position.height}
         width={position.width}
       >
-        <div style={single ? wrapperStyle : undefined}>
-          <p>{labelText}</p>
-          <p>{name}</p>
-        </div>
+        {labelText !== 0 && percent !== 0 ? (
+          <div style={single ? wrapperStyle : undefined}>
+            <p>{labelText}</p>
+            <p>{name}</p>
+          </div>
+        ) : null}
       </foreignObject>
     </g>
   );
