@@ -51,8 +51,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const extractCount = ({ severity_fatal_count, severity_light_count, severity_severe_count }: any) => {
-  //checking availability of two or more types
-  if ([severity_fatal_count, severity_light_count, severity_severe_count].filter(Boolean).length > 2)
+  //checking availability of one or more types
+  if ([severity_fatal_count, severity_light_count, severity_severe_count].filter(Boolean).length > 1)
     return { severity_fatal_count, severity_light_count, severity_severe_count };
   else {
     return null;
