@@ -4,19 +4,26 @@ import Ambulance from '../../../assets/Ambulance.png';
 import Crutches from '../../../assets/Crutches.png';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 
 interface SProps {
   severity: string;
+  inRecord?: boolean;
 }
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    width: '50%',
+  },
+  singleType: {
+    height: '40%',
+    width: 'auto',
+  },
+  list: {
+    height: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'flex-end',
-    paddingRight: theme.spacing(1),
-    width: '50%',
-    height: '100%',
   },
   image: {
     height: '80%',
@@ -24,15 +31,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SeverityImage: FC<SProps> = ({ severity }) => {
+const SeverityImage: FC<SProps> = ({ severity, inRecord }) => {
   const classes = useStyles();
   interface SeverityTypesImages {
     [index: string]: string;
   }
   const imgBySeverity: SeverityTypesImages = { fatal: Person, severe: Ambulance, light: Crutches };
+  const root = classNames(classes.root, inRecord ? classes.list : classes.singleType);
   return (
-    <Box className={classes.root}>
-      <img src={imgBySeverity[severity]} className={classes.image} alt={imgBySeverity[severity]} />
+    <Box className={root}>
+      <img className={classes.image} src={imgBySeverity[severity]} alt={imgBySeverity[severity]} />
     </Box>
   );
 };
