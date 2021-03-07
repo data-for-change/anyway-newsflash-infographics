@@ -34,6 +34,7 @@ const useStyles = makeStyles({
 const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
   const classes = useStyles();
   const store: RootStore = useStore();
+  const [lanChanged, setLanChanged] = React.useState(false);
   const id = match.params.id ? parseInt(match.params.id) : null;
   const loading = store.widgetBoxLoading;
 
@@ -46,10 +47,11 @@ const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
   useEffect(() => {
     if (match.params.lng) {
       store.changeLanguage(match.params.lng);
+      setLanChanged(!lanChanged);
     } else {
       store.changeLanguage('he');
     }
-  }, [match.params.lng, store]);
+  }, [lanChanged, match.params.lng, store]);
 
   if (!id) {
     return <Redirect to="/" />;
