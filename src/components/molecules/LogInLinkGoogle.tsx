@@ -3,12 +3,11 @@ import { oceanBlueColor, skyBlueColor } from '../../style';
 import { Typography } from '../atoms';
 import React from 'react';
 import { openSignInWindow } from '../../services/signInWindow';
-import { authServerUrl , redirectUrl} from '../../utils/utils';
+import { authServerUrl, redirectUrl } from '../../utils/utils';
 import { AnyWayButton } from '../atoms/AnyWayButton';
 
-const url :URL = new URL(`${authServerUrl}authorize/google`);
+const url: URL = new URL(`${authServerUrl}authorize/google`);
 url.searchParams.append('redirect_url', redirectUrl!);
-
 
 const useStyles = makeStyles({
   link: {

@@ -7,14 +7,26 @@ import AnywayImage from '../../../assets/anyway.png';
 import { Typography, Logo } from '../../atoms';
 import { useTranslation } from 'react-i18next';
 
+const MAX_WORDS_PER_TITLE_LINE = 5;
+
 interface IProps {
   variant: HeaderVariant;
   text: string | undefined;
   road: number;
 }
 const CardHeader: FC<IProps> = ({ variant, text, road }) => {
-  let headerContent = null;
   const { i18n } = useTranslation();
+
+  let headerContent = null;
+  let textLine1 = text;
+  let textLine2;
+  const textWordsArr = text?.split(' ');
+  const textWordLength = textWordsArr?.length;
+  if (textWordLength && textWordLength > MAX_WORDS_PER_TITLE_LINE) {
+    const indexToSplit = Math.floor(textWordLength / 2);
+    textLine1 = textWordsArr?.slice(0, indexToSplit).join(' ');
+    textLine2 = textWordsArr?.slice(indexToSplit).join(' ');
+  }
 
   switch (variant) {
     case HeaderVariant.Centered:
@@ -22,7 +34,8 @@ const CardHeader: FC<IProps> = ({ variant, text, road }) => {
         <Box display="flex" alignItems="center" flex={1}>
           <RoadNumberImage roadNumber={road} />
           <Box flex={1} px={2} textAlign="center">
-            <Typography.Body1>{text}</Typography.Body1>
+            <Typography.Body1>{textLine1} </Typography.Body1>
+            {textLine2 && <Typography.Body1>{textLine2}</Typography.Body1>}
           </Box>
         </Box>
       );
