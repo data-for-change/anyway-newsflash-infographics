@@ -1,29 +1,17 @@
-import axios from "axios";
-import {authServerUrl} from "../utils/utils";
-
-interface UserStatus {
-  authenticated : boolean,
-  cookies : any,
-  userName : string
+import axios from 'axios';
+import { USER_SERVICE_URL } from '../utils/utils';
+export interface ActualiUserInfo {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
 }
 
-  export const fetchUserLoginStatus = async function (): Promise<any> {
-    try {
-      const response = await axios({
-        method: 'get',
-        url: `${authServerUrl}/auth/google-login/success`,
-        withCredentials: true,
-      });
-
-      const userStatus: UserStatus = {
-        authenticated: response.data.authenticated,
-        cookies: response.data.cookies,
-        userName: response.data.user,
-      };
-
-      return userStatus;
-    } catch (err) {
-      console.log(err);
-    }
+export const fetchUserInfo = async function (): Promise<ActualiUserInfo> {
+  const response = await axios.get(USER_SERVICE_URL, { withCredentials: true });
+  const userInfo: ActualiUserInfo = {
+    firstName: response.data[`first_name`],
+    lastName: response.data['last_name'],
   };
 
+  return userInfo;
+};

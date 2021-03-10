@@ -24,6 +24,12 @@ export const loginPopUpDim = {
 export const serverUrl = process.env.REACT_APP_BASE_URL;
 
 export const authServerUrl = serverUrl;
+export const AUTH_LOGIN_GOOGLE_URL: URL = new URL(`${authServerUrl}authorize/google`);
+export const REDIRECT_URL: string | undefined = process.env.REACT_APP_REDIRECT_URL;
+export const USER_SERVICE_URL = `${authServerUrl}user/info`;
+
+AUTH_LOGIN_GOOGLE_URL.searchParams.append('redirect_url', REDIRECT_URL!);
+
 //function return api key depends on the env it running on
 export const mapApiKey = process.env.REACT_APP_GOOGLE_MAP_KEY ? process.env.REACT_APP_GOOGLE_MAP_KEY : '';
 

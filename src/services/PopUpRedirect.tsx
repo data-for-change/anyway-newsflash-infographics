@@ -1,4 +1,5 @@
 import React, {useEffect} from "react";
+import { useStore } from '../store/storeConfig';
 // note - params may be added to future use
 const PopUpRedirect :React.FC =  () => {
   useEffect(() => {

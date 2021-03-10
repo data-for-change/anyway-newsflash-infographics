@@ -8,7 +8,7 @@ import { SourceFilterEnum } from '../models/SourceFilter';
 import { fetchNews } from '../services/news.data.service';
 import SettingsStore from './settings.store';
 import { IPoint } from '../models/Point';
-import { fetchUserLoginStatus } from '../services/user.service';
+import { ActualiUserInfo, fetchUserInfo } from '../services/user.service';
 import i18next from '../services/i18n.service';
 
 // todo: move all map defaults to one place
@@ -29,7 +29,7 @@ export default class RootStore {
 
   @observable newsFlashCollection: Array<INewsFlash> = [];
   @observable isUserAuthenticated: boolean = false;
-  @observable userName: string = '';
+  @observable userInfo: ActualiUserInfo= {};
   @observable activeNewsFlashId: number = 0; // active newsflash id
   @observable newsFlashFetchLimit: number = 0;
   @observable newsFlashWidgetsMeta: ILocationMeta = DEFAULT_LOCATION_META;
@@ -132,10 +132,10 @@ export default class RootStore {
 
   @action
   getUserLoginDetails() {
-    fetchUserLoginStatus()
+    fetchUserInfo()
       .then((userData) => {
-        this.isUserAuthenticated = userData.authenticated;
-        this.userName = userData.userName;
+        this.userInfo.firstName = userData.email;
+        this.userInfo.lastName = userData.lastName;
       })
       .catch((err) => console.log(err));
   }

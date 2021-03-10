@@ -21,9 +21,9 @@ const useStyles = makeStyles({
 });
 
 interface IUserProfileHeader {
-  name: string;
+  firstName?: string;
 }
-const UserProfileHeader: React.FC<IUserProfileHeader> = ({ name }) => {
+const UserProfileHeader: React.FC<IUserProfileHeader> = ({ firstName }) => {
   const classes = useStyles();
 
   return (
@@ -31,7 +31,7 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({ name }) => {
       <a className={classes.link} href={LINK}>
         <Typography.Body1>LOGOUT</Typography.Body1>
       </a>
-      <Typography.Body1>{`שלום ${name}`}</Typography.Body1>
+      <Typography.Body1>{` שלום${firstName}`}</Typography.Body1>
     </div>
   );
 };

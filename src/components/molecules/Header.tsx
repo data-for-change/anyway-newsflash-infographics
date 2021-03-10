@@ -29,8 +29,8 @@ const Header: FC = () => {
   }, [store]);
   //login or logout- depend on authentication state
   let authElement;
-  if (store.isUserAuthenticated) {
-    authElement = <UserProfileHeader name={store.userName} />;
+  if (store.userInfo.firstName) {
+    authElement = <UserProfileHeader firstName={store.userInfo.email} />;
   } else {
     authElement = (
       <div>

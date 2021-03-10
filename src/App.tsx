@@ -6,7 +6,6 @@ import { Box, createStyles, makeStyles, Theme, ThemeProvider } from '@material-u
 import { StoreContext, useStore } from './store/storeConfig';
 import Header from './components/molecules/Header';
 import 'leaflet/dist/leaflet.css';
-import PopUpRedirect from './services/PopUpRedirect';
 import HomePageRedirect from './pages/HomePageRedirect';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@material-ui/core/styles';
@@ -49,7 +48,6 @@ const App: FC = () => {
               <Switch>
                 <Route exact path="/" component={HomePageRedirect} />
                 <Route path="/:lng?/newsflash/:id" component={HomePage} />
-                <Route path="/popup-redirect" component={PopUpRedirect}></Route>
               </Switch>
             </Box>
             <Box height={footerHeight} display="flex">
