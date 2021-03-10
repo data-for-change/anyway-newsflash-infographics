@@ -34,7 +34,7 @@ const CardHeader: FC<IProps> = ({ variant, text, road }) => {
         <Box display="flex" alignItems="center" flex={1}>
           <RoadNumberImage roadNumber={road} />
           <Box flex={1} px={2} textAlign="center">
-            <Typography.Body1>{textLine1}</Typography.Body1>
+            <Typography.Body1>{textLine1} </Typography.Body1>
             {textLine2 && <Typography.Body1>{textLine2}</Typography.Body1>}
           </Box>
         </Box>
