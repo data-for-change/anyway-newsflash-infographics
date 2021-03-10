@@ -5,6 +5,7 @@ import RoadNumberImage from './RoadNumberImage';
 import LamasImage from '../../../assets/cbs.png';
 import AnywayImage from '../../../assets/anyway.png';
 import { Typography, Logo } from '../../atoms';
+import { useTranslation } from 'react-i18next';
 
 const MAX_WORDS_PER_TITLE_LINE = 5;
 
@@ -14,6 +15,8 @@ interface IProps {
   road: number;
 }
 const CardHeader: FC<IProps> = ({ variant, text, road }) => {
+  const { i18n } = useTranslation();
+
   let headerContent = null;
   let textLine1 = text;
   let textLine2;
@@ -44,8 +47,7 @@ const CardHeader: FC<IProps> = ({ variant, text, road }) => {
             <RoadNumberImage roadNumber={road} />
           </Box>
           <Box ml={'7%'} display="flex" flex={1} justifyContent="flex-end" alignItems="flex-end" height={30}>
-            <Box height={'100%'} ml={'2.5%'}>
-              {' '}
+            <Box height={'100%'} m={i18n.language === 'he' ? '0 0 0 2.5%' : '0 2.5% 0 0'}>
               <Logo src={LamasImage} alt={'Lamas'} height={30} />
             </Box>
             <Logo src={AnywayImage} alt={'Anyway'} height={20} />
