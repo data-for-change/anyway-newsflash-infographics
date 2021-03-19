@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import { IWidgetCountBySeverityTextData } from '../../../models/WidgetData';
 import { Theme, makeStyles } from '@material-ui/core';
 import { brightGreyColor } from '../../../style';
@@ -47,33 +47,18 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const extractCount = ({ severity_fatal_count, severity_light_count, severity_severe_count }: any) => {
-  //checking availability of one or more types
-  if ([severity_fatal_count, severity_light_count, severity_severe_count].filter(Boolean).length > 1)
-    return { severity_fatal_count, severity_light_count, severity_severe_count };
-  else {
-    return null;
-  }
-};
-
 const TextView: FC<IProps> = ({ data, segmentText }) => {
   const classes = useStyles();
-  const { items } = data;
-  const countsData = extractCount(items);
-  // e.g. if there are only accidents types of severity_fatal_count will return the strinf "fatal"
-  const findSingleType = () => {
-    if (!countsData) {
-      for (const [key, value] of Object.entries(items)) {
-        if (key.split('_')[0] === 'severity') {
-          if (!value) {
-            return;
-          } else {
-            return key.split('_')[1];
-          }
-        }
-      }
-    }
-  };
+  //extract counts by severity type fields
+  const countsData = Object.assign(
+    [data.items.severity_fatal_count, data.items.severity_light_count, data.items.severity_severe_count].filter(
+      Boolean,
+    ),
+  );
+  const findSingleType = useCallback(() => {
+    const countsTypes = Object.keys(countsData);
+    return countsTypes.length === 1 ? countsTypes[0] : undefined;
+  }, [countsData]);
 
   const singleType: string | undefined = findSingleType();
   const headerClass = classNames(classes.headerBase, singleType ? classes.headerSingleType : classes.headerList);
