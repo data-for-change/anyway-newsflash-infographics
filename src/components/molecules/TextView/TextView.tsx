@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import TextViewList from './TextViewList';
 import TextViewHeader from './TextViewHeader';
 import SeverityImage from './SeverityImage';
+import { severityNameMap } from '../../../services/widgets.style.service';
 
 interface IProps {
   data: IWidgetCountBySeverityTextData;
@@ -47,32 +48,39 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+const getCountsForView = ({
+  items: { severity_fatal_count, severity_light_count, severity_severe_count },
+}: IWidgetCountBySeverityTextData) => {
+  const countsForDesc = Object.entries({
+    severity_fatal_count,
+    severity_light_count,
+    severity_severe_count,
+  }).filter((type) => Boolean(type[1]));
+  return Object.fromEntries(countsForDesc);
+};
+
 const TextView: FC<IProps> = ({ data, segmentText }) => {
   const classes = useStyles();
   //extract counts by severity type fields
-  const countsData = Object.assign(
-    [data.items.severity_fatal_count, data.items.severity_light_count, data.items.severity_severe_count].filter(
-      Boolean,
-    ),
-  );
+  const dataForView = getCountsForView(data);
   const findSingleType = useCallback(() => {
-    const countsTypes = Object.keys(countsData);
+    const countsTypes = Object.keys(dataForView);
     return countsTypes.length === 1 ? countsTypes[0] : undefined;
-  }, [countsData]);
+  }, [dataForView]);
 
-  const singleType: string | undefined = findSingleType();
+  const singleType: string | undefined = severityNameMap.get(findSingleType());
   const headerClass = classNames(classes.headerBase, singleType ? classes.headerSingleType : classes.headerList);
   return (
     <div className={classes.root}>
       <Box className={headerClass} color={brightGreyColor} textAlign="center">
         <TextViewHeader singleType={singleType} data={data} segmentText={segmentText} />
       </Box>
-      {countsData ? (
-        <Box color="text.secondary" className={classes.list}>
-          <TextViewList data={countsData} />
-        </Box>
+      {singleType ? (
+        <SeverityImage severity={singleType!} />
       ) : (
-        singleType && <SeverityImage severity={singleType!} />
+        <Box color="text.secondary" className={classes.list}>
+          <TextViewList data={dataForView} />
+        </Box>
       )}
     </div>
   );

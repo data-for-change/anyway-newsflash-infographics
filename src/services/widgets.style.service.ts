@@ -47,3 +47,11 @@ export function getWidgetVariant(widgetName: string) {
   const variant = widgetVariants[widgetName];
   return variant || widgetVariants.defaultVariant;
 }
+
+export const severityNameMap = new Map();
+
+severityNameMap.set('severity_severe_count', 'severe');
+severityNameMap.set('severity_fatal_count', 'fatal');
+severityNameMap.set('severity_light_count', 'light');
+
+
