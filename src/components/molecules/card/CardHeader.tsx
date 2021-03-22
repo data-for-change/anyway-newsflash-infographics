@@ -1,4 +1,4 @@
-import { Box } from '@material-ui/core';
+import { Box, createStyles, makeStyles, Theme } from '@material-ui/core';
 import React, { FC } from 'react';
 import { HeaderVariant } from '../../../services/widgets.style.service';
 import RoadNumberImage from './RoadNumberImage';
@@ -6,8 +6,27 @@ import LamasImage from '../../../assets/cbs.png';
 import AnywayImage from '../../../assets/anyway.png';
 import { Typography, Logo } from '../../atoms';
 import { useTranslation } from 'react-i18next';
+import { silverSmokeColor } from '../../../style/_globals';
 
 const MAX_WORDS_PER_TITLE_LINE = 5;
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    labelWrapper: {
+      backgroundColor: silverSmokeColor,
+      maxWidth: '10rem',
+    },
+    labelTypography: {
+      maxWidth: 'min-content',
+      paddingLeft: '2rem',
+      paddingRight: '1rem',
+    },
+
+    roadSVG: {
+      margin: 'auto',
+    },
+  }),
+);
 
 interface IProps {
   variant: HeaderVariant;
@@ -16,6 +35,7 @@ interface IProps {
 }
 const CardHeader: FC<IProps> = ({ variant, text, road }) => {
   const { i18n } = useTranslation();
+  const classes = useStyles();
 
   let headerContent = null;
   let textLine1 = text;
@@ -34,6 +54,19 @@ const CardHeader: FC<IProps> = ({ variant, text, road }) => {
         <Box display="flex" alignItems="center" flex={1}>
           <RoadNumberImage roadNumber={road} />
           <Box flex={1} px={2} textAlign="center">
+            <Typography.Body1>{textLine1} </Typography.Body1>
+            {textLine2 && <Typography.Body1>{textLine2}</Typography.Body1>}
+          </Box>
+        </Box>
+      );
+      break;
+    case HeaderVariant.Label:
+      headerContent = (
+        <Box display="flex" alignItems="right" flex={1} className={classes.labelWrapper}>
+          <Box className={classes.roadSVG}>
+            <RoadNumberImage roadNumber={road} />
+          </Box>
+          <Box textAlign="center" whiteSpace="normal" className={classes.labelTypography}>
             <Typography.Body1>{textLine1} </Typography.Body1>
             {textLine2 && <Typography.Body1>{textLine2}</Typography.Body1>}
           </Box>
