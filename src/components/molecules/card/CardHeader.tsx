@@ -13,17 +13,12 @@ const MAX_WORDS_PER_TITLE_LINE = 5;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     labelWrapper: {
-      backgroundColor: silverSmokeColor,
-      maxWidth: '10rem',
+      backgroundColor: silverSmokeColor + '8c', // 8c is the opacity. it will look like this : backgroundColor:#d3d3d38c
+      position: 'absolute',
+      width: 'fit-content',
     },
-    labelTypography: {
+    label: {
       maxWidth: 'min-content',
-      paddingLeft: '2rem',
-      paddingRight: '1rem',
-    },
-
-    roadSVG: {
-      margin: 'auto',
     },
   }),
 );
@@ -63,10 +58,10 @@ const CardHeader: FC<IProps> = ({ variant, text, road }) => {
     case HeaderVariant.Label:
       headerContent = (
         <Box display="flex" alignItems="right" flex={1} className={classes.labelWrapper}>
-          <Box className={classes.roadSVG}>
+          <Box display="flex" justifyContent="center" alignItems="center" pr={2}>
             <RoadNumberImage roadNumber={road} />
           </Box>
-          <Box textAlign="center" whiteSpace="normal" className={classes.labelTypography}>
+          <Box textAlign="center" pl={2} pr={1} className={classes.label}>
             <Typography.Body1>{textLine1} </Typography.Body1>
             {textLine2 && <Typography.Body1>{textLine2}</Typography.Body1>}
           </Box>
