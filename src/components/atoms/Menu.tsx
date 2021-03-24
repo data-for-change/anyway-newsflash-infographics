@@ -10,7 +10,6 @@ const Menu: FC<IProps> = ({ items, anchorEl, handleClose }) => {
   return (
     <div>
       <MaterialMenu
-        //open menu under button
         getContentAnchorEl={null}
         anchorOrigin={{
           vertical: 'bottom',
