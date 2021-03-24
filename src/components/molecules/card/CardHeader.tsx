@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: silverSmokeColor + opacity80percent,
       position: 'absolute',
       width: 'fit-content',
+      display: 'flex',
     },
     label: {
       maxWidth: 'min-content',
@@ -57,7 +58,7 @@ const CardHeader: FC<IProps> = ({ variant, text, road }) => {
       break;
     case HeaderVariant.Label:
       headerContent = (
-        <Box display="flex" alignItems="right" flex={1} className={classes.labelWrapper}>
+        <Box className={classes.labelWrapper}>
           <Box display="flex" justifyContent="center" alignItems="center" pr={2}>
             <RoadNumberImage roadNumber={road} />
           </Box>
