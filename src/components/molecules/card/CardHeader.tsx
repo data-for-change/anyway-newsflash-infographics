@@ -6,14 +6,14 @@ import LamasImage from '../../../assets/cbs.png';
 import AnywayImage from '../../../assets/anyway.png';
 import { Typography, Logo } from '../../atoms';
 import { useTranslation } from 'react-i18next';
-import { silverSmokeColor } from '../../../style/_globals';
+import { silverSmokeColor, opacity80percent } from '../../../style/_globals';
 
 const MAX_WORDS_PER_TITLE_LINE = 5;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     labelWrapper: {
-      backgroundColor: silverSmokeColor + '8c', // 8c is the opacity. it will look like this : backgroundColor:#d3d3d38c
+      backgroundColor: silverSmokeColor + opacity80percent,
       position: 'absolute',
       width: 'fit-content',
     },

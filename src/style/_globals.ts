@@ -29,6 +29,8 @@ export const cardWidth = 500;
 export const cardHeaderHeight = 70;
 export const cardFooterHeight = 50;
 
+export const opacity80percent = '8c';
+
 //pie
 export const pieChartColors = ['#AE0721', '#818386', '#d90000', '#890505', '#6a6a6a'];
 
