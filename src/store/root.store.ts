@@ -38,6 +38,7 @@ export default class RootStore {
   @observable newsFlashLoading: boolean = false;
   @observable widgetBoxLoading: boolean = false;
   @observable currentLanguageRouteString: string = '';
+  @observable selectedLanguage: string = 'he';
   // domain stores
   settingsStore: SettingsStore;
 
@@ -66,7 +67,7 @@ export default class RootStore {
 
   @computed
   get newsFlashWidgetsMetaSegmentName(): string {
-    const { road_segment_name } =  this.newsFlashWidgetsMeta.location_info;
+    const { road_segment_name } = this.newsFlashWidgetsMeta.location_info;
     return road_segment_name ? road_segment_name : '';
   }
 
@@ -143,14 +144,14 @@ export default class RootStore {
   @action
   selectNewsFlash(id: number): void {
     this.activeNewsFlashId = id;
-    this.fetchSelectedNewsFlashWidgets(id, this.newsFlashWidgetsTimerFilter);
+    this.fetchSelectedNewsFlashWidgets(id, this.selectedLanguage, this.newsFlashWidgetsTimerFilter);
   }
 
   @action
   changeTimeFilter(filterValue: number): void {
     if (this.newsFlashWidgetsTimerFilter !== filterValue) {
       this.newsFlashWidgetsTimerFilter = filterValue;
-      this.fetchSelectedNewsFlashWidgets(this.activeNewsFlashId, filterValue);
+      this.fetchSelectedNewsFlashWidgets(this.activeNewsFlashId, this.selectedLanguage, filterValue);
     }
   }
   @action
@@ -159,13 +160,15 @@ export default class RootStore {
       lngCode === 'he'
         ? (this.currentLanguageRouteString = '')
         : (this.currentLanguageRouteString = `/${i18next.language}`);
+      this.selectedLanguage = i18next.language;
+      this.fetchSelectedNewsFlashWidgets(this.activeNewsFlashId, i18next.language, this.newsFlashWidgetsTimerFilter);
     });
   }
 
-  private fetchSelectedNewsFlashWidgets(id: number, filterValue: number): void {
+  private fetchSelectedNewsFlashWidgets(id: number, lang: string, filterValue: number): void {
     this.widgetBoxLoading = true;
 
-    fetchWidgets(id, filterValue).then((response: any) => {
+    fetchWidgets(id, lang, filterValue).then((response: any) => {
       this.widgetBoxLoading = false;
       if (response && response.widgets && response.meta) {
         this.newsFlashWidgetsMeta = response.meta;
