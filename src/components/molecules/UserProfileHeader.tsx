@@ -31,7 +31,7 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({ firstName }) => {
       <a className={classes.link} href={LINK}>
         <Typography.Body1>LOGOUT</Typography.Body1>
       </a>
-      <Typography.Body1>{` שלום${firstName}`}</Typography.Body1>
+      <Typography.Body1>{` שלום ${firstName}`}</Typography.Body1>
     </div>
   );
 };

@@ -135,8 +135,9 @@ export default class RootStore {
   getUserLoginDetails() {
     fetchUserInfo()
       .then((userData) => {
-        this.userInfo.firstName = userData.email;
+        this.userInfo.firstName = userData.firstName;
         this.userInfo.lastName = userData.lastName;
+        this.userInfo.email = userData.email;
       })
       .catch((err) => console.log(err));
   }
