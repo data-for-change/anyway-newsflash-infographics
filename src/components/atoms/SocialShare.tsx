@@ -6,15 +6,18 @@ const ICON_SIZE = 24;
 
 const SocialShare = () => {
   const url = window.location.origin;
+  const buttonBorderStyle = {
+    outline: 'none',
+  };
   return (
     <Box display="flex">
       <Box p={1}>
-        <FacebookShareButton url={url}>
+        <FacebookShareButton url={url} style={buttonBorderStyle}>
           <FacebookIcon round size={ICON_SIZE} />
         </FacebookShareButton>
       </Box>
       <Box p={1}>
-        <TwitterShareButton url={url}>
+        <TwitterShareButton url={url} style={buttonBorderStyle}>
           <TwitterIcon round size={ICON_SIZE} />
         </TwitterShareButton>
       </Box>
