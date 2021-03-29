@@ -13,9 +13,10 @@ interface IProps {
   onClose: () => void;
   widgetName: string;
   text: string | undefined;
+  information: string;
 }
 
-const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
+const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text, information }) => {
   const [cardElement, setCardElement] = useState({});
   const [size, setSize] = useState(1);
   const { t } = useTranslation();
@@ -64,6 +65,7 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
         </Box>
         <Box px={2} display="flex" justifyContent="center" flexGrow={1}>
           <AnyWayCard
+            information={information}
             getCardRef={getCardRef}
             widgetName={widgetName}
             roadNumber={roadNumber}
