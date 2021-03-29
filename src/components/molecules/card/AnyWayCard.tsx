@@ -18,8 +18,6 @@ import CardFooter from './CardFooter';
 import CardEditor from '../../organisms/CardEditorDialog';
 
 const DEFAULTE_SIZE = 1;
-const LOREM_IPSUM =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquet mi vitae tristique laoreet. Integer at ante id lectus varius.';
 export interface CardSizeOptions {
   size?: number;
 }
@@ -31,6 +29,7 @@ interface IProps {
   getCardRef?: (element: HTMLElement) => any;
   title: string | undefined;
   dateComment: string;
+  information: string;
 }
 
 const getSizeFactor = (options: CardSizeOptions | undefined): number => (options?.size ? options.size : DEFAULTE_SIZE);
@@ -52,9 +51,6 @@ const useStyles = makeStyles({
       backgroundColor: 'transparent',
     },
   },
-  hidden: {
-    display: 'none',
-  },
 });
 
 const AnyWayCard: FC<IProps> = ({
@@ -66,6 +62,7 @@ const AnyWayCard: FC<IProps> = ({
   actionButtons = true,
   title,
   dateComment,
+  information,
 }) => {
   const [element, setElement] = useState({});
   const [isOpen, setOpen] = useState(false);
@@ -89,9 +86,9 @@ const AnyWayCard: FC<IProps> = ({
       <AnyWayButton className={classes.button} disableRipple={true} onClick={handleCardEditorOpen}>
         <SettingsOverscanIcon />
       </AnyWayButton>
-      <Tooltip title={LOREM_IPSUM} placement="top" aria-label="info">
+      <Tooltip title={information} placement="top" aria-label="info">
         <span>
-          <AnyWayButton className={`${classes.button} ${classes.hidden}`} disableRipple={true} onClick={() => {}}>
+          <AnyWayButton className={`${classes.button}`} disableRipple={true} onClick={() => {}}>
             <InfoOutlinedIcon />
           </AnyWayButton>
         </span>
@@ -131,7 +128,13 @@ const AnyWayCard: FC<IProps> = ({
               <CardFooter dateComment={dateComment} />
             </Box>
           )}
-          <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} text={title} />
+          <CardEditor
+            information={information}
+            isOpen={isOpen}
+            onClose={handleCardEditorClose}
+            widgetName={widgetName}
+            text={title}
+          />
         </Box>
       </Card>
       <Box display="flex" justifyContent="space-between">
