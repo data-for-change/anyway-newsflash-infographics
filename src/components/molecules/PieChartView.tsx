@@ -34,6 +34,7 @@ export const renderCollisionCustomizedLabel = (props: any, fontSize = '100%', us
   const sin = Math.sin(-RADIAN * midAngle); // if sin >= 0 label is on top half
   const cos = Math.cos(-RADIAN * midAngle);
   const labelText = usePercent ? `${Math.round(percent * 100)}%` : value;
+  const valueIsNotZero = labelText !== 0 && percent !== 0;
 
   const singleSliceLabelPosition = {
     x: cx - outerRadius / 2,
@@ -77,7 +78,7 @@ export const renderCollisionCustomizedLabel = (props: any, fontSize = '100%', us
         height={position.height}
         width={position.width}
       >
-        {labelText !== 0 && percent !== 0 ? (
+        {valueIsNotZero ? (
           <div style={single ? wrapperStyle : undefined}>
             <p>{labelText}</p>
             <p>{name}</p>
