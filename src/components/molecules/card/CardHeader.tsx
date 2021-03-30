@@ -1,4 +1,4 @@
-import { Box, makeStyles, Theme } from '@material-ui/core';
+import { Box, makeStyles } from '@material-ui/core';
 import React, { FC } from 'react';
 import { HeaderVariant } from '../../../services/widgets.style.service';
 import RoadNumberImage from './RoadNumberImage';
