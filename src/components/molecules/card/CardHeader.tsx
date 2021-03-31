@@ -1,6 +1,5 @@
-import { Box, createStyles, makeStyles, Theme } from '@material-ui/core';
+import { Box, makeStyles } from '@material-ui/core';
 import React, { FC } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { HeaderVariant } from '../../../services/widgets.style.service';
 import RoadNumberImage from './RoadNumberImage';
 import LamasImage from '../../../assets/cbs.png';
@@ -27,21 +26,16 @@ const useStyles = makeStyles({
   logosContainer: {
     height: '100%',
   },
+  labelWrapper: {
+    backgroundColor: silverSmokeColor + opacity80percent,
+    position: 'absolute',
+    width: 'fit-content',
+    display: 'flex',
+  },
+  label: {
+    maxWidth: 'min-content',
+  },
 });
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    labelWrapper: {
-      backgroundColor: silverSmokeColor + opacity80percent,
-      position: 'absolute',
-      width: 'fit-content',
-      display: 'flex',
-    },
-    label: {
-      maxWidth: 'min-content',
-    },
-  }),
-);
 
 interface IProps {
   variant: HeaderVariant;
@@ -51,7 +45,6 @@ interface IProps {
 const CardHeader: FC<IProps> = ({ variant, text, road }) => {
   const classes = useStyles();
   const { i18n } = useTranslation();
-  const classes = useStyles();
 
   let headerContent = null;
 
@@ -75,8 +68,9 @@ const CardHeader: FC<IProps> = ({ variant, text, road }) => {
             <RoadNumberImage roadNumber={road} />
           </Box>
           <Box textAlign="center" pl={2} pr={1} className={classes.label}>
-            <Typography.Body1>{textLine1} </Typography.Body1>
-            {textLine2 && <Typography.Body1>{textLine2}</Typography.Body1>}
+            <Box className={classes.text}>
+              <Typography.Body1>{text}</Typography.Body1>
+            </Box>
           </Box>
         </Box>
       );
