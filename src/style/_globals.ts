@@ -7,7 +7,7 @@ export const skyBlueColor = '#00aaff';
 export const oceanBlueColor = '#0088cc';
 //white-Gray base collection
 export const shadowColor = '#4c4c4c';
-export const textViewHeaderColor = '#5a5b5e';
+export const brightGreyColor = '#5a5b5e';
 export const smokeWhiteColor = '#f5f5f5';
 //silver-Gray base collection
 export const silverSmokeColor = '#D3D3D3';
@@ -28,6 +28,8 @@ export const cardWidth = 500;
 // card content and actions (footer)
 export const cardHeaderHeight = 70;
 export const cardFooterHeight = 50;
+
+export const opacity80percent = '8c';
 
 //pie
 export const pieChartColors = ['#AE0721', '#818386', '#d90000', '#890505', '#6a6a6a'];

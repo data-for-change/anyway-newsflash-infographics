@@ -1,13 +1,10 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { observer } from 'mobx-react-lite';
 import { AppBar, Logo } from '../atoms';
 import AnywayImage from '../../assets/anyway.png';
 import { SignInIcon } from '../atoms/SignInIcon';
 import LogInLinkGoogle from './LogInLinkGoogle';
 import { Box } from '@material-ui/core';
-import { useStore } from '../../store/storeConfig';
-import RootStore from '../../store/root.store';
-import UserProfileHeader from './UserProfileHeader';
 import { makeStyles } from '@material-ui/core/styles';
 import LanguageMenu from '../organisms/LanguageMenu';
 
@@ -20,24 +17,22 @@ const useStyles = makeStyles({
 const reloadHomePage = () => {
   document.location.href = '/';
 };
-
+// comment out user details from auth server until cors policy bloc  will be handled.
 const Header: FC = () => {
-  const store: RootStore = useStore();
+  //const store: RootStore = useStore();
   const classes = useStyles();
-  useEffect(() => {
+  /*useEffect(() => {
     store.getUserLoginDetails();
-  }, [store]);
+  }, [store]);*/
   //login or logout- depend on authentication state
-  let authElement;
-  if (store.isUserAuthenticated) {
+  /*if (store.isUserAuthenticated) {
     authElement = <UserProfileHeader name={store.userName} />;
-  } else {
-    authElement = (
-      <div>
-        <LogInLinkGoogle />
-      </div>
-    );
-  }
+  } else {*/
+  const authElement = (
+    <div>
+      <LogInLinkGoogle />
+    </div>
+  );
   return (
     <AppBar>
       <Logo src={AnywayImage} alt={'Anyway'} height={30} onClick={reloadHomePage} />
