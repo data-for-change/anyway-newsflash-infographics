@@ -65,6 +65,17 @@ export interface IWidgetMostSevereAccidentsTableData extends IWidgetDataBase {
     type: string;
   }[];
 }
+export interface IWidgetRainAccidentsBySeverityTableData extends IWidgetDataBase {
+  items: {
+    severity: number;
+    severity_hebrew: string;
+    amount_of_accidents_caused_by_rain: number;
+    accidents_caused_by_rain_percentage: number;
+  }[];
+  text: {
+    title: string;
+  };
+}
 export interface IWidgetAccidentsHeatMapData extends IWidgetDataBase {
   items: IPoint[];
 }

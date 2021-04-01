@@ -17,6 +17,7 @@ import {
   IWidgetAccidentCountByDriverType,
   IWidgetAccidentCountByCarType,
   IWidgetInjuredAccidentsWithPedestrians,
+  IWidgetRainAccidentsBySeverityTableData,
 } from '../../../models/WidgetData';
 import AccidentsCountByHourBarWidget from './AccidentsCountByHourBarWidget';
 // import InjuredCountPerAgeGroupPieWidget from './InjuredCountPerAgeGroupPieWidget';
@@ -37,6 +38,7 @@ import AccidentCountByCarTypeWidget from './AccidentCountByCarTypeWidget';
 import InjuredAccidentsWithPedestrians from './InjuredAccidentsWithPedestrians';
 import { IPoint } from '../../../models/Point';
 import { WidgetName } from '../../../models/WidgetName';
+import RainAccidentsTableWidget from './RainAccidentsTableWidget';
 
 interface IProps {
   widget: IWidgetBase;
@@ -62,6 +64,10 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
       widgetComponent = (
         <MostSevereAccidentsMapWidget data={data as IWidgetMostSevereAccidentsData} sizeOptions={sizeOptions} />
       );
+      break;
+    }
+    case WidgetName.rain_accidents_by_severity: {
+      widgetComponent = <RainAccidentsTableWidget data={data as IWidgetRainAccidentsBySeverityTableData} />;
       break;
     }
     case WidgetName.most_severe_accidents_table: {

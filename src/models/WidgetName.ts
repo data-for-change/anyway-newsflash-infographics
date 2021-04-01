@@ -18,4 +18,5 @@ export enum WidgetName {
   accident_count_by_driver_type = 'accident_count_by_driver_type',
   accident_count_by_car_type = 'accident_count_by_car_type',
   injured_accidents_with_pedestrians = 'injured_accidents_with_pedestrians',
+  rain_accidents_by_severity = 'rain_accidents_by_severity',
 }
