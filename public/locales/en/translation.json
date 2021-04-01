@@ -73,5 +73,8 @@
     "size": "Size",
     "download": "Download as PNG"
   },
-  "labelPosition": "Label Position"
+  "labelPosition": "Label Position",
+  "table": {
+    "labels": ["Date", "Hour", "Type", "Killed", "Severe injured", "Light injured"]
+  }
 }
