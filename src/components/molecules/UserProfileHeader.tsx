@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { oceanBlueColor, skyBlueColor } from '../../style';
-import { Typography } from '../atoms';
+import { Button, Typography } from '../atoms';
 import React from 'react';
 import { authServerUrl } from '../../utils/utils';
 
@@ -29,7 +29,7 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({ firstName }) => {
   return (
     <div className={classes.profile}>
       <a className={classes.link} href={LINK}>
-        <Typography.Body1>LOGOUT</Typography.Body1>
+        <Button.Standard>LOGOUT</Button.Standard>
       </a>
       <Typography.Body1>{` שלום ${firstName}`}</Typography.Body1>
     </div>
