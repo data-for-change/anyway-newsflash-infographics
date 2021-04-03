@@ -23,7 +23,7 @@ export const loginPopUpDim = {
 //server url can be on dev or the heroku server
 export const serverUrl = process.env.REACT_APP_BASE_URL;
 
-export const authServerUrl = serverUrl;
+export const authServerUrl = process.env.REACT_APP_AUTH_URL;
 export const AUTH_LOGIN_GOOGLE_URL: URL = new URL(`${authServerUrl}authorize/google`);
 export const REDIRECT_URL: string | undefined = process.env.REACT_APP_REDIRECT_URL;
 export const USER_SERVICE_URL = `${authServerUrl}user/info`;
