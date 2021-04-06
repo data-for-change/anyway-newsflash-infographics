@@ -13,7 +13,7 @@ const MostSevereAccidentsTableWidget: FC<IProps> = ({ data }) => {
   const { t } = useTranslation();
   const { items, text } = data;
 
-  const labels: Array<string> = t('table.labels', { returnObjects: true });
+  const labels: Array<string> = t('table.severeAccidentsLabels', { returnObjects: true });
   const dataKeys = ['date', 'hour', 'type', 'killed_count', 'severe_injured_count', 'light_injured_count'];
 
   const accidentsByAscDate = [...items];

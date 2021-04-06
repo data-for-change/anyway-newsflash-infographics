@@ -75,6 +75,11 @@
   },
   "labelPosition": "Label Position",
   "table": {
-    "labels": ["Date", "Hour", "Type", "Killed", "Severe injured", "Light injured"]
+    "severeAccidentsLabels": ["Date", "Hour", "Type", "Killed", "Severe injured", "Light injured"],
+    "rainAccidentsLabels": [
+      "Accident severity",
+      "Amount of accidents caused by rain",
+      "Percent of accidents caused by rain"
+    ]
   }
 }

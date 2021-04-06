@@ -12,7 +12,7 @@ const RainAccidentsTableWidget: FC<IProps> = ({ data }) => {
   const { t } = useTranslation();
   const { items, text } = data;
 
-  const labels: Array<string> = t('table.labels', { returnObjects: true });
+  const labels: Array<string> = t('table.rainAccidentsLabels', { returnObjects: true });
   const dataKeys = ['severity_hebrew', 'amount_of_accidents_caused_by_rain', 'accidents_caused_by_rain_percentage'];
 
   const tableData = createTableData(labels, dataKeys, items, text);
