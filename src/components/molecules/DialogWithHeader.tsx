@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Dialog, Typography } from '../atoms';
-import { Box, makeStyles, createStyles, Theme, IconButton, DialogTitle } from '@material-ui/core';
+import { Box, makeStyles, createStyles, Theme, IconButton, DialogTitle, DialogContent } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { shadowColor, blueVioletColor } from '../../style';
 
@@ -42,9 +42,7 @@ const DialogWithHeader: FC<IProps> = ({ onClose, isShowing, title, fullWidth, ch
           </IconButton>
         </Box>
       </DialogTitle>
-      <Box display="flex" flexDirection="column" px={3} py={3}>
-        {children}
-      </Box>
+      <DialogContent>{children}</DialogContent>
     </Dialog>
   );
 };

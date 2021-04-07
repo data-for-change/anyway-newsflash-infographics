@@ -1,8 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { oceanBlueColor, skyBlueColor } from '../../style';
 import { Button, Typography } from '../atoms';
-import React from 'react';
-import { authServerUrl } from '../../utils/utils';
+import React, { useState } from 'react';
+import { authServerUrl, useQuery } from '../../utils/utils';
+import UserInfoForm from './UserUpdateForm';
 
 const LINK = `${authServerUrl}/auth/logout`;
 
@@ -15,7 +16,7 @@ const useStyles = makeStyles({
     },
     cursor: 'pointer',
   },
-  profile: {
+  userGreeting: {
     color: 'black',
   },
 });
@@ -25,14 +26,21 @@ interface IUserProfileHeader {
 }
 const UserProfileHeader: React.FC<IUserProfileHeader> = ({ firstName }) => {
   const classes = useStyles();
+  const userUpdateScreen = useQuery().get('updateUser') === 'true';
 
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(userUpdateScreen);
+  const toggleUserUpdateScreen = (isOpen: boolean) => {
+    setIsDialogOpen(isOpen);
+  };
   return (
-    <div className={classes.profile}>
+   <>
       <a className={classes.link} href={LINK}>
         <Button.Standard>LOGOUT</Button.Standard>
       </a>
-      <Typography.Body1>{` שלום ${firstName}`}</Typography.Body1>
-    </div>
+      <Button.Standard onClick={toggleUserUpdateScreen.bind(null, true)}> User Info </Button.Standard>
+      <Typography.Body1><span className={classes.userGreeting}>{` שלום ${firstName}`}</span></Typography.Body1>
+      <UserInfoForm isShowing={isDialogOpen} onClose={toggleUserUpdateScreen.bind(null, false)} />
+    </>
   );
 };
 

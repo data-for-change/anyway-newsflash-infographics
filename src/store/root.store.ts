@@ -8,8 +8,9 @@ import { SourceFilterEnum } from '../models/SourceFilter';
 import { fetchNews } from '../services/news.data.service';
 import SettingsStore from './settings.store';
 import { IPoint } from '../models/Point';
-import { ActualiUserInfo, fetchUserInfo } from '../services/user.service';
+import { ActualiUserInfo, fetchUserInfo, postUserInfo } from '../services/user.service';
 import i18next from '../services/i18n.service';
+import { IFormInput } from '../components/molecules/UserUpdateForm';
 
 // todo: move all map defaults to one place
 const DEFAULT_TIME_FILTER = 5;
@@ -141,6 +142,17 @@ export default class RootStore {
       })
       .catch((err) => console.log(err));
   }
+
+  @action
+  updateUserInfo(formInput :IFormInput){
+    postUserInfo(formInput).then(isValid => {
+      if(isValid){
+        this.userInfo = {...this.userInfo, ...formInput};
+      }
+    })
+  };
+
+
 
   @action
   selectNewsFlash(id: number): void {

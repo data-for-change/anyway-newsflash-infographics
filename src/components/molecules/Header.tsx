@@ -14,6 +14,8 @@ import LanguageMenu from '../organisms/LanguageMenu';
 const useStyles = makeStyles({
   settings: {
     display: 'flex',
+    width: '40%',
+    justifyContent: 'space-evenly',
   },
 });
 
@@ -29,9 +31,9 @@ const Header: FC = () => {
   }, [store]);
   //login or logout- depend on authentication state
   let authElement;
-  const userInfo = store.userInfo.email;
-  if (userInfo) {
-    authElement = <UserProfileHeader firstName={userInfo} />;
+  const userInfo = store.userInfo;
+  if (userInfo.email) {
+    authElement = <UserProfileHeader firstName={userInfo.firstName} />;
   } else {
     authElement = (
       <div>
