@@ -32,10 +32,10 @@ const HeatMap: FC<IProps> = ({ data, center, sizeOptions }) => {
 
   const mapRef = React.createRef<any>();
   useEffect(() => {
-    const map = mapRef.current.leafletElement;
-    setTimeout(() => {
-      map.invalidateSize();
-    });
+    if (mapRef.current?.leafletElement) {
+      const { leafletElement } = mapRef.current;
+      setTimeout(leafletElement.invalidateSize);
+    }
   }, [sizeOptions, mapRef]);
 
   const isDataValid = data && uniquePoints(data).length > 1;
