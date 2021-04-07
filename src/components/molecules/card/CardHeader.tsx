@@ -31,6 +31,7 @@ const useStyles = makeStyles({
     position: 'absolute',
     width: 'fit-content',
     display: 'flex',
+    marginRight: '-24px',
   },
   label: {
     maxWidth: 'min-content',
@@ -64,11 +65,11 @@ const CardHeader: FC<IProps> = ({ variant, text, road }) => {
     case HeaderVariant.Label:
       headerContent = (
         <Box className={classes.labelWrapper}>
-          <Box display="flex" justifyContent="center" alignItems="center" pr={2}>
+          <Box display="flex" justifyContent="center" alignItems="center" pr={4}>
             <RoadNumberImage roadNumber={road} />
           </Box>
           <Box textAlign="center" pl={2} pr={1} className={classes.label}>
-            <Box className={classes.text}>
+            <Box>
               <Typography.Body1>{text}</Typography.Body1>
             </Box>
           </Box>
