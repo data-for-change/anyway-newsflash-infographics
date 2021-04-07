@@ -68,6 +68,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
       widgetComponent = <MostSevereAccidentsTableWidget data={data as IWidgetMostSevereAccidentsTableData} />;
       break;
     }
+    // remove accidents_heat_map until "Cannot read property '_leaflet_pos' of undefined" error is fixed
     case WidgetName.accidents_heat_map: {
       widgetComponent = (
         <HeatMap data={data.items as IPoint[]} center={{ lat: 32.0853, lng: 34.7818 }} sizeOptions={sizeOptions} />
