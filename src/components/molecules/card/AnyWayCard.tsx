@@ -29,7 +29,7 @@ interface IProps {
   getCardRef?: (element: HTMLElement) => any;
   title: string | undefined;
   dateComment: string;
-  information: string;
+  information?: string;
 }
 
 const getSizeFactor = (options: CardSizeOptions | undefined): number => (options?.size ? options.size : DEFAULTE_SIZE);
@@ -50,6 +50,11 @@ const useStyles = makeStyles({
     '&:hover': {
       backgroundColor: 'transparent',
     },
+  },
+  information: {
+    padding: '14px',
+    lineHeight: '1.75px',
+    cursor: 'pointer',
   },
 });
 
@@ -86,13 +91,15 @@ const AnyWayCard: FC<IProps> = ({
       <AnyWayButton className={classes.button} disableRipple={true} onClick={handleCardEditorOpen}>
         <SettingsOverscanIcon />
       </AnyWayButton>
-      <Tooltip title={information} placement="top" aria-label="info">
-        <span>
-          <AnyWayButton className={`${classes.button}`} disableRipple={true} onClick={() => {}}>
-            <InfoOutlinedIcon />
-          </AnyWayButton>
-        </span>
-      </Tooltip>
+      {information && (
+        <Box className={classes.information}>
+          <Tooltip title={information} placement="top" aria-label="info">
+            <span>
+              <InfoOutlinedIcon />
+            </span>
+          </Tooltip>
+        </Box>
+      )}
     </>
   );
 
@@ -128,17 +135,13 @@ const AnyWayCard: FC<IProps> = ({
               <CardFooter dateComment={dateComment} />
             </Box>
           )}
-          <CardEditor
-            information={information}
-            isOpen={isOpen}
-            onClose={handleCardEditorClose}
-            widgetName={widgetName}
-            text={title}
-          />
+          <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} text={title} />
         </Box>
       </Card>
       <Box display="flex" justifyContent="space-between">
-        <Box>{buttons}</Box>
+        <Box display="flex" alignItems="center">
+          {buttons}
+        </Box>
         <SocialShare />
       </Box>
     </>
