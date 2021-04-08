@@ -21,7 +21,7 @@ const SocialShare = () => {
         </FacebookShareButton>
       </Box>
       <Box p={1}>
-        <TwitterShareButton url={url}>
+        <TwitterShareButton url={url} className={classes.noOutline}>
           <TwitterIcon round size={ICON_SIZE} />
         </TwitterShareButton>
       </Box>
