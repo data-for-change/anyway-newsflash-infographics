@@ -18,9 +18,9 @@ _PR name_ format should be: `v0.2.0` - replace with the new version number.
 We follow the [semver](https://semver.org/) standard, release considered as a `minor` change,
 so if last release was `v0.2.0`, next release should be `v0.3.0`.
 
-#### Step 2: Publish a Release on target branch (`master` / `demo` etc)
+#### Step 2: Publish a Release on `dev` branch ( / `demo` etc)
 
-Follow [Creating a release](https://help.github.com/en/github/administering-a-repository/managing-releases-in-a-repository#creating-a-release) steps 1 - 7. **Make sure you set `master` as target**
+Follow [Creating a release](https://help.github.com/en/github/administering-a-repository/managing-releases-in-a-repository#creating-a-release) steps 1 - 6.
 
 If you want to add changes to your release after creation, You may either:
 

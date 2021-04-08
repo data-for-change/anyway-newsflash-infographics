@@ -1,23 +1,18 @@
-import { defaultWidgetsCollectionData, getDemoWidgetData, mockHTTPCall } from './mocks/mock.service';
+import { getDemoWidgetData } from './mocks/mock.service';
 import { ILocationData, IWidgetBase } from '../models/WidgetData';
 import axios from 'axios';
 import { DEMO_ID, showDemoCards, showOnlyOperCards } from '../utils/utils';
 import { operationalCards } from '../const/cards.const';
 
-export function fetchDefaultWidgets(): Promise<any> {
-  // @ts-ignore
-  return mockHTTPCall<ILocationData>(defaultWidgetsCollectionData).then((res: any) => processWidgetsFetchResponse(res));
-}
-
 const NEWS_FLASH_API: string = '/api/infographics-data';
 
-export const fetchWidgets = async (id: number, yearAgo?: number): Promise<ILocationData | undefined> => {
+export const fetchWidgets = async (id: number, lang: string, yearAgo?: number): Promise<ILocationData | undefined> => {
   if (showDemoCards && id === DEMO_ID) {
     return getDemoWidgetData();
   }
 
   try {
-    const query = [`news_flash_id=${id}`];
+    const query = [`lang=${lang}&news_flash_id=${id}`];
     if (yearAgo) {
       query.push(`years_ago=${yearAgo}`);
     }
@@ -34,12 +29,12 @@ export const fetchWidgets = async (id: number, yearAgo?: number): Promise<ILocat
 function processWidgetsFetchResponse(response: any) {
   const meta = response.data.meta;
   let widgets = response.data.widgets;
+  widgets = getVerifiedWidgetsData(widgets);
+  widgets = addWidgetsVariants(widgets);
 
   if (showOnlyOperCards) {
     widgets = getOperWidgetData(widgets);
   }
-  widgets = getVerifiedWidgetsData(widgets);
-  widgets = addWidgetsVariants(widgets);
   return { meta, widgets };
 }
 
