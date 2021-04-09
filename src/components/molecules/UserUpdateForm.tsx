@@ -4,10 +4,13 @@ import { Grid, TextField } from '@material-ui/core';
 import { useStore } from '../../store/storeConfig';
 import Button from '../atoms/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import { observer } from 'mobx-react-lite';
+import { ActualiUserInfo } from '../../services/user.service';
 
 interface IProps {
   isShowing: boolean;
   onClose: () => void;
+  defaultValues: ActualiUserInfo;
 }
 
 export interface IFormInput {
@@ -23,14 +26,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose }) => {
-  const store = useStore();
-  const [formInput, setFormInput] = useState<IFormInput>({
-    email: store.userInfo.email,
-    firstName: store.userInfo.firstName,
-    lastName: store.userInfo.lastName,
-    workplace: store.userInfo.workPlace,
-  });
+const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) => {
+  const { updateUserInfo } = useStore();
+  const [formInput, setFormInput] = useState<IFormInput>({});
 
   const handleInput = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const name = evt.currentTarget?.name;
@@ -40,7 +38,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose }) => {
   const classes = useStyles();
 
   const handleSubmit = () => {
-    store.updateUserInfo(formInput);
+    updateUserInfo(formInput);
     onClose();
   };
 
@@ -49,7 +47,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose }) => {
       <Grid className={classes.grid} container justify={'center'} alignItems={'center'} spacing={4}>
         <Grid item xs={6}>
           <TextField
-            defaultValue={formInput.lastName}
+            defaultValue={defaultValues.lastName}
             onChange={handleInput}
             name="lastName"
             variant={'outlined'}
@@ -59,7 +57,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose }) => {
         </Grid>
         <Grid item xs={6}>
           <TextField
-            defaultValue={formInput.firstName}
+            defaultValue={defaultValues.firstName}
             onChange={handleInput}
             name="firstName"
             variant={'outlined'}
@@ -74,14 +72,14 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose }) => {
             fullWidth
             name="email"
             label="Email"
-            defaultValue={formInput.email}
+            defaultValue={defaultValues.email}
             placeholder={'Please enter your name'}
           />
         </Grid>
         <Grid item xs={12}>
           <TextField
-            defaultValue={formInput.workplace}
-            name="workPlace"
+            defaultValue={defaultValues.workplace}
+            name="workplace"
             label={'Workplace'}
             variant={'outlined'}
             fullWidth
@@ -94,4 +92,4 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose }) => {
   );
 };
 
-export default UserInfoForm;
+export default observer(UserInfoForm);

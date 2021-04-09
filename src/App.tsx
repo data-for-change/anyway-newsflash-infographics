@@ -49,7 +49,7 @@ const App: FC = () => {
               <Switch>
                 <Route exact path="/" component={HomePageRedirect} />
                 <Route path="/:lng?/newsflash/:id" component={HomePage} />
-                <Route path='/popup-redirect' component = {PopUpRedirect}/>
+                <Route path="/login-popup-redirect" component={PopUpRedirect} />
               </Switch>
             </Box>
             <Box height={footerHeight} display="flex">

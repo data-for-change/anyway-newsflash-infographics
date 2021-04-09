@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { GET_USER_INFO_URL, UPDATE_USER_INFO_URL } from '../utils/utils';
 import { IFormInput } from '../components/molecules/UserUpdateForm';
-import { StatusCodes } from 'http-status-codes';
+import { StatusCodes } from '../utils/HTTPStatuesCodes';
 export interface ActualiUserInfo {
   firstName?: string;
   lastName?: string;
   email?: string;
-  workPlace?: string;
+  workplace?: string;
 }
 
 export interface UpdateUserReq {
@@ -23,7 +23,7 @@ export const fetchUserInfo = async function (): Promise<ActualiUserInfo> {
     firstName: response.data[`first_name`],
     lastName: response.data['last_name'],
     email: response.data['email'],
-    workPlace: response.data['user_work_place'],
+    workplace: response.data['work_on_behalf_of_organization'],
   };
   return userInfo;
 };

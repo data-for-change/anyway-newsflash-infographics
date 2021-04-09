@@ -139,6 +139,8 @@ export default class RootStore {
         this.userInfo.firstName = userData.firstName;
         this.userInfo.lastName = userData.lastName;
         this.userInfo.email = userData.email;
+        this.userInfo.workplace = userData.workplace;
+        this.isUserAuthenticated = true;
       })
       .catch((err) => console.log(err));
   }

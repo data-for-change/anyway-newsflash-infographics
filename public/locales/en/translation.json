@@ -76,5 +76,8 @@
   "labelPosition": "Label Position",
   "table": {
     "labels": ["Date", "Hour", "Type", "Killed", "Severe injured", "Light injured"]
+  },
+  "header": {
+    "userGreeting" : "Hello"
   }
 }
