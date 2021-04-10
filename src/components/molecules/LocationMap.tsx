@@ -34,10 +34,10 @@ const LocationMap: FC<IProps> = ({ items, center, sizeOptions }) => {
   const bounds = getBounds(items);
   const mapRef = React.createRef<any>();
   useEffect(() => {
-    const map = mapRef.current.leafletElement;
-    setTimeout(() => {
-      map.invalidateSize();
-    });
+    if (mapRef.current?.leafletElement) {
+      const { leafletElement } = mapRef.current;
+      setTimeout(leafletElement.invalidateSize);
+    }
   }, [sizeOptions, mapRef]);
 
   return (
