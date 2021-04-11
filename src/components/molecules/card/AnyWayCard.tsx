@@ -34,7 +34,7 @@ interface IProps {
 
 const getSizeFactor = (options: CardSizeOptions | undefined): number => (options?.size ? options.size : DEFAULTE_SIZE);
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     fontFamily: fontFamilyString,
     position: 'relative', // for meta tags
@@ -52,11 +52,11 @@ const useStyles = makeStyles({
     },
   },
   information: {
-    padding: '14px',
-    lineHeight: '1.75px',
+    padding: theme.spacing(2.3),
+    lineHeight: '0.75',
     cursor: 'pointer',
   },
-});
+}));
 
 const AnyWayCard: FC<IProps> = ({
   widgetName,
