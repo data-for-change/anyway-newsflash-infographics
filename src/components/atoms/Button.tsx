@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { Button as MatButton, ButtonProps, IconButton } from '@material-ui/core';
+import { Button as MatButton, IconButton as MatIconButton } from '@material-ui/core';
 
-interface IProps extends ButtonProps {
+interface IProps {
   onClick?: () => any;
 }
 
@@ -11,6 +11,8 @@ const StandardButton: FC<IProps> = ({ onClick, children }) => (
     {children}
   </MatButton>
 );
+
+const IconButton: FC<IProps> = ({ onClick, children }) => <MatIconButton onClick={onClick}>{children}</MatIconButton>;
 
 const Button = {
   Standard: StandardButton,
