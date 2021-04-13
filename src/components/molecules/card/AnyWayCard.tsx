@@ -52,7 +52,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   information: {
-    padding: theme.spacing(2.3),
+    minWidth: theme.spacing(8), // to have the same width as other buttons
+    textAlign: 'center',
     lineHeight: '0.75',
     cursor: 'pointer',
   },
