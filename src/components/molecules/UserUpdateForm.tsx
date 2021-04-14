@@ -41,8 +41,8 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
   const [formInput, setFormInput] = useState<IFormInput>(defaultValues);
 
   const handleInput = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const name = evt.currentTarget?.name;
-    const newValue = { [name]: evt.currentTarget?.value };
+    const { name, value } = evt.currentTarget;
+    const newValue = { [name]: value };
     setFormInput((prevState) => ({ ...prevState, ...newValue }));
   };
   const classes = useStyles();
