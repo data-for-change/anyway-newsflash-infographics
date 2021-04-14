@@ -78,6 +78,17 @@
     "labels": ["תאריך", "שעה", "סוג תאונה", "הרוג", "קשה", "קל"]
   },
   "header": {
-    "userGreeting" : "שלום"
+    "userGreeting" : "שלום",
+    "userinfoUpdate" : "פרטי משתמש"
+  },
+  "userDetailsForm" :{
+    "title": "עדכן פרטים",
+    "firstName": "שם פרטי",
+    "lastName": "שם משפחה",
+    "email": "דואר אלקטרוני",
+    "organization" : "שם הארגון",
+    "submitButton" : "שמור",
+    "error" : "אופס! משהו השתבש"
+
   }
 }

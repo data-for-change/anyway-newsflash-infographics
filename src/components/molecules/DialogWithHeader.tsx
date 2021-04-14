@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme: Theme) =>
     close: {
       color: shadowColor,
     },
+    content: {
+      overflow: 'hidden',
+    },
   }),
 );
 
@@ -42,7 +45,7 @@ const DialogWithHeader: FC<IProps> = ({ onClose, isShowing, title, fullWidth, ch
           </IconButton>
         </Box>
       </DialogTitle>
-      <DialogContent>{children}</DialogContent>
+      <DialogContent className={classes.content}>{children}</DialogContent>
     </Dialog>
   );
 };

@@ -32,6 +32,7 @@ export const AUTH_LOGIN_GOOGLE_URL: URL = new URL(`${authServerUrl}authorize/goo
 export const REDIRECT_URL: string | undefined = process.env.REACT_APP_REDIRECT_URL;
 export const GET_USER_INFO_URL = `${authServerUrl}user/info`;
 export const UPDATE_USER_INFO_URL = `${authServerUrl}user/update`;
+export const LOG_OUT_USER_URL = `${authServerUrl}logout`;
 
 AUTH_LOGIN_GOOGLE_URL.searchParams.append('redirect_url', REDIRECT_URL!);
 

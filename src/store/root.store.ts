@@ -11,6 +11,8 @@ import { IPoint } from '../models/Point';
 import { ActualiUserInfo, fetchUserInfo, postUserInfo } from '../services/user.service';
 import i18next from '../services/i18n.service';
 import { IFormInput } from '../components/molecules/UserUpdateForm';
+import axios from 'axios';
+import { LOG_OUT_USER_URL } from '../utils/utils';
 
 // todo: move all map defaults to one place
 const DEFAULT_TIME_FILTER = 5;
@@ -30,7 +32,8 @@ export default class RootStore {
 
   @observable newsFlashCollection: Array<INewsFlash> = [];
   @observable isUserAuthenticated: boolean = false;
-  @observable userInfo: ActualiUserInfo= {};
+  @observable userApiError: boolean = false;
+  @observable userInfo: ActualiUserInfo = {};
   @observable activeNewsFlashId: number = 0; // active newsflash id
   @observable newsFlashFetchLimit: number = 0;
   @observable newsFlashWidgetsMeta: ILocationMeta = DEFAULT_LOCATION_META;
@@ -133,28 +136,34 @@ export default class RootStore {
   }
 
   @action
+  logOutUser() {
+    axios.get(LOG_OUT_USER_URL).then((res) => {
+      this.isUserAuthenticated = false;
+      this.userInfo = {};
+    });
+  }
+  @action
   getUserLoginDetails() {
     fetchUserInfo()
       .then((userData) => {
-        this.userInfo.firstName = userData.firstName;
-        this.userInfo.lastName = userData.lastName;
-        this.userInfo.email = userData.email;
-        this.userInfo.workplace = userData.workplace;
+        this.userInfo = { ...this.userInfo, ...userData };
         this.isUserAuthenticated = true;
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        this.isUserAuthenticated = false;
+        console.log(err);
+      });
   }
 
   @action
-  updateUserInfo(formInput :IFormInput){
-    postUserInfo(formInput).then(isValid => {
-      if(isValid){
-        this.userInfo = {...this.userInfo, ...formInput};
-      }
-    })
-  };
-
-
+  async updateUserInfo(formInput: IFormInput) {
+    const isValid = await postUserInfo(formInput);
+    if (isValid) {
+      this.getUserLoginDetails();
+    } else {
+      this.userApiError = true;
+    }
+  }
 
   @action
   selectNewsFlash(id: number): void {

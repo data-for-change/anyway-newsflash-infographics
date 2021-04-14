@@ -1,16 +1,16 @@
 import React, { ChangeEvent, useState } from 'react';
 import DialogWithHeader from './DialogWithHeader';
-import { Grid, TextField } from '@material-ui/core';
+import { Box, Grid, TextField } from '@material-ui/core';
 import { useStore } from '../../store/storeConfig';
 import Button from '../atoms/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { observer } from 'mobx-react-lite';
-import { ActualiUserInfo } from '../../services/user.service';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   isShowing: boolean;
   onClose: () => void;
-  defaultValues: ActualiUserInfo;
+  defaultValues: IFormInput;
 }
 
 export interface IFormInput {
@@ -24,11 +24,21 @@ const useStyles = makeStyles((theme) => ({
   grid: {
     marginTop: theme.spacing(1),
   },
+  error: {
+    textAlign: 'center',
+  },
+
+  submitButton: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: theme.spacing(2),
+  },
 }));
 
 const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) => {
-  const { updateUserInfo } = useStore();
-  const [formInput, setFormInput] = useState<IFormInput>({});
+  const store = useStore();
+  const { t } = useTranslation();
+  const [formInput, setFormInput] = useState<IFormInput>(defaultValues);
 
   const handleInput = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const name = evt.currentTarget?.name;
@@ -37,13 +47,21 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
   };
   const classes = useStyles();
 
-  const handleSubmit = () => {
-    updateUserInfo(formInput);
-    onClose();
+  const handleSubmit = async () => {
+    await store.updateUserInfo(formInput);
+    if (!store.userApiError) {
+      onClose();
+    }
   };
 
   return (
-    <DialogWithHeader fullWidth maxWidth={'sm'} isShowing={isShowing} title={'עדכן פרטים'} onClose={onClose}>
+    <DialogWithHeader
+      fullWidth
+      maxWidth={'sm'}
+      isShowing={isShowing}
+      title={t('userDetailsForm.title')}
+      onClose={onClose}
+    >
       <Grid className={classes.grid} container justify={'center'} alignItems={'center'} spacing={4}>
         <Grid item xs={6}>
           <TextField
@@ -52,26 +70,28 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
             name="lastName"
             variant={'outlined'}
             fullWidth
-            label="Last Name"
+            label={t('userDetailsForm.lastName')}
           />
         </Grid>
         <Grid item xs={6}>
           <TextField
+            required
             defaultValue={defaultValues.firstName}
             onChange={handleInput}
             name="firstName"
             variant={'outlined'}
             fullWidth
-            label="First Name"
+            label={t('userDetailsForm.firstName')}
           />
         </Grid>
         <Grid item xs={12}>
           <TextField
+            required
             onChange={handleInput}
             variant={'outlined'}
             fullWidth
             name="email"
-            label="Email"
+            label={t('userDetailsForm.email')}
             defaultValue={defaultValues.email}
             placeholder={'Please enter your name'}
           />
@@ -80,13 +100,20 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
           <TextField
             defaultValue={defaultValues.workplace}
             name="workplace"
-            label={'Workplace'}
+            label={t('userDetailsForm.organization')}
             variant={'outlined'}
             fullWidth
             onChange={handleInput}
           />
         </Grid>
-        <Button.Standard onClick={handleSubmit}>Submit</Button.Standard>
+        <Grid item xs={12}>
+          {store.userApiError && <p className={classes.error}>{t('userDetailsForm.error')} </p>}
+        </Grid>
+        <Grid item xs={12}>
+          <Box className={classes.submitButton}>
+            <Button.Standard onClick={handleSubmit}>{t(`userDetailsForm.submitButton`)}</Button.Standard>
+          </Box>
+        </Grid>
       </Grid>
     </DialogWithHeader>
   );
