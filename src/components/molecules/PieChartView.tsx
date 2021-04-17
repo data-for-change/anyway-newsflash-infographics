@@ -4,6 +4,8 @@ import { fontFamilyString, pieChartColors, whiteColor } from '../../style';
 import { makeStyles } from '@material-ui/core';
 
 const TEXT_RELATIVE_WIDTH = 0.8;
+const FULL_SECTOR_ANGLE = -90;
+
 interface ILabelProps {
   customizedLabel: (props: any, fontSize?: string, usePercent?: boolean, single?: boolean) => JSX.Element | null;
   labelFontSize?: string;
@@ -34,6 +36,7 @@ export const renderCollisionCustomizedLabel = (props: any, fontSize = '100%', us
   const sin = Math.sin(-RADIAN * midAngle); // if sin >= 0 label is on top half
   const cos = Math.cos(-RADIAN * midAngle);
   const labelText = usePercent ? `${Math.round(percent * 100)}%` : value;
+  const isFullSector = midAngle === FULL_SECTOR_ANGLE;
 
   const singleSliceLabelPosition = {
     x: cx - outerRadius / 2,
@@ -72,8 +75,8 @@ export const renderCollisionCustomizedLabel = (props: any, fontSize = '100%', us
       <foreignObject
         style={collisionLabelStyle}
         fill={'white'}
-        x={Math.round(position.x)}
-        y={Math.round(position.y)}
+        x={!isFullSector ? Math.round(position.x) : position.height}
+        y={!isFullSector ? Math.round(position.y) : position.width}
         height={position.height}
         width={position.width}
       >
