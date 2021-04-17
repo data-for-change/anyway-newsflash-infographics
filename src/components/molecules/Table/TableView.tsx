@@ -21,12 +21,12 @@ const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
     root: {
       textAlign: 'center',
-      padding: theme.spacing(0.7, 0),
+      padding: theme.spacing(1, 0),
       borderBottom: `1px solid ${blackColor}`,
     },
     sizeSmall: {
       '&:last-child': {
-        padding: theme.spacing(0.7, 1),
+        padding: theme.spacing(1, 1),
       },
     },
     head: {
@@ -35,6 +35,7 @@ const StyledTableCell = withStyles((theme: Theme) =>
     },
   }),
 )(TableCell);
+
 const StyledTableRow = withStyles(() =>
   createStyles({
     root: {
