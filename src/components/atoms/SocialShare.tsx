@@ -5,7 +5,7 @@ import { Box, makeStyles } from '@material-ui/core/';
 const ICON_SIZE = 24;
 
 const useStyles = makeStyles({
-  noOutline: {
+  socialShareButton: {
     outline: 'none',
   },
 });
@@ -16,12 +16,12 @@ const SocialShare = () => {
   return (
     <Box display="flex">
       <Box p={1}>
-        <FacebookShareButton url={url} className={classes.noOutline}>
+        <FacebookShareButton url={url} className={classes.socialShareButton}>
           <FacebookIcon round size={ICON_SIZE} />
         </FacebookShareButton>
       </Box>
       <Box p={1}>
-        <TwitterShareButton url={url} className={classes.noOutline}>
+        <TwitterShareButton url={url} className={classes.socialShareButton}>
           <TwitterIcon round size={ICON_SIZE} />
         </TwitterShareButton>
       </Box>
