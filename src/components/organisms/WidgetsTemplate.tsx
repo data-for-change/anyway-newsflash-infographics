@@ -28,6 +28,7 @@ const WidgetsTemplate: FC = () => {
     return (
       <Box m={2} key={index}>
         <AnyWayCard
+          information={widget.meta.information}
           widgetName={widget.name}
           title={widget.data?.text?.title}
           dateComment={store.newsFlashWidgetsMetaDateComment}
