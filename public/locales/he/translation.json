@@ -62,7 +62,8 @@
   },
   "onUrban": {
     "road": "כבישים בין עירוניים",
-    "location": "בכל הארץ"
+    "location": "בכל הארץ",
+    "route": "כביש"
   },
   "cardEditor": {
     "title": "עריכת כרטיס",
@@ -76,5 +77,21 @@
   "labelPosition": "מיקום תווית",
   "table": {
     "labels": ["תאריך", "שעה", "סוג תאונה", "הרוג", "קשה", "קל"]
+  },
+  "login": "התחברות",
+  "filterPanel": {
+    "all": "הכל"
+  },
+  "sideBar": "מיקום משוער:",
+  "UserProfileHeader": {
+    "hallo": "שלום",
+    "logout": "התנתקות"
+  },
+  "widgets": {
+    "countByCarType": {
+      "header1": "השוואת אחוז התאונות ע\"פ כלי רכב",
+      "header2": "במקטע לעומת ממוצע ארצי בכבישים מאותו הסוג"
+    },
+    "template": "אין נתונים להצגה"
   }
 }

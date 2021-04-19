@@ -62,7 +62,8 @@
   },
   "onUrban": {
     "road": "On urban roads (without intersections)",
-    "location": "throughout the country"
+    "location": "throughout the country",
+    "route": "Route"
   },
   "cardEditor": {
     "title": "Card Editing",
@@ -76,5 +77,21 @@
   "labelPosition": "Label Position",
   "table": {
     "labels": ["Date", "Hour", "Type", "Killed", "Severe injured", "Light injured"]
+  },
+  "login": "LOGIN",
+  "filterPanel": {
+    "all": "all"
+  },
+  "sideBar": "Approximate location:",
+  "UserProfileHeader": {
+    "hallo": "Hallo",
+    "logout": "LOGOUT"
+  },
+  "widgets": {
+    "countByCarType": {
+      "header1": "Accidents count by vehicle type",
+      "header2": "in a section compared to national average on roads of the same type"
+    },
+    "template": "No data to display"
   }
 }

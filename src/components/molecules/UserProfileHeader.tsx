@@ -3,6 +3,7 @@ import { oceanBlueColor, skyBlueColor } from '../../style';
 import { Typography } from '../atoms';
 import React from 'react';
 import { authServerUrl } from '../../utils/utils';
+import { useTranslation } from 'react-i18next';
 
 const LINK = `${authServerUrl}/auth/logout`;
 
@@ -25,13 +26,14 @@ interface IUserProfileHeader {
 }
 const UserProfileHeader: React.FC<IUserProfileHeader> = ({ name }) => {
   const classes = useStyles();
+  const { t } = useTranslation();
 
   return (
     <div className={classes.profile}>
       <a className={classes.link} href={LINK}>
-        <Typography.Body1>LOGOUT</Typography.Body1>
+        <Typography.Body1>{t('UserProfileHeader.logout')}</Typography.Body1>
       </a>
-      <Typography.Body1>{`שלום ${name}`}</Typography.Body1>
+      <Typography.Body1>{`${t('UserProfileHeader.hallo')} ${name}`}</Typography.Body1>
     </div>
   );
 };

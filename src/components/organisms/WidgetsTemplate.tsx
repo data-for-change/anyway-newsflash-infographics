@@ -9,9 +9,11 @@ import { MetaTag } from '../atoms';
 import { Typography } from '../atoms';
 import { Box } from '@material-ui/core';
 import WidgetWrapper from '../molecules/widgets/WidgetWrapper';
+import { useTranslation } from 'react-i18next';
 
 const WidgetsTemplate: FC = () => {
   const store: RootStore = useStore();
+  const { t } = useTranslation();
   const widgetsData = store.newsFlashWidgetsData;
   const widgetCards = widgetsData.map((widget, index, sizeOptions) => {
     const widgetComponent = (
@@ -41,7 +43,7 @@ const WidgetsTemplate: FC = () => {
     );
   });
 
-  const NoDataText = <Typography.Body4>אין נתונים להצגה</Typography.Body4>;
+  const NoDataText = <Typography.Body4>{t('widgets.template')}</Typography.Body4>;
 
   return <Grid.Container>{widgetsData && widgetsData.length > 0 ? widgetCards : NoDataText} </Grid.Container>;
 };
