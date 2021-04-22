@@ -8,11 +8,9 @@ import { SourceFilterEnum } from '../models/SourceFilter';
 import { fetchNews } from '../services/news.data.service';
 import SettingsStore from './settings.store';
 import { IPoint } from '../models/Point';
-import { ActualiUserInfo, fetchUserInfo, postUserInfo } from '../services/user.service';
+import { ActualiUserInfo, fetchUserInfo, logoutUserFromSession, postUserInfo } from '../services/user.service';
 import i18next from '../services/i18n.service';
 import { IFormInput } from '../components/molecules/UserUpdateForm';
-import axios from 'axios';
-import { LOG_OUT_USER_URL } from '../utils/utils';
 
 // todo: move all map defaults to one place
 const DEFAULT_TIME_FILTER = 5;
@@ -137,11 +135,14 @@ export default class RootStore {
 
   @action
   logOutUser() {
-    axios.get(LOG_OUT_USER_URL).then((res) => {
-      this.isUserAuthenticated = false;
-      this.userInfo = {};
+    logoutUserFromSession().then((isOk) => {
+      if (isOk) {
+        this.isUserAuthenticated = false;
+        this.userInfo = {};
+      }
     });
   }
+
   @action
   getUserLoginDetails() {
     fetchUserInfo()

@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 import DialogWithHeader from './DialogWithHeader';
-import { Box, Grid, TextField } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
 import { useStore } from '../../store/storeConfig';
 import Button from '../atoms/Button';
 import { makeStyles } from '@material-ui/core/styles';

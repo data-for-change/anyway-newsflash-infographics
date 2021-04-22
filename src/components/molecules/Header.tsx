@@ -10,7 +10,6 @@ import RootStore from '../../store/root.store';
 import UserProfileHeader from './UserProfileHeader';
 import { makeStyles } from '@material-ui/core/styles';
 import LanguageMenu from '../organisms/LanguageMenu';
-import { IFormInput } from './UserUpdateForm';
 
 const useStyles = makeStyles({
   userSection: {
@@ -27,12 +26,6 @@ const reloadHomePage = () => {
 const Header: FC = () => {
   const store: RootStore = useStore();
   const isUserCompleteReg: boolean = !!(store.userInfo.meta && !store.userInfo.meta.isCompleteRegistration);
-  const defaultVal: IFormInput = {
-    firstName: store.userInfo.data?.firstName,
-    lastName: store.userInfo.data?.lastName,
-    workplace: store.userInfo.data?.workplace,
-    email: store.userInfo.data?.email,
-  };
   const classes = useStyles();
   useEffect(() => {
     store.getUserLoginDetails();
@@ -40,11 +33,12 @@ const Header: FC = () => {
   //login or logout- depend on authentication state
   let authElement;
   if (store.isUserAuthenticated) {
+    const { ...defaultVals } = store.userInfo.data!;
     const handleLogout = () => {
       store.logOutUser();
     };
     authElement = (
-      <UserProfileHeader handleLogout={handleLogout} isUpdateScreenOpen={isUserCompleteReg} userDetails={defaultVal} />
+      <UserProfileHeader handleLogout={handleLogout} isUpdateScreenOpen={isUserCompleteReg} userDetails={defaultVals} />
     );
   } else {
     authElement = (

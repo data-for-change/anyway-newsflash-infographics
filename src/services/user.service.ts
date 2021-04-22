@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_USER_INFO_URL, UPDATE_USER_INFO_URL } from '../utils/utils';
+import { GET_USER_INFO_URL, LOG_OUT_USER_URL, UPDATE_USER_INFO_URL } from '../utils/utils';
 import { IFormInput } from '../components/molecules/UserUpdateForm';
 import { StatusCodes } from '../utils/HTTPStatuesCodes';
 export interface ActualiUserInfo {
@@ -53,4 +53,15 @@ export const postUserInfo = async function (formInput: IFormInput): Promise<Bool
     console.error(`Error while trying to update/create user Details : ${e}`);
   }
   return isUpdateUser;
+};
+
+export const logoutUserFromSession = async function (): Promise<boolean> {
+  let isSessionLogOut: boolean = false;
+  try {
+    const res = await axios.get(LOG_OUT_USER_URL);
+    isSessionLogOut = res.status === StatusCodes.OK;
+  } catch (e) {
+    console.error(`an Error has occured while trying to log out : ${e}`);
+  }
+  return isSessionLogOut;
 };
