@@ -1,13 +1,13 @@
-import React, { FC, useEffect } from 'react';
-import { Map } from 'react-leaflet';
-// @ts-ignore
-import HeatmapLayer from 'react-leaflet-heatmap-layer';
+import React, { FC, useEffect, useState } from 'react';
+import { MapContainer } from 'react-leaflet';
 import { IPoint } from '../../models/Point';
 import L, { LatLng } from 'leaflet';
-
+import 'leaflet.heat';
 import { makeStyles } from '@material-ui/core/styles';
 import { uniquePoints } from '../../utils/utils';
 import GoogleMapsLayer from './map/GoogleMapsLayer';
+import MapViewControl from '../../services/MapViewControl';
+import HeatMapLayer from '../../services/HeatMapLayer';
 
 const INITIAL_ZOOM = parseInt(process.env.REACT_APP_DEFAULT_MAP_ZOOM!);
 const useStyles = makeStyles({
@@ -29,14 +29,12 @@ interface IProps {
 
 const HeatMap: FC<IProps> = ({ data, center, sizeOptions }) => {
   const classes = useStyles();
-
-  const mapRef = React.createRef<any>();
+  const [map, setMap] = useState<L.Map>();
   useEffect(() => {
-    if (mapRef.current?.leafletElement) {
-      const { leafletElement } = mapRef.current;
-      setTimeout(leafletElement.invalidateSize);
+    if (map) {
+      setTimeout(map.invalidateSize);
     }
-  }, [sizeOptions, mapRef]);
+  }, [sizeOptions, map]);
 
   const isDataValid = data && uniquePoints(data).length > 1;
   if (!isDataValid) {
@@ -45,17 +43,11 @@ const HeatMap: FC<IProps> = ({ data, center, sizeOptions }) => {
   const bounds = getBounds(data);
 
   return (
-    <Map center={center} bounds={bounds} zoom={INITIAL_ZOOM} className={classes.wrapper} ref={mapRef}>
-      <HeatmapLayer
-        fitBoundsOnLoad
-        fitBoundsOnUpdate
-        points={data}
-        longitudeExtractor={(m: any) => m.longitude}
-        latitudeExtractor={(m: any) => m.latitude}
-        intensityExtractor={(m: any) => parseFloat(m.latitude)}
-      />
+    <MapContainer center={center} bounds={bounds} zoom={INITIAL_ZOOM} className={classes.wrapper} whenCreated={setMap}>
+      <MapViewControl bounds={bounds} />
       <GoogleMapsLayer />
-    </Map>
+      <HeatMapLayer points={data} />
+    </MapContainer>
   );
 };
 const getBounds = (data: IPoint[]) => {

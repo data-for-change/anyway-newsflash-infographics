@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import LocationMap from '../LocationMap';
 import { IWidgetMostSevereAccidentsData } from '../../../models/WidgetData';
+import { INITIAL_CENTER } from '../../../utils/utils';
 
-const CENTER = { lat: 32.0853, lng: 34.7818 };
 interface IProps {
   data: IWidgetMostSevereAccidentsData;
   sizeOptions: number;
 }
 const MostSevereAccidentsMapWidget: FC<IProps> = ({ data, sizeOptions }) => {
   const { items } = data;
-  return <LocationMap items={items} center={CENTER} sizeOptions={sizeOptions} />;
+  return <LocationMap items={items} center={INITIAL_CENTER} sizeOptions={sizeOptions} />;
 };
 export default MostSevereAccidentsMapWidget;
