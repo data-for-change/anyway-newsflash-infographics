@@ -13,10 +13,10 @@ interface IProps {
 }
 
 export interface IFormInput {
-  email?: string;
-  firstName?: string;
-  lastName?: string;
-  workplace?: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  workplace: string;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
   error: {
     textAlign: 'center',
   },
-
   submitButton: {
     display: 'flex',
     justifyContent: 'center',

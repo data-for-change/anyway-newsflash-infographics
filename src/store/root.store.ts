@@ -31,7 +31,7 @@ export default class RootStore {
   @observable newsFlashCollection: Array<INewsFlash> = [];
   @observable isUserAuthenticated: boolean = false;
   @observable userApiError: boolean = false;
-  @observable userInfo: ActualiUserInfo = {};
+  @observable userInfo: ActualiUserInfo | null = null;
   @observable activeNewsFlashId: number = 0; // active newsflash id
   @observable newsFlashFetchLimit: number = 0;
   @observable newsFlashWidgetsMeta: ILocationMeta = DEFAULT_LOCATION_META;
@@ -138,7 +138,7 @@ export default class RootStore {
     logoutUserFromSession().then((isOk) => {
       if (isOk) {
         this.isUserAuthenticated = false;
-        this.userInfo = {};
+        this.userInfo = null;
       }
     });
   }
@@ -147,7 +147,7 @@ export default class RootStore {
   getUserLoginDetails() {
     fetchUserInfo()
       .then((userData) => {
-        this.userInfo = { ...this.userInfo, ...userData };
+        this.userInfo = userData;
         this.isUserAuthenticated = true;
       })
       .catch((err) => {
@@ -161,6 +161,7 @@ export default class RootStore {
     const isValid = await postUserInfo(formInput);
     if (isValid) {
       this.getUserLoginDetails();
+      this.userApiError = false;
     } else {
       this.userApiError = true;
     }

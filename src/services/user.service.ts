@@ -3,22 +3,22 @@ import { GET_USER_INFO_URL, LOG_OUT_USER_URL, UPDATE_USER_INFO_URL } from '../ut
 import { IFormInput } from '../components/molecules/UserUpdateForm';
 import { StatusCodes } from '../utils/HTTPStatuesCodes';
 export interface ActualiUserInfo {
-  data?: {
-    firstName?: string;
-    lastName?: string;
-    email?: string;
-    workplace?: string;
+  data: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    workplace: string;
   };
-  meta?: {
+  meta: {
     isCompleteRegistration: boolean;
   };
 }
 
 export interface UpdateUserReq {
-  first_name?: string;
-  last_name?: string;
-  user_work_place?: string;
-  email?: string;
+  first_name: string;
+  last_name: string;
+  user_work_place: string;
+  email: string;
 }
 
 export const fetchUserInfo = async function (): Promise<ActualiUserInfo> {
@@ -26,13 +26,13 @@ export const fetchUserInfo = async function (): Promise<ActualiUserInfo> {
 
   const userInfo: ActualiUserInfo = {
     data: {
-      firstName: response.data[`first_name`],
-      lastName: response.data['last_name'],
-      email: response.data['email'],
-      workplace: response.data['work_on_behalf_of_organization'],
+      firstName: response.data.first_name,
+      lastName: response.data.last_name,
+      email: response.data.email,
+      workplace: response.data.work_on_behalf_of_organization,
     },
     meta: {
-      isCompleteRegistration: response.data['is_user_completed_registration'],
+      isCompleteRegistration: response.data.is_user_completed_registration,
     },
   };
   return userInfo;

@@ -5,7 +5,7 @@ let previousUrl: string;
 
 const receiveMessage = () => {
   //change window in order to re-rednder -todo try to find better way to do it
-  window.location.assign(`/`);
+  window.location.reload();
 };
 export const openSignInWindow: Function = (url: string, name: string) => {
   // remove any existing event listeners

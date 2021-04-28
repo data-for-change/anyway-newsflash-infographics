@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'space-between',
       paddingLeft: '2vw',
       paddingRight: '2vw',
+      color: 'inherit',
     },
   }),
 );

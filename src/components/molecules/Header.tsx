@@ -25,7 +25,8 @@ const reloadHomePage = () => {
 
 const Header: FC = () => {
   const store: RootStore = useStore();
-  const isUserCompleteReg: boolean = !!(store.userInfo.meta && !store.userInfo.meta.isCompleteRegistration);
+  const isUserDetailsRequired: boolean = store.userInfo?.meta.isCompleteRegistration === false;
+
   const classes = useStyles();
   useEffect(() => {
     store.getUserLoginDetails();
@@ -33,19 +34,19 @@ const Header: FC = () => {
   //login or logout- depend on authentication state
   let authElement;
   if (store.isUserAuthenticated) {
-    const { ...defaultVals } = store.userInfo.data!;
+    const { ...userDetails } = store.userInfo!.data;
     const handleLogout = () => {
       store.logOutUser();
     };
     authElement = (
-      <UserProfileHeader handleLogout={handleLogout} isUpdateScreenOpen={isUserCompleteReg} userDetails={defaultVals} />
+      <UserProfileHeader
+        handleLogout={handleLogout}
+        isUpdateScreenOpen={isUserDetailsRequired}
+        userDetails={userDetails}
+      />
     );
   } else {
-    authElement = (
-      <div>
-        <LogInLinkGoogle />
-      </div>
-    );
+    authElement = <LogInLinkGoogle />;
   }
   return (
     <AppBar>
