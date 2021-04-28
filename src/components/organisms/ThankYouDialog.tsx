@@ -14,10 +14,15 @@ interface IProps {
 const ThankYouDialog: FC<IProps> = ({ isShowing, onClose }) => {
   const { t } = useTranslation();
   return (
-    <DialogWithHeader isShowing={isShowing} onClose={onClose} title={t('thankYouDialog.title')} maxWidth={maxWidth}>
+    <DialogWithHeader
+      isShowing={isShowing}
+      onClose={onClose}
+      title={t('thankYouDialog.Acknowledgements')}
+      maxWidth={maxWidth}
+    >
       <article>
         <Box mb={1}>
-          <Typography.Body5>{t('thankYouDialog.contentTitle')}</Typography.Body5>
+          <Typography.Body5>{t('thankYouDialog.Developed by')}</Typography.Body5>
         </Box>
         <Typography.Body5>{t('thankYouDialog.names', { joinArrays: ', ' })}</Typography.Body5>
       </article>

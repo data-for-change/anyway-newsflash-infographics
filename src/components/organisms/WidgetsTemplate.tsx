@@ -43,7 +43,7 @@ const WidgetsTemplate: FC = () => {
     );
   });
 
-  const NoDataText = <Typography.Body4>{t('widgets.template')}</Typography.Body4>;
+  const NoDataText = <Typography.Body4>{t('widgets.No data')}</Typography.Body4>;
 
   return <Grid.Container>{widgetsData && widgetsData.length > 0 ? widgetCards : NoDataText} </Grid.Container>;
 };

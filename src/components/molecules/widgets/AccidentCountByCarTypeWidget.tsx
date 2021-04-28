@@ -31,8 +31,8 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
   return (
     <>
       <Box display="flex" flexDirection="column">
-        <span>{t('widgets.countByCarType.header1')}</span>
-        <span>{t('widgets.countByCarType.header2')}</span>
+        <span>{t('widgets.countByCarType.Accidents count by vehicle type')}</span>
+        <span>{t('widgets.countByCarType.compared to national average')}</span>
       </Box>
       <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center">
         <Box textAlign="center">{segmentText}</Box>
