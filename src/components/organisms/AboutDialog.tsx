@@ -26,7 +26,9 @@ const AboutDialog: FC<IProps> = ({ isShowing, onClose }) => {
           <Typography.Body5>
             {t('aboutDialog.content3')}
             &nbsp;
-            <a href={t('aboutDialog.linkUrl')}>{t('aboutDialog.linkText')}</a>
+            <a href={t('aboutDialog.linkUrl')} target="_blank" rel="noopener noreferrer">
+              {t('aboutDialog.linkText')}
+            </a>
           </Typography.Body5>
         </Box>
       </article>
