@@ -1,10 +1,8 @@
 import React, { ChangeEvent, useState } from 'react';
 import DialogWithHeader from './DialogWithHeader';
-import { Box, Grid } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
+import { Box, Grid, TextField, makeStyles } from '@material-ui/core';
 import { useStore } from '../../store/storeConfig';
 import Button from '../atoms/Button';
-import { makeStyles } from '@material-ui/core/styles';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 
