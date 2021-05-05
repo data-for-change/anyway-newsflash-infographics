@@ -4,7 +4,6 @@ import { fontFamilyString, pieChartColors, whiteColor } from '../../style';
 import { makeStyles } from '@material-ui/core';
 
 const TEXT_RELATIVE_WIDTH = 0.8;
-const FULL_SECTOR_ANGLE = -90;
 
 interface ILabelProps {
   customizedLabel: (props: any, fontSize?: string, usePercent?: boolean, single?: boolean) => JSX.Element | null;
@@ -12,7 +11,7 @@ interface ILabelProps {
 }
 
 interface IProps {
-  data: Array<object>;
+  data: Array<any>;
   xLabel: string;
   yLabel: string;
   innerRadius?: string;
@@ -36,7 +35,6 @@ export const renderCollisionCustomizedLabel = (props: any, fontSize = '100%', us
   const sin = Math.sin(-RADIAN * midAngle); // if sin >= 0 label is on top half
   const cos = Math.cos(-RADIAN * midAngle);
   const labelText = usePercent ? `${Math.round(percent * 100)}%` : value;
-  const isFullSector = midAngle === FULL_SECTOR_ANGLE;
 
   const singleSliceLabelPosition = {
     x: cx - outerRadius / 2,
@@ -75,8 +73,8 @@ export const renderCollisionCustomizedLabel = (props: any, fontSize = '100%', us
       <foreignObject
         style={collisionLabelStyle}
         fill={'white'}
-        x={!isFullSector ? Math.round(position.x) : position.height}
-        y={!isFullSector ? Math.round(position.y) : position.width}
+        x={Math.round(position.x)}
+        y={Math.round(position.y)}
         height={position.height}
         width={position.width}
       >
@@ -148,8 +146,8 @@ export const PieChartView: FC<IProps> = ({
 }) => {
   const renderLabel = useCallback(
     (props: PieLabelRenderProps) =>
-      labelProps.customizedLabel(props, labelProps.labelFontSize, usePercent, data.length === 1),
-    [labelProps, usePercent, data],
+      labelProps.customizedLabel(props, labelProps.labelFontSize, usePercent, data.some(items => items[yLabel] === 0)),
+    [labelProps, usePercent, data, yLabel],
   );
 
   const classes = useStyles();
