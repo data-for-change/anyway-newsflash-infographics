@@ -53,8 +53,10 @@ const Header: FC = () => {
       <Logo src={AnywayImage} alt={'Anyway'} height={30} onClick={reloadHomePage} />
       <Box className={classes.userSection}>
         <LanguageMenu />
-        {authElement}
-        <SignInIcon />
+        <span style={{ display: 'none' }}>
+          {authElement}
+          <SignInIcon />
+        </span>
       </Box>
     </AppBar>
   );
