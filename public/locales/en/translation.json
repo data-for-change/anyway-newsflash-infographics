@@ -75,5 +75,18 @@
   "labelPosition": "Label Position",
   "table": {
     "labels": ["Date", "Hour", "Type", "Killed", "Severe injured", "Light injured"]
+  },
+  "header": {
+    "userGreeting" : "Hello",
+    "userinfoUpdate" : "Update Info"
+  },
+  "userDetailsForm" :{
+    "title": "update details",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "E-mail",
+    "organization" : "Organization",
+    "submitButton" : "Save",
+    "error" : "oops! something went wrong"
   }
 }
