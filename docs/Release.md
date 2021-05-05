@@ -5,8 +5,8 @@ Updating all environments (Production & Demo) are prefeable, although per-envron
 ### Create a Release
 
 #### Before starting
-
-Make sure you update `version` field in `package.json` for `dev` branch
+1. Checkout `dev` branch and `git pull`
+1. Make sure you update `version` field in `package.json` for `dev` branch
 
 #### Step 1: Updating target branch (`master` / `demo` etc)
 
