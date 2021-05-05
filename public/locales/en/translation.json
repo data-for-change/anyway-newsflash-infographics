@@ -82,6 +82,10 @@
   "filterPanel": {
     "all": "all"
   },
+  "header": {
+    "userGreeting": "Hello",
+    "userinfoUpdate": "Update Info"
+  },
   "sideBar": "Approximate location:",
   "UserProfileHeader": {
     "hallo": "Hallo",

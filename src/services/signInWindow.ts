@@ -1,20 +1,19 @@
-import {loginPopUpDim} from "../utils/utils";
+import { loginPopUpDim } from '../utils/utils';
 
-let windowObjectReference :Window | null =null;
-let previousUrl :string;
+let windowObjectReference: Window | null = null;
+let previousUrl: string;
 
 const receiveMessage = () => {
-//change window in order to re-rednder -todo try to find better way to do it
-    window.location.pathname = '/';
+  //change window in order to re-rednder -todo try to find better way to do it
+  window.location.reload();
 };
-  export const openSignInWindow :Function = (url :string, name :string) => {
+export const openSignInWindow: Function = (url: string, name: string) => {
   // remove any existing event listeners
   window.removeEventListener('message', receiveMessage);
 
   const left = (window.screen.width - loginPopUpDim.width) / 2;
   const top = (window.screen.height - loginPopUpDim.height) / 4;
-  const strWindowFeatures =
-    `toolbar=no, menubar=no, width=+${loginPopUpDim.width}, height=+${loginPopUpDim.height}, top= +${top}, left=+${left}`;
+  const strWindowFeatures = `toolbar=no, menubar=no, width=+${loginPopUpDim.width}, height=+${loginPopUpDim.height}, top= +${top}, left=+${left}`;
 
   if (windowObjectReference === null || windowObjectReference.closed) {
     /* if the pointer to the window object in memory does not exist
@@ -35,7 +34,7 @@ const receiveMessage = () => {
   }
 
   // add the listener for receiving a message from the popup
-  window.addEventListener('message', event => receiveMessage(), false);
+  window.addEventListener('message', (event) => receiveMessage(), false);
   // assign the previous URL
   previousUrl = url;
 };

@@ -82,6 +82,10 @@
   "filterPanel": {
     "all": "הכל"
   },
+  "header": {
+    "userGreeting": "שלום",
+    "userinfoUpdate": "פרטי משתמש"
+  },
   "sideBar": "מיקום משוער:",
   "UserProfileHeader": {
     "hallo": "שלום",
