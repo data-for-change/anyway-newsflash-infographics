@@ -14,7 +14,7 @@ interface IProps {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     dialogHeader: {
-      padding: theme.spacing(0),
+      padding: 0,
       paddingInlineStart: theme.spacing(3),
       borderBottom: `2px solid ${shadowColor}`,
     },
