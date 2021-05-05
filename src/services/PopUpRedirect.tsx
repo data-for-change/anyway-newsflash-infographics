@@ -1,6 +1,6 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from 'react';
 // note - params may be added to future use
-const PopUpRedirect :React.FC =  () => {
+const PopUpRedirect: React.FC = () => {
   useEffect(() => {
     // get the URL parameters which will include the auth token
     const params = window.location.search;

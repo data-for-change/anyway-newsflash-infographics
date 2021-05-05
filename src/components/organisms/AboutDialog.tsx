@@ -14,17 +14,17 @@ interface IProps {
 const AboutDialog: FC<IProps> = ({ isShowing, onClose }) => {
   const { t } = useTranslation();
   return (
-    <DialogWithHeader title={t('aboutDialog.title')} isShowing={isShowing} onClose={onClose} maxWidth={maxWidth}>
+    <DialogWithHeader title={t('aboutDialog.About')} isShowing={isShowing} onClose={onClose} maxWidth={maxWidth}>
       <article>
         <Box mb={1}>
-          <Typography.Body5>{t('aboutDialog.content1')}</Typography.Body5>
+          <Typography.Body5>{t('aboutDialog.Next challenge')}</Typography.Body5>
         </Box>
         <Box mb={1}>
-          <Typography.Body5>{t('aboutDialog.content2')}</Typography.Body5>
+          <Typography.Body5>{t('aboutDialog.The generated infographics')}</Typography.Body5>
         </Box>
         <Box>
           <Typography.Body5>
-            {t('aboutDialog.content3')}
+            {t('aboutDialog.We believe')}
             &nbsp;
             <a href={t('aboutDialog.linkUrl')}>{t('aboutDialog.linkText')}</a>
           </Typography.Body5>
