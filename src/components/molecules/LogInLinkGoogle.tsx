@@ -25,7 +25,7 @@ const LogInLinkGoogle = () => {
   };
   return (
     <AnyWayButton className={classes.link} onClick={handleClick}>
-      <Button.Standard onClick={handleClick}>LOGIN</Button.Standard>
+      <Button.Standard onClick={handleClick}>{t('login')}</Button.Standard>
     </AnyWayButton>
   );
 };
