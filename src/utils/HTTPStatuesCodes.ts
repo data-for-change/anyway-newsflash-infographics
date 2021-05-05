@@ -1,4 +1,4 @@
-export  enum StatusCodes {
+export enum StatusCodes {
   /**
    * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.3.3
    *
@@ -334,5 +334,5 @@ export  enum StatusCodes {
    *
    * Was defined in a previous version of the HTTP specification to indicate that a requested response must be accessed by a proxy. It has been deprecated due to security concerns regarding in-band configuration of a proxy.
    */
-  USE_PROXY = 305
+  USE_PROXY = 305,
 }

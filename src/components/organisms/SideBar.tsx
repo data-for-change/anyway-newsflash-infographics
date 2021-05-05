@@ -10,6 +10,8 @@ import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
 import { InfinitScroll } from '../atoms';
 import SideBarMap from '../molecules/SideBarMap';
+import { useTranslation } from 'react-i18next';
+
 const INFINITE_SCROLL_FETCH_SIZE = 5;
 
 interface IProps {}
@@ -29,7 +31,8 @@ const useStyles = makeStyles({
 const SideBar: FC<IProps> = () => {
   const store: RootStore = useStore();
   const classes = useStyles();
-  const mapTitle = 'מיקום משוער:';
+  const { t } = useTranslation();
+  const mapTitle = `${t('sideBar')}`;
   const location = store.activeNewsFlashLocation;
   const loading = store.newsFlashLoading;
   const fetchMoreNewsItems = useCallback(() => {

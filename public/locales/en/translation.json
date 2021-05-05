@@ -4,8 +4,8 @@
     "acknowledgements": "Acknowledgements"
   },
   "thankYouDialog": {
-    "title": "Acknowledgements",
-    "contentTitle": "This project was developed by:",
+    "Acknowledgements": "Acknowledgements",
+    "Developed by": "This project was developed by:",
     "names": [
       "Yuval Bar Levi",
       "Miki Stanger",
@@ -26,10 +26,10 @@
     ]
   },
   "aboutDialog": {
-    "title": "About",
-    "content1": "ANYWAY’s next challenge is to form an automatic generator of infographics to empower and serve journalists, bloggers, public opinion leaders, community leaders etc. in the era of data journalism.",
-    "content2": "The generated infographics will enhance reporting and news writing with the use of statistics. Each infographic will be created for a real-time road accident related news flash and will provide a deeper insight into the story based on historical data.",
-    "content3": "This, we believe, will increase both the quantity and quality of articles dealing with road accidents, and will result in raising public awareness and creating pressure on decision makers to initiate infrastructure improvements in light of",
+    "About": "About",
+    "Next challenge": "ANYWAY’s next challenge is to form an automatic generator of infographics to empower and serve journalists, bloggers, public opinion leaders, community leaders etc. in the era of data journalism.",
+    "The generated infographics": "The generated infographics will enhance reporting and news writing with the use of statistics. Each infographic will be created for a real-time road accident related news flash and will provide a deeper insight into the story based on historical data.",
+    "We believe": "This, we believe, will increase both the quantity and quality of articles dealing with road accidents, and will result in raising public awareness and creating pressure on decision makers to initiate infrastructure improvements in light of",
     "linkText": "Vision Zero.",
     "linkUrl": "https://en.wikipedia.org/wiki/Vision_Zero"
   },
@@ -62,10 +62,11 @@
   },
   "onUrban": {
     "road": "On urban roads (without intersections)",
-    "location": "throughout the country"
+    "location": "throughout the country",
+    "route": "Route"
   },
   "cardEditor": {
-    "title": "Card Editing",
+    "edit": "Card Editing",
     "mode": "Display Mode",
     "display": "Display",
     "landscape": "Portrait",
@@ -77,17 +78,24 @@
   "table": {
     "labels": ["Date", "Hour", "Type", "Killed", "Severe injured", "Light injured"]
   },
-  "header": {
-    "userGreeting" : "Hello",
-    "userinfoUpdate" : "Update Info"
+  "login": "LOGIN",
+  "filterPanel": {
+    "all": "all"
   },
-  "userDetailsForm" :{
-    "title": "update details",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "email": "E-mail",
-    "organization" : "Organization",
-    "submitButton" : "Save",
-    "error" : "oops! something went wrong"
+  "header": {
+    "userGreeting": "Hello",
+    "userinfoUpdate": "Update Info"
+  },
+  "sideBar": "Approximate location:",
+  "UserProfileHeader": {
+    "hallo": "Hallo",
+    "logout": "LOGOUT"
+  },
+  "widgets": {
+    "countByCarType": {
+      "Accidents count by vehicle type": "Accidents count by vehicle type",
+      "compared to national average": "in a section compared to national average on roads of the same type"
+    },
+    "No data": "No data to display"
   }
 }

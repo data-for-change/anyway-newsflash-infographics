@@ -15,7 +15,7 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({ userDetails, isUpdate
 
   return (
     <>
-      <Button.Standard onClick={handleLogout}>LOGOUT</Button.Standard>
+      <Button.Standard onClick={handleLogout}>{t('UserProfileHeader.logout')}</Button.Standard>
       <Button.Standard onClick={() => toggleUserUpdateScreen(true)}>{t('header.userinfoUpdate')}</Button.Standard>
       <Typography.Body1>
         <span>{`${t('header.userGreeting')} ${userDetails.firstName}`}</span>
