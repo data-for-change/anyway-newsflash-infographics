@@ -19,8 +19,9 @@ We follow the [semver](https://semver.org/) standard, release considered as a `m
 so if last release was `v0.2.0`, next release should be `v0.3.0`.
 
 #### Step 2: Publish a Release on `dev` branch ( / `demo` etc)
+Go to [create a new release](https://github.com/hasadna/anyway-newsflash-infographics/releases/new) and create a release with the version number and `Target:master`.
 
-Follow [Creating a release](https://help.github.com/en/github/administering-a-repository/managing-releases-in-a-repository#creating-a-release) steps 1 - 6.
+If you're new to github releases, follow [Creating a release](https://help.github.com/en/github/administering-a-repository/managing-releases-in-a-repository#creating-a-release) steps 1 - 6.
 
 If you want to add changes to your release after creation, You may either:
 
