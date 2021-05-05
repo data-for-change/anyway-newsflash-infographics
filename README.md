@@ -84,6 +84,7 @@ REACT_APP_GOOGLE_MAP_KEY='THE_API_KEY_HERE'
 
 - [React Router](https://reacttraining.com/react-router/web/guides/quick-start)
 - [MobX](https://mobx.js.org/) - using [react-mobx-lite](https://github.com/mobxjs/mobx-react-lite) with [hooks](https://mobx-react.js.org/libraries)
+- [Ten minute introduction to MobX and React](https://mobx.js.org/getting-started) - Learn how MobX works in 10 minutes!
 - [axios](https://github.com/axios/axios)
 - [Storybook](https://storybook.js.org/)
 - [Material-UI](https://material-ui.com/)
