@@ -29,13 +29,6 @@ interface IProps {
 
 const HeatMap: FC<IProps> = ({ data, center, sizeOptions }) => {
   const classes = useStyles();
-  const [map, setMap] = useState<L.Map>();
-  useEffect(() => {
-    if (map) {
-      setTimeout(map.invalidateSize);
-    }
-  }, [sizeOptions, map]);
-
   const isDataValid = data && uniquePoints(data).length > 1;
   if (!isDataValid) {
     return null;
@@ -43,7 +36,7 @@ const HeatMap: FC<IProps> = ({ data, center, sizeOptions }) => {
   const bounds = getBounds(data);
 
   return (
-    <MapContainer center={center} bounds={bounds} zoom={INITIAL_ZOOM} className={classes.wrapper} whenCreated={setMap}>
+    <MapContainer center={center} bounds={bounds} zoom={INITIAL_ZOOM} className={classes.wrapper}>
       <MapViewControl bounds={bounds} />
       <GoogleMapsLayer />
       <HeatMapLayer points={data} />
