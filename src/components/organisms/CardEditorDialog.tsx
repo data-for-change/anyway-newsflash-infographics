@@ -49,7 +49,7 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
   );
 
   return (
-    <DialogWithHeader fullWidth={true} isShowing={isOpen} onClose={onClose} title={t('cardEditor.title')}>
+    <DialogWithHeader fullWidth={true} isShowing={isOpen} onClose={onClose} title={t('cardEditor.edit')}>
       <Box display="flex">
         <Box px={2} display="flex" flexDirection="column" flexBasis={200} minWidth={200} boxSizing="border-box">
           <Box mt={2} display="flex" flexDirection="column">
