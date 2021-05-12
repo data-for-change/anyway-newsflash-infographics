@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { MapContainer } from 'react-leaflet';
 import { IPoint } from '../../models/Point';
 import L, { LatLng } from 'leaflet';
