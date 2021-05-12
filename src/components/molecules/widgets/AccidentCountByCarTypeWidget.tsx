@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { IWidgetAccidentCountByCarType } from '../../../models/WidgetData';
 import DoubleBarChartView from '../DoubleBarChartView';
 import { Box, makeStyles, Theme } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 const CAR_TYPE = 'car_type';
 const PERCENTAGE_SEGMENT = 'percentage_segment';
 const PERCENTAGE_COUNTRY = 'percentage_country';
@@ -19,6 +20,7 @@ const useStyle = makeStyles((theme: Theme) => ({
 
 const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
   const classes = useStyle();
+  const { t } = useTranslation();
   const { items } = data;
   const roundedItems = items.map((i) => ({
     ...i,
@@ -29,8 +31,8 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
   return (
     <>
       <Box display="flex" flexDirection="column">
-        <span>השוואת אחוז התאונות ע"פ כלי רכב</span>
-        <span>במקטע לעומת ממוצע ארצי בכבישים מאותו הסוג</span>
+        <span>{t('widgets.countByCarType.Accidents count by vehicle type')}</span>
+        <span>{t('widgets.countByCarType.compared to national average')}</span>
       </Box>
       <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center">
         <Box textAlign="center">{segmentText}</Box>

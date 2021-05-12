@@ -1,5 +1,9 @@
-import { IPoint } from '../models/Point';
+﻿import { IPoint } from '../models/Point';
+import { useLocation } from 'react-router';
 
+export function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 export function uniquePoints(points: IPoint[]) {
   const uniquePoints = new Array<IPoint>();
   const uniqueSet = new Set();
@@ -23,8 +27,15 @@ export const loginPopUpDim = {
 //server url can be on dev or the heroku server
 export const serverUrl = process.env.REACT_APP_BASE_URL;
 
-export const authServerUrl = serverUrl;
-export const redirectUrl = process.env.REACT_APP_REDIRECT_URL;
+export const authServerUrl = process.env.REACT_APP_AUTH_URL;
+export const AUTH_LOGIN_GOOGLE_URL: URL = new URL(`${authServerUrl}authorize/google`);
+export const REDIRECT_URL: string | undefined = process.env.REACT_APP_REDIRECT_URL;
+export const GET_USER_INFO_URL = `${authServerUrl}user/info`;
+export const UPDATE_USER_INFO_URL = `${authServerUrl}user/update`;
+export const LOG_OUT_USER_URL = `${authServerUrl}logout`;
+
+AUTH_LOGIN_GOOGLE_URL.searchParams.append('redirect_url', REDIRECT_URL!);
+
 //function return api key depends on the env it running on
 export const mapApiKey = process.env.REACT_APP_GOOGLE_MAP_KEY ? process.env.REACT_APP_GOOGLE_MAP_KEY : '';
 

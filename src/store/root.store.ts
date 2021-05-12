@@ -8,8 +8,9 @@ import { SourceFilterEnum } from '../models/SourceFilter';
 import { fetchNews } from '../services/news.data.service';
 import SettingsStore from './settings.store';
 import { IPoint } from '../models/Point';
-import { fetchUserLoginStatus } from '../services/user.service';
+import { ActualiUserInfo, fetchUserInfo, logoutUserFromSession, postUserInfo } from '../services/user.service';
 import i18next from '../services/i18n.service';
+import { IFormInput } from '../components/molecules/UserUpdateForm';
 
 // todo: move all map defaults to one place
 const DEFAULT_TIME_FILTER = 5;
@@ -29,7 +30,8 @@ export default class RootStore {
 
   @observable newsFlashCollection: Array<INewsFlash> = [];
   @observable isUserAuthenticated: boolean = false;
-  @observable userName: string = '';
+  @observable userApiError: boolean = false;
+  @observable userInfo: ActualiUserInfo | null = null;
   @observable activeNewsFlashId: number = 0; // active newsflash id
   @observable newsFlashFetchLimit: number = 0;
   @observable newsFlashWidgetsMeta: ILocationMeta = DEFAULT_LOCATION_META;
@@ -132,13 +134,37 @@ export default class RootStore {
   }
 
   @action
+  logOutUser() {
+    logoutUserFromSession().then((isOk) => {
+      if (isOk) {
+        this.isUserAuthenticated = false;
+        this.userInfo = null;
+      }
+    });
+  }
+
+  @action
   getUserLoginDetails() {
-    fetchUserLoginStatus()
+    fetchUserInfo()
       .then((userData) => {
-        this.isUserAuthenticated = userData.authenticated;
-        this.userName = userData.userName;
+        this.userInfo = userData;
+        this.isUserAuthenticated = true;
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        this.isUserAuthenticated = false;
+        console.log(err);
+      });
+  }
+
+  @action
+  async updateUserInfo(formInput: IFormInput) {
+    const isValid = await postUserInfo(formInput);
+    if (isValid) {
+      this.getUserLoginDetails();
+      this.userApiError = false;
+    } else {
+      this.userApiError = true;
+    }
   }
 
   @action

@@ -34,6 +34,7 @@ const useStyles = makeStyles({
   linkItem: {
     borderLeft: `2px solid ${silverSmokeColor}`,
     cursor: 'pointer',
+    transition: 'color 0.3s',
     '&:hover': {
       color: `${skyBlueColor}`,
     },

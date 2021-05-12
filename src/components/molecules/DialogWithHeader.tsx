@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Dialog, Typography } from '../atoms';
-import { Box, makeStyles, createStyles, Theme, IconButton, DialogTitle } from '@material-ui/core';
+import { Box, makeStyles, createStyles, Theme, IconButton, DialogTitle, DialogContent } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { shadowColor, blueVioletColor } from '../../style';
 
@@ -14,7 +14,8 @@ interface IProps {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     dialogHeader: {
-      padding: theme.spacing(0, 1.5, 0, 3),
+      padding: 0,
+      paddingInlineStart: theme.spacing(3),
       borderBottom: `2px solid ${shadowColor}`,
     },
     bar: {
@@ -26,6 +27,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     close: {
       color: shadowColor,
+    },
+    content: {
+      overflow: 'hidden',
     },
   }),
 );
@@ -42,9 +46,7 @@ const DialogWithHeader: FC<IProps> = ({ onClose, isShowing, title, fullWidth, ch
           </IconButton>
         </Box>
       </DialogTitle>
-      <Box display="flex" flexDirection="column" px={3} py={3}>
-        {children}
-      </Box>
+      <DialogContent className={classes.content}>{children}</DialogContent>
     </Dialog>
   );
 };

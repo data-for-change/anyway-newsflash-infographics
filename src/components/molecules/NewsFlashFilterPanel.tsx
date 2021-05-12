@@ -10,6 +10,7 @@ import RootStore from '../../store/root.store';
 import { useStore } from '../../store/storeConfig';
 import { SourceFilterEnum } from '../../models/SourceFilter';
 import { Typography } from '../atoms';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles({
   image: {
@@ -42,6 +43,7 @@ const useStyles = makeStyles({
 
 export const NewsFlashFilterPanel: React.FC = () => {
   const classes = useStyles();
+  const { t } = useTranslation();
   const store: RootStore = useStore();
   const [activeFilter, setActiveFilter] = useState(SourceFilterEnum.all);
 
@@ -57,7 +59,7 @@ export const NewsFlashFilterPanel: React.FC = () => {
           setActiveFilter(SourceFilterEnum.all);
         }}
       >
-        <Typography.Title2>הכל</Typography.Title2>
+        <Typography.Title2>{t('filterPanel.all')}</Typography.Title2>
       </AnyWayButton>
       <AnyWayButton
         className={

@@ -4,13 +4,14 @@ import { fontFamilyString, pieChartColors, whiteColor } from '../../style';
 import { makeStyles } from '@material-ui/core';
 
 const TEXT_RELATIVE_WIDTH = 0.8;
+
 interface ILabelProps {
   customizedLabel: (props: any, fontSize?: string, usePercent?: boolean, single?: boolean) => JSX.Element | null;
   labelFontSize?: string;
 }
 
 interface IProps {
-  data: Array<object>;
+  data: Array<any>;
   xLabel: string;
   yLabel: string;
   innerRadius?: string;
@@ -145,8 +146,13 @@ export const PieChartView: FC<IProps> = ({
 }) => {
   const renderLabel = useCallback(
     (props: PieLabelRenderProps) =>
-      labelProps.customizedLabel(props, labelProps.labelFontSize, usePercent, data.length === 1),
-    [labelProps, usePercent, data],
+      labelProps.customizedLabel(
+        props,
+        labelProps.labelFontSize,
+        usePercent,
+        data.some((items) => items[yLabel] === 0),
+      ),
+    [labelProps, usePercent, data, yLabel],
   );
 
   const classes = useStyles();
