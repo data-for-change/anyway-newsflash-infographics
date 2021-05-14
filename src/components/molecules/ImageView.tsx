@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { IWidgetVisionZeroImageData } from '../../models/WidgetData';
-import visionZeroImage from '../../assets/vision-zero.png';
+// import visionZeroImage from '../../assets/vision-zero.png';
+import visionZeroImage from '../../assets/vision_zero_2_plus_1.jpg';
 import { makeStyles } from '@material-ui/core';
 
 //Image SRC hardcoded,
@@ -23,11 +24,12 @@ const useStyles = makeStyles(() => ({
   },
 }));
 const ImageView: FC<IProps> = ({ data }) => {
+  console.log('~ data', data);
   // todo: set image based on data
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <img src={visionZeroImage} className={classes.image} alt="vision zero" />
+      <img src={visionZeroImage} className={classes.image} alt="vision zero 2 plus 1" />
     </div>
   );
 };
