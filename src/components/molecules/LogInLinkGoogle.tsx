@@ -7,7 +7,7 @@ import { AnyWayButton } from '../atoms/AnyWayButton';
 import { openSignInWindow } from '../../services/signInWindow';
 import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles({
-  link: {
+  userButton: {
     color: `${oceanBlueColor}`,
     textDecoration: 'none',
     '&:hover': {
@@ -24,9 +24,9 @@ const LogInLinkGoogle = () => {
     openSignInWindow(AUTH_LOGIN_GOOGLE_URL, 'Google Authentication');
   };
   return (
-    <AnyWayButton className={classes.link} onClick={handleClick}>
-      <Button.Standard onClick={handleClick}>{t('login')}</Button.Standard>
-    </AnyWayButton>
+    <a onClick={handleClick} className={classes.userButton}>
+      {t('login')}
+    </a>
   );
 };
 
