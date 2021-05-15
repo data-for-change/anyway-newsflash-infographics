@@ -17,9 +17,6 @@ const useStyles = makeStyles({
   textWrapper: {
     width: '100%',
   },
-  text: {
-    maxWidth: '75%',
-  },
   roadImageWrapper: {
     position: 'relative',
     top: '40%',
@@ -58,7 +55,7 @@ const CardHeader: FC<IProps> = ({ variant, text, road }) => {
         <Box display="flex" alignItems="center" flex={1}>
           <RoadNumberImage roadNumber={road} />
           <Box display="flex" justifyContent="center" px={2} className={classes.textWrapper}>
-            <Box display="flex" flexDirection="column" className={classes.text}>
+            <Box display="flex" flexDirection="column">
               <Typography.Body1>{headerText?.textLine1}</Typography.Body1>
               <Typography.Body1>{headerText?.textLine2}</Typography.Body1>
             </Box>

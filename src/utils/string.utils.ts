@@ -1,5 +1,5 @@
 const MAX_WORDS_PER_TITLE_LINE = 5;
-
+// when title less than 5 words, show in one line, otherwise split title to equal lines
 export const splitTextHeader = (text = '') => {
   let textLine1 = text;
   let textLine2 = '';
