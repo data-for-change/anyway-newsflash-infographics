@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC } from 'react';
 import classnames from 'classnames';
 import { Box, makeStyles } from '@material-ui/core';
 import { silverSmokeColor, oceanBlueColor } from '../../style';
@@ -41,55 +41,59 @@ const useStyles = makeStyles({
   },
 });
 
-export const NewsFlashFilterPanel: React.FC = () => {
+interface IProps {}
+const NewsFlashFilterPanel: FC<IProps> = () => {
   const classes = useStyles();
   const { t } = useTranslation();
   const store: RootStore = useStore();
-  const [activeFilter, setActiveFilter] = useState(SourceFilterEnum.all);
 
   return (
     // will be convert to filterButtonsMap instead of code duplicate for the filter button
     <Box className={classes.container}>
       <AnyWayButton
         className={
-          activeFilter === SourceFilterEnum.all ? classnames(classes.buttonClicked, classes.button) : classes.button
+          store.newsFlashActiveFilter === SourceFilterEnum.all
+            ? classnames(classes.buttonClicked, classes.button)
+            : classes.button
         }
         onClick={() => {
-          store.filterNewsFlashCollection(SourceFilterEnum.all);
-          setActiveFilter(SourceFilterEnum.all);
+          store.setActiveNewsFlashFilter(SourceFilterEnum.all);
         }}
       >
         <Typography.Title2>{t('filterPanel.all')}</Typography.Title2>
       </AnyWayButton>
       <AnyWayButton
         className={
-          activeFilter === SourceFilterEnum.ynet ? classnames(classes.buttonClicked, classes.button) : classes.button
+          store.newsFlashActiveFilter === SourceFilterEnum.ynet
+            ? classnames(classes.buttonClicked, classes.button)
+            : classes.button
         }
         onClick={() => {
-          store.filterNewsFlashCollection(SourceFilterEnum.ynet);
-          setActiveFilter(SourceFilterEnum.ynet);
+          store.setActiveNewsFlashFilter(SourceFilterEnum.ynet);
         }}
       >
         <img className={classes.image} src={ynetLogo} alt="Ynet" />
       </AnyWayButton>
       <AnyWayButton
         className={
-          activeFilter === SourceFilterEnum.walla ? classnames(classes.buttonClicked, classes.button) : classes.button
+          store.newsFlashActiveFilter === SourceFilterEnum.walla
+            ? classnames(classes.buttonClicked, classes.button)
+            : classes.button
         }
         onClick={() => {
-          store.filterNewsFlashCollection(SourceFilterEnum.walla);
-          setActiveFilter(SourceFilterEnum.walla);
+          store.setActiveNewsFlashFilter(SourceFilterEnum.walla);
         }}
       >
         <img className={classes.image} src={wallaLogo} alt="Walla" />
       </AnyWayButton>
       <AnyWayButton
         className={
-          activeFilter === SourceFilterEnum.mda ? classnames(classes.buttonClicked, classes.button) : classes.button
+          store.newsFlashActiveFilter === SourceFilterEnum.mda
+            ? classnames(classes.buttonClicked, classes.button)
+            : classes.button
         }
         onClick={() => {
-          store.filterNewsFlashCollection(SourceFilterEnum.mda);
-          setActiveFilter(SourceFilterEnum.mda);
+          store.setActiveNewsFlashFilter(SourceFilterEnum.mda);
         }}
       >
         <img className={classes.image} src={madaLogo} alt="Magen David Adom" />
@@ -97,3 +101,5 @@ export const NewsFlashFilterPanel: React.FC = () => {
     </Box>
   );
 };
+
+export default NewsFlashFilterPanel;

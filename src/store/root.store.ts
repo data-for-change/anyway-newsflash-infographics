@@ -13,6 +13,7 @@ import i18next from '../services/i18n.service';
 import { IFormInput } from '../components/molecules/UserUpdateForm';
 
 // todo: move all map defaults to one place
+const FETCH_NEWS_FILTER_INIT_OFFSET = 0;
 const DEFAULT_TIME_FILTER = 5;
 const DEFAULT_LOCATION = { latitude: 32.0853, longitude: 34.7818 };
 const DEFAULT_LOCATION_META = {
@@ -33,7 +34,8 @@ export default class RootStore {
   @observable userApiError: boolean = false;
   @observable userInfo: ActualiUserInfo | null = null;
   @observable activeNewsFlashId: number = 0; // active newsflash id
-  @observable newsFlashFetchLimit: number = 0;
+  @observable newsFlashFetchOffSet: number = FETCH_NEWS_FILTER_INIT_OFFSET;
+  @observable newsFlashActiveFilter: SourceFilterEnum = SourceFilterEnum.all;
   @observable newsFlashWidgetsMeta: ILocationMeta = DEFAULT_LOCATION_META;
   @observable newsFlashWidgetsData: Array<IWidgetBase> = [];
   @observable newsFlashWidgetsTimerFilter = DEFAULT_TIME_FILTER; // newsflash time filter (in years ago, 5 is the default)
@@ -112,13 +114,23 @@ export default class RootStore {
 
   @action checkuserstatus(): void {}
 
+  @action setActiveNewsFlashFilter(source: SourceFilterEnum) {
+    if (source !== this.newsFlashActiveFilter) {
+      this.newsFlashActiveFilter = source;
+      this.newsFlashCollection = [];
+      this.newsFlashFetchOffSet = FETCH_NEWS_FILTER_INIT_OFFSET;
+      this.filterNewsFlashCollection(this.newsFlashFetchOffSet, source);
+    }
+    return;
+  }
+
   @action
-  filterNewsFlashCollection(source?: SourceFilterEnum): void {
+  filterNewsFlashCollection(offSet: number, source?: SourceFilterEnum): void {
     this.newsFlashLoading = true;
-    fetchNews(source, this.newsFlashFetchLimit).then((data: any) => {
+    fetchNews(source, offSet).then((data: any) => {
       this.newsFlashLoading = false;
       if (data) {
-        this.newsFlashCollection = data;
+        this.newsFlashCollection = [...this.newsFlashCollection, ...data];
       } else {
         console.error(`filterNewsFlashCollection(source:${source}) invalid data:`, data);
       }
@@ -127,10 +139,10 @@ export default class RootStore {
 
   @action
   infiniteFetchLimit(count: number): void {
-    this.newsFlashFetchLimit += count;
-    const { newsFlashCollection, newsFlashFetchLimit } = this;
-    if (newsFlashCollection.length < newsFlashFetchLimit - count) return;
-    this.filterNewsFlashCollection();
+    this.newsFlashFetchOffSet += count;
+    const { newsFlashCollection, newsFlashFetchOffSet, newsFlashActiveFilter } = this;
+    if (newsFlashCollection.length < newsFlashFetchOffSet - count) return;
+    this.filterNewsFlashCollection(newsFlashFetchOffSet, newsFlashActiveFilter);
   }
 
   @action
