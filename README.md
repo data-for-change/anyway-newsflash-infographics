@@ -193,9 +193,9 @@ Each environment has a specific environment file which can be used to override `
 We use [github actions](https://github.com/marketplace?type=actions) for the following flows:
 
 1. [on-push CI](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3ACI) - provide per-PR CI testing
-1. [deploy-dev](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuos deployment of `dev` branch to Staging Environment - https://anyway-infographics-staging.web.app/
-1. [deploy-master](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuos deployment of `master` branch to Production Environment - https://anyway-infographics.web.app/
-1. [deploy-demo](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuos deployment of `demo` branch to Demo Environment - https://anyway-infographics-demo.web.app/
+1. [deploy-dev](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuous deployment of `dev` branch to Staging Environment - https://anyway-infographics-staging.web.app/
+1. [deploy-master](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuous deployment of `master` branch to Production Environment - https://anyway-infographics.web.app/
+1. [deploy-demo](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuous deployment of `demo` branch to Demo Environment - https://anyway-infographics-demo.web.app/
 
 Note: see the flows status badge at the top of this file
 

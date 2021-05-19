@@ -14,7 +14,7 @@ important concept is vision zero -
 
 The aim of Newsflash InfoGraphics is providing useful information for reporters about accidents and road safety.
 
-to do this we combine data , knowledge and InfoGraphics from various sources:
+To do so we combine data, knowledge and InfoGraphics from various sources:
 
 - news flashes about accidents,
 - history and statistics about similar accident's, (in this region, with similar vehicle, etc)
