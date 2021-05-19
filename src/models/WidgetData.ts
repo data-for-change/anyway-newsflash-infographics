@@ -134,12 +134,6 @@ export interface IWidgetHeadOnCollisionsComparisonData extends IWidgetDataBase {
   };
 }
 
-export interface IWidgetVisionZeroImageData extends IWidgetDataBase {
-  items: {
-    image_src: string;
-  }[];
-}
-
 export interface IWidgetTopRoadSegmentsAccidentsPerKm extends IWidgetDataBase {
   items: {}[];
 }
