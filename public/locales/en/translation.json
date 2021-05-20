@@ -86,6 +86,10 @@
     "userGreeting": "Hello",
     "userinfoUpdate": "Update Info"
   },
+  "userDetailsForm": {
+    "Update": "Update",
+    "UserDetails": "User Details"
+  },
   "sideBar": "Approximate location:",
   "UserProfileHeader": {
     "hallo": "Hallo",

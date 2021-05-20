@@ -57,7 +57,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
       fullWidth
       maxWidth={'sm'}
       isShowing={isShowing}
-      title={t('userDetailsForm.title')}
+      title={t('userDetailsForm.UserDetails')}
       onClose={onClose}
     >
       <Grid className={classes.grid} container justify={'center'} alignItems={'center'} spacing={4}>
@@ -109,7 +109,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
         </Grid>
         <Grid item xs={12}>
           <Box className={classes.submitButton}>
-            <Button.Standard onClick={handleSubmit}>{t(`userDetailsForm.submitButton`)}</Button.Standard>
+            <Button.Standard onClick={handleSubmit}>{t(`userDetailsForm.Update`)}</Button.Standard>
           </Box>
         </Grid>
       </Grid>

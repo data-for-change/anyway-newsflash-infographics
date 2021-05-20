@@ -91,6 +91,10 @@
     "hallo": "שלום",
     "logout": "התנתקות"
   },
+  "userDetailsForm": {
+    "Update": "עדכן",
+    "UserDetails": "פרטי משתמש"
+  },
   "widgets": {
     "countByCarType": {
       "Accidents count by vehicle type": "השוואת אחוז התאונות ע\"פ כלי רכב",
