@@ -7,6 +7,7 @@ import AnywayImage from '../../../assets/anyway.png';
 import { Typography, Logo } from '../../atoms';
 import { useTranslation } from 'react-i18next';
 import { silverSmokeColor, opacity80percent } from '../../../style/_globals';
+import { splitTextHeader } from '../../../utils/string.utils';
 
 const useStyles = makeStyles({
   wrapper: {
@@ -15,9 +16,6 @@ const useStyles = makeStyles({
   },
   textWrapper: {
     width: '100%',
-  },
-  text: {
-    width: '75%',
   },
   roadImageWrapper: {
     position: 'relative',
@@ -49,14 +47,17 @@ const CardHeader: FC<IProps> = ({ variant, text, road }) => {
 
   let headerContent = null;
 
+  const headerText = splitTextHeader(text);
+
   switch (variant) {
     case HeaderVariant.Centered:
       headerContent = (
         <Box display="flex" alignItems="center" flex={1}>
           <RoadNumberImage roadNumber={road} />
           <Box display="flex" justifyContent="center" px={2} className={classes.textWrapper}>
-            <Box className={classes.text}>
-              <Typography.Body1>{text}</Typography.Body1>
+            <Box display="flex" flexDirection="column">
+              <Typography.Body1>{headerText?.textLine1}</Typography.Body1>
+              <Typography.Body1>{headerText?.textLine2}</Typography.Body1>
             </Box>
           </Box>
         </Box>
