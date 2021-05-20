@@ -121,7 +121,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
       );
       break;
     }
-    case WidgetName.vision_zero: {
+    case WidgetName.vision_zero_2_plus_1: {
       widgetComponent = <StaticImageViewWidget data={data as IWidgetVisionZeroImageData} />;
       break;
     }

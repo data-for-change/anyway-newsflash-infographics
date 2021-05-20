@@ -27,7 +27,9 @@ export interface IWidgetBase {
   rank: number; // order? (not in use)
   name: string; // unique - used as identifier
   data: IWidgetDataType;
-  meta?: {};
+  meta: {
+    information: string;
+  };
 }
 export interface ILocationMeta {
   location_info: {
@@ -130,12 +132,6 @@ export interface IWidgetHeadOnCollisionsComparisonData extends IWidgetDataBase {
       count: number;
     }[];
   };
-}
-
-export interface IWidgetVisionZeroImageData extends IWidgetDataBase {
-  items: {
-    image_src: string;
-  }[];
 }
 
 export interface IWidgetTopRoadSegmentsAccidentsPerKm extends IWidgetDataBase {

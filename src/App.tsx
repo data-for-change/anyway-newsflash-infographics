@@ -6,10 +6,10 @@ import { Box, createStyles, makeStyles, Theme, ThemeProvider } from '@material-u
 import { StoreContext, useStore } from './store/storeConfig';
 import Header from './components/molecules/Header';
 import 'leaflet/dist/leaflet.css';
-import PopUpRedirect from './services/PopUpRedirect';
 import HomePageRedirect from './pages/HomePageRedirect';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@material-ui/core/styles';
+import PopUpRedirect from './services/PopUpRedirect';
 // main components height - must add up to 100
 const headerHeight = '5vh';
 const pageContentHeight = '88vh';
@@ -49,7 +49,7 @@ const App: FC = () => {
               <Switch>
                 <Route exact path="/" component={HomePageRedirect} />
                 <Route path="/:lng?/newsflash/:id" component={HomePage} />
-                <Route path="/popup-redirect" component={PopUpRedirect}></Route>
+                <Route path="/login-popup-redirect" component={PopUpRedirect} />
               </Switch>
             </Box>
             <Box height={footerHeight} display="flex">

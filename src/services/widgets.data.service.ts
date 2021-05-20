@@ -6,13 +6,13 @@ import { operationalCards } from '../const/cards.const';
 
 const NEWS_FLASH_API: string = '/api/infographics-data';
 
-export const fetchWidgets = async (id: number, yearAgo?: number): Promise<ILocationData | undefined> => {
+export const fetchWidgets = async (id: number, lang: string, yearAgo?: number): Promise<ILocationData | undefined> => {
   if (showDemoCards && id === DEMO_ID) {
     return getDemoWidgetData();
   }
 
   try {
-    const query = [`news_flash_id=${id}`];
+    const query = [`lang=${lang}&news_flash_id=${id}`];
     if (yearAgo) {
       query.push(`years_ago=${yearAgo}`);
     }

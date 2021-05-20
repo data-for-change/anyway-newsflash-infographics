@@ -1,11 +1,12 @@
-import React, { FC, useEffect } from 'react';
-import { Map } from 'react-leaflet';
+import React, { FC, useEffect, useState } from 'react';
+import { MapContainer } from 'react-leaflet';
 import L, { LatLng } from 'leaflet';
 import { uniquePoints } from '../../utils/utils';
 import { IPoint } from '../../models/Point';
 import { MostSevereAccidentsMarker } from '../atoms';
 import { ClockPosition } from '../../models/ClockPosition';
 import GoogleMapsLayer from './map/GoogleMapsLayer';
+import MapViewControl from '../../services/MapViewControl';
 const INITIAL_ZOOM = parseInt(process.env.REACT_APP_DEFAULT_MAP_ZOOM!);
 const WRAPPER_STYLES = { height: '100%', width: '100%' };
 const DEFAULT_BOUNDS = [
@@ -32,19 +33,19 @@ const LocationMap: FC<IProps> = ({ items, center, sizeOptions }) => {
     return null;
   });
   const bounds = getBounds(items);
-  const mapRef = React.createRef<any>();
+  const [map, setMap] = useState<L.Map>();
   useEffect(() => {
-    const map = mapRef.current.leafletElement;
-    setTimeout(() => {
-      map.invalidateSize();
-    });
-  }, [sizeOptions, mapRef]);
+    if (map) {
+      setTimeout(map.invalidateSize);
+    }
+  }, [sizeOptions, map]);
 
   return (
-    <Map center={center} bounds={bounds} zoom={INITIAL_ZOOM} style={WRAPPER_STYLES} ref={mapRef}>
+    <MapContainer whenCreated={setMap} center={center} bounds={bounds} zoom={INITIAL_ZOOM} style={WRAPPER_STYLES}>
+      <MapViewControl bounds={bounds} center={center} zoom={INITIAL_ZOOM} />
       <GoogleMapsLayer />
       {markers}
-    </Map>
+    </MapContainer>
   );
 };
 
