@@ -32,4 +32,4 @@ If you're new to github releases, follow [Creating a release](https://help.githu
 If you want to add changes to your release after creation, You may either:
 
 - Create a new `patch` release (change only the `patch` version number), like: `v0.3.1`
-- [Delete the release](https://help.github.com/en/github/administering-a-repository/managing-releases-in-a-repository#deleting-a-release), update `master` and re-create the release with the same verion number
+- [Delete the release](https://help.github.com/en/github/administering-a-repository/managing-releases-in-a-repository#deleting-a-release), update `master` and re-create the release with the same version number
