@@ -87,8 +87,8 @@
     "userinfoUpdate": "Update Info"
   },
   "userDetailsForm": {
-    "submitButton": "Update",
-    "title": "User Details"
+    "Update": "Update",
+    "UserDetails": "User Details"
   },
   "sideBar": "Approximate location:",
   "UserProfileHeader": {

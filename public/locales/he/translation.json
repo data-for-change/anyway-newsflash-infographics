@@ -92,8 +92,8 @@
     "logout": "התנתקות"
   },
   "userDetailsForm": {
-    "submitButton": "עדכן",
-    "title": "פרטי משתמש"
+    "Update": "עדכן",
+    "UserDetails": "פרטי משתמש"
   },
   "widgets": {
     "countByCarType": {
