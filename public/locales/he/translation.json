@@ -93,7 +93,11 @@
   },
   "userDetailsForm": {
     "Update": "עדכן",
-    "UserDetails": "פרטי משתמש"
+    "UserDetails": "פרטי משתמש",
+    "lastName": "שם משפחה",
+    "firstName": "שם פרטי",
+    "email": "דואר אלקטרוני",
+    "organization": "ארגון"
   },
   "widgets": {
     "countByCarType": {
