@@ -14,6 +14,12 @@ interface IProps {
   segmentText: string;
 }
 
+export interface CountBySeverity {
+  fatal: number;
+  severe: number;
+  light: number;
+}
+
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     position: 'relative',
@@ -48,25 +54,46 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const getCountsForView = ({
-  items: { severity_fatal_count, severity_light_count, severity_severe_count },
-}: IWidgetCountBySeverityTextData) => {
-  const countsForDesc = Object.entries({
-    severity_fatal_count,
-    severity_light_count,
-    severity_severe_count,
-  }).filter((type) => Boolean(type[1]));
-  return Object.fromEntries(countsForDesc);
-};
+function getSingleType(countBySeverity: CountBySeverity) {
+  if (countBySeverity.fatal) {
+    return 'fatal';
+  }
+  if (countBySeverity.severe) {
+    return 'sever';
+  }
+  if (countBySeverity.light) {
+    return 'light';
+  }
+}
+
+// const getCountsForView = ({
+//   items: { severity_fatal_count, severity_light_count, severity_severe_count },
+// }: IWidgetCountBySeverityTextData) => {
+//   const countsForDesc = Object.entries({
+//     severity_fatal_count,
+//     severity_light_count,
+//     severity_severe_count,
+//   }).filter((type) => Boolean(type[1]));
+//   return Object.fromEntries(countsForDesc);
+// };
 
 const TextView: FC<IProps> = ({ data, segmentText }) => {
   const classes = useStyles();
   //extract counts by severity type fields
-  const dataForView = getCountsForView(data);
+  // const dataForView = getCountsForView(data);
+
+  const countBySeverity: CountBySeverity = {
+    fatal: data?.items.severity_fatal_count || 0,
+    severe: data?.items.severity_severe_count || 0,
+    light: data?.items.severity_light_count || 0,
+  };
+  const howManySeverities = [!!countBySeverity.fatal, !!countBySeverity.severe, !!countBySeverity.light];
+  const isMultiType = Object.entries(countBySeverity).filter(Boolean).length > 1;
+
   const findSingleType = useCallback(() => {
     const countsTypes = Object.keys(dataForView);
     return countsTypes.length === 1 ? countsTypes[0] : undefined;
-  }, [dataForView]);
+  }, []);
 
   const singleType: string | undefined = severityNameMap.get(findSingleType());
   const headerClass = classNames(classes.headerBase, singleType ? classes.headerSingleType : classes.headerList);

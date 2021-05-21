@@ -1,34 +1,35 @@
 import React from 'react';
 import TextViewRecord from './TextViewRecord';
 import { useTranslation } from 'react-i18next';
+import { CountBySeverity } from './TextView';
 
 interface IProps {
-  data: any;
+  data: CountBySeverity;
 }
 
 const TextViewList: React.FC<IProps> = ({ data }) => {
   const { t } = useTranslation();
   return (
     <>
-      {data.severity_fatal_count && (
+      {data.fatal && (
         <TextViewRecord
-          numOfAccidents={data.severity_fatal_count}
-          severityDesc={t(`textView.fatal.${data.severity_fatal_count > 1 ? 'plural' : 'singular'}`)}
+          numOfAccidents={data.fatal}
+          severityDesc={t(`textView.fatal.${data.fatal > 1 ? 'plural' : 'singular'}`)}
           imgSrc={'fatal'}
         />
       )}
-      {data.severity_severe_count && (
+      {data.severe && (
         <TextViewRecord
-          numOfAccidents={data.severity_severe_count}
-          severityDesc={t(`textView.severe.${data.severity_severe_count > 1 ? 'plural' : 'singular'}`)}
+          numOfAccidents={data.severe}
+          severityDesc={t(`textView.severe.${data.severe > 1 ? 'plural' : 'singular'}`)}
           imgSrc={'severe'}
         />
       )}
-      {data.severity_light_count && (
+      {data.light && (
         <TextViewRecord
           isLast={true}
-          numOfAccidents={data.severity_light_count}
-          severityDesc={t(`textView.light.${data.severity_light_count > 1 ? 'plural' : 'singular'}`)}
+          numOfAccidents={data.light}
+          severityDesc={t(`textView.light.${data.light > 1 ? 'plural' : 'singular'}`)}
           imgSrc={'light'}
         />
       )}
