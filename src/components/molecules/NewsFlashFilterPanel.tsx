@@ -24,7 +24,7 @@ const useStyles = makeStyles({
     border: `1px solid ${silverSmokeColor}`,
   },
 
-  buttonClicked: {
+  active: {
     border: `2px solid ${silverSmokeColor}`,
     borderColor: oceanBlueColor,
   },
@@ -51,11 +51,9 @@ const NewsFlashFilterPanel: FC<IProps> = () => {
     // will be convert to filterButtonsMap instead of code duplicate for the filter button
     <Box className={classes.container}>
       <AnyWayButton
-        className={
-          store.newsFlashActiveFilter === SourceFilterEnum.all
-            ? classnames(classes.buttonClicked, classes.button)
-            : classes.button
-        }
+        className={classnames(classes.button, {
+          [`${classes.active}`]: store.newsFlashActiveFilter === SourceFilterEnum.all,
+        })}
         onClick={() => {
           store.setActiveNewsFlashFilter(SourceFilterEnum.all);
         }}
@@ -63,11 +61,9 @@ const NewsFlashFilterPanel: FC<IProps> = () => {
         <Typography.Title2>{t('filterPanel.all')}</Typography.Title2>
       </AnyWayButton>
       <AnyWayButton
-        className={
-          store.newsFlashActiveFilter === SourceFilterEnum.ynet
-            ? classnames(classes.buttonClicked, classes.button)
-            : classes.button
-        }
+        className={classnames(classes.button, {
+          [`${classes.active}`]: store.newsFlashActiveFilter === SourceFilterEnum.ynet,
+        })}
         onClick={() => {
           store.setActiveNewsFlashFilter(SourceFilterEnum.ynet);
         }}
@@ -75,11 +71,9 @@ const NewsFlashFilterPanel: FC<IProps> = () => {
         <img className={classes.image} src={ynetLogo} alt="Ynet" />
       </AnyWayButton>
       <AnyWayButton
-        className={
-          store.newsFlashActiveFilter === SourceFilterEnum.walla
-            ? classnames(classes.buttonClicked, classes.button)
-            : classes.button
-        }
+        className={classnames(classes.button, {
+          [`${classes.active}`]: store.newsFlashActiveFilter === SourceFilterEnum.walla,
+        })}
         onClick={() => {
           store.setActiveNewsFlashFilter(SourceFilterEnum.walla);
         }}
@@ -87,11 +81,9 @@ const NewsFlashFilterPanel: FC<IProps> = () => {
         <img className={classes.image} src={wallaLogo} alt="Walla" />
       </AnyWayButton>
       <AnyWayButton
-        className={
-          store.newsFlashActiveFilter === SourceFilterEnum.mda
-            ? classnames(classes.buttonClicked, classes.button)
-            : classes.button
-        }
+        className={classnames(classes.button, {
+          [`${classes.active}`]: store.newsFlashActiveFilter === SourceFilterEnum.mda,
+        })}
         onClick={() => {
           store.setActiveNewsFlashFilter(SourceFilterEnum.mda);
         }}
