@@ -18,8 +18,6 @@ import CardFooter from './CardFooter';
 import CardEditor from '../../organisms/CardEditorDialog';
 
 const DEFAULTE_SIZE = 1;
-const LOREM_IPSUM =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquet mi vitae tristique laoreet. Integer at ante id lectus varius.';
 export interface CardSizeOptions {
   size?: number;
 }
@@ -31,11 +29,12 @@ interface IProps {
   getCardRef?: (element: HTMLElement) => any;
   title: string | undefined;
   dateComment: string;
+  information?: string;
 }
 
 const getSizeFactor = (options: CardSizeOptions | undefined): number => (options?.size ? options.size : DEFAULTE_SIZE);
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     fontFamily: fontFamilyString,
     position: 'relative', // for meta tags
@@ -52,10 +51,13 @@ const useStyles = makeStyles({
       backgroundColor: 'transparent',
     },
   },
-  hidden: {
-    display: 'none',
+  information: {
+    minWidth: theme.spacing(8), // to have the same width as other buttons
+    textAlign: 'center',
+    lineHeight: '0.75',
+    cursor: 'pointer',
   },
-});
+}));
 
 const AnyWayCard: FC<IProps> = ({
   widgetName,
@@ -66,6 +68,7 @@ const AnyWayCard: FC<IProps> = ({
   actionButtons = true,
   title,
   dateComment,
+  information,
 }) => {
   const [element, setElement] = useState({});
   const [isOpen, setOpen] = useState(false);
@@ -89,13 +92,15 @@ const AnyWayCard: FC<IProps> = ({
       <AnyWayButton className={classes.button} disableRipple={true} onClick={handleCardEditorOpen}>
         <SettingsOverscanIcon />
       </AnyWayButton>
-      <Tooltip title={LOREM_IPSUM} placement="top" aria-label="info">
-        <span>
-          <AnyWayButton className={`${classes.button} ${classes.hidden}`} disableRipple={true} onClick={() => {}}>
-            <InfoOutlinedIcon />
-          </AnyWayButton>
-        </span>
-      </Tooltip>
+      {information && (
+        <Box className={classes.information}>
+          <Tooltip title={information} placement="top" aria-label="info">
+            <span>
+              <InfoOutlinedIcon />
+            </span>
+          </Tooltip>
+        </Box>
+      )}
     </>
   );
 
@@ -135,7 +140,9 @@ const AnyWayCard: FC<IProps> = ({
         </Box>
       </Card>
       <Box display="flex" justifyContent="space-between">
-        <Box>{buttons}</Box>
+        <Box display="flex" alignItems="center">
+          {buttons}
+        </Box>
         <SocialShare />
       </Box>
     </>

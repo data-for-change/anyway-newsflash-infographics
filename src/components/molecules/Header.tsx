@@ -12,7 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import LanguageMenu from '../organisms/LanguageMenu';
 
 const useStyles = makeStyles({
-  settings: {
+  userSection: {
     display: 'flex',
   },
 });
@@ -23,6 +23,8 @@ const reloadHomePage = () => {
 
 const Header: FC = () => {
   const store: RootStore = useStore();
+  const isUserDetailsRequired: boolean = store.userInfo?.meta.isCompleteRegistration === false;
+
   const classes = useStyles();
   useEffect(() => {
     store.getUserLoginDetails();
@@ -30,18 +32,24 @@ const Header: FC = () => {
   //login or logout- depend on authentication state
   let authElement;
   if (store.isUserAuthenticated) {
-    authElement = <UserProfileHeader name={store.userName} />;
-  } else {
+    const { ...userDetails } = store.userInfo!.data;
+    const handleLogout = () => {
+      store.logOutUser();
+    };
     authElement = (
-      <div>
-        <LogInLinkGoogle />
-      </div>
+      <UserProfileHeader
+        handleLogout={handleLogout}
+        isUpdateScreenOpen={isUserDetailsRequired}
+        userDetails={userDetails}
+      />
     );
+  } else {
+    authElement = <LogInLinkGoogle />;
   }
   return (
     <AppBar>
       <Logo src={AnywayImage} alt={'Anyway'} height={30} onClick={reloadHomePage} />
-      <Box className={classes.settings}>
+      <Box className={classes.userSection}>
         <LanguageMenu />
         {authElement}
         <SignInIcon />

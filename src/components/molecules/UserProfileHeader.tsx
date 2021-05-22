@@ -1,38 +1,54 @@
-import { makeStyles } from '@material-ui/core/styles';
-import { oceanBlueColor, skyBlueColor } from '../../style';
 import { Typography } from '../atoms';
-import React from 'react';
-import { authServerUrl } from '../../utils/utils';
+import React, { useState } from 'react';
+import UserInfoForm, { IFormInput } from './UserUpdateForm';
+import { useTranslation } from 'react-i18next';
+import makeStyles from '@material-ui/core/styles/makeStyles';
+import { oceanBlueColor, skyBlueColor } from '../../style';
+import Box from '@material-ui/core/Box';
 
-const LINK = `${authServerUrl}/auth/logout`;
-
-const useStyles = makeStyles({
-  link: {
+const useStyles = makeStyles((theme) => ({
+  userButton: {
     color: `${oceanBlueColor}`,
+    padding: theme.spacing(1),
     textDecoration: 'none',
     '&:hover': {
       color: `${skyBlueColor}`,
     },
     cursor: 'pointer',
   },
-  profile: {
-    color: 'black',
+  welcomeMsg: {
+    padding: theme.spacing(1),
   },
-});
+}));
 
 interface IUserProfileHeader {
-  name: string;
+  userDetails: IFormInput;
+  isUpdateScreenOpen: boolean;
+  handleLogout: () => any;
 }
-const UserProfileHeader: React.FC<IUserProfileHeader> = ({ name }) => {
+const UserProfileHeader: React.FC<IUserProfileHeader> = ({ userDetails, isUpdateScreenOpen, handleLogout }) => {
+  const { t } = useTranslation();
   const classes = useStyles();
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(isUpdateScreenOpen);
+  const toggleUserUpdateScreen = (isOpen: boolean) => setIsDialogOpen(isOpen);
 
   return (
-    <div className={classes.profile}>
-      <a className={classes.link} href={LINK}>
-        <Typography.Body1>LOGOUT</Typography.Body1>
-      </a>
-      <Typography.Body1>{`שלום ${name}`}</Typography.Body1>
-    </div>
+    <>
+      <Box className={classes.userButton} onClick={handleLogout}>
+        {t('UserProfileHeader.logout')}
+      </Box>
+      <Box className={classes.userButton} onClick={() => toggleUserUpdateScreen(true)}>
+        {t('header.userinfoUpdate')}
+      </Box>
+      <Box className={classes.welcomeMsg}>
+        <Typography.Body2>{`${t('header.userGreeting')} ${userDetails.firstName}`}</Typography.Body2>
+      </Box>
+      <UserInfoForm
+        defaultValues={userDetails}
+        isShowing={isDialogOpen}
+        onClose={() => toggleUserUpdateScreen(false)}
+      />
+    </>
   );
 };
 

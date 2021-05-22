@@ -57,7 +57,7 @@ const FilterBar: FC<IProps> = () => {
                   <Typography.Body2>{store.newsFlashWidgetsMetaLocation}</Typography.Body2>
                 </Grid>
                 <Grid item className={classes.showDescriptionButton}>
-                  <Button.Standard size="small" onClick={() => setIsDescOpen(!isDescOpen)}>
+                  <Button.Standard onClick={() => setIsDescOpen(!isDescOpen)}>
                     {isDescOpen ? t('filterBar.Hide Details') : t('filterBar.Show Details')}
                   </Button.Standard>
                 </Grid>

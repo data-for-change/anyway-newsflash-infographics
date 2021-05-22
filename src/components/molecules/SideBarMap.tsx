@@ -1,13 +1,14 @@
 import React, { FC } from 'react';
-import { Map } from 'react-leaflet';
+import { MapContainer } from 'react-leaflet';
 // @ts-ignore
 import { IPoint } from '../../models/Point';
 import L, { LatLng } from 'leaflet';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { uniquePoints } from '../../utils/utils';
+import { INITIAL_CENTER, uniquePoints } from '../../utils/utils';
 import { Marker } from '../atoms';
 import GoogleMapsLayer from './map/GoogleMapsLayer';
+import MapViewControl from '../../services/MapViewControl';
 
 const INITIAL_ZOOM = parseInt(process.env.REACT_APP_DEFAULT_MAP_ZOOM!);
 const useStyles = makeStyles({
@@ -35,11 +36,11 @@ const SideBarMap: FC<IProps> = ({ items }) => {
   const bounds = getBounds(items);
 
   return (
-    <Map bounds={bounds} zoom={INITIAL_ZOOM} className={classes.wrapper}>
+    <MapContainer bounds={bounds} zoom={INITIAL_ZOOM} className={classes.wrapper}>
+      <MapViewControl bounds={bounds} center={INITIAL_CENTER} zoom={INITIAL_ZOOM} />
       <GoogleMapsLayer />
-
       <Marker markerdata={items[0]} />
-    </Map>
+    </MapContainer>
   );
 };
 const getBounds = (items: IPoint[]) => {
