@@ -38,10 +38,10 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({ userDetails, isUpdate
         {t('UserProfileHeader.logout')}
       </Box>
       <Box className={classes.userButton} onClick={() => toggleUserUpdateScreen(true)}>
-        {t('header.userinfoUpdate')}
+        {t('header.User Info Update')}
       </Box>
       <Box className={classes.welcomeMsg}>
-        <Typography.Body2>{`${t('header.userGreeting')} ${userDetails.firstName}`}</Typography.Body2>
+        <Typography.Body2>{`${t('header.User Greeting')} ${userDetails.firstName}`}</Typography.Body2>
       </Box>
       <UserInfoForm
         defaultValues={userDetails}

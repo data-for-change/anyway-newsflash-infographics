@@ -83,16 +83,16 @@
     "all": "all"
   },
   "header": {
-    "userGreeting": "Hello",
-    "userinfoUpdate": "Update Info"
+    "User Greeting": "Hello",
+    "User Info Update": "Update Info"
   },
   "userDetailsForm": {
     "Update": "Update",
-    "UserDetails": "User Details",
-    "lastName": "Last Name",
-    "firstName": "First Name",
-    "email": "Email",
-    "organization": "Organization"
+    "User Details": "User Details",
+    "Last Name": "Last Name",
+    "First Name": "First Name",
+    "Email": "Email",
+    "Organization": "Organization"
   },
   "sideBar": "Approximate location:",
   "UserProfileHeader": {
