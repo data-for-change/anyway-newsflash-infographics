@@ -47,49 +47,45 @@ const NewsFlashFilterPanel: FC<IProps> = () => {
   const { t } = useTranslation();
   const store: RootStore = useStore();
 
+  const getLogoByFilter = (type: SourceFilterEnum) => {
+    switch (type) {
+      case SourceFilterEnum.all: {
+        return 'filterPanel.all';
+      }
+      case SourceFilterEnum.ynet: {
+        return ynetLogo;
+      }
+      case SourceFilterEnum.walla: {
+        return wallaLogo;
+      }
+      case SourceFilterEnum.mda: {
+        return madaLogo;
+      }
+    }
+  };
+
   return (
     // will be convert to filterButtonsMap instead of code duplicate for the filter button
     <Box className={classes.container}>
-      <AnyWayButton
-        className={classnames(classes.button, {
-          [`${classes.active}`]: store.newsFlashActiveFilter === SourceFilterEnum.all,
-        })}
-        onClick={() => {
-          store.setActiveNewsFlashFilter(SourceFilterEnum.all);
-        }}
-      >
-        <Typography.Title2>{t('filterPanel.all')}</Typography.Title2>
-      </AnyWayButton>
-      <AnyWayButton
-        className={classnames(classes.button, {
-          [`${classes.active}`]: store.newsFlashActiveFilter === SourceFilterEnum.ynet,
-        })}
-        onClick={() => {
-          store.setActiveNewsFlashFilter(SourceFilterEnum.ynet);
-        }}
-      >
-        <img className={classes.image} src={ynetLogo} alt="Ynet" />
-      </AnyWayButton>
-      <AnyWayButton
-        className={classnames(classes.button, {
-          [`${classes.active}`]: store.newsFlashActiveFilter === SourceFilterEnum.walla,
-        })}
-        onClick={() => {
-          store.setActiveNewsFlashFilter(SourceFilterEnum.walla);
-        }}
-      >
-        <img className={classes.image} src={wallaLogo} alt="Walla" />
-      </AnyWayButton>
-      <AnyWayButton
-        className={classnames(classes.button, {
-          [`${classes.active}`]: store.newsFlashActiveFilter === SourceFilterEnum.mda,
-        })}
-        onClick={() => {
-          store.setActiveNewsFlashFilter(SourceFilterEnum.mda);
-        }}
-      >
-        <img className={classes.image} src={madaLogo} alt="Magen David Adom" />
-      </AnyWayButton>
+      {Object.values(SourceFilterEnum).map((filter: SourceFilterEnum) => {
+        const logo = getLogoByFilter(filter);
+        return (
+          <AnyWayButton
+            className={classnames(classes.button, {
+              [`${classes.active}`]: store.newsFlashActiveFilter === filter,
+            })}
+            onClick={() => {
+              store.setActiveNewsFlashFilter(filter);
+            }}
+          >
+            {filter === SourceFilterEnum.all ? (
+              <Typography.Title2>{logo && t(logo)}</Typography.Title2>
+            ) : (
+              <img className={classes.image} src={logo} alt={filter} />
+            )}
+          </AnyWayButton>
+        );
+      })}
     </Box>
   );
 };
