@@ -83,8 +83,8 @@
     "all": "הכל"
   },
   "header": {
-    "userGreeting": "שלום",
-    "userinfoUpdate": "פרטי משתמש"
+    "User Greeting": "שלום",
+    "User Info Update": "פרטי משתמש"
   },
   "sideBar": "מיקום משוער:",
   "UserProfileHeader": {
@@ -93,7 +93,11 @@
   },
   "userDetailsForm": {
     "Update": "עדכן",
-    "UserDetails": "פרטי משתמש"
+    "UserDetails": "פרטי משתמש",
+    "Last Name": "שם משפחה",
+    "First Name": "שם פרטי",
+    "Email": "דואר אלקטרוני",
+    "Organization": "ארגון"
   },
   "widgets": {
     "countByCarType": {
