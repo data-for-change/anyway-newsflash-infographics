@@ -58,7 +58,7 @@ export const postUserInfo = async function (formInput: IFormInput): Promise<Bool
 export const logoutUserFromSession = async function (): Promise<boolean> {
   let isSessionLogOut: boolean = false;
   try {
-    const res = await axios.get(LOG_OUT_USER_URL);
+    const res = await axios.get(LOG_OUT_USER_URL, { withCredentials: true });
     isSessionLogOut = res.status === StatusCodes.OK;
   } catch (e) {
     console.error(`an Error has occured while trying to log out : ${e}`);

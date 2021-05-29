@@ -6,7 +6,7 @@ import { mapApiKey } from '../../../utils/utils';
 const GoogleMapsLayer: FC = ({ children }) => {
   return (
     <ReactLeafletGoogleLayer
-      googleMapsLoaderConf={{ KEY: mapApiKey, VERSION: '3.40.6' }}
+      googleMapsLoaderConf={{ apiKey: mapApiKey, version: '3.40.6' }}
       type="roadmap"
       styles={MAP_STYLE}
     />

@@ -146,7 +146,12 @@ export const PieChartView: FC<IProps> = ({
 }) => {
   const renderLabel = useCallback(
     (props: PieLabelRenderProps) =>
-      labelProps.customizedLabel(props, labelProps.labelFontSize, usePercent, data.some(items => items[yLabel] === 0)),
+      labelProps.customizedLabel(
+        props,
+        labelProps.labelFontSize,
+        usePercent,
+        data.some((items) => items[yLabel] === 0),
+      ),
     [labelProps, usePercent, data, yLabel],
   );
 
