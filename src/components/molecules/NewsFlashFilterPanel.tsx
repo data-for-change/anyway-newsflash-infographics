@@ -49,9 +49,6 @@ const NewsFlashFilterPanel: FC<IProps> = () => {
 
   const getLogoByFilter = (type: SourceFilterEnum) => {
     switch (type) {
-      case SourceFilterEnum.all: {
-        return 'filterPanel.all';
-      }
       case SourceFilterEnum.ynet: {
         return ynetLogo;
       }
@@ -65,21 +62,18 @@ const NewsFlashFilterPanel: FC<IProps> = () => {
   };
 
   return (
-    // will be convert to filterButtonsMap instead of code duplicate for the filter button
     <Box className={classes.container}>
       {Object.values(SourceFilterEnum).map((filter: SourceFilterEnum) => {
         const logo = getLogoByFilter(filter);
         return (
           <AnyWayButton
             className={classnames(classes.button, {
-              [`${classes.active}`]: store.newsFlashActiveFilter === filter,
+              [classes.active]: store.newsFlashActiveFilter === filter,
             })}
-            onClick={() => {
-              store.setActiveNewsFlashFilter(filter);
-            }}
+            onClick={() => store.setActiveNewsFlashFilter(filter)}
           >
             {filter === SourceFilterEnum.all ? (
-              <Typography.Title2>{logo && t(logo)}</Typography.Title2>
+              <Typography.Title2>{t('filterPanel.all')}</Typography.Title2>
             ) : (
               <img className={classes.image} src={logo} alt={filter} />
             )}
