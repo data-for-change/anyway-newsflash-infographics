@@ -14,8 +14,6 @@ import LanguageMenu from '../organisms/LanguageMenu';
 const useStyles = makeStyles({
   userSection: {
     display: 'flex',
-    width: '40%',
-    justifyContent: 'space-evenly',
   },
 });
 
@@ -53,10 +51,8 @@ const Header: FC = () => {
       <Logo src={AnywayImage} alt={'Anyway'} height={30} onClick={reloadHomePage} />
       <Box className={classes.userSection}>
         <LanguageMenu />
-        <span style={{ display: 'none' }}>
-          {authElement}
-          <SignInIcon />
-        </span>
+        {authElement}
+        <SignInIcon />
       </Box>
     </AppBar>
   );

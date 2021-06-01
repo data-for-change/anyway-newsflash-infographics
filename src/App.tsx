@@ -29,13 +29,14 @@ const App: FC = () => {
   const store = useStore();
   const theme = useTheme();
 
+  const appDir = i18n.dir();
   useEffect(() => {
     // https://material-ui.com/guides/right-to-left/
     //add dir tag to the body
-    document.body.dir = i18n.dir();
+    document.body.dir = appDir;
     //change dir in theme
-    theme.direction = i18n.dir();
-  }, [i18n, theme.direction, store.changeLanguage]);
+    theme.direction = appDir;
+  }, [i18n, theme.direction, appDir]);
 
   return (
     <StoreContext.Provider value={store}>

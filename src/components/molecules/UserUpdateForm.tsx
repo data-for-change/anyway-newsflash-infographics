@@ -57,7 +57,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
       fullWidth
       maxWidth={'sm'}
       isShowing={isShowing}
-      title={t('userDetailsForm.title')}
+      title={t('userDetailsForm.UserDetails')}
       onClose={onClose}
     >
       <Grid className={classes.grid} container justify={'center'} alignItems={'center'} spacing={4}>
@@ -68,7 +68,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
             name="lastName"
             variant={'outlined'}
             fullWidth
-            label={t('userDetailsForm.lastName')}
+            label={t('userDetailsForm.Last Name')}
           />
         </Grid>
         <Grid item xs={6}>
@@ -79,7 +79,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
             name="firstName"
             variant={'outlined'}
             fullWidth
-            label={t('userDetailsForm.firstName')}
+            label={t('userDetailsForm.First Name')}
           />
         </Grid>
         <Grid item xs={12}>
@@ -89,7 +89,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
             variant={'outlined'}
             fullWidth
             name="email"
-            label={t('userDetailsForm.email')}
+            label={t('userDetailsForm.Email')}
             defaultValue={defaultValues.email}
             placeholder={'Please enter your name'}
           />
@@ -98,7 +98,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
           <TextField
             defaultValue={defaultValues.workplace}
             name="workplace"
-            label={t('userDetailsForm.organization')}
+            label={t('userDetailsForm.Organization')}
             variant={'outlined'}
             fullWidth
             onChange={handleInput}
@@ -109,7 +109,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
         </Grid>
         <Grid item xs={12}>
           <Box className={classes.submitButton}>
-            <Button.Standard onClick={handleSubmit}>{t(`userDetailsForm.submitButton`)}</Button.Standard>
+            <Button.Standard onClick={handleSubmit}>{t(`userDetailsForm.Update`)}</Button.Standard>
           </Box>
         </Grid>
       </Grid>
