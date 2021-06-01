@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { IWidgetCountBySeverityTextData } from '../../../models/WidgetData';
-import { Theme, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import { brightGreyColor } from '../../../style';
 import Box from '@material-ui/core/Box';
 import classNames from 'classnames';
@@ -19,7 +19,7 @@ export interface CountBySeverity {
   light: number;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     position: 'relative',
     top: '10%',
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function getSingleType(countBySeverity: CountBySeverity): string | undefined {
+function getSingleType(countBySeverity: CountBySeverity): string {
   if (countBySeverity.fatal) {
     return 'fatal';
   }
@@ -62,6 +62,8 @@ function getSingleType(countBySeverity: CountBySeverity): string | undefined {
   }
   if (countBySeverity.light) {
     return 'light';
+  } else {
+    return '';
   }
 }
 
@@ -81,7 +83,7 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
     <div className={classes.root}>
       <Box className={headerClass} color={brightGreyColor} textAlign="center">
         <TextViewHeader
-          singleType={isSingleType && getSingleType(countBySeverity)!}
+          singleType={isSingleType ? getSingleType(countBySeverity) : ''}
           data={data}
           segmentText={segmentText}
         />
