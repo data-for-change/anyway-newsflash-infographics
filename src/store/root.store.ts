@@ -118,19 +118,19 @@ export default class RootStore {
       this.newsFlashActiveFilter = filter;
       this.newsFlashCollection = [];
       this.newsFlashFetchOffSet = 0;
-      this.filterNewsFlashCollection(this.newsFlashFetchOffSet, filter);
+      this.filterNewsFlashCollection();
     }
   }
 
   @action
-  filterNewsFlashCollection(offSet: number, filter?: SourceFilterEnum): void {
+  filterNewsFlashCollection(): void {
     this.newsFlashLoading = true;
-    fetchNews(filter, offSet).then((data: any) => {
+    fetchNews(this.newsFlashActiveFilter, this.newsFlashFetchOffSet).then((data: any) => {
       this.newsFlashLoading = false;
       if (data) {
         this.newsFlashCollection = [...this.newsFlashCollection, ...data];
       } else {
-        console.error(`filterNewsFlashCollection(filter:${filter}) invalid data:`, data);
+        console.error(`filterNewsFlashCollection(filter:${this.newsFlashActiveFilter}) invalid data:`, data);
       }
     });
   }
@@ -139,7 +139,7 @@ export default class RootStore {
   infiniteFetchLimit(fetchSize: number): void {
     this.newsFlashFetchOffSet += fetchSize;
     if (this.newsFlashCollection.length >= this.newsFlashFetchOffSet - fetchSize) {
-      this.filterNewsFlashCollection(this.newsFlashFetchOffSet, this.newsFlashActiveFilter);
+      this.filterNewsFlashCollection();
     }
   }
 

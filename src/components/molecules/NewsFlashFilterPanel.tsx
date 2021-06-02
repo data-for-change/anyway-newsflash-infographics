@@ -71,6 +71,7 @@ const NewsFlashFilterPanel: FC<IProps> = () => {
               [classes.active]: store.newsFlashActiveFilter === filter,
             })}
             onClick={() => store.setActiveNewsFlashFilter(filter)}
+            key={filter}
           >
             {filter === SourceFilterEnum.all ? (
               <Typography.Title2>{t('filterPanel.all')}</Typography.Title2>
