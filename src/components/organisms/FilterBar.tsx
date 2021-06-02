@@ -45,7 +45,7 @@ const FilterBar: FC<IProps> = () => {
     <div className={classes.grow}>
       <AppBar position="static" color="transparent" elevation={0}>
         <Toolbar variant="dense">
-          <Grid container spacing={2} alignItems={'center'}>
+          <Grid container spacing={2} alignItems="center">
             <Grid item>
               <SelectButton onChange={onFilterChange} />
             </Grid>
@@ -61,7 +61,7 @@ const FilterBar: FC<IProps> = () => {
                 </Grid>
               </Grid>
             </Grid>
-            <Collapse in={isDescOpen} timeout={'auto'}>
+            <Collapse in={isDescOpen} timeout="auto">
               <Grid item lg={12}>
                 <Box mb={2} px={3}>
                   <Typography.Body3>{store.activeNewsFlash?.description}</Typography.Body3>
