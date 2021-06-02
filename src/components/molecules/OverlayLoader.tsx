@@ -25,7 +25,6 @@ interface IProps {
 }
 
 const OverlayLoader: FC<IProps> = ({ show }) => {
-  // passing props to useStyles - see demo: https://codesandbox.io/s/giubj?file=/demo.js:224-229
   const classes = useStyles(show);
   return (
     <Box className={classes.root}>
