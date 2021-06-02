@@ -9,6 +9,7 @@ import { useLocation } from 'react-router';
 import queryString from 'query-string';
 import { Typography, Button } from '../atoms';
 import { useTranslation } from 'react-i18next';
+import Collapse from '@material-ui/core/Collapse';
 
 interface IProps {}
 
@@ -17,11 +18,8 @@ const useStyles = makeStyles(() =>
     grow: {
       flexGrow: 1,
     },
-    locationMeta: {
-      alignSelf: 'flex-start',
-    },
-    showDescriptionButton: {
-      alignSelf: 'baseline',
+    descriptionHeader: {
+      alignItems: 'center',
     },
   }),
 );
@@ -47,29 +45,29 @@ const FilterBar: FC<IProps> = () => {
     <div className={classes.grow}>
       <AppBar position="static" color="transparent" elevation={0}>
         <Toolbar variant="dense">
-          <Grid container spacing={2} alignItems="baseline">
+          <Grid container spacing={2} alignItems={'center'}>
             <Grid item>
               <SelectButton onChange={onFilterChange} />
             </Grid>
             <Grid item>
-              <Grid item container spacing={2}>
-                <Grid item className={classes.locationMeta}>
+              <Grid item container spacing={2} className={classes.descriptionHeader}>
+                <Grid item>
                   <Typography.Body2>{store.newsFlashWidgetsMetaLocation}</Typography.Body2>
                 </Grid>
-                <Grid item className={classes.showDescriptionButton}>
+                <Grid item>
                   <Button.Standard onClick={() => setIsDescOpen(!isDescOpen)}>
                     {isDescOpen ? t('filterBar.Hide Details') : t('filterBar.Show Details')}
                   </Button.Standard>
                 </Grid>
               </Grid>
-              {isDescOpen && (
-                <Grid item>
-                  <Box mt={1}>
-                    <Typography.Body3>{store.activeNewsFlash?.description}</Typography.Body3>
-                  </Box>
-                </Grid>
-              )}
             </Grid>
+            <Collapse in={isDescOpen} timeout={'auto'}>
+              <Grid item lg={12}>
+                <Box mb={2} px={3}>
+                  <Typography.Body3>{store.activeNewsFlash?.description}</Typography.Body3>
+                </Box>
+              </Grid>
+            </Collapse>
           </Grid>
         </Toolbar>
       </AppBar>
