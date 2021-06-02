@@ -37,9 +37,7 @@ const StyledTableCell = withStyles((theme: Theme) =>
 )(TableCell);
 const StyledTableRow = withStyles(() =>
   createStyles({
-    root: {
-      // styles can be added here
-    },
+    root: {},
   }),
 )(TableRow);
 

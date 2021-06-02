@@ -1,16 +1,3 @@
-// current suggestion for widget structure (25 April 2020)
-// export interface IWidgetBase = {
-//   name: string; // unique - used as identifier
-//   data: {
-//     text: Array<string>;  // text items - title, text content etc.
-//     items: object | Array<any>;    // data items - points, events, image name, chart ticks etc.
-//     addionals?: any       // optional - any additional data
-//   };
-//   meta: {
-//     category: string;     // one per widget
-//     tags: Array<string>;  // zero or more per widget
-//   };
-// }
 import { IPoint, IPointAccident } from './Point';
 import { IWidgetDataType } from './WidgetDataType';
 

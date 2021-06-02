@@ -46,11 +46,3 @@ export const DEMO_ID = 999;
 export const showOnlyOperCards = process.env.REACT_APP_SHOW_ONLY_OPER_CARDS === 'true';
 
 export const INITIAL_CENTER = { lat: 32.0853, lng: 34.7818 };
-
-// export function handleNewsflashId(id?: string) {
-//   let newsFlashId: string | number | undefined = id;
-//   if (id) {
-//     newsFlashId = id !== DEMO_ID ? parseInt(id) : DEMO_ID;
-//   }
-//   return newsFlashId;
-// }

@@ -15,7 +15,6 @@ export enum FooterVariant {
 export interface CardVariant {
   header: HeaderVariant;
   footer: FooterVariant;
-  // backgroundImage
 }
 
 // === widgets variants === //
@@ -27,8 +26,6 @@ const widgetVariants: { [index: string]: CardVariant } = {
   [WidgetName.injured_count_per_age_group]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
   [WidgetName.most_severe_accidents]: { header: HeaderVariant.None, footer: FooterVariant.Logo },
   [WidgetName.most_severe_accidents_table]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
-  // [WidgetName.accidents_heat_map]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
-  // [WidgetName.street_view]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
   [WidgetName.accident_count_by_severity]: { header: HeaderVariant.Logo, footer: FooterVariant.None },
   [WidgetName.accident_count_by_accident_type]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
   [WidgetName.accident_count_by_accident_year]: { header: HeaderVariant.Logo, footer: FooterVariant.None },

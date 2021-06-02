@@ -24,7 +24,6 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
   const roadNumber = store.newsFlashWidgetsMetaRoadNumber;
   const dateComment = store.newsFlashWidgetsMetaDateComment;
 
-  // const widgetRef = useRef<HTMLDivElement>(null);
   const getCardRef = (element: HTMLElement) => setCardElement(element);
   const imgDownloadHandler = () => {
     if (cardElement && cardElement instanceof HTMLElement) {
