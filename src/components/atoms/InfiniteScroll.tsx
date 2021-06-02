@@ -19,7 +19,7 @@ interface IProps {
   onScrollEnd: () => any;
 }
 
-const InfinitScroll: FC<IProps> = ({ children, onScrollEnd }) => {
+const InfiniteScroll: FC<IProps> = ({ children, onScrollEnd }) => {
   const classes = useStyles();
   const scrollList = useRef<HTMLDivElement>(null);
   const store = useStore();
@@ -45,4 +45,4 @@ const InfinitScroll: FC<IProps> = ({ children, onScrollEnd }) => {
   );
 };
 
-export default InfinitScroll;
+export default InfiniteScroll;

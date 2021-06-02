@@ -1,18 +1,18 @@
 import React, { FC, useCallback } from 'react';
 import { Box, makeStyles } from '@material-ui/core';
 import News from './News';
-import { NewsFlashFilterPanel } from '../molecules/NewsFlashFilterPanel';
+import NewsFlashFilterPanel from '../molecules/NewsFlashFilterPanel';
 import OverlayLoader from '../molecules/OverlayLoader';
 import { silverSmokeColor } from '../../style';
 import { Typography, ErrorBoundary } from '../atoms';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
-import { InfinitScroll } from '../atoms';
+import { InfiniteScroll } from '../atoms';
 import SideBarMap from '../molecules/SideBarMap';
 import { useTranslation } from 'react-i18next';
 
-const INFINITE_SCROLL_FETCH_SIZE = 5;
+const INFINITE_SCROLL_FETCH_SIZE = 100;
 
 interface IProps {}
 
@@ -32,9 +32,11 @@ const SideBar: FC<IProps> = () => {
   const store: RootStore = useStore();
   const classes = useStyles();
   const { t } = useTranslation();
+
   const mapTitle = `${t('sideBar')}`;
   const location = store.activeNewsFlashLocation;
   const loading = store.newsFlashLoading;
+
   const fetchMoreNewsItems = useCallback(() => {
     console.log('fetchMoreNewsItems');
     store.infiniteFetchLimit(INFINITE_SCROLL_FETCH_SIZE);
@@ -49,9 +51,9 @@ const SideBar: FC<IProps> = () => {
             <NewsFlashFilterPanel />
           </ErrorBoundary>
         </Box>
-        <InfinitScroll onScrollEnd={fetchMoreNewsItems}>
+        <InfiniteScroll onScrollEnd={fetchMoreNewsItems}>
           <News />
-        </InfinitScroll>
+        </InfiniteScroll>
       </Box>
       <Box borderTop={`1px solid ${silverSmokeColor}`} flexShrink={0} flexGrow={0} p={1}>
         <Typography.Body4 children={mapTitle} />
