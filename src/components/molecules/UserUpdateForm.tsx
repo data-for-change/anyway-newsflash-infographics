@@ -5,6 +5,7 @@ import { useStore } from '../../store/storeConfig';
 import Button from '../atoms/Button';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
+import { IValidationErrors, validateUserDetails } from '../../utils/validations';
 
 interface IProps {
   isShowing: boolean;
@@ -33,26 +34,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const initialValidations = {
+  email: true,
+  firstName: true,
+  lastName: true,
+};
+
 const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) => {
   const store = useStore();
   const { t } = useTranslation();
   const [formInput, setFormInput] = useState<IFormInput>(defaultValues);
+  const [validations, setValidations] = useState<IValidationErrors>(initialValidations);
 
   const handleInput = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = evt.currentTarget;
     const newValue = { [name]: value };
-    /*    if (validateInput(name, value)) {
-    }*/
     setFormInput((prevState) => ({ ...prevState, ...newValue }));
   };
   const classes = useStyles();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    await store.updateUserInfo(formInput);
-    if (!store.userApiError) {
-      onClose();
+    const inputValidations: IValidationErrors = validateUserDetails(formInput);
+    if (Object.values(validations).every(Boolean)) {
+      await store.updateUserInfo(formInput);
+      if (!store.userApiError) {
+        onClose();
+      }
     }
+    setValidations(inputValidations);
   };
 
   return (
@@ -63,13 +73,15 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
       title={t('userDetailsForm.UserDetails')}
       onClose={onClose}
     >
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} noValidate>
         <Grid className={classes.grid} container justify={'center'} alignItems={'center'} spacing={4}>
           <Grid item xs={6}>
             <TextField
               defaultValue={defaultValues.lastName}
               onChange={handleInput}
               name="lastName"
+              error={!validations.lastName}
+              helperText={validations.lastName ? '' : 'Please provide a last name'}
               variant={'outlined'}
               fullWidth
               label={t('userDetailsForm.Last Name')}
@@ -81,6 +93,8 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
               defaultValue={defaultValues.firstName}
               onChange={handleInput}
               name="firstName"
+              error={!validations.firstName}
+              helperText={validations.firstName ? '' : 'Please provide a first name'}
               variant={'outlined'}
               fullWidth
               label={t('userDetailsForm.First Name')}
@@ -93,6 +107,8 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
               variant={'outlined'}
               fullWidth
               name="email"
+              error={!validations.email}
+              helperText={validations.email ? '' : 'Please provide a valid Email'}
               label={t('userDetailsForm.Email')}
               defaultValue={defaultValues.email}
               placeholder={'Please enter your name'}
@@ -108,9 +124,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
               onChange={handleInput}
             />
           </Grid>
-          <Grid item xs={12}>
-            {store.userApiError && <p className={classes.error}>{t('userDetailsForm.error')} </p>}
-          </Grid>
+          <Grid item xs={12}></Grid>
           <Grid item xs={12}>
             <Box className={classes.submitButton}>
               <Button.Standard type="submit">{t(`userDetailsForm.Update`)}</Button.Standard>
