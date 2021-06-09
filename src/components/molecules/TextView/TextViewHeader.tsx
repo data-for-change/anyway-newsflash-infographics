@@ -13,7 +13,7 @@ interface IProps {
 }
 interface AProps {
   accidentsCount: Number;
-  singleType: string | false;
+  singleType: string;
 }
 
 const useStyles = makeStyles((theme) => ({
