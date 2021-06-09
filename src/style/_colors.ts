@@ -20,33 +20,13 @@ export const honeyColor = '#F2BB0A';
 //Stacked chart
 export const yellowColor = '#ffdd22';
 
-export const defaultBorderRadius = 4;
-export const sidBarWidth = 300;
-// card
-export const cardHeight = 500;
-export const cardWidth = 500;
-// card content and actions (footer)
-export const cardHeaderHeight = 70;
-export const cardFooterHeight = 50;
-
+// Opacity
 export const opacity80percent = '8c';
 
 //pie
 export const pieChartColors = ['#AE0721', '#818386', '#d90000', '#890505', '#6a6a6a'];
 
-export const fontFamilyString = [
-  '"Alef"',
-  '-apple-system',
-  'BlinkMacSystemFont',
-  '"Segoe UI"',
-  'Roboto',
-  '"Helvetica Neue"',
-  'Arial',
-  'sans-serif',
-].join(',');
-
 //road number icon && font
-export const roadIconFont = 'sans-serif';
 export const roadIconColors = {
   red: '#ae0721',
   blue: '#0000FE',

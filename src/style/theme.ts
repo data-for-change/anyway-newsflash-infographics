@@ -1,5 +1,5 @@
 import { ThemeOptions } from '@material-ui/core';
-import { fontFamilyString } from './_globals';
+import { fontFamilyString } from './_sizes';
 
 const defaultThemeOptions: ThemeOptions = {
   palette: {},
