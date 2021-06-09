@@ -16,7 +16,7 @@ import { getSizes } from './card.util';
 import CardBackgroundImage from './CardBackgroundImage';
 import CardFooter from './CardFooter';
 import CardEditor from '../../organisms/CardEditorDialog';
-import { transparent } from '../../../style/_colors';
+import { transparent } from '../../../style';
 
 const DEFAULTE_SIZE = 1;
 export interface CardSizeOptions {
