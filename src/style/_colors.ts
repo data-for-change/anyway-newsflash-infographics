@@ -19,9 +19,12 @@ export const cherryJamColor = '#8a1212';
 export const honeyColor = '#F2BB0A';
 //Stacked chart
 export const yellowColor = '#ffdd22';
+// Grey
+export const darkGrey = '#818386';
 
 // Opacity
 export const opacity80percent = '8c';
+export const transparent = 'transparent';
 
 //pie
 export const pieChartColors = ['#AE0721', '#818386', '#d90000', '#890505', '#6a6a6a'];

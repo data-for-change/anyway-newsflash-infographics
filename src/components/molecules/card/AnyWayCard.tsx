@@ -16,6 +16,7 @@ import { getSizes } from './card.util';
 import CardBackgroundImage from './CardBackgroundImage';
 import CardFooter from './CardFooter';
 import CardEditor from '../../organisms/CardEditorDialog';
+import { transparent } from '../../../style/_colors';
 
 const DEFAULTE_SIZE = 1;
 export interface CardSizeOptions {
@@ -48,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     '&:hover': {
-      backgroundColor: 'transparent',
+      backgroundColor: transparent,
     },
   },
   information: {
