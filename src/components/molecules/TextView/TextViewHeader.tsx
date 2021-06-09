@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 interface IProps {
   data: IWidgetCountBySeverityTextData;
   segmentText: string;
-  singleType: string | false;
+  singleType: string;
 }
 interface AProps {
   accidentsCount: Number;
