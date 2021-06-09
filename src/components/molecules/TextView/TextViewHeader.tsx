@@ -9,11 +9,11 @@ import { makeStyles } from '@material-ui/core/styles';
 interface IProps {
   data: IWidgetCountBySeverityTextData;
   segmentText: string;
-  singleType?: string;
+  singleType: string;
 }
 interface AProps {
   accidentsCount: Number;
-  singleType: string | undefined;
+  singleType: string;
 }
 
 const useStyles = makeStyles((theme) => ({
