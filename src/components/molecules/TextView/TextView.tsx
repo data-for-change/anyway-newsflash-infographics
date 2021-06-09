@@ -58,7 +58,7 @@ function getSingleType(countBySeverity: CountBySeverity): string {
     return 'fatal';
   }
   if (countBySeverity.severe) {
-    return 'sever';
+    return 'severe';
   }
   if (countBySeverity.light) {
     return 'light';
