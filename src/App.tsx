@@ -31,6 +31,7 @@ const App: FC = () => {
 
   const appDir = i18n.dir();
   useEffect(() => {
+    // https://material-ui.com/guides/right-to-left/
     document.body.dir = appDir;
     theme.direction = appDir;
   }, [i18n, theme.direction, appDir]);

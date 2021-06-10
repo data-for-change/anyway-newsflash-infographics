@@ -19,6 +19,7 @@ const widgetToImage = (fileName: string, widgetElement: HTMLElement, scale = DEF
     usingDomToImage(fileName, widgetElement, scale);
   }
 };
+// Uses canvas. OK for maps, buggy for other elements
 const usingHtml2Canvas = (fileName: string, widgetElement: HTMLElement, scale: number) => {
   html2canvas(widgetElement, {
     useCORS: true, // to allow loading maps

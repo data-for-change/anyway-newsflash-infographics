@@ -37,7 +37,7 @@ const getSizeFactor = (options: CardSizeOptions | undefined): number => (options
 const useStyles = makeStyles((theme) => ({
   root: {
     fontFamily: fontFamilyString,
-    position: 'relative',
+    position: 'relative', // for meta tags
     boxSizing: 'border-box',
     zIndex: 0,
   },
