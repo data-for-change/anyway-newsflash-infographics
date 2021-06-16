@@ -116,12 +116,6 @@ const useStyles = makeStyles({
 });
 const TooltipMarker = ({ data, position, offset }: any) => {
   const classes = useStyles(offset);
-  // const { accident_timestamp, accident_severity, accident_type = '' } = markerData;
-  // const { accident_timestamp, accident_severity, accident_type = '' } = markerData;
-  // const typeStr = accident_type === '' ? '' : `, ${accident_type}`;
-
-  // temp: make string short - skip desription
-  // const iconText = `${dateFormat(accident_timestamp)} - ${accident_severity}${typeStr}`;
   const iconText: any = `${dateFormat(data.accident_timestamp)}`;
 
   const TooltipTemplate = (

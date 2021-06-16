@@ -9,7 +9,6 @@ export function useInput(initialValue = '', callback?: Function) {
   return { onChange, value };
 }
 
-// same as useInput, with onChange that can be called programmatically
 export function useDynamicInput(initialValue = '', callback?: Function) {
   const [value, setValue] = useState(initialValue);
   // can be called dynamically, like: onChange('Hi')

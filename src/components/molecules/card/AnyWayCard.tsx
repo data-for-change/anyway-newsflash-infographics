@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: fontFamilyString,
     position: 'relative', // for meta tags
     boxSizing: 'border-box',
-    zIndex: 0, // lower than background image
+    zIndex: 0,
   },
   content: {
     height: '100%',
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   information: {
-    minWidth: theme.spacing(8), // to have the same width as other buttons
+    minWidth: theme.spacing(8),
     textAlign: 'center',
     lineHeight: '0.75',
     cursor: 'pointer',
@@ -107,7 +107,7 @@ const AnyWayCard: FC<IProps> = ({
   const refFn = (element: HTMLDivElement) => {
     setElement(element);
     if (getCardRef) {
-      getCardRef(element); // send ref to parent
+      getCardRef(element);
     }
   };
 
