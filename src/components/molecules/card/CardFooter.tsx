@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Logo, Typography } from '../../atoms';
 import LamasImage from '../../../assets/cbs.png';
 import AnywayImage from '../../../assets/anyway.png';
