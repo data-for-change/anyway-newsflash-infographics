@@ -32,9 +32,7 @@ const App: FC = () => {
   const appDir = i18n.dir();
   useEffect(() => {
     // https://material-ui.com/guides/right-to-left/
-    //add dir tag to the body
     document.body.dir = appDir;
-    //change dir in theme
     theme.direction = appDir;
   }, [i18n, theme.direction, appDir]);
 
