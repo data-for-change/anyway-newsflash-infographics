@@ -25,8 +25,6 @@ const useStyles = makeStyles({
   },
 });
 
-type SvgInHtml = HTMLElement & SVGTextElement;
-
 const CardFooter: React.FC<IProps> = ({ dateComment }) => {
   const classes = useStyles();
   const store = useStore();
