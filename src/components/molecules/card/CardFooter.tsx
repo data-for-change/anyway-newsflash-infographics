@@ -19,9 +19,6 @@ const useStyles = makeStyles({
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
   },
-  comment: {
-    display: 'block',
-  },
 });
 
 const CardFooter: React.FC<IProps> = ({ dateComment }) => {
