@@ -19,18 +19,14 @@ const useStyles = makeStyles({
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
   },
-  comment: {
-    paddingLeft: '1rem',
-  },
 });
 
 const CardFooter: React.FC<IProps> = ({ dateComment }) => {
   const classes = useStyles();
+
   return (
     <div className={classes.main}>
-      <Typography.Body3>
-        <div className={classes.comment}>{dateComment}</div>
-      </Typography.Body3>
+      <Typography.Body3>{dateComment}</Typography.Body3>
       <Box display="flex" flex={1} />
       <Logo src={LamasImage} alt={'Lamas'} height={30} />
       <Logo src={AnywayImage} alt={'Anyway'} height={20} />
