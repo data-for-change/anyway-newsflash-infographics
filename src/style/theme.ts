@@ -1,5 +1,5 @@
 import { ThemeOptions } from '@material-ui/core';
-import { fontFamilyString } from './_globals';
+import { fontFamilyString, darkGrey } from './';
 
 const defaultThemeOptions: ThemeOptions = {
   palette: {},
@@ -26,7 +26,7 @@ const defaultThemeOptions: ThemeOptions = {
     // body variants (like: newsflash data, widget contents etc)
     h1: {
       fontSize: 20,
-      fontColor: '#818386',
+      fontColor: darkGrey,
       fontWeight: 700,
     },
     h2: {

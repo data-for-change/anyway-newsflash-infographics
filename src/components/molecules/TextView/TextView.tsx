@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { IWidgetCountBySeverityTextData } from '../../../models/WidgetData';
-import { Theme, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import { brightGreyColor } from '../../../style';
 import Box from '@material-ui/core/Box';
 import classNames from 'classnames';
@@ -13,7 +13,13 @@ interface IProps {
   segmentText: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+export interface CountBySeverity {
+  fatal: number;
+  severe: number;
+  light: number;
+}
+
+const useStyles = makeStyles(() => ({
   root: {
     position: 'relative',
     top: '10%',
@@ -47,47 +53,47 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const extractCount = ({ severity_fatal_count, severity_light_count, severity_severe_count }: any) => {
-  //checking availability of one or more types
-  if ([severity_fatal_count, severity_light_count, severity_severe_count].filter(Boolean).length > 1)
-    return { severity_fatal_count, severity_light_count, severity_severe_count };
-  else {
-    return null;
+function getSingleType(countBySeverity: CountBySeverity): string {
+  if (countBySeverity.fatal) {
+    return 'fatal';
   }
-};
+  if (countBySeverity.severe) {
+    return 'severe';
+  }
+  if (countBySeverity.light) {
+    return 'light';
+  } else {
+    return '';
+  }
+}
 
 const TextView: FC<IProps> = ({ data, segmentText }) => {
   const classes = useStyles();
-  const { items } = data;
-  const countsData = extractCount(items);
-  // e.g. if there are only accidents types of severity_fatal_count will return the strinf "fatal"
-  const findSingleType = () => {
-    if (!countsData) {
-      for (const [key, value] of Object.entries(items)) {
-        if (key.split('_')[0] === 'severity') {
-          if (!value) {
-            return;
-          } else {
-            return key.split('_')[1];
-          }
-        }
-      }
-    }
-  };
 
-  const singleType: string | undefined = findSingleType();
-  const headerClass = classNames(classes.headerBase, singleType ? classes.headerSingleType : classes.headerList);
+  const countBySeverity: CountBySeverity = {
+    fatal: data?.items.severity_fatal_count,
+    severe: data?.items.severity_severe_count,
+    light: data?.items.severity_light_count,
+  };
+  const howManySeverities = [!!countBySeverity.fatal, !!countBySeverity.severe, !!countBySeverity.light];
+  const isSingleType = howManySeverities.filter(Boolean).length === 1;
+
+  const headerClass = classNames(classes.headerBase, isSingleType ? classes.headerSingleType : classes.headerList);
   return (
     <div className={classes.root}>
       <Box className={headerClass} color={brightGreyColor} textAlign="center">
-        <TextViewHeader singleType={singleType} data={data} segmentText={segmentText} />
+        <TextViewHeader
+          singleType={isSingleType ? getSingleType(countBySeverity) : ''}
+          data={data}
+          segmentText={segmentText}
+        />
       </Box>
-      {countsData ? (
-        <Box color="text.secondary" className={classes.list}>
-          <TextViewList data={countsData} />
-        </Box>
+      {isSingleType ? (
+        <SeverityImage severity={getSingleType(countBySeverity)!} />
       ) : (
-        singleType && <SeverityImage severity={singleType!} />
+        <Box color="text.secondary" className={classes.list}>
+          <TextViewList data={countBySeverity} />
+        </Box>
       )}
     </div>
   );

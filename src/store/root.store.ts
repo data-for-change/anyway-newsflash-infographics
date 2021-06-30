@@ -33,7 +33,8 @@ export default class RootStore {
   @observable userApiError: boolean = false;
   @observable userInfo: ActualiUserInfo | null = null;
   @observable activeNewsFlashId: number = 0; // active newsflash id
-  @observable newsFlashFetchLimit: number = 0;
+  @observable newsFlashFetchOffSet = 0;
+  @observable newsFlashActiveFilter: SourceFilterEnum = SourceFilterEnum.all;
   @observable newsFlashWidgetsMeta: ILocationMeta = DEFAULT_LOCATION_META;
   @observable newsFlashWidgetsData: Array<IWidgetBase> = [];
   @observable newsFlashWidgetsTimerFilter = DEFAULT_TIME_FILTER; // newsflash time filter (in years ago, 5 is the default)
@@ -112,25 +113,34 @@ export default class RootStore {
 
   @action checkuserstatus(): void {}
 
+  @action setActiveNewsFlashFilter(filter: SourceFilterEnum) {
+    if (filter !== this.newsFlashActiveFilter) {
+      this.newsFlashActiveFilter = filter;
+      this.newsFlashCollection = [];
+      this.newsFlashFetchOffSet = 0;
+      this.filterNewsFlashCollection();
+    }
+  }
+
   @action
-  filterNewsFlashCollection(source?: SourceFilterEnum): void {
+  filterNewsFlashCollection(): void {
     this.newsFlashLoading = true;
-    fetchNews(source, this.newsFlashFetchLimit).then((data: any) => {
+    fetchNews(this.newsFlashActiveFilter, this.newsFlashFetchOffSet).then((data: any) => {
       this.newsFlashLoading = false;
       if (data) {
-        this.newsFlashCollection = data;
+        this.newsFlashCollection = [...this.newsFlashCollection, ...data];
       } else {
-        console.error(`filterNewsFlashCollection(source:${source}) invalid data:`, data);
+        console.error(`filterNewsFlashCollection(filter:${this.newsFlashActiveFilter}) invalid data:`, data);
       }
     });
   }
 
   @action
-  infiniteFetchLimit(count: number): void {
-    this.newsFlashFetchLimit += count;
-    const { newsFlashCollection, newsFlashFetchLimit } = this;
-    if (newsFlashCollection.length < newsFlashFetchLimit - count) return;
-    this.filterNewsFlashCollection();
+  infiniteFetchLimit(fetchSize: number): void {
+    this.newsFlashFetchOffSet += fetchSize;
+    if (this.newsFlashCollection.length >= this.newsFlashFetchOffSet - fetchSize) {
+      this.filterNewsFlashCollection();
+    }
   }
 
   @action

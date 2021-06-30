@@ -3,7 +3,6 @@ import {
   IWidgetAccidentCountByRoadLight,
   IWidgetBase,
   IWidgetAccidentsByHourBarData,
-  // IWidgetInjuredCountPerAgeGroupPieData,
   IWidgetMostSevereAccidentsData,
   IWidgetMostSevereAccidentsTableData,
   IWidgetCountBySeverityTextData,
@@ -19,7 +18,6 @@ import {
   IWidgetInjuredAccidentsWithPedestrians,
 } from '../../../models/WidgetData';
 import AccidentsCountByHourBarWidget from './AccidentsCountByHourBarWidget';
-// import InjuredCountPerAgeGroupPieWidget from './InjuredCountPerAgeGroupPieWidget';
 import MostSevereAccidentsMapWidget from './MostSevereAccidentsMapWidget';
 import MostSevereAccidentsTableWidget from './MostSevereAccidentsTableWidget';
 import HeatMap from '../HeatMap';
@@ -86,7 +84,6 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
       break;
     }
     case WidgetName.accident_count_by_accident_type: {
-      // example of pie widget
       widgetComponent = <CountByTypePieWidget data={data as IWidgetAccidentsByTypeData} />;
       break;
     }
@@ -121,7 +118,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
       );
       break;
     }
-    case WidgetName.vision_zero: {
+    case WidgetName.vision_zero_2_plus_1: {
       widgetComponent = <StaticImageViewWidget data={data as IWidgetVisionZeroImageData} />;
       break;
     }

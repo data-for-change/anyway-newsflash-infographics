@@ -20,7 +20,7 @@ const errorNews: INewsFlash = {
 
 const NEWS_FLASH_API: string = '/api/news-flash';
 
-export function fetchNews(source = '', limit = 100): Promise<any> {
+export function fetchNews(source = '', offSet = 0, limit = 100): Promise<any> {
   const query = [];
   if (source) {
     query.push(`source=${source}`);
@@ -28,6 +28,8 @@ export function fetchNews(source = '', limit = 100): Promise<any> {
   if (limit) {
     query.push(`limit=${limit}`);
   }
+  query.push(`offset=${offSet}`);
+
   // temporary according to request from Atalya
   query.push('road_segment_only=true&interurban_only=true');
 

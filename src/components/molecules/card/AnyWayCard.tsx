@@ -16,6 +16,7 @@ import { getSizes } from './card.util';
 import CardBackgroundImage from './CardBackgroundImage';
 import CardFooter from './CardFooter';
 import CardEditor from '../../organisms/CardEditorDialog';
+import { transparent } from '../../../style';
 
 const DEFAULTE_SIZE = 1;
 export interface CardSizeOptions {
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: fontFamilyString,
     position: 'relative', // for meta tags
     boxSizing: 'border-box',
-    zIndex: 0, // lower than background image
+    zIndex: 0,
   },
   content: {
     height: '100%',
@@ -48,11 +49,11 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     '&:hover': {
-      backgroundColor: 'transparent',
+      backgroundColor: transparent,
     },
   },
   information: {
-    minWidth: theme.spacing(8), // to have the same width as other buttons
+    minWidth: theme.spacing(8),
     textAlign: 'center',
     lineHeight: '0.75',
     cursor: 'pointer',
@@ -107,7 +108,7 @@ const AnyWayCard: FC<IProps> = ({
   const refFn = (element: HTMLDivElement) => {
     setElement(element);
     if (getCardRef) {
-      getCardRef(element); // send ref to parent
+      getCardRef(element);
     }
   };
 

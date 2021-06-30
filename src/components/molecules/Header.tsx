@@ -10,12 +10,11 @@ import RootStore from '../../store/root.store';
 import UserProfileHeader from './UserProfileHeader';
 import { makeStyles } from '@material-ui/core/styles';
 import LanguageMenu from '../organisms/LanguageMenu';
+import { FEATURE_FLAGS } from '../../utils/env.utils';
 
 const useStyles = makeStyles({
   userSection: {
     display: 'flex',
-    width: '40%',
-    justifyContent: 'space-evenly',
   },
 });
 
@@ -31,32 +30,34 @@ const Header: FC = () => {
   useEffect(() => {
     store.getUserLoginDetails();
   }, [store]);
-  //login or logout- depend on authentication state
+
   let authElement;
-  if (store.isUserAuthenticated) {
-    const { ...userDetails } = store.userInfo!.data;
-    const handleLogout = () => {
-      store.logOutUser();
-    };
-    authElement = (
-      <UserProfileHeader
-        handleLogout={handleLogout}
-        isUpdateScreenOpen={isUserDetailsRequired}
-        userDetails={userDetails}
-      />
-    );
-  } else {
-    authElement = <LogInLinkGoogle />;
+  if (FEATURE_FLAGS.login) {
+    //login or logout- depend on authentication state
+    if (store.isUserAuthenticated) {
+      const { ...userDetails } = store.userInfo!.data;
+      const handleLogout = () => {
+        store.logOutUser();
+      };
+      authElement = (
+        <UserProfileHeader
+          handleLogout={handleLogout}
+          isUpdateScreenOpen={isUserDetailsRequired}
+          userDetails={userDetails}
+        />
+      );
+    } else {
+      authElement = <LogInLinkGoogle />;
+    }
   }
+
   return (
     <AppBar>
       <Logo src={AnywayImage} alt={'Anyway'} height={30} onClick={reloadHomePage} />
       <Box className={classes.userSection}>
         <LanguageMenu />
-        <span style={{ display: 'none' }}>
-          {authElement}
-          <SignInIcon />
-        </span>
+        {authElement}
+        <SignInIcon />
       </Box>
     </AppBar>
   );

@@ -98,8 +98,6 @@ export const renderCustomizedLabel = (props: any, fontSize = '14', usePercent = 
   const yCountLabel = cy + radius * Math.sin(-midAngle * RADIAN);
   const sin = Math.sin(-RADIAN * midAngle); // if sin >= 0 label is on top half
   const cos = Math.cos(-RADIAN * midAngle); // if cos >= 0 label is on right half
-  // const sx = cx + outerRadius * cos;
-  // const sy = cy + outerRadius * sin;
   const mx = cx + (outerRadius + 30) * cos;
   const my = cy + (outerRadius + 30) * sin;
   const ex = mx + (cos >= 0 ? -1 : -1.5) * 25;
@@ -146,7 +144,12 @@ export const PieChartView: FC<IProps> = ({
 }) => {
   const renderLabel = useCallback(
     (props: PieLabelRenderProps) =>
-      labelProps.customizedLabel(props, labelProps.labelFontSize, usePercent, data.some(items => items[yLabel] === 0)),
+      labelProps.customizedLabel(
+        props,
+        labelProps.labelFontSize,
+        usePercent,
+        data.some((items) => items[yLabel] === 0),
+      ),
     [labelProps, usePercent, data, yLabel],
   );
 

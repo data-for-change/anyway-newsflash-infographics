@@ -10,7 +10,6 @@ export function initService(): Promise<any> {
   const promiseArray = [fetchNews()];
 
   return Promise.all(promiseArray).then((promiseCollection) => ({
-    // return object - resolved data from all promises
     newsFlashCollection: promiseCollection[0],
     newsFlashWidgetsData: promiseCollection[1],
   }));
