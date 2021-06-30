@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
-import { Button as MatButton, ButtonProps, IconButton as MatIconButton } from '@material-ui/core';
+import { Button as MatButton, IconButton as MatIconButton } from '@material-ui/core';
 
-interface IProps extends ButtonProps {
+interface IProps {
   onClick?: () => any;
+  type?: 'button' | 'submit' | 'reset';
 }
 
 // todo: make standard buttons for entire app

@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
 import DialogWithHeader from './DialogWithHeader';
-import { Box, Grid, TextField, makeStyles } from '@material-ui/core';
+import { Box, Grid, TextField, makeStyles, FormHelperText } from '@material-ui/core';
 import { useStore } from '../../store/storeConfig';
 import Button from '../atoms/Button';
 import { observer } from 'mobx-react-lite';
@@ -32,6 +32,12 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     marginBottom: theme.spacing(2),
   },
+  show: {
+    visibility: 'visible',
+  },
+  hide: {
+    visibility: 'hidden',
+  },
 }));
 
 const initialValidations = {
@@ -56,9 +62,10 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const inputValidations: IValidationErrors = validateUserDetails(formInput);
-    if (Object.values(validations).every(Boolean)) {
+    if (Object.values(inputValidations).every(Boolean)) {
       await store.updateUserInfo(formInput);
       if (!store.userApiError) {
+        setValidations(initialValidations);
         onClose();
       }
     }
@@ -71,7 +78,10 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
       maxWidth={'sm'}
       isShowing={isShowing}
       title={t('userDetailsForm.UserDetails')}
-      onClose={onClose}
+      onClose={() => {
+        setValidations(initialValidations);
+        onClose();
+      }}
     >
       <form onSubmit={handleSubmit} noValidate>
         <Grid className={classes.grid} container justify={'center'} alignItems={'center'} spacing={4}>
@@ -81,11 +91,13 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
               onChange={handleInput}
               name="lastName"
               error={!validations.lastName}
-              helperText={validations.lastName ? '' : 'Please provide a last name'}
               variant={'outlined'}
               fullWidth
               label={t('userDetailsForm.Last Name')}
             />
+            <FormHelperText error className={!validations.lastName ? classes.show : classes.hide}>
+              {"Please provide a last name'"}
+            </FormHelperText>
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -93,12 +105,13 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
               defaultValue={defaultValues.firstName}
               onChange={handleInput}
               name="firstName"
-              error={!validations.firstName}
-              helperText={validations.firstName ? '' : 'Please provide a first name'}
               variant={'outlined'}
               fullWidth
               label={t('userDetailsForm.First Name')}
             />
+            <FormHelperText error className={!validations.firstName ? classes.show : classes.hide}>
+              {'Please provide a first name'}
+            </FormHelperText>
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -108,11 +121,13 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
               fullWidth
               name="email"
               error={!validations.email}
-              helperText={validations.email ? '' : 'Please provide a valid Email'}
               label={t('userDetailsForm.Email')}
               defaultValue={defaultValues.email}
               placeholder={'Please enter your name'}
             />
+            <FormHelperText error className={!validations.email ? classes.show : classes.hide}>
+              {'Please provide a valid Email'}
+            </FormHelperText>
           </Grid>
           <Grid item xs={12}>
             <TextField
