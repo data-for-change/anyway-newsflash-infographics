@@ -48,7 +48,6 @@ export default class RootStore {
   constructor() {
     // init app data
     initService().then((initData) => {
-      console.log(initData);
       if (initData.newsFlashCollection) {
         this.newsFlashCollection = initData.newsFlashCollection;
       }
@@ -162,7 +161,7 @@ export default class RootStore {
       })
       .catch((err) => {
         this.isUserAuthenticated = false;
-        console.log(err);
+        console.error(err);
       });
   }
 
