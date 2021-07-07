@@ -17,7 +17,7 @@ export const useStore = (): RootStore => {
 };
 
 // see: https://facebook.github.io/create-react-app/docs/adding-custom-environment-variables
-if (isProd) {
+if (!isProd) {
   // @ts-ignore
   window['store'] = store;
 }

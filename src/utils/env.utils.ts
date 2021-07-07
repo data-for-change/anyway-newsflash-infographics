@@ -1,4 +1,4 @@
-﻿export const isProd = process.env.NODE_ENV === 'production';
+﻿export const isProd = process.env.REACT_APP_ENV === 'production';
 
 // temporary helpers for features flags.
 // once feature is production ready - method and env var can be deleted

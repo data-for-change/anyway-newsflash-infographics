@@ -38,7 +38,6 @@ const SideBar: FC<IProps> = () => {
   const loading = store.newsFlashLoading;
 
   const fetchMoreNewsItems = useCallback(() => {
-    console.log('fetchMoreNewsItems');
     store.infiniteFetchLimit(INFINITE_SCROLL_FETCH_SIZE);
   }, [store]);
 
