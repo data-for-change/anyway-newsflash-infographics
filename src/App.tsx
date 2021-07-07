@@ -34,7 +34,7 @@ const App: FC = () => {
     // https://material-ui.com/guides/right-to-left/
     document.body.dir = appDir;
     theme.direction = appDir;
-  }, [i18n, theme.direction, appDir]);
+  }, [i18n, theme, theme.direction, appDir]);
 
   return (
     <StoreContext.Provider value={store}>

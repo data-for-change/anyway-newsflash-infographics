@@ -1,4 +1,4 @@
-export default {
+const demo = {
   meta: {
     location_info: { resolution: 'אחר', road1: 90, road_segment_name: 'ייצוג אזרחים ערבים בכלל עובדי המדינה' },
     location_text: 'יצוג אזרחים ערבים בכלל עובדי המדינה',
@@ -6,3 +6,5 @@ export default {
   },
   widgets: [],
 };
+
+export default demo;
