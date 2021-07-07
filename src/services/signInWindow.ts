@@ -3,9 +3,13 @@ import { loginPopUpDim } from '../utils/utils';
 let windowObjectReference: Window | null = null;
 let previousUrl: string;
 
-const receiveMessage = () => {
-  //change window in order to re-rednder -todo try to find better way to do it
-  window.location.reload();
+const receiveMessage = (e: any) => {
+  if (e.origin !== window.location.origin) {
+    console.warn('redirect origin is not valid');
+    return;
+  }
+  console.info('redirect to main page...');
+  window.location.pathname = '/';
 };
 export const openSignInWindow: Function = (url: string, name: string) => {
   // remove any existing event listeners
@@ -34,7 +38,7 @@ export const openSignInWindow: Function = (url: string, name: string) => {
   }
 
   // add the listener for receiving a message from the popup
-  window.addEventListener('message', (event) => receiveMessage(), false);
+  window.addEventListener('message', (event) => receiveMessage(event), false);
   // assign the previous URL
   previousUrl = url;
 };
