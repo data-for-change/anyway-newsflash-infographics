@@ -1,10 +1,10 @@
-import { loginPopUpDim, ORIGIN } from '../utils/utils';
+import { loginPopUpDim } from '../utils/utils';
 
 let windowObjectReference: Window | null = null;
 let previousUrl: string;
 
 const receiveMessage = (e: any) => {
-  if (e.origin !== ORIGIN) {
+  if (e.origin !== window.location.origin) {
     console.warn('redirect origin is not valid');
     return;
   }
