@@ -32,9 +32,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     marginBottom: theme.spacing(2),
   },
-  show: {
-    visibility: 'visible',
-  },
   hide: {
     visibility: 'hidden',
   },
@@ -95,7 +92,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
               fullWidth
               label={t('userDetailsForm.Last Name')}
             />
-            <FormHelperText error className={!validations.lastName ? classes.show : classes.hide}>
+            <FormHelperText error className={!validations.lastName ? '' : classes.hide}>
               {"Please provide a last name'"}
             </FormHelperText>
           </Grid>
@@ -109,7 +106,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
               fullWidth
               label={t('userDetailsForm.First Name')}
             />
-            <FormHelperText error className={!validations.firstName ? classes.show : classes.hide}>
+            <FormHelperText error className={!validations.firstName ? '' : classes.hide}>
               {'Please provide a first name'}
             </FormHelperText>
           </Grid>
@@ -125,7 +122,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
               defaultValue={defaultValues.email}
               placeholder={'Please enter your name'}
             />
-            <FormHelperText error className={!validations.email ? classes.show : classes.hide}>
+            <FormHelperText error className={!validations.email ? '' : classes.hide}>
               {'Please provide a valid Email'}
             </FormHelperText>
           </Grid>
@@ -142,7 +139,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
           <Grid item xs={12}></Grid>
           <Grid item xs={12}>
             <Box className={classes.submitButton}>
-              <Button.Standard type="submit">{t(`userDetailsForm.Update`)}</Button.Standard>
+              <Button.Standard isSubmit>{t(`userDetailsForm.Update`)}</Button.Standard>
             </Box>
           </Grid>
         </Grid>
