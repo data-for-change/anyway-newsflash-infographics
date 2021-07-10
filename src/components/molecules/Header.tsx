@@ -15,6 +15,7 @@ import { FEATURE_FLAGS } from '../../utils/env.utils';
 const useStyles = makeStyles({
   userSection: {
     display: 'flex',
+    alignItems: 'center',
   },
 });
 
