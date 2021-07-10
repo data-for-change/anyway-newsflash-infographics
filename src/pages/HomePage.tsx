@@ -29,6 +29,9 @@ const useStyles = makeStyles({
     height: 'inherit',
     overflow: 'auto',
   },
+  sideBarWrapper: {
+    borderInlineEnd: `1px solid ${silverSmokeColor}`,
+  },
 });
 
 const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
@@ -57,7 +60,7 @@ const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
 
   return (
     <Box display="flex" flexGrow={1} className={classes.mainBox}>
-      <Box flexGrow={1} width={319} display="flex" borderLeft={1} borderColor={silverSmokeColor}>
+      <Box flexGrow={1} width={319} display="flex" borderColor={silverSmokeColor} className={classes.sideBarWrapper}>
         <SideBar />
       </Box>
       <Box flexGrow={5} className={classes.widgetBox} position="relative">
