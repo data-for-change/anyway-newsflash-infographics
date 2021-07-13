@@ -15,8 +15,8 @@ export const verifiedWidgetData = (widget: any) => {
 
   switch (name) {
     case 'accidents_heat_map': {
-      const validData = items.map((item: IPoint) => validCoords(item.latitude) && validCoords(item.longitude));
-      isValid = [validData] && items.length > 1;
+      const validData = items.every((item: IPoint) => validCoords(item.latitude) && validCoords(item.longitude));
+      isValid = validData && items.length > 1;
       break;
     }
     case 'street_view': {
@@ -25,7 +25,7 @@ export const verifiedWidgetData = (widget: any) => {
       break;
     }
     case 'most_severe_accidents': {
-      [isValid] = items.map(
+      isValid = items.every(
         (item: any) =>
           validCoords(item.latitude) &&
           validCoords(item.longitude) &&
@@ -46,7 +46,7 @@ export const verifiedWidgetData = (widget: any) => {
       break;
     }
     case 'most_severe_accidents_table': {
-      [isValid] = items.map(
+      isValid = items.every(
         (item: any) =>
           validString(item.accident_severity) &&
           validNumber(item.accident_year) &&
@@ -61,43 +61,43 @@ export const verifiedWidgetData = (widget: any) => {
       break;
     }
     case 'head_on_collisions_comparison': {
-      [isValid] =
-        items.all_roads_fatal_accidents.map((item: any) => validString(item.desc) && validNumber(item.count)) ||
-        items.specific_road_segment_fatal_accidents.map(
+      isValid =
+        items.all_roads_fatal_accidents.every((item: any) => validString(item.desc) && validNumber(item.count)) ||
+        items.specific_road_segment_fatal_accidents.every(
           (item: any) => validString(item.desc) && validNumber(item.count),
         );
       break;
     }
     case 'accident_count_by_accident_type': {
-      [isValid] = items.map((item: any) => validString(item.accident_type) && validNumber(item.count));
+      isValid = items.every((item: any) => validString(item.accident_type) && validNumber(item.count));
       break;
     }
     case 'accident_count_by_accident_year': {
-      [isValid] = items.map((item: any) => validNumber(item.accident_year) && validNumber(item.count));
+      isValid = items.every((item: any) => validNumber(item.accident_year) && validNumber(item.count));
       break;
     }
     case 'injured_count_by_accident_year': {
-      [isValid] = items.map((item: any) => validNumber(item.accident_year) && validNumber(item.count));
+      isValid = items.every((item: any) => validNumber(item.accident_year) && validNumber(item.count));
       break;
     }
     case 'accident_count_by_day_night': {
-      [isValid] = items.map((item: any) => validString(item.day_night) && validNumber(item.count));
+      isValid = items.every((item: any) => validString(item.day_night) && validNumber(item.count));
       break;
     }
     case 'accident_count_by_hour': {
-      [isValid] = items.map((item: any) => validNumber(item.accident_hour) && validNumber(item.count));
+      isValid = items.every((item: any) => validNumber(item.accident_hour) && validNumber(item.count));
       break;
     }
     case 'accident_count_by_road_light': {
-      [isValid] = items.map((item: any) => validString(item.road_light) && validNumber(item.count));
+      isValid = items.every((item: any) => validString(item.road_light) && validNumber(item.count));
       break;
     }
     case 'accident_count_by_driver_type': {
-      [isValid] = items.map((item: any) => validString(item.driver_type) && validNumber(item.count));
+      isValid = items.every((item: any) => validString(item.driver_type) && validNumber(item.count));
       break;
     }
     case 'accident_count_by_car_type': {
-      [isValid] = items.map(
+      isValid = items.every(
         (item: any) =>
           validString(item.car_type) && validNumber(item.percentage_country) && validNumber(item.percentage_segment),
       );
@@ -105,16 +105,16 @@ export const verifiedWidgetData = (widget: any) => {
     }
     case 'top_road_segments_accidents': {
       //temporary till fixing property in backend
-      [isValid] = items.map((item: any) => validString(item['segment name']) && validNumber(item.count));
+      isValid = items.every((item: any) => validString(item['segment name']) && validNumber(item.count));
       break;
     }
     case 'pedestrian_injured_in_junctions': {
       //temporary till fixing property in backend
-      [isValid] = items.map((item: any) => validString(item['street name']) && validNumber(item.count));
+      isValid = items.every((item: any) => validString(item['street name']) && validNumber(item.count));
       break;
     }
     case 'injured_accidents_with_pedestrians': {
-      [isValid] = items.map(
+      isValid = items.every(
         (item: any) =>
           validNumber(item.killed_injury_severity_count) &&
           validString(item.killed_injury_severity_text) &&
@@ -127,7 +127,7 @@ export const verifiedWidgetData = (widget: any) => {
       break;
     }
     case 'accident_severity_by_cross_location': {
-      [isValid] = items.map(
+      isValid = items.every(
         (item: any) =>
           validString(item.cross_location_text) &&
           validNumber(item.killed_injury_severity_count) &&

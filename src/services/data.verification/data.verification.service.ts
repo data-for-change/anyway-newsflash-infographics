@@ -1,6 +1,7 @@
 import { verifiedWidgetData } from './data.verification';
 
 export function getVerifiedWidgetsData(widgets: Array<any>) {
+  console.log('🚀 ~ file: data.verification.service.ts ~ line 4 ~ getVerifiedWidgetsData ~ widgets', widgets);
   const verifiedWidgets = widgets.filter((widget, index) => {
     // general structure tests (for all widgets)
     // test name property
@@ -12,8 +13,13 @@ export function getVerifiedWidgetsData(widgets: Array<any>) {
     } else {
       isValid = isValid && typeof widget.data === 'object';
     }
-    // TODO
-    // add checks per widget (switch) here
+
+    if (Array.isArray(widget.data.items)) {
+      isValid = isValid && widget.data.items.length > 0;
+    } else {
+      isValid = isValid && typeof widget.data === 'object';
+    }
+
     isValid = isValid && verifiedWidgetData(widget);
     if (!isValid) {
       console.warn(`Invalid widget ${widget.name} [index: ${index}]: `, widget);

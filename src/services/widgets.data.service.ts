@@ -42,28 +42,6 @@ function processWidgetsFetchResponse(response: any) {
 function getOperWidgetData(widgets: Array<any>) {
   return widgets.filter((widget) => operationalCards.includes(widget.name));
 }
-// return array of valid widgets data (invalid widget objects will be removed!)
-// function getVerifiedWidgetsData(widgets: Array<any>) {
-//   const verifiedWidgets = widgets.filter((widget, index) => {
-//     // general structure tests (for all widgets)
-//     // test name property
-//     let isValid = widget && widget.name && typeof widget.name === 'string';
-//     // test data property
-//     isValid = isValid && widget.data;
-//     if (Array.isArray(widget.data)) {
-//       isValid = isValid && widget.data.length > 0;
-//     } else {
-//       isValid = isValid && typeof widget.data === 'object';
-//     }
-//     // TODO
-//     // add checks per widget (switch) here
-//     if (!isValid) {
-//       console.warn(`Invalid widget ${widget.name} [index: ${index}]: `, widget);
-//     }
-//     return isValid;
-//   });
-//   return verifiedWidgets;
-// }
 
 // for future use
 function addWidgetsVariants(widgets: Array<IWidgetBase>) {
