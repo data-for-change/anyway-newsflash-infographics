@@ -33,7 +33,9 @@ const AccidentsOccurred: FC<AProps> = ({ accidentsCount, singleType }) => {
       <Typography.Body1>{t('textView.occurred')}</Typography.Body1>
     </Box>,
     <Typography.Title1 bold>
-      <Box className={classes.numOfAcc}>{accidentsCount}</Box>
+      <Box mr={1} key={2} className={classes.numOfAcc}>
+        {accidentsCount}
+      </Box>
     </Typography.Title1>,
     <Box mr={1} key={3}>
       <Typography.Body1>{t('textView.accidents')}</Typography.Body1>
