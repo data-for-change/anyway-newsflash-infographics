@@ -49,7 +49,6 @@ export default class RootStore {
     // init app data
     makeAutoObservable(this);
     initService().then((initData) => {
-      console.log(initData);
       runInAction(() => {
         if (initData.newsFlashCollection) {
           this.newsFlashCollection = initData.newsFlashCollection;
@@ -163,7 +162,7 @@ export default class RootStore {
         runInAction(() => {
           this.isUserAuthenticated = false;
         });
-        console.log(err);
+        console.error(err);
       });
   }
 
