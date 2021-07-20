@@ -77,11 +77,11 @@
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.1.16",
-    "@storybook/addon-essentials": "^6.3.4",
+    "@storybook/addon-essentials": "^6.1.16",
     "@storybook/addon-links": "^6.1.16",
     "@storybook/node-logger": "^6.1.16",
     "@storybook/preset-create-react-app": "^3.1.5",
-    "@storybook/react": "^6.3.4",
+    "@storybook/react": "^6.1.16",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
