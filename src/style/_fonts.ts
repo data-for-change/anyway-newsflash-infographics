@@ -1,6 +1,5 @@
 export const fontFamilyString = [
   'Rubik',
-  '"Alef"',
   '-apple-system',
   'BlinkMacSystemFont',
   '"Segoe UI"',
