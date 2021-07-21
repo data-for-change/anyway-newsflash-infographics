@@ -11,7 +11,7 @@ const options = {
     escapeValue: false,
   },
   react: {
-    wait: true,
+    useSuspense:true
   },
 };
 i18n.use(HttpApi).use(initReactI18next).init(options);
