@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
     color: roadIconColors.red,
     fontWeight: 'bold',
     fontSize: '200%',
-    fontFamily: 'Alef',
   },
 }));
 
