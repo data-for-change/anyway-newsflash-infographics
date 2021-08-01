@@ -8,6 +8,7 @@ export interface ActualiUserInfo {
     lastName: string;
     email: string;
     workplace: string;
+    imgUrl : string
   };
   meta: {
     isCompleteRegistration: boolean;
@@ -30,6 +31,7 @@ export const fetchUserInfo = async function (): Promise<ActualiUserInfo> {
       lastName: response.data.last_name,
       email: response.data.email,
       workplace: response.data.work_on_behalf_of_organization,
+      imgUrl : response.data.oauth_provider_user_picture_url
     },
     meta: {
       isCompleteRegistration: response.data.is_user_completed_registration,

@@ -2,7 +2,6 @@ import React, { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { AppBar, Logo } from '../atoms';
 import AnywayImage from '../../assets/anyway.png';
-import { SignInIcon } from '../atoms/SignInIcon';
 import LogInLinkGoogle from './LogInLinkGoogle';
 import { Box } from '@material-ui/core';
 import { useStore } from '../../store/storeConfig';
@@ -36,7 +35,7 @@ const Header: FC = () => {
   if (FEATURE_FLAGS.login) {
     //login or logout- depend on authentication state
     if (store.isUserAuthenticated) {
-      const { ...userDetails } = store.userInfo!.data;
+      const { ...userDetails } = store.userInfo;
       const handleLogout = () => {
         store.logOutUser();
       };
@@ -60,7 +59,6 @@ const Header: FC = () => {
         {authElement && (
           <>
             {authElement}
-            <SignInIcon />
           </>
         )}
       </Box>
