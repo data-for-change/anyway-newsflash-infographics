@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { AppBar, Logo } from '../atoms';
+import { useTranslation } from 'react-i18next';
+import { AppBar, Button, Logo } from '../atoms';
 import AnywayImage from '../../assets/anyway.png';
 import { SignInIcon } from '../atoms/SignInIcon';
 import LogInLinkGoogle from './LogInLinkGoogle';
@@ -26,6 +27,7 @@ const reloadHomePage = () => {
 const Header: FC = () => {
   const store: RootStore = useStore();
   const isUserDetailsRequired: boolean = store.userInfo?.meta.isCompleteRegistration === false;
+  const { t } = useTranslation();
 
   const classes = useStyles();
   useEffect(() => {
@@ -56,6 +58,7 @@ const Header: FC = () => {
     <AppBar>
       <Logo src={AnywayImage} alt={'Anyway'} height={30} onClick={reloadHomePage} />
       <Box className={classes.userSection}>
+        <Button.Standard>{t('header.Search')}</Button.Standard>
         <LanguageMenu />
         {authElement && (
           <>
