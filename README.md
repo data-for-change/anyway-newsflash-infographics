@@ -228,11 +228,6 @@ We use `singleQuote` as default. If having trouble with making the VScode extens
 }
 ```
 
-## Mock Server <a id="mock-server"></a>
-
-Mock server can be found under https://anyway-mock-server.herokuapp.com/api.
-The server caching all responses from each unique request.
-
 ## Available Scripts <a name="available-scripts"></a>
 
 In the project directory, you can run:
