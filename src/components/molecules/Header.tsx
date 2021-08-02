@@ -52,8 +52,15 @@ const Header: FC = () => {
     }
   }
 
-  return (
-    <AppBar>
+  if (FEATURE_FLAGS.login) {
+    return <AppBar>
+      <Logo src={AnywayImage} alt={'Anyway'} height={30} onClick={reloadHomePage} />
+      <Box className={classes.userSection}>
+        {authElement}
+      </Box>
+    </AppBar>
+  } else {
+    return <AppBar>
       <Logo src={AnywayImage} alt={'Anyway'} height={30} onClick={reloadHomePage} />
       <Box className={classes.userSection}>
         <LanguageMenu />
@@ -65,7 +72,7 @@ const Header: FC = () => {
         )}
       </Box>
     </AppBar>
-  );
+  };
 };
 
 export default observer(Header);
