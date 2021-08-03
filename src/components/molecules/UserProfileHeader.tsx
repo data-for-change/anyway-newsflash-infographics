@@ -21,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
   welcomeMsg: {
     padding: theme.spacing(1),
   },
+  avatar: {
+    width: theme.spacing(5),
+    height: theme.spacing(5),
+  }
 }));
 
 interface IUserProfileHeader {
@@ -46,7 +50,7 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({ userDetails, isUpdate
       <Box className={classes.welcomeMsg}>
         <Typography.Body2>{`${t('header.User Greeting')} ${userData.firstName || ''}`}</Typography.Body2>
       </Box>
-      <Avatar alt={userData.firstName?.substr(0,1).toUpperCase()} src={userData.imgUrl} />
+      <Avatar className={classes.avatar} alt={userData.firstName?.substr(0,1).toUpperCase()} src={userData.imgUrl} />
 
       <UserInfoForm
         defaultValues={userData}

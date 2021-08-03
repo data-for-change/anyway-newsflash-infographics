@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { AppBar, Logo } from '../atoms';
-import AnywayImage from '../../assets/anyway.png';
+
 import LogInLinkGoogle from './LogInLinkGoogle';
 import { Box } from '@material-ui/core';
 import { useStore } from '../../store/storeConfig';
@@ -10,6 +10,7 @@ import UserProfileHeader from './UserProfileHeader';
 import { makeStyles } from '@material-ui/core/styles';
 import LanguageMenu from '../organisms/LanguageMenu';
 import { FEATURE_FLAGS } from '../../utils/env.utils';
+import logoMap, { anywayLogo } from '../../utils/LogoMap';
 
 const useStyles = makeStyles({
   userSection: {
@@ -32,10 +33,12 @@ const Header: FC = () => {
   }, [store]);
 
   let authElement;
+  let logo : string = '';
   if (FEATURE_FLAGS.login) {
     //login or logout- depend on authentication state
     if (store.isUserAuthenticated) {
       const { ...userDetails } = store.userInfo;
+       logo = logoMap.get(userDetails.data.workplace) || anywayLogo  ;
       const handleLogout = () => {
         store.logOutUser();
       };
@@ -48,12 +51,13 @@ const Header: FC = () => {
       );
     } else {
       authElement = <LogInLinkGoogle />;
+      logo = anywayLogo;
     }
   }
 
   return (
     <AppBar>
-      <Logo src={AnywayImage} alt={'Anyway'} height={30} onClick={reloadHomePage} />
+      <Logo src={logo} alt={'Anyway'} height={30} onClick={reloadHomePage} />
       <Box className={classes.userSection}>
         <LanguageMenu />
         {authElement && (
