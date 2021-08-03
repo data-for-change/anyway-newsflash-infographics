@@ -1,12 +1,14 @@
-import { observable } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 import { Theme, createMuiTheme } from '@material-ui/core';
 import { defaultThemeOptions } from '../style';
 import RootStore from './root.store';
 
 export default class SettingsStore {
-  @observable private _theme: Theme = createMuiTheme(defaultThemeOptions);
+  private _theme: Theme = createMuiTheme(defaultThemeOptions);
 
-  constructor(private rootStore: RootStore) {}
+  constructor(private rootStore: RootStore) {
+    makeAutoObservable(this);
+  }
 
   get theme(): Theme {
     return this._theme;

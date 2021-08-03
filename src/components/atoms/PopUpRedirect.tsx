@@ -6,7 +6,7 @@ const PopUpRedirect: React.FC = () => {
     const params = window.location.search;
     if (window.opener) {
       // send them to the opening window
-      window.opener.postMessage(params);
+      window.opener.postMessage(params, window.location.origin);
       // close the popup
       window.close();
     }
