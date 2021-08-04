@@ -15,6 +15,7 @@ import { FEATURE_FLAGS } from '../../utils/env.utils';
 const useStyles = makeStyles({
   userSection: {
     display: 'flex',
+    alignItems: 'center',
   },
 });
 
@@ -56,8 +57,12 @@ const Header: FC = () => {
       <Logo src={AnywayImage} alt={'Anyway'} height={30} onClick={reloadHomePage} />
       <Box className={classes.userSection}>
         <LanguageMenu />
-        {authElement}
-        <SignInIcon />
+        {authElement && (
+          <>
+            {authElement}
+            <SignInIcon />
+          </>
+        )}
       </Box>
     </AppBar>
   );

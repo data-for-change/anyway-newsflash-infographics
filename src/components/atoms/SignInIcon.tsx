@@ -8,6 +8,9 @@ const useStyles = makeStyles((theme: Theme) =>
       color: blackColor,
       marginRight: '5px',
       cursor: 'default',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
   }),
 );

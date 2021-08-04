@@ -9,7 +9,7 @@ import 'leaflet/dist/leaflet.css';
 import HomePageRedirect from './pages/HomePageRedirect';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@material-ui/core/styles';
-import PopUpRedirect from './services/PopUpRedirect';
+import PopUpRedirect from './components/atoms/PopUpRedirect';
 // main components height - must add up to 100
 const headerHeight = '5vh';
 const pageContentHeight = '88vh';
@@ -34,7 +34,7 @@ const App: FC = () => {
     // https://material-ui.com/guides/right-to-left/
     document.body.dir = appDir;
     theme.direction = appDir;
-  }, [i18n, theme.direction, appDir]);
+  }, [i18n, theme, theme.direction, appDir]);
 
   return (
     <StoreContext.Provider value={store}>

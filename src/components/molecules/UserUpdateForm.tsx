@@ -1,10 +1,11 @@
 import React, { ChangeEvent, useState } from 'react';
 import DialogWithHeader from './DialogWithHeader';
-import { Box, Grid, TextField, makeStyles } from '@material-ui/core';
+import { Box, Grid, TextField, makeStyles, FormHelperText } from '@material-ui/core';
 import { useStore } from '../../store/storeConfig';
 import Button from '../atoms/Button';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
+import { IValidationErrors, validateUserDetails } from '../../utils/validations';
 
 interface IProps {
   isShowing: boolean;
@@ -31,12 +32,22 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     marginBottom: theme.spacing(2),
   },
+  hide: {
+    visibility: 'hidden',
+  },
 }));
+
+const initialValidations = {
+  email: true,
+  firstName: true,
+  lastName: true,
+};
 
 const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) => {
   const store = useStore();
   const { t } = useTranslation();
   const [formInput, setFormInput] = useState<IFormInput>(defaultValues);
+  const [validations, setValidations] = useState<IValidationErrors>(initialValidations);
 
   const handleInput = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = evt.currentTarget;
@@ -45,11 +56,17 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
   };
   const classes = useStyles();
 
-  const handleSubmit = async () => {
-    await store.updateUserInfo(formInput);
-    if (!store.userApiError) {
-      onClose();
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const inputValidations: IValidationErrors = validateUserDetails(formInput);
+    if (Object.values(inputValidations).every(Boolean)) {
+      await store.updateUserInfo(formInput);
+      if (!store.userApiError) {
+        setValidations(initialValidations);
+        onClose();
+      }
     }
+    setValidations(inputValidations);
   };
 
   return (
@@ -58,61 +75,75 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
       maxWidth={'sm'}
       isShowing={isShowing}
       title={t('userDetailsForm.UserDetails')}
-      onClose={onClose}
+      onClose={() => {
+        setValidations(initialValidations);
+        onClose();
+      }}
     >
-      <Grid className={classes.grid} container justify={'center'} alignItems={'center'} spacing={4}>
-        <Grid item xs={6}>
-          <TextField
-            defaultValue={defaultValues.lastName}
-            onChange={handleInput}
-            name="lastName"
-            variant={'outlined'}
-            fullWidth
-            label={t('userDetailsForm.Last Name')}
-          />
+      <form onSubmit={handleSubmit} noValidate>
+        <Grid className={classes.grid} container justify={'center'} alignItems={'center'} spacing={4}>
+          <Grid item xs={6}>
+            <TextField
+              defaultValue={defaultValues.lastName}
+              onChange={handleInput}
+              name="lastName"
+              error={!validations.lastName}
+              variant={'outlined'}
+              fullWidth
+              label={t('userDetailsForm.Last Name')}
+            />
+            <FormHelperText error className={!validations.lastName ? '' : classes.hide}>
+              {"Please provide a last name'"}
+            </FormHelperText>
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              required
+              defaultValue={defaultValues.firstName}
+              onChange={handleInput}
+              name="firstName"
+              variant={'outlined'}
+              fullWidth
+              label={t('userDetailsForm.First Name')}
+            />
+            <FormHelperText error className={!validations.firstName ? '' : classes.hide}>
+              {'Please provide a first name'}
+            </FormHelperText>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              onChange={handleInput}
+              variant={'outlined'}
+              fullWidth
+              name="email"
+              error={!validations.email}
+              label={t('userDetailsForm.Email')}
+              defaultValue={defaultValues.email}
+              placeholder={'Please enter your name'}
+            />
+            <FormHelperText error className={!validations.email ? '' : classes.hide}>
+              {'Please provide a valid Email'}
+            </FormHelperText>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              defaultValue={defaultValues.workplace}
+              name="workplace"
+              label={t('userDetailsForm.Organization')}
+              variant={'outlined'}
+              fullWidth
+              onChange={handleInput}
+            />
+          </Grid>
+          <Grid item xs={12}></Grid>
+          <Grid item xs={12}>
+            <Box className={classes.submitButton}>
+              <Button.Standard isSubmit>{t(`userDetailsForm.Update`)}</Button.Standard>
+            </Box>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <TextField
-            required
-            defaultValue={defaultValues.firstName}
-            onChange={handleInput}
-            name="firstName"
-            variant={'outlined'}
-            fullWidth
-            label={t('userDetailsForm.First Name')}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            onChange={handleInput}
-            variant={'outlined'}
-            fullWidth
-            name="email"
-            label={t('userDetailsForm.Email')}
-            defaultValue={defaultValues.email}
-            placeholder={'Please enter your name'}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            defaultValue={defaultValues.workplace}
-            name="workplace"
-            label={t('userDetailsForm.Organization')}
-            variant={'outlined'}
-            fullWidth
-            onChange={handleInput}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          {store.userApiError && <p className={classes.error}>{t('userDetailsForm.error')} </p>}
-        </Grid>
-        <Grid item xs={12}>
-          <Box className={classes.submitButton}>
-            <Button.Standard onClick={handleSubmit}>{t(`userDetailsForm.Update`)}</Button.Standard>
-          </Box>
-        </Grid>
-      </Grid>
+      </form>
     </DialogWithHeader>
   );
 };
