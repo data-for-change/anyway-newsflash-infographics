@@ -56,9 +56,11 @@ const Header: FC = () => {
     <AppBar>
       <Logo src={AnywayImage} alt={'Anyway'} height={30} onClick={reloadHomePage} />
       <Box className={classes.userSection}>
-        <LanguageMenu />
-        {authElement && (
+        {FEATURE_FLAGS.login ? (
+        <>{authElement}</>
+        ) : (
           <>
+          <LanguageMenu />
             {authElement}
             <SignInIcon />
           </>
