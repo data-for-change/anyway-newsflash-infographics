@@ -27,7 +27,8 @@ const News: FC = () => {
           {store.newsFlashCollection.length > 0 ? (
             store.newsFlashCollection.map((news) => {
               const className = news.id === store.activeNewsFlashId ? classes.activeNewsFlash : '';
-              const date = news.date == null ? '' : new Date(news.date.replace(/-/g, '/')).toLocaleDateString();
+              const date = news.date == null ? '' : new Date(news.date.replace(/-/g, '/')).toLocaleDateString(store.selectedLanguage
+                                                                                                              + '-' + store.selectedRegion);
               return (
                 <Link key={news.id} to={`${store.currentLanguageRouteString}/newsflash/${news.id}`}>
                   <Box border={1} borderColor={silverSmokeColor} p={1} className={className}>

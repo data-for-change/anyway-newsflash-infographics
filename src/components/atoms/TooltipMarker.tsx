@@ -114,9 +114,9 @@ const useStyles = makeStyles({
     transform: (offset) => getLabelArrowRotation(offset as ClockPosition),
   },
 });
-const TooltipMarker = ({ data, position, offset }: any) => {
+const TooltipMarker = ({ data, position, offset, locale}: any) => {
   const classes = useStyles(offset);
-  const iconText: any = `${dateFormat(data.accident_timestamp)}`;
+  const iconText: any = `${dateFormat(data.accident_timestamp, locale)}`;
 
   const TooltipTemplate = (
     <div className={classes.root}>

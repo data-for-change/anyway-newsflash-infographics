@@ -5,8 +5,10 @@ import HttpApi from 'i18next-http-backend';
 const options = {
   fallbackLng: 'he',
   supportedLngs: ['he', 'en', 'ar'],
+  supportedRegions: ['IL', 'US', 'EG'],
   debug: true,
   lng: 'he',
+  region: 'IL',
   interpolation: {
     escapeValue: false,
   },

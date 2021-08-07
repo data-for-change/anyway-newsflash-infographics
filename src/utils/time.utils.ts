@@ -1,4 +1,4 @@
-export function dateFormat(date: Date | string): string {
+export function dateFormat(date: Date | string, locale: string): string {
   let dateStr = '';
   if (!date) {
     console.error('invalid date', date);
@@ -7,7 +7,7 @@ export function dateFormat(date: Date | string): string {
       // using replace to support safari format: "2017-07-12 19:30:00" ===> "2017-07-12T19:30:00"
       date = new Date(date.replace(/\s/, 'T'));
     }
-    dateStr = new Intl.DateTimeFormat('he-il').format(date);
+    dateStr = new Intl.DateTimeFormat(locale).format(date);
   }
   return dateStr;
 }
