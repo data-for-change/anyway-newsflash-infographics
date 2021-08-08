@@ -100,7 +100,6 @@ const useStyles = makeStyles({
   },
   content: () => ({
     position: 'relative',
-    order: 1,
     padding: ' 1px 3px',
     borderRadius: '5px 7px 7px 5px',
     whiteSpace: 'nowrap',
