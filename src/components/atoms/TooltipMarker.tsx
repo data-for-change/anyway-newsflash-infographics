@@ -94,26 +94,26 @@ const useStyles = makeStyles({
     position: 'absolute',
     right: 16,
     bottom: 0,
-    transform: (offset) => getLabelPosition(offset as ClockPosition),
+    transform: (prop) => getLabelPosition(prop.offset as ClockPosition),
     display: 'flex',
-    flexFlow: (offset) => getLabelFlexFlow(offset as ClockPosition),
+    flexFlow: (prop) => getLabelFlexFlow(prop.offset as ClockPosition),
     alignItems: 'center',
   },
-  content: (prop:any) => ({
+  content: {
     position: 'relative',
-    order: prop.order ? 0 : 1,
+    order: (prop: any) => (prop.order ? 0 : 1),
     padding: ' 1px 3px',
     borderRadius: '5px 7px 7px 5px',
     whiteSpace: 'nowrap',
     color: whiteColor,
     backgroundColor: blackColor,
-  }),
+  },
   arrow: {
     display: 'inline-flex',
     borderStyle: 'solid',
     borderWidth: '5px 0 5px 20px',
     borderColor: tooltipMarkerBorderColorArrow,
-    transform: (offset) => getLabelArrowRotation(offset as ClockPosition),
+    transform: (prop) => getLabelArrowRotation(prop.offset as ClockPosition),
   },
 });
 const TooltipMarker = ({ data, position, offset }: any) => {
