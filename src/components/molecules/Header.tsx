@@ -58,7 +58,7 @@ const Header: FC = () => {
     <AppBar>
       <Logo src={AnywayImage} alt={'Anyway'} height={30} onClick={reloadHomePage} />
       <Box className={classes.userSection}>
-        {FEATURE_FLAGS.login && <Button.Standard>{t('header.Search')}</Button.Standard>}
+        {FEATURE_FLAGS.location_search && <Button.Standard>{t('header.Search')}</Button.Standard>}
         <LanguageMenu />
         {authElement && (
           <>
