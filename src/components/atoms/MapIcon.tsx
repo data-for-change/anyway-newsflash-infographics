@@ -1,13 +1,13 @@
 import L from 'leaflet';
-import standardYellowIcon from '../../assets/map/standard-yellow-marker.png';
-import standardOrangeIcon from '../../assets/map/standard-orange-marker.png';
-import standardRedIcon from '../../assets/map/standard-red-marker.png';
+import standardYellowIcon from 'assets/map/standard-yellow-marker.png';
+import standardOrangeIcon from 'assets/map/standard-orange-marker.png';
+import standardRedIcon from 'assets/map/standard-red-marker.png';
 
-import carYellowIcon from '../../assets/map/car-yellow-marker.png';
-import carOrangeIcon from '../../assets/map/car-orange-marker.png';
-import carRedIcon from '../../assets/map/car-red-marker.png';
-import shadowIcon from '../../assets/map/marker-shadow.png';
-import { IconTypes, SeverityTypes } from '../../models/Map';
+import carYellowIcon from 'assets/map/car-yellow-marker.png';
+import carOrangeIcon from 'assets/map/car-orange-marker.png';
+import carRedIcon from 'assets/map/car-red-marker.png';
+import shadowIcon from 'assets/map/marker-shadow.png';
+import { IconTypes, SeverityTypes } from 'models/Map';
 
 const STANDARD_ICON_SIZE = { iconSize: [25, 41], iconAnchor: [17, 46], popupAnchor: [1, -34], shadowSize: [41, 41] };
 const CAR_ICON_SIZE = { iconSize: [25, 25], iconAnchor: [10, 15], popupAnchor: [0, -4], shadowSize: [41, 41] };

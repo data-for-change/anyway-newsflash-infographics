@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import BarChartView from '../BarChartView';
-import { IWidgetInjuredByYearData } from '../../../models/WidgetData';
+import { IWidgetInjuredByYearData } from 'models/WidgetData';
 
 const ACCIDENT_YEAR = 'accident_year';
 const COUNT = 'count';

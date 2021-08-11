@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { IWidgetInjuredAccidentsWithPedestrians } from '../../../models/WidgetData';
+import { IWidgetInjuredAccidentsWithPedestrians } from 'models/WidgetData';
 import StackedBarChartView from '../StackedBarChartView';
 import { Box, makeStyles, Theme } from '@material-ui/core';
 

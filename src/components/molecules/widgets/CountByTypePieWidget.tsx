@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import PieChartView from '../PieChartView';
-import { IWidgetAccidentsByTypeData } from '../../../models/WidgetData';
+import { IWidgetAccidentsByTypeData } from 'models/WidgetData';
 
 const ACCIDENT_TYPE = 'accident_type';
 const COUNT = 'count';

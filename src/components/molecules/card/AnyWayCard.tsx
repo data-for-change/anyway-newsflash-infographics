@@ -1,22 +1,22 @@
 import React, { FC, useState } from 'react';
 import { Card, CardContent, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import widgetToImage from '../../../services/to-image.service';
-import { AnyWayButton } from '../../atoms/AnyWayButton';
+import widgetToImage from 'services/to-image.service';
+import { AnyWayButton } from 'components/atoms/AnyWayButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
 import SettingsOverscanIcon from '@material-ui/icons/SettingsOverscan';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 
-import { fontFamilyString } from '../../../style';
+import { fontFamilyString } from 'style';
 import CardHeader from './CardHeader';
 import SocialShare from '../../atoms/SocialShare';
-import { FooterVariant, getWidgetVariant, HeaderVariant } from '../../../services/widgets.style.service';
+import { FooterVariant, getWidgetVariant, HeaderVariant } from 'services/widgets.style.service';
 import { getSizes } from './card.util';
 import CardBackgroundImage from './CardBackgroundImage';
 import CardFooter from './CardFooter';
-import CardEditor from '../../organisms/CardEditorDialog';
-import { transparent } from '../../../style';
+import CardEditor from 'components/organisms/CardEditorDialog';
+import { transparent } from 'style';
 
 const DEFAULTE_SIZE = 1;
 export interface CardSizeOptions {

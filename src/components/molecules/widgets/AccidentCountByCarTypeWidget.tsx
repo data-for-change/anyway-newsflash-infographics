@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { IWidgetAccidentCountByCarType } from '../../../models/WidgetData';
+import { IWidgetAccidentCountByCarType } from 'models/WidgetData';
 import DoubleBarChartView from '../DoubleBarChartView';
 import { Box, makeStyles, Theme } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';

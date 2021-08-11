@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { IWidgetInjuredCountPerAgeGroupPieData } from '../../../models/WidgetData';
+import { IWidgetInjuredCountPerAgeGroupPieData } from 'models/WidgetData';
 import PieChartView from '../PieChartView';
 
 interface IProps {
