@@ -1,5 +1,5 @@
 import React from 'react';
-import { Logo, Typography } from '../../atoms';
+import { Logo, Typography } from 'components/atoms';
 import LamasImage from 'assets/cbs.png';
 import AnywayImage from 'assets/anyway.png';
 import { makeStyles } from '@material-ui/core/styles';
