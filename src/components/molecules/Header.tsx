@@ -11,7 +11,6 @@ import UserProfileHeader from './UserProfileHeader';
 import { makeStyles } from '@material-ui/core/styles';
 import LanguageMenu from '../organisms/LanguageMenu';
 import { FEATURE_FLAGS } from '../../utils/env.utils';
-import MapDialog from './MapDialog';
 
 const useStyles = makeStyles({
   userSection: {
@@ -58,8 +57,6 @@ const Header: FC = () => {
       <Logo src={AnywayImage} alt={'Anyway'} height={30} onClick={reloadHomePage} />
       <Box className={classes.userSection}>
         <LanguageMenu />
-        {/* only on this branch - remove before merging! */}
-        <MapDialog section="המקטע שנבחר" isShowing={true} onClose={() => console.log('dialog!')} />
         {authElement && (
           <>
             {authElement}
