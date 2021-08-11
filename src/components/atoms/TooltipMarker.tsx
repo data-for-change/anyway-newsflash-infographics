@@ -8,6 +8,7 @@ import { ClockPosition } from '../../models/ClockPosition';
 import { transparentColor, whiteColor, blackColor, tooltipMarkerBorderColorArrow } from '../../style';
 import { useTranslation } from 'react-i18next';
 
+
 const getLabelPosition = (offset: ClockPosition): string => {
   const x = getLabelXPosition(offset);
   const y = getLabelYPosition(offset);
@@ -98,8 +99,9 @@ const useStyles = makeStyles({
     flexFlow: (offset) => getLabelFlexFlow(offset as ClockPosition),
     alignItems: 'center',
   },
-  content: () => ({
+  content: (prop:any) => ({
     position: 'relative',
+    order: prop.order ? 0 : 1,
     padding: ' 1px 3px',
     borderRadius: '5px 7px 7px 5px',
     whiteSpace: 'nowrap',
@@ -115,13 +117,15 @@ const useStyles = makeStyles({
   },
 });
 const TooltipMarker = ({ data, position, offset }: any) => {
-  const classes = useStyles(offset);
-  const iconText: any = `${dateFormat(data.accident_timestamp)}`;
   const { i18n } = useTranslation();
+  const order = i18n.language === 'en'
+  const classes = useStyles({offset, order});
+  const iconText: any = `${dateFormat(data.accident_timestamp)}`;
+
 
   const TooltipTemplate = (
     <div className={classes.root}>
-      <div className={classes.content} style={{order: i18n.language === 'en' ? 0 : 1}}>{iconText}</div>
+      <div className={classes.content}>{iconText}</div>
       <div className={classes.arrow}></div>
     </div>
   );
