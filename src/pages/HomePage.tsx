@@ -1,15 +1,15 @@
 import React, { FC, useEffect } from 'react';
 import WidgetsTemplate from '../components/organisms/WidgetsTemplate';
 import { Box } from '@material-ui/core';
-import SideBar from '../components/organisms/SideBar';
+import SideBar from 'components/organisms/SideBar';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { RouteComponentProps, Redirect } from 'react-router';
 import { silverSmokeColor } from '../style';
-import FilterBar from '../components/organisms/FilterBar';
-import OverlayLoader from '../components/molecules/OverlayLoader';
+import FilterBar from 'components/organisms/FilterBar';
+import OverlayLoader from 'components/molecules/OverlayLoader';
 import { observer } from 'mobx-react-lite';
-import { useStore } from '../store/storeConfig';
-import RootStore from '../store/root.store';
+import { useStore } from 'store/storeConfig';
+import RootStore from 'store/root.store';
 import DemoPage from './DemoPage';
 import { Route, Switch } from 'react-router-dom';
 

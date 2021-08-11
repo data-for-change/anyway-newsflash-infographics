@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { MapContainer } from 'react-leaflet';
 import L, { LatLng } from 'leaflet';
-import { uniquePoints } from '../../utils/utils';
+import { uniquePoints } from 'utils/utils';
 import { IPoint } from 'models/Point';
 import { MostSevereAccidentsMarker } from 'components/atoms';
 import { ClockPosition } from 'models/ClockPosition';

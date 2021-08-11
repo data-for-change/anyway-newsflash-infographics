@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import { useStore } from '../../store/storeConfig';
-import RootStore from '../../store/root.store';
+import { useStore } from 'store/storeConfig';
+import RootStore from 'store/root.store';
 import { observer } from 'mobx-react-lite';
-import { Grid } from '../atoms';
+import { Grid } from 'components/atoms';
 import AnyWayCard from '../molecules/card/AnyWayCard';
 import ErrorBoundary from '../atoms/ErrorBoundary';
 import { MetaTag } from '../atoms';

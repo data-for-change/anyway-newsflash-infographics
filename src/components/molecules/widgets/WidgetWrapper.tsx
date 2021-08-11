@@ -16,7 +16,7 @@ import {
   IWidgetAccidentCountByDriverType,
   IWidgetAccidentCountByCarType,
   IWidgetInjuredAccidentsWithPedestrians,
-} from '../../../models/WidgetData';
+} from 'models/WidgetData';
 import AccidentsCountByHourBarWidget from './AccidentsCountByHourBarWidget';
 import MostSevereAccidentsMapWidget from './MostSevereAccidentsMapWidget';
 import MostSevereAccidentsTableWidget from './MostSevereAccidentsTableWidget';
@@ -33,8 +33,8 @@ import AccidentCountByRoadLight from './AccidentCountByRoadLight';
 import AccidentCountByDriverType from './AccidentCountByDriverType';
 import AccidentCountByCarTypeWidget from './AccidentCountByCarTypeWidget';
 import InjuredAccidentsWithPedestrians from './InjuredAccidentsWithPedestrians';
-import { IPoint } from '../../../models/Point';
-import { WidgetName } from '../../../models/WidgetName';
+import { IPoint } from 'models/Point';
+import { WidgetName } from 'models/WidgetName';
 
 interface IProps {
   widget: IWidgetBase;

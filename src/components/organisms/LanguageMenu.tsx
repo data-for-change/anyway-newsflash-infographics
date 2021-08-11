@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import Menu from '../atoms/Menu';
-import { useStore } from '../../store/storeConfig';
-import languageSelector from '../../assets/language-selector.svg';
+import { useStore } from 'store/storeConfig';
+import languageSelector from 'assets/language-selector.svg';
 import { AnyWayButton } from '../atoms/AnyWayButton';
 import { Link, Typography } from '../atoms';
 
