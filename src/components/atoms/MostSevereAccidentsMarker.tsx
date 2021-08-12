@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { defaultBorderRadius, silverSmokeColor } from '../../style';
 import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
+import { useLocaleValue } from "../../hooks/date.hooks"
 
 interface IProps {
   data: any;
@@ -57,7 +58,7 @@ const MostSevereAccidentsMarker: FC<IProps> = ({ data, tooltipOffset = ClockPosi
   const [offset, setOffset] = useState(tooltipOffset);
   const { latitude, longitude, accident_severity, accident_timestamp } = data;
   const position: L.LatLng = new L.LatLng(latitude, longitude);
-  const locale: string = store.selectedLanguage + '-' + store.selectedRegion;
+  let locale = useLocaleValue()
 
   const icon: L.Icon = MapIcon.getIconBySeverity('carIcon', data.accident_severity);
   const isValid = accident_timestamp && accident_severity;

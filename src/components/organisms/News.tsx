@@ -6,6 +6,7 @@ import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
 import { observer } from 'mobx-react-lite';
 import { dateFormat } from '../../utils/time.utils';
+import { useLocaleValue } from "../../hooks/date.hooks"
 
 const useStyles = makeStyles({
   container: {},
@@ -20,7 +21,7 @@ const useStyles = makeStyles({
 const News: FC = () => {
   const store: RootStore = useStore();
   const classes = useStyles();
-  const locale: string = store.selectedLanguage + '-' + store.selectedRegion;
+  let locale = useLocaleValue();
 
   return (
     <Box flexGrow={1} display="flex" flexDirection="column" className={classes.newsFeed}>
@@ -29,7 +30,7 @@ const News: FC = () => {
           {store.newsFlashCollection.length > 0 ? (
             store.newsFlashCollection.map((news) => {
               const className = news.id === store.activeNewsFlashId ? classes.activeNewsFlash : '';
-              const date = news.date == null ? '' : dateFormat(new Date(news.date.replace(/-/g, '/')), locale)
+              const date = news.date == null ? '' : dateFormat(new Date(news.date.replace(/-/g, '/')), locale);
               return (
                 <Link key={news.id} to={`${store.currentLanguageRouteString}/newsflash/${news.id}`}>
                   <Box border={1} borderColor={silverSmokeColor} p={1} className={className}>
