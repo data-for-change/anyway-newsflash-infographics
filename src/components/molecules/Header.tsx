@@ -1,14 +1,15 @@
 import React, { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { AppBar, Logo } from '../atoms';
+import { useTranslation } from 'react-i18next';
+import { makeStyles } from '@material-ui/core/styles';
+import { Box } from '@material-ui/core';
+import { AppBar, Button, Logo } from '../atoms';
 import AnywayImage from '../../assets/anyway.png';
 import { SignInIcon } from '../atoms/SignInIcon';
 import LogInLinkGoogle from './LogInLinkGoogle';
-import { Box } from '@material-ui/core';
 import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
 import UserProfileHeader from './UserProfileHeader';
-import { makeStyles } from '@material-ui/core/styles';
 import LanguageMenu from '../organisms/LanguageMenu';
 import { FEATURE_FLAGS } from '../../utils/env.utils';
 
@@ -26,6 +27,7 @@ const reloadHomePage = () => {
 const Header: FC = () => {
   const store: RootStore = useStore();
   const isUserDetailsRequired: boolean = store.userInfo?.meta.isCompleteRegistration === false;
+  const { t } = useTranslation();
 
   const classes = useStyles();
   useEffect(() => {
@@ -56,9 +58,9 @@ const Header: FC = () => {
     <AppBar>
       <Logo src={AnywayImage} alt={'Anyway'} height={30} onClick={reloadHomePage} />
       <Box className={classes.userSection}>
-        {FEATURE_FLAGS.login ? (
-        <>{authElement}</>
-        ) : (
+        {FEATURE_FLAGS.location_search && <Button.Standard>{t('header.Search')}</Button.Standard>}
+        <LanguageMenu />
+        {authElement && (
           <>
           <LanguageMenu />
             {authElement}
