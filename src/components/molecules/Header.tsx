@@ -59,10 +59,9 @@ const Header: FC = () => {
       <Logo src={AnywayImage} alt={'Anyway'} height={30} onClick={reloadHomePage} />
       <Box className={classes.userSection}>
         {FEATURE_FLAGS.location_search && <Button.Standard>{t('header.Search')}</Button.Standard>}
-        <LanguageMenu />
+        {FEATURE_FLAGS.language && <LanguageMenu />}
         {authElement && (
           <>
-          <LanguageMenu />
             {authElement}
             <SignInIcon />
           </>
