@@ -19,8 +19,8 @@ export const fetchWidgets = async (id: number, lang: string, yearAgo?: number): 
     }
     if (SHOW_MOCK) {
       query.push(`mock=${SHOW_MOCK}`);
-
     }
+
   const widgetsUrl = `${NEWS_FLASH_API}?${query.join('&')}`;    //temp - long response time of server- keep console.log to see out url
     console.log(widgetsUrl);
     const response = await axios.get(widgetsUrl);
