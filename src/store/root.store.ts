@@ -11,7 +11,6 @@ import { IPoint } from '../models/Point';
 import { ActualiUserInfo, fetchUserInfo, logoutUserFromSession, postUserInfo } from '../services/user.service';
 import i18next from '../services/i18n.service';
 import { IFormInput } from '../components/molecules/UserUpdateForm';
-import { ContactSupportOutlined } from '@material-ui/icons';
 
 // todo: move all map defaults to one place
 const DEFAULT_TIME_FILTER = 5;
