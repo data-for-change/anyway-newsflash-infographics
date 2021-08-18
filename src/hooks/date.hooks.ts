@@ -13,6 +13,7 @@ export function useLocaleValue() {
 
     useEffect(() => {
         setLang(store.selectedLanguage);
-    }), [store.selectedLanguage];
+    }, [store.selectedLanguage]);
+
     return lang === 'he' ? locales['hebrew'] : locales['english'];
 }
