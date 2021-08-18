@@ -1,7 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { AppBar, Logo } from '../atoms';
-
 import LogInLinkGoogle from './LogInLinkGoogle';
 import { Box } from '@material-ui/core';
 import { useStore } from '../../store/storeConfig';
