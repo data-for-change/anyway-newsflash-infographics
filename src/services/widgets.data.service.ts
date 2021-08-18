@@ -1,8 +1,8 @@
 import { getDemoWidgetData } from './mocks/mock.service';
-import { ILocationData, IWidgetBase } from '../models/WidgetData';
+import { ILocationData, IWidgetBase } from 'models/WidgetData';
 import axios from 'axios';
-import { DEMO_ID, showDemoCards, showOnlyOperCards } from '../utils/utils';
-import { operationalCards } from '../const/cards.const';
+import { DEMO_ID, showDemoCards, showOnlyOperCards } from 'utils/utils';
+import { operationalCards } from 'const/cards.const';
 import { getVerifiedWidgetsData } from './data.verification/data.verification.service';
 
 const NEWS_FLASH_API: string = '/api/infographics-data';

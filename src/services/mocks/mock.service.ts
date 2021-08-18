@@ -1,6 +1,6 @@
 import demoCardsNewsFlash from './demoCardsNewsflash.mock.data';
 import demoCardsWidgetsData from './demoCardsWidgetsData.mock.data';
-import { ILocationData } from '../../models/WidgetData';
+import { ILocationData } from 'models/WidgetData';
 
 const demoNewsflashIndex = 2; // add demo newsflash in this index
 

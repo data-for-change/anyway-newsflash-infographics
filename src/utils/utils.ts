@@ -1,4 +1,4 @@
-﻿import { IPoint } from '../models/Point';
+﻿import { IPoint } from 'models/Point';
 import { useLocation } from 'react-router';
 
 export function useQuery() {

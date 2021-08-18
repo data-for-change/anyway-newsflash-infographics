@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { GET_USER_INFO_URL, LOG_OUT_USER_URL, UPDATE_USER_INFO_URL } from '../utils/utils';
-import { IFormInput } from '../components/molecules/UserUpdateForm';
-import { StatusCodes } from '../utils/HTTPStatuesCodes';
+import { GET_USER_INFO_URL, LOG_OUT_USER_URL, UPDATE_USER_INFO_URL } from 'utils/utils';
+import { IFormInput } from 'components/molecules/UserUpdateForm';
+import { StatusCodes } from 'utils/HTTPStatuesCodes';
 export interface ActualiUserInfo {
   data: {
     firstName: string;
