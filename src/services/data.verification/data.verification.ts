@@ -1,4 +1,4 @@
-import { IPoint } from 'models/Point';
+import { IPoint } from '../../models/Point';
 
 const mostExtremeLongitude = 36;
 const mostExtremeLatitude = 29;
@@ -139,8 +139,12 @@ export const verifiedWidgetData = (widget: any) => {
       );
       break;
     }
+    case 'vision_zero_2_plus_1': {
+      isValid = items.every((item: any) => validString(item.image_src));
+      break;
+    }
     default: {
-      isValid = false;
+      isValid = false
     }
   }
 
