@@ -11,6 +11,7 @@ import { IPoint } from '../models/Point';
 import { ActualiUserInfo, fetchUserInfo, logoutUserFromSession, postUserInfo } from '../services/user.service';
 import i18next from '../services/i18n.service';
 import { IFormInput } from '../components/molecules/UserUpdateForm';
+import { ContactSupportOutlined } from '@material-ui/icons';
 
 // todo: move all map defaults to one place
 const DEFAULT_TIME_FILTER = 5;
@@ -41,9 +42,7 @@ export default class RootStore {
   newsFlashLoading: boolean = false;
   widgetBoxLoading: boolean = false;
   currentLanguageRouteString: string = '';
-  localeMapper: any = {'he': 'IL', 'en': 'US', 'ar': 'EG'};
   selectedLanguage: string = 'he';
-  selectedRegion: string = this.localeMapper[this.selectedLanguage];
   // domain stores
   settingsStore: SettingsStore;
 
@@ -60,7 +59,6 @@ export default class RootStore {
           this.newsFlashWidgetsMeta = initData.newsFlashWidgetsData.meta;
         }
         this.appInitialized = true;
-        this.selectedRegion = this.localeMapper[this.selectedLanguage];
       });
     });
     // settings store - settings of the app such as num of results returned etc.
