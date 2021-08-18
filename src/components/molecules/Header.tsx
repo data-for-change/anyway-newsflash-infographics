@@ -10,7 +10,7 @@ import UserProfileHeader from './UserProfileHeader';
 import { makeStyles } from '@material-ui/core/styles';
 import LanguageMenu from '../organisms/LanguageMenu';
 import { FEATURE_FLAGS } from '../../utils/env.utils';
-import logoMap, { anywayLogo } from '../../utils/LogoMap';
+import { anywayLogo } from '../../utils/LogoMap';
 
 const useStyles = makeStyles({
   userSection: {
@@ -38,7 +38,7 @@ const Header: FC = () => {
     //login or logout- depend on authentication state
     if (store.isUserAuthenticated) {
       const { ...userDetails } = store.userInfo;
-       logo = logoMap.get(userDetails.data.workplace) || anywayLogo  ;
+       logo = anywayLogo  ;
       const handleLogout = () => {
         store.logOutUser();
       };

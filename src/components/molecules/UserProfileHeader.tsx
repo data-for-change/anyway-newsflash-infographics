@@ -6,7 +6,9 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import { oceanBlueColor, skyBlueColor } from '../../style';
 import Box from '@material-ui/core/Box';
 import { Avatar } from '@material-ui/core';
-import { ActualiUserInfo } from '../../services/user.service';
+import { IUserInfo } from '../../services/user.service';
+
+const avatarSize = '40px';
 
 const useStyles = makeStyles((theme) => ({
   userButton: {
@@ -22,13 +24,13 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
   },
   avatar: {
-    width: theme.spacing(5),
-    height: theme.spacing(5),
+    width: avatarSize,
+    height: avatarSize,
   }
 }));
 
 interface IUserProfileHeader {
-  userDetails: ActualiUserInfo;
+  userDetails: IUserInfo;
   isUpdateScreenOpen: boolean;
   handleLogout: () => any;
 }
@@ -50,7 +52,8 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({ userDetails, isUpdate
       <Box className={classes.welcomeMsg}>
         <Typography.Body2>{`${t('header.User Greeting')} ${userData.firstName || ''}`}</Typography.Body2>
       </Box>
-      <Avatar className={classes.avatar} alt={userData.firstName?.substr(0,1).toUpperCase()} src={userData.imgUrl} />
+      <Avatar className={classes.avatar} alt={userData.firstName?.substr(0,1).toUpperCase()}
+              src={userData.imgUrl} />
 
       <UserInfoForm
         defaultValues={userData}

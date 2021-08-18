@@ -2,7 +2,7 @@ import axios from 'axios';
 import { GET_USER_INFO_URL, LOG_OUT_USER_URL, UPDATE_USER_INFO_URL } from '../utils/utils';
 import { IFormInput } from '../components/molecules/UserUpdateForm';
 import { StatusCodes } from '../utils/HTTPStatuesCodes';
-export interface ActualiUserInfo {
+export interface IUserInfo {
   data: {
     firstName: string;
     lastName: string;
@@ -22,10 +22,10 @@ export interface UpdateUserReq {
   email: string;
 }
 
-export const fetchUserInfo = async function (): Promise<ActualiUserInfo> {
+export const fetchUserInfo = async function (): Promise<IUserInfo> {
   const response = await axios.get(GET_USER_INFO_URL, { withCredentials: true });
 
-  const userInfo: ActualiUserInfo = {
+  const userInfo: IUserInfo = {
     data: {
       firstName: response.data.first_name,
       lastName: response.data.last_name,
