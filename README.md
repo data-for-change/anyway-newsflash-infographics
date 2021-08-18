@@ -195,8 +195,10 @@ We use [github actions](https://github.com/marketplace?type=actions) for the fol
 
 1. [on-push CI](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3ACI) - provide per-PR CI testing
 1. [deploy-dev](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuous deployment of `dev` branch to Staging Environment - https://anyway-infographics-staging.web.app/
-1. [deploy-master](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuous deployment of `master` branch to Production Environment - https://anyway-infographics.web.app/
-1. [deploy-demo](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuous deployment of `demo` branch to Demo Environment - https://anyway-infographics-demo.web.app/
+1. [deploy-master](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuous deployment of master branch to Production Environment:
+* https://anyway-infographics.web.app/
+* https://media.anyway.co.il/
+1. [Deprecated] [deploy-demo](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuous deployment of demo branch to Demo Environment - https://anyway-infographics-demo.web.app/
 
 Note: see the flows status badge at the top of this file
 
@@ -228,11 +230,6 @@ We use `singleQuote` as default. If having trouble with making the VScode extens
   "prettier.singleQuote": true
 }
 ```
-
-## Mock Server <a id="mock-server"></a>
-
-Mock server can be found under https://anyway-mock-server.herokuapp.com/api.
-The server caching all responses from each unique request.
 
 ## Available Scripts <a name="available-scripts"></a>
 

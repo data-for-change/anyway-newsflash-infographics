@@ -3,11 +3,18 @@ import { Button as MatButton, IconButton as MatIconButton } from '@material-ui/c
 
 interface IProps {
   onClick?: () => any;
+  isSubmit?: boolean;
 }
 
 // todo: make standard buttons for entire app
-const StandardButton: FC<IProps> = ({ onClick, children }) => (
-  <MatButton variant="contained" color="primary" onClick={onClick}>
+const StandardButton: FC<IProps> = ({ isSubmit = false, onClick, children }) => (
+  <MatButton type={isSubmit ? 'submit' : 'button'} variant="contained" color="primary" onClick={onClick}>
+    {children}
+  </MatButton>
+);
+
+const OutlinedButton: FC<IProps> = ({ isSubmit = false, onClick, children }) => (
+  <MatButton type={isSubmit ? 'submit' : 'button'} variant="outlined" color="primary" onClick={onClick}>
     {children}
   </MatButton>
 );
@@ -17,6 +24,7 @@ const IconButton: FC<IProps> = ({ onClick, children }) => <MatIconButton onClick
 const Button = {
   Standard: StandardButton,
   Icon: IconButton,
+  Outlined: OutlinedButton,
 };
 
 export default Button;

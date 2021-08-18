@@ -1,4 +1,4 @@
-﻿import { IPoint } from '../models/Point';
+﻿import { IPoint } from 'models/Point';
 import { useLocation } from 'react-router';
 
 export function useQuery() {
@@ -29,12 +29,12 @@ export const serverUrl = process.env.REACT_APP_BASE_URL;
 
 export const authServerUrl = process.env.REACT_APP_AUTH_URL;
 export const AUTH_LOGIN_GOOGLE_URL: URL = new URL(`${authServerUrl}authorize/google`);
-export const REDIRECT_URL: string | undefined = process.env.REACT_APP_REDIRECT_URL;
+export const REDIRECT_ROUTE: string | undefined = process.env.REACT_APP_REDIRECT_URL;
 export const GET_USER_INFO_URL = `${authServerUrl}user/info`;
 export const UPDATE_USER_INFO_URL = `${authServerUrl}user/update`;
 export const LOG_OUT_USER_URL = `${authServerUrl}logout`;
 
-AUTH_LOGIN_GOOGLE_URL.searchParams.append('redirect_url', REDIRECT_URL!);
+AUTH_LOGIN_GOOGLE_URL.searchParams.append('redirect_url', `${window.location.origin}${REDIRECT_ROUTE!}`);
 
 //function return api key depends on the env it running on
 export const mapApiKey = process.env.REACT_APP_GOOGLE_MAP_KEY ? process.env.REACT_APP_GOOGLE_MAP_KEY : '';
@@ -47,10 +47,4 @@ export const showOnlyOperCards = process.env.REACT_APP_SHOW_ONLY_OPER_CARDS === 
 
 export const INITIAL_CENTER = { lat: 32.0853, lng: 34.7818 };
 
-// export function handleNewsflashId(id?: string) {
-//   let newsFlashId: string | number | undefined = id;
-//   if (id) {
-//     newsFlashId = id !== DEMO_ID ? parseInt(id) : DEMO_ID;
-//   }
-//   return newsFlashId;
-// }
+export const SHOW_MOCK = process.env.REACT_APP_SHOW_MOCK_INFORMATION === 'true';

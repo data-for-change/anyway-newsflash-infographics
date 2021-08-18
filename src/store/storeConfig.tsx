@@ -1,6 +1,7 @@
 // https://mobx-react.js.org/recipes-context
 
 import React from 'react';
+import { isProd } from 'utils/env.utils';
 import RootStore from './root.store';
 
 const store = new RootStore();
@@ -16,7 +17,7 @@ export const useStore = (): RootStore => {
 };
 
 // see: https://facebook.github.io/create-react-app/docs/adding-custom-environment-variables
-if (process.env.NODE_ENV !== 'production') {
+if (!isProd) {
   // @ts-ignore
   window['store'] = store;
 }

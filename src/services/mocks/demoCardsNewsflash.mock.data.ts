@@ -1,6 +1,6 @@
-import { DEMO_ID } from '../../utils/utils';
+import { DEMO_ID } from 'utils/utils';
 
-export default {
+const demo = {
   id: DEMO_ID,
   lat: 32.0853,
   lon: 34.7818,
@@ -9,3 +9,4 @@ export default {
   source: 'ynet',
   date: '2020 -05-20 00:00:00',
 };
+export default demo;
