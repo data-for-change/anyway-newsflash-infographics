@@ -186,6 +186,7 @@ Active Environments:
 - Staging - to be used internally by Anyway teams
 - Production - Contains ready cards
 - Demo - Contains ready cards & Demo Cards
+- Mock - to be used to get demo mock information.
 
 Environment base file is `.env`.
 Each environment has a specific environment file which can be used to override `.env`. for example `.env.demo` will override `.env` for Demo environment. For more info see [CRA docs](https://create-react-app.dev/docs/adding-custom-environment-variables/) and [this post about env-cmd](https://medium.com/@rishi.vedpathak/react-environment-specific-builds-using-env-with-cra-and-env-cmd-5960a1253fe6)
