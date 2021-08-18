@@ -121,8 +121,6 @@ const TooltipMarker = ({ data, position, offset }: any) => {
   const order = i18n.language === 'en'
   const classes = useStyles({offset, order});
   const iconText: any = `${dateFormat(data.accident_timestamp)}`;
-
-
   const TooltipTemplate = (
     <div className={classes.root}>
       <div className={classes.content}>{iconText}</div>
