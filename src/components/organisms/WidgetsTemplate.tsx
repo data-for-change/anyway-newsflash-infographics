@@ -3,12 +3,12 @@ import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
 import { observer } from 'mobx-react-lite';
 import { Grid } from 'components/atoms';
-import AnyWayCard from '../molecules/card/AnyWayCard';
-import ErrorBoundary from '../atoms/ErrorBoundary';
-import { MetaTag } from '../atoms';
-import { Typography } from '../atoms';
+import AnyWayCard from 'components/molecules/card/AnyWayCard';
+import ErrorBoundary from 'components/atoms/ErrorBoundary';
+import { MetaTag } from 'components/atoms';
+import { Typography } from 'components/atoms';
 import { Box } from '@material-ui/core';
-import WidgetWrapper from '../molecules/widgets/WidgetWrapper';
+import WidgetWrapper from 'components/molecules/widgets/WidgetWrapper';
 import { useTranslation } from 'react-i18next';
 
 const WidgetsTemplate: FC = () => {

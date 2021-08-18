@@ -1,4 +1,4 @@
-import { Typography } from '../atoms';
+import { Typography } from 'components/atoms';
 import React, { useState } from 'react';
 import UserInfoForm, { IFormInput } from './UserUpdateForm';
 import { useTranslation } from 'react-i18next';

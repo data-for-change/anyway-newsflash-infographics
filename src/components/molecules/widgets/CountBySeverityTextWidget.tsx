@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { IWidgetCountBySeverityTextData } from 'models/WidgetData';
-import TextView from '../TextView/TextView';
+import TextView from 'components/molecules/TextView/TextView';
 
 interface IProps {
   data: IWidgetCountBySeverityTextData;

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import PieChartView from '../PieChartView';
+import PieChartView from 'components/molecules/PieChartView';
 import { IWidgetCountBySeverityData } from 'models/WidgetData';
 
 const ACCIDENT_SEVERITY = 'accident_severity';

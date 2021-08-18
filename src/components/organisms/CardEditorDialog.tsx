@@ -1,10 +1,10 @@
 import React, { FC, useState } from 'react';
 import DialogWithHeader from '../molecules/DialogWithHeader';
 import { useStore } from 'store/storeConfig';
-import WidgetWrapper from '../molecules/widgets/WidgetWrapper';
+import WidgetWrapper from 'components/molecules/widgets/WidgetWrapper';
 import { Box } from '@material-ui/core';
-import AnyWayCard, { CardSizeOptions } from '../molecules/card/AnyWayCard';
-import { MetaTag, ErrorBoundary, Typography, Button, Slider } from '../atoms';
+import AnyWayCard, { CardSizeOptions } from 'components/molecules/card/AnyWayCard';
+import { MetaTag, ErrorBoundary, Typography, Button, Slider } from 'components/atoms';
 import widgetToImage from 'services/to-image.service';
 import { useTranslation } from 'react-i18next';
 

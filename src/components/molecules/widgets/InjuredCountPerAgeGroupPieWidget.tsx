@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { IWidgetInjuredCountPerAgeGroupPieData } from 'models/WidgetData';
-import PieChartView from '../PieChartView';
+import PieChartView from 'components/molecules/PieChartView';
 
 interface IProps {
   data: IWidgetInjuredCountPerAgeGroupPieData;

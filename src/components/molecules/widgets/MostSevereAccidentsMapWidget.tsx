@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import LocationMap from '../LocationMap';
+import LocationMap from 'components/molecules/LocationMap';
 import { IWidgetMostSevereAccidentsData } from 'models/WidgetData';
 import { INITIAL_CENTER } from 'utils/utils';
 

@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import logoHasdna from 'assets/hasadna.png';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
-import { Typography } from '../atoms';
-import { silverSmokeColor, oceanBlueColor, skyBlueColor } from '../../style';
+import { Typography } from 'components/atoms';
+import { silverSmokeColor, oceanBlueColor, skyBlueColor } from 'style';
 import ThankYouDialog from './ThankYouDialog';
 import AboutDialog from './AboutDialog';
 

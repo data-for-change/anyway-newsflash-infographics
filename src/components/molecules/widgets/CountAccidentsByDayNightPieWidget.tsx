@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import PieChartView from '../PieChartView';
+import PieChartView from 'components/molecules/PieChartView';
 import { IWidgetAccidentsByDayNightData } from 'models/WidgetData';
 
 const ACCIDENT_TYPE = 'day_night';

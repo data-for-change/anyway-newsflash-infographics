@@ -20,7 +20,7 @@ import {
 import AccidentsCountByHourBarWidget from './AccidentsCountByHourBarWidget';
 import MostSevereAccidentsMapWidget from './MostSevereAccidentsMapWidget';
 import MostSevereAccidentsTableWidget from './MostSevereAccidentsTableWidget';
-import HeatMap from '../HeatMap';
+import HeatMap from 'components/molecules/HeatMap';
 import CountBySeverityTextWidget from './CountBySeverityTextWidget';
 import CountByTypePieWidget from './CountByTypePieWidget';
 import CountByYearBarWidget from './CountByYearBarWidget';

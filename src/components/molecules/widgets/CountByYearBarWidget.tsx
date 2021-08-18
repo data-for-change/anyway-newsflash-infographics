@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import BarChartView from '../BarChartView';
+import BarChartView from 'components/molecules/BarChartView';
 import { IWidgetAccidentsByYearData } from 'models/WidgetData';
 
 const ACCIDENT_YEAR = 'accident_year';
