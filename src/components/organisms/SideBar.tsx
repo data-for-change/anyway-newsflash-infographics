@@ -4,7 +4,7 @@ import News from './News';
 import NewsFlashFilterPanel from 'components/molecules/NewsFlashFilterPanel';
 import OverlayLoader from '../molecules/OverlayLoader';
 import { silverSmokeColor } from 'style';
-import { Typography, ErrorBoundary } from '../atoms';
+import { Typography, ErrorBoundary } from 'components/atoms';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
