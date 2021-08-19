@@ -1,16 +1,16 @@
 // https://mobx.js.org/best/store.html#combining-multiple-stores
 import { runInAction, makeAutoObservable } from 'mobx';
-import { initService } from '../services/init.service';
-import { fetchWidgets } from '../services/widgets.data.service';
-import { INewsFlash } from '../models/NewFlash';
-import { ILocationMeta, IWidgetBase } from '../models/WidgetData';
-import { SourceFilterEnum } from '../models/SourceFilter';
-import { fetchNews } from '../services/news.data.service';
+import { initService } from 'services/init.service';
+import { fetchWidgets } from 'services/widgets.data.service';
+import { INewsFlash } from 'models/NewFlash';
+import { ILocationMeta, IWidgetBase } from 'models/WidgetData';
+import { SourceFilterEnum } from 'models/SourceFilter';
+import { fetchNews } from 'services/news.data.service';
 import SettingsStore from './settings.store';
-import { IPoint } from '../models/Point';
-import { ActualiUserInfo, fetchUserInfo, logoutUserFromSession, postUserInfo } from '../services/user.service';
-import i18next from '../services/i18n.service';
-import { IFormInput } from '../components/molecules/UserUpdateForm';
+import { IPoint } from 'models/Point';
+import { ActualiUserInfo, fetchUserInfo, logoutUserFromSession, postUserInfo } from 'services/user.service';
+import i18next from 'services/i18n.service';
+import { IFormInput } from 'components/molecules/UserUpdateForm';
 
 // todo: move all map defaults to one place
 const DEFAULT_TIME_FILTER = 5;

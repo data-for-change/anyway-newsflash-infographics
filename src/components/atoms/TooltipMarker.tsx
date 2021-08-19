@@ -6,6 +6,8 @@ import { makeStyles } from '@material-ui/core';
 import { dateFormat } from '../../utils/time.utils';
 import { ClockPosition } from '../../models/ClockPosition';
 import { transparentColor, whiteColor, blackColor, tooltipMarkerBorderColorArrow } from '../../style';
+import { useTranslation } from 'react-i18next';
+
 
 const getLabelPosition = (offset: ClockPosition): string => {
   const x = getLabelXPosition(offset);
@@ -92,32 +94,32 @@ const useStyles = makeStyles({
     position: 'absolute',
     right: 16,
     bottom: 0,
-    transform: (offset) => getLabelPosition(offset as ClockPosition),
+    transform: (prop) => getLabelPosition(prop.offset as ClockPosition),
     display: 'flex',
-    flexFlow: (offset) => getLabelFlexFlow(offset as ClockPosition),
+    flexFlow: (prop) => getLabelFlexFlow(prop.offset as ClockPosition),
     alignItems: 'center',
   },
-  content: () => ({
+  content: {
     position: 'relative',
-    order: 1,
+    order: (prop: any) => (prop.order ? 0 : 1),
     padding: ' 1px 3px',
     borderRadius: '5px 7px 7px 5px',
     whiteSpace: 'nowrap',
     color: whiteColor,
     backgroundColor: blackColor,
-  }),
+  },
   arrow: {
     display: 'inline-flex',
     borderStyle: 'solid',
     borderWidth: '5px 0 5px 20px',
     borderColor: tooltipMarkerBorderColorArrow,
-    transform: (offset) => getLabelArrowRotation(offset as ClockPosition),
+    transform: (prop) => getLabelArrowRotation(prop.offset as ClockPosition),
   },
 });
+
 const TooltipMarker = ({ data, position, offset, locale}: any) => {
   const classes = useStyles(offset);
   const iconText: any = `${dateFormat(data.accident_timestamp, locale)}`;
-
   const TooltipTemplate = (
     <div className={classes.root}>
       <div className={classes.content}>{iconText}</div>

@@ -1,8 +1,8 @@
 import { getDemoWidgetData } from './mocks/mock.service';
-import { ILocationData, IWidgetBase } from '../models/WidgetData';
+import { ILocationData, IWidgetBase } from 'models/WidgetData';
 import axios from 'axios';
-import { DEMO_ID, showDemoCards, showOnlyOperCards } from '../utils/utils';
-import { operationalCards } from '../const/cards.const';
+import { DEMO_ID, showDemoCards, showOnlyOperCards, SHOW_MOCK } from 'utils/utils';
+import { operationalCards } from 'const/cards.const';
 import { getVerifiedWidgetsData } from './data.verification/data.verification.service';
 
 const NEWS_FLASH_API: string = '/api/infographics-data';
@@ -17,7 +17,12 @@ export const fetchWidgets = async (id: number, lang: string, yearAgo?: number): 
     if (yearAgo) {
       query.push(`years_ago=${yearAgo}`);
     }
-    const widgetsUrl = `${NEWS_FLASH_API}?${query.join('&')}`;
+    if (SHOW_MOCK) {
+      query.push(`mock=${SHOW_MOCK}`);
+    }
+
+  const widgetsUrl = `${NEWS_FLASH_API}?${query.join('&')}`;    //temp - long response time of server- keep console.log to see out url
+    console.log(widgetsUrl);
     const response = await axios.get(widgetsUrl);
     return processWidgetsFetchResponse(response);
   } catch (error) {
