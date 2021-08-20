@@ -80,9 +80,9 @@ const CardHeader: FC<IProps> = ({ variant, text, road }) => {
             <RoadNumberImage roadNumber={road} />
           </Box>
           <Box ml={'7%'} display="flex" flex={1} justifyContent="flex-end" alignItems="flex-end" height={30}>
-              <Box className={classes.logosContainer} mx={1}>
+            <Box className={classes.logosContainer} mx={1}>
               <Logo src={LamasImage} alt={'Lamas'} height={30} />
-          </Box>
+            </Box>
             <Logo src={AnywayImage} alt={'Anyway'} height={20} />
           </Box>
         </Box>
