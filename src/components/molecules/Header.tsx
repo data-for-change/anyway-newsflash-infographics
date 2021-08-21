@@ -24,12 +24,12 @@ const reloadHomePage = () => {
 
 const Header: FC = () => {
   const store: RootStore = useStore();
-  const isUserDetailsRequired: boolean = store.userInfo?.meta.isCompleteRegistration === false;
+  const isUserDetailsRequired: boolean = !!store.userInfo?.meta.isCompleteRegistration;
 
   const classes = useStyles();
   useEffect(() => {
     store.getUserLoginDetails();
-  }, [store]);
+  }, [store]);git
 
   let authElement;
   let logo : string = '';
