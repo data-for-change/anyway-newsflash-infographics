@@ -4,8 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import { AppBar, Button, Logo } from '../atoms';
-import { SignInIcon } from '../atoms/SignInIcon';
-import LogInLinkGoogle from './LogInLinkGoogle';
+  import LogInLinkGoogle from './LogInLinkGoogle';
 import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
 import UserProfileHeader from './UserProfileHeader';
@@ -61,12 +60,7 @@ const Header: FC = () => {
       <Box className={classes.userSection}>
         {FEATURE_FLAGS.location_search && <Button.Standard>{t('header.Search')}</Button.Standard>}
         {FEATURE_FLAGS.language && <LanguageMenu />}
-        {authElement && (
-          <>
-            {authElement}
-            <SignInIcon />
-          </>
-        )}
+        {authElement}
       </Box>
     </AppBar>
   );
