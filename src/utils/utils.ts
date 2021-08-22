@@ -1,4 +1,4 @@
-﻿import { IPoint } from '../models/Point';
+﻿import { IPoint } from 'models/Point';
 import { useLocation } from 'react-router';
 
 export function useQuery() {
@@ -47,3 +47,4 @@ export const showOnlyOperCards = process.env.REACT_APP_SHOW_ONLY_OPER_CARDS === 
 
 export const INITIAL_CENTER = { lat: 32.0853, lng: 34.7818 };
 
+export const SHOW_MOCK = process.env.REACT_APP_SHOW_MOCK_INFORMATION === 'true';
