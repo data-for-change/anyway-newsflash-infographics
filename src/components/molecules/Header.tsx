@@ -26,7 +26,7 @@ const reloadHomePage = () => {
 
 const Header: FC = () => {
   const store: RootStore = useStore();
-  const isUserDetailsRequired: boolean = !!store.userInfo?.meta.isCompleteRegistration;
+  const isUserDetailsRequired: boolean = !store.userInfo?.meta.isCompleteRegistration;
   const { t } = useTranslation();
 
   const classes = useStyles();
@@ -35,12 +35,11 @@ const Header: FC = () => {
   }, [store]);
 
   let authElement;
-  let logo : string = '';
+  let logo : string = anywayLogo;
   if (FEATURE_FLAGS.login) {
     //login or logout- depend on authentication state
     if (store.isUserAuthenticated) {
       const { ...userDetails } = store.userInfo;
-       logo = anywayLogo  ;
       const handleLogout = () => {
         store.logOutUser();
       };
