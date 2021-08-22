@@ -29,7 +29,7 @@ const Header: FC = () => {
   const classes = useStyles();
   useEffect(() => {
     store.getUserLoginDetails();
-  }, [store]);git
+  }, [store]);
 
   let authElement;
   let logo : string = '';
