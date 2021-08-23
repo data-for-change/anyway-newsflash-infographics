@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { MapContainer, useMapEvents } from 'react-leaflet';
-import { IPoint } from 'models/Point';
-import { INITIAL_CENTER } from 'utils/utils';
-import { Marker } from 'atoms';
+import { IPoint } from '../../models/Point';
+import { INITIAL_CENTER } from '../../utils/utils';
+import { Marker } from '../atoms';
 import GoogleMapsLayer from './map/GoogleMapsLayer';
 
 const INITIAL_ZOOM = parseInt(process.env.REACT_APP_DEFAULT_MAP_ZOOM!);
