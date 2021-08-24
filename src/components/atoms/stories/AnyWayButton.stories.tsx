@@ -9,8 +9,8 @@ export default {
 
 const Template: Story<ComponentProps<typeof AnyWayButton>> = (args) => <AnyWayButton {...args} />;
 
-export const FirstStory = Template.bind({});
-FirstStory.args = {
-  onClick: () => console.log('sss'),
-  children: <div>some text</div>,
+export const AnyWayButtonS = Template.bind({});
+AnyWayButtonS.args = {
+  onClick: () => console.log('You clicked it!'),
+  children: 'Anyway Button',
 };
