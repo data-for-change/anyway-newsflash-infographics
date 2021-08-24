@@ -7,7 +7,7 @@ import { Dialog, Button, Typography } from '../atoms';
 interface IProps {
   section: string;
   isShowing: boolean;
-  onClose: () => any;
+  onClose: () => void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -50,7 +50,7 @@ const MapDialog: FC<IProps> = ({ section, isShowing, onClose }) => {
           <div className={classes.chosenSection}>
             {/*needs to be bolder - just give it a classname?*/}
             <Typography.Body1 bold>{t('mapDialog.chosenSegment')}</Typography.Body1>
-            <Typography.Body1>{section}</Typography.Body1>
+            <Typography.Body1>{` ${section}`}</Typography.Body1>
           </div>
         </DialogContent>
         <DialogActions className={classes.actions}>

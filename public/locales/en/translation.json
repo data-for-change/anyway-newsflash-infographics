@@ -109,7 +109,7 @@
   "mapDialog": {
     "searchButton": "Search",
     "cancelButton": "Cancel",
-    "chosenSegment": "Chosen section: ",
+    "chosenSegment": "Chosen section:",
     "searchSection": "Search section"
   }
 }

@@ -109,7 +109,7 @@
   "mapDialog": {
     "searchButton": "חיפוש",
     "cancelButton": "ביטול",
-    "chosenSegment": "המקטע שנבחר: ",
+    "chosenSegment": "המקטע שנבחר:",
     "searchSection": "חיפוש מקטע"
   }
 }
