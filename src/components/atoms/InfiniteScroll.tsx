@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useCallback, useRef } from 'react';
 import { makeStyles } from '@material-ui/core';
-import { useStore } from '../../store/storeConfig';
+import { useStore } from 'store/storeConfig';
 
 const INFINITE_SCROLLING_OFFSET: number = 30;
 

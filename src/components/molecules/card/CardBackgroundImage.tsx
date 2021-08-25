@@ -1,8 +1,8 @@
 import { makeStyles, Theme } from '@material-ui/core';
 import React, { FC } from 'react';
-import { HeaderVariant } from '../../../services/widgets.style.service';
-import CardBackgrounRoadImage from '../../../assets/card-bg-road.png';
-import CardBackgrounMapImage from '../../../assets/card-bg-map.png';
+import { HeaderVariant } from 'services/widgets.style.service';
+import CardBackgrounRoadImage from 'assets/card-bg-road.png';
+import CardBackgrounMapImage from 'assets/card-bg-map.png';
 
 const ROAD_IMAGE_HEIGHT = 130;
 const MAP_IMAGE_HEIGHT = '100%';

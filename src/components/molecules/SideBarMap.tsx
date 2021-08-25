@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import { MapContainer } from 'react-leaflet';
 // @ts-ignore
-import { IPoint } from '../../models/Point';
+import { IPoint } from 'models/Point';
 import L, { LatLng } from 'leaflet';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { INITIAL_CENTER, uniquePoints } from '../../utils/utils';
-import { Marker } from '../atoms';
+import { INITIAL_CENTER, uniquePoints } from 'utils/utils';
+import { Marker } from 'components/atoms';
 import GoogleMapsLayer from './map/GoogleMapsLayer';
-import MapViewControl from '../../services/MapViewControl';
+import MapViewControl from 'services/MapViewControl';
 
 const INITIAL_ZOOM = parseInt(process.env.REACT_APP_DEFAULT_MAP_ZOOM!);
 const useStyles = makeStyles({

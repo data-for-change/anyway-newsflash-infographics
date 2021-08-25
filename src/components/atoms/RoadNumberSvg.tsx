@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { roadIconFont } from '../../style';
+import { roadIconFont } from 'style';
 
 const WIDTH = '56px';
 const HEIGHT = '40px';

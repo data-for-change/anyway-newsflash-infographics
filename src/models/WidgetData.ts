@@ -98,7 +98,7 @@ export interface IWidgetStreetViewData extends IWidgetDataBase {
 export interface IWidgetVisionZeroImageData extends IWidgetDataBase {
   items: {
     image_src: string;
-  }[];
+  };
 }
 
 export interface IWidgetAccidentsByDayNightData extends IWidgetDataBase {

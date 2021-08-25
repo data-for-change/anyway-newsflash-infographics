@@ -2,14 +2,14 @@ import React, { FC } from 'react';
 import classnames from 'classnames';
 import { Box, makeStyles } from '@material-ui/core';
 import { silverSmokeColor, oceanBlueColor } from '../../style';
-import ynetLogo from '../../assets/ynet-website-logo.svg';
-import wallaLogo from '../../assets/walla-logo.svg';
-import madaLogo from '../../assets/mada-logo.svg';
-import { AnyWayButton } from '../atoms/AnyWayButton';
-import RootStore from '../../store/root.store';
-import { useStore } from '../../store/storeConfig';
-import { SourceFilterEnum } from '../../models/SourceFilter';
-import { Typography } from '../atoms';
+import ynetLogo from 'assets/ynet-website-logo.svg';
+import wallaLogo from 'assets/walla-logo.svg';
+import madaLogo from 'assets/mada-logo.svg';
+import { AnyWayButton } from 'components/atoms/AnyWayButton';
+import RootStore from 'store/root.store';
+import { useStore } from 'store/storeConfig';
+import { SourceFilterEnum } from 'models/SourceFilter';
+import { Typography } from 'components/atoms';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles({

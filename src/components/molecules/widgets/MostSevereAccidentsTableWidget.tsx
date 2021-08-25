@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import TableView from '../Table/TableView';
-import { IWidgetMostSevereAccidentsTableData } from '../../../models/WidgetData';
-import { toJsDateFormat } from '../../../utils/time.utils';
-import { createTableData } from '../Table/formatTableData.service';
+import TableView from 'components/molecules/Table/TableView';
+import { IWidgetMostSevereAccidentsTableData } from 'models/WidgetData';
+import { toJsDateFormat } from 'utils/time.utils';
+import { createTableData } from 'components/molecules/Table/formatTableData.service';
 
 interface IProps {
   data: IWidgetMostSevereAccidentsTableData;

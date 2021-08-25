@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import Person from '../../../assets/Person.png';
-import Ambulance from '../../../assets/Ambulance.png';
-import Crutches from '../../../assets/Crutches.png';
+import Person from 'assets/Person.png';
+import Ambulance from 'assets/Ambulance.png';
+import Crutches from 'assets/Crutches.png';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
