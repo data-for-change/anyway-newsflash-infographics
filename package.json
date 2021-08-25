@@ -1,0 +1,118 @@
+{
+    "name": "anyway-newsflash-infographics",
+    "version": "0.7.0",
+    "private": true,
+    "dependencies": {
+      "@babel/eslint-parser": "^7.14.7",
+      "@material-ui/core": "^4.11.3",
+      "@material-ui/icons": "^4.11.2",
+      "@react-leaflet/core": "^1.0.2",
+      "@types/classnames": "^2.3.1",
+      "@types/leaflet.heat": "^0.2.0",
+      "@types/query-string": "^6.3.0",
+      "axios": "^0.21.1",
+      "classnames": "^2.3.1",
+      "env-cmd": "^10.1.0",
+      "file-saver": "^2.0.5",
+      "html-to-image": "^1.6.2",
+      "i18next": "^20.3.2",
+      "i18next-http-backend": "^1.2.6",
+      "leaflet": "^1.7.1",
+      "leaflet.heat": "^0.2.0",
+      "mobx": "^6.3.2",
+      "mobx-react-lite": "^3.2.0",
+      "normalize.css": "^8.0.1",
+      "query-string": "^7.0.1",
+      "react": "^17.0.2",
+      "react-async-loader": "^0.1.2",
+      "react-dom": "^17.0.2",
+      "react-i18next": "^11.11.1",
+      "react-leaflet": "3.1.0",
+      "react-leaflet-google-layer": "^2.0.4",
+      "react-router-dom": "^5.2.0",
+      "react-scripts": "4.0.3",
+      "react-share": "^4.4.0",
+      "recharts": "^2.0.9",
+      "typescript": "^4.3.5"
+    },
+    "scripts": {
+      "start": "react-scripts start",
+      "build": "react-scripts build",
+      "build:staging": "env-cmd -f .env.staging react-scripts build",
+      "build:demo": "env-cmd -f .env.demo react-scripts build",
+      "lint": "eslint src/**/*.ts src/**/*.tsx",
+      "test": "react-scripts test",
+      "eject": "react-scripts eject",
+      "git:prune": "git remote prune origin",
+      "git:merged": "git branch --merged development",
+      "sb": "start-storybook -p 6006 -s public",
+      "build-sb": "build-storybook -s public"
+    },
+    "eslintConfig": {
+      "extends": [
+        "react-app",
+        "prettier"
+      ],
+      "rules": {
+        "max-lines": [
+          2,
+          {
+            "max": 200,
+            "skipBlankLines": true,
+            "skipComments": true
+          }
+        ]
+      }
+    },
+    "browserslist": {
+      "production": [
+        ">0.2%",
+        "not dead",
+        "not op_mini all"
+      ],
+      "development": [
+        "last 1 chrome version",
+        "last 1 firefox version",
+        "last 1 safari version"
+      ]
+    },
+    "devDependencies": {
+      "@storybook/addon-actions": "^6.3.2",
+      "@storybook/addon-essentials": "^6.3.2",
+      "@storybook/addon-links": "^6.3.2",
+      "@storybook/node-logger": "^6.3.2",
+      "@storybook/preset-create-react-app": "^3.2.0",
+      "@storybook/react": "^6.3.2",
+      "@testing-library/jest-dom": "^5.14.1",
+      "@testing-library/react": "^12.0.0",
+      "@testing-library/user-event": "^13.1.9",
+      "@types/file-saver": "^2.0.2",
+      "@types/googlemaps": "^3.43.3",
+      "@types/jest": "^26.0.24",
+      "@types/node": "^16.0.0",
+      "@types/react": "^17.0.13",
+      "@types/react-dom": "^17.0.8",
+      "@types/react-leaflet": "^2.8.1",
+      "@types/react-router-dom": "^5.1.7",
+      "@types/recharts": "^2.0.0",
+      "eslint": "7.30.0",
+      "eslint-config-prettier": "8.3.0",
+      "husky": "7.0.1",
+      "lint-staged": "11.0.0",
+      "prettier": "2.3.2"
+    },
+    "husky": {
+      "hooks": {
+        "pre-commit": "lint-staged"
+      }
+    },
+    "lint-staged": {
+      "*.{ts,tsx}": [
+        "eslint --fix"
+      ],
+      "*.{html,css,scss,stylus,js,ts,tsx,json,yml,md}": [
+        "prettier --write"
+      ]
+    }
+  }
+  
