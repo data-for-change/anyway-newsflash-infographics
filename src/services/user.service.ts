@@ -1,13 +1,14 @@
 import axios from 'axios';
-import { GET_USER_INFO_URL, LOG_OUT_USER_URL, UPDATE_USER_INFO_URL } from '../utils/utils';
-import { IFormInput } from '../components/molecules/UserUpdateForm';
-import { StatusCodes } from '../utils/HTTPStatuesCodes';
-export interface ActualiUserInfo {
+import { GET_USER_INFO_URL, LOG_OUT_USER_URL, UPDATE_USER_INFO_URL } from 'utils/utils';
+import { IFormInput } from 'components/molecules/UserUpdateForm';
+import { StatusCodes } from 'utils/HTTPStatuesCodes';
+export interface IUserInfo {
   data: {
     firstName: string;
     lastName: string;
     email: string;
     workplace: string;
+    imgUrl : string
   };
   meta: {
     isCompleteRegistration: boolean;
@@ -21,15 +22,17 @@ export interface UpdateUserReq {
   email: string;
 }
 
-export const fetchUserInfo = async function (): Promise<ActualiUserInfo> {
+export const fetchUserInfo = async function (): Promise<IUserInfo> {
   const response = await axios.get(GET_USER_INFO_URL, { withCredentials: true });
+  const userInfoData = response.data;
 
-  const userInfo: ActualiUserInfo = {
+  const userInfo: IUserInfo = {
     data: {
-      firstName: response.data.first_name,
-      lastName: response.data.last_name,
-      email: response.data.email,
-      workplace: response.data.work_on_behalf_of_organization,
+      firstName: userInfoData.first_name === 'null'  ? undefined : userInfoData.first_name ,
+      lastName: userInfoData.last_name,
+      email: userInfoData.email,
+      workplace: userInfoData.work_on_behalf_of_organization,
+      imgUrl : userInfoData.oauth_provider_user_picture_url
     },
     meta: {
       isCompleteRegistration: response.data.is_user_completed_registration,

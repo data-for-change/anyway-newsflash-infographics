@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { IWidgetVisionZeroImageData } from '../../models/WidgetData';
-import visionZeroImage from '../../assets/vision_zero_2_plus_1.jpg';
+import { IWidgetVisionZeroImageData } from 'models/WidgetData';
+import visionZeroImage from 'assets/vision_zero_2_plus_1.jpg';
 import { makeStyles } from '@material-ui/core';
 
 interface IProps {

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import DialogWithHeader from '../molecules/DialogWithHeader';
-import { Typography } from '../atoms';
+import DialogWithHeader from 'components/molecules/DialogWithHeader';
+import { Typography } from 'components/atoms';
 import { Box } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 

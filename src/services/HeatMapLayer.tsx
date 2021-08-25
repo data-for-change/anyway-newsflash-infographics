@@ -2,7 +2,7 @@ import { useMap } from 'react-leaflet';
 import L, { LatLng } from 'leaflet';
 import 'leaflet.heat';
 import { useEffect } from 'react';
-import { IPoint } from '../models/Point';
+import { IPoint } from 'models/Point';
 
 const HEATMAP_OPTIONS = {
   minOpacity: 0.3,

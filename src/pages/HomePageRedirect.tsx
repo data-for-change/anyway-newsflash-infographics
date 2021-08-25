@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { Redirect } from 'react-router';
 import { observer } from 'mobx-react-lite';
-import { useStore } from '../store/storeConfig';
-import RootStore from '../store/root.store';
+import { useStore } from 'store/storeConfig';
+import RootStore from 'store/root.store';
 
 interface IProps {}
 
