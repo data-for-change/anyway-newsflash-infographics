@@ -4,14 +4,13 @@ import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import { AppBar,Button, Logo } from 'components/atoms';
-import AnywayImage from 'assets/anyway.png';
-import { SignInIcon } from 'components/atoms/SignInIcon';
 import LogInLinkGoogle from './LogInLinkGoogle';
 import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
 import UserProfileHeader from './UserProfileHeader';
 import LanguageMenu from 'components/organisms/LanguageMenu';
 import { FEATURE_FLAGS } from 'utils/env.utils';
+import { anywayLogo } from '../../utils/LogoMap';
 
 
 const useStyles = makeStyles({
