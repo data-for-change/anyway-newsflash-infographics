@@ -5,8 +5,6 @@ import AnywayImage from 'assets/anyway.png';
 import { makeStyles } from '@material-ui/core/styles';
 import { cardFooterHeight } from 'style';
 import { Box } from '@material-ui/core';
-import { useLocaleValue } from 'hooks/date.hooks';
-import { dateFormat } from 'utils/time.utils';
 
 interface IProps {
   dateComment: string;
