@@ -24,14 +24,15 @@ export interface UpdateUserReq {
 
 export const fetchUserInfo = async function (): Promise<IUserInfo> {
   const response = await axios.get(GET_USER_INFO_URL, { withCredentials: true });
+  const userInfoData = response.data;
 
   const userInfo: IUserInfo = {
     data: {
-      firstName: response.data.first_name,
-      lastName: response.data.last_name,
-      email: response.data.email,
-      workplace: response.data.work_on_behalf_of_organization,
-      imgUrl : response.data.oauth_provider_user_picture_url
+      firstName: userInfoData.first_name === 'null'  ? undefined : userInfoData.first_name ,
+      lastName: userInfoData.last_name,
+      email: userInfoData.email,
+      workplace: userInfoData.work_on_behalf_of_organization,
+      imgUrl : userInfoData.oauth_provider_user_picture_url
     },
     meta: {
       isCompleteRegistration: response.data.is_user_completed_registration,
