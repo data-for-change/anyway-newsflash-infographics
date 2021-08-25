@@ -1,4 +1,4 @@
-export function dateFormat(date: Date | string, locale: string): string {
+export function dateFormat(date: Date | string, locale: string | undefined): string {
   let dateStr = '';
   if (!date) {
     console.error('invalid date', date);

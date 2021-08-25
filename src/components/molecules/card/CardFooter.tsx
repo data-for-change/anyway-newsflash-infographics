@@ -1,12 +1,12 @@
 import React from 'react';
-import { Logo, Typography } from '../../atoms';
-import LamasImage from '../../../assets/cbs.png';
-import AnywayImage from '../../../assets/anyway.png';
+import { Logo, Typography } from 'components/atoms';
+import LamasImage from 'assets/cbs.png';
+import AnywayImage from 'assets/anyway.png';
 import { makeStyles } from '@material-ui/core/styles';
-import { cardFooterHeight } from '../../../style';
-import { useLocaleValue } from '../../../hooks/date.hooks';
-import { dateFormat } from '../../../utils/time.utils';
+import { cardFooterHeight } from 'style';
 import { Box } from '@material-ui/core';
+import { useLocaleValue } from 'hooks/date.hooks';
+import { dateFormat } from 'utils/time.utils';
 
 interface IProps {
   dateComment: string;
@@ -25,7 +25,8 @@ const useStyles = makeStyles({
 
 const CardFooter: React.FC<IProps> = ({ dateComment }) => {
   const classes = useStyles();
-  let locale = useLocaleValue();
+  const locale = useLocaleValue();
+  //temp - needs to see how the this date is given, in case of change - this breaks
   let temp_dates_comment = dateComment.split(' ');
   temp_dates_comment[3] = dateFormat(temp_dates_comment[3], locale);
   dateComment = temp_dates_comment.join(' ');

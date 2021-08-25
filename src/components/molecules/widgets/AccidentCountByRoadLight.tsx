@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { IWidgetAccidentCountByRoadLight } from '../../../models/WidgetData';
+import { IWidgetAccidentCountByRoadLight } from 'models/WidgetData';
 
 interface IProps {
   data: IWidgetAccidentCountByRoadLight;

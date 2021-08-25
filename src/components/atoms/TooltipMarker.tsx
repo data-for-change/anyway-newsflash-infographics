@@ -3,9 +3,9 @@ import ReactDOMServer from 'react-dom/server';
 import L from 'leaflet';
 import { Marker } from 'react-leaflet';
 import { makeStyles } from '@material-ui/core';
-import { dateFormat } from '../../utils/time.utils';
-import { ClockPosition } from '../../models/ClockPosition';
-import { transparentColor, whiteColor, blackColor, tooltipMarkerBorderColorArrow } from '../../style';
+import { dateFormat } from 'utils/time.utils';
+import { ClockPosition } from 'models/ClockPosition';
+import { transparentColor, whiteColor, blackColor, tooltipMarkerBorderColorArrow } from 'style';
 
 
 const getLabelPosition = (offset: ClockPosition): string => {
@@ -117,7 +117,7 @@ const useStyles = makeStyles({
 });
 const TooltipMarker = ({ data, position, offset, locale}: any) => {
   const classes = useStyles(offset);
-  const iconText: any = `${dateFormat(data.accident_timestamp, locale)}`;
+  const iconText = `${dateFormat(data.accident_timestamp, locale)}`;
 
   const TooltipTemplate = (
     <div className={classes.root}>

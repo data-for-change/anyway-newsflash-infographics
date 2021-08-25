@@ -1,19 +1,17 @@
-import { useState, useEffect } from 'react';
 import { useStore } from '../store/storeConfig';
 import RootStore from '../store/root.store';
 
+const locales = {
+    hebrew: 'he-IL', 
+    english: 'en-US', 
+    arabic: 'ar-EG'
+};
+
 export function useLocaleValue() {
     const store: RootStore = useStore();
-    const locales = {
-        hebrew: 'he-IL', 
-        english: 'en-US', 
-        arabic: 'ar-EG'
-    };
-    const [lang, setLang] = useState(store.selectedLanguage);
-
-    useEffect(() => {
-        setLang(store.selectedLanguage);
-    }, [store.selectedLanguage]);
-
-    return lang === 'he' ? locales['hebrew'] : locales['english'];
+    switch(store.selectedLanguage) {
+        case 'he': return locales.hebrew;
+        case 'en': return locales.english;
+        case 'ar': return locales.arabic;
+    }
 }

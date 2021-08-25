@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core';
-import { ClockPosition } from '../../models/ClockPosition';
-import { blackColor } from '../../style';
+import { ClockPosition } from 'models/ClockPosition';
+import { blackColor } from 'style';
 
 interface IProps {
   type: ClockPosition;
