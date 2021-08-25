@@ -8,7 +8,7 @@ import { SourceFilterEnum } from 'models/SourceFilter';
 import { fetchNews } from 'services/news.data.service';
 import SettingsStore from './settings.store';
 import { IPoint } from 'models/Point';
-import { ActualiUserInfo, fetchUserInfo, logoutUserFromSession, postUserInfo } from 'services/user.service';
+import { IUserInfo, fetchUserInfo, logoutUserFromSession, postUserInfo } from 'services/user.service';
 import i18next from 'services/i18n.service';
 import { IFormInput } from 'components/molecules/UserUpdateForm';
 
@@ -31,7 +31,7 @@ export default class RootStore {
   newsFlashCollection: Array<INewsFlash> = [];
   isUserAuthenticated: boolean = false;
   userApiError: boolean = false;
-  userInfo: ActualiUserInfo | null = null;
+  userInfo: IUserInfo | null = null;
   activeNewsFlashId: number = 0; // active newsflash id
   newsFlashFetchOffSet = 0;
   newsFlashActiveFilter: SourceFilterEnum = SourceFilterEnum.all;
