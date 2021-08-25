@@ -13,5 +13,6 @@ export function useLocaleValue() {
         case 'he': return locales.hebrew;
         case 'en': return locales.english;
         case 'ar': return locales.arabic;
+        default: return locales.hebrew;
     }
 }

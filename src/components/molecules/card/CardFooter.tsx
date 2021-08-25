@@ -25,11 +25,6 @@ const useStyles = makeStyles({
 
 const CardFooter: React.FC<IProps> = ({ dateComment }) => {
   const classes = useStyles();
-  const locale = useLocaleValue();
-  //temp - needs to see how the this date is given, in case of change - this breaks
-  let temp_dates_comment = dateComment.split(' ');
-  temp_dates_comment[3] = dateFormat(temp_dates_comment[3], locale);
-  dateComment = temp_dates_comment.join(' ');
 
   return (
     <div className={classes.main}>
