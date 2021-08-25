@@ -1,9 +1,9 @@
-import { Typography } from '../atoms';
+import { Typography } from 'components/atoms';
 import React, { useState } from 'react';
 import UserInfoForm, { IFormInput } from './UserUpdateForm';
 import { useTranslation } from 'react-i18next';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import { oceanBlueColor, skyBlueColor } from '../../style';
+import { oceanBlueColor, skyBlueColor } from 'style';
 import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({

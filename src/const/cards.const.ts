@@ -1,4 +1,4 @@
-import { WidgetName } from '../models/WidgetName';
+import { WidgetName } from 'models/WidgetName';
 
 // cards is this least will be avaiaable for operation environments (all non-staging environments)
 export const operationalCards: WidgetName[] = [

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { IWidgetInjuredAccidentsWithPedestrians } from '../../../models/WidgetData';
-import StackedBarChartView from '../StackedBarChartView';
+import { IWidgetInjuredAccidentsWithPedestrians } from 'models/WidgetData';
+import StackedBarChartView from 'components/molecules/StackedBarChartView';
 import { Box, makeStyles, Theme } from '@material-ui/core';
 
 const YEAR = 'year';

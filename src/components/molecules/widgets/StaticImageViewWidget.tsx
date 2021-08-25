@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { IWidgetVisionZeroImageData } from '../../../models/WidgetData';
-import ImageView from '../ImageView';
+import { IWidgetVisionZeroImageData } from 'models/WidgetData';
+import ImageView from 'components/molecules/ImageView';
 
 interface IProps {
   data: IWidgetVisionZeroImageData;

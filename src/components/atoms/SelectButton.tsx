@@ -8,7 +8,7 @@ import { Select } from '@material-ui/core';
 import { CalendarTodayOutlined } from '@material-ui/icons';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
-import { useStore } from '../../store/storeConfig';
+import { useStore } from 'store/storeConfig';
 
 interface IProps {
   onChange: (value: number) => any;

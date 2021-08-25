@@ -1,8 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { oceanBlueColor, skyBlueColor } from '../../style';
+import { oceanBlueColor, skyBlueColor } from 'style';
 import React from 'react';
-import { AUTH_LOGIN_GOOGLE_URL } from '../../utils/utils';
-import { openSignInWindow } from '../../services/signInWindow';
+import { AUTH_LOGIN_GOOGLE_URL } from 'utils/utils';
+import { openSignInWindow } from 'services/signInWindow';
 import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles((theme) => ({
   userButton: {
