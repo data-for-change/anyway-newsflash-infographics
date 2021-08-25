@@ -10,7 +10,8 @@ import RootStore from 'store/root.store';
 import UserProfileHeader from './UserProfileHeader';
 import LanguageMenu from 'components/organisms/LanguageMenu';
 import { FEATURE_FLAGS } from 'utils/env.utils';
-import { anywayLogo } from '../../utils/LogoMap';
+import anywayLogo from 'assets/anyway.png';
+import { SignInIcon } from 'components/atoms/SignInIcon';
 
 
 const useStyles = makeStyles({
@@ -51,7 +52,10 @@ const Header: FC = () => {
         />
       );
     } else {
-      authElement = <LogInLinkGoogle />;
+      authElement = <>
+        <LogInLinkGoogle />
+      <SignInIcon/>
+      </>;
     }
   }
 
