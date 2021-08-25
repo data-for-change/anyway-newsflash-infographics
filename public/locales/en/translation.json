@@ -83,6 +83,7 @@
     "all": "all"
   },
   "header": {
+    "Search":"Search",
     "User Greeting": "Hello",
     "User Info Update": "Update Info"
   },
