@@ -9,14 +9,12 @@ import './services/i18n.service';
 import * as serviceWorker from './serviceWorker';
 import OverlayLoader from './components/molecules/OverlayLoader';
 
-
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 ReactDOM.render(
-  
   <Suspense fallback={<OverlayLoader show />}>
-     <StylesProvider jss={jss}>
-    <App />
+    <StylesProvider jss={jss}>
+      <App />
     </StylesProvider>
   </Suspense>,
   document.getElementById('root'),

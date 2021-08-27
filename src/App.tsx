@@ -1,5 +1,4 @@
 import React, { FC, useEffect } from 'react';
-
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import { Footer } from './components/organisms/Footer';
@@ -16,7 +15,6 @@ const headerHeight = '5vh';
 const pageContentHeight = '88vh';
 const footerHeight = '7vh';
 
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     pageContent: {
@@ -24,6 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   }),
 );
+
 const App: FC = () => {
   const { i18n } = useTranslation();
   const classes = useStyles();
@@ -31,34 +30,33 @@ const App: FC = () => {
   const theme = useTheme();
 
   const appDir = i18n.dir();
+
   useEffect(() => {
-    // https://material-ui.com/guides/right-to-left/F
+    // https://material-ui.com/guides/right-to-left/
     document.body.dir = appDir;
-    // theme.direction = appDir;
-    // , theme.direction
   }, [i18n, theme, appDir]);
 
   return (
-    <StoreContext.Provider value={store}> 
-        <ThemeProvider theme={appDir === 'rtl' ? store.settingsStore.rtlTheme : store.settingsStore.theme}>
-          <Router>
-            <Box>
-              <Box height={headerHeight} display="flex">
-                <Header />
-              </Box>
-              <Box height={pageContentHeight} className={classes.pageContent}>
-                <Switch>
-                  <Route exact path="/" component={HomePageRedirect} />
-                  <Route path="/:lng?/newsflash/:id" component={HomePage} />
-                  <Route path="/login-popup-redirect" component={PopUpRedirect} />
-                </Switch>
-              </Box>
-              <Box height={footerHeight} display="flex">
-                <Footer />
-              </Box>
+    <StoreContext.Provider value={store}>
+      <ThemeProvider theme={appDir === 'rtl' ? store.settingsStore.rtlTheme : store.settingsStore.theme}>
+        <Router>
+          <Box>
+            <Box height={headerHeight} display="flex">
+              <Header />
             </Box>
-          </Router>
-        </ThemeProvider>
+            <Box height={pageContentHeight} className={classes.pageContent}>
+              <Switch>
+                <Route exact path="/" component={HomePageRedirect} />
+                <Route path="/:lng?/newsflash/:id" component={HomePage} />
+                <Route path="/login-popup-redirect" component={PopUpRedirect} />
+              </Switch>
+            </Box>
+            <Box height={footerHeight} display="flex">
+              <Footer />
+            </Box>
+          </Box>
+        </Router>
+      </ThemeProvider>
     </StoreContext.Provider>
   );
 };
