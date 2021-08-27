@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { Theme, createMuiTheme } from '@material-ui/core';
-import { defaultThemeOptions } from '../style';
+import { defaultThemeOptions } from 'style';
 import RootStore from './root.store';
 
 export default class SettingsStore {

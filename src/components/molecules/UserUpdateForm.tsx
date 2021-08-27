@@ -1,11 +1,11 @@
 import React, { ChangeEvent, useState } from 'react';
 import DialogWithHeader from './DialogWithHeader';
 import { Box, Grid, TextField, makeStyles, FormHelperText } from '@material-ui/core';
-import { useStore } from '../../store/storeConfig';
-import Button from '../atoms/Button';
+import { useStore } from 'store/storeConfig';
+import Button from 'components/atoms/Button';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
-import { IValidationErrors, validateUserDetails } from '../../utils/validations';
+import { IValidationErrors, validateUserDetails } from 'utils/validations';
 
 interface IProps {
   isShowing: boolean;
