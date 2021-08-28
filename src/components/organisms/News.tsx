@@ -5,8 +5,8 @@ import { silverSmokeColor } from 'style';
 import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
 import { observer } from 'mobx-react-lite';
-import { dateFormat } from '../../utils/time.utils';
-import { useLocaleValue } from "../../hooks/date.hooks"
+import { dateFormat } from 'utils/time.utils';
+import { useLocaleValue } from 'hooks/date.hooks';
 
 const useStyles = makeStyles({
   container: {},
