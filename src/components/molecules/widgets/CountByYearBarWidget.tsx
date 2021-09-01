@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import BarChartView from '../BarChartView';
-import { IWidgetAccidentsByYearData } from '../../../models/WidgetData';
+import BarChartView from 'components/molecules/BarChartView';
+import { IWidgetAccidentsByYearData } from 'models/WidgetData';
 
 const ACCIDENT_YEAR = 'accident_year';
 const COUNT = 'count';

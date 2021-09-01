@@ -1,9 +1,9 @@
 import React from 'react';
 import Box from '@material-ui/core/Box';
-import { roadIconColors, silverSmokeColor } from '../../../style';
+import { roadIconColors, silverSmokeColor } from 'style';
 import SeverityImage from './SeverityImage';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography } from '../../atoms';
+import { Typography } from 'components/atoms';
 
 interface IProps {
   numOfAccidents: number;
