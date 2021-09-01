@@ -61,6 +61,11 @@
           "skipBlankLines": true,
           "skipComments": true
         }
+      ],
+      "quotes": [
+        2,
+        "single",
+        "avoid-escape"
       ]
     }
   },

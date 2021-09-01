@@ -139,7 +139,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
           <Grid item xs={12}></Grid>
           <Grid item xs={12}>
             <Box className={classes.submitButton}>
-              <Button.Standard isSubmit>{t(`userDetailsForm.Update`)}</Button.Standard>
+              <Button.Standard isSubmit>{t('userDetailsForm.Update')}</Button.Standard>
             </Box>
           </Grid>
         </Grid>
