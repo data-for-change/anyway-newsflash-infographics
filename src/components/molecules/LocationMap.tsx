@@ -21,7 +21,7 @@ interface IProps {
 }
 
 const LocationMap: FC<IProps> = ({ items, center, sizeOptions }) => {
-  let markers = items.map((x: IPoint, i: number) => {
+  const markers = items.map((x: IPoint, i: number) => {
     if (x.latitude !== null && x.longitude !== null) {
       const tooltipOffset = i % 2 === 0 ? ClockPosition.RIGHT : ClockPosition.LEFT;
       return (
@@ -52,7 +52,7 @@ const LocationMap: FC<IProps> = ({ items, center, sizeOptions }) => {
 // get bounding box for collection of points
 const getBounds = (items: IPoint[]) => {
   let bound: LatLng[] = DEFAULT_BOUNDS;
-  let points = uniquePoints(items);
+  const points = uniquePoints(items);
   if (points.length === 1) {
     // single point provided
     const p = points[0];
