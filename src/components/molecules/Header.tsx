@@ -36,7 +36,7 @@ const Header: FC = () => {
   }, [store]);
 
   let authElement;
-  let logo : string = anywayLogo;
+  const logo = anywayLogo;
   if (FEATURE_FLAGS.login) {
     //login or logout- depend on authentication state
     if (store.isUserAuthenticated) {
