@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Box, DialogContent, DialogTitle, DialogActions } from '@material-ui/core';
-import { Dialog, Button, Typography } from '../atoms';
+import { Dialog, Button, Typography } from 'components/atoms';
 
 interface IProps {
   section: string;
@@ -55,7 +55,7 @@ const MapDialog: FC<IProps> = ({ section, isShowing, onClose }) => {
         </DialogContent>
         <DialogActions className={classes.actions}>
           <Button.Standard>{t('mapDialog.searchButton')}</Button.Standard>
-          <Button.Standard>{t('mapDialog.cancelButton')}</Button.Standard> {/*change to outline button when ready*/}
+          <Button.Outlined>{t('mapDialog.cancelButton')}</Button.Outlined> {/*change to outline button when ready*/}
         </DialogActions>
       </Box>
     </Dialog>
