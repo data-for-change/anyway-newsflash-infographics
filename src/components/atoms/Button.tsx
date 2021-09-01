@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Button as MatButton, IconButton as MatIconButton } from '@material-ui/core';
 
-interface IProps {
+export interface IProps {
   onClick?: () => any;
   isSubmit?: boolean;
 }
