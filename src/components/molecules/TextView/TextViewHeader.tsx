@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import Box from '@material-ui/core/Box';
-import { roadIconColors } from '../../../style';
-import { Typography } from '../../atoms';
+import { roadIconColors } from 'style';
+import { Typography } from 'components/atoms';
 import { useTranslation } from 'react-i18next';
-import { IWidgetCountBySeverityTextData } from '../../../models/WidgetData';
+import { IWidgetCountBySeverityTextData } from 'models/WidgetData';
 import { makeStyles } from '@material-ui/core/styles';
 
 interface IProps {
@@ -32,7 +32,7 @@ const AccidentsOccurred: FC<AProps> = ({ accidentsCount, singleType }) => {
     <Box mr={1} key={1}>
       <Typography.Body1>{t('textView.occurred')}</Typography.Body1>
     </Box>,
-    <Typography.Title1 bold>
+    <Typography.Title1 key={2} bold>
       <Box className={classes.numOfAcc}>{accidentsCount}</Box>
     </Typography.Title1>,
     <Box mr={1} key={3}>

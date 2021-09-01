@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import BarChartView from '../BarChartView';
-import { IWidgetAccidentsByHourBarData } from '../../../models/WidgetData';
+import BarChartView from 'components/molecules/BarChartView';
+import { IWidgetAccidentsByHourBarData } from 'models/WidgetData';
 
 const ACCIDENT_HOUR = 'accident_hour';
 const COUNT = 'count';

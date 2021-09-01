@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import ReactLeafletGoogleLayer from 'react-leaflet-google-layer';
-import { MAP_STYLE } from '../../../style/map.style';
-import { mapApiKey } from '../../../utils/utils';
 import { useParams } from 'react-router-dom';
+import { MAP_STYLE } from 'style/map.style';
+import { mapApiKey } from 'utils/utils';
 
 interface lng {
   lng: string;

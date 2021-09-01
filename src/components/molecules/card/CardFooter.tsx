@@ -1,9 +1,9 @@
 import React from 'react';
-import { Logo, Typography } from '../../atoms';
-import LamasImage from '../../../assets/cbs.png';
-import AnywayImage from '../../../assets/anyway.png';
+import { Logo, Typography } from 'components/atoms';
+import LamasImage from 'assets/cbs.png';
+import AnywayImage from 'assets/anyway.png';
 import { makeStyles } from '@material-ui/core/styles';
-import { cardFooterHeight } from '../../../style';
+import { cardFooterHeight } from 'style';
 import { Box } from '@material-ui/core';
 
 interface IProps {

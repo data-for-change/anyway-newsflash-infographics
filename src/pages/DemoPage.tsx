@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import RepresentationInCivilService from '../assets/demo/representation-in-civil-service.jpg';
-import RepresentationInGoverment from '../assets/demo/representation-in-government-companies.jpg';
-import CivilServiceRate from '../assets/demo/civil-service-rate.jpg';
-import { Grid } from '../components/atoms';
+import RepresentationInCivilService from 'assets/demo/representation-in-civil-service.jpg';
+import RepresentationInGoverment from 'assets/demo/representation-in-government-companies.jpg';
+import CivilServiceRate from 'assets/demo/civil-service-rate.jpg';
+import { Grid } from 'components/atoms';
 import { cardHeight, cardWidth } from '../style';
 
 interface IProps {}
