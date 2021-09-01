@@ -1,15 +1,15 @@
 import React, { FC, useEffect } from 'react';
 import WidgetsTemplate from '../components/organisms/WidgetsTemplate';
 import { Box } from '@material-ui/core';
-import SideBar from '../components/organisms/SideBar';
+import SideBar from 'components/organisms/SideBar';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { RouteComponentProps, Redirect } from 'react-router';
 import { silverSmokeColor } from '../style';
-import FilterBar from '../components/organisms/FilterBar';
-import OverlayLoader from '../components/molecules/OverlayLoader';
+import FilterBar from 'components/organisms/FilterBar';
+import OverlayLoader from 'components/molecules/OverlayLoader';
 import { observer } from 'mobx-react-lite';
-import { useStore } from '../store/storeConfig';
-import RootStore from '../store/root.store';
+import { useStore } from 'store/storeConfig';
+import RootStore from 'store/root.store';
 import DemoPage from './DemoPage';
 import { Route, Switch } from 'react-router-dom';
 
@@ -28,6 +28,9 @@ const useStyles = makeStyles({
   widgetBox: {
     height: 'inherit',
     overflow: 'auto',
+  },
+  sideBarWrapper: {
+    borderInlineEnd: `1px solid ${silverSmokeColor}`,
   },
 });
 
@@ -57,7 +60,7 @@ const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
 
   return (
     <Box display="flex" flexGrow={1} className={classes.mainBox}>
-      <Box flexGrow={1} width={319} display="flex" borderLeft={1} borderColor={silverSmokeColor}>
+      <Box flexGrow={1} width={319} display="flex" className={classes.sideBarWrapper}>
         <SideBar />
       </Box>
       <Box flexGrow={5} className={classes.widgetBox} position="relative">

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { IWidgetTopRoadSegmentsAccidentsPerKm } from '../../../models/WidgetData';
+import { IWidgetTopRoadSegmentsAccidentsPerKm } from 'models/WidgetData';
 
 interface IProps {
   data: IWidgetTopRoadSegmentsAccidentsPerKm;

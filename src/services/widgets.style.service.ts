@@ -1,4 +1,4 @@
-import { WidgetName } from '../models/WidgetName';
+import { WidgetName } from 'models/WidgetName';
 
 export enum HeaderVariant {
   None,

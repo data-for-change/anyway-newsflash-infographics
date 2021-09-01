@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
 import { MapContainer } from 'react-leaflet';
 import L, { LatLng } from 'leaflet';
-import { uniquePoints } from '../../utils/utils';
-import { IPoint } from '../../models/Point';
-import { MostSevereAccidentsMarker } from '../atoms';
-import { ClockPosition } from '../../models/ClockPosition';
+import { uniquePoints } from 'utils/utils';
+import { IPoint } from 'models/Point';
+import { MostSevereAccidentsMarker } from 'components/atoms';
+import { ClockPosition } from 'models/ClockPosition';
 import GoogleMapsLayer from './map/GoogleMapsLayer';
-import MapViewControl from '../../services/MapViewControl';
+import MapViewControl from 'services/MapViewControl';
 const INITIAL_ZOOM = parseInt(process.env.REACT_APP_DEFAULT_MAP_ZOOM!);
 const WRAPPER_STYLES = { height: '100%', width: '100%' };
 const DEFAULT_BOUNDS = [
@@ -21,7 +21,7 @@ interface IProps {
 }
 
 const LocationMap: FC<IProps> = ({ items, center, sizeOptions }) => {
-  let markers = items.map((x: IPoint, i: number) => {
+  const markers = items.map((x: IPoint, i: number) => {
     if (x.latitude !== null && x.longitude !== null) {
       const tooltipOffset = i % 2 === 0 ? ClockPosition.RIGHT : ClockPosition.LEFT;
       return (
@@ -52,7 +52,7 @@ const LocationMap: FC<IProps> = ({ items, center, sizeOptions }) => {
 // get bounding box for collection of points
 const getBounds = (items: IPoint[]) => {
   let bound: LatLng[] = DEFAULT_BOUNDS;
-  let points = uniquePoints(items);
+  const points = uniquePoints(items);
   if (points.length === 1) {
     // single point provided
     const p = points[0];
