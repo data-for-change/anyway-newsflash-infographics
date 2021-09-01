@@ -38,6 +38,7 @@ const LanguageMenu: FC = () => {
       <Menu
         items={LANGUAGES.map((language) => (
           <Link
+            shouldReload
             to={
               language.value === 'he'
                 ? `/newsflash/${store.activeNewsFlashId}`
