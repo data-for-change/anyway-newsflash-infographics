@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { IWidgetAccidentCountByDriverType } from '../../../models/WidgetData';
-import PieChartView from '../PieChartView';
+import { IWidgetAccidentCountByDriverType } from 'models/WidgetData';
+import PieChartView from 'components/molecules/PieChartView';
 
 const DRIVER_TYPE = 'driver_type';
 const COUNT = 'count';
