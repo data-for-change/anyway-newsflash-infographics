@@ -6,6 +6,17 @@ const validCoords = (coords: any) => coords < mostExtremeLongitude && coords > m
 const validNumber = (value: any) => typeof value === 'number' && value >= 0;
 const validString = (value: any) => typeof value === 'string';
 
+
+export const isVerifiedWidgetData = (widget: any) => {
+  let isValid = false;
+  try {
+    isValid = verifiedWidgetData(widget);
+  } catch (err) {
+    console.error('isVerifiedWidgetData - data structure error', widget, err);
+  }
+  return isValid;
+}
+
 export const verifiedWidgetData = (widget: any) => {
   const {
     name,
@@ -139,8 +150,12 @@ export const verifiedWidgetData = (widget: any) => {
       );
       break;
     }
+    case 'vision_zero_2_plus_1': {
+      isValid = validString(items.image_src);
+      break;
+    }
     default: {
-      isValid = false;
+      isValid = false
     }
   }
 

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import L from 'leaflet';
 import { Marker as MapMarker, Popup } from 'react-leaflet';
-import { MapIcon } from '../atoms';
+import { MapIcon } from 'components/atoms';
 
 interface IProps {
   markerdata: any;

@@ -1,4 +1,4 @@
-import { DEMO_ID } from '../../utils/utils';
+import { DEMO_ID } from 'utils/utils';
 
 const demo = {
   id: DEMO_ID,

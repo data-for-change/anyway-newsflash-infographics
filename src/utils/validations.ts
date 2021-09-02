@@ -1,4 +1,4 @@
-import { IFormInput } from '../components/molecules/UserUpdateForm';
+import { IFormInput } from 'components/molecules/UserUpdateForm';
 
 export interface IValidationErrors {
   email: boolean;

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-import { IPoint } from '../../models/Point';
-import { Marker } from '../atoms';
+import { IPoint } from 'models/Point';
+import { Marker } from 'components/atoms';
 import Map from './map/Map';
 
 

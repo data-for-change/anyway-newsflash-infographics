@@ -44,7 +44,7 @@ const Map: FC<IProps> = ({ zoom = INITIAL_ZOOM, center=INITIAL_CENTER, data, chi
 const getBounds = (items: IPoint[] | undefined) => {
   let bound: LatLng[] = DEFAULT_BOUNDS;
 
-  let points = items && uniquePoints(items);
+  const points = items && uniquePoints(items);
   if (points && points?.length === 1) {
     // single point provided
     const p = points[0];

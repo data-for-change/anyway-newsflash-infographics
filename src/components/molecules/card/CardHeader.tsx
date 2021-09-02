@@ -1,13 +1,13 @@
 import { Box, makeStyles } from '@material-ui/core';
 import React, { FC } from 'react';
-import { HeaderVariant } from '../../../services/widgets.style.service';
+import { HeaderVariant } from 'services/widgets.style.service';
 import RoadNumberImage from './RoadNumberImage';
-import LamasImage from '../../../assets/cbs.png';
-import AnywayImage from '../../../assets/anyway.png';
-import { Typography, Logo } from '../../atoms';
+import LamasImage from 'assets/cbs.png';
+import AnywayImage from 'assets/anyway.png';
+import { Typography, Logo } from 'components/atoms';
 import { useTranslation } from 'react-i18next';
-import { silverSmokeColor, opacity80percent } from '../../../style/';
-import { splitTextHeader } from '../../../utils/string.utils';
+import { silverSmokeColor, opacity80percent } from 'style/';
+import { splitTextHeader } from 'utils/string.utils';
 
 const useStyles = makeStyles({
   wrapper: {

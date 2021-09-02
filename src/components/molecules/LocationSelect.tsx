@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useMapEvents } from 'react-leaflet';
-import { IPoint } from '../../models/Point';
-import { Marker } from '../atoms';
+import { IPoint } from 'models/Point';
+import { Marker } from 'components/atoms';
 import GoogleMapsLayer from './map/GoogleMapsLayer';
 import Map from './map/Map';
 
