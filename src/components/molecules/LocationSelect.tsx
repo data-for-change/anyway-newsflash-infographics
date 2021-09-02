@@ -25,7 +25,6 @@ interface IProps {
 }
 
 const LocationSelect: FC<IProps> = ({ location, onLocationChange }) => {
-
   return (
     <Map>
       <LocationPicker onLocationChange={onLocationChange} />
