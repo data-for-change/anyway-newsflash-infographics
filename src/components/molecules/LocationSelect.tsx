@@ -1,11 +1,9 @@
 import { FC } from 'react';
-import { MapContainer, useMapEvents } from 'react-leaflet';
+import { useMapEvents } from 'react-leaflet';
 import { IPoint } from '../../models/Point';
-import { INITIAL_CENTER } from '../../utils/utils';
 import { Marker } from '../atoms';
 import GoogleMapsLayer from './map/GoogleMapsLayer';
-
-const INITIAL_ZOOM = parseInt(process.env.REACT_APP_DEFAULT_MAP_ZOOM!);
+import Map from './map/Map';
 
 interface ILocation {
   onLocationChange: (location: IPoint) => void;
@@ -25,15 +23,15 @@ interface IProps {
   location: IPoint | null;
   onLocationChange: (location: IPoint | null) => void;
 }
-//TODO create Map component
-const LocationSelect:FC<IProps> = ({location, onLocationChange}) => {
+
+const LocationSelect: FC<IProps> = ({ location, onLocationChange }) => {
 
   return (
-    <MapContainer center={INITIAL_CENTER} zoom={INITIAL_ZOOM} style={{ height: '100%', width: '100%' }}>
+    <Map>
       <LocationPicker onLocationChange={onLocationChange} />
       <GoogleMapsLayer />
       {location && <Marker markerdata={location} />}
-    </MapContainer>
+    </Map>
   );
 };
 

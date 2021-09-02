@@ -68,7 +68,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
     }
     case WidgetName.accidents_heat_map: {
       widgetComponent = (
-        <HeatMap data={data.items as IPoint[]} center={{ lat: 32.0853, lng: 34.7818 }} sizeOptions={sizeOptions} />
+        <HeatMap data={data.items as IPoint[]} />
       );
       break;
     }
