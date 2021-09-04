@@ -15,22 +15,24 @@ const useStyles = makeStyles((theme: Theme) =>
     dialogFooter: {
       display: 'flex',
       justifyContent: 'flex-end',
-      gap: 10,
+      gap: theme.spacing(1.5),
     },
-    mainContent: {},
     wrapper: {
       minWidth: 500,
-      padding: 20,
+      padding: theme.spacing(2.5),
+      paddingInlineStart: theme.spacing(5),
     },
     dialogHeader: {
       padding: 0,
-      paddingInlineStart: theme.spacing(3),
     },
     actions: {
-      gap: 10,
+      gap: theme.spacing(1.5),
     },
     chosenSection: {
-      marginBlock: 15,
+      marginBlock: theme.spacing(2),
+    },
+    dialogContent: {
+      paddingInlineStart: 0,
     },
   }),
 );
@@ -41,10 +43,10 @@ const MapDialog: FC<IProps> = ({ section, isShowing, onClose }) => {
   return (
     <Dialog isShowing={isShowing} onClose={onClose} maxWidth="lg">
       <Box className={classes.wrapper}>
-        <DialogTitle className={classes.dialogHeader}>
+        <Box className={classes.dialogHeader}>
           <Typography.Title1>{t('mapDialog.searchSection')}</Typography.Title1>
-        </DialogTitle>
-        <DialogContent>
+        </Box>
+        <DialogContent className={classes.dialogContent}>
           {/*A placeholder to visually estimate the size*/}
           <img src="https://images.indianexpress.com/2017/05/google-maps-759.jpg" alt="" />
           <div className={classes.chosenSection}>
@@ -55,7 +57,7 @@ const MapDialog: FC<IProps> = ({ section, isShowing, onClose }) => {
         </DialogContent>
         <DialogActions className={classes.actions}>
           <Button.Standard>{t('mapDialog.searchButton')}</Button.Standard>
-          <Button.Outlined>{t('mapDialog.cancelButton')}</Button.Outlined> {/*change to outline button when ready*/}
+          <Button.Outlined>{t('mapDialog.cancelButton')}</Button.Outlined>
         </DialogActions>
       </Box>
     </Dialog>
