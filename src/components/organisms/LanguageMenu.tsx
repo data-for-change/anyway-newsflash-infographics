@@ -3,7 +3,7 @@ import Menu from 'components/atoms/Menu';
 import { useStore } from 'store/storeConfig';
 import languageSelector from 'assets/language-selector.svg';
 import { AnyWayButton } from 'components/atoms/AnyWayButton';
-import { Link, Typography } from 'components/atoms';
+import { Typography, Button } from 'components/atoms';
 
 const LANGUAGES = [
   {
@@ -28,6 +28,12 @@ const LanguageMenu: FC = () => {
   const closeMenu = () => {
     setAnchorEl(null);
   };
+  const reloadLang = (value: string) => {
+    if (value === 'he') {
+      return window.location.assign(`/newsflash/${store.activeNewsFlashId}`);
+    }
+    return window.location.assign(`/${value}/newsflash/${store.activeNewsFlashId}`);
+  };
   const store = useStore();
 
   return (
@@ -37,16 +43,9 @@ const LanguageMenu: FC = () => {
       </AnyWayButton>
       <Menu
         items={LANGUAGES.map((language) => (
-          <Link
-            shouldReload
-            to={
-              language.value === 'he'
-                ? `/newsflash/${store.activeNewsFlashId}`
-                : `/${language.value}/newsflash/${store.activeNewsFlashId}`
-            }
-          >
+          <Button.Text onClick={() => reloadLang(language.value)}>
             <Typography.Body5>{language.buttonText}</Typography.Body5>
-          </Link>
+          </Button.Text>
         ))}
         handleClose={closeMenu}
         anchorEl={anchorEl}

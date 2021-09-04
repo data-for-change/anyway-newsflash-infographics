@@ -15,20 +15,11 @@ const useStyles = makeStyles({
 
 interface IProps extends LinkProps {
   to: string;
-  shouldReload?: boolean;
 }
 
 const Link: FC<IProps> = ({ ...props }) => {
   const classes = useStyles();
-  const { shouldReload, to } = props;
 
-  if (shouldReload) {
-    return (
-      <a className={classes.link} {...props} href={to}>
-        {props.children}
-      </a>
-    );
-  }
   return <RouterLink className={classes.link} {...props} />;
 };
 export default Link;
