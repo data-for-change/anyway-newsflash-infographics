@@ -10,7 +10,8 @@ interface lng {
 
 const GoogleMapsLayer: FC = ({ children }) => {
   const { lng }: lng = useParams();
-  const selectedLang: string = lng ? lng : 'he';
+
+  const selectedLang: string = lng || 'he';
 
   return (
     <ReactLeafletGoogleLayer
