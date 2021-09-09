@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { Link, Typography } from '../atoms';
+import { Link, Typography } from 'components/atoms';
 import { Box, makeStyles } from '@material-ui/core';
-import { silverSmokeColor } from '../../style';
-import { useStore } from '../../store/storeConfig';
-import RootStore from '../../store/root.store';
+import { silverSmokeColor } from 'style';
+import { useStore } from 'store/storeConfig';
+import RootStore from 'store/root.store';
 import { observer } from 'mobx-react-lite';
-import { dateFormat } from '../../utils/time.utils';
-import { useLocale } from "../../hooks/date.hooks"
+import { dateFormat } from 'utils/time.utils';
+import { useLocale } from 'hooks/date.hooks';
 
 const useStyles = makeStyles({
   container: {},

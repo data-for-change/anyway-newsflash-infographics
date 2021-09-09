@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { Typography } from '../../atoms';
+import { Typography } from 'components/atoms';
 import PieChartView, { renderCollisionCustomizedLabel } from '../PieChartView';
-import { IWidgetHeadOnCollisionsComparisonData } from '../../../models/WidgetData';
+import { IWidgetHeadOnCollisionsComparisonData } from 'models/WidgetData';
 import { Box, makeStyles } from '@material-ui/core';
-import { cherryJamColor, silverSpoonColor } from '../../../style';
+import { cherryJamColor, silverSpoonColor } from 'style';
 import { useTranslation } from 'react-i18next';
-import RootStore from '../../../store/root.store';
-import { useStore } from '../../../store/storeConfig';
+import RootStore from 'store/root.store';
+import { useStore } from 'store/storeConfig';
 
 const ACCIDENT_TYPE = 'desc';
 const COUNT = 'count';

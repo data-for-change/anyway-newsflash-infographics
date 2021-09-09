@@ -5,10 +5,10 @@ import { Marker, Popup } from 'react-leaflet';
 
 import { AnyWayButton } from './AnyWayButton';
 import { Typography, MapIcon, TooltipMarker, TooltipArrow } from '.';
-import { ClockPosition } from '../../models/ClockPosition';
+import { ClockPosition } from 'models/ClockPosition';
 import { useTranslation } from 'react-i18next';
-import { defaultBorderRadius, silverSmokeColor } from '../../style';
-import { useLocale } from "../../hooks/date.hooks"
+import { defaultBorderRadius, silverSmokeColor } from 'style';
+import { useLocale } from 'hooks/date.hooks'
 
 interface IProps {
   data: any;

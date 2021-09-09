@@ -12,7 +12,7 @@ export enum WidgetName {
   accident_count_by_day_night = 'accident_count_by_day_night',
   head_on_collisions_comparison = 'head_on_collisions_comparison',
   head_on_collisions_comparison_percentage = 'head_on_collisions_comparison_percentage',
-  vision_zero_2_plus_1 = 'vision_zero_2_plus_1 ',
+  vision_zero_2_plus_1 = 'vision_zero_2_plus_1',
   top_road_segments_accidents_per_km = 'top_road_segments_accidents_per_km',
   accident_count_by_road_light = 'accident_count_by_road_light',
   accident_count_by_driver_type = 'accident_count_by_driver_type',

@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import { MapContainer } from 'react-leaflet';
-import { IPoint } from '../../models/Point';
+import { IPoint } from 'models/Point';
 import L, { LatLng } from 'leaflet';
 import 'leaflet.heat';
 import { makeStyles } from '@material-ui/core/styles';
-import { uniquePoints } from '../../utils/utils';
+import { uniquePoints } from 'utils/utils';
 import GoogleMapsLayer from './map/GoogleMapsLayer';
-import MapViewControl from '../../services/MapViewControl';
-import HeatMapLayer from '../../services/HeatMapLayer';
+import MapViewControl from 'services/MapViewControl';
+import HeatMapLayer from 'services/HeatMapLayer';
 
 const INITIAL_ZOOM = parseInt(process.env.REACT_APP_DEFAULT_MAP_ZOOM!);
 const useStyles = makeStyles({

@@ -1,16 +1,18 @@
 import React, { FC, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { AppBar, Logo } from '../atoms';
-import AnywayImage from '../../assets/anyway.png';
-import { SignInIcon } from '../atoms/SignInIcon';
-import LogInLinkGoogle from './LogInLinkGoogle';
-import { Box } from '@material-ui/core';
-import { useStore } from '../../store/storeConfig';
-import RootStore from '../../store/root.store';
-import UserProfileHeader from './UserProfileHeader';
+import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
-import LanguageMenu from '../organisms/LanguageMenu';
-import { FEATURE_FLAGS } from '../../utils/env.utils';
+import { Box } from '@material-ui/core';
+import { AppBar,Button, Logo } from 'components/atoms';
+import LogInLinkGoogle from './LogInLinkGoogle';
+import { useStore } from 'store/storeConfig';
+import RootStore from 'store/root.store';
+import UserProfileHeader from './UserProfileHeader';
+import LanguageMenu from 'components/organisms/LanguageMenu';
+import { FEATURE_FLAGS } from 'utils/env.utils';
+import anywayLogo from 'assets/anyway.png';
+import { SignInIcon } from 'components/atoms/SignInIcon';
+
 
 const useStyles = makeStyles({
   userSection: {
@@ -25,7 +27,8 @@ const reloadHomePage = () => {
 
 const Header: FC = () => {
   const store: RootStore = useStore();
-  const isUserDetailsRequired: boolean = store.userInfo?.meta.isCompleteRegistration === false;
+  const isUserDetailsRequired: boolean = !store.userInfo?.meta.isCompleteRegistration;
+  const { t } = useTranslation();
 
   const classes = useStyles();
   useEffect(() => {
@@ -33,10 +36,11 @@ const Header: FC = () => {
   }, [store]);
 
   let authElement;
+  let logo : string = anywayLogo;
   if (FEATURE_FLAGS.login) {
     //login or logout- depend on authentication state
     if (store.isUserAuthenticated) {
-      const { ...userDetails } = store.userInfo!.data;
+      const { ...userDetails } = store.userInfo;
       const handleLogout = () => {
         store.logOutUser();
       };
@@ -48,21 +52,20 @@ const Header: FC = () => {
         />
       );
     } else {
-      authElement = <LogInLinkGoogle />;
+      authElement = <>
+        <LogInLinkGoogle />
+      <SignInIcon/>
+      </>;
     }
   }
 
   return (
     <AppBar>
-      <Logo src={AnywayImage} alt={'Anyway'} height={30} onClick={reloadHomePage} />
+      <Logo src={logo} alt={'Anyway'} height={30} onClick={reloadHomePage} />
       <Box className={classes.userSection}>
-        <LanguageMenu />
-        {authElement && (
-          <>
-            {authElement}
-            <SignInIcon />
-          </>
-        )}
+        {FEATURE_FLAGS.location_search && <Button.Standard>{t('header.Search')}</Button.Standard>}
+        {FEATURE_FLAGS.language && <LanguageMenu />}
+        {authElement}
       </Box>
     </AppBar>
   );
