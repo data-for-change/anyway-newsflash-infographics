@@ -6,7 +6,7 @@ import { useStore } from '../../store/storeConfig';
 import RootStore from '../../store/root.store';
 import { observer } from 'mobx-react-lite';
 import { dateFormat } from '../../utils/time.utils';
-import { useLocaleValue } from "../../hooks/date.hooks"
+import { useLocale } from "../../hooks/date.hooks"
 
 const useStyles = makeStyles({
   container: {},
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 const News: FC = () => {
   const store: RootStore = useStore();
   const classes = useStyles();
-  let locale = useLocaleValue();
+  const locale = useLocale();
 
   return (
     <Box flexGrow={1} display="flex" flexDirection="column" className={classes.newsFeed}>

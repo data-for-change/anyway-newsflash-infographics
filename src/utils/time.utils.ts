@@ -1,4 +1,6 @@
-export function dateFormat(date: Date | string, locale: string): string {
+import { locales } from "../hooks/date.hooks";
+
+export function dateFormat(date: Date | string, locale: string = locales.he): string {
   let dateStr = '';
   if (!date) {
     console.error('invalid date', date);

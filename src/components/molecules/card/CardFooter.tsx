@@ -4,8 +4,6 @@ import LamasImage from '../../../assets/cbs.png';
 import AnywayImage from '../../../assets/anyway.png';
 import { makeStyles } from '@material-ui/core/styles';
 import { cardFooterHeight } from '../../../style';
-import { useLocaleValue } from '../../../hooks/date.hooks';
-import { dateFormat } from '../../../utils/time.utils';
 import { Box } from '@material-ui/core';
 
 interface IProps {
@@ -25,10 +23,6 @@ const useStyles = makeStyles({
 
 const CardFooter: React.FC<IProps> = ({ dateComment }) => {
   const classes = useStyles();
-  let locale = useLocaleValue();
-  let temp_dates_comment = dateComment.split(' ');
-  temp_dates_comment[3] = dateFormat(temp_dates_comment[3], locale);
-  dateComment = temp_dates_comment.join(' ');
 
   return (
     <div className={classes.main}>
