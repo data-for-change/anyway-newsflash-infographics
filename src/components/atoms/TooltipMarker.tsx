@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import L from 'leaflet';
+import { useTranslation } from 'react-i18next';
 import { Marker } from 'react-leaflet';
 import { makeStyles } from '@material-ui/core';
 import { dateFormat } from 'utils/time.utils';
 import { ClockPosition } from 'models/ClockPosition';
 import { transparentColor, whiteColor, blackColor, tooltipMarkerBorderColorArrow } from 'style';
+import { useLocale } from 'hooks/date.hooks'
 
 
 const getLabelPosition = (offset: ClockPosition): string => {
@@ -115,10 +117,12 @@ const useStyles = makeStyles({
     transform: (prop) => getLabelArrowRotation(prop.offset as ClockPosition),
   },
 });
-const TooltipMarker = ({ data, position, offset, locale}: any) => {
-  const classes = useStyles(offset);
+const TooltipMarker = ({ data, position, offset }: any) => {
+  const { i18n } = useTranslation();
+  const order = i18n.language === 'en'
+  const classes = useStyles({offset, order});
+  const locale = useLocale()
   const iconText = `${dateFormat(data.accident_timestamp, locale)}`;
-
   const TooltipTemplate = (
     <div className={classes.root}>
       <div className={classes.content}>{iconText}</div>
