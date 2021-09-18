@@ -1,4 +1,4 @@
-import { locales } from "hooks/date.hooks";
+import { locales } from 'hooks/date.hooks';
 
 export function dateFormat(date: Date | string, locale: string = locales.he): string {
   let dateStr = '';
