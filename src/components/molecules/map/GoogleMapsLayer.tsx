@@ -10,7 +10,6 @@ interface lng {
 
 const GoogleMapsLayer: FC = ({ children }) => {
   const { lng } = useParams<lng>();
-
   const selectedLang: string = lng || 'he';
 
   return (
