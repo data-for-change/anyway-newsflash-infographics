@@ -4,6 +4,7 @@ import { useStore } from 'store/storeConfig';
 import languageSelector from 'assets/language-selector.svg';
 import { AnyWayButton } from 'components/atoms/AnyWayButton';
 import { Typography, Button } from 'components/atoms';
+import { useTranslation } from 'react-i18next';
 
 const LANGUAGES = [
   {
@@ -22,17 +23,18 @@ const LANGUAGES = [
 
 const LanguageMenu: FC = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const { i18n } = useTranslation();
   const openMenu = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
   const closeMenu = () => {
     setAnchorEl(null);
   };
-  const reloadLang = (value: string) => {
-    if (value === 'he') {
-      return window.location.assign(`/newsflash/${store.activeNewsFlashId}`);
+  const LangClickHangler = (lang: string) => {
+    if (lang !== i18n.language) {
+      const prefix = lang !== 'he' ? `/${lang}` : '';
+      return window.location.assign(`${prefix}/newsflash/${store.activeNewsFlashId}`);
     }
-    return window.location.assign(`/${value}/newsflash/${store.activeNewsFlashId}`);
   };
   const store = useStore();
 
@@ -43,7 +45,7 @@ const LanguageMenu: FC = () => {
       </AnyWayButton>
       <Menu
         items={LANGUAGES.map((language) => (
-          <Button.Text onClick={() => reloadLang(language.value)}>
+          <Button.Text onClick={() => LangClickHangler(language.value)}>
             <Typography.Body5>{language.buttonText}</Typography.Body5>
           </Button.Text>
         ))}
