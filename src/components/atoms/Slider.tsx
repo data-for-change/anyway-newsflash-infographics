@@ -13,12 +13,12 @@ const marks = [
     label: 'x1',
   },
   {
-    value: 1.5,
-    label: 'x1.5',
+    value: 1.25,
+    label: 'x1.25',
   },
   {
-    value: 2,
-    label: 'x2',
+    value: 1.5,
+    label: 'x1.5',
   },
 ];
 const Slider = ({ onChange }: any) => {
@@ -34,7 +34,7 @@ const Slider = ({ onChange }: any) => {
         step={0.1}
         marks={marks}
         min={1}
-        max={2}
+        max={1.5}
       />
     </div>
   );
