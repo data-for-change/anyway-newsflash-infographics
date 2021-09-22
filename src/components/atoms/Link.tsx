@@ -12,14 +12,12 @@ const useStyles = makeStyles({
     },
   },
 });
-
 interface IProps extends LinkProps {
   to: string;
 }
 
 const Link: FC<IProps> = ({ ...props }) => {
   const classes = useStyles();
-
   return <RouterLink className={classes.link} {...props} />;
 };
 export default Link;
