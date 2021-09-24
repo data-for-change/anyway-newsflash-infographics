@@ -17,6 +17,7 @@ const useStyles = makeStyles(() => ({
 
 const useBold = (bold: boolean) => {
   const classes = useStyles();
+  if (Object.keys(bold).length === 0 && bold.constructor === Object) {bold = false}
   return bold ? classes.bold : '';
 };
 
