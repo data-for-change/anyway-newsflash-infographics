@@ -134,6 +134,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
               variant={'outlined'}
               fullWidth
               onChange={handleInput}
+              disabled
             />
           </Grid>
           <Grid item xs={12}></Grid>
