@@ -89,8 +89,8 @@
   },
   "sideBar": "מיקום משוער:",
   "UserProfileHeader": {
-    "hallo": "שלום",
-    "logout": "התנתקות"
+    "logout": "התנתקות",
+    "management" : "ניהול"
   },
   "userDetailsForm": {
     "Update": "עדכן",

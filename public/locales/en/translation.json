@@ -97,8 +97,8 @@
   },
   "sideBar": "Approximate location:",
   "UserProfileHeader": {
-    "hallo": "Hallo",
-    "logout": "LOGOUT"
+    "logout": "LOGOUT",
+    "management" : "management"
   },
   "widgets": {
     "countByCarType": {

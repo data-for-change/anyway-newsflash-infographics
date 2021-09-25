@@ -33,6 +33,7 @@ export const REDIRECT_ROUTE: string | undefined = process.env.REACT_APP_REDIRECT
 export const GET_USER_INFO_URL = `${authServerUrl}user/info`;
 export const UPDATE_USER_INFO_URL = `${authServerUrl}user/update`;
 export const LOG_OUT_USER_URL = `${authServerUrl}logout`;
+export const isMockUser = process.env.REACT_APP_MOCK_USER === 'true';
 
 AUTH_LOGIN_GOOGLE_URL.searchParams.append('redirect_url', `${window.location.origin}${REDIRECT_ROUTE!}`);
 

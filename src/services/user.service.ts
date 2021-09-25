@@ -1,14 +1,16 @@
 import axios from 'axios';
-import { GET_USER_INFO_URL, LOG_OUT_USER_URL, UPDATE_USER_INFO_URL } from 'utils/utils';
+import { GET_USER_INFO_URL, isMockUser, LOG_OUT_USER_URL, UPDATE_USER_INFO_URL } from 'utils/utils';
 import { IFormInput } from 'components/molecules/UserUpdateForm';
 import { StatusCodes } from 'utils/HTTPStatuesCodes';
+import { mockUserInfo } from './mocks/userDetails.mock.data';
 export interface IUserInfo {
   data: {
     firstName: string;
     lastName: string;
     email: string;
-    workplace: string;
-    imgUrl : string
+    workplace:string;
+    imgUrl : string;
+    roles:  string[];
   };
   meta: {
     isCompleteRegistration: boolean;
@@ -23,21 +25,29 @@ export interface UpdateUserReq {
 }
 
 export const fetchUserInfo = async function (): Promise<IUserInfo> {
-  const response = await axios.get(GET_USER_INFO_URL, { withCredentials: true });
-  const userInfoData = response.data;
+  let userInfo : IUserInfo;
+  if(isMockUser){
+    userInfo = mockUserInfo;
+  }
+  else{
 
-  const userInfo: IUserInfo = {
-    data: {
-      firstName: userInfoData.first_name === 'null'  ? undefined : userInfoData.first_name ,
-      lastName: userInfoData.last_name,
-      email: userInfoData.email,
-      workplace: userInfoData.work_on_behalf_of_organization,
-      imgUrl : userInfoData.oauth_provider_user_picture_url
-    },
-    meta: {
-      isCompleteRegistration: response.data.is_user_completed_registration,
-    },
-  };
+    const response = await axios.get(GET_USER_INFO_URL, { withCredentials: true });
+    const userInfoData = response.data;
+
+     userInfo = {
+      data: {
+        firstName: userInfoData.first_name === 'null'  ? undefined : userInfoData.first_name ,
+        lastName: userInfoData.last_name,
+        email: userInfoData.email,
+        workplace: userInfoData.work_on_behalf_of_organization,
+        imgUrl : userInfoData.oauth_provider_user_picture_url,
+        roles :userInfoData.roles
+      },
+      meta: {
+        isCompleteRegistration: response.data.is_user_completed_registration,
+      },
+    };
+  }
   return userInfo;
 };
 

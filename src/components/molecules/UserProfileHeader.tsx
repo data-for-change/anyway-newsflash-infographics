@@ -43,6 +43,9 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({ userDetails, isUpdate
 
   return (
     <>
+      {userDetails.data.roles.find((role) => role ==="admins")  &&  <Box className={classes.userButton} onClick={() => console.log('management clicked!')}>
+        {t('UserProfileHeader.management')}
+      </Box>}
       <Box className={classes.userButton} onClick={handleLogout}>
         {t('UserProfileHeader.logout')}
       </Box>
