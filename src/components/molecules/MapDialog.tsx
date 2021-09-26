@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Box, DialogContent, DialogTitle, DialogActions } from '@material-ui/core';
+import { Box, DialogContent, DialogActions } from '@material-ui/core';
 import { Dialog, Button, Typography } from 'components/atoms';
 
 interface IProps {
@@ -15,18 +15,18 @@ const useStyles = makeStyles((theme: Theme) =>
     dialogFooter: {
       display: 'flex',
       justifyContent: 'flex-end',
-      gap: theme.spacing(1.5),
+      gap: theme.spacing(1),
     },
     wrapper: {
       minWidth: 500,
-      padding: theme.spacing(2.5),
+      padding: theme.spacing(2),
       paddingInlineStart: theme.spacing(5),
     },
     dialogHeader: {
       padding: 0,
     },
     actions: {
-      gap: theme.spacing(1.5),
+      gap: theme.spacing(1),
     },
     chosenSection: {
       marginBlock: theme.spacing(2),
