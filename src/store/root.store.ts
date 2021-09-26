@@ -75,14 +75,14 @@ export default class RootStore {
   }
 
   get newsFlashWidgetsMetaRoadNumber(): number {
-    let {
+    const {
       location_info: { road1 },
     } = this.newsFlashWidgetsMeta;
     return road1;
   }
 
   get newsFlashWidgetsMetaDateComment(): string {
-    let { dates_comment } = this.newsFlashWidgetsMeta;
+    const { dates_comment } = this.newsFlashWidgetsMeta;
     return dates_comment;
   }
 
