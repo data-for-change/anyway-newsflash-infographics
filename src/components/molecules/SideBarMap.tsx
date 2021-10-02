@@ -13,7 +13,7 @@ const SideBarMap: FC<IProps> = ({ items }) => {
 
   return (
     <Map data={items}>
-      <Marker markerdata={items[0]} />
+      {items[0] && <Marker markerdata={items[0]} />}
     </Map>
   );
 };

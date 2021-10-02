@@ -3,10 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { MapContainer } from 'react-leaflet';
 import L, { LatLng } from 'leaflet';
-import { IPoint } from '../../../models/Point';
-import { INITIAL_CENTER, INITIAL_ZOOM } from '../../../utils/utils';
-import { uniquePoints } from '../../../utils/utils';
-import MapViewControl from '../../../services/MapViewControl';
+import { IPoint } from 'models/Point';
+import { INITIAL_CENTER, INITIAL_ZOOM } from 'utils/utils';
+import { uniquePoints } from 'utils/utils';
+import MapViewControl from 'services/MapViewControl';
 import GoogleMapsLayer from './GoogleMapsLayer';
 
 const useStyles = makeStyles({
