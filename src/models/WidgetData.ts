@@ -18,6 +18,12 @@ export interface IWidgetBase {
     information: string;
   };
 }
+
+export interface IDateComments {
+  date_range: Array<number>;
+  last_update: number;
+}
+
 export interface ILocationMeta {
   location_info: {
     resolution: string;
@@ -25,7 +31,7 @@ export interface ILocationMeta {
     road_segment_name: string;
   };
   location_text: string;
-  dates_comment: string;
+  dates_comment: IDateComments;
 }
 export interface IWidgetAccidentsByHourBarData extends IWidgetDataBase {
   items: {

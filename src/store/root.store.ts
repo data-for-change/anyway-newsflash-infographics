@@ -3,7 +3,7 @@ import { runInAction, makeAutoObservable } from 'mobx';
 import { initService } from 'services/init.service';
 import { fetchWidgets } from 'services/widgets.data.service';
 import { INewsFlash } from 'models/NewFlash';
-import { ILocationMeta, IWidgetBase } from 'models/WidgetData';
+import { IDateComments, ILocationMeta, IWidgetBase } from 'models/WidgetData';
 import { SourceFilterEnum } from 'models/SourceFilter';
 import { fetchNews } from 'services/news.data.service';
 import SettingsStore from './settings.store';
@@ -22,7 +22,10 @@ const DEFAULT_LOCATION_META = {
     road_segment_name: '',
   },
   location_text: '',
-  dates_comment: '',
+  dates_comment: {
+    date_range: [],
+    last_update: 0
+  },
 };
 
 export default class RootStore {
@@ -81,7 +84,7 @@ export default class RootStore {
     return road1;
   }
 
-  get newsFlashWidgetsMetaDateComment(): string {
+  get newsFlashWidgetsMetaDateComment(): IDateComments {
     const { dates_comment } = this.newsFlashWidgetsMeta;
     return dates_comment;
   }
