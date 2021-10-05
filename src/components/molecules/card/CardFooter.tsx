@@ -5,9 +5,10 @@ import AnywayImage from 'assets/anyway.png';
 import { makeStyles } from '@material-ui/core/styles';
 import { cardFooterHeight } from 'style';
 import { Box } from '@material-ui/core';
+import { IDateComments } from 'models/WidgetData';
 
 interface IProps {
-  dateComment: string;
+  dateComment: IDateComments;
 }
 
 const useStyles = makeStyles({
@@ -23,10 +24,10 @@ const useStyles = makeStyles({
 
 const CardFooter: React.FC<IProps> = ({ dateComment }) => {
   const classes = useStyles();
-
+  const dateRange = dateComment?.date_range?.join('-') ?? ''
   return (
     <div className={classes.main}>
-      <Typography.Body3>{dateComment}</Typography.Body3>
+      <Typography.Body3>{dateRange}</Typography.Body3>
       <Box display="flex" flex={1} />
       <Logo src={LamasImage} alt={'Lamas'} height={30} />
       <Logo src={AnywayImage} alt={'Anyway'} height={20} />
