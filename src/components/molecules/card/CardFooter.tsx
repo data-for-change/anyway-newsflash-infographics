@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 
 const CardFooter: React.FC<IProps> = ({ dateComment }) => {
   const classes = useStyles();
-  const dateRange = dateComment.date_range.join('-')
+  const dateRange = dateComment?.date_range?.join('-') ?? ''
   return (
     <div className={classes.main}>
       <Typography.Body3>{dateRange}</Typography.Body3>

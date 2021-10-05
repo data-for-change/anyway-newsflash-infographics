@@ -6,6 +6,7 @@ import { operationalCards } from 'const/cards.const';
 import { getVerifiedWidgetsData } from './data.verification/data.verification.service';
 
 const NEWS_FLASH_API: string = '/api/infographics-data';
+const WIDGETS_BY_LOCATION_API: string = 'api/infographics-data-by-location';
 
 export const fetchWidgets = async (id: number, lang: string, yearAgo?: number): Promise<ILocationData | undefined> => {
   if (showDemoCards && id === DEMO_ID) {
@@ -22,6 +23,29 @@ export const fetchWidgets = async (id: number, lang: string, yearAgo?: number): 
     }
 
   const widgetsUrl = `${NEWS_FLASH_API}?${query.join('&')}`;    //temp - long response time of server- keep console.log to see out url
+    console.log(widgetsUrl);
+    const response = await axios.get(widgetsUrl);
+    return processWidgetsFetchResponse(response);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const fetchWidgetsByLocation = async (id: number, lang: string, yearAgo?: number): Promise<ILocationData | undefined> => {
+  if (showDemoCards && id === DEMO_ID) {
+    return getDemoWidgetData();
+  }
+
+  try {
+    const query = [`lang=${lang}&road_segment_id=${id}`];
+    if (yearAgo) {
+      query.push(`years_ago=${yearAgo}`);
+    }
+    if (SHOW_MOCK) {
+      query.push(`mock=${SHOW_MOCK}`);
+    }
+
+    const widgetsUrl = `${WIDGETS_BY_LOCATION_API}?${query.join('&')}`;
     console.log(widgetsUrl);
     const response = await axios.get(widgetsUrl);
     return processWidgetsFetchResponse(response);

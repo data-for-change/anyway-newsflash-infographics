@@ -5,6 +5,13 @@ export interface ILocationData {
   meta: ILocationMeta;
   widgets: IWidgetBase[];
 }
+
+export interface IGpsData {
+  road1: number;
+  road_segment_name: string;
+  road_segment_id: number;
+  resolution: string;
+}
 export interface IWidgetDataBase {
   text: {
     title?: string;

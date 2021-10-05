@@ -1,13 +1,18 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Box, DialogContent, DialogActions } from '@material-ui/core';
+import { Box, DialogActions } from '@material-ui/core';
 import { Dialog, Button, Typography } from 'components/atoms';
+import LocationSelect from 'components/molecules/LocationSelect';
+import { IPoint } from 'models/Point';
 
 interface IProps {
-  section: string;
-  isShowing: boolean;
+  section?: string;
+  open: boolean;
+  location: IPoint | undefined;
   onClose: () => void;
+  onLocationChange: (location: IPoint) => void;
+  onSearch: () => void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -20,7 +25,6 @@ const useStyles = makeStyles((theme: Theme) =>
     wrapper: {
       minWidth: 500,
       padding: theme.spacing(2),
-      paddingInlineStart: theme.spacing(5),
     },
     dialogHeader: {
       padding: 0,
@@ -31,33 +35,31 @@ const useStyles = makeStyles((theme: Theme) =>
     chosenSection: {
       marginBlock: theme.spacing(2),
     },
-    dialogContent: {
-      paddingInlineStart: 0,
-    },
   }),
 );
 
-const MapDialog: FC<IProps> = ({ section, isShowing, onClose }) => {
+const MapDialog: FC<IProps> = ({ section='', open, onClose, location, onLocationChange, onSearch }) => {
   const classes = useStyles();
   const { t } = useTranslation();
+
   return (
-    <Dialog isShowing={isShowing} onClose={onClose} maxWidth="lg">
+    <Dialog isShowing={open} onClose={onClose} maxWidth='lg' fullWidth>
       <Box className={classes.wrapper}>
         <Box className={classes.dialogHeader}>
           <Typography.Title1>{t('mapDialog.searchSection')}</Typography.Title1>
         </Box>
-        <DialogContent className={classes.dialogContent}>
-          {/*A placeholder to visually estimate the size*/}
-          <img src="https://images.indianexpress.com/2017/05/google-maps-759.jpg" alt="" />
+        <Box display='flex' flexDirection='column' height='75vh'>
+          <Box display='contents'>
+            <LocationSelect location={location} onLocationChange={onLocationChange} />
+          </Box>
           <div className={classes.chosenSection}>
-            {/*needs to be bolder - just give it a classname?*/}
             <Typography.Body1 bold>{t('mapDialog.chosenSegment')}</Typography.Body1>
-            <Typography.Body1>{` ${section}`}</Typography.Body1>
+            <Typography.Body1>{section}</Typography.Body1>
           </div>
-        </DialogContent>
+        </Box>
         <DialogActions className={classes.actions}>
-          <Button.Standard>{t('mapDialog.searchButton')}</Button.Standard>
-          <Button.Outlined>{t('mapDialog.cancelButton')}</Button.Outlined>
+          <Button.Standard onClick={onSearch}>{t('mapDialog.searchButton')}</Button.Standard>
+          <Button.Outlined onClick={onClose}>{t('mapDialog.cancelButton')}</Button.Outlined>
         </DialogActions>
       </Box>
     </Dialog>
