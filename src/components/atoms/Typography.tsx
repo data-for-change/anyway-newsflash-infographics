@@ -17,52 +17,50 @@ const useStyles = makeStyles(() => ({
 
 const useBold = (bold: boolean) => {
   const classes = useStyles();
-  if (Object.keys(bold).length === 0 && bold.constructor === Object) {bold = false}
   return bold ? classes.bold : '';
 };
 
 // for styles of each variant - see 'theme.ts'
 const Typography: IText = {
-  Title1: ({ children }, bold) => (
+  Title1: ({ children , bold= false}) => (
     <Typo className={useBold(bold)} variant="subtitle1" component="h2">
       {children}
     </Typo>
   ),
-  Title2: ({ children }, bold) => (
+  Title2: ({ children , bold= false}) => (
     <Typo className={useBold(bold)} variant="subtitle2" component="h3">
       {children}
     </Typo>
   ),
-  Body1: ({ children }, bold) => (
+  Body1: ({ children , bold= false}) => (
     <Typo className={useBold(bold)} variant="h1" component="span">
       {children}
     </Typo>
   ),
-  Body2: ({ children }, bold) => (
+  Body2: ({ children , bold= false}) => (
     <Typo className={useBold(bold)} variant="h2" component="span">
       {children}
     </Typo>
   ),
-  Body3: ({ children }, bold) => (
+  Body3: ({ children , bold= false}) => (
     <Typo className={useBold(bold)} variant="h3" component="span">
       {children}
     </Typo>
   ),
-  Body4: ({ children }, bold) => (
+  Body4: ({ children , bold= false}) => (
     <Typo className={useBold(bold)} variant="h4" component="span">
       {children}
     </Typo>
   ),
-  Body5: ({ children }, bold) => (
+  Body5: ({ children , bold= false}) => (
     <Typo className={useBold(bold)} variant="h5" component="span">
       {children}
     </Typo>
   ),
-  Body6: ({ children }, bold) => (
+  Body6: ({ children , bold= false}) => (
     <Typo className={useBold(bold)} variant="h6" component="span">
       {children}
     </Typo>
   ),
 };
-
 export default Typography;
