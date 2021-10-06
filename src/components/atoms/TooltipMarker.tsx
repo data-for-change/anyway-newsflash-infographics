@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core';
 import { dateFormat } from 'utils/time.utils';
 import { ClockPosition } from 'models/ClockPosition';
 import { transparentColor, whiteColor, blackColor, tooltipMarkerBorderColorArrow } from 'style';
+import { useLocale } from 'hooks/date.hooks'
 
 
 const getLabelPosition = (offset: ClockPosition): string => {
@@ -120,7 +121,8 @@ const TooltipMarker = ({ data, position, offset }: any) => {
   const { i18n } = useTranslation();
   const order = i18n.language === 'en'
   const classes = useStyles({offset, order});
-  const iconText: any = `${dateFormat(data.accident_timestamp)}`;
+  const locale = useLocale()
+  const iconText = `${dateFormat(data.accident_timestamp, locale)}`;
   const TooltipTemplate = (
     <div className={classes.root}>
       <div className={classes.content}>{iconText}</div>

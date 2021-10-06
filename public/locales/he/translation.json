@@ -106,5 +106,11 @@
       "compared to national average": "במקטע לעומת ממוצע ארצי בכבישים מאותו הסוג"
     },
     "No data": "אין נתונים להצגה"
+  },
+  "mapDialog": {
+    "searchButton": "חיפוש",
+    "cancelButton": "ביטול",
+    "chosenSegment": "המקטע שנבחר:",
+    "searchSection": "חיפוש מקטע"
   }
 }
