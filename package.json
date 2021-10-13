@@ -57,6 +57,7 @@
       "max-lines": [
         2,
         {
+          "max": 200,
           "skipBlankLines": true,
           "skipComments": true
         }
