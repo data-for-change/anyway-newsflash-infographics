@@ -17,6 +17,7 @@
     "html-to-image": "^1.6.2",
     "i18next": "^20.3.2",
     "i18next-http-backend": "^1.2.6",
+    "jss-rtl": "^0.3.0",
     "leaflet": "^1.7.1",
     "leaflet.heat": "^0.2.0",
     "mobx": "^6.3.2",
