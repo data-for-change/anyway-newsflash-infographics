@@ -2,7 +2,6 @@ import { ThemeOptions } from '@material-ui/core';
 import { fontFamilyString, darkGrey } from './';
 
 const defaultThemeOptions: ThemeOptions = {
-  direction: 'ltr',
   palette: {},
   overrides: {
     MuiCardContent: {
