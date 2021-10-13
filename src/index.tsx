@@ -5,10 +5,13 @@ import App from './App';
 import './services/i18n.service';
 import * as serviceWorker from './serviceWorker';
 import OverlayLoader from './components/molecules/OverlayLoader';
+import { ErrorBoundary } from 'components/atoms';
 
 ReactDOM.render(
   <Suspense fallback={<OverlayLoader show />}>
-    <App />
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
   </Suspense>,
   document.getElementById('root'),
 );
