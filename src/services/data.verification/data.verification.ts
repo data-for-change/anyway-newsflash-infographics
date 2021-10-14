@@ -6,6 +6,17 @@ const validCoords = (coords: any) => coords < mostExtremeLongitude && coords > m
 const validNumber = (value: any) => typeof value === 'number' && value >= 0;
 const validString = (value: any) => typeof value === 'string';
 
+
+export const isVerifiedWidgetData = (widget: any) => {
+  let isValid = false;
+  try {
+    isValid = verifiedWidgetData(widget);
+  } catch (err) {
+    console.error('isVerifiedWidgetData - data structure error', widget, err);
+  }
+  return isValid;
+}
+
 export const verifiedWidgetData = (widget: any) => {
   const {
     name,

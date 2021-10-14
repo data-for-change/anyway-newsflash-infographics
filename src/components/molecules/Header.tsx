@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
@@ -12,6 +12,8 @@ import LanguageMenu from 'components/organisms/LanguageMenu';
 import { FEATURE_FLAGS } from 'utils/env.utils';
 import anywayLogo from 'assets/anyway.png';
 import { SignInIcon } from 'components/atoms/SignInIcon';
+import MapDialog from 'components/molecules/MapDialog';
+import { IPoint } from 'models/Point';
 
 
 const useStyles = makeStyles({
@@ -27,16 +29,34 @@ const reloadHomePage = () => {
 
 const Header: FC = () => {
   const store: RootStore = useStore();
+  const [open, setOpen] = useState(false);
+  const [location, setLocation] = useState<IPoint | undefined>();
+
   const isUserDetailsRequired: boolean = !store.userInfo?.meta.isCompleteRegistration;
+  const roadSegmentLocation = store.gpsLocationData;
+  const selectedLanguage = store.selectedLanguage;
   const { t } = useTranslation();
 
   const classes = useStyles();
+
+  const onLocationChange = (location: IPoint) => {
+    store.fetchGpsLocation(location);
+    setLocation(location);
+  };
+
+  const onLocationSearch = () => {
+    if (roadSegmentLocation) {
+      store.fetchSelectedNewsFlashWidgetsByLocation(roadSegmentLocation?.road_segment_id, selectedLanguage);
+      setOpen(false);
+    }
+  }
+
   useEffect(() => {
     store.getUserLoginDetails();
   }, [store]);
 
   let authElement;
-  let logo : string = anywayLogo;
+  const logo = anywayLogo;
   if (FEATURE_FLAGS.login) {
     //login or logout- depend on authentication state
     if (store.isUserAuthenticated) {
@@ -54,7 +74,7 @@ const Header: FC = () => {
     } else {
       authElement = <>
         <LogInLinkGoogle />
-      <SignInIcon/>
+        <SignInIcon/>
       </>;
     }
   }
@@ -63,10 +83,21 @@ const Header: FC = () => {
     <AppBar>
       <Logo src={logo} alt={'Anyway'} height={30} onClick={reloadHomePage} />
       <Box className={classes.userSection}>
-        {FEATURE_FLAGS.location_search && <Button.Standard>{t('header.Search')}</Button.Standard>}
+        <Button.Standard onClick={() => setOpen(true)}>{t('header.Search')}</Button.Standard>
         {FEATURE_FLAGS.language && <LanguageMenu />}
         {authElement}
       </Box>
+      <MapDialog
+        open={open}
+        location={location}
+        section={roadSegmentLocation?.road_segment_name}
+        onLocationChange={onLocationChange}
+        onClose={() => {
+          setOpen(false);
+          setLocation(undefined);
+        }}
+        onSearch={onLocationSearch}
+      />
     </AppBar>
   );
 };
