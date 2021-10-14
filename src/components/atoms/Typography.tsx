@@ -6,11 +6,13 @@ import { Variant } from '@material-ui/core/styles/createTypography';
 interface IBold {
   bold?: boolean;
 }
+
 interface IText {
   [property: string]: FC<IBold>;
 }
 
-interface ITypographyBase extends IBold {
+interface ITypographyBase {
+  bold?: boolean;
   variant: Variant;
   component: ElementType;
 }
