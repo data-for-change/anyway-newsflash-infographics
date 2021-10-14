@@ -1,3 +1,4 @@
+/* eslint-disable*/
 // https://mobx.js.org/best/store.html#combining-multiple-stores
 import { runInAction, makeAutoObservable } from 'mobx';
 import { initService } from 'services/init.service';
