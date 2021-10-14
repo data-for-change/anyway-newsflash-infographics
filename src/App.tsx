@@ -34,11 +34,12 @@ const App: FC = () => {
   useEffect(() => {
     // https://material-ui.com/guides/right-to-left/
     document.body.dir = appDir;
-  }, [i18n, theme, appDir]);
+    theme.direction = appDir;
+  }, [i18n, theme, theme.direction, appDir]);
 
   return (
     <StoreContext.Provider value={store}>
-      <ThemeProvider theme={appDir === 'rtl' ? store.settingsStore.rtlTheme : store.settingsStore.theme}>
+      <ThemeProvider theme={store.settingsStore.theme}>
         <Router>
           <Box>
             <Box height={headerHeight} display="flex">
