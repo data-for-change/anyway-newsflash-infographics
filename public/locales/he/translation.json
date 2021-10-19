@@ -112,5 +112,6 @@
     "cancelButton": "ביטול",
     "chosenSegment": "המקטע שנבחר:",
     "searchSection": "חיפוש מקטע"
-  }
+  },
+  "locationIndicator": "(תוצאות חיפוש מקטע)"
 }
