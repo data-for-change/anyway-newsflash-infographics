@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import Menu from 'components/atoms/Menu';
 import { useStore } from 'store/storeConfig';
 import languageSelector from 'assets/language-selector.svg';
@@ -24,32 +24,27 @@ const LANGUAGES = [
 const LanguageMenu: FC = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const { i18n } = useTranslation();
-  const openMenu = (event: any) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const closeMenu = () => {
-    setAnchorEl(null);
-  };
-  const LangClickHangler = (lang: string) => {
+  const store = useStore();
+
+  const LangClickHandler = (lang: string) => {
     if (lang !== i18n.language) {
       const prefix = lang !== 'he' ? `/${lang}` : '';
       return window.location.assign(`${prefix}/newsflash/${store.activeNewsFlashId}`);
     }
   };
-  const store = useStore();
 
   return (
     <div>
-      <AnyWayButton aria-controls="menu" aria-haspopup="true" onClick={openMenu}>
+      <AnyWayButton aria-controls="menu" aria-haspopup="true" onClick={(e)=>setAnchorEl(e.currentTarget)}>
         <img alt="language selection" src={languageSelector} />
       </AnyWayButton>
       <Menu
         items={LANGUAGES.map((language) => (
-          <Button.Text onClick={() => LangClickHangler(language.value)}>
+          <Button.Text onClick={() => LangClickHandler(language.value)}>
             <Typography.Body5>{language.buttonText}</Typography.Body5>
           </Button.Text>
         ))}
-        handleClose={closeMenu}
+        handleClose={() => setAnchorEl(null)}
         anchorEl={anchorEl}
       />
     </div>
