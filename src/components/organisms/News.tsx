@@ -5,6 +5,8 @@ import { silverSmokeColor } from 'style';
 import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
 import { observer } from 'mobx-react-lite';
+import { dateFormat } from 'utils/time.utils';
+import { useLocale } from 'hooks/date.hooks';
 
 const useStyles = makeStyles({
   container: {},
@@ -19,15 +21,19 @@ const useStyles = makeStyles({
 const News: FC = () => {
   const store: RootStore = useStore();
   const classes = useStyles();
+  const locale = useLocale();
 
   return (
     <Box flexGrow={1} display="flex" flexDirection="column" className={classes.newsFeed}>
       <Box flexGrow={1}>
         <Box className={classes.container} flexDirection={'column'}>
+          {store.gpsLocationData && <Box display="flex" justifyContent="center" p={2}>
+            <Typography.Body5>(תוצאות חיפוש מקטע)</Typography.Body5>
+          </Box>}
           {store.newsFlashCollection.length > 0 ? (
             store.newsFlashCollection.map((news) => {
               const className = news.id === store.activeNewsFlashId ? classes.activeNewsFlash : '';
-              const date = news.date == null ? '' : new Date(news.date.replace(/-/g, '/')).toLocaleDateString();
+              const date = news.date == null ? '' : dateFormat(new Date(news.date.replace(/-/g, '/')), locale);
               return (
                 <Link key={news.id} to={`${store.currentLanguageRouteString}/newsflash/${news.id}`}>
                   <Box border={1} borderColor={silverSmokeColor} p={1} className={className}>

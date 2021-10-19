@@ -160,7 +160,7 @@ export const PieChartView: FC<IProps> = ({
       <PieChart>
         <defs>
           <filter id={PIE_SHADOW_ID}>
-            <feDropShadow dx="-4" dy="1" stdDeviation="3.5" />
+            <feDropShadow dx="-3" dy="1" stdDeviation="2.5" flood-opacity='0.5'/>
           </filter>
         </defs>
         <Pie
