@@ -18,7 +18,7 @@ const errorNews: INewsFlash = {
   location: '',
 };
 
-const NEWS_FLASH_API: string = '/api/news-flash';
+const NEWS_FLASH_API: string = '/api/news-flash-v2';
 
 export function fetchNews(source = '', offSet = 0, limit = 100): Promise<any> {
   const query = [];
@@ -31,7 +31,7 @@ export function fetchNews(source = '', offSet = 0, limit = 100): Promise<any> {
   query.push(`offset=${offSet}`);
 
   // temporary according to request from Atalya
-  query.push('road_segment_only=true&interurban_only=true');
+  query.push('resolution=street&resolution=suburban_road');
 
   const url = `${NEWS_FLASH_API}?${query.join('&')}`;
 
