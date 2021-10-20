@@ -5,7 +5,6 @@ import RoadNumberImage from './RoadNumberImage';
 import LamasImage from 'assets/cbs.png';
 import AnywayImage from 'assets/anyway.png';
 import { Typography, Logo } from 'components/atoms';
-import { useTranslation } from 'react-i18next';
 import { silverSmokeColor, opacity80percent } from 'style/';
 import { splitTextHeader } from 'utils/string.utils';
 
@@ -43,7 +42,6 @@ interface IProps {
 }
 const CardHeader: FC<IProps> = ({ variant, text, road }) => {
   const classes = useStyles();
-  const { i18n } = useTranslation();
 
   let headerContent = null;
 
@@ -82,7 +80,7 @@ const CardHeader: FC<IProps> = ({ variant, text, road }) => {
             <RoadNumberImage roadNumber={road} />
           </Box>
           <Box ml={'7%'} display="flex" flex={1} justifyContent="flex-end" alignItems="flex-end" height={30}>
-            <Box className={classes.logosContainer} m={i18n.language === 'he' ? '0 0 0 2.5%' : '0 2.5% 0 0'}>
+            <Box className={classes.logosContainer} mx={1}>
               <Logo src={LamasImage} alt={'Lamas'} height={30} />
             </Box>
             <Logo src={AnywayImage} alt={'Anyway'} height={20} />

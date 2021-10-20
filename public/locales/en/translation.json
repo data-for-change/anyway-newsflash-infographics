@@ -112,5 +112,6 @@
     "cancelButton": "Cancel",
     "chosenSegment": "Chosen section:",
     "searchSection": "Search section"
-  }
+  },
+  "locationIndicator": "(Chosen Section Search Result)"
 }

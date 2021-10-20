@@ -5,6 +5,7 @@ export const transparentColor = 'transparent';
 export const blueVioletColor = '#3f51b5';
 export const skyBlueColor = '#00aaff';
 export const oceanBlueColor = '#0088cc';
+export const secondaryBgColor = '#E3F6FF';
 //white-Gray base collection
 export const shadowColor = '#4c4c4c';
 export const brightGreyColor = '#5a5b5e';
