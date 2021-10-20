@@ -10,7 +10,7 @@ import shadowIcon from 'assets/map/marker-shadow.png';
 import { IconTypes, SeverityTypes } from 'models/Map';
 
 const STANDARD_ICON_SIZE = { iconSize: [25, 41], iconAnchor: [17, 46], popupAnchor: [1, -34], shadowSize: [41, 41] };
-const CAR_ICON_SIZE = { iconSize: [25, 25], iconAnchor: [10, 15], popupAnchor: [0, -4], shadowSize: [41, 41] };
+const CAR_ICON_SIZE = { iconSize: [30, 30], iconAnchor: [10, 15], popupAnchor: [0, -4], shadowSize: [41, 41] };
 
 const createLeafletIcon = (image: string, iconSize: any, shadow?: string) => {
   const icon = new L.Icon({
@@ -37,13 +37,16 @@ const MapIcon = {
     red: createLeafletIcon(carRedIcon, CAR_ICON_SIZE),
   },
   getIconBySeverity: (type: IconTypes, severity: SeverityTypes) => {
-    const light = 'קלה';
-    const severe = 'קשה';
+    const light = 'light';
+    const severe = 'severe';;
+    const fatal = 'fatal'
     switch (severity) {
       case light:
         return MapIcon[type].yellow;
       case severe:
         return MapIcon[type].orange;
+      case fatal:
+        return MapIcon[type].red;
       default:
         return MapIcon[type].red;
     }
