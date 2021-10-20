@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { MapContainer } from 'react-leaflet';
 import L, { LatLng } from 'leaflet';
 import { IPoint } from 'models/Point';
-import { INITIAL_CENTER, INITIAL_ZOOM } from 'utils/utils';
+import { INITIAL_CENTER } from 'utils/utils';
 import { uniquePoints } from 'utils/utils';
 import MapViewControl from 'services/MapViewControl';
 import GoogleMapsLayer from './GoogleMapsLayer';
@@ -27,14 +27,14 @@ interface IProps {
   data?: IPoint[];
 }
 
-const Map: FC<IProps> = ({ zoom = INITIAL_ZOOM, center=INITIAL_CENTER, data, children }) => {
+const Map: FC<IProps> = ({ zoom, center = INITIAL_CENTER, data, children }) => {
   const classes = useStyles();
 
   const bounds = getBounds(data);
 
   return (
     <MapContainer zoom={zoom} className={classes.root}>
-      <MapViewControl bounds={bounds} center={center} zoom={INITIAL_ZOOM} />
+      <MapViewControl bounds={bounds} center={center} zoom={zoom} />
       <GoogleMapsLayer />
       {children}
     </MapContainer>
