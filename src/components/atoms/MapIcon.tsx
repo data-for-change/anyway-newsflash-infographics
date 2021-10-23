@@ -38,8 +38,8 @@ const MapIcon = {
   },
   getIconBySeverity: (type: IconTypes, severity: SeverityTypes) => {
     const light = 'light';
-    const severe = 'severe';;
-    const fatal = 'fatal'
+    const severe = 'severe';
+    const fatal = 'fatal';
     switch (severity) {
       case light:
         return MapIcon[type].yellow;
