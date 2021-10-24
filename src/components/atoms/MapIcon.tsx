@@ -37,15 +37,12 @@ const MapIcon = {
     red: createLeafletIcon(carRedIcon, CAR_ICON_SIZE),
   },
   getIconBySeverity: (type: IconTypes, severity: SeverityTypes) => {
-    const light = 'light';
-    const severe = 'severe';
-    const fatal = 'fatal';
     switch (severity) {
-      case light:
+      case 'light':
         return MapIcon[type].yellow;
-      case severe:
+      case 'severe':
         return MapIcon[type].orange;
-      case fatal:
+      case 'fatal':
         return MapIcon[type].red;
       default:
         return MapIcon[type].red;
