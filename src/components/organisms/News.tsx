@@ -7,6 +7,7 @@ import RootStore from 'store/root.store';
 import { observer } from 'mobx-react-lite';
 import { dateFormat } from 'utils/time.utils';
 import { useLocale } from 'hooks/date.hooks';
+import LocationSearchIndicator from 'components/molecules/LocationSearchIndicator';
 
 const useStyles = makeStyles({
   container: {},
@@ -27,9 +28,7 @@ const News: FC = () => {
     <Box flexGrow={1} display="flex" flexDirection="column" className={classes.newsFeed}>
       <Box flexGrow={1}>
         <Box className={classes.container} flexDirection={'column'}>
-          {store.gpsLocationData && <Box display="flex" justifyContent="center" p={2}>
-            <Typography.Body5>(תוצאות חיפוש מקטע)</Typography.Body5>
-          </Box>}
+          {store.gpsLocationData && <LocationSearchIndicator/>}
           {store.newsFlashCollection.length > 0 ? (
             store.newsFlashCollection.map((news) => {
               const className = news.id === store.activeNewsFlashId ? classes.activeNewsFlash : '';
