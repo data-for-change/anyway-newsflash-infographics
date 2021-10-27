@@ -6,4 +6,5 @@ export const operationalCards: WidgetName[] = [
   WidgetName.most_severe_accidents_table,
   WidgetName.most_severe_accidents,
   WidgetName.head_on_collisions_comparison_percentage,
+  WidgetName.vision_zero_2_plus_1,
 ];
