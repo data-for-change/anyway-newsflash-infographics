@@ -33,7 +33,7 @@ const widgetVariants: { [index: string]: CardVariant } = {
   [WidgetName.accident_count_by_day_night]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
   [WidgetName.head_on_collisions_comparison]: { header: HeaderVariant.Label, footer: FooterVariant.Logo },
   [WidgetName.head_on_collisions_comparison_percentage]: { header: HeaderVariant.Label, footer: FooterVariant.Logo },
-  [WidgetName.vision_zero_2_plus_1]: { header: HeaderVariant.None, footer: FooterVariant.Logo },
+  [WidgetName.vision_zero_2_plus_1]: { header: HeaderVariant.None, footer: FooterVariant.None },
   [WidgetName.top_road_segments_accidents_per_km]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
   [WidgetName.accident_count_by_road_light]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
   [WidgetName.accident_count_by_driver_type]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
