@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { IWidgetCountBySeverityTextData } from 'models/WidgetData';
+import { IWidgetCountBySeverityTextDataBase } from 'models/WidgetData';
 import { makeStyles } from '@material-ui/core';
 import { brightGreyColor } from 'style';
 import Box from '@material-ui/core/Box';
@@ -8,16 +8,32 @@ import TextViewList from './TextViewList';
 import TextViewHeader from './TextViewHeader';
 import SeverityImage from './SeverityImage';
 
-interface IProps {
-  data: IWidgetCountBySeverityTextData;
-  segmentText: string;
+type ISeverityCounts<T> = {
+  fatal: T;
+  severe: T;
+  light: T;
+} & ({ total: T } | { noun: T, verb: T });
+
+export type ICountBySeverity = ISeverityCounts<number>;
+export type ISeverityFieldNames = ISeverityCounts<string>;
+
+export interface ITextViewLabels {
+  fatal: string;
+  severe: string;
+  light: string;
+  noun: string;
+  verb: string
 }
 
-export interface CountBySeverity {
-  fatal: number;
-  severe: number;
-  light: number;
+interface IProps {
+  data: IWidgetCountBySeverityTextDataBase;
+  severityFieldNames: ISeverityFieldNames;
+  segmentText: string;
+  labels: ITextViewLabels;
 }
+
+
+export type IFormattedWidgetCountBySeverity = IWidgetCountBySeverityTextDataBase<ICountBySeverity>
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -53,7 +69,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function getSingleType(countBySeverity: CountBySeverity): string {
+function getSingleType(countBySeverity: ICountBySeverity): string {
   if (countBySeverity.fatal) {
     return 'fatal';
   }
@@ -67,13 +83,16 @@ function getSingleType(countBySeverity: CountBySeverity): string {
   }
 }
 
-const TextView: FC<IProps> = ({ data, segmentText }) => {
+const TextView: FC<IProps> = ({ data, segmentText, severityFieldNames: { fatal: fatalFieldName, severe: severeFieldName, light: lightFieldName, light: totalFieldName }, labels }) => {
   const classes = useStyles();
 
-  const countBySeverity: CountBySeverity = {
-    fatal: data?.items.severity_fatal_count,
-    severe: data?.items.severity_severe_count,
-    light: data?.items.severity_light_count,
+  const items: IWidgetCountBySeverityTextDataBase["items"] & any = data?.items || {};
+
+  const countBySeverity = {
+    fatal: items[fatalFieldName],
+    severe: items[severeFieldName],
+    light: items[lightFieldName],
+    total: items[totalFieldName]
   };
   const howManySeverities = [!!countBySeverity.fatal, !!countBySeverity.severe, !!countBySeverity.light];
   const isSingleType = howManySeverities.filter(Boolean).length === 1;
@@ -84,15 +103,17 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
       <Box className={headerClass} color={brightGreyColor} textAlign="center">
         <TextViewHeader
           singleType={isSingleType ? getSingleType(countBySeverity) : ''}
+          totalCount={countBySeverity.total}
           data={data}
           segmentText={segmentText}
+          labels={labels}
         />
       </Box>
       {isSingleType ? (
         <SeverityImage severity={getSingleType(countBySeverity)!} />
       ) : (
         <Box color="text.secondary" className={classes.list}>
-          <TextViewList data={countBySeverity} />
+          <TextViewList data={countBySeverity} labels={labels} />
         </Box>
       )}
     </div>
