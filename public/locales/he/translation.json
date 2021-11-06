@@ -1,7 +1,8 @@
 {
   "footer": {
     "about": "אודות",
-    "acknowledgements": "תודות"
+    "acknowledgements": "תודות",
+    "version": "גרסה"
   },
   "thankYouDialog": {
     "Acknowledgements": "תודות",
@@ -83,7 +84,7 @@
     "all": "הכל"
   },
   "header": {
-    "Search":"חיפוש",
+    "Search": "חיפוש",
     "User Greeting": "שלום",
     "User Info Update": "פרטי משתמש"
   },
