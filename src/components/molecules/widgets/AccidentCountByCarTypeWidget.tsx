@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { IWidgetAccidentCountByCarType } from 'models/WidgetData';
-import DoubleBarChartView from 'components/molecules/DoubleBarChartView';
 import { Box, makeStyles, Theme } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
+import GenericBarChartView, {BarChartType} from '../GenericBarChartView';
 const CAR_TYPE = 'car_type';
 const PERCENTAGE_SEGMENT = 'percentage_segment';
 const PERCENTAGE_COUNTRY = 'percentage_country';
@@ -38,11 +38,14 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
         <Box textAlign="center">{segmentText}</Box>
       </Box>
       <Box className={classes.chartWrapper}>
-        <DoubleBarChartView
+        <GenericBarChartView
+          type={BarChartType.DOUBLE}
           data={roundedItems}
           yLabel={CAR_TYPE}
           xLabel1={PERCENTAGE_SEGMENT}
           xLabel2={PERCENTAGE_COUNTRY}
+          names={['name1','name2']}
+          xLabels={['x1','x2']}
         />
       </Box>
     </>
