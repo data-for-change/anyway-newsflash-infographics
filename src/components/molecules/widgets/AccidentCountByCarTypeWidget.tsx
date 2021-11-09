@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { IWidgetAccidentCountByCarType } from 'models/WidgetData';
 import { Box, makeStyles, Theme } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import GenericBarChartView, {BarChartType} from '../GenericBarChartView';
+import GenericBarChartView from '../GenericBarChartView';
 const CAR_TYPE = 'car_type';
 const PERCENTAGE_SEGMENT = 'percentage_segment';
 const PERCENTAGE_COUNTRY = 'percentage_country';
@@ -27,6 +27,9 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
     percentage_segment: Math.round(i.percentage_segment),
     percentage_country: Math.round(i.percentage_country),
   }));
+  const xLabels = [PERCENTAGE_SEGMENT,PERCENTAGE_COUNTRY];
+  const xNames = [t('widgets.countByCarType.percentage segment'),t('widgets.countByCarType.percentage country')]
+  const numOfBars = xLabels.length;
 
   return (
     <>
@@ -34,18 +37,16 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
         <span>{t('widgets.countByCarType.Accidents count by vehicle type')}</span>
         <span>{t('widgets.countByCarType.compared to national average')}</span>
       </Box>
-      <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center">
+      <Box display="flex" flexDirection="row" justifyContent="center" alignItems="center" fontWeight={500}>
         <Box textAlign="center">{segmentText}</Box>
       </Box>
       <Box className={classes.chartWrapper}>
         <GenericBarChartView
-          type={BarChartType.DOUBLE}
+          numOfBars={numOfBars}
           data={roundedItems}
           yLabel={CAR_TYPE}
-          xLabel1={PERCENTAGE_SEGMENT}
-          xLabel2={PERCENTAGE_COUNTRY}
-          names={['name1','name2']}
-          xLabels={['x1','x2']}
+          xLabels={xLabels}
+          xNames={xNames}
         />
       </Box>
     </>
