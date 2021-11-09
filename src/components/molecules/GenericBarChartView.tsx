@@ -29,16 +29,17 @@ const GenericBarChartView: FC<IProps> = ({ numOfBars, xNames, xLabels, data,yLab
   const COLORS = [roseColor, honeyColor, yellowColor]
   const isStacked = numOfBars === 3;
 
+
   return (
     <>
       <ResponsiveContainer >
         <BarChart data={data}>
-          <XAxis angle={70} minTickGap={1} tickLine={false} axisLine={false} dataKey={yLabel}  />
+          <XAxis angle={-10} interval={0} dataKey={yLabel} tickLine={false} axisLine={false} />
           <Tooltip/>
-          <Legend />
+          <Legend verticalAlign="top" height={36}/>
           {Array.from({ length: numOfBars }, (_, i) =>
-            <Bar  name={xNames[i]} stackId={isStacked ? "a": undefined} fill={COLORS[i]} dataKey={xLabels[i]} radius={[10, 10, 10, 10]}>
-            <LabelList dataKey={xLabels[i]} position="insideTop" />
+            <Bar name={xNames[i]} stackId={isStacked ? "a": undefined} fill={COLORS[i]} dataKey={xLabels[i]} radius={[10, 10, 10, 10]}>
+            <LabelList dataKey={xLabels[i]} position="top" />
           </Bar>)}
         </BarChart>
       </ResponsiveContainer>
