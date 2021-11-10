@@ -154,8 +154,12 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
       break;
     }
     default: {
-      widgetComponent = null; // do not create element for unrecognized widget
-      console.warn(`widget name (${name}) was not recognize `, widget);
+      widgetComponent = (
+        <InjuredAccidentsWithPedestrians
+          data={data as IWidgetInjuredAccidentsWithPedestrians}
+          segmentText={segmentText}
+        />
+      );
       break;
     }
   }

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { IWidgetInjuredAccidentsWithPedestrians } from 'models/WidgetData';
-import StackedBarChartView from 'components/molecules/StackedBarChartView';
 import { Box, makeStyles, Theme } from '@material-ui/core';
+import GenericBarChartView from '../GenericBarChartView';
 
 const YEAR = 'year';
 const KILLED_INJURY_SEVERITY_COUNT = 'killed_injury_severity_count';
@@ -26,20 +26,30 @@ const useStyle = makeStyles((theme: Theme) => ({
 
 const InjuredAccidentsWithPedestrians: FC<IProps> = ({ data, segmentText }) => {
   const classes = useStyle();
-  const { items } = data;
+  const  items  = [
+    { 'year':2011, 'killed_injury_severity_count': 3, 'severe_injury_severity_count': 12, 'light_injury_severity_count': 23 },
+    { 'year':2012,'killed_injury_severity_count': 3, 'severe_injury_severity_count': 12, 'light_injury_severity_count': 23 },
+    { 'year':2013,'killed_injury_severity_count': 3, 'severe_injury_severity_count': 12, 'light_injury_severity_count': 23 },
+    { 'year':2014,'killed_injury_severity_count': 3, 'severe_injury_severity_count': 12, 'light_injury_severity_count': 23 },
+    { 'year':2015,'killed_injury_severity_count': 3, 'severe_injury_severity_count': 12, 'light_injury_severity_count': 23 },
+    { 'year':2016,'killed_injury_severity_count': 3, 'severe_injury_severity_count': 12, 'light_injury_severity_count': 23 },
+    { 'year':2017,'killed_injury_severity_count': 3, 'severe_injury_severity_count': 12, 'light_injury_severity_count': 23 },
+
+  ];
+  const xLabels = [KILLED_INJURY_SEVERITY_COUNT,SEVERE_INJURY_SEVERITY_COUNT,LIGHT_INJURY_SEVERITY_COUNT]
+  const numOfBars = xLabels.length;
+  const xNames = [NAME1,NAME2,NAME3]
+
   return (
     <>
       <Box textAlign="center">{segmentText}</Box>
       <Box className={classes.chartWrapper}>
-        <StackedBarChartView
+        <GenericBarChartView
+          numOfBars={numOfBars}
           data={items}
           yLabel={YEAR}
-          xLabel1={KILLED_INJURY_SEVERITY_COUNT}
-          xLabel2={SEVERE_INJURY_SEVERITY_COUNT}
-          xLabel3={LIGHT_INJURY_SEVERITY_COUNT}
-          name1={NAME1}
-          name2={NAME2}
-          name3={NAME3}
+          xLabels={xLabels}
+          xNames={xNames}
         />
       </Box>
     </>

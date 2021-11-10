@@ -16,13 +16,18 @@ interface IProps {
   data: Array<object>;
   yLabel: string;
   textLabel?: string;
-  name1?: string;
-  name2?: string;
-  name3?: string;
   xLabels: string[];
   xNames: string[];
 }
 
+const CustomizedLabel =(props:any) =>{
+  const { x, y, value } = props;
+  return (
+    <g>
+      <text x={x} y={y} offset={0} >{value}%</text>
+    </g>
+  )
+}
 
 
 const GenericBarChartView: FC<IProps> = ({ numOfBars, xNames, xLabels, data,yLabel, textLabel }) => {
@@ -38,8 +43,8 @@ const GenericBarChartView: FC<IProps> = ({ numOfBars, xNames, xLabels, data,yLab
           <Tooltip/>
           <Legend verticalAlign="top" height={36}/>
           {Array.from({ length: numOfBars }, (_, i) =>
-            <Bar name={xNames[i]} stackId={isStacked ? "a": undefined} fill={COLORS[i]} dataKey={xLabels[i]} radius={[10, 10, 10, 10]}>
-            <LabelList dataKey={xLabels[i]} position="top" />
+            <Bar  isAnimationActive={false} name={xNames[i]} stackId={isStacked ? "a": undefined} fill={COLORS[i]} dataKey={xLabels[i]}  radius={[10, 10, 10, 10]} >
+            <LabelList  dataKey={xLabels[i]} position="insideTop"  />
           </Bar>)}
         </BarChart>
       </ResponsiveContainer>
