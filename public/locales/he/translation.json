@@ -104,8 +104,13 @@
     "countByCarType": {
       "Accidents count by vehicle type": "השוואת אחוז התאונות ע\"פ כלי רכב",
       "compared to national average": "במקטע לעומת ממוצע ארצי בכבישים מאותו הסוג",
-      "percentage segment": "אחוז במקטע",
-      "percentage country": "אחוז ארצי"
+      "percentage_segment": "אחוז במקטע",
+      "percentage_country": "אחוז ארצי"
+    },
+    "injuredAccidentsWithPedestrians": {
+      "Killed": "נהרגו",
+      "Severe": "בינוני",
+      "Light": "קשה"
     },
     "No data": "אין נתונים להצגה"
   },

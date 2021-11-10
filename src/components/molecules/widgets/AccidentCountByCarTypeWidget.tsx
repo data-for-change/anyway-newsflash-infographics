@@ -28,7 +28,7 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
     percentage_country: Math.round(i.percentage_country),
   }));
   const xLabels = [PERCENTAGE_SEGMENT,PERCENTAGE_COUNTRY];
-  const xNames = [t('widgets.countByCarType.percentage segment'),t('widgets.countByCarType.percentage country')]
+  const xNames = [t('widgets.countByCarType.percentage_segment'),t('widgets.countByCarType.percentage_country')]
   const numOfBars = xLabels.length;
 
   return (
@@ -42,6 +42,8 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
       </Box>
       <Box className={classes.chartWrapper}>
         <GenericBarChartView
+          isStacked={false}
+          isPercentages={true}
           numOfBars={numOfBars}
           data={roundedItems}
           yLabel={CAR_TYPE}
