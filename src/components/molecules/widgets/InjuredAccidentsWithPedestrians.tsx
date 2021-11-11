@@ -8,7 +8,7 @@ const YEAR = 'year';
 const KILLED_INJURY_SEVERITY_COUNT = 'killed_injury_severity_count';
 const SEVERE_INJURY_SEVERITY_COUNT = 'severe_injury_severity_count';
 const LIGHT_INJURY_SEVERITY_COUNT = 'light_injury_severity_count';
-const NAME1 = 'Killed';
+const NAME1 = 'Fatal';
 const NAME2 = 'Severe';
 const NAME3 = 'Light';
 
@@ -32,7 +32,7 @@ const InjuredAccidentsWithPedestrians: FC<IProps> = ({ data, segmentText }) => {
     { 'year':2011, 'killed_injury_severity_count': 40, 'severe_injury_severity_count': 50, 'light_injury_severity_count': 70 },
     { 'year':2012,'killed_injury_severity_count': 6, 'severe_injury_severity_count': 2, 'light_injury_severity_count': 8 },
     { 'year':2013,'killed_injury_severity_count': 12, 'severe_injury_severity_count': 34, 'light_injury_severity_count': 67 },
-    { 'year':2014,'killed_injury_severity_count': 36, 'severe_injury_severity_count': 152, 'light_injury_severity_count': 263 },
+    { 'year':2014,'killed_injury_severity_count': 36, 'severe_injury_severity_count': 2, 'light_injury_severity_count': 1 },
     { 'year':2015,'killed_injury_severity_count': 13, 'severe_injury_severity_count': 2, 'light_injury_severity_count': 3 },
     { 'year':2016,'killed_injury_severity_count': 7, 'severe_injury_severity_count': 7, 'light_injury_severity_count': 45 },
     { 'year':2017,'killed_injury_severity_count': 37, 'severe_injury_severity_count': 12, 'light_injury_severity_count': 23 },
@@ -40,7 +40,7 @@ const InjuredAccidentsWithPedestrians: FC<IProps> = ({ data, segmentText }) => {
   ];
   const xLabels = [KILLED_INJURY_SEVERITY_COUNT,SEVERE_INJURY_SEVERITY_COUNT,LIGHT_INJURY_SEVERITY_COUNT]
   const numOfBars = xLabels.length;
-  const xNames = [t(`widgets.injuredAccidentsWithPedestrians.${NAME1}`),t(`widgets.injuredAccidentsWithPedestrians.${NAME2}`),t(`widgets.injuredAccidentsWithPedestrians.${NAME3}`)]
+  const xNames = [t(`textView.plural.${NAME1}`),t(`textView.plural.${NAME2}`),t(`textView.plural.${NAME3}`)]
 
   return (
     <>

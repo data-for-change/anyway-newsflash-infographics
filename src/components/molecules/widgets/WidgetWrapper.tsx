@@ -155,10 +155,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
     }
     default: {
       widgetComponent = (
-        <InjuredAccidentsWithPedestrians
-          data={data as IWidgetInjuredAccidentsWithPedestrians}
-          segmentText={segmentText}
-        />
+        <CountByYearBarWidget data={data as IWidgetAccidentsByYearData} />
       );
       break;
     }

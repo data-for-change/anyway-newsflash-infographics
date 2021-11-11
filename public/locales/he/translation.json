@@ -107,11 +107,6 @@
       "percentage_segment": "אחוז במקטע",
       "percentage_country": "אחוז ארצי"
     },
-    "injuredAccidentsWithPedestrians": {
-      "Killed": "נהרגו",
-      "Severe": "בינוני",
-      "Light": "קשה"
-    },
     "No data": "אין נתונים להצגה"
   },
   "mapDialog": {
