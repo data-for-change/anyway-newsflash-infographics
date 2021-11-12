@@ -1,17 +1,18 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import HttpApi from 'i18next-http-backend';
+import { ARABIC, ENGLISH, HEBREW } from 'const/languages.const';
 
 const options = {
-  fallbackLng: 'he',
-  supportedLngs: ['he', 'en', 'ar'],
+  fallbackLng: HEBREW,
+  supportedLngs: [HEBREW, ENGLISH, ARABIC],
   debug: true,
-  lng: 'he',
+  lng: HEBREW,
   interpolation: {
     escapeValue: false,
   },
   react: {
-    useSuspense:true
+    useSuspense: true,
   },
 };
 i18n.use(HttpApi).use(initReactI18next).init(options);

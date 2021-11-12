@@ -5,19 +5,20 @@ import languageSelector from 'assets/language-selector.svg';
 import { AnyWayButton } from 'components/atoms/AnyWayButton';
 import { Typography, Button } from 'components/atoms';
 import { useTranslation } from 'react-i18next';
+import { ARABIC, ENGLISH, HEBREW } from 'const/languages.const';
 
 const LANGUAGES = [
   {
     buttonText: 'English',
-    value: 'en',
+    value: ENGLISH,
   },
   {
     buttonText: 'עברית',
-    value: 'he',
+    value: HEBREW,
   },
   {
     buttonText: 'العربية',
-    value: 'ar',
+    value: ARABIC,
   },
 ];
 
@@ -28,14 +29,14 @@ const LanguageMenu: FC = () => {
 
   const LangClickHandler = (lang: string) => {
     if (lang !== i18n.language) {
-      const prefix = lang !== 'he' ? `/${lang}` : '';
+      const prefix = lang !== HEBREW ? `/${lang}` : '';
       return window.location.assign(`${prefix}/newsflash/${store.activeNewsFlashId}`);
     }
   };
 
   return (
     <div>
-      <AnyWayButton aria-controls="menu" aria-haspopup="true" onClick={(e)=>setAnchorEl(e.currentTarget)}>
+      <AnyWayButton aria-controls="menu" aria-haspopup="true" onClick={(e) => setAnchorEl(e.currentTarget)}>
         <img alt="language selection" src={languageSelector} />
       </AnyWayButton>
       <Menu

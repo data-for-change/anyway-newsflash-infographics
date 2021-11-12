@@ -13,6 +13,7 @@ import { IUserInfo, fetchUserInfo, logoutUserFromSession, postUserInfo } from 's
 import i18next from 'services/i18n.service';
 import { IFormInput } from 'components/molecules/UserUpdateForm';
 import { fetchGpsLocation } from 'services/gpsToLocation.data.service';
+import { HEBREW } from 'const/languages.const';
 
 // todo: move all map defaults to one place
 const DEFAULT_TIME_FILTER = 5;
@@ -46,7 +47,7 @@ export default class RootStore {
   newsFlashLoading: boolean = false;
   widgetBoxLoading: boolean = false;
   currentLanguageRouteString: string = '';
-  selectedLanguage: string = 'he';
+  selectedLanguage: string = HEBREW;
   gpsLocationData: IGpsData | null = null;
   // domain stores
   settingsStore: SettingsStore;
@@ -199,7 +200,7 @@ export default class RootStore {
   changeLanguage(lngCode: string): void {
     i18next.changeLanguage(lngCode).then(() => {
       runInAction(() => {
-        lngCode === 'he'
+        lngCode === HEBREW
           ? (this.currentLanguageRouteString = '')
           : (this.currentLanguageRouteString = `/${i18next.language}`);
         this.selectedLanguage = i18next.language;
