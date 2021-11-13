@@ -43,7 +43,7 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
       <Box className={classes.chartWrapper}>
         <GenericBarChartView
           isStacked={false}
-          isPercentages={true}
+          isPercentage={true}
           numOfBars={numOfBars}
           data={roundedItems}
           yLabel={CAR_TYPE}

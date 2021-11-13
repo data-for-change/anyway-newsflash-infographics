@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { ResponsiveContainer, BarChart, LabelList, XAxis, Bar , Tooltip, Legend} from 'recharts';
-import { roseColor, honeyColor, yellowColor } from 'style';
+import { roseColor, honeyColor, yellowColor, blackColor } from 'style';
 import { Typography } from 'components/atoms';
 import tinycolor from 'tinycolor2';
 
@@ -9,53 +9,50 @@ interface IProps {
   isStacked: boolean;
   numOfBars: number;
   data: Array<object>;
-  isPercentages: boolean;
+  isPercentage: boolean;
   yLabel: string;
   textLabel?: string;
   xLabels: string[];
   xNames: string[];
 }
 
-const CustomizedLabelWithPercentages =(props:any) =>{
-  const { x, y, value, height } = props;
-  const calculatedY = height < 20 ? '90%' : y + 20;
-
-  return (
-    <g>
-      <text  x={x+35} y={calculatedY}>{value}%</text>
-    </g>
-  )
-}
 
 const CustomizedLabel =(props:any) =>{
-  const { x, y, value, height } = props;
-  const calculatedValue = height < 20 ? null : value;
-  const calculatedY = y + 20;
-
+  const { x, y, value, height,width, isPercentage } = props;
+  const calculatedValue = isPercentage ? value+'%': value;
   return (
     <g>
-      <text  x={x+50} y={calculatedY}>{calculatedValue}</text>
+      <text textAnchor="middle" x = {x + width / 2} y = {y + 20}>{height < 20 ? null : calculatedValue}</text>
     </g>
   )
 }
 
-const GenericBarChartView: FC<IProps> = ({ isStacked,numOfBars, xNames, xLabels, data,isPercentages,yLabel, textLabel }) => {
-  const COLORS = [roseColor, honeyColor, yellowColor]
+const GenericBarChartView: FC<IProps> = ({ isStacked,numOfBars, xNames, xLabels, data,isPercentage,yLabel, textLabel }) => {
+  const COLORS = [roseColor, honeyColor, yellowColor, blackColor]
+  type radiusType = [number, number, number, number];
+  const bottomSide:radiusType = [0,0,10,10];
+  const topSide:radiusType = [10,10,0,0];
+  const bothSides:radiusType = [10,10,10,10];
+  const noRadius:radiusType = [0,0,0,0];
 
-  const barElements = Array.from({ length: numOfBars }, (_, i) => {
-    const shadowColor = tinycolor(COLORS[i]).darken().toString();
-    const bottomShadow = isStacked ? '0' : '1mm'
-    const barStyle = {filter: `drop-shadow(1mm ${bottomShadow} 0 ${shadowColor})`};
-    let radius: [number, number, number, number] = [0,0,0,0]
+  function customRadiusByBarIndex(i:number) {
+    switch (i) {
+      case 0: return bottomSide;
+      case (numOfBars - 1): return topSide;
+      default: return noRadius;
+    }
+  }
 
-    if (i === 0) {radius = [0,0,10,10]}
-    if (i === 2) {radius = [10,10,0,0]}
-    if (!isStacked) {
-      radius = i === 0 ?  [10,10,10,10] : [10,10,10,10]
+  // Iterate all bars and styling per bar.
+  const barElements = Array.from({ length: numOfBars}, (_, i) => {
+    const barStyle = {filter: `drop-shadow(1mm ${isStacked ? '0' : '1mm'} 0 ${tinycolor(COLORS[i]).darken().toString()})`};
+    let barRadius = bothSides;
+    if(isStacked && numOfBars > 1) {
+     barRadius = customRadiusByBarIndex(i);
     }
 
-    return <Bar name={xNames[i]} stackId={isStacked ? "a": undefined} fill={COLORS[i]} dataKey={xLabels[i]} style={barStyle} isAnimationActive={false} radius={radius}  >
-      <LabelList content={isPercentages ? <CustomizedLabelWithPercentages />:<CustomizedLabel />} dataKey={xLabels[i]} position="insideTop"  />
+    return <Bar name={xNames[i]} stackId={isStacked ? "a": undefined} fill={COLORS[i]} dataKey={xLabels[i]} style={barStyle} isAnimationActive={false} radius={barRadius}  >
+      <LabelList  content={<CustomizedLabel isPercentage={isPercentage} numOfBars={numOfBars}/>} dataKey={xLabels[i]}  />
     </Bar>
   })
 
@@ -63,9 +60,9 @@ const GenericBarChartView: FC<IProps> = ({ isStacked,numOfBars, xNames, xLabels,
     <>
       <ResponsiveContainer >
         <BarChart data={data}>
-          <XAxis angle={-10} interval={0} dataKey={yLabel} tickLine={false} axisLine={false} />
+          <XAxis  angle={-7} interval={0} dataKey={yLabel} tickLine={false} axisLine={false} style={{ fill: blackColor }}/>
           <Tooltip/>
-          <Legend verticalAlign="top" height={36} iconType="circle"/>
+          <Legend verticalAlign="top" align="right" iconType="circle" />
           {barElements}
         </BarChart>
       </ResponsiveContainer>

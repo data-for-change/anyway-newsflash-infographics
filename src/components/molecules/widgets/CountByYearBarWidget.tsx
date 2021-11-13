@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import BarChartView from 'components/molecules/BarChartView';
 import { IWidgetAccidentsByYearData } from 'models/WidgetData';
 import GenericBarChartView from '../GenericBarChartView';
 import { useTranslation } from 'react-i18next';
@@ -18,8 +17,9 @@ interface IProps {
 
 const CountByYearBarWidget: FC<IProps> = ({ data }) => {
   const { t } = useTranslation();
-  const { text } = data;
-  const items  = [
+  const {items, text } = data;
+
+  const mockItems  = [
     { 'accident_year':2017, 'fatal_count': 1, 'severe_count': 5, 'light_count': 55 },
     { 'accident_year':2018, 'fatal_count': 3, 'severe_count': 3, 'light_count': 50 },
     { 'accident_year':2019, 'fatal_count': 1, 'severe_count': 6, 'light_count': 68 },
@@ -32,9 +32,9 @@ const CountByYearBarWidget: FC<IProps> = ({ data }) => {
 
 
   return <GenericBarChartView isStacked={true}
-                              isPercentages={false}
+                              isPercentage={false}
                               numOfBars={numOfBars}
-                              data={items}
+                              data={mockItems}
                               xLabels={xLabels}
                               yLabel={YEAR}
                               textLabel={text.title}

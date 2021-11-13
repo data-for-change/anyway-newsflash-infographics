@@ -48,7 +48,7 @@ const InjuredAccidentsWithPedestrians: FC<IProps> = ({ data, segmentText }) => {
       <Box className={classes.chartWrapper}>
         <GenericBarChartView
           isStacked={true}
-          isPercentages={false}
+          isPercentage={false}
           numOfBars={numOfBars}
           data={items}
           yLabel={YEAR}
