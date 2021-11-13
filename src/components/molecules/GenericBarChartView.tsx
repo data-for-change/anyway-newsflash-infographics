@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { ResponsiveContainer, BarChart, LabelList, XAxis, Bar , Tooltip, Legend} from 'recharts';
-import { roseColor, honeyColor, yellowColor, blackColor } from 'style';
+import { roseColor, honeyColor, yellowColor, blackColor, whiteColor } from 'style';
 import { Typography } from 'components/atoms';
 import tinycolor from 'tinycolor2';
 
@@ -18,11 +18,11 @@ interface IProps {
 
 
 const CustomizedLabel =(props:any) =>{
-  const { x, y, value, height,width, isPercentage } = props;
+  const { x, y, value, height,width, isPercentage, isStacked} = props;
   const calculatedValue = isPercentage ? value+'%': value;
   return (
     <g>
-      <text textAnchor="middle" x = {x + width / 2} y = {y + 20}>{height < 20 ? null : calculatedValue}</text>
+      <text fill={isStacked ? blackColor : whiteColor} textAnchor="middle" x={x + width / 2} y={y + 20}>{height < 20 ? null : calculatedValue}</text>
     </g>
   )
 }
@@ -52,7 +52,7 @@ const GenericBarChartView: FC<IProps> = ({ isStacked,numOfBars, xNames, xLabels,
     }
 
     return <Bar name={xNames[i]} stackId={isStacked ? "a": undefined} fill={COLORS[i]} dataKey={xLabels[i]} style={barStyle} isAnimationActive={false} radius={barRadius}  >
-      <LabelList  content={<CustomizedLabel isPercentage={isPercentage} numOfBars={numOfBars}/>} dataKey={xLabels[i]}  />
+      <LabelList  content={<CustomizedLabel isPercentage={isPercentage} isStacked={isStacked}/>} dataKey={xLabels[i]}  />
     </Bar>
   })
 
@@ -60,7 +60,7 @@ const GenericBarChartView: FC<IProps> = ({ isStacked,numOfBars, xNames, xLabels,
     <>
       <ResponsiveContainer >
         <BarChart data={data}>
-          <XAxis  angle={-7} interval={0} dataKey={yLabel} tickLine={false} axisLine={false} style={{ fill: blackColor }}/>
+          <XAxis  angle={-7} interval={0} dataKey={yLabel} tickLine={false} axisLine={false} style={{ fill: blackColor }} />
           <Tooltip/>
           <Legend verticalAlign="top" align="right" iconType="circle" />
           {barElements}
