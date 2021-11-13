@@ -25,7 +25,11 @@ const TextButton: FC<IProps> = ({ isSubmit = false, onClick, children }) => (
   </MatButton>
 );
 
-const IconButton: FC<IProps> = ({ onClick, children }) => <MatIconButton onClick={onClick}>{children}</MatIconButton>;
+const IconButton: FC<IProps> = ({ isSubmit = false, onClick, children }) => (
+  <MatIconButton type={isSubmit ? 'submit' : 'button'} onClick={onClick}>
+    {children}
+  </MatIconButton>
+);
 
 const Button = {
   Standard: StandardButton,

@@ -1,42 +1,48 @@
 import { ComponentProps, ReactNode } from 'react';
 import { Story, Meta } from '@storybook/react';
 import Button, { IProps } from 'components/atoms/Button';
+
 export default {
   title: 'Components/atoms/Button',
   component: Button,
+  argTypes: {
+    variant: {
+      options: ['outlined', 'standard', 'icon', 'text'],
+      control: { type: 'select' },
+    },
+  },
 } as unknown as Meta;
 
-interface StoryButtonProps extends IProps {
-  type: string;
-  children?: ReactNode;
-}
-
-const Template: Story<StoryButtonProps> = (args) => {
-  if (args.type === 'standard') {
-    return <Button.Standard>Standard Button</Button.Standard>;
-  } else if (args.type === 'outlined') {
-    return <Button.Outlined>Outlined Button</Button.Outlined>;
-  } else if (args.type === 'icon') {
-    return <Button.Icon>Icon Button</Button.Icon>;
+const Template: Story = ({ children, ...args }) => {
+  if (args.variant === 'standard') {
+    return <Button.Standard {...args}>{children}</Button.Standard>;
+  } else if (args.variant === 'outlined') {
+    return <Button.Outlined {...args}>{children}</Button.Outlined>;
+  } else if (args.variant === 'icon') {
+    return <Button.Icon {...args}>{children}</Button.Icon>;
+  } else if (args.variant === 'text') {
+    return <Button.Text {...args}>{children}</Button.Text>;
   } else {
     return <div>This component must have a type prop</div>;
   }
 };
 
-export const ButtonStandardS = Template.bind({});
-ButtonStandardS.args = {
-  type: 'standard',
+export const Buttons = Template.bind({});
+Buttons.args = {
   children: 'Button',
+  variant: 'standard',
+  isSubmit: false,
+  onClick: () => 'text',
 };
 
-export const ButtonOutlinedS = Template.bind({});
-ButtonOutlinedS.args = {
-  type: 'outlined',
-  children: 'Button',
-};
+// export const ButtonOutlinedS = Template.bind({});
+// ButtonOutlinedS.args = {
+//   type: 'outlined',
+//   children: 'Button',
+// };
 
-export const ButtonIconS = Template.bind({});
-ButtonIconS.args = {
-  type: 'icon',
-  children: 'Button',
-};
+// export const ButtonIconS = Template.bind({});
+// ButtonIconS.args = {
+//   type: 'icon',
+//   children: 'Button',
+// };

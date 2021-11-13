@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     },
   },
 });
-interface IProps extends LinkProps {
+export interface IProps extends LinkProps {
   to: string;
 }
 
