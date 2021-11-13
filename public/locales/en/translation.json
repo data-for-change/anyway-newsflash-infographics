@@ -83,7 +83,7 @@
     "all": "all"
   },
   "header": {
-    "Search":"Search",
+    "Search": "Search",
     "User Greeting": "Hello",
     "User Info Update": "Update Info"
   },
@@ -110,7 +110,8 @@
   "mapDialog": {
     "searchButton": "Search",
     "cancelButton": "Cancel",
-    "chosenSegment": "Chosen section: ",
+    "chosenSegment": "Chosen section:",
     "searchSection": "Search section"
-  }
+  },
+  "locationIndicator": "(Chosen Section Search Result)"
 }

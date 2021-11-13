@@ -17,6 +17,7 @@ import CardBackgroundImage from './CardBackgroundImage';
 import CardFooter from './CardFooter';
 import CardEditor from 'components/organisms/CardEditorDialog';
 import { transparent } from 'style';
+import { IDateComments } from 'models/WidgetData';
 
 const DEFAULTE_SIZE = 1;
 export interface CardSizeOptions {
@@ -29,7 +30,7 @@ interface IProps {
   sizeOptions?: CardSizeOptions;
   getCardRef?: (element: HTMLElement) => any;
   title: string | undefined;
-  dateComment: string;
+  dateComment: IDateComments;
   information?: string;
 }
 

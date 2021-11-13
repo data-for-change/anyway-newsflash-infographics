@@ -1,16 +1,18 @@
+/* eslint-disable*/
 // https://mobx.js.org/best/store.html#combining-multiple-stores
 import { runInAction, makeAutoObservable } from 'mobx';
 import { initService } from 'services/init.service';
-import { fetchWidgets } from 'services/widgets.data.service';
+import { fetchWidgets, fetchWidgetsByLocation } from 'services/widgets.data.service';
 import { INewsFlash } from 'models/NewFlash';
-import { ILocationMeta, IWidgetBase } from 'models/WidgetData';
+import { IDateComments, IGpsData, ILocationMeta, IWidgetBase } from 'models/WidgetData';
 import { SourceFilterEnum } from 'models/SourceFilter';
 import { fetchNews } from 'services/news.data.service';
 import SettingsStore from './settings.store';
 import { IPoint } from 'models/Point';
-import { ActualiUserInfo, fetchUserInfo, logoutUserFromSession, postUserInfo } from 'services/user.service';
+import { IUserInfo, fetchUserInfo, logoutUserFromSession, postUserInfo } from 'services/user.service';
 import i18next from 'services/i18n.service';
 import { IFormInput } from 'components/molecules/UserUpdateForm';
+import { fetchGpsLocation } from 'services/gpsToLocation.data.service';
 
 // todo: move all map defaults to one place
 const DEFAULT_TIME_FILTER = 5;
@@ -22,7 +24,10 @@ const DEFAULT_LOCATION_META = {
     road_segment_name: '',
   },
   location_text: '',
-  dates_comment: '',
+  dates_comment: {
+    date_range: [],
+    last_update: 0
+  },
 };
 
 export default class RootStore {
@@ -31,7 +36,7 @@ export default class RootStore {
   newsFlashCollection: Array<INewsFlash> = [];
   isUserAuthenticated: boolean = false;
   userApiError: boolean = false;
-  userInfo: ActualiUserInfo | null = null;
+  userInfo: IUserInfo | null = null;
   activeNewsFlashId: number = 0; // active newsflash id
   newsFlashFetchOffSet = 0;
   newsFlashActiveFilter: SourceFilterEnum = SourceFilterEnum.all;
@@ -42,6 +47,7 @@ export default class RootStore {
   widgetBoxLoading: boolean = false;
   currentLanguageRouteString: string = '';
   selectedLanguage: string = 'he';
+  gpsLocationData: IGpsData | null = null;
   // domain stores
   settingsStore: SettingsStore;
 
@@ -75,14 +81,14 @@ export default class RootStore {
   }
 
   get newsFlashWidgetsMetaRoadNumber(): number {
-    let {
+    const {
       location_info: { road1 },
     } = this.newsFlashWidgetsMeta;
     return road1;
   }
 
-  get newsFlashWidgetsMetaDateComment(): string {
-    let { dates_comment } = this.newsFlashWidgetsMeta;
+  get newsFlashWidgetsMetaDateComment(): IDateComments {
+    const { dates_comment } = this.newsFlashWidgetsMeta;
     return dates_comment;
   }
 
@@ -210,9 +216,45 @@ export default class RootStore {
         if (response && response.widgets && response.meta) {
           this.newsFlashWidgetsMeta = response.meta;
           this.newsFlashWidgetsData = response.widgets;
+          this.setGpsLocationData(null)
         } else {
           console.error(`fetchWidgets(id:${id}) invalid response:`, response);
         }
+      });
+    });
+  }
+
+  fetchSelectedNewsFlashWidgetsByLocation(id: number, lang: string, filterValue?: number): void {
+    runInAction(() => (this.widgetBoxLoading = true));
+    fetchWidgetsByLocation(id, lang, filterValue).then((response: any) => {
+      runInAction(() => {
+        this.widgetBoxLoading = false;
+        if (response && response.widgets && response.meta) {
+          this.newsFlashWidgetsMeta = response.meta;
+          this.newsFlashWidgetsData = response.widgets;
+        } else {
+          console.error(`fetchWidgets(id:${id}) invalid response:`, response);
+        }
+      });
+    });
+  };
+
+  setGpsLocationData(data: IGpsData | null) {
+    runInAction(() => {
+      this.gpsLocationData = data;
+    });
+  };
+
+  async fetchGpsLocation(data: IPoint) {
+    runInAction(() => {
+      fetchGpsLocation(data).then((response: IGpsData | undefined) => {
+        runInAction(() => {
+          if (response) {
+            this.setGpsLocationData(response);
+          } else {
+            console.error(`gpsLocation invalid response:`, response);
+          }
+        });
       });
     });
   }

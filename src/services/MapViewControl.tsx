@@ -10,6 +10,7 @@ interface IProps {
 
 const MapViewControl: React.FC<IProps> = ({ zoom, center, bounds }) => {
   const map = useMap();
+  map.invalidateSize();
   if (zoom && center) {
     map.setView(center, zoom);
   }

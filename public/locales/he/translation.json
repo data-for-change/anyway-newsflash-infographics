@@ -83,7 +83,7 @@
     "all": "הכל"
   },
   "header": {
-    "Search":"חיפוש",
+    "Search": "חיפוש",
     "User Greeting": "שלום",
     "User Info Update": "פרטי משתמש"
   },
@@ -110,7 +110,8 @@
   "mapDialog": {
     "searchButton": "חיפוש",
     "cancelButton": "ביטול",
-    "chosenSegment": "המקטע שנבחר: ",
+    "chosenSegment": "המקטע שנבחר:",
     "searchSection": "חיפוש מקטע"
-  }
+  },
+  "locationIndicator": "(תוצאות חיפוש מקטע)"
 }

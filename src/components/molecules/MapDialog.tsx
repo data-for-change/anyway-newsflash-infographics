@@ -1,13 +1,18 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Box, DialogContent, DialogTitle, DialogActions } from '@material-ui/core';
-import { Dialog, Button, Typography } from '../atoms';
+import { Box, DialogActions } from '@material-ui/core';
+import { Dialog, Button, Typography } from 'components/atoms';
+import LocationSelect from 'components/molecules/LocationSelect';
+import { IPoint } from 'models/Point';
 
 interface IProps {
-  section: string;
-  isShowing: boolean;
-  onClose: () => any;
+  section?: string;
+  open: boolean;
+  location: IPoint | undefined;
+  onClose: () => void;
+  onLocationChange: (location: IPoint) => void;
+  onSearch: () => void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -15,47 +20,46 @@ const useStyles = makeStyles((theme: Theme) =>
     dialogFooter: {
       display: 'flex',
       justifyContent: 'flex-end',
-      gap: 10,
+      gap: theme.spacing(1),
     },
-    mainContent: {},
     wrapper: {
       minWidth: 500,
-      padding: 20,
+      padding: theme.spacing(2),
     },
     dialogHeader: {
       padding: 0,
-      paddingInlineStart: theme.spacing(3),
     },
     actions: {
-      gap: 10,
+      gap: theme.spacing(1),
     },
     chosenSection: {
-      marginBlock: 15,
+      marginBlock: theme.spacing(2),
     },
   }),
 );
 
-const MapDialog: FC<IProps> = ({ section, isShowing, onClose }) => {
+const MapDialog: FC<IProps> = ({ section = '', open, onClose, location, onLocationChange, onSearch }) => {
   const classes = useStyles();
   const { t } = useTranslation();
+
   return (
-    <Dialog isShowing={isShowing} onClose={onClose} maxWidth="lg">
+    <Dialog isShowing={open} onClose={onClose} maxWidth="lg" fullWidth>
       <Box className={classes.wrapper}>
-        <DialogTitle className={classes.dialogHeader}>
+        <Box className={classes.dialogHeader}>
           <Typography.Title1>{t('mapDialog.searchSection')}</Typography.Title1>
-        </DialogTitle>
-        <DialogContent>
-          {/*A placeholder to visually estimate the size*/}
-          <img src="https://images.indianexpress.com/2017/05/google-maps-759.jpg" alt="" />
+        </Box>
+        <Box display="flex" flexDirection="column" height="75vh">
+          <Box display="contents">
+            <LocationSelect location={location} onLocationChange={onLocationChange} />
+          </Box>
           <div className={classes.chosenSection}>
-            {/*needs to be bolder - just give it a classname?*/}
             <Typography.Body1 bold>{t('mapDialog.chosenSegment')}</Typography.Body1>
             <Typography.Body1>{section}</Typography.Body1>
           </div>
-        </DialogContent>
+        </Box>
         <DialogActions className={classes.actions}>
-          <Button.Standard>{t('mapDialog.searchButton')}</Button.Standard>
-          <Button.Standard>{t('mapDialog.cancelButton')}</Button.Standard> {/*change to outline button when ready*/}
+          <Button.Standard onClick={onSearch}>{t('mapDialog.searchButton')}</Button.Standard>
+          <Button.Outlined onClick={onClose}>{t('mapDialog.cancelButton')}</Button.Outlined>
         </DialogActions>
       </Box>
     </Dialog>
