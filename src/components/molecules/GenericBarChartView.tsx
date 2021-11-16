@@ -16,6 +16,25 @@ interface IProps {
   xNames: string[];
 }
 
+function getBarRadius(isStacked:boolean,numOfBars:number,barIndex:number) {
+  // create custom type as recharts <bar /> component does not accept regular number[].
+  type radiusType = [number, number, number, number];
+  type radiusSidesType = Record<'bottomSide' | 'topSide' | 'bothSides' | 'noRadius', radiusType>
+  const radiusSides:radiusSidesType = {
+    bottomSide : [0,0,10,10],
+    topSide : [10,10,0,0],
+    bothSides : [10,10,10,10],
+    noRadius : [0,0,0,0]
+  }
+
+  if (!isStacked) {return radiusSides.bothSides}
+
+  switch (barIndex) {
+    case 0: return radiusSides.bottomSide;
+    case (numOfBars - 1): return radiusSides.topSide;
+    default: return radiusSides.noRadius;
+  }
+}
 
 const CustomizedLabel =(props:any) =>{
   const { x, y, value, height,width, isPercentage, isStacked} = props;
@@ -29,27 +48,11 @@ const CustomizedLabel =(props:any) =>{
 
 const GenericBarChartView: FC<IProps> = ({ isStacked,numOfBars, xNames, xLabels, data,isPercentage,yLabel, textLabel }) => {
   const COLORS = [roseColor, honeyColor, yellowColor, blackColor]
-  type radiusType = [number, number, number, number];
-  const bottomSide:radiusType = [0,0,10,10];
-  const topSide:radiusType = [10,10,0,0];
-  const bothSides:radiusType = [10,10,10,10];
-  const noRadius:radiusType = [0,0,0,0];
-
-  function customRadiusByBarIndex(i:number) {
-    switch (i) {
-      case 0: return bottomSide;
-      case (numOfBars - 1): return topSide;
-      default: return noRadius;
-    }
-  }
 
   // Iterate all bars and styling per bar.
-  const barElements = Array.from({ length: numOfBars}, (_, i) => {
+  const barElements = () => Array.from({ length: numOfBars}, (_, i) => {
     const barStyle = {filter: `drop-shadow(1mm ${isStacked ? '0' : '1mm'} 0 ${tinycolor(COLORS[i]).darken().toString()})`};
-    let barRadius = bothSides;
-    if(isStacked && numOfBars > 1) {
-     barRadius = customRadiusByBarIndex(i);
-    }
+    const barRadius = getBarRadius(isStacked, numOfBars, i);
 
     return <Bar name={xNames[i]} stackId={isStacked ? "a": undefined} fill={COLORS[i]} dataKey={xLabels[i]} style={barStyle} isAnimationActive={false} radius={barRadius}  >
       <LabelList  content={<CustomizedLabel isPercentage={isPercentage} isStacked={isStacked}/>} dataKey={xLabels[i]}  />
@@ -61,9 +64,9 @@ const GenericBarChartView: FC<IProps> = ({ isStacked,numOfBars, xNames, xLabels,
       <ResponsiveContainer >
         <BarChart data={data}>
           <XAxis  angle={-7} interval={0} dataKey={yLabel} tickLine={false} axisLine={false} style={{ fill: blackColor }} />
-          <Tooltip/>
+          <Tooltip />
           <Legend verticalAlign="top" align="right" iconType="circle" />
-          {barElements}
+          {numOfBars > 0 && barElements()}
         </BarChart>
       </ResponsiveContainer>
       {textLabel && <Typography.Body3>{textLabel}</Typography.Body3>}

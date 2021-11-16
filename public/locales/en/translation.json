@@ -103,7 +103,9 @@
   "widgets": {
     "countByCarType": {
       "Accidents count by vehicle type": "Accidents count by vehicle type",
-      "compared to national average": "in a section compared to national average on roads of the same type"
+      "compared to national average": "in a section compared to national average on roads of the same type",
+      "percentage_segment": "Segment Percentage",
+      "percentage_country": "Country Percentage"
     },
     "No data": "No data to display"
   },
