@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const App: FC = () => {
   const { i18n } = useTranslation();
-  const classes = useStyles();
   const store = useStore();
   const theme = useTheme();
 
@@ -45,7 +44,7 @@ const App: FC = () => {
             <Box height={headerHeight} display="flex">
               <Header />
             </Box>
-            <Box height={pageContentHeight} className={classes.pageContent}>
+            <Box height={pageContentHeight} className={useStyles().pageContent}>
               <Switch>
                 <Route exact path="/" component={HomePageRedirect} />
                 <Route path="/:lng?/newsflash/:id" component={HomePage} />
