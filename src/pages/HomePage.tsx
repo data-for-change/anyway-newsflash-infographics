@@ -12,7 +12,7 @@ import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
 import DemoPage from './DemoPage';
 import { Route, Switch } from 'react-router-dom';
-import { HEBREW } from 'const/languages.const';
+import { LANG } from 'const/languages.const';
 
 interface IProps {}
 
@@ -51,7 +51,7 @@ const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
     if (match.params.lng) {
       store.changeLanguage(match.params.lng);
     } else {
-      store.changeLanguage(HEBREW);
+      store.changeLanguage(LANG.HE);
     }
   }, [match.params.lng, store]);
 

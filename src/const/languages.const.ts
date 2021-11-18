@@ -1,3 +1,5 @@
-export const ENGLISH = 'en';
-export const HEBREW = 'he';
-export const ARABIC = 'ar';
+export enum LANG {
+  EN = 'en',
+  HE = 'he',
+  AR = 'ar',
+}

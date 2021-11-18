@@ -5,20 +5,20 @@ import languageSelector from 'assets/language-selector.svg';
 import { AnyWayButton } from 'components/atoms/AnyWayButton';
 import { Typography, Button } from 'components/atoms';
 import { useTranslation } from 'react-i18next';
-import { ARABIC, ENGLISH, HEBREW } from 'const/languages.const';
+import { LANG } from 'const/languages.const';
 
 const LANGUAGES = [
   {
     buttonText: 'English',
-    value: ENGLISH,
+    value: LANG.EN,
   },
   {
     buttonText: 'עברית',
-    value: HEBREW,
+    value: LANG.HE,
   },
   {
     buttonText: 'العربية',
-    value: ARABIC,
+    value: LANG.AR,
   },
 ];
 
@@ -29,7 +29,7 @@ const LanguageMenu: FC = () => {
 
   const LangClickHandler = (lang: string) => {
     if (lang !== i18n.language) {
-      const prefix = lang !== HEBREW ? `/${lang}` : '';
+      const prefix = lang !== LANG.HE ? `/${lang}` : '';
       return window.location.assign(`${prefix}/newsflash/${store.activeNewsFlashId}`);
     }
   };

@@ -1,4 +1,4 @@
-import { HEBREW } from 'const/languages.const';
+import { LANG } from 'const/languages.const';
 import React, { FC } from 'react';
 import ReactLeafletGoogleLayer from 'react-leaflet-google-layer';
 import { useParams } from 'react-router-dom';
@@ -7,7 +7,7 @@ import { mapApiKey } from 'utils/utils';
 
 const GoogleMapsLayer: FC = () => {
   const { lng } = useParams<{ lng: string }>();
-  const language: string = lng || HEBREW;
+  const language: string = lng || LANG.HE;
 
   return (
     <ReactLeafletGoogleLayer
