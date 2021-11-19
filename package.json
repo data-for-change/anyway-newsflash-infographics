@@ -1,6 +1,6 @@
 {
   "name": "anyway-newsflash-infographics",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "private": true,
   "dependencies": {
     "@babel/eslint-parser": "^7.14.7",
