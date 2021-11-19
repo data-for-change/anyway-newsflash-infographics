@@ -103,7 +103,6 @@ https://github.com/edmund-dev/react-async-loader/blob/master/example/GoogleMap.j
 |   +-- atoms
 |   +-- molecules
 |   +-- organisms
-|   +-- templates
 +-- hooks           // common reusable hooks
 +-- models          // typescript interfaces and classes
 +-- pages           // page components
@@ -179,7 +178,7 @@ We have app server (written in [express](https://expressjs.com/), a node.js-base
 
 See [API document](https://docs.google.com/document/d/1Hv5ItvwM3z9nn95LjlsYHL-o18V8PgWrrQOKIPiPymU)
 
-### CICD And Environments<a id="cicd"></a>
+### Environments and CI/CD<a id="cicd"></a>
 
 Active Environments:
 
@@ -193,14 +192,19 @@ Each environment has a specific environment file which can be used to override `
 
 We use [github actions](https://github.com/marketplace?type=actions) for the following flows:
 
-1. [on-push CI](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3ACI) - provide per-PR CI testing
+1. [on-push CI](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3ACI) - provide per-PR CI testing and a live PR preview (see below)
 1. [deploy-dev](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuous deployment of `dev` branch to Staging Environment - https://anyway-infographics-staging.web.app/
 1. [deploy-master](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuous deployment of master branch to Production Environment:
 * https://anyway-infographics.web.app/
 * https://media.anyway.co.il/
 1. [Deprecated] [deploy-demo](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuous deployment of demo branch to Demo Environment - https://anyway-infographics-demo.web.app/
 
-Note: see the flows status badge at the top of this file
+Live Preview
+Once you open a PR and all test pass successfully, a temporary live preview site will be created. Use it to see the changes and make sure everything works, before asking for a code review.
+
+You can get the live preview url by pressing "Show all Checks" and than "Details" on the main PR page.
+After clicking on "Details", the github action steps will be displayed. you can find the preview url under "Deploy" step (see image).
+![](docs/pr-preview.jpg)
 
 ### About bundle size <a id="bundle-size"></a>
 
