@@ -7,7 +7,7 @@ on:
       - master
 
 jobs:
-  build:
+  build_and_preview:
     runs-on: ubuntu-latest
 
     strategy:
@@ -24,5 +24,12 @@ jobs:
       - run: npm run build --if-present
       - run: npm run lint
         # todo: add unit tests
+
+      - name: Deploy
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+            repoToken: '${{ secrets.GITHUB_TOKEN }}'
+            firebaseServiceAccount: '${{ secrets.FIREBASE_TOKEN }}'
+            projectId: anyway-newsflash-infographics
         env:
           CI: true
