@@ -1,9 +1,15 @@
 import React, { Suspense } from 'react';
-import { Box, createStyles, makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core';
+import { Box, ThemeProvider, Theme, StyledEngineProvider } from '@mui/material';
+import { makeStyles, createStyles } from '@mui/styles';
+import { createTheme } from '@mui/material/styles';
 import OverlayLoader from '../src/components/molecules/OverlayLoader';
 import { defaultThemeOptions } from '../src/style/theme';
 
-const customTheme = createMuiTheme(defaultThemeOptions);
+declare module '@mui/styles/defaultTheme' {
+  interface DefaultTheme extends Theme {}
+}
+
+const customTheme = createTheme(defaultThemeOptions);
 const useStyles = makeStyles(() =>
   createStyles({
     rtl: {
@@ -17,11 +23,13 @@ function StoryApp(Story) {
 
   return (
     <Suspense fallback={<OverlayLoader show />}>
-      <ThemeProvider theme={customTheme}>
-        <Box className={classes.rtl}>
-          <Story />
-        </Box>
-      </ThemeProvider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={customTheme}>
+          <Box className={classes.rtl}>
+            <Story />
+          </Box>
+        </ThemeProvider>
+      </StyledEngineProvider>
     </Suspense>
   );
 }

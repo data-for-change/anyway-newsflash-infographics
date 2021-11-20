@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { IWidgetAccidentCountByCarType } from 'models/WidgetData';
 import DoubleBarChartView from 'components/molecules/DoubleBarChartView';
-import { Box, makeStyles, Theme } from '@material-ui/core';
+import { Box, Theme } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { useTranslation } from 'react-i18next';
 const CAR_TYPE = 'car_type';
 const PERCENTAGE_SEGMENT = 'percentage_segment';

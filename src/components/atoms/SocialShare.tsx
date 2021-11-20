@@ -1,6 +1,7 @@
+import { Box } from '@mui/material/';
+import { makeStyles } from '@mui/styles';
 import React from 'react';
-import { FacebookShareButton, TwitterShareButton, FacebookIcon, TwitterIcon } from 'react-share';
-import { Box, makeStyles } from '@material-ui/core/';
+import { FacebookIcon, FacebookShareButton, TwitterIcon, TwitterShareButton } from 'react-share';
 
 const ICON_SIZE = 24;
 

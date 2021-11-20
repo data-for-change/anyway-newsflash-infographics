@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Box } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Box } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import RepresentationInCivilService from 'assets/demo/representation-in-civil-service.jpg';
 import RepresentationInGoverment from 'assets/demo/representation-in-government-companies.jpg';
 import CivilServiceRate from 'assets/demo/civil-service-rate.jpg';

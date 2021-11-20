@@ -1,16 +1,16 @@
-import React, { FC, useCallback } from 'react';
-import { Box, makeStyles } from '@material-ui/core';
-import News from './News';
+import { Box } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { ErrorBoundary, InfiniteScroll, Typography } from 'components/atoms';
 import NewsFlashFilterPanel from 'components/molecules/NewsFlashFilterPanel';
-import OverlayLoader from '../molecules/OverlayLoader';
-import { silverSmokeColor } from 'style';
-import { Typography, ErrorBoundary } from 'components/atoms';
-import { observer } from 'mobx-react-lite';
-import { useStore } from 'store/storeConfig';
-import RootStore from 'store/root.store';
-import { InfiniteScroll } from 'components/atoms';
 import SideBarMap from 'components/molecules/SideBarMap';
+import { observer } from 'mobx-react-lite';
+import React, { FC, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import RootStore from 'store/root.store';
+import { useStore } from 'store/storeConfig';
+import { silverSmokeColor } from 'style';
+import OverlayLoader from '../molecules/OverlayLoader';
+import News from './News';
 
 const INFINITE_SCROLL_FETCH_SIZE = 100;
 

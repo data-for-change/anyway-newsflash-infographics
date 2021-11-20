@@ -1,8 +1,8 @@
 import React from 'react';
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
 import { roadIconColors, silverSmokeColor } from 'style';
 import SeverityImage from './SeverityImage';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import { Typography } from 'components/atoms';
 
 interface IProps {

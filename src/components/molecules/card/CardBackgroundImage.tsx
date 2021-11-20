@@ -1,4 +1,5 @@
-import { makeStyles, Theme } from '@material-ui/core';
+import { Theme } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import React, { FC } from 'react';
 import { HeaderVariant } from 'services/widgets.style.service';
 import CardBackgrounRoadImage from 'assets/card-bg-road.png';

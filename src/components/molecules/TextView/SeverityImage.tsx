@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import Person from 'assets/Person.png';
 import Ambulance from 'assets/Ambulance.png';
 import Crutches from 'assets/Crutches.png';
-import Box from '@material-ui/core/Box';
-import { makeStyles } from '@material-ui/core/styles';
+import Box from '@mui/material/Box';
+import { makeStyles } from '@mui/styles';
 import classNames from 'classnames';
 
 interface SProps {

@@ -1,5 +1,5 @@
+import { makeStyles } from '@mui/styles';
 import React, { FC } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 
 interface LogoProps {
   src: string;

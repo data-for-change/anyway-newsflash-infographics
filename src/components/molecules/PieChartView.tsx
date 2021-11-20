@@ -1,7 +1,7 @@
 import React, { FC, useCallback } from 'react';
 import { ResponsiveContainer, PieChart, Pie, Cell, PieLabelRenderProps } from 'recharts';
 import { fontFamilyString, pieChartColors, whiteColor } from 'style';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 
 const TEXT_RELATIVE_WIDTH = 0.8;
 
@@ -160,7 +160,7 @@ export const PieChartView: FC<IProps> = ({
       <PieChart>
         <defs>
           <filter id={PIE_SHADOW_ID}>
-            <feDropShadow dx="-3" dy="1" stdDeviation="2.5" flood-opacity='0.5'/>
+            <feDropShadow dx="-3" dy="1" stdDeviation="2.5" flood-opacity="0.5" />
           </filter>
         </defs>
         <Pie

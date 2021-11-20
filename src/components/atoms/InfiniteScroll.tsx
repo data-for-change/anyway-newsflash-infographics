@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useCallback, useRef } from 'react';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import React, { FC, useCallback, useEffect, useRef } from 'react';
 import { useStore } from 'store/storeConfig';
 
 const INFINITE_SCROLLING_OFFSET: number = 30;

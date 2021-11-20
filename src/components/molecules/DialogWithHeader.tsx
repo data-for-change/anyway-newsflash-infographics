@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { Dialog, Typography } from 'components/atoms';
-import { Box, makeStyles, createStyles, Theme, IconButton, DialogTitle, DialogContent } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
+import { Box, Theme, IconButton, DialogTitle, DialogContent } from '@mui/material';
+import { makeStyles, createStyles } from '@mui/styles';
+import CloseIcon from '@mui/icons-material/Close';
 import { shadowColor, blueVioletColor } from 'style';
 
 interface IProps {
@@ -41,7 +42,7 @@ const DialogWithHeader: FC<IProps> = ({ onClose, isShowing, title, fullWidth, ch
       <DialogTitle className={classes.dialogHeader}>
         <Box className={classes.bar}>
           <Typography.Body4>{title}</Typography.Body4>
-          <IconButton onClick={onClose} className={classes.close}>
+          <IconButton onClick={onClose} className={classes.close} size="large">
             <CloseIcon>close the dialog</CloseIcon>
           </IconButton>
         </Box>

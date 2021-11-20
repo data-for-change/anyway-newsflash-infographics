@@ -1,15 +1,13 @@
-import React, { FC } from 'react';
-import { useStore } from 'store/storeConfig';
-import RootStore from 'store/root.store';
-import { observer } from 'mobx-react-lite';
-import { Grid } from 'components/atoms';
-import AnyWayCard from 'components/molecules/card/AnyWayCard';
+import { Box } from '@mui/material';
+import { Grid, MetaTag, Typography } from 'components/atoms';
 import ErrorBoundary from 'components/atoms/ErrorBoundary';
-import { MetaTag } from 'components/atoms';
-import { Typography } from 'components/atoms';
-import { Box } from '@material-ui/core';
+import AnyWayCard from 'components/molecules/card/AnyWayCard';
 import WidgetWrapper from 'components/molecules/widgets/WidgetWrapper';
+import { observer } from 'mobx-react-lite';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import RootStore from 'store/root.store';
+import { useStore } from 'store/storeConfig';
 
 const WidgetsTemplate: FC = () => {
   const store: RootStore = useStore();

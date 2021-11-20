@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
 import { roadIconColors } from 'style';
 import { Typography } from 'components/atoms';
 import { useTranslation } from 'react-i18next';
 import { IWidgetCountBySeverityTextData } from 'models/WidgetData';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import { LANG } from 'const/languages.const';
 
 interface IProps {
@@ -78,7 +78,6 @@ const TextViewHeader: React.FC<IProps> = ({ data: { items }, segmentText, single
         <Typography.Body1>{`${t('textView.onSegment')} ${
           i18n.language === LANG.EN ? ' ' : ''
         }${segmentText}`}</Typography.Body1>
-        
       </Box>
       <Box>
         <AccidentsOccurred singleType={singleType} accidentsCount={items.total_accidents_count} />

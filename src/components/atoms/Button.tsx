@@ -1,5 +1,5 @@
+import { Button as MatButton, IconButton as MatIconButton } from '@mui/material';
 import React, { FC } from 'react';
-import { Button as MatButton, IconButton as MatIconButton } from '@material-ui/core';
 
 interface IProps {
   onClick?: () => any;

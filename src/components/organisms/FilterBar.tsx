@@ -1,6 +1,7 @@
 import React, { FC, useCallback, useState, useEffect } from 'react';
-import { makeStyles, createStyles, Divider, Grid, Box } from '@material-ui/core';
-import { AppBar, Toolbar } from '@material-ui/core';
+import { Divider, Grid, Box } from '@mui/material';
+import { makeStyles, createStyles } from '@mui/styles';
+import { AppBar, Toolbar } from '@mui/material';
 import SelectButton from 'components/atoms/SelectButton';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'store/storeConfig';
@@ -9,7 +10,7 @@ import { useLocation } from 'react-router';
 import queryString from 'query-string';
 import { Typography, Button } from 'components/atoms';
 import { useTranslation } from 'react-i18next';
-import Collapse from '@material-ui/core/Collapse';
+import Collapse from '@mui/material/Collapse';
 
 interface IProps {}
 

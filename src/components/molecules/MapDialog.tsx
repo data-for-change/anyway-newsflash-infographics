@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Box, DialogActions } from '@material-ui/core';
+import { Theme } from '@mui/material/styles';
+import { createStyles, makeStyles } from '@mui/styles';
+import { Box, DialogActions } from '@mui/material';
 import { Dialog, Button, Typography } from 'components/atoms';
 import LocationSelect from 'components/molecules/LocationSelect';
 import { IPoint } from 'models/Point';
@@ -38,18 +39,18 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const MapDialog: FC<IProps> = ({ section='', open, onClose, location, onLocationChange, onSearch }) => {
+const MapDialog: FC<IProps> = ({ section = '', open, onClose, location, onLocationChange, onSearch }) => {
   const classes = useStyles();
   const { t } = useTranslation();
 
   return (
-    <Dialog isShowing={open} onClose={onClose} maxWidth='lg' fullWidth>
+    <Dialog isShowing={open} onClose={onClose} maxWidth="lg" fullWidth>
       <Box className={classes.wrapper}>
         <Box className={classes.dialogHeader}>
           <Typography.Title1>{t('mapDialog.searchSection')}</Typography.Title1>
         </Box>
-        <Box display='flex' flexDirection='column' height='75vh'>
-          <Box display='contents'>
+        <Box display="flex" flexDirection="column" height="75vh">
+          <Box display="contents">
             <LocationSelect location={location} onLocationChange={onLocationChange} />
           </Box>
           <div className={classes.chosenSection}>

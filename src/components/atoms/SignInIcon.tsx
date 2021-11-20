@@ -1,5 +1,6 @@
+import { Theme } from '@mui/material';
+import { createStyles, makeStyles } from '@mui/styles';
 import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import { blackColor } from 'style';
 
 const useStyles = makeStyles((theme: Theme) =>

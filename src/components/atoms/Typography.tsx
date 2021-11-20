@@ -1,7 +1,7 @@
 import { FC, ElementType } from 'react';
-import MaterialTypography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import { Variant } from '@material-ui/core/styles/createTypography';
+import MaterialTypography from '@mui/material/Typography';
+import { makeStyles } from '@mui/styles';
+import { Variant } from '@mui/material/styles/createTypography';
 
 interface IBold {
   bold?: boolean;

@@ -1,5 +1,5 @@
+import { makeStyles } from '@mui/styles';
 import React, { FC } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { Link as RouterLink, LinkProps } from 'react-router-dom';
 import { oceanBlueColor, skyBlueColor } from 'style';
 

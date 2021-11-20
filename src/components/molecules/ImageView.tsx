@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { IWidgetVisionZeroImageData } from 'models/WidgetData';
 import visionZeroImage from 'assets/vision_zero_2_plus_1.jpg';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 
 interface IProps {
   data: IWidgetVisionZeroImageData;

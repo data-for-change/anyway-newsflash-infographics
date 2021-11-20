@@ -1,14 +1,13 @@
-import React, { FC, useState } from 'react';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { useLocale } from 'hooks/date.hooks';
 import L from 'leaflet';
-import { Marker, Popup } from 'react-leaflet';
-
-import { AnyWayButton } from './AnyWayButton';
-import { Typography, MapIcon, TooltipMarker, TooltipArrow } from '.';
 import { ClockPosition } from 'models/ClockPosition';
+import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Marker, Popup } from 'react-leaflet';
 import { defaultBorderRadius, silverSmokeColor } from 'style';
-import { useLocale } from 'hooks/date.hooks'
+import { MapIcon, TooltipArrow, TooltipMarker, Typography } from '.';
+import { AnyWayButton } from './AnyWayButton';
 
 interface IProps {
   data: any;
@@ -55,13 +54,13 @@ const MostSevereAccidentsMarker: FC<IProps> = ({ data, tooltipOffset = ClockPosi
   const [offset, setOffset] = useState(tooltipOffset);
   const { latitude, longitude, accident_severity, accident_timestamp } = data;
   const position: L.LatLng = new L.LatLng(latitude, longitude);
-  const locale = useLocale()
+  const locale = useLocale();
 
   const icon: L.Icon = MapIcon.getIconBySeverity('carIcon', data.accident_severity);
   const isValid = accident_timestamp && accident_severity;
   return !isValid ? null : (
     <>
-      <TooltipMarker data={data} position={position} offset={offset} locale={locale}/>
+      <TooltipMarker data={data} position={position} offset={offset} locale={locale} />
       <Marker icon={icon} position={position}>
         {
           <Popup className={classes.root}>

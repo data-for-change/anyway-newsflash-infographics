@@ -1,6 +1,6 @@
+import MaterialMenu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import React, { FC, ReactElement } from 'react';
-import MaterialMenu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 interface IProps {
   items: Array<ReactElement>;
   handleClose: () => any;
@@ -10,7 +10,6 @@ const Menu: FC<IProps> = ({ items, anchorEl, handleClose }) => {
   return (
     <div>
       <MaterialMenu
-        getContentAnchorEl={null}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'center',

@@ -1,14 +1,11 @@
+import { CalendarTodayOutlined } from '@mui/icons-material';
+import { FormControl, List, ListItem, ListItemIcon, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { createStyles, makeStyles } from '@mui/styles';
 import React, { FC, useCallback } from 'react';
-import { Typography } from '../atoms';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { ListItemIcon, List, ListItem } from '@material-ui/core';
-import { MenuItem } from '@material-ui/core';
-import { FormControl } from '@material-ui/core';
-import { Select } from '@material-ui/core';
-import { CalendarTodayOutlined } from '@material-ui/icons';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
 import { useStore } from 'store/storeConfig';
+import { Typography } from '../atoms';
 
 interface IProps {
   onChange: (value: number) => any;
@@ -30,7 +27,7 @@ const SelectButton: FC<IProps> = ({ onChange }) => {
   const history = useHistory();
 
   const handleChange = useCallback(
-    (event: React.ChangeEvent<{ value: unknown }>) => {
+    (event: SelectChangeEvent<unknown>) => {
       onChange(event.target.value as number);
       const url: string = history.location.pathname;
       const queryPrefix = url.indexOf('?') === -1 ? '?' : '&';
@@ -61,6 +58,7 @@ const SelectButton: FC<IProps> = ({ onChange }) => {
             onClose={handleClose}
             onOpen={handleOpen}
             value={store.newsFlashWidgetsTimerFilter}
+            variant="standard"
             onChange={handleChange}
           >
             <MenuItem value={1}>

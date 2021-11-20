@@ -1,6 +1,6 @@
+import MatSlider from '@mui/material/Slider';
+import { makeStyles } from '@mui/styles';
 import React from 'react';
-import MatSlider from '@material-ui/core/Slider';
-import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   root: {

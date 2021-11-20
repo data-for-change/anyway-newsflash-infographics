@@ -1,23 +1,21 @@
-import React, { FC, useState } from 'react';
-import { Card, CardContent, Box } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import widgetToImage from 'services/to-image.service';
+import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import SettingsOverscanIcon from '@mui/icons-material/SettingsOverscan';
+import { Box, Card, CardContent } from '@mui/material';
+import Tooltip from '@mui/material/Tooltip';
+import { makeStyles } from '@mui/styles';
 import { AnyWayButton } from 'components/atoms/AnyWayButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
-import SettingsOverscanIcon from '@material-ui/icons/SettingsOverscan';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-
-import { fontFamilyString } from 'style';
-import CardHeader from './CardHeader';
 import SocialShare from 'components/atoms/SocialShare';
+import CardEditor from 'components/organisms/CardEditorDialog';
+import { IDateComments } from 'models/WidgetData';
+import React, { FC, useState } from 'react';
+import widgetToImage from 'services/to-image.service';
 import { FooterVariant, getWidgetVariant, HeaderVariant } from 'services/widgets.style.service';
+import { fontFamilyString, transparent } from 'style';
 import { getSizes } from './card.util';
 import CardBackgroundImage from './CardBackgroundImage';
 import CardFooter from './CardFooter';
-import CardEditor from 'components/organisms/CardEditorDialog';
-import { transparent } from 'style';
-import { IDateComments } from 'models/WidgetData';
+import CardHeader from './CardHeader';
 
 const DEFAULTE_SIZE = 1;
 export interface CardSizeOptions {

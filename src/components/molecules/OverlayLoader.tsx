@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Loader from 'components/atoms/Loader';
-import Box from '@material-ui/core/Box';
-import { makeStyles } from '@material-ui/core';
+import Box from '@mui/material/Box';
+import { makeStyles } from '@mui/styles';
 import { silverSmokeColor } from 'style';
 
 const useStyles = makeStyles({

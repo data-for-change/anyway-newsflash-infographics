@@ -1,13 +1,13 @@
+import { makeStyles } from '@mui/styles';
+import { useLocale } from 'hooks/date.hooks';
+import L from 'leaflet';
+import { ClockPosition } from 'models/ClockPosition';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import L from 'leaflet';
 import { useTranslation } from 'react-i18next';
 import { Marker } from 'react-leaflet';
-import { makeStyles } from '@material-ui/core';
+import { blackColor, tooltipMarkerBorderColorArrow, transparentColor, whiteColor } from 'style';
 import { dateFormat } from 'utils/time.utils';
-import { ClockPosition } from 'models/ClockPosition';
-import { transparentColor, whiteColor, blackColor, tooltipMarkerBorderColorArrow } from 'style';
-import { useLocale } from 'hooks/date.hooks';
 import { LANG } from 'const/languages.const';
 
 const getLabelPosition = (offset: ClockPosition): string => {

@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 import DialogWithHeader from './DialogWithHeader';
-import { Box, Grid, TextField, makeStyles, FormHelperText } from '@material-ui/core';
+import { Box, Grid, TextField, FormHelperText } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { useStore } from 'store/storeConfig';
 import Button from 'components/atoms/Button';
 import { observer } from 'mobx-react-lite';
@@ -81,7 +82,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
       }}
     >
       <form onSubmit={handleSubmit} noValidate>
-        <Grid className={classes.grid} container justify={'center'} alignItems={'center'} spacing={4}>
+        <Grid className={classes.grid} container justifyContent={'center'} alignItems={'center'} spacing={4}>
           <Grid item xs={6}>
             <TextField
               defaultValue={defaultValues.lastName}

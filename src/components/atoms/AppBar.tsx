@@ -1,6 +1,7 @@
+import { Theme } from '@mui/material';
+import MatAppBar from '@mui/material/AppBar';
+import { createStyles, makeStyles } from '@mui/styles';
 import React, { FC } from 'react';
-import MatAppBar from '@material-ui/core/AppBar';
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import { smokeWhiteColor } from 'style';
 
 const useStyles = makeStyles((theme: Theme) =>

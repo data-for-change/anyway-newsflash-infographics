@@ -1,13 +1,19 @@
-import { ThemeOptions } from '@material-ui/core';
-import { fontFamilyString, darkGrey } from './';
+import { Theme, ThemeOptions } from '@mui/material/styles';
+import { darkGrey, fontFamilyString } from './';
+
+declare module '@mui/styles/defaultTheme' {
+  interface DefaultTheme extends Theme {}
+}
 
 const defaultThemeOptions: ThemeOptions = {
   palette: {},
-  overrides: {
+  components: {
     MuiCardContent: {
-      root: {
-        '&:last-child': {
-          paddingBottom: 0,
+      styleOverrides: {
+        root: {
+          '&:last-child': {
+            paddingBottom: 0,
+          },
         },
       },
     },

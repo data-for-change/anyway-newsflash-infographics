@@ -1,8 +1,8 @@
 import React, { FC, useEffect } from 'react';
 import WidgetsTemplate from '../components/organisms/WidgetsTemplate';
-import { Box } from '@material-ui/core';
+import { Box } from '@mui/material';
 import SideBar from 'components/organisms/SideBar';
-import makeStyles from '@material-ui/core/styles/makeStyles';
+import { makeStyles } from '@mui/styles';
 import { RouteComponentProps, Redirect } from 'react-router';
 import { silverSmokeColor } from '../style';
 import FilterBar from 'components/organisms/FilterBar';

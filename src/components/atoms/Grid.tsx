@@ -1,5 +1,5 @@
+import { default as MaterialGrid } from '@mui/material/Grid';
 import React, { FC } from 'react';
-import { default as MaterialGrid } from '@material-ui/core/Grid';
 
 interface IProps {}
 

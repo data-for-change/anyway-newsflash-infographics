@@ -87,7 +87,7 @@ REACT_APP_GOOGLE_MAP_KEY='THE_API_KEY_HERE'
 - [Ten minute introduction to MobX and React](https://mobx.js.org/getting-started) - Learn how MobX works in 10 minutes!
 - [axios](https://github.com/axios/axios)
 - [Storybook](https://storybook.js.org/)
-- [Material-UI](https://material-ui.com/)
+- [MUI](https://mui.com/)
 - [Recharts](https://recharts.org/en-US/) - A composable charting library built on React components
 - [Leaflet](https://leafletjs.com/) Interactive maps
 
@@ -204,8 +204,10 @@ We use [github actions](https://github.com/marketplace?type=actions) for the fol
 1. [on-push CI](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3ACI) - provide per-PR CI testing and a live PR preview (see below)
 1. [deploy-dev](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuous deployment of `dev` branch to Staging Environment - https://anyway-infographics-staging.web.app/
 1. [deploy-master](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuous deployment of master branch to Production Environment:
-* https://anyway-infographics.web.app/
-* https://media.anyway.co.il/
+
+- https://anyway-infographics.web.app/
+- https://media.anyway.co.il/
+
 1. [Deprecated] [deploy-demo](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuous deployment of demo branch to Demo Environment - https://anyway-infographics-demo.web.app/
 
 Live Preview
@@ -219,7 +221,7 @@ After clicking on "Details", the github action steps will be displayed. you can 
 
 Since [Create React App](https://github.com/facebook/create-react-app) uses webpack under the hood,
 You can safely use [named imports](https://stackoverflow.com/questions/36795819/when-should-i-use-curly-braces-for-es6-import/36796281#36796281)
-when working with [Material UI components](https://material-ui.com/guides/minimizing-bundle-size/#how-to-reduce-the-bundle-size).
+when working with [MUI components](https://mui.com/guides/minimizing-bundle-size/#how-to-reduce-the-bundle-size).
 
 ### Git Scripts <a id="git-scripts"></a>
 

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles, createStyles } from '@mui/styles';
 import { Typography } from 'components/atoms';
-import { Table, TableBody, TableCell, TableHead, TableRow, Theme } from '@material-ui/core';
+import { Table, TableBody, TableCell, TableHead, TableRow, Theme } from '@mui/material';
 import { silverGrayColor, blackColor } from 'style';
 import { ITableData } from './formatTableData.service';
 

@@ -1,12 +1,12 @@
+import { Avatar } from '@mui/material';
+import Box from '@mui/material/Box';
+import { makeStyles } from '@mui/styles';
 import { Typography } from 'components/atoms';
 import React, { useState } from 'react';
-import UserInfoForm from './UserUpdateForm';
 import { useTranslation } from 'react-i18next';
-import makeStyles from '@material-ui/core/styles/makeStyles';
 import { oceanBlueColor, skyBlueColor } from 'style';
-import Box from '@material-ui/core/Box';
-import { Avatar } from '@material-ui/core';
 import { IUserInfo } from 'services/user.service';
+import UserInfoForm from './UserUpdateForm';
 
 const avatarSize = '40px';
 

@@ -1,6 +1,5 @@
 import { FC } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-
+import { makeStyles } from '@mui/styles';
 import { MapContainer } from 'react-leaflet';
 import L, { LatLng } from 'leaflet';
 import { IPoint } from 'models/Point';
@@ -27,7 +26,7 @@ interface IProps {
   data?: IPoint[];
 }
 
-const Map: FC<IProps> = ({ zoom = INITIAL_ZOOM, center=INITIAL_CENTER, data, children }) => {
+const Map: FC<IProps> = ({ zoom = INITIAL_ZOOM, center = INITIAL_CENTER, data, children }) => {
   const classes = useStyles();
 
   const bounds = getBounds(data);

@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { IWidgetCountBySeverityTextData } from 'models/WidgetData';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 import { brightGreyColor } from 'style';
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
 import classNames from 'classnames';
 import TextViewList from './TextViewList';
 import TextViewHeader from './TextViewHeader';
