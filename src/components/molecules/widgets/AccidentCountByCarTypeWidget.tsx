@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { IWidgetAccidentCountByCarType } from 'models/WidgetData';
 import { Box, makeStyles, Theme } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import GenericBarChartView from '../GenericBarChartView';
+import GenericBarChartView,{BarType} from '../GenericBarChartView';
 const CAR_TYPE = 'car_type';
 const PERCENTAGE_SEGMENT = 'percentage_segment';
 const PERCENTAGE_COUNTRY = 'percentage_country';
@@ -29,7 +29,6 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
   }));
   const xLabels = [PERCENTAGE_SEGMENT,PERCENTAGE_COUNTRY];
   const xNames = [t('widgets.countByCarType.percentage_segment'),t('widgets.countByCarType.percentage_country')]
-  const numOfBars = xLabels.length;
 
   return (
     <>
@@ -42,9 +41,8 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
       </Box>
       <Box className={classes.chartWrapper}>
         <GenericBarChartView
-          isStacked={false}
+          barType={BarType.Single}
           isPercentage={true}
-          numOfBars={numOfBars}
           data={roundedItems}
           yLabel={CAR_TYPE}
           xLabels={xLabels}

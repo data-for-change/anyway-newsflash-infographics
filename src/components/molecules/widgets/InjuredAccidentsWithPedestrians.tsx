@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { IWidgetInjuredAccidentsWithPedestrians } from 'models/WidgetData';
 import { Box, makeStyles, Theme } from '@material-ui/core';
-import GenericBarChartView from '../GenericBarChartView';
+import GenericBarChartView, { BarType } from '../GenericBarChartView';
 import { useTranslation } from 'react-i18next';
 
 const YEAR = 'year';
@@ -39,7 +39,6 @@ const InjuredAccidentsWithPedestrians: FC<IProps> = ({ data, segmentText }) => {
 
   ];
   const xLabels = [KILLED_INJURY_SEVERITY_COUNT,SEVERE_INJURY_SEVERITY_COUNT,LIGHT_INJURY_SEVERITY_COUNT]
-  const numOfBars = xLabels.length;
   const xNames = [t(`textView.plural.${NAME1}`),t(`textView.plural.${NAME2}`),t(`textView.plural.${NAME3}`)]
 
   return (
@@ -47,9 +46,8 @@ const InjuredAccidentsWithPedestrians: FC<IProps> = ({ data, segmentText }) => {
       <Box textAlign="center">{segmentText}</Box>
       <Box className={classes.chartWrapper}>
         <GenericBarChartView
-          isStacked={true}
+          barType={BarType.Stacked}
           isPercentage={false}
-          numOfBars={numOfBars}
           data={items}
           yLabel={YEAR}
           xLabels={xLabels}

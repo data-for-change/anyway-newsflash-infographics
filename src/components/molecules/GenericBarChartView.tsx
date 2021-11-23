@@ -4,10 +4,13 @@ import { roseColor, honeyColor, yellowColor, blackColor, whiteColor } from 'styl
 import { Typography } from 'components/atoms';
 import tinycolor from 'tinycolor2';
 
-
+export enum BarType {
+  Single = 1,
+  Multi,
+  Stacked
+}
 interface IProps {
-  isStacked: boolean;
-  numOfBars: number;
+  barType: BarType;
   data: Array<object>;
   isPercentage: boolean;
   yLabel: string;
@@ -46,16 +49,17 @@ const CustomizedLabel =(props:any) =>{
   )
 }
 
-const GenericBarChartView: FC<IProps> = ({ isStacked,numOfBars, xNames, xLabels, data,isPercentage,yLabel, textLabel }) => {
+const GenericBarChartView: FC<IProps> = ({ barType, xNames, xLabels, data,isPercentage,yLabel, textLabel }) => {
   const COLORS = [roseColor, honeyColor, yellowColor, blackColor]
-
+  const numOfBars=xLabels.length;
+  const isStacked:boolean =  barType === BarType.Stacked ;
   // Iterate all bars and styling per bar.
   const barElements = () => Array.from({ length: numOfBars}, (_, i) => {
     const barStyle = {filter: `drop-shadow(1mm ${isStacked ? '0' : '1mm'} 0 ${tinycolor(COLORS[i]).darken().toString()})`};
     const barRadius = getBarRadius(isStacked, numOfBars, i);
 
     return <Bar name={xNames[i]} stackId={isStacked ? "a": undefined} fill={COLORS[i]} dataKey={xLabels[i]} style={barStyle} isAnimationActive={false} radius={barRadius}  >
-      <LabelList  content={<CustomizedLabel isPercentage={isPercentage} isStacked={isStacked}/>} dataKey={xLabels[i]}  />
+      <LabelList content={<CustomizedLabel isPercentage={isPercentage} isStacked={isStacked}/>} dataKey={xLabels[i]}  />
     </Bar>
   })
 
