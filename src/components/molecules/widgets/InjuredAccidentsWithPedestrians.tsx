@@ -8,9 +8,6 @@ const YEAR = 'year';
 const KILLED_INJURY_SEVERITY_COUNT = 'killed_injury_severity_count';
 const SEVERE_INJURY_SEVERITY_COUNT = 'severe_injury_severity_count';
 const LIGHT_INJURY_SEVERITY_COUNT = 'light_injury_severity_count';
-const NAME1 = 'Fatal';
-const NAME2 = 'Severe';
-const NAME3 = 'Light';
 
 interface IProps {
   data: IWidgetInjuredAccidentsWithPedestrians;
@@ -39,7 +36,6 @@ const InjuredAccidentsWithPedestrians: FC<IProps> = ({ data, segmentText }) => {
 
   ];
   const xLabels = [KILLED_INJURY_SEVERITY_COUNT,SEVERE_INJURY_SEVERITY_COUNT,LIGHT_INJURY_SEVERITY_COUNT]
-  const xNames = [t(`textView.plural.${NAME1}`),t(`textView.plural.${NAME2}`),t(`textView.plural.${NAME3}`)]
 
   return (
     <>
@@ -51,7 +47,6 @@ const InjuredAccidentsWithPedestrians: FC<IProps> = ({ data, segmentText }) => {
           data={items}
           yLabel={YEAR}
           xLabels={xLabels}
-          xNames={xNames}
         />
       </Box>
     </>

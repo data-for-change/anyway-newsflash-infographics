@@ -16,7 +16,6 @@ interface IProps {
   yLabel: string;
   textLabel?: string;
   xLabels: string[];
-  xNames: string[];
 }
 
 function getBarRadius(isStacked:boolean,numOfBars:number,barIndex:number) {
@@ -49,7 +48,7 @@ const CustomizedLabel =(props:any) =>{
   )
 }
 
-const GenericBarChartView: FC<IProps> = ({ barType, xNames, xLabels, data,isPercentage,yLabel, textLabel }) => {
+const GenericBarChartView: FC<IProps> = ({ barType, xLabels, data,isPercentage,yLabel, textLabel }) => {
   const COLORS = [roseColor, honeyColor, yellowColor, blackColor]
   const numOfBars=xLabels.length;
   const isStacked:boolean =  barType === BarType.Stacked ;
@@ -58,7 +57,7 @@ const GenericBarChartView: FC<IProps> = ({ barType, xNames, xLabels, data,isPerc
     const barStyle = {filter: `drop-shadow(1mm ${isStacked ? '0' : '1mm'} 0 ${tinycolor(COLORS[i]).darken().toString()})`};
     const barRadius = getBarRadius(isStacked, numOfBars, i);
 
-    return <Bar name={xNames[i]} stackId={isStacked ? "a": undefined} fill={COLORS[i]} dataKey={xLabels[i]} style={barStyle} isAnimationActive={false} radius={barRadius}  >
+    return <Bar name={xLabels[i]} stackId={isStacked ? "a": undefined} fill={COLORS[i]} dataKey={xLabels[i]} style={barStyle} isAnimationActive={false} radius={barRadius}  >
       <LabelList content={<CustomizedLabel isPercentage={isPercentage} isStacked={isStacked}/>} dataKey={xLabels[i]}  />
     </Bar>
   })
