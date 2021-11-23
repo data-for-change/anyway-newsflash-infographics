@@ -5,9 +5,9 @@ import { Typography } from 'components/atoms';
 import tinycolor from 'tinycolor2';
 
 export enum BarType {
-  Single = 1,
-  Multi,
-  Stacked
+  Single = 'single',
+  Multi='multi',
+  Stacked='stacked'
 }
 interface IProps {
   barType: BarType;

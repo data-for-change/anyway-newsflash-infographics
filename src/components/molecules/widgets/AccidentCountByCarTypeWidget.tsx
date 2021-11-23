@@ -84,6 +84,8 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
   const isPercentage = originData.data.is_percentage;
   const xTranslateMap:stringObject = originData.text.x_labels_map;
   const yTranslateMap:stringObject = originData.text.y_labels_map;
+  const barType =  originData.data.bar_type;
+
   const transformedItems = items.reduce((newArray:Array<stringNumObject>, currItem) => {
     const {label_key,series} = currItem;
 
@@ -113,7 +115,7 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
       </Box>
       <Box className={classes.chartWrapper}>
         <GenericBarChartView
-          barType={BarType.Single}
+          barType={BarType.Multi}
           isPercentage={isPercentage}
           data={transformedItems}
           yLabel={translatedYLabelName}
