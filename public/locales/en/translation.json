@@ -1,7 +1,8 @@
 {
   "footer": {
     "about": "About",
-    "acknowledgements": "Acknowledgements"
+    "acknowledgements": "Acknowledgements",
+    "version": "Version"
   },
   "thankYouDialog": {
     "Acknowledgements": "Acknowledgements",
@@ -83,7 +84,7 @@
     "all": "all"
   },
   "header": {
-    "Search":"Search",
+    "Search": "Search",
     "User Greeting": "Hello",
     "User Info Update": "Update Info"
   },
