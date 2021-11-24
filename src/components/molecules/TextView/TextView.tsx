@@ -1,12 +1,62 @@
-import React, { FC } from 'react';
-import { IWidgetCountBySeverityTextData } from 'models/WidgetData';
-import { makeStyles } from '@mui/styles';
-import { brightGreyColor } from 'style';
 import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
 import classNames from 'classnames';
-import TextViewList from './TextViewList';
-import TextViewHeader from './TextViewHeader';
+import { IWidgetCountBySeverityTextData } from 'models/WidgetData';
+import React, { FC } from 'react';
+import { brightGreyColor } from 'style';
 import SeverityImage from './SeverityImage';
+import TextViewHeader from './TextViewHeader';
+import TextViewList from './TextViewList';
+
+const PREFIX = 'TextView';
+
+const classes = {
+  root: `${PREFIX}-root`,
+  headerBase: `${PREFIX}-headerBase`,
+  list: `${PREFIX}-list`,
+  singleTypeImage: `${PREFIX}-singleTypeImage`,
+  headerSingleType: `${PREFIX}-headerSingleType`,
+  headerList: `${PREFIX}-headerList`,
+};
+
+const Root = styled('div')(() => ({
+  [`&.${classes.root}`]: {
+    position: 'relative',
+    top: '10%',
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    width: '100%',
+    justifyContent: 'center',
+    letterSpacing: 1,
+    alignItems: 'center',
+  },
+
+  [`& .${classes.headerBase}`]: {
+    width: '70%',
+    height: '20%',
+  },
+
+  [`& .${classes.list}`]: {
+    width: '80%',
+    height: '100%',
+    alignSelf: 'flex-end',
+  },
+
+  [`& .${classes.singleTypeImage}`]: {
+    height: '40%',
+    width: 'auto',
+  },
+
+  [`& .${classes.headerSingleType}`]: {
+    position: 'relative',
+    bottom: '20%',
+  },
+
+  [`& .${classes.headerList}`]: {
+    alignSelf: 'center',
+  },
+}));
 
 interface IProps {
   data: IWidgetCountBySeverityTextData;
@@ -18,40 +68,6 @@ export interface CountBySeverity {
   severe: number;
   light: number;
 }
-
-const useStyles = makeStyles(() => ({
-  root: {
-    position: 'relative',
-    top: '10%',
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%',
-    width: '100%',
-    justifyContent: 'center',
-    letterSpacing: 1,
-    alignItems: 'center',
-  },
-  headerBase: {
-    width: '70%',
-    height: '20%',
-  },
-  list: {
-    width: '80%',
-    height: '100%',
-    alignSelf: 'flex-end',
-  },
-  singleTypeImage: {
-    height: '40%',
-    width: 'auto',
-  },
-  headerSingleType: {
-    position: 'relative',
-    bottom: '20%',
-  },
-  headerList: {
-    alignSelf: 'center',
-  },
-}));
 
 function getSingleType(countBySeverity: CountBySeverity): string {
   if (countBySeverity.fatal) {
@@ -68,8 +84,6 @@ function getSingleType(countBySeverity: CountBySeverity): string {
 }
 
 const TextView: FC<IProps> = ({ data, segmentText }) => {
-  const classes = useStyles();
-
   const countBySeverity: CountBySeverity = {
     fatal: data?.items.severity_fatal_count,
     severe: data?.items.severity_severe_count,
@@ -80,7 +94,7 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
 
   const headerClass = classNames(classes.headerBase, isSingleType ? classes.headerSingleType : classes.headerList);
   return (
-    <div className={classes.root}>
+    <Root className={classes.root}>
       <Box className={headerClass} color={brightGreyColor} textAlign="center">
         <TextViewHeader
           singleType={isSingleType ? getSingleType(countBySeverity) : ''}
@@ -95,7 +109,7 @@ const TextView: FC<IProps> = ({ data, segmentText }) => {
           <TextViewList data={countBySeverity} />
         </Box>
       )}
-    </div>
+    </Root>
   );
 };
 export default TextView;

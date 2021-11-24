@@ -1,6 +1,5 @@
-import { Box, Theme, ThemeProvider, StyledEngineProvider } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-import { createStyles, makeStyles } from '@mui/styles';
+import { Box } from '@mui/material';
+import { StyledEngineProvider, ThemeProvider, styled, useTheme } from '@mui/material/styles';
 import 'leaflet/dist/leaflet.css';
 import React, { FC, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -12,25 +11,21 @@ import HomePage from './pages/HomePage';
 import HomePageRedirect from './pages/HomePageRedirect';
 import { StoreContext, useStore } from './store/storeConfig';
 
+const PREFIX = 'App';
 
-declare module '@mui/styles/defaultTheme' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
-}
+const classes = {
+  pageContent: `${PREFIX}-pageContent`,
+};
 
+const StyledStoreContextProvider = styled(StoreContext.Provider)(({ theme: Theme }) => ({
+  [`& .${classes.pageContent}`]: {
+    overflow: 'auto',
+  },
+}));
 
 // main components height - must add up to 100
 const headerHeight = '5vh';
-const pageContentHeight = '88vh';
 const footerHeight = '7vh';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    pageContent: {
-      overflow: 'auto',
-    },
-  }),
-);
 
 const App: FC = () => {
   const { i18n } = useTranslation();
@@ -46,7 +41,7 @@ const App: FC = () => {
   }, [i18n, theme, theme.direction, appDir]);
 
   return (
-    <StoreContext.Provider value={store}>
+    <StyledStoreContextProvider value={store}>
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={store.settingsStore.theme}>
           <Router>
@@ -54,13 +49,11 @@ const App: FC = () => {
               <Box height={headerHeight} display="flex">
                 <Header />
               </Box>
-              <Box height={pageContentHeight} className={useStyles().pageContent}>
-                <Switch>
-                  <Route exact path="/" component={HomePageRedirect} />
-                  <Route path="/:lng?/newsflash/:id" component={HomePage} />
-                  <Route path="/login-popup-redirect" component={PopUpRedirect} />
-                </Switch>
-              </Box>
+              <Switch>
+                <Route exact path="/" component={HomePageRedirect} />
+                <Route path="/:lng?/newsflash/:id" component={HomePage} />
+                <Route path="/login-popup-redirect" component={PopUpRedirect} />
+              </Switch>
               <Box height={footerHeight} display="flex">
                 <Footer />
               </Box>
@@ -68,7 +61,7 @@ const App: FC = () => {
           </Router>
         </ThemeProvider>
       </StyledEngineProvider>
-    </StoreContext.Provider>
+    </StyledStoreContextProvider>
   );
 };
 export default App;

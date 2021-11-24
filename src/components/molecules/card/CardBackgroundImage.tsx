@@ -1,9 +1,24 @@
-import { Theme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
+import CardBackgrounMapImage from 'assets/card-bg-map.png';
+import CardBackgrounRoadImage from 'assets/card-bg-road.png';
 import React, { FC } from 'react';
 import { HeaderVariant } from 'services/widgets.style.service';
-import CardBackgrounRoadImage from 'assets/card-bg-road.png';
-import CardBackgrounMapImage from 'assets/card-bg-map.png';
+
+const PREFIX = 'CardBackgroundImage';
+
+const classes = {
+  img: `${PREFIX}-img`,
+};
+
+const Root = styled('img')(({ theme }) => ({
+  [`&.${classes.img}`]: {
+    position: 'absolute',
+    zIndex: -1,
+    top: 0,
+    right: 0,
+    marginInlineStart: (props: any) => (props.variant === HeaderVariant.Label ? theme.spacing(1) : 0),
+  },
+}));
 
 const ROAD_IMAGE_HEIGHT = 130;
 const MAP_IMAGE_HEIGHT = '100%';
@@ -12,18 +27,7 @@ interface IProps {
   variant: HeaderVariant;
 }
 
-const useStyles = makeStyles<Theme, IProps>((theme) => ({
-  img: {
-    position: 'absolute',
-    zIndex: -1,
-    top: 0,
-    right: 0,
-    marginInlineStart: (props) => (props.variant === HeaderVariant.Label ? theme.spacing(1) : 0),
-  },
-}));
-
 const CardBackgroundImage: FC<IProps> = ({ variant }) => {
-  const classes = useStyles({ variant });
   let src;
   let height;
 
@@ -39,6 +43,6 @@ const CardBackgroundImage: FC<IProps> = ({ variant }) => {
       break;
   }
 
-  return <img height={height} src={src} className={classes.img} alt="" />;
+  return <Root height={height} src={src} className={classes.img} alt="" />;
 };
 export default CardBackgroundImage;

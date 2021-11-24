@@ -1,21 +1,26 @@
 import { Box } from '@mui/material/';
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 import React from 'react';
 import { FacebookIcon, FacebookShareButton, TwitterIcon, TwitterShareButton } from 'react-share';
 
-const ICON_SIZE = 24;
+const PREFIX = 'SocialShare';
 
-const useStyles = makeStyles({
-  socialShareButton: {
+const classes = {
+  socialShareButton: `${PREFIX}-socialShareButton`,
+};
+
+const StyledBox = styled(Box)({
+  [`& .${classes.socialShareButton}`]: {
     outline: 'none',
   },
 });
 
+const ICON_SIZE = 24;
+
 const SocialShare = () => {
-  const classes = useStyles();
   const url = window.location.origin;
   return (
-    <Box display="flex">
+    <StyledBox display="flex">
       <Box p={1}>
         <FacebookShareButton url={url} className={classes.socialShareButton}>
           <FacebookIcon round size={ICON_SIZE} />
@@ -26,7 +31,7 @@ const SocialShare = () => {
           <TwitterIcon round size={ICON_SIZE} />
         </TwitterShareButton>
       </Box>
-    </Box>
+    </StyledBox>
   );
 };
 export default SocialShare;

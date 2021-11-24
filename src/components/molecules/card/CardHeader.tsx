@@ -1,37 +1,48 @@
 import { Box } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
+import AnywayImage from 'assets/anyway.png';
+import LamasImage from 'assets/cbs.png';
+import { Logo, Typography } from 'components/atoms';
 import React, { FC } from 'react';
 import { HeaderVariant } from 'services/widgets.style.service';
-import RoadNumberImage from './RoadNumberImage';
-import LamasImage from 'assets/cbs.png';
-import AnywayImage from 'assets/anyway.png';
-import { Typography, Logo } from 'components/atoms';
-import { silverSmokeColor, opacity80percent } from 'style/';
+import { opacity80percent, silverSmokeColor } from 'style/';
 import { splitTextHeader } from 'utils/string.utils';
+import RoadNumberImage from './RoadNumberImage';
 
-const useStyles = makeStyles({
-  wrapper: {
+const PREFIX = 'CardHeader';
+
+const classes = {
+  wrapper: `${PREFIX}-wrapper`,
+  textWrapper: `${PREFIX}-textWrapper`,
+  roadImageWrapper: `${PREFIX}-roadImageWrapper`,
+  logosContainer: `${PREFIX}-logosContainer`,
+  labelWrapper: `${PREFIX}-labelWrapper`,
+  label: `${PREFIX}-label`,
+};
+
+const StyledBox = styled(Box)({
+  [`& .${classes.wrapper}`]: {
     width: '100%',
     height: '100%',
   },
-  textWrapper: {
+  [`& .${classes.textWrapper}`]: {
     width: '100%',
   },
-  roadImageWrapper: {
+  [`& .${classes.roadImageWrapper}`]: {
     position: 'relative',
     top: '40%',
   },
-  logosContainer: {
+  [`& .${classes.logosContainer}`]: {
     height: '100%',
   },
-  labelWrapper: {
+  [`& .${classes.labelWrapper}`]: {
     backgroundColor: silverSmokeColor + opacity80percent,
     position: 'absolute',
     width: 'fit-content',
     display: 'flex',
     right: 0,
   },
-  label: {
+  [`& .${classes.label}`]: {
     maxWidth: 'min-content',
   },
 });
@@ -42,15 +53,13 @@ interface IProps {
   road: number;
 }
 const CardHeader: FC<IProps> = ({ variant, text, road }) => {
-  const classes = useStyles();
-
   let headerContent = null;
   const headerText = splitTextHeader(text);
 
   switch (variant) {
     case HeaderVariant.Centered:
       headerContent = (
-        <Box display="flex" alignItems="center" flex={1}>
+        <StyledBox display="flex" alignItems="center" flex={1}>
           <RoadNumberImage roadNumber={road} />
           <Box display="flex" justifyContent="center" px={2} className={classes.textWrapper}>
             <Box display="flex" flexDirection="column">
@@ -58,7 +67,7 @@ const CardHeader: FC<IProps> = ({ variant, text, road }) => {
               <Typography.Body1>{headerText?.textLine2}</Typography.Body1>
             </Box>
           </Box>
-        </Box>
+        </StyledBox>
       );
       break;
     case HeaderVariant.Label:

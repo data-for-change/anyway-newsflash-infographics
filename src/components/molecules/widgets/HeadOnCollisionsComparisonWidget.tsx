@@ -1,13 +1,71 @@
-import React, { FC } from 'react';
-import { Typography } from 'components/atoms';
-import PieChartView, { renderCollisionCustomizedLabel } from '../PieChartView';
-import { IWidgetHeadOnCollisionsComparisonData } from 'models/WidgetData';
 import { Box } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import { cherryJamColor, silverSpoonColor } from 'style';
+import { styled } from '@mui/material/styles';
+import { Typography } from 'components/atoms';
+import { IWidgetHeadOnCollisionsComparisonData } from 'models/WidgetData';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import RootStore from 'store/root.store';
 import { useStore } from 'store/storeConfig';
+import { cherryJamColor, silverSpoonColor } from 'style';
+import PieChartView, { renderCollisionCustomizedLabel } from '../PieChartView';
+
+const PREFIX = 'HeadOnCollisionsComparisonWidget';
+
+const classes = {
+  textHighlight: `${PREFIX}-textHighlight`,
+  segmentDesc: `${PREFIX}-segmentDesc`,
+  timeRange: `${PREFIX}-timeRange`,
+  primaryContent: `${PREFIX}-primaryContent`,
+  primaryDesc: `${PREFIX}-primaryDesc`,
+  secondaryContent: `${PREFIX}-secondaryContent`,
+  secondaryDesc: `${PREFIX}-secondaryDesc`,
+};
+
+const StyledBox = styled(Box)(() => ({
+  [`& .${classes.textHighlight}`]: {
+    color: cherryJamColor,
+  },
+
+  [`& .${classes.segmentDesc}`]: {
+    color: silverSpoonColor,
+  },
+
+  [`& .${classes.timeRange}`]: {
+    position: 'relative',
+    bottom: '25%',
+    right: '10%',
+    color: silverSpoonColor,
+  },
+
+  [`& .${classes.primaryContent}`]: {
+    display: 'flex',
+    height: MAIN_CONTENT_HEIGHT,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+
+  [`& .${classes.primaryDesc}`]: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '30%',
+  },
+
+  [`& .${classes.secondaryContent}`]: {
+    display: 'flex',
+    height: SECONDARY_CONTENT_HEIGHT,
+    width: '80%',
+    position: 'relative',
+    bottom: '10%',
+  },
+
+  [`& .${classes.secondaryDesc}`]: {
+    justifyContent: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    width: '30%',
+  },
+}));
 
 const ACCIDENT_TYPE = 'desc';
 const COUNT = 'count';
@@ -20,48 +78,7 @@ interface IProps {
   usePercent?: boolean;
 }
 
-const useStyles = makeStyles(() => ({
-  textHighlight: {
-    color: cherryJamColor,
-  },
-  segmentDesc: {
-    color: silverSpoonColor,
-  },
-  timeRange: {
-    position: 'relative',
-    bottom: '25%',
-    right: '10%',
-    color: silverSpoonColor,
-  },
-  primaryContent: {
-    display: 'flex',
-    height: MAIN_CONTENT_HEIGHT,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  primaryDesc: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '30%',
-  },
-  secondaryContent: {
-    display: 'flex',
-    height: SECONDARY_CONTENT_HEIGHT,
-    width: '80%',
-    position: 'relative',
-    bottom: '10%',
-  },
-  secondaryDesc: {
-    justifyContent: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    width: '30%',
-  },
-}));
-
 const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePercent }) => {
-  const classes = useStyles();
   const store: RootStore = useStore();
   const { t } = useTranslation();
   const bigPieData = data.items.specific_road_segment_fatal_accidents;
@@ -69,7 +86,7 @@ const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePer
   const roadNumberSegment: string = ` ${t('onUrban.route')} ${store.newsFlashWidgetsMetaRoadNumber}`;
   const descSegment: string = roadNumberSegment == null ? '' : segmetText.substr(roadNumberSegment.length);
   return (
-    <Box height={'100%'} display="flex" flexDirection="column" mr={'80px'}>
+    <StyledBox height={'100%'} display="flex" flexDirection="column" mr={'80px'}>
       <Box className={classes.primaryContent}>
         <Box className={classes.primaryDesc}>
           <Box className={classes.textHighlight}>
@@ -109,7 +126,7 @@ const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePer
           outerRadius={'100%'}
         />
       </Box>
-    </Box>
+    </StyledBox>
   );
 };
 export default HeadOnCollisionsComparisonWidget;

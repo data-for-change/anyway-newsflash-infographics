@@ -1,15 +1,20 @@
-import { FC } from 'react';
-import { makeStyles } from '@mui/styles';
-import { MapContainer } from 'react-leaflet';
+import { styled } from '@mui/material/styles';
 import L, { LatLng } from 'leaflet';
 import { IPoint } from 'models/Point';
-import { INITIAL_CENTER, INITIAL_ZOOM } from 'utils/utils';
-import { uniquePoints } from 'utils/utils';
+import { FC } from 'react';
+import { MapContainer } from 'react-leaflet';
 import MapViewControl from 'services/MapViewControl';
+import { INITIAL_CENTER, INITIAL_ZOOM, uniquePoints } from 'utils/utils';
 import GoogleMapsLayer from './GoogleMapsLayer';
 
-const useStyles = makeStyles({
-  root: {
+const PREFIX = 'Map';
+
+const classes = {
+  root: `${PREFIX}-root`,
+};
+
+const StyledMapContainer = styled(MapContainer)({
+  [`&.${classes.root}`]: {
     height: '100%',
     width: '100%',
   },
@@ -27,16 +32,14 @@ interface IProps {
 }
 
 const Map: FC<IProps> = ({ zoom = INITIAL_ZOOM, center = INITIAL_CENTER, data, children }) => {
-  const classes = useStyles();
-
   const bounds = getBounds(data);
 
   return (
-    <MapContainer zoom={zoom} className={classes.root}>
+    <StyledMapContainer zoom={zoom} className={classes.root}>
       <MapViewControl bounds={bounds} center={center} zoom={INITIAL_ZOOM} />
       <GoogleMapsLayer />
       {children}
-    </MapContainer>
+    </StyledMapContainer>
   );
 };
 

@@ -1,33 +1,38 @@
-import React, { FC, useCallback, useState, useEffect } from 'react';
-import { Divider, Grid, Box } from '@mui/material';
-import { makeStyles, createStyles } from '@mui/styles';
-import { AppBar, Toolbar } from '@mui/material';
+import { AppBar, Box, Divider, Grid, Toolbar } from '@mui/material';
+import Collapse from '@mui/material/Collapse';
+import { styled } from '@mui/material/styles';
+import { Button, Typography } from 'components/atoms';
 import SelectButton from 'components/atoms/SelectButton';
 import { observer } from 'mobx-react-lite';
-import { useStore } from 'store/storeConfig';
-import RootStore from 'store/root.store';
-import { useLocation } from 'react-router';
 import queryString from 'query-string';
-import { Typography, Button } from 'components/atoms';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import Collapse from '@mui/material/Collapse';
+import { useLocation } from 'react-router';
+import RootStore from 'store/root.store';
+import { useStore } from 'store/storeConfig';
+
+const PREFIX = 'FilterBar';
+
+const classes = {
+  grow: `${PREFIX}-grow`,
+  descriptionHeader: `${PREFIX}-descriptionHeader`,
+};
+
+const Root = styled('div')(() => ({
+  [`&.${classes.grow}`]: {
+    flexGrow: 1,
+  },
+
+  [`& .${classes.descriptionHeader}`]: {
+    alignItems: 'center',
+  },
+}));
 
 interface IProps {}
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    grow: {
-      flexGrow: 1,
-    },
-    descriptionHeader: {
-      alignItems: 'center',
-    },
-  }),
-);
-
 const FilterBar: FC<IProps> = () => {
   const store: RootStore = useStore();
-  const classes = useStyles();
+
   const onFilterChange = useCallback((value: number) => store.changeTimeFilter(value), [store]);
   const { t } = useTranslation();
   const [isDescOpen, setIsDescOpen] = useState(false);
@@ -43,7 +48,7 @@ const FilterBar: FC<IProps> = () => {
   }, [queryParam, store]);
 
   return (
-    <div className={classes.grow}>
+    <Root className={classes.grow}>
       <AppBar position="static" color="transparent" elevation={0}>
         <Toolbar variant="dense">
           <Grid container spacing={2} alignItems="center">
@@ -73,7 +78,7 @@ const FilterBar: FC<IProps> = () => {
         </Toolbar>
       </AppBar>
       <Divider />
-    </div>
+    </Root>
   );
 };
 

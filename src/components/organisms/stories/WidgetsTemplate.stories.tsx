@@ -1,26 +1,20 @@
-import * as React from 'react';
 import { Box } from '@mui/material';
-import makeStyles from '@mui/material/styles/makeStyles';
+import { styled } from '@mui/material/styles';
+import * as React from 'react';
 import WidgetsTemplate from '../WidgetsTemplate';
+
+const PREFIX = 'WidgetsTemplate';
+
+const classes = {
+  mainBox: `${PREFIX}-mainBox`,
+  widgetBox: `${PREFIX}-widgetBox`,
+};
 
 export default {
   title: 'Components/organisms/WidgetsTemplate',
 };
 
-const useStyles = makeStyles({
-  mainBox: {
-    height: 'inherit',
-  },
-
-  widgetBox: {
-    height: 'inherit',
-    overflow: 'auto',
-  },
-});
-
 const App: React.FC = () => {
-  const classes = useStyles();
-
   return (
     <Box display="flex" flexGrow={1} className={classes.mainBox}>
       <Box flexGrow={5} className={classes.widgetBox} position="relative">
@@ -30,4 +24,15 @@ const App: React.FC = () => {
   );
 };
 
-export const common = () => <App />;
+const StyledApp = styled(App)({
+  [`& .${classes.mainBox}`]: {
+    height: 'inherit',
+  },
+
+  [`& .${classes.widgetBox}`]: {
+    height: 'inherit',
+    overflow: 'auto',
+  },
+});
+
+export const common = () => <StyledApp />;

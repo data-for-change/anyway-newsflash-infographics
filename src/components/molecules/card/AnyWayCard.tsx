@@ -2,8 +2,8 @@ import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import SettingsOverscanIcon from '@mui/icons-material/SettingsOverscan';
 import { Box, Card, CardContent } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import Tooltip from '@mui/material/Tooltip';
-import { makeStyles } from '@mui/styles';
 import { AnyWayButton } from 'components/atoms/AnyWayButton';
 import SocialShare from 'components/atoms/SocialShare';
 import CardEditor from 'components/organisms/CardEditorDialog';
@@ -16,6 +16,43 @@ import { getSizes } from './card.util';
 import CardBackgroundImage from './CardBackgroundImage';
 import CardFooter from './CardFooter';
 import CardHeader from './CardHeader';
+
+const PREFIX = 'AnyWayCard';
+
+const classes = {
+  root: `${PREFIX}-root`,
+  content: `${PREFIX}-content`,
+  button: `${PREFIX}-button`,
+  information: `${PREFIX}-information`,
+};
+
+const Root = styled('div')(({ theme }) => ({
+  [`& .${classes.root}`]: {
+    fontFamily: fontFamilyString,
+    position: 'relative', // for meta tags
+    boxSizing: 'border-box',
+    zIndex: 0,
+  },
+
+  [`& .${classes.content}`]: {
+    height: '100%',
+    boxSizing: 'border-box',
+    padding: 0,
+  },
+
+  [`& .${classes.button}`]: {
+    '&:hover': {
+      backgroundColor: transparent,
+    },
+  },
+
+  [`& .${classes.information}`]: {
+    minWidth: theme.spacing(8),
+    textAlign: 'center',
+    lineHeight: '0.75',
+    cursor: 'pointer',
+  },
+}));
 
 const DEFAULTE_SIZE = 1;
 export interface CardSizeOptions {
@@ -33,31 +70,6 @@ interface IProps {
 }
 
 const getSizeFactor = (options: CardSizeOptions | undefined): number => (options?.size ? options.size : DEFAULTE_SIZE);
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    fontFamily: fontFamilyString,
-    position: 'relative', // for meta tags
-    boxSizing: 'border-box',
-    zIndex: 0,
-  },
-  content: {
-    height: '100%',
-    boxSizing: 'border-box',
-    padding: 0,
-  },
-  button: {
-    '&:hover': {
-      backgroundColor: transparent,
-    },
-  },
-  information: {
-    minWidth: theme.spacing(8),
-    textAlign: 'center',
-    lineHeight: '0.75',
-    cursor: 'pointer',
-  },
-}));
 
 const AnyWayCard: FC<IProps> = ({
   widgetName,
@@ -78,14 +90,13 @@ const AnyWayCard: FC<IProps> = ({
   const factor = getSizeFactor(sizeOptions);
   const sizes = getSizes(variant, factor);
 
-  const classes = useStyles();
   const imgDownloadHandler = () => {
     if (element && element instanceof HTMLElement) {
       widgetToImage(widgetName, element);
     }
   };
   const buttons = !actionButtons ? null : (
-    <>
+    <Root>
       <AnyWayButton className={classes.button} disableRipple={true} onClick={imgDownloadHandler}>
         <GetAppOutlinedIcon />
       </AnyWayButton>
@@ -101,7 +112,7 @@ const AnyWayCard: FC<IProps> = ({
           </Tooltip>
         </Box>
       )}
-    </>
+    </Root>
   );
 
   const refFn = (element: HTMLDivElement) => {
@@ -112,7 +123,7 @@ const AnyWayCard: FC<IProps> = ({
   };
 
   return (
-    <>
+    <Root>
       <Card ref={refFn} className={classes.root} variant="outlined">
         <Box height={sizes.height} width={sizes.width} position="relative" padding={3}>
           {/* BACKGROUND IMAGE */}
@@ -145,7 +156,7 @@ const AnyWayCard: FC<IProps> = ({
         </Box>
         <SocialShare />
       </Box>
-    </>
+    </Root>
   );
 };
 export default AnyWayCard;

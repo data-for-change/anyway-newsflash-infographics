@@ -1,18 +1,40 @@
-import React, { FC, useEffect } from 'react';
-import WidgetsTemplate from '../components/organisms/WidgetsTemplate';
 import { Box } from '@mui/material';
-import SideBar from 'components/organisms/SideBar';
-import { makeStyles } from '@mui/styles';
-import { RouteComponentProps, Redirect } from 'react-router';
-import { silverSmokeColor } from '../style';
-import FilterBar from 'components/organisms/FilterBar';
+import { styled } from '@mui/material/styles';
 import OverlayLoader from 'components/molecules/OverlayLoader';
+import FilterBar from 'components/organisms/FilterBar';
+import SideBar from 'components/organisms/SideBar';
 import { observer } from 'mobx-react-lite';
-import { useStore } from 'store/storeConfig';
-import RootStore from 'store/root.store';
-import DemoPage from './DemoPage';
+import React, { FC, useEffect } from 'react';
+import { Redirect, RouteComponentProps } from 'react-router';
 import { Route, Switch } from 'react-router-dom';
+import RootStore from 'store/root.store';
+import { useStore } from 'store/storeConfig';
+import WidgetsTemplate from '../components/organisms/WidgetsTemplate';
+import { silverSmokeColor } from '../style';
+import DemoPage from './DemoPage';
 import { LANG } from 'const/languages.const';
+
+const PREFIX = 'HomePage';
+
+const classes = {
+  mainBox: `${PREFIX}-mainBox`,
+  widgetBox: `${PREFIX}-widgetBox`,
+  sideBarWrapper: `${PREFIX}-sideBarWrapper`,
+};
+
+const StyledBox = styled(Box)({
+  [`&.${classes.mainBox}`]: {
+    height: 'inherit',
+  },
+
+  [`& .${classes.widgetBox}`]: {
+    height: 'inherit',
+    overflow: 'auto',
+  },
+  [`& .${classes.sideBarWrapper}`]: {
+    borderInlineEnd: `1px solid ${silverSmokeColor}`,
+  },
+});
 
 interface IProps {}
 
@@ -21,22 +43,7 @@ interface IRouteProps {
   lng?: string;
 }
 
-const useStyles = makeStyles({
-  mainBox: {
-    height: 'inherit',
-  },
-
-  widgetBox: {
-    height: 'inherit',
-    overflow: 'auto',
-  },
-  sideBarWrapper: {
-    borderInlineEnd: `1px solid ${silverSmokeColor}`,
-  },
-});
-
 const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
-  const classes = useStyles();
   const store: RootStore = useStore();
   const id = match.params.id ? parseInt(match.params.id) : null;
   const loading = store.widgetBoxLoading;
@@ -60,7 +67,7 @@ const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
   }
 
   return (
-    <Box display="flex" flexGrow={1} className={classes.mainBox}>
+    <StyledBox display="flex" flexGrow={1} className={classes.mainBox}>
       <Box flexGrow={1} width={319} display="flex" className={classes.sideBarWrapper}>
         <SideBar />
       </Box>
@@ -73,7 +80,7 @@ const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
           <Route path="/:lng?/newsflash/:id" component={WidgetsTemplate} />
         </Switch>
       </Box>
-    </Box>
+    </StyledBox>
   );
 };
 

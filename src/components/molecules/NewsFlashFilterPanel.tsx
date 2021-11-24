@@ -1,35 +1,45 @@
-import React, { FC } from 'react';
-import classnames from 'classnames';
-import { Box, makeStyles } from '@mui/material';
-import { silverSmokeColor, oceanBlueColor } from 'style';
-import ynetLogo from 'assets/ynet-website-logo.svg';
-import wallaLogo from 'assets/walla-logo.svg';
+import { Box } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import madaLogo from 'assets/mada-logo.svg';
+import wallaLogo from 'assets/walla-logo.svg';
+import ynetLogo from 'assets/ynet-website-logo.svg';
+import classnames from 'classnames';
+import { Typography } from 'components/atoms';
 import { AnyWayButton } from 'components/atoms/AnyWayButton';
+import { SourceFilterEnum } from 'models/SourceFilter';
+import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import RootStore from 'store/root.store';
 import { useStore } from 'store/storeConfig';
-import { SourceFilterEnum } from 'models/SourceFilter';
-import { Typography } from 'components/atoms';
-import { useTranslation } from 'react-i18next';
+import { oceanBlueColor, silverSmokeColor } from 'style';
 
-const useStyles = makeStyles({
-  image: {
+const PREFIX = 'NewsFlashFilterPanel';
+
+const classes = {
+  image: `${PREFIX}-image`,
+  button: `${PREFIX}-button`,
+  active: `${PREFIX}-active`,
+  container: `${PREFIX}-container`,
+};
+
+const StyledBox = styled(Box)({
+  [`& .${classes.image}`]: {
     maxWidth: '50px',
     maxHeight: '35px',
   },
-  button: {
+  [`& .${classes.button}`]: {
     height: '50px',
     marginLeft: '10px',
     width: '50px',
     border: `1px solid ${silverSmokeColor}`,
   },
 
-  active: {
+  [`& .${classes.active}`]: {
     border: `2px solid ${silverSmokeColor}`,
     borderColor: oceanBlueColor,
   },
 
-  container: {
+  [`&.${classes.container}`]: {
     paddingTop: '16px',
     paddingBottom: '20px',
     marginRight: '10px',
@@ -43,7 +53,6 @@ const useStyles = makeStyles({
 
 interface IProps {}
 const NewsFlashFilterPanel: FC<IProps> = () => {
-  const classes = useStyles();
   const { t } = useTranslation();
   const store: RootStore = useStore();
 
@@ -62,7 +71,7 @@ const NewsFlashFilterPanel: FC<IProps> = () => {
   };
 
   return (
-    <Box className={classes.container}>
+    <StyledBox className={classes.container}>
       {Object.values(SourceFilterEnum).map((filter: SourceFilterEnum) => {
         const logo = getLogoByFilter(filter);
         return (
@@ -81,7 +90,7 @@ const NewsFlashFilterPanel: FC<IProps> = () => {
           </AnyWayButton>
         );
       })}
-    </Box>
+    </StyledBox>
   );
 };
 

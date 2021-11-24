@@ -1,5 +1,17 @@
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 import React, { FC } from 'react';
+
+const PREFIX = 'Logo';
+
+const classes = {
+  link: `${PREFIX}-link`,
+};
+
+const Root = styled('img')({
+  [`&.${classes.link}`]: {
+    cursor: 'pointer',
+  },
+});
 
 interface LogoProps {
   src: string;
@@ -8,15 +20,8 @@ interface LogoProps {
   onClick?: () => any;
 }
 
-const useStyles = makeStyles({
-  link: {
-    cursor: 'pointer',
-  },
-});
-
 const Logo: FC<LogoProps> = ({ src, alt, height, onClick }) => {
-  const classes = useStyles();
-  return <img className={classes.link} src={src} alt={alt} height={`${height}`} onClick={onClick} />;
+  return <Root className={classes.link} src={src} alt={alt} height={`${height}`} onClick={onClick} />;
 };
 
 export default Logo;

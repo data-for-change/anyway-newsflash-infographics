@@ -1,6 +1,19 @@
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 import React, { FC, useCallback, useEffect, useRef } from 'react';
 import { useStore } from 'store/storeConfig';
+
+const PREFIX = 'InfiniteScroll';
+
+const classes = {
+  root: `${PREFIX}-root`,
+};
+
+const Root = styled('div')({
+  [`&.${classes.root}`]: {
+    overflow: 'auto',
+    position: 'relative',
+  },
+});
 
 const INFINITE_SCROLLING_OFFSET: number = 30;
 
@@ -8,19 +21,11 @@ function isScrollEnd(element: HTMLDivElement) {
   return element.scrollTop + element.clientHeight > element.scrollHeight - INFINITE_SCROLLING_OFFSET;
 }
 
-const useStyles = makeStyles({
-  root: {
-    overflow: 'auto',
-    position: 'relative',
-  },
-});
-
 interface IProps {
   onScrollEnd: () => any;
 }
 
 const InfiniteScroll: FC<IProps> = ({ children, onScrollEnd }) => {
-  const classes = useStyles();
   const scrollList = useRef<HTMLDivElement>(null);
   const store = useStore();
 
@@ -39,9 +44,9 @@ const InfiniteScroll: FC<IProps> = ({ children, onScrollEnd }) => {
   }, [handleScroll]);
 
   return (
-    <div ref={scrollList} className={classes.root}>
+    <Root ref={scrollList} className={classes.root}>
       {children}
-    </div>
+    </Root>
   );
 };
 

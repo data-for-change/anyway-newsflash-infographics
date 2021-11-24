@@ -1,14 +1,54 @@
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 import { useLocale } from 'hooks/date.hooks';
 import L from 'leaflet';
 import { ClockPosition } from 'models/ClockPosition';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import { useTranslation } from 'react-i18next';
 import { Marker } from 'react-leaflet';
 import { blackColor, tooltipMarkerBorderColorArrow, transparentColor, whiteColor } from 'style';
 import { dateFormat } from 'utils/time.utils';
-import { LANG } from 'const/languages.const';
+
+const PREFIX = 'TooltipMarker';
+
+const classes = {
+  icon: `${PREFIX}-icon`,
+  root: `${PREFIX}-root`,
+  content: `${PREFIX}-content`,
+  arrow: `${PREFIX}-arrow`,
+};
+
+const StyledMarker = styled(Marker)({
+  [`& .${classes.icon}`]: {
+    width: 0,
+    height: 0,
+    backgroundColor: transparentColor,
+  },
+  [`& .${classes.root}`]: {
+    position: 'absolute',
+    right: 16,
+    bottom: 0,
+    transform: (prop: any) => getLabelPosition(prop.offset as ClockPosition),
+    display: 'flex',
+    flexFlow: (prop: any) => getLabelFlexFlow(prop.offset as ClockPosition),
+    alignItems: 'center',
+  },
+  [`& .${classes.content}`]: {
+    position: 'relative',
+    order: (prop: any) => (prop.order ? 0 : 1),
+    padding: ' 1px 3px',
+    borderRadius: '5px 7px 7px 5px',
+    whiteSpace: 'nowrap',
+    color: whiteColor,
+    backgroundColor: blackColor,
+  },
+  [`& .${classes.arrow}`]: {
+    display: 'inline-flex',
+    borderStyle: 'solid',
+    borderWidth: '5px 0 5px 20px',
+    borderColor: tooltipMarkerBorderColorArrow,
+    transform: (prop: any) => getLabelArrowRotation(prop.offset as ClockPosition),
+  },
+});
 
 const getLabelPosition = (offset: ClockPosition): string => {
   const x = getLabelXPosition(offset);
@@ -85,42 +125,7 @@ const getLabelArrowRotation = (offset: ClockPosition): string => {
   }
 };
 
-const useStyles = makeStyles({
-  icon: {
-    width: 0,
-    height: 0,
-    backgroundColor: transparentColor,
-  },
-  root: {
-    position: 'absolute',
-    right: 16,
-    bottom: 0,
-    transform: (prop) => getLabelPosition(prop.offset as ClockPosition),
-    display: 'flex',
-    flexFlow: (prop) => getLabelFlexFlow(prop.offset as ClockPosition),
-    alignItems: 'center',
-  },
-  content: {
-    position: 'relative',
-    order: (prop: any) => (prop.order ? 0 : 1),
-    padding: ' 1px 3px',
-    borderRadius: '5px 7px 7px 5px',
-    whiteSpace: 'nowrap',
-    color: whiteColor,
-    backgroundColor: blackColor,
-  },
-  arrow: {
-    display: 'inline-flex',
-    borderStyle: 'solid',
-    borderWidth: '5px 0 5px 20px',
-    borderColor: tooltipMarkerBorderColorArrow,
-    transform: (prop) => getLabelArrowRotation(prop.offset as ClockPosition),
-  },
-});
 const TooltipMarker = ({ data, position, offset }: any) => {
-  const { i18n } = useTranslation();
-  const order = i18n.language === LANG.EN;
-  const classes = useStyles({ offset, order });
   const locale = useLocale();
   const iconText = `${dateFormat(data.accident_timestamp, locale)}`;
   const TooltipTemplate = (
@@ -134,7 +139,7 @@ const TooltipMarker = ({ data, position, offset }: any) => {
     html: ReactDOMServer.renderToString(TooltipTemplate),
   });
 
-  return <Marker icon={tooltipIcon} position={position} />;
+  return <StyledMarker icon={tooltipIcon} position={position} />;
 };
 
 export default TooltipMarker;

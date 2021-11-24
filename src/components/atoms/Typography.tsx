@@ -1,7 +1,25 @@
-import { FC, ElementType } from 'react';
-import MaterialTypography from '@mui/material/Typography';
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 import { Variant } from '@mui/material/styles/createTypography';
+import MaterialTypography from '@mui/material/Typography';
+import { ElementType, FC } from 'react';
+
+const PREFIX = 'Typography';
+
+const classes = {
+  bold: `${PREFIX}-bold`,
+};
+
+const TypographyBase: FC<ITypographyBase> = ({ bold, variant, component, children }) => (
+  <MaterialTypography className={useBold(bold)} variant={variant} component={component}>
+    {children}
+  </MaterialTypography>
+);
+
+const StyledTypographyBase = styled(TypographyBase)(() => ({
+  [`& .${classes.bold}`]: {
+    fontWeight: 'bold',
+  },
+}));
 
 interface IBold {
   bold?: boolean;
@@ -17,26 +35,13 @@ interface ITypographyBase {
   component: ElementType;
 }
 
-const useStyles = makeStyles(() => ({
-  bold: {
-    fontWeight: 'bold',
-  },
-}));
-
 const useBold = (bold = false) => {
-  const classes = useStyles();
   return bold ? classes.bold : '';
 };
 
-const TypographyBase: FC<ITypographyBase> = ({ bold, variant, component, children }) => (
-  <MaterialTypography className={useBold(bold)} variant={variant} component={component}>
-    {children}
-  </MaterialTypography>
-);
-
 // for styles of each variant - see 'theme.ts'
 const Typography: IText = {
-  Title1: (props) => <TypographyBase variant="subtitle1" component="h2" {...props} />,
+  Title1: (props) => <StyledTypographyBase variant="subtitle1" component="h2" {...props} />,
   Title2: (props) => <TypographyBase variant="subtitle2" component="h3" {...props} />,
   Body1: (props) => <TypographyBase variant="h1" component="span" {...props} />,
   Body2: (props) => <TypographyBase variant="h2" component="span" {...props} />,

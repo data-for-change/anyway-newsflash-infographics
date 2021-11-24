@@ -1,11 +1,17 @@
-import React, { FC } from 'react';
-import Loader from 'components/atoms/Loader';
 import Box from '@mui/material/Box';
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
+import Loader from 'components/atoms/Loader';
+import React, { FC } from 'react';
 import { silverSmokeColor } from 'style';
 
-const useStyles = makeStyles({
-  root: {
+const PREFIX = 'OverlayLoader';
+
+const classes = {
+  root: `${PREFIX}-root`,
+};
+
+const StyledBox = styled(Box)({
+  [`&.${classes.root}`]: {
     position: 'absolute',
     top: 0,
     left: 0,
@@ -14,7 +20,7 @@ const useStyles = makeStyles({
     backgroundColor: silverSmokeColor,
     opacity: 0.5,
     zIndex: 2,
-    display: (show) => (show ? 'flex' : 'none'),
+    display: (show: any) => (show ? 'flex' : 'none'),
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -25,12 +31,10 @@ interface IProps {
 }
 
 const OverlayLoader: FC<IProps> = ({ show }) => {
-  // passing props to useStyles - see demo: https://codesandbox.io/s/giubj?file=/demo.js:224-229
-  const classes = useStyles(show);
   return (
-    <Box className={classes.root}>
+    <StyledBox className={classes.root}>
       <Loader />
-    </Box>
+    </StyledBox>
   );
 };
 export default OverlayLoader;

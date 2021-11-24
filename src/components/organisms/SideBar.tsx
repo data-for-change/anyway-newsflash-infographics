@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 import { ErrorBoundary, InfiniteScroll, Typography } from 'components/atoms';
 import NewsFlashFilterPanel from 'components/molecules/NewsFlashFilterPanel';
 import SideBarMap from 'components/molecules/SideBarMap';
@@ -12,12 +12,14 @@ import { silverSmokeColor } from 'style';
 import OverlayLoader from '../molecules/OverlayLoader';
 import News from './News';
 
-const INFINITE_SCROLL_FETCH_SIZE = 100;
+const PREFIX = 'SideBar';
 
-interface IProps {}
+const classes = {
+  newsContainer: `${PREFIX}-newsContainer`,
+};
 
-const useStyles = makeStyles({
-  newsContainer: {
+const StyledBox = styled(Box)({
+  [`& .${classes.newsContainer}`]: {
     overflow: 'auto',
     position: 'relative',
     display: 'flex',
@@ -28,9 +30,13 @@ const useStyles = makeStyles({
   },
 });
 
+const INFINITE_SCROLL_FETCH_SIZE = 100;
+
+interface IProps {}
+
 const SideBar: FC<IProps> = () => {
   const store: RootStore = useStore();
-  const classes = useStyles();
+
   const { t } = useTranslation();
 
   const mapTitle = `${t('sideBar')}`;
@@ -42,7 +48,7 @@ const SideBar: FC<IProps> = () => {
   }, [store]);
 
   return (
-    <Box display="flex" flexDirection="column" justifyContent="center" alignItems="stretch">
+    <StyledBox display="flex" flexDirection="column" justifyContent="center" alignItems="stretch">
       <Box className={classes.newsContainer}>
         <OverlayLoader show={loading} />
         <Box>
@@ -64,7 +70,7 @@ const SideBar: FC<IProps> = () => {
           </ErrorBoundary>
         )}
       </Box>
-    </Box>
+    </StyledBox>
   );
 };
 

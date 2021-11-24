@@ -1,9 +1,42 @@
-import React, { FC } from 'react';
-import { Dialog, Typography } from 'components/atoms';
-import { Box, Theme, IconButton, DialogTitle, DialogContent } from '@mui/material';
-import { makeStyles, createStyles } from '@mui/styles';
 import CloseIcon from '@mui/icons-material/Close';
-import { shadowColor, blueVioletColor } from 'style';
+import { Box, DialogContent, DialogTitle, IconButton } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import { Dialog, Typography } from 'components/atoms';
+import React, { FC } from 'react';
+import { blueVioletColor, shadowColor } from 'style';
+
+const PREFIX = 'DialogWithHeader';
+
+const classes = {
+  dialogHeader: `${PREFIX}-dialogHeader`,
+  bar: `${PREFIX}-bar`,
+  close: `${PREFIX}-close`,
+  content: `${PREFIX}-content`,
+};
+
+const StyledDialog = styled(Dialog)(({ theme }) => ({
+  [`& .${classes.dialogHeader}`]: {
+    padding: 0,
+    paddingInlineStart: theme.spacing(3),
+    borderBottom: `2px solid ${shadowColor}`,
+  },
+
+  [`& .${classes.bar}`]: {
+    display: 'flex',
+    width: 'inherit',
+    color: blueVioletColor,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  [`& .${classes.close}`]: {
+    color: shadowColor,
+  },
+
+  [`& .${classes.content}`]: {
+    overflow: 'hidden',
+  },
+}));
 
 interface IProps {
   title: string;
@@ -12,33 +45,10 @@ interface IProps {
   fullWidth?: boolean;
   maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
 }
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    dialogHeader: {
-      padding: 0,
-      paddingInlineStart: theme.spacing(3),
-      borderBottom: `2px solid ${shadowColor}`,
-    },
-    bar: {
-      display: 'flex',
-      width: 'inherit',
-      color: blueVioletColor,
-      justifyContent: 'space-between',
-      alignItems: 'center',
-    },
-    close: {
-      color: shadowColor,
-    },
-    content: {
-      overflow: 'hidden',
-    },
-  }),
-);
 
 const DialogWithHeader: FC<IProps> = ({ onClose, isShowing, title, fullWidth, children, maxWidth = 'lg' }) => {
-  const classes = useStyles();
   return (
-    <Dialog isShowing={isShowing} onClose={onClose} fullWidth={fullWidth} maxWidth={maxWidth}>
+    <StyledDialog isShowing={isShowing} onClose={onClose} fullWidth={fullWidth} maxWidth={maxWidth}>
       <DialogTitle className={classes.dialogHeader}>
         <Box className={classes.bar}>
           <Typography.Body4>{title}</Typography.Body4>
@@ -48,7 +58,7 @@ const DialogWithHeader: FC<IProps> = ({ onClose, isShowing, title, fullWidth, ch
         </Box>
       </DialogTitle>
       <DialogContent className={classes.content}>{children}</DialogContent>
-    </Dialog>
+    </StyledDialog>
   );
 };
 

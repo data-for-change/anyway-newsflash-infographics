@@ -1,12 +1,19 @@
 import MatSlider from '@mui/material/Slider';
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 import React from 'react';
 
-const useStyles = makeStyles({
-  root: {
+const PREFIX = 'Slider';
+
+const classes = {
+  root: `${PREFIX}-root`,
+};
+
+const Root = styled('div')({
+  [`&.${classes.root}`]: {
     padding: 10,
   },
 });
+
 const marks = [
   {
     value: 1,
@@ -22,10 +29,8 @@ const marks = [
   },
 ];
 const Slider = ({ onChange }: any) => {
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
+    <Root className={classes.root}>
       <MatSlider
         defaultValue={1}
         onChange={onChange}
@@ -36,7 +41,7 @@ const Slider = ({ onChange }: any) => {
         min={1}
         max={2}
       />
-    </div>
+    </Root>
   );
 };
 export default Slider;

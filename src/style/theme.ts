@@ -1,9 +1,5 @@
-import { Theme, ThemeOptions } from '@mui/material/styles';
+import { ThemeOptions } from '@mui/material/styles';
 import { darkGrey, fontFamilyString } from './';
-
-declare module '@mui/styles/defaultTheme' {
-  interface DefaultTheme extends Theme {}
-}
 
 const defaultThemeOptions: ThemeOptions = {
   palette: {},

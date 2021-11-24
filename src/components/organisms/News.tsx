@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 import { Link, Typography } from 'components/atoms';
 import LocationSearchIndicator from 'components/molecules/LocationSearchIndicator';
 import { useLocale } from 'hooks/date.hooks';
@@ -10,23 +10,31 @@ import { useStore } from 'store/storeConfig';
 import { silverSmokeColor } from 'style';
 import { dateFormat } from 'utils/time.utils';
 
-const useStyles = makeStyles({
-  container: {},
-  newsFeed: {
+const PREFIX = 'News';
+
+const classes = {
+  container: `${PREFIX}-container`,
+  newsFeed: `${PREFIX}-newsFeed`,
+  activeNewsFlash: `${PREFIX}-activeNewsFlash`,
+};
+
+const StyledBox = styled(Box)({
+  [`& .${classes.container}`]: {},
+  [`&.${classes.newsFeed}`]: {
     overflow: 'auto',
   },
-  activeNewsFlash: {
+  [`& .${classes.activeNewsFlash}`]: {
     backgroundColor: silverSmokeColor,
   },
 });
 
 const News: FC = () => {
   const store: RootStore = useStore();
-  const classes = useStyles();
+
   const locale = useLocale();
 
   return (
-    <Box flexGrow={1} display="flex" flexDirection="column" className={classes.newsFeed}>
+    <StyledBox flexGrow={1} display="flex" flexDirection="column" className={classes.newsFeed}>
       <Box flexGrow={1}>
         <Box className={classes.container} flexDirection={'column'}>
           {store.gpsLocationData && <LocationSearchIndicator />}
@@ -54,7 +62,7 @@ const News: FC = () => {
           )}
         </Box>
       </Box>
-    </Box>
+    </StyledBox>
   );
 };
 

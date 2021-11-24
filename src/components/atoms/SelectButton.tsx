@@ -1,26 +1,29 @@
 import { CalendarTodayOutlined } from '@mui/icons-material';
 import { FormControl, List, ListItem, ListItemIcon, MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import { createStyles, makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 import React, { FC, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router';
 import { useStore } from 'store/storeConfig';
 import { Typography } from '../atoms';
 
+const PREFIX = 'SelectButton';
+
+const classes = {
+  formControl: `${PREFIX}-formControl`,
+};
+
+const StyledList = styled(List)(() => ({
+  [`& .${classes.formControl}`]: {
+    textAlign: 'right',
+  },
+}));
+
 interface IProps {
   onChange: (value: number) => any;
 }
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    formControl: {
-      textAlign: 'right',
-    },
-  }),
-);
-
 const SelectButton: FC<IProps> = ({ onChange }) => {
-  const classes = useStyles();
   const store = useStore();
   const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);
@@ -45,7 +48,8 @@ const SelectButton: FC<IProps> = ({ onChange }) => {
   };
 
   return (
-    <List component="nav" aria-label="main mailbox folders">
+    // TODO here was component="nav"
+    <StyledList aria-label="main mailbox folders">
       <ListItem>
         <ListItemIcon>
           <CalendarTodayOutlined />
@@ -76,7 +80,7 @@ const SelectButton: FC<IProps> = ({ onChange }) => {
           </Select>
         </FormControl>
       </ListItem>
-    </List>
+    </StyledList>
   );
 };
 

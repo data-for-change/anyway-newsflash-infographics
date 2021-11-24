@@ -1,21 +1,23 @@
-import React from 'react';
-import { Logo, Typography } from 'components/atoms';
-import LamasImage from 'assets/cbs.png';
-import AnywayImage from 'assets/anyway.png';
-import { makeStyles } from '@mui/styles';
-import { cardFooterHeight } from 'style';
 import { Box } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import AnywayImage from 'assets/anyway.png';
+import LamasImage from 'assets/cbs.png';
+import { Logo, Typography } from 'components/atoms';
 import { IDateComments } from 'models/WidgetData';
 import { useTranslation } from 'react-i18next';
 import { dateFormat } from 'utils/time.utils';
 import { useLocale } from 'hooks/date.hooks';
+import React from 'react';
+import { cardFooterHeight } from 'style';
 
-interface IProps {
-  dateComment: IDateComments;
-}
+const PREFIX = 'CardFooter';
 
-const useStyles = makeStyles({
-  main: {
+const classes = {
+  main: `${PREFIX}-main`,
+};
+
+const Root = styled('div')({
+  [`&.${classes.main}`]: {
     width: '100%',
     display: 'flex',
     boxSizing: 'border-box',
@@ -25,14 +27,17 @@ const useStyles = makeStyles({
   },
 });
 
+interface IProps {
+  dateComment: IDateComments;
+}
+
 const CardFooter: React.FC<IProps> = ({ dateComment }) => {
   const { t } = useTranslation();
-  const classes = useStyles();
   const locale = useLocale();
   const lastUpdateDate = dateComment.last_update ? dateFormat(new Date(dateComment.last_update), locale) : null;
   const dateRange = dateComment.date_range ? dateComment.date_range.join('-') : null;
   return (
-    <div className={classes.main}>
+    <Root className={classes.main}>
       <Typography.Body3>{dateRange}</Typography.Body3>
       {lastUpdateDate && (
         <Typography.Body3>
@@ -46,7 +51,7 @@ const CardFooter: React.FC<IProps> = ({ dateComment }) => {
       <Box display="flex" flex={1} />
       <Logo src={LamasImage} alt={'Lamas'} height={30} />
       <Logo src={AnywayImage} alt={'Anyway'} height={20} />
-    </div>
+    </Root>
   );
 };
 
