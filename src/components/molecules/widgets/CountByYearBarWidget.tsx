@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { IWidgetAccidentsByYearData } from 'models/WidgetData';
-import GenericBarChartView, { BarType } from '../GenericBarChartView';
+import GenericBarChartView from '../GenericBarChartView';
 import { useTranslation } from 'react-i18next';
 
 type stringNumObject = Record<string, string | number>;
@@ -20,12 +20,12 @@ const CountByYearBarWidget: FC<IProps> = ({ data }) => {
     data: {
       y_label_name: 'accident_year',
       is_percentage: false,
-      bar_type: 'stacked',
+      is_stacked: true,
       items: [
         {
           label_key: '2017',
           series: [
-            { label_key: 'light', value: 55 },
+            { label_key: 'light', value: 35 },
             { label_key: 'severe', value: 5 },
             { label_key: 'fatal', value: 1 },
           ],
@@ -33,7 +33,7 @@ const CountByYearBarWidget: FC<IProps> = ({ data }) => {
         {
           label_key: '2018',
           series: [
-            { label_key: 'light', value: 50 },
+            { label_key: 'light', value: 100 },
             { label_key: 'severe', value: 3 },
             { label_key: 'fatal', value: 3 },
           ],
@@ -49,7 +49,7 @@ const CountByYearBarWidget: FC<IProps> = ({ data }) => {
         {
           label_key: '2020',
           series: [
-            { label_key: 'light', value: 50 },
+            { label_key: 'light', value: 30 },
             { label_key: 'severe', value: 3 },
             { label_key: 'fatal', value: 3 },
           ],
@@ -77,7 +77,7 @@ const CountByYearBarWidget: FC<IProps> = ({ data }) => {
    */
 
   const isPercentage = originData.data.is_percentage;
-  const barType = originData.data.bar_type;
+  const isStacked = originData.data.is_stacked;
   const labelsMap: stringObject = originData.text.labels_map;
   const translatedYLabelName = getTranslatedLabel('y_label_name');
   function getTranslatedLabel(key: string): string {
@@ -88,7 +88,7 @@ const CountByYearBarWidget: FC<IProps> = ({ data }) => {
     return getTranslatedLabel(dataPoint.label_key);
   });
 
-  const transformedItems = items.map((item, i) => {
+  const transformedItems = items.map((item) => {
     const { label_key, series } = item;
     const result: stringNumObject = {};
     const label = label_key.toString();
@@ -104,7 +104,7 @@ const CountByYearBarWidget: FC<IProps> = ({ data }) => {
 
   return (
     <GenericBarChartView
-      barType={BarType.Stacked}
+      isStacked={isStacked}
       isPercentage={isPercentage}
       data={transformedItems}
       xLabels={xLabels}

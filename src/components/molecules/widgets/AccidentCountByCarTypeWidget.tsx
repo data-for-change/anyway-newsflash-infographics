@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { IWidgetAccidentCountByCarType } from 'models/WidgetData';
 import { Box, makeStyles, Theme } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import GenericBarChartView, { BarType } from '../GenericBarChartView';
+import GenericBarChartView from '../GenericBarChartView';
 
 type stringNumObject = Record<string, string | number>;
 type stringObject = Record<string, string>;
@@ -29,7 +29,7 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
     data: {
       y_label_name: 'car_type',
       is_percentage: true,
-      bar_type: 'multi',
+      is_stacked: false,
       items: [
         {
           label_key: 'bicycle',
@@ -77,7 +77,7 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
   };
 
   const isPercentage = originData.data.is_percentage;
-  const barType = originData.data.bar_type;
+  const isStacked = originData.data.is_stacked;
   const translationMap: stringObject = originData.text.labels_map;
   const translatedYLabelName = getTranslatedLabel('y_label_name');
   function getTranslatedLabel(key: string): string {
@@ -87,7 +87,7 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
   const xLabels = originData.data.items[0].series.map((dataPoint) => {
     return getTranslatedLabel(dataPoint.label_key);
   });
-  const transformedItems = items.map((item, i) => {
+  const transformedItems = items.map((item) => {
     const { label_key, series } = item;
     const result: stringNumObject = {};
     const label = label_key.toString();
@@ -112,7 +112,7 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
       </Box>
       <Box className={classes.chartWrapper}>
         <GenericBarChartView
-          barType={BarType.Multi}
+          isStacked={isStacked}
           isPercentage={isPercentage}
           data={transformedItems}
           yLabel={translatedYLabelName}

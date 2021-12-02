@@ -104,9 +104,7 @@
   "widgets": {
     "countByCarType": {
       "Accidents count by vehicle type": "השוואת אחוז התאונות ע\"פ כלי רכב",
-      "compared to national average": "במקטע לעומת ממוצע ארצי בכבישים מאותו הסוג",
-      "percentage_segment": "אחוז במקטע",
-      "percentage_country": "אחוז ארצי"
+      "compared to national average": "במקטע לעומת ממוצע ארצי בכבישים מאותו הסוג"
     },
     "No data": "אין נתונים להצגה"
   },

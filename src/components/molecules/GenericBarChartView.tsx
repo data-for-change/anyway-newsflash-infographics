@@ -4,13 +4,8 @@ import { roseColor, honeyColor, yellowColor, blackColor, whiteColor } from 'styl
 import { Typography } from 'components/atoms';
 import tinycolor from 'tinycolor2';
 
-export enum BarType {
-  Single = 'single',
-  Multi = 'multi',
-  Stacked = 'stacked',
-}
 interface IProps {
-  barType: BarType;
+  isStacked: boolean;
   data: Array<object>;
   isPercentage: boolean;
   yLabel: string;
@@ -18,28 +13,27 @@ interface IProps {
   xLabels: string[];
 }
 
-function getBarRadius(isStacked: boolean, numOfBars: number, barIndex: number) {
-  // create custom type as recharts <bar /> component does not accept regular number[].
-  type radiusType = [number, number, number, number];
-  type radiusSidesType = Record<'bottomSide' | 'topSide' | 'bothSides' | 'noRadius', radiusType>;
-  const radiusSides: radiusSidesType = {
-    bottomSide: [0, 0, 10, 10],
-    topSide: [10, 10, 0, 0],
-    bothSides: [10, 10, 10, 10],
-    noRadius: [0, 0, 0, 0],
-  };
+// create custom type as recharts <bar /> component does not accept regular number[].
+const borderRadius: Record<'Bottom' | 'Top' | 'All' | 'None', [number, number, number, number]> = {
+  Bottom: [0, 0, 10, 10],
+  Top: [10, 10, 0, 0],
+  All: [10, 10, 10, 10],
+  None: [0, 0, 0, 0],
+};
 
+function getBarRadius(isStacked: boolean, numOfBars: number, barIndex: number) {
+  const lastBar = numOfBars - 1;
   if (!isStacked) {
-    return radiusSides.bothSides;
+    return borderRadius.All;
   }
 
   switch (barIndex) {
     case 0:
-      return radiusSides.bottomSide;
-    case numOfBars - 1:
-      return radiusSides.topSide;
+      return borderRadius.Bottom;
+    case lastBar:
+      return borderRadius.Top;
     default:
-      return radiusSides.noRadius;
+      return borderRadius.None;
   }
 }
 
@@ -55,10 +49,10 @@ const CustomizedLabel = (props: any) => {
   );
 };
 
-const GenericBarChartView: FC<IProps> = ({ barType, xLabels, data, isPercentage, yLabel, textLabel }) => {
+const GenericBarChartView: FC<IProps> = ({ isStacked, xLabels, data, isPercentage, yLabel, textLabel }) => {
   const COLORS = [yellowColor, honeyColor, roseColor, blackColor];
   const numOfBars = xLabels.length;
-  const isStacked: boolean = barType === BarType.Stacked;
+
   // Iterate all bars and styling per bar.
   const barElements = () =>
     Array.from({ length: numOfBars }, (_, i) => {
