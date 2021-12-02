@@ -4,9 +4,13 @@ import { roseColor, honeyColor, yellowColor, blackColor, whiteColor } from 'styl
 import { Typography } from 'components/atoms';
 import tinycolor from 'tinycolor2';
 
+type BarDataMap = {
+  [key: string]: number | string;
+};
+
 interface IProps {
   isStacked: boolean;
-  data: Array<object>;
+  data: Array<BarDataMap>;
   isPercentage: boolean;
   yLabel: string;
   textLabel?: string;
@@ -50,9 +54,8 @@ const CustomizedLabel = (props: any) => {
 };
 
 const GenericBarChartView: FC<IProps> = ({ isStacked, xLabels, data, isPercentage, yLabel, textLabel }) => {
-  const COLORS = [yellowColor, honeyColor, roseColor, blackColor];
   const numOfBars = xLabels.length;
-
+  const COLORS = isStacked ? [yellowColor, honeyColor, roseColor] : [roseColor, honeyColor, yellowColor];
   // Iterate all bars and styling per bar.
   const barElements = () =>
     Array.from({ length: numOfBars }, (_, i) => {

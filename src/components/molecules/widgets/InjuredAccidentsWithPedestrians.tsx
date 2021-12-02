@@ -26,15 +26,12 @@ const InjuredAccidentsWithPedestrians: FC<IProps> = ({ data, segmentText }) => {
   const classes = useStyle();
   const { t } = useTranslation();
   const items = [
-    { year: 2011, killed_injury_severity_count: 40, severe_injury_severity_count: 50, light_injury_severity_count: 70 },
-    { year: 2012, killed_injury_severity_count: 6, severe_injury_severity_count: 2, light_injury_severity_count: 8 },
-    { year: 2013, killed_injury_severity_count: 12, severe_injury_severity_count: 34, light_injury_severity_count: 67 },
-    { year: 2014, killed_injury_severity_count: 36, severe_injury_severity_count: 2, light_injury_severity_count: 1 },
-    { year: 2015, killed_injury_severity_count: 13, severe_injury_severity_count: 2, light_injury_severity_count: 3 },
-    { year: 2016, killed_injury_severity_count: 7, severe_injury_severity_count: 7, light_injury_severity_count: 45 },
-    { year: 2017, killed_injury_severity_count: 37, severe_injury_severity_count: 12, light_injury_severity_count: 23 },
+    { year: 2011, value: 40 },
+    { year: 2012, value: 64 },
+    { year: 2013, value: 12 },
+    { year: 2014, value: 36 },
   ];
-  const xLabels = [KILLED_INJURY_SEVERITY_COUNT, SEVERE_INJURY_SEVERITY_COUNT, LIGHT_INJURY_SEVERITY_COUNT];
+  const xLabels = ['value'];
 
   return (
     <>
