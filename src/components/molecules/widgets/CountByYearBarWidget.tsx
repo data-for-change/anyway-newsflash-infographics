@@ -18,7 +18,6 @@ const CountByYearBarWidget: FC<IProps> = ({ data }) => {
   const originData = {
     name: 'accident_count_by_accident_year',
     data: {
-      y_label_name: 'accident_year',
       is_percentage: false,
       is_stacked: true,
       items: [
