@@ -27,8 +27,8 @@ const useStyles = makeStyles({
   },
 });
 
-const generateDate = (dateObj: any) => {
-  const lastDate = new Date(dateObj);
+const generateDate = (dateString: string) => {
+  const lastDate = new Date(dateString);
   const year = lastDate.getFullYear();
   const day = lastDate.getDate();
   const month = lastDate.getMonth();
@@ -44,9 +44,9 @@ const CardFooter: React.FC<IProps> = ({ dateComment }) => {
   return (
     <div className={classes.main}>
       <Typography.Body3>{dateRange},</Typography.Body3>
-      <Typography.Body5>
+      <Typography.Body3>
         <span className={classes.spaceSpan}>{t('widgets.lastDateUpdated')}:</span>
-      </Typography.Body5>
+      </Typography.Body3>
       <Typography.Body3>{lastDateUpdated}</Typography.Body3>
       <Box display="flex" flex={1} />
       <Logo src={LamasImage} alt={'Lamas'} height={30} />
