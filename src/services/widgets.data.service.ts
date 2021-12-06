@@ -22,8 +22,7 @@ export const fetchWidgets = async (id: number, lang: string, yearAgo?: number): 
       query.push(`mock=${SHOW_MOCK}`);
     }
 
-  const widgetsUrl = `${NEWS_FLASH_API}?${query.join('&')}`;    //temp - long response time of server- keep console.log to see out url
-    console.log(widgetsUrl);
+    const widgetsUrl = `${NEWS_FLASH_API}?${query.join('&')}`;
     const response = await axios.get(widgetsUrl);
     return processWidgetsFetchResponse(response);
   } catch (error) {
@@ -31,7 +30,11 @@ export const fetchWidgets = async (id: number, lang: string, yearAgo?: number): 
   }
 };
 
-export const fetchWidgetsByLocation = async (id: number, lang: string, yearAgo?: number): Promise<ILocationData | undefined> => {
+export const fetchWidgetsByLocation = async (
+  id: number,
+  lang: string,
+  yearAgo?: number,
+): Promise<ILocationData | undefined> => {
   if (showDemoCards && id === DEMO_ID) {
     return getDemoWidgetData();
   }
