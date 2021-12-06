@@ -1,13 +1,15 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Link, Typography } from 'components/atoms';
 import { Box, makeStyles } from '@material-ui/core';
 import { silverSmokeColor } from 'style';
 import { useStore } from 'store/storeConfig';
+import { useParams } from 'react-router-dom';
 import RootStore from 'store/root.store';
 import { observer } from 'mobx-react-lite';
 import { dateFormat } from 'utils/time.utils';
 import { useLocale } from 'hooks/date.hooks';
 import LocationSearchIndicator from 'components/molecules/LocationSearchIndicator';
+import { IRouteProps } from 'models/Route';
 
 const useStyles = makeStyles({
   container: {},
@@ -23,12 +25,13 @@ const News: FC = () => {
   const store: RootStore = useStore();
   const classes = useStyles();
   const locale = useLocale();
+  const { gpsId } = useParams<IRouteProps>();
 
   return (
     <Box flexGrow={1} display="flex" flexDirection="column" className={classes.newsFeed}>
       <Box flexGrow={1}>
         <Box className={classes.container} flexDirection={'column'}>
-          {store.gpsLocationData && <LocationSearchIndicator/>}
+          {gpsId && <LocationSearchIndicator/>}
           {store.newsFlashCollection.length > 0 ? (
             store.newsFlashCollection.map((news) => {
               const className = news.id === store.activeNewsFlashId ? classes.activeNewsFlash : '';
