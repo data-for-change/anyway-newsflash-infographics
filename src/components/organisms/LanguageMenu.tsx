@@ -5,19 +5,20 @@ import languageSelector from 'assets/language-selector.svg';
 import { AnyWayButton } from 'components/atoms/AnyWayButton';
 import { Typography, Button } from 'components/atoms';
 import { useTranslation } from 'react-i18next';
+import { LANG } from 'const/languages.const';
 
 const LANGUAGES = [
   {
     buttonText: 'English',
-    value: 'en',
+    value: LANG.EN,
   },
   {
     buttonText: 'עברית',
-    value: 'he',
+    value: LANG.HE,
   },
   {
     buttonText: 'العربية',
-    value: 'ar',
+    value: LANG.AR,
   },
 ];
 
@@ -42,7 +43,7 @@ const LanguageMenu: FC = () => {
 
   return (
     <div>
-      <AnyWayButton aria-controls="menu" aria-haspopup="true" onClick={(e)=>setAnchorEl(e.currentTarget)}>
+      <AnyWayButton aria-controls="menu" aria-haspopup="true" onClick={(e) => setAnchorEl(e.currentTarget)}>
         <img alt="language selection" src={languageSelector} />
       </AnyWayButton>
       <Menu

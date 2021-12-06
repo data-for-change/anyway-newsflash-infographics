@@ -21,29 +21,29 @@ const defaultThemeOptions: ThemeOptions = {
     },
     subtitle2: {
       fontSize: 22,
-      fontWeight: 700,
+      fontWeight: 400,
     },
     // body variants (like: newsflash data, widget contents etc)
     h1: {
       fontSize: 20,
       fontColor: darkGrey,
-      fontWeight: 700,
+      fontWeight: 400,
     },
     h2: {
       fontSize: 18,
-      fontWeight: 700,
+      fontWeight: 400,
     },
     h3: {
       fontSize: 16,
-      fontWeight: 700,
+      fontWeight: 400,
     },
     h4: {
       fontSize: 15,
-      fontWeight: 700,
+      fontWeight: 400,
     },
     h5: {
       fontSize: 14,
-      fontWeight: 700,
+      fontWeight: 400,
     },
     h6: {
       fontSize: 13,

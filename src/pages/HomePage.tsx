@@ -12,6 +12,7 @@ import RootStore from 'store/root.store';
 import DemoPage from './DemoPage';
 import { Redirect, Route, Switch, useParams } from 'react-router-dom';
 import { IRouteProps } from 'models/Route';
+import { LANG } from 'const/languages.const';
 
 interface IProps {}
 
@@ -50,7 +51,7 @@ const HomePage: FC<IProps> = () => {
     if (lng) {
       store.changeLanguage(lng);
     } else {
-      store.changeLanguage('he');
+      store.changeLanguage(LANG.HE);
     }
   }, [lng, store]);
 
