@@ -1,37 +1,35 @@
-import { toBlob } from 'html-to-image';
 import { saveAs } from 'file-saver';
+import html2canvas from 'html2canvas';
 
 const DEFAULT_SCALE = 1;
 
-const widgetToImage = (fileName: string, widgetElement: HTMLElement, scale = DEFAULT_SCALE) => {
-  usingHtmlToImage(fileName, widgetElement, scale);
+const removeMapControllers = (el: Document) => {
+  const elementList = el.querySelectorAll(
+    '.leaflet-control-container, .gmnoprint, .gm-fullscreen-control, .gm-iv-address, .gm-style-cc',
+  );
+  Array.from(elementList).forEach((el) => el.remove());
 };
 
-// Uses SVG foreignObject. Works with canvas and HTML/SVG
-// https://github.com/bubkoo/html-to-image#how-it-works
-const usingHtmlToImage = (fileName: string, widgetElement: HTMLElement, scale: number) => {
-  const leafletControls = [
-    'leaflet-control-container',
-    'gmnoprint',
-    'gm-fullscreen-control',
-    'gm-iv-address',
-    'gm-style-cc',
-  ];
+const widgetToImage = (fileName: string, widgetElement: HTMLElement, scale = DEFAULT_SCALE) => {
+  usingHtml2Canvas(fileName, widgetElement, scale);
+};
 
-  const filter = (widgetElement: any) => {
-    return widgetElement.tagName !== 'BUTTON' && !leafletControls.includes(widgetElement.className);
-  };
+// Uses canvas. Works ok for all elements including maps.
+// https://github.com/niklasvh/html2canvas
+const usingHtml2Canvas = (fileName: string, widgetElement: HTMLElement, scale: number) => {
 
-  const style = {
-    transform: `scale(${scale})`,
-    transformOrigin: '100% 0%',
-  };
-  toBlob(widgetElement, {
-    filter: filter,
-    style,
-  }).then(function (blob: any) {
-    saveAs(blob, `${fileName}.png`);
-  });
+  html2canvas(widgetElement, {
+    useCORS: true, // to allow loading maps
+    imageTimeout: 3000,
+    scale,
+    onclone: (el) => removeMapControllers(el),
+  })
+    .then(function (canvas) {
+      return canvas.toDataURL('image/png', 1.0);
+    })
+    .then(function (blob: any) {
+      saveAs(blob, `${fileName}.png`);
+    });
 };
 
 export default widgetToImage;
