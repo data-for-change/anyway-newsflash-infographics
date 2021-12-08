@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { IWidgetAccidentsByYearData } from 'models/WidgetData';
-import GenericBarChartView from '../GenericBarChartView';
+import GenericBarChartView, { IMultiBarChartProps } from '../GenericBarChartView';
 import { useTranslation } from 'react-i18next';
 
 type stringNumObject = Record<string, string | number>;

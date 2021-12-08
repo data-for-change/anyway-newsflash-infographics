@@ -8,13 +8,19 @@ type BarDataMap = {
   [key: string]: number | string;
 };
 
-interface IProps {
-  isStacked: boolean;
-  data: Array<BarDataMap>;
+interface IBarChartBaseProps {
   isPercentage: boolean;
   yLabel: string;
   textLabel?: string;
   xLabels: string[];
+}
+export interface ISingleBarChartProps extends IBarChartBaseProps {
+  data: Array<BarDataMap>;
+}
+
+export interface IMultiBarChartProps extends IBarChartBaseProps {
+  data: Array<BarDataMap>;
+  isStacked: boolean;
 }
 
 // create custom type as recharts <bar /> component does not accept regular number[].
@@ -53,7 +59,14 @@ const CustomizedLabel = (props: any) => {
   );
 };
 
-const GenericBarChartView: FC<IProps> = ({ isStacked, xLabels, data, isPercentage, yLabel, textLabel }) => {
+const GenericBarChartView: FC<ISingleBarChartProps & IMultiBarChartProps> = ({
+  isStacked,
+  xLabels,
+  data,
+  isPercentage,
+  yLabel,
+  textLabel,
+}) => {
   const numOfBars = xLabels.length;
   const COLORS = isStacked ? [yellowColor, honeyColor, roseColor] : [roseColor, honeyColor, yellowColor];
   // Iterate all bars and styling per bar.
