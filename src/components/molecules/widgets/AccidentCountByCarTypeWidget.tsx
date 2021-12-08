@@ -2,7 +2,8 @@ import React, { FC } from 'react';
 import { IWidgetAccidentCountByCarType } from 'models/WidgetData';
 import { Box, makeStyles, Theme } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import GenericBarChartView from '../GenericBarChartView';
+import { MultiBarChart } from '../GenericBarChartView';
+import { transformItems } from '../../../utils/barchart';
 
 type stringNumObject = Record<string, string | number>;
 type stringObject = Record<string, string>;
@@ -27,9 +28,6 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
   const originData = {
     name: 'accident_count_by_car_type',
     data: {
-      y_label_name: 'car_type',
-      is_percentage: true,
-      is_stacked: false,
       items: [
         {
           label_key: 'bicycle',
@@ -64,7 +62,6 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
     text: {
       title: 'accident count by car type',
       labels_map: {
-        y_label_name: 'סוג רכב',
         percentage_segment: 'אזור',
         percentage_country: 'מדינה',
         truck: 'מסחרי/משאית',
@@ -76,30 +73,10 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
     },
   };
 
-  const isPercentage = originData.data.is_percentage;
-  const isStacked = originData.data.is_stacked;
-  const translationMap: stringObject = originData.text.labels_map;
-  const translatedYLabelName = getTranslatedLabel('y_label_name');
-  function getTranslatedLabel(key: string): string {
-    return translationMap[key] || key;
-  }
-  const items = originData.data.items;
-  const xLabels = originData.data.items[0].series.map((dataPoint) => {
-    return getTranslatedLabel(dataPoint.label_key);
-  });
-  const transformedItems = items.map((item) => {
-    const { label_key, series } = item;
-    const result: stringNumObject = {};
-    const label = label_key.toString();
-    result[translatedYLabelName] = getTranslatedLabel(label); //   {'סוג רכב':'אופניים'}  /  {'שנה':'2017'}
-    series.forEach((dataPoint) => {
-      const { label_key, value } = dataPoint;
-      const label = getTranslatedLabel(label_key);
-      result[label] = Math.round(value); //   {'year':2017, 'percentage_segment':5 ...series}
-    });
-    return result;
-  });
-  console.log(transformedItems);
+  const isSingleBar = originData.data.items[0].series == null;
+  const items = transformItems(originData, isSingleBar);
+  const yLabels = Object.keys(items[0]);
+  yLabels.splice(0, 1);
 
   return (
     <>
@@ -111,13 +88,7 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
         <Box textAlign="center">{segmentText}</Box>
       </Box>
       <Box className={classes.chartWrapper}>
-        <GenericBarChartView
-          isStacked={isStacked}
-          isPercentage={isPercentage}
-          data={transformedItems}
-          yLabel={translatedYLabelName}
-          xLabels={xLabels}
-        />
+        <MultiBarChart isStacked={false} isPercentage={true} data={items} yLabels={yLabels} />
       </Box>
     </>
   );

@@ -152,6 +152,9 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
       break;
     }
     default: {
+      // widgetComponent = (
+      //   <AccidentCountByCarTypeWidget data={data as IWidgetAccidentCountByCarType} segmentText={locationText} />
+      // );
       widgetComponent = <CountByYearBarWidget data={data as IWidgetAccidentsByYearData} />;
       // widgetComponent = (
       //   <InjuredAccidentsWithPedestrians
@@ -159,6 +162,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
       //     segmentText={segmentText}
       //   />
       // );
+
       break;
     }
   }

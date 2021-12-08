@@ -1,10 +1,8 @@
 import React, { FC } from 'react';
 import { IWidgetAccidentsByYearData } from 'models/WidgetData';
-import GenericBarChartView, { IMultiBarChartProps } from '../GenericBarChartView';
+import { MultiBarChart } from '../GenericBarChartView';
 import { useTranslation } from 'react-i18next';
-
-type stringNumObject = Record<string, string | number>;
-type stringObject = Record<string, string>;
+import { transformItems } from '../../../utils/barchart';
 
 interface IProps {
   data: IWidgetAccidentsByYearData;
@@ -75,41 +73,11 @@ const CountByYearBarWidget: FC<IProps> = ({ data }) => {
    * { 'accident_year':2021, 'fatal_count': 1, 'severe_count': 5, 'light_count': 39 },
    */
 
-  const isPercentage = originData.data.is_percentage;
-  const isStacked = originData.data.is_stacked;
-  const labelsMap: stringObject = originData.text.labels_map;
-  const translatedYLabelName = getTranslatedLabel('y_label_name');
-  function getTranslatedLabel(key: string): string {
-    return labelsMap[key] || key;
-  }
-  const items = originData.data.items;
-  const xLabels = originData.data.items[0].series.map((dataPoint) => {
-    return getTranslatedLabel(dataPoint.label_key);
-  });
+  const isSingleBar = originData.data.items[0].series == null;
+  const items = transformItems(originData, isSingleBar);
+  const yLabels = Object.keys(items[0]);
+  yLabels.splice(0, 1);
 
-  const transformedItems = items.map((item) => {
-    const { label_key, series } = item;
-    const result: stringNumObject = {};
-    const label = label_key.toString();
-    result[translatedYLabelName] = getTranslatedLabel(label); //   {'סוג רכב':'אופניים'}    {'שנה':'2017'}
-    series.forEach((dataPoint) => {
-      const { label_key, value } = dataPoint;
-      const label = getTranslatedLabel(label_key);
-      result[label] = Math.round(value); //   {'year':2017, 'percentage_segment':5 ...series}
-    });
-    return result;
-  });
-  console.log(transformedItems);
-
-  return (
-    <GenericBarChartView
-      isStacked={isStacked}
-      isPercentage={isPercentage}
-      data={transformedItems}
-      xLabels={xLabels}
-      yLabel={translatedYLabelName}
-      textLabel={text.title}
-    />
-  );
+  return <MultiBarChart isStacked={true} isPercentage={false} data={items} yLabels={yLabels} textLabel={text.title} />;
 };
 export default CountByYearBarWidget;

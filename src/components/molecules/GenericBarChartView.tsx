@@ -3,23 +3,20 @@ import { ResponsiveContainer, BarChart, LabelList, XAxis, Bar, Tooltip, Legend }
 import { roseColor, honeyColor, yellowColor, blackColor, whiteColor } from 'style';
 import { Typography } from 'components/atoms';
 import tinycolor from 'tinycolor2';
-
+const COLORS = [yellowColor, honeyColor, roseColor];
 type BarDataMap = {
   [key: string]: number | string;
 };
 
 interface IBarChartBaseProps {
+  data: Array<BarDataMap>;
   isPercentage: boolean;
-  yLabel: string;
   textLabel?: string;
-  xLabels: string[];
+  yLabels: string[];
 }
-export interface ISingleBarChartProps extends IBarChartBaseProps {
-  data: Array<BarDataMap>;
-}
+interface ISingleBarChartProps extends IBarChartBaseProps {}
 
-export interface IMultiBarChartProps extends IBarChartBaseProps {
-  data: Array<BarDataMap>;
+interface IMultiBarChartProps extends IBarChartBaseProps {
   isStacked: boolean;
 }
 
@@ -31,11 +28,8 @@ const borderRadius: Record<'Bottom' | 'Top' | 'All' | 'None', [number, number, n
   None: [0, 0, 0, 0],
 };
 
-function getBarRadius(isStacked: boolean, numOfBars: number, barIndex: number) {
+function getBarRadius(numOfBars: number, barIndex: number) {
   const lastBar = numOfBars - 1;
-  if (!isStacked) {
-    return borderRadius.All;
-  }
 
   switch (barIndex) {
     case 0:
@@ -59,41 +53,7 @@ const CustomizedLabel = (props: any) => {
   );
 };
 
-const GenericBarChartView: FC<ISingleBarChartProps & IMultiBarChartProps> = ({
-  isStacked,
-  xLabels,
-  data,
-  isPercentage,
-  yLabel,
-  textLabel,
-}) => {
-  const numOfBars = xLabels.length;
-  const COLORS = isStacked ? [yellowColor, honeyColor, roseColor] : [roseColor, honeyColor, yellowColor];
-  // Iterate all bars and styling per bar.
-  const barElements = () =>
-    Array.from({ length: numOfBars }, (_, i) => {
-      const barStyle = {
-        filter: `drop-shadow(1mm ${isStacked ? '0' : '1mm'} 0 ${tinycolor(COLORS[i]).darken().toString()})`,
-      };
-      const barRadius = getBarRadius(isStacked, numOfBars, i);
-
-      return (
-        <Bar
-          stackId={isStacked ? 'a' : undefined}
-          fill={COLORS[i]}
-          dataKey={xLabels[i]}
-          style={barStyle}
-          isAnimationActive={false}
-          radius={barRadius}
-        >
-          <LabelList
-            content={<CustomizedLabel isPercentage={isPercentage} isStacked={isStacked} />}
-            dataKey={xLabels[i]}
-          />
-        </Bar>
-      );
-    });
-
+const BarChartContainer: FC<IBarChartBaseProps> = ({ data, textLabel, children }) => {
   return (
     <>
       <ResponsiveContainer>
@@ -101,18 +61,67 @@ const GenericBarChartView: FC<ISingleBarChartProps & IMultiBarChartProps> = ({
           <XAxis
             angle={-7}
             interval={0}
-            dataKey={yLabel}
+            dataKey={'xType'}
             tickLine={false}
             axisLine={false}
             style={{ fill: blackColor }}
           />
           <Tooltip />
           <Legend verticalAlign="top" align="right" iconType="circle" />
-          {numOfBars > 0 && barElements()}
+          {children}
         </BarChart>
       </ResponsiveContainer>
       {textLabel && <Typography.Body3>{textLabel}</Typography.Body3>}
     </>
   );
 };
-export default GenericBarChartView;
+
+const SingleBarChart: FC<ISingleBarChartProps> = ({ data, isPercentage, yLabels }) => {
+  const barStyle = {
+    filter: `drop-shadow(1mm 1mm 0 ${tinycolor(roseColor).darken().toString()})`,
+  };
+  return (
+    <>
+      <BarChartContainer data={data} isPercentage={isPercentage} yLabels={yLabels}>
+        <Bar fill={roseColor} dataKey={yLabels[0]} style={barStyle} isAnimationActive={false} radius={borderRadius.All}>
+          <LabelList content={<CustomizedLabel isPercentage={isPercentage} />} dataKey={yLabels[0]} />
+        </Bar>
+      </BarChartContainer>
+    </>
+  );
+};
+
+const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, yLabels, isStacked }) => {
+  const numOfBars = yLabels.length;
+  return (
+    <>
+      <BarChartContainer data={data} isPercentage={isPercentage} yLabels={yLabels}>
+        {Array.from({ length: numOfBars }, (_, i) => {
+          const barStyle = {
+            filter: `drop-shadow(1mm ${isStacked ? '0' : '1mm'} 0 ${tinycolor(COLORS[i]).darken().toString()})`,
+          };
+
+          const barRadius = isStacked ? getBarRadius(numOfBars, i) : borderRadius.All;
+
+          return (
+            <Bar
+              stackId={isStacked ? 'stack_1' : undefined}
+              fill={COLORS[i]}
+              dataKey={yLabels[i]}
+              style={barStyle}
+              isAnimationActive={false}
+              radius={barRadius}
+            >
+              <LabelList
+                content={<CustomizedLabel isPercentage={isPercentage} isStacked={isStacked} />}
+                dataKey={yLabels[i]}
+              />
+            </Bar>
+          );
+        })}
+      </BarChartContainer>
+    </>
+  );
+};
+
+export { SingleBarChart, MultiBarChart };
