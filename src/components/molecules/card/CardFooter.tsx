@@ -27,19 +27,11 @@ const useStyles = makeStyles({
   },
 });
 
-const generateDate = (dateString: string) => {
-  const lastDate = new Date(dateString);
-  const year = lastDate.getFullYear();
-  const day = lastDate.getDate();
-  const month = lastDate.getMonth();
-
-  return `${day}/${month + 1}/${year}`;
-};
-
 const CardFooter: React.FC<IProps> = ({ dateComment }) => {
   const { t } = useTranslation();
   const classes = useStyles();
-  const lastDateUpdated = generateDate(dateComment.last_update);
+  const lastDate = new Date(dateComment.last_update);
+  const lastDateString = `${lastDate.getDate()}/${lastDate.getMonth() + 1}/${lastDate.getFullYear()}`;
   const dateRange = dateComment?.date_range?.join('-') ?? '';
   return (
     <div className={classes.main}>
@@ -47,7 +39,7 @@ const CardFooter: React.FC<IProps> = ({ dateComment }) => {
       <Typography.Body3>
         <span className={classes.spaceSpan}>{t('widgets.lastDateUpdated')}:</span>
       </Typography.Body3>
-      <Typography.Body3>{lastDateUpdated}</Typography.Body3>
+      <Typography.Body3>{lastDateString}</Typography.Body3>
       <Box display="flex" flex={1} />
       <Logo src={LamasImage} alt={'Lamas'} height={30} />
       <Logo src={AnywayImage} alt={'Anyway'} height={20} />
