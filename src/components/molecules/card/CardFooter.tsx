@@ -31,7 +31,7 @@ const CardFooter: React.FC<IProps> = ({ dateComment }) => {
   const { t } = useTranslation();
   const classes = useStyles();
   const lastDate = new Date(dateComment.last_update);
-  const lastDateString = `${lastDate.getDate()}/${lastDate.getMonth() + 1}/${lastDate.getFullYear()}`;
+  const lastDateString = dateComment.last_update? `${lastDate.getDate()}/${lastDate.getMonth() + 1}/${lastDate.getFullYear()}`: ""
   const dateRange = dateComment?.date_range?.join('-') ?? '';
   return (
     <div className={classes.main}>
