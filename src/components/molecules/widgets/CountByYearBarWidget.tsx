@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { IWidgetAccidentsByYearData } from 'models/WidgetData';
-import GenericBarChartView, { IMultiBarChartProps } from '../GenericBarChartView';
+import { MultiBarChart } from '../GenericBarChartView';
 import { useTranslation } from 'react-i18next';
 
 type stringNumObject = Record<string, string | number>;
@@ -75,15 +75,13 @@ const CountByYearBarWidget: FC<IProps> = ({ data }) => {
    * { 'accident_year':2021, 'fatal_count': 1, 'severe_count': 5, 'light_count': 39 },
    */
 
-  const isPercentage = originData.data.is_percentage;
-  const isStacked = originData.data.is_stacked;
   const labelsMap: stringObject = originData.text.labels_map;
-  const translatedYLabelName = getTranslatedLabel('y_label_name');
+
   function getTranslatedLabel(key: string): string {
     return labelsMap[key] || key;
   }
   const items = originData.data.items;
-  const xLabels = originData.data.items[0].series.map((dataPoint) => {
+  const yLabels = originData.data.items[0].series.map((dataPoint) => {
     return getTranslatedLabel(dataPoint.label_key);
   });
 
@@ -91,7 +89,7 @@ const CountByYearBarWidget: FC<IProps> = ({ data }) => {
     const { label_key, series } = item;
     const result: stringNumObject = {};
     const label = label_key.toString();
-    result[translatedYLabelName] = getTranslatedLabel(label); //   {'סוג רכב':'אופניים'}    {'שנה':'2017'}
+    result['xType'] = getTranslatedLabel(label); //   {'סוג רכב':'אופניים'}    {'שנה':'2017'}
     series.forEach((dataPoint) => {
       const { label_key, value } = dataPoint;
       const label = getTranslatedLabel(label_key);
@@ -102,12 +100,11 @@ const CountByYearBarWidget: FC<IProps> = ({ data }) => {
   console.log(transformedItems);
 
   return (
-    <GenericBarChartView
-      isStacked={isStacked}
-      isPercentage={isPercentage}
+    <MultiBarChart
+      isStacked={true}
+      isPercentage={false}
       data={transformedItems}
-      xLabels={xLabels}
-      yLabel={translatedYLabelName}
+      yLabels={yLabels}
       textLabel={text.title}
     />
   );
