@@ -14,7 +14,7 @@ interface IProps {
   dateComment: IDateComments;
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   main: {
     width: '100%',
     display: 'flex',
@@ -23,20 +23,28 @@ const useStyles = makeStyles({
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
   },
-});
+  lastDate: {
+    paddingInlineStart: theme.spacing(0.7),
+  },
+}));
 
 const CardFooter: React.FC<IProps> = ({ dateComment }) => {
   const { t } = useTranslation();
   const classes = useStyles();
   const locale = useLocale();
   const lastDate = dateComment.last_update == null ? '' : dateFormat(new Date(dateComment.last_update), locale);
-  const dateRange = dateComment.date_range == null ? '' : dateComment.date_range.join('-')
+  const dateRange = dateComment.date_range == null ? '' : dateComment.date_range.join('-');
   return (
     <div className={classes.main}>
-      <Typography.Body3>{dateRange} </Typography.Body3>
+      <Typography.Body3>
+        {dateRange}
+        {lastDate && <span>,</span>}
+      </Typography.Body3>
       {lastDate && (
         <Typography.Body3>
-          ,{t('widgets.lastDateUpdated')}: {lastDate}
+          <Box className={classes.lastDate}>
+            {t('widgets.lastDateUpdated')}:<span className={classes.lastDate}>{lastDate}</span>
+          </Box>
         </Typography.Body3>
       )}
       <Box display="flex" flex={1} />
