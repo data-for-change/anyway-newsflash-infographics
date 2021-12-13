@@ -1,6 +1,5 @@
 type stringNumObject = Record<string, string | number>;
 type stringObject = Record<string, string>;
-type stringArrayObject = Record<string, {}>;
 
 export const transformItems = (jsonData: any, isSingleBar: boolean) => {
   function getTranslatedLabel(key: string) {
@@ -11,6 +10,24 @@ export const transformItems = (jsonData: any, isSingleBar: boolean) => {
 
   const translationMap: stringObject = jsonData.text.labels_map;
   const items = jsonData.data.items;
+
+  // const transformedItems = items.map((item: any) => {
+  //   const result: stringNumObject = {};
+  //   const label = item.label_key.toString();
+  //   result['xType'] = getTranslatedLabel(label);
+  //   if (isSingleBar) {
+  //     result[translatedYLabelName] = item.value;
+  //   } else {
+  //     const series = item.series;
+  //     series.forEach((dataPoint: any) => {
+  //       const { label_key, value } = dataPoint;
+  //       const yLabel = getTranslatedLabel(label_key);
+  //       result[yLabel] = Math.round(value); //
+  //     });
+  //   }
+  //
+  //   return result;
+  // });
 
   if (isSingleBar) {
     const translatedYLabelName = getTranslatedLabel('value');
@@ -35,6 +52,6 @@ export const transformItems = (jsonData: any, isSingleBar: boolean) => {
       return result;
     });
   }
-  console.log('hi', transformedItems);
+
   return transformedItems;
 };
