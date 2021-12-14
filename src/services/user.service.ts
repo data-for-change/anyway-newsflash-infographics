@@ -1,14 +1,16 @@
-import axios from 'axios';
-import { GET_USER_INFO_URL, LOG_OUT_USER_URL, UPDATE_USER_INFO_URL } from 'utils/utils';
+import axios, { AxiosError } from 'axios';
+import { GET_USER_INFO_URL, GET_USERS_INFO_LIST_URL, LOG_OUT_USER_URL, UPDATE_USER_INFO_URL } from 'utils/utils';
 import { IFormInput } from 'components/molecules/UserUpdateForm';
 import { StatusCodes } from 'utils/HTTPStatuesCodes';
-export interface IUserInfo {
+import { IUserInfo } from '../models/user/IUserInfo';
+export interface IAnywayUserDetails {
   data: {
-    firstName: string;
+    firstName?: string;
     lastName: string;
     email: string;
-    workplace: string;
+    workplace?: string;
     imgUrl : string
+    roles : [string]
   };
   meta: {
     isCompleteRegistration: boolean;
@@ -22,17 +24,17 @@ export interface UpdateUserReq {
   email: string;
 }
 
-export const fetchUserInfo = async function (): Promise<IUserInfo> {
+export const fetchUserInfo = async function (): Promise<IAnywayUserDetails> {
   const response = await axios.get(GET_USER_INFO_URL, { withCredentials: true });
-  const userInfoData = response.data;
+  const userInfoData : IUserInfo = response.data;
 
-  const userInfo: IUserInfo = {
+  const userInfo: IAnywayUserDetails = {
     data: {
       firstName: userInfoData.first_name === 'null'  ? undefined : userInfoData.first_name ,
       lastName: userInfoData.last_name,
       email: userInfoData.email,
-      workplace: userInfoData.work_on_behalf_of_organization,
-      imgUrl : userInfoData.oauth_provider_user_picture_url
+      imgUrl : userInfoData.oauth_provider_user_picture_url,
+      roles : userInfoData.roles as [string]
     },
     meta: {
       isCompleteRegistration: response.data.is_user_completed_registration,
@@ -40,6 +42,33 @@ export const fetchUserInfo = async function (): Promise<IUserInfo> {
   };
   return userInfo;
 };
+
+export const addRoleToUser =async  (role: string, email :string) =>{
+  try {
+    await axios.post(UPDATE_USER_INFO_URL, {role,email}, { withCredentials: true });
+    return role;
+  } catch (e) {
+    console.error(`Error while trying to update/create user Details : ${e}`);
+  }
+}
+
+export const getUsersList = async () =>{
+  try {
+    const response = await axios.get(GET_USERS_INFO_LIST_URL, { withCredentials: true });
+    return response.data
+  } catch (e) {
+    console.error(`Error while trying to get   users  details list : ${JSON.stringify(e.response.data)}`);
+  }
+}
+
+export const getRolesList = async () => {
+  try {
+    const response = await axios.get(UPDATE_USER_INFO_URL, { withCredentials: true });
+    return response.data
+  } catch (e) {
+    console.error(`Error while trying to update/create user Details : ${e}`);
+  }
+}
 
 export const postUserInfo = async function (formInput: IFormInput): Promise<Boolean> {
   let isUpdateUser: boolean = false;

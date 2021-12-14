@@ -9,11 +9,19 @@ import { SourceFilterEnum } from 'models/SourceFilter';
 import { fetchNews } from 'services/news.data.service';
 import SettingsStore from './settings.store';
 import { IPoint } from 'models/Point';
-import { IUserInfo, fetchUserInfo, logoutUserFromSession, postUserInfo } from 'services/user.service';
+import {
+  IAnywayUserDetails,
+  fetchUserInfo,
+  logoutUserFromSession,
+  postUserInfo,
+  getUsersList,
+} from 'services/user.service';
 import i18next from 'services/i18n.service';
 import { IFormInput } from 'components/molecules/UserUpdateForm';
 import { fetchGpsLocation } from 'services/gpsToLocation.data.service';
 import { LANG } from 'const/languages.const';
+import { ROLE_ADMIN_NAME } from '../utils/utils';
+import { IUserInfo } from '../models/user/IUserInfo';
 
 // todo: move all map defaults to one place
 const DEFAULT_TIME_FILTER = 5;
@@ -37,7 +45,7 @@ export default class RootStore {
   newsFlashCollection: Array<INewsFlash> = [];
   isUserAuthenticated: boolean = false;
   userApiError: boolean = false;
-  userInfo: IUserInfo | null = null;
+  userInfo: IAnywayUserDetails | null = null;
   activeNewsFlashId: number = 0; // active newsflash id
   newsFlashFetchOffSet = 0;
   newsFlashActiveFilter: SourceFilterEnum = SourceFilterEnum.all;
@@ -51,6 +59,10 @@ export default class RootStore {
   gpsLocationData: IGpsData | null = null;
   // domain stores
   settingsStore: SettingsStore;
+  //admin role only observables
+  isAdmin : boolean = false;
+  usersInfoList : [IUserInfo] | null= null;
+
 
   constructor() {
     // init app data
@@ -116,6 +128,14 @@ export default class RootStore {
 
   checkuserstatus(): void {}
 
+  getUsersListInfo() {
+    getUsersList().then(list => {
+      this.usersInfoList = list
+    }).catch(e => {
+      console.log(`error getting user details :${JSON.stringify(e)}`);
+    })
+  }
+
   setActiveNewsFlashFilter(filter: SourceFilterEnum) {
     if (filter !== this.newsFlashActiveFilter) {
       runInAction(() => {
@@ -152,6 +172,10 @@ export default class RootStore {
         runInAction(() => {
           this.isUserAuthenticated = false;
           this.userInfo = null;
+          if(this.isAdmin){
+            this.usersInfoList = null;
+            this.isAdmin = false;
+          }
         });
       }
     });
@@ -162,6 +186,7 @@ export default class RootStore {
       .then((userData) => {
         runInAction(() => {
           this.userInfo = userData;
+          this.isAdmin = userData.data.roles.includes(ROLE_ADMIN_NAME);
           this.isUserAuthenticated = true;
         });
       })
