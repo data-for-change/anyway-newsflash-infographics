@@ -7,8 +7,6 @@ interface IProps {
   segmentText: string;
 }
 const CountBySeverityTextWidget: FC<IProps> = ({ data, segmentText }) => {
-  console.log(data)
-  console.log(segmentText)
   return <TextView data={data} segmentText={segmentText} />;
 };
 export default CountBySeverityTextWidget;

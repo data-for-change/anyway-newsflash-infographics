@@ -45,7 +45,8 @@
   "textView": {
     "inYear": "בשנה",
     "inYears": "בשנים",
-    "on": "במקטע",
+    "on": "ב",
+    "onSegment": "במקטע",
     "occurred": "התרחשו",
     "accidents": "תאונות",
     "fatal": {

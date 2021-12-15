@@ -44,8 +44,8 @@ const CardHeader: FC<IProps> = ({ variant, text, road }) => {
   const classes = useStyles();
 
   let headerContent = null;
-
   const headerText = splitTextHeader(text);
+
 
   switch (variant) {
     case HeaderVariant.Centered:
