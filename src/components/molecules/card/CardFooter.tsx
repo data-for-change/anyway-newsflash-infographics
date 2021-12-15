@@ -23,8 +23,8 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
   },
-  lastDate: {
-    paddingInlineStart: theme.spacing(0.7),
+  lastUpdateDate: {
+    paddingInlineStart: theme.spacing(1),
   },
 }));
 
@@ -32,18 +32,18 @@ const CardFooter: React.FC<IProps> = ({ dateComment }) => {
   const { t } = useTranslation();
   const classes = useStyles();
   const locale = useLocale();
-  const lastDate = dateComment.last_update == null ? '' : dateFormat(new Date(dateComment.last_update), locale);
+  const lastUpdateDate = dateComment.last_update == null ? '' : dateFormat(new Date(dateComment.last_update), locale);
   const dateRange = dateComment.date_range == null ? '' : dateComment.date_range.join('-');
   return (
     <div className={classes.main}>
       <Typography.Body3>
         {dateRange}
-        {lastDate && <span>,</span>}
+        {lastUpdateDate && <span>,</span>}
       </Typography.Body3>
-      {lastDate && (
+      {lastUpdateDate && (
         <Typography.Body3>
-          <Box className={classes.lastDate}>
-            {t('widgets.lastDateUpdated')}:<span className={classes.lastDate}>{lastDate}</span>
+          <Box className={classes.lastUpdateDate}>
+            {t('widgets.lastDateUpdated')}:<span className={classes.lastUpdateDate}>{lastUpdateDate}</span>
           </Box>
         </Typography.Body3>
       )}
