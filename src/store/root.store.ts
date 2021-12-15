@@ -58,9 +58,15 @@ export default class RootStore {
     initService().then((initData) => {
       runInAction(() => {
         if (initData.newsFlashCollection) {
+          console.log('---------');
+          console.log(initData.newsFlashCollection);
+          console.log('---------');
           this.newsFlashCollection = initData.newsFlashCollection;
         }
         if (initData.newsFlashWidgetsData) {
+          console.log('*********');
+          console.log(initData.newsFlashWidgetsData);
+          console.log('*********');
           this.newsFlashWidgetsData = initData.newsFlashWidgetsData.widgets;
           this.newsFlashWidgetsMeta = initData.newsFlashWidgetsData.meta;
         }

@@ -75,9 +75,10 @@ const TextViewHeader: React.FC<IProps> = ({ data: { items }, segmentText, single
         </Box>
       )}
       <Box mb={1}>
-        <Typography.Body1>{`${t('textView.on')}${
+        <Typography.Body1>{`${t('textView.on')} ${
           i18n.language === LANG.EN ? ' ' : ''
         }${segmentText}`}</Typography.Body1>
+        
       </Box>
       <Box>
         <AccidentsOccurred singleType={singleType} accidentsCount={items.total_accidents_count} />
