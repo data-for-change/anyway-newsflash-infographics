@@ -1,6 +1,19 @@
 # Guidelines<a id="guidelines"></a>
 
+- ### [Styling](#styling)
 - ### [Typography](#typography)
+
+### Styling ↸ <a id="styling"></a> [🔼](#guidelines)
+There are 2 ways to affect styling:
+* `index.css` - for limited set global stuff (mostly you won't need it)
+* Using MUI styling system
+
+Guidelines for styling a specific component
+* Use MUI [hook API](https://mui.com/styles/basics/#hook-api) form
+* Spacing
+  - Avoid using specific sizes (like `4px` or `2vw`) for padding and margins. Use [theme.spacing](https://mui.com/customization/spacing/) instead
+  - Avoid using decimal values (like `theme.spacing(1.7)`), use integers only (`theme.spacing(2)`)
+* Theming - sometimes it is make more sense to change the theme options rather than a specific component. See MUI [theme section](https://mui.com/customization/theming/), and also our `theme.ts` file 
 
 ### Typography ↸ <a id="typography"></a> [🔼](#guidelines)
 
