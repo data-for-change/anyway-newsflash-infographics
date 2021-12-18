@@ -14,7 +14,6 @@ const widgetToImage = (fileName: string, widgetElement: HTMLElement, scale = DEF
   usingHtml2Canvas(fileName, widgetElement, scale);
 };
 
-// Uses canvas. Works ok for all elements including maps.
 // https://github.com/niklasvh/html2canvas
 const usingHtml2Canvas = (fileName: string, widgetElement: HTMLElement, scale: number) => {
 
