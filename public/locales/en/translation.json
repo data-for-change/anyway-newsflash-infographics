@@ -86,7 +86,9 @@
   "header": {
     "Search": "Search",
     "User Greeting": "Hello",
-    "User Info Update": "Update Info"
+    "User Info Update": "Update Info",
+    "management" : "Management"
+
   },
   "userDetailsForm": {
     "Update": "Update",
@@ -95,6 +97,9 @@
     "First Name": "First Name",
     "Email": "Email",
     "Organization": "Organization"
+  },
+  "usersManagement": {
+  "title" : "Users Management"
   },
   "sideBar": "Approximate location:",
   "UserProfileHeader": {

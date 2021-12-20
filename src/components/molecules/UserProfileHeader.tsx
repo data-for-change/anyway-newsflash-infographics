@@ -34,8 +34,9 @@ interface IUserProfileHeader {
   userDetails: IAnywayUserDetails;
   isUpdateScreenOpen: boolean;
   handleLogout: () => any;
+  isAdmin: boolean;
 }
-const UserProfileHeader: React.FC<IUserProfileHeader> = ({ userDetails, isUpdateScreenOpen, handleLogout }) => {
+const UserProfileHeader: React.FC<IUserProfileHeader> = ({ userDetails, isUpdateScreenOpen, handleLogout , isAdmin}) => {
   const { t } = useTranslation();
   const defaultFormInput : IFormInput = {
     email: userDetails.data.email,
@@ -49,6 +50,7 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({ userDetails, isUpdate
 
   return (
     <>
+      { isAdmin && <Box className={classes.userButton}>{t('header.management')}</Box>}
       <Box className={classes.userButton} onClick={handleLogout}>
         {t('UserProfileHeader.logout')}
       </Box>

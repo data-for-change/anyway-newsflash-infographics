@@ -66,6 +66,7 @@ const Header: FC = () => {
       };
       authElement = (
         <UserProfileHeader
+          isAdmin={store.isAdmin}
           handleLogout={handleLogout}
           isUpdateScreenOpen={isUserDetailsRequired}
           userDetails={userDetails}

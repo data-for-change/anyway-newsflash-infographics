@@ -1,5 +1,11 @@
-import axios, { AxiosError } from 'axios';
-import { GET_USER_INFO_URL, GET_USERS_INFO_LIST_URL, LOG_OUT_USER_URL, UPDATE_USER_INFO_URL } from 'utils/utils';
+import axios from 'axios';
+import {
+  ADD_ROLE_TO_USER_URL,
+  GET_USER_INFO_URL,
+  GET_USERS_INFO_LIST_URL,
+  LOG_OUT_USER_URL,
+  UPDATE_USER_INFO_URL,
+} from 'utils/utils';
 import { IFormInput } from 'components/molecules/UserUpdateForm';
 import { StatusCodes } from 'utils/HTTPStatuesCodes';
 import { IUserInfo } from '../models/user/IUserInfo';
@@ -18,7 +24,7 @@ export interface IAnywayUserDetails {
 }
 
 export interface UpdateUserReq {
-  first_name: string;
+  first_name?: string;
   last_name: string;
   user_work_place: string;
   email: string;
@@ -45,7 +51,7 @@ export const fetchUserInfo = async function (): Promise<IAnywayUserDetails> {
 
 export const addRoleToUser =async  (role: string, email :string) =>{
   try {
-    await axios.post(UPDATE_USER_INFO_URL, {role,email}, { withCredentials: true });
+    await axios.post(ADD_ROLE_TO_USER_URL, {role,email}, { withCredentials: true });
     return role;
   } catch (e) {
     console.error(`Error while trying to update/create user Details : ${e}`);
