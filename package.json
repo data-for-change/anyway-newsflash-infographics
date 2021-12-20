@@ -40,7 +40,7 @@
     "build": "react-scripts build",
     "build:staging": "env-cmd -f .env.staging react-scripts build",
     "build:demo": "env-cmd -f .env.demo react-scripts build",
-    "lint": "eslint src/**/*.ts src/**/*.tsx",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "git:prune": "git remote prune origin",
