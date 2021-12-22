@@ -67,7 +67,8 @@
       ],
       "no-restricted-imports": ["error", {
         "patterns": ["../.*"]
-      }]
+      }],
+      "no-multiple-empty-lines": "error"
     }
   },
   "browserslist": {
