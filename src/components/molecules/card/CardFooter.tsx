@@ -32,8 +32,8 @@ const CardFooter: React.FC<IProps> = ({ dateComment }) => {
   const { t } = useTranslation();
   const classes = useStyles();
   const locale = useLocale();
-  const lastUpdateDate = dateComment.last_update == null ? '' : dateFormat(new Date(dateComment.last_update), locale);
-  const dateRange = dateComment.date_range == null ? '' : dateComment.date_range.join('-');
+  const lastUpdateDate = dateComment.last_update ? dateFormat(new Date(dateComment.last_update), locale) : null;
+  const dateRange = dateComment.date_range ? dateComment.date_range.join('-') : null;
   return (
     <div className={classes.main}>
       <Typography.Body3>
