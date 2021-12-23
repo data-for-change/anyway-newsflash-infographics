@@ -7,15 +7,13 @@ import {
   IWidgetMostSevereAccidentsTableData,
   IWidgetCountBySeverityTextData,
   IWidgetAccidentsByTypeData,
-  IWidgetAccidentsByYearData,
-  IWidgetInjuredByYearData,
+  IWidgetMultiBarData,
   IWidgetAccidentsByDayNightData,
   IWidgetHeadOnCollisionsComparisonData,
   IWidgetVisionZeroImageData,
   IWidgetTopRoadSegmentsAccidentsPerKm,
   IWidgetAccidentCountByDriverType,
-  IWidgetAccidentCountByCarType,
-  IWidgetInjuredAccidentsWithPedestrians,
+  IWidgetSingleBarData,
 } from 'models/WidgetData';
 import AccidentsCountByHourBarWidget from './AccidentsCountByHourBarWidget';
 import MostSevereAccidentsMapWidget from './MostSevereAccidentsMapWidget';
@@ -51,7 +49,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
       widgetComponent = <AccidentsCountByHourBarWidget data={data as IWidgetAccidentsByHourBarData} />;
       break;
     }
-    // Temp - until server issues has been staged
+    //Temp - until server issues has been staged
     // case WidgetName.injured_count_per_age_group: {
     //   widgetComponent = <InjuredCountPerAgeGroupPieWidget data={data as IWidgetInjuredCountPerAgeGroupPieData} />;
     //   break;
@@ -70,7 +68,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
       widgetComponent = <HeatMap data={data.items as IPoint[]} />;
       break;
     }
-    // remove street_view until fixed
+    //remove street_view until fixed
     // case WidgetName.street_view: {
     //   widgetComponent = <StreetViewWidget data={data as IWidgetStreetViewData} />;
     //   break;
@@ -86,11 +84,11 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
       break;
     }
     case WidgetName.accident_count_by_accident_year: {
-      widgetComponent = <CountByYearBarWidget data={data as IWidgetAccidentsByYearData} />;
+      widgetComponent = <CountByYearBarWidget data={data as IWidgetMultiBarData} />;
       break;
     }
     case WidgetName.injured_count_by_accident_year: {
-      widgetComponent = <CountInjuredByYearBarWidget data={data as IWidgetInjuredByYearData} />;
+      widgetComponent = <CountInjuredByYearBarWidget data={data as IWidgetMultiBarData} />;
       break;
     }
     case WidgetName.accident_count_by_day_night: {
@@ -137,32 +135,18 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
       break;
     }
     case WidgetName.accident_count_by_car_type: {
-      widgetComponent = (
-        <AccidentCountByCarTypeWidget data={data as IWidgetAccidentCountByCarType} segmentText={locationText} />
-      );
+      widgetComponent = <AccidentCountByCarTypeWidget data={data as IWidgetMultiBarData} segmentText={locationText} />;
       break;
     }
     case WidgetName.injured_accidents_with_pedestrians: {
       widgetComponent = (
-        <InjuredAccidentsWithPedestrians
-          data={data as IWidgetInjuredAccidentsWithPedestrians}
-          segmentText={segmentText}
-        />
+        <InjuredAccidentsWithPedestrians data={data as IWidgetSingleBarData} segmentText={segmentText} />
       );
       break;
     }
     default: {
-      // widgetComponent = (
-      //   <AccidentCountByCarTypeWidget data={data as IWidgetAccidentCountByCarType} segmentText={locationText} />
-      // );
-      widgetComponent = <CountByYearBarWidget data={data as IWidgetAccidentsByYearData} />;
-      // widgetComponent = (
-      //   <InjuredAccidentsWithPedestrians
-      //     data={data as IWidgetInjuredAccidentsWithPedestrians}
-      //     segmentText={segmentText}
-      //   />
-      // );
-
+      widgetComponent = null; // do not create element for unrecognized widget
+      console.warn(`widget name (${name}) was not recognize `, widget);
       break;
     }
   }

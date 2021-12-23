@@ -6,7 +6,6 @@ const validCoords = (coords: any) => coords < mostExtremeLongitude && coords > m
 const validNumber = (value: any) => typeof value === 'number' && value >= 0;
 const validString = (value: any) => typeof value === 'string';
 
-
 export const isVerifiedWidgetData = (widget: any) => {
   let isValid = false;
   try {
@@ -15,7 +14,7 @@ export const isVerifiedWidgetData = (widget: any) => {
     console.error('isVerifiedWidgetData - data structure error', widget, err);
   }
   return isValid;
-}
+};
 
 export const verifiedWidgetData = (widget: any) => {
   const {
@@ -84,11 +83,11 @@ export const verifiedWidgetData = (widget: any) => {
       break;
     }
     case 'accident_count_by_accident_year': {
-      isValid = items.every((item: any) => validNumber(item.accident_year) && validNumber(item.count));
+      isValid = true;
       break;
     }
     case 'injured_count_by_accident_year': {
-      isValid = items.every((item: any) => validNumber(item.accident_year) && validNumber(item.count));
+      isValid = true;
       break;
     }
     case 'accident_count_by_day_night': {
@@ -155,7 +154,7 @@ export const verifiedWidgetData = (widget: any) => {
       break;
     }
     default: {
-      isValid = false
+      isValid = false;
     }
   }
 

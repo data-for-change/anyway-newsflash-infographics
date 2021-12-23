@@ -3,7 +3,8 @@ import { ResponsiveContainer, BarChart, LabelList, XAxis, Bar, Tooltip, Legend }
 import { roseColor, honeyColor, yellowColor, blackColor, whiteColor } from 'style';
 import { Typography } from 'components/atoms';
 import tinycolor from 'tinycolor2';
-const COLORS = [yellowColor, honeyColor, roseColor];
+// const COLORS = [yellowColor, honeyColor, roseColor];
+const COLORS = [roseColor, honeyColor, yellowColor];
 type BarDataMap = {
   [key: string]: number | string;
 };
@@ -56,6 +57,7 @@ const CustomizedLabel = (props: any) => {
 const BarChartContainer: FC<IBarChartBaseProps> = ({ data, textLabel, children }) => {
   return (
     <>
+      {textLabel && <Typography.Body3>{textLabel}</Typography.Body3>}
       <ResponsiveContainer>
         <BarChart data={data}>
           <XAxis
@@ -71,18 +73,17 @@ const BarChartContainer: FC<IBarChartBaseProps> = ({ data, textLabel, children }
           {children}
         </BarChart>
       </ResponsiveContainer>
-      {textLabel && <Typography.Body3>{textLabel}</Typography.Body3>}
     </>
   );
 };
 
-const SingleBarChart: FC<ISingleBarChartProps> = ({ data, isPercentage, yLabels }) => {
+const SingleBarChart: FC<ISingleBarChartProps> = ({ data, isPercentage, yLabels, textLabel }) => {
   const barStyle = {
     filter: `drop-shadow(1mm 1mm 0 ${tinycolor(roseColor).darken().toString()})`,
   };
   return (
     <>
-      <BarChartContainer data={data} isPercentage={isPercentage} yLabels={yLabels}>
+      <BarChartContainer data={data} isPercentage={isPercentage} yLabels={yLabels} textLabel={textLabel}>
         <Bar fill={roseColor} dataKey={yLabels[0]} style={barStyle} isAnimationActive={false} radius={borderRadius.All}>
           <LabelList content={<CustomizedLabel isPercentage={isPercentage} />} dataKey={yLabels[0]} />
         </Bar>
@@ -91,11 +92,11 @@ const SingleBarChart: FC<ISingleBarChartProps> = ({ data, isPercentage, yLabels 
   );
 };
 
-const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, yLabels, isStacked }) => {
+const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, yLabels, isStacked, textLabel }) => {
   const numOfBars = yLabels.length;
   return (
     <>
-      <BarChartContainer data={data} isPercentage={isPercentage} yLabels={yLabels}>
+      <BarChartContainer data={data} isPercentage={isPercentage} yLabels={yLabels} textLabel={textLabel}>
         {Array.from({ length: numOfBars }, (_, i) => {
           const barStyle = {
             filter: `drop-shadow(1mm ${isStacked ? '0' : '1mm'} 0 ${tinycolor(COLORS[i]).darken().toString()})`,

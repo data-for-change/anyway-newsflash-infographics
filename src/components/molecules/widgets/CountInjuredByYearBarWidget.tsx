@@ -1,16 +1,29 @@
 import React, { FC } from 'react';
-import BarChartView from 'components/molecules/BarChartView';
-import { IWidgetInjuredByYearData } from 'models/WidgetData';
-
-const ACCIDENT_YEAR = 'accident_year';
-const COUNT = 'count';
+import { IWidgetMultiBarData } from 'models/WidgetData';
+import { transformItems } from '../../../utils/barchart.utils';
+import { MultiBarChart } from '../GenericBarChartView';
 
 interface IProps {
-  data: IWidgetInjuredByYearData;
+  data: IWidgetMultiBarData;
 }
 
 const CountInjuredByYearBarWidget: FC<IProps> = ({ data }) => {
-  const { items, text } = data;
-  return <BarChartView data={items} xLabel={ACCIDENT_YEAR} yLabel={COUNT} textLabel={text.title} />;
+  const content = JSON.parse(JSON.stringify(data));
+  const items = transformItems(content);
+
+  const yLabels = Object.keys(items[0]);
+  yLabels.splice(0, 1);
+
+  return (
+    <>
+      <MultiBarChart
+        isStacked={true}
+        isPercentage={false}
+        data={items}
+        yLabels={yLabels}
+        textLabel={content.text.title}
+      />
+    </>
+  );
 };
 export default CountInjuredByYearBarWidget;

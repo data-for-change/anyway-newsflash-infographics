@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { IWidgetInjuredAccidentsWithPedestrians } from 'models/WidgetData';
+import { IWidgetSingleBarData } from 'models/WidgetData';
 import { Box, makeStyles, Theme } from '@material-ui/core';
 import { SingleBarChart } from '../GenericBarChartView';
 import { useTranslation } from 'react-i18next';
-import { transformItems } from '../../../utils/barchart';
+import { transformItems } from '../../../utils/barchart.utils';
 
 interface IProps {
-  data: IWidgetInjuredAccidentsWithPedestrians;
+  data: IWidgetSingleBarData;
   segmentText: string;
 }
 const useStyle = makeStyles((theme: Theme) => ({
@@ -21,34 +21,17 @@ const useStyle = makeStyles((theme: Theme) => ({
 const InjuredAccidentsWithPedestrians: FC<IProps> = ({ data, segmentText }) => {
   const classes = useStyle();
   const { t } = useTranslation();
-  const originData = {
-    name: 'accident_count_by_accident_year',
-    data: {
-      items: [
-        { label_key: '2017', value: 55 },
-        { label_key: '2018', value: 5 },
-        { label_key: '2019', value: 1 },
-      ],
-    },
-    text: {
-      title: 'widget title bla bla',
-      labels_map: {
-        value: 'מספר נפגעים',
-      },
-    },
-  };
+  const content = JSON.parse(JSON.stringify(data));
 
-  const isSingleBar = true;
-  const items = transformItems(originData, isSingleBar);
-  // console.log(JSON.stringify(transformedItems)); // [{"שנה":"2017","מספר נפגעים":55},{"שנה":"2018","מספר נפגעים":5},{"שנה":"2019","מספר נפגעים":1}];
-
-  const yLabels = [originData.text.labels_map.value];
+  const newItems = transformItems(content);
+  const yLabels = Object.keys(content.items[0]);
+  yLabels.splice(0, 1);
 
   return (
     <>
       <Box textAlign="center">{segmentText}</Box>
       <Box className={classes.chartWrapper}>
-        <SingleBarChart isPercentage={false} data={items} yLabels={yLabels} />
+        <SingleBarChart isPercentage={false} data={newItems} yLabels={yLabels} />
       </Box>
     </>
   );
