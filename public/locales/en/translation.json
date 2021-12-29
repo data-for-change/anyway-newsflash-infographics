@@ -111,7 +111,8 @@
       "Accidents count by vehicle type": "Accidents count by vehicle type",
       "compared to national average": "in a section compared to national average on roads of the same type"
     },
-    "No data": "No data to display"
+    "No data": "No data to display",
+    "lastDateUpdated": "last update"
   },
   "mapDialog": {
     "searchButton": "Search",

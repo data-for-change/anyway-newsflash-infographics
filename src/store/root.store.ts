@@ -35,7 +35,7 @@ const DEFAULT_LOCATION_META = {
   location_text: '',
   dates_comment: {
     date_range: [],
-    last_update: 0,
+    last_update: '',
   },
 };
 
@@ -67,6 +67,7 @@ export default class RootStore {
   constructor() {
     // init app data
     makeAutoObservable(this);
+
     initService().then((initData) => {
       runInAction(() => {
         if (initData.newsFlashCollection) {

@@ -4,7 +4,7 @@ const demo = {
     location_text: 'יצוג אזרחים ערבים בכלל עובדי המדינה',
     dates_comment: {
       date_range: [],
-      last_update: 0,
+      last_update: '',
     },
   },
   widgets: [],

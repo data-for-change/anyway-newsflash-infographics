@@ -28,7 +28,7 @@ export interface IWidgetBase {
 
 export interface IDateComments {
   date_range: Array<number>;
-  last_update: number;
+  last_update: string;
 }
 
 export interface ILocationMeta {

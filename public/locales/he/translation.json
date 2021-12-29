@@ -110,7 +110,8 @@
       "Accidents count by vehicle type": "השוואת אחוז התאונות ע\"פ כלי רכב",
       "compared to national average": "במקטע לעומת ממוצע ארצי בכבישים מאותו הסוג"
     },
-    "No data": "אין נתונים להצגה"
+    "No data": "אין נתונים להצגה",
+    "lastDateUpdated": "עדכון אחרון"
   },
   "mapDialog": {
     "searchButton": "חיפוש",
