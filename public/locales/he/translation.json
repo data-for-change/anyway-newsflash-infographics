@@ -87,7 +87,7 @@
     "Search": "חיפוש",
     "User Greeting": "שלום",
     "User Info Update": "פרטי משתמש",
-    "management" : "ניהול"
+    "management": "ניהול"
   },
   "sideBar": "מיקום משוער:",
   "UserProfileHeader": {
@@ -103,7 +103,11 @@
     "Organization": "ארגון"
   },
   "usersManagement": {
-    "title" : "ניהול משתמשים"
+    "title": "ניהול משתמשים",
+    "cancel": "בטל",
+    "save": "שמור",
+    "saveAll": "שמור שינויים",
+    "edit": "עריכה"
   },
   "widgets": {
     "countByCarType": {

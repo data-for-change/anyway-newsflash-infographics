@@ -76,10 +76,10 @@ const AdminManagementForm: React.FC<IProps> = ({ labels, defaultValues, isShowin
     return (
       <ButtonGroup>
         <Button variant="contained" onClick={() => saveEditMode(props.itemData)}>
-          שמור
+          {t('usersManagement.save')}
         </Button>
         <Button variant="contained" onClick={() => cancelEditMode(props.itemData)}>
-          בטל
+          {t('usersManagement.cancel')}
         </Button>
       </ButtonGroup>
     );
@@ -87,7 +87,7 @@ const AdminManagementForm: React.FC<IProps> = ({ labels, defaultValues, isShowin
   const ViewMode = (props: any) => {
     return (
       <Button onClick={() => changeEditObject(props.itemData)} variant="contained">
-        עריכה
+        {t('usersManagement.edit')}
       </Button>
     );
   };
@@ -191,7 +191,7 @@ const AdminManagementForm: React.FC<IProps> = ({ labels, defaultValues, isShowin
         </Table>
       </TableContainer>
       <Button variant="contained" className={classes.saveButton}>
-        שמור שינויים
+        {t('usersManagement.saveAll')}
       </Button>
     </DialogWithHeader>
   );
