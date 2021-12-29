@@ -14,7 +14,7 @@ interface IProps {
   dateComment: IDateComments;
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   main: {
     width: '100%',
     display: 'flex',
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
   },
-}));
+});
 
 const CardFooter: React.FC<IProps> = ({ dateComment }) => {
   const { t } = useTranslation();
