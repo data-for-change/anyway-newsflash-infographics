@@ -122,6 +122,10 @@ export default class RootStore {
     return this.newsFlashCollection.find((item) => item.id === this.activeNewsFlashId);
   }
 
+  get usersManagementTableData() : any {
+    return this.usersInfoList?.map(user => ({name :`${user.first_name} ${user.last_name}` , role: user.roles[0] ,email : user.email}))
+  }
+
   getWidgetsDataByName(name: string): IWidgetBase | undefined {
     return this.newsFlashWidgetsData.find((item) => item.name === name);
   }

@@ -61,9 +61,9 @@ export const addRoleToUser =async  (role: string, email :string) =>{
 export const getUsersList = async () =>{
   try {
     const response = await axios.get(GET_USERS_INFO_LIST_URL, { withCredentials: true });
-    return response.data
+    return response.data;
   } catch (e) {
-    console.error(`Error while trying to get   users  details list : ${JSON.stringify(e.response.data)}`);
+    console.error(`Error while trying to get users details list : ${JSON.stringify(e.response.data)}`);
   }
 }
 
