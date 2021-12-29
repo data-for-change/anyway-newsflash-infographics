@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end',
   },
   lastUpdateDate: {
-    paddingInlineStart: theme.spacing(1),
+    paddingInlineStart: theme.spacing(0.7),
   },
 }));
 
@@ -36,14 +36,14 @@ const CardFooter: React.FC<IProps> = ({ dateComment }) => {
   const dateRange = dateComment.date_range ? dateComment.date_range.join('-') : null;
   return (
     <div className={classes.main}>
-      <Typography.Body3>
-        {dateRange}
-        {lastUpdateDate && <span>,</span>}
-      </Typography.Body3>
+      <Typography.Body3>{dateRange}</Typography.Body3>
       {lastUpdateDate && (
         <Typography.Body3>
-          <Box className={classes.lastUpdateDate}>
-            {t('widgets.lastDateUpdated')}:<span className={classes.lastUpdateDate}>{lastUpdateDate}</span>
+          <Box>
+            ,
+            <span className={classes.lastUpdateDate}>
+              {t('widgets.lastDateUpdated')}:<span className={classes.lastUpdateDate}>{lastUpdateDate}</span>
+            </span>
           </Box>
         </Typography.Body3>
       )}
