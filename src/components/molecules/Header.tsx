@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
-import { AppBar,Button, Logo } from 'components/atoms';
+import { AppBar, Button, Logo } from 'components/atoms';
 import LogInLinkGoogle from './LogInLinkGoogle';
 import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
@@ -14,7 +14,6 @@ import anywayLogo from 'assets/anyway.png';
 import { SignInIcon } from 'components/atoms/SignInIcon';
 import MapDialog from 'components/molecules/MapDialog';
 import { IPoint } from 'models/Point';
-
 
 const useStyles = makeStyles({
   userSection: {
@@ -49,7 +48,7 @@ const Header: FC = () => {
       store.fetchSelectedNewsFlashWidgetsByLocation(roadSegmentLocation?.road_segment_id, selectedLanguage);
       setOpen(false);
     }
-  }
+  };
 
   useEffect(() => {
     store.getUserLoginDetails();
@@ -72,10 +71,12 @@ const Header: FC = () => {
         />
       );
     } else {
-      authElement = <>
-        <LogInLinkGoogle />
-        <SignInIcon/>
-      </>;
+      authElement = (
+        <>
+          <LogInLinkGoogle />
+          <SignInIcon />
+        </>
+      );
     }
   }
 

@@ -38,18 +38,18 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const MapDialog: FC<IProps> = ({ section='', open, onClose, location, onLocationChange, onSearch }) => {
+const MapDialog: FC<IProps> = ({ section = '', open, onClose, location, onLocationChange, onSearch }) => {
   const classes = useStyles();
   const { t } = useTranslation();
 
   return (
-    <Dialog isShowing={open} onClose={onClose} maxWidth='lg' fullWidth>
+    <Dialog isShowing={open} onClose={onClose} maxWidth="lg" fullWidth>
       <Box className={classes.wrapper}>
         <Box className={classes.dialogHeader}>
           <Typography.Title1>{t('mapDialog.searchSection')}</Typography.Title1>
         </Box>
-        <Box display='flex' flexDirection='column' height='75vh'>
-          <Box display='contents'>
+        <Box display="flex" flexDirection="column" height="75vh">
+          <Box display="contents">
             <LocationSelect location={location} onLocationChange={onLocationChange} />
           </Box>
           <div className={classes.chosenSection}>

@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import MaterialMenu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-interface IProps {
+export interface IProps {
   items: Array<ReactElement>;
   handleClose: () => any;
   anchorEl: HTMLElement | null;
