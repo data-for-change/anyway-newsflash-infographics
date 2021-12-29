@@ -59,9 +59,8 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({
   const toggleAdminManagementScreen = (isOpen: boolean) => setIsAdminDialogOpen(isOpen);
 
   return (
-    // change later to "isAdmin"
     <>
-      {true && (
+      {isAdmin && (
         <Box className={classes.userButton} onClick={() => toggleAdminManagementScreen(true)}>
           {t('header.management')}
         </Box>
