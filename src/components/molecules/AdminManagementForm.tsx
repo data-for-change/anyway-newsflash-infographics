@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
 import { Typography } from 'components/atoms';
 import {
+  TableContainer,
   Table,
   Box,
   InputLabel,
@@ -25,19 +26,19 @@ import {
   saveEditModeHelper,
   changeEditObjectHelper,
   changeCurrentSelectedRoleHelper,
+  IeditObjList,
+  IProps,
 } from './AdminManagementFormHelpers';
 
-interface IProps {
-  isShowing: boolean;
-  onClose: () => void;
-  defaultValues: Array<{ name: string; mail: string; roles: string; id: string }>;
-  labels: Array<string>;
-}
 const useStyles = makeStyles((theme: Theme) => ({
   table: {
     border: `1px solid ${blackColor}`,
     borderBottom: 0,
     borderCollapse: 'separate',
+  },
+  saveButton: {
+    marginTop: '20px',
+    marginBottom: '10px',
   },
 }));
 const StyledTableCell = withStyles((theme: Theme) =>
@@ -65,13 +66,7 @@ const StyledTableRow = withStyles(() =>
     },
   }),
 )(TableRow);
-type IeditObjList = Record<
-  string,
-  {
-    editMode: boolean;
-    organizationValue: string;
-  }
->;
+
 const AdminManagementForm: React.FC<IProps> = ({ labels, defaultValues, isShowing, onClose }) => {
   const [editObject, setEditObject] = React.useState<IeditObjList>({});
   const { t } = useTranslation();
@@ -97,9 +92,11 @@ const AdminManagementForm: React.FC<IProps> = ({ labels, defaultValues, isShowin
     );
   };
   const OrganizationEditList: any = (props: any) => {
-    const orgName = editObject[props.item.id]['organizationValue'];
+    const orgName = editObject[props.item.id]['organizationValue']
+      ? editObject[props.item.id]['organizationValue']
+      : props.item.roles;
     const [currentOrganization, setcurrentOrganization] = React.useState(orgName);
-    const orgList = ['teva', 'nmp', 'or yarok', 'kakal', 'goodForThePeople', 'cmn', 'loni'];
+    const orgList = ['walla', 'ynet', 'papaya', 'lahaim', 'or yarok', 'kakal'];
     const handleChange = (e: any) => {
       setcurrentOrganization(e.target.value);
       const newObj = changeCurrentSelectedRoleHelper({ ...editObject }, props.item.id, e.target.value);
@@ -128,7 +125,6 @@ const AdminManagementForm: React.FC<IProps> = ({ labels, defaultValues, isShowin
       </Box>
     );
   };
-
   const OrganizationViewMode: any = (item: any) => {
     if (editObject[item.id]) {
       return <p>{editObject[item.id]['organizationValue']}</p>;
@@ -158,40 +154,45 @@ const AdminManagementForm: React.FC<IProps> = ({ labels, defaultValues, isShowin
         onClose();
       }}
     >
-      <Table className={classes.table} size="small" aria-label="a dense table">
-        <TableHead>
-          <StyledTableRow>
-            {labels.map((label: string, index: number) => (
-              <StyledTableCell key={index}>
-                <Typography.Body5>{label}</Typography.Body5>
-              </StyledTableCell>
+      <TableContainer style={{ maxHeight: 250 }}>
+        <Table className={classes.table} size="small" aria-label="a dense table">
+          <TableHead>
+            <StyledTableRow>
+              {labels.map((label: string, index: number) => (
+                <StyledTableCell key={index}>
+                  <Typography.Body5>{label}</Typography.Body5>
+                </StyledTableCell>
+              ))}
+              <StyledTableCell></StyledTableCell>
+            </StyledTableRow>
+          </TableHead>
+          <TableBody>
+            {defaultValues.map((item: any, index: number) => (
+              <TableRow key={index}>
+                <TableCell align="center">{item.name}</TableCell>
+                <TableCell align="center">{item.mail}</TableCell>
+                <TableCell align="center" width="30%">
+                  {editObject[item.id] && editObject[item.id]['editMode'] ? (
+                    <OrganizationEditList item={item} />
+                  ) : (
+                    OrganizationViewMode(item)
+                  )}
+                </TableCell>
+                <TableCell align="center" width="40%">
+                  {editObject[item.id] && editObject[item.id]['editMode'] ? (
+                    <EditMode itemData={item} />
+                  ) : (
+                    <ViewMode itemData={item} />
+                  )}
+                </TableCell>
+              </TableRow>
             ))}
-            <StyledTableCell></StyledTableCell>
-          </StyledTableRow>
-        </TableHead>
-        <TableBody>
-          {defaultValues.map((item: any, index: number) => (
-            <TableRow key={index}>
-              <TableCell align="center">{item.name}</TableCell>
-              <TableCell align="center">{item.mail}</TableCell>
-              <TableCell align="center" width="20%">
-                {editObject[item.id] && editObject[item.id]['editMode'] ? (
-                  <OrganizationEditList item={item} />
-                ) : (
-                  OrganizationViewMode(item)
-                )}
-              </TableCell>
-              <TableCell align="center" width="20%">
-                {editObject[item.id] && editObject[item.id]['editMode'] ? (
-                  <EditMode itemData={item} />
-                ) : (
-                  <ViewMode itemData={item} />
-                )}
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <Button variant="contained" className={classes.saveButton}>
+        שמור שינויים
+      </Button>
     </DialogWithHeader>
   );
 };

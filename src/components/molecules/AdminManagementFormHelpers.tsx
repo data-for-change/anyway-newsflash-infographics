@@ -1,7 +1,7 @@
 export const cancelEditModeHelper = (el: any, newObj: any) => {
   const { id } = el;
   newObj[id]['editMode'] = false;
-  newObj[id]['organizationValue'] = el.organizationName;
+  newObj[id]['organizationValue'] = el.roles;
   return newObj;
 };
 export const saveEditModeHelper = (element: any, newObj: any) => {
@@ -30,3 +30,18 @@ export const changeCurrentSelectedRoleHelper = (newObject: any, id: any, newComp
   };
   return newObject;
 };
+
+export type IeditObjList = Record<
+  string,
+  {
+    editMode: boolean;
+    organizationValue: string;
+  }
+>;
+
+export interface IProps {
+  isShowing: boolean;
+  onClose: () => void;
+  defaultValues: Array<{ name: string; mail: string; roles: string; id: string }>;
+  labels: Array<string>;
+}
