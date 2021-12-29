@@ -5,7 +5,7 @@ export const cancelEditModeHelper = (el: any, newObj: any) => {
   return newObj;
 };
 export const saveEditModeHelper = (element: any, newObj: any) => {
-  const { id, organizationName } = element;
+  const { id } = element;
   newObj[id]['editMode'] = false;
   return newObj;
 };
