@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
-import { ResponsiveContainer, BarChart, LabelList, XAxis, Bar, Tooltip, Legend } from 'recharts';
+import { ResponsiveContainer, BarChart, LabelList, XAxis, Bar, Tooltip, Legend, Cell } from 'recharts';
 import { roseColor, honeyColor, yellowColor, blackColor, whiteColor } from 'style';
 import { Typography } from 'components/atoms';
 import tinycolor from 'tinycolor2';
-// const COLORS = [yellowColor, honeyColor, roseColor];
-const COLORS = [roseColor, honeyColor, yellowColor];
+
+const COLORS = [yellowColor, honeyColor, roseColor];
+
 type BarDataMap = {
   [key: string]: number | string;
 };
@@ -13,7 +14,6 @@ interface IBarChartBaseProps {
   data: Array<BarDataMap>;
   isPercentage: boolean;
   textLabel?: string;
-  yLabels: string[];
 }
 interface ISingleBarChartProps extends IBarChartBaseProps {}
 
@@ -29,18 +29,12 @@ const borderRadius: Record<'Bottom' | 'Top' | 'All' | 'None', [number, number, n
   None: [0, 0, 0, 0],
 };
 
-function getBarRadius(numOfBars: number, barIndex: number) {
-  const lastBar = numOfBars - 1;
-
-  switch (barIndex) {
-    case 0:
-      return borderRadius.Bottom;
-    case lastBar:
-      return borderRadius.Top;
-    default:
-      return borderRadius.None;
-  }
-}
+const borderRadiusForCell: Record<'Bottom' | 'Top' | 'All' | 'None', string> = {
+  Bottom: ['0', '0', '10', '10'] as unknown as string,
+  Top: ['10', '10', '0', '0'] as unknown as string,
+  All: ['10', '10', '10', '10'] as unknown as string,
+  None: ['0', '0', '0', '0'] as unknown as string,
+};
 
 const CustomizedLabel = (props: any) => {
   const { x, y, value, height, width, isPercentage, isStacked } = props;
@@ -59,7 +53,7 @@ const BarChartContainer: FC<IBarChartBaseProps> = ({ data, textLabel, children }
     <>
       {textLabel && <Typography.Body3>{textLabel}</Typography.Body3>}
       <ResponsiveContainer>
-        <BarChart data={data}>
+        <BarChart data={data} margin={{ bottom: 20 }}>
           <XAxis
             angle={-7}
             interval={0}
@@ -69,7 +63,7 @@ const BarChartContainer: FC<IBarChartBaseProps> = ({ data, textLabel, children }
             style={{ fill: blackColor }}
           />
           <Tooltip />
-          <Legend verticalAlign="top" align="right" iconType="circle" />
+          <Legend verticalAlign="top" align="right" iconType="circle" height={35} />
           {children}
         </BarChart>
       </ResponsiveContainer>
@@ -77,13 +71,16 @@ const BarChartContainer: FC<IBarChartBaseProps> = ({ data, textLabel, children }
   );
 };
 
-const SingleBarChart: FC<ISingleBarChartProps> = ({ data, isPercentage, yLabels, textLabel }) => {
+const SingleBarChart: FC<ISingleBarChartProps> = ({ data, isPercentage, textLabel }) => {
+  const yLabels = Object.keys(data[0]);
+  yLabels.splice(0, 1);
+
   const barStyle = {
     filter: `drop-shadow(1mm 1mm 0 ${tinycolor(roseColor).darken().toString()})`,
   };
   return (
     <>
-      <BarChartContainer data={data} isPercentage={isPercentage} yLabels={yLabels} textLabel={textLabel}>
+      <BarChartContainer data={data} isPercentage={isPercentage} textLabel={textLabel}>
         <Bar fill={roseColor} dataKey={yLabels[0]} style={barStyle} isAnimationActive={false} radius={borderRadius.All}>
           <LabelList content={<CustomizedLabel isPercentage={isPercentage} />} dataKey={yLabels[0]} />
         </Bar>
@@ -92,17 +89,17 @@ const SingleBarChart: FC<ISingleBarChartProps> = ({ data, isPercentage, yLabels,
   );
 };
 
-const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, yLabels, isStacked, textLabel }) => {
-  const numOfBars = yLabels.length;
+const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, isStacked, textLabel }) => {
+  const yLabels = Object.keys(data[0]);
+  yLabels.splice(0, 1);
+  const maxBarsNum = yLabels.length;
   return (
     <>
-      <BarChartContainer data={data} isPercentage={isPercentage} yLabels={yLabels} textLabel={textLabel}>
-        {Array.from({ length: numOfBars }, (_, i) => {
+      <BarChartContainer data={data} isPercentage={isPercentage} textLabel={textLabel}>
+        {Array.from({ length: maxBarsNum }, (_, i) => {
           const barStyle = {
             filter: `drop-shadow(1mm ${isStacked ? '0' : '1mm'} 0 ${tinycolor(COLORS[i]).darken().toString()})`,
           };
-
-          const barRadius = isStacked ? getBarRadius(numOfBars, i) : borderRadius.All;
 
           return (
             <Bar
@@ -111,8 +108,43 @@ const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, yLabels, i
               dataKey={yLabels[i]}
               style={barStyle}
               isAnimationActive={false}
-              radius={barRadius}
             >
+              {data.map((barSeries) => {
+                // remove empty entries from barSeries
+                // e.g {'light':10,'fatal':0} -> {'light':10}
+                const cleanSeries: any = {};
+                for (const [key, value] of Object.entries(barSeries)) {
+                  if (value !== 0) {
+                    cleanSeries[key] = value;
+                  }
+                }
+
+                const barsNumInCurrStack = Object.keys(cleanSeries).length - 1;
+
+                if (!isStacked || barsNumInCurrStack <= 1) {
+                  return <Cell radius={borderRadiusForCell.All} />;
+                }
+
+                // handle custom border radius
+                const firstLabel = yLabels[0];
+                const secondLabel = yLabels[1];
+                let optionOne = !cleanSeries[firstLabel] ? yLabels[1] : yLabels[0];
+                let optionTwo = !cleanSeries[firstLabel] ? yLabels[2] : yLabels[1];
+
+                if (barsNumInCurrStack >= 3 || !cleanSeries[secondLabel]) {
+                  optionOne = yLabels[0];
+                  optionTwo = yLabels[2];
+                }
+
+                switch (yLabels[i]) {
+                  case optionOne:
+                    return <Cell radius={borderRadiusForCell.Bottom} />;
+                  case optionTwo:
+                    return <Cell radius={borderRadiusForCell.Top} />;
+                  default:
+                    return <Cell radius={borderRadiusForCell.None} />;
+                }
+              })}
               <LabelList
                 content={<CustomizedLabel isPercentage={isPercentage} isStacked={isStacked} />}
                 dataKey={yLabels[i]}

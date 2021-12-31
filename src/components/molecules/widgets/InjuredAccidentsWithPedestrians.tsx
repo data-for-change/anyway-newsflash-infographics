@@ -24,14 +24,12 @@ const InjuredAccidentsWithPedestrians: FC<IProps> = ({ data, segmentText }) => {
   const content = JSON.parse(JSON.stringify(data));
 
   const newItems = transformItems(content);
-  const yLabels = Object.keys(content.items[0]);
-  yLabels.splice(0, 1);
 
   return (
     <>
       <Box textAlign="center">{segmentText}</Box>
       <Box className={classes.chartWrapper}>
-        <SingleBarChart isPercentage={false} data={newItems} yLabels={yLabels} />
+        <SingleBarChart isPercentage={false} data={newItems} />
       </Box>
     </>
   );

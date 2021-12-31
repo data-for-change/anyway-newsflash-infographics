@@ -21,8 +21,6 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
   const { t } = useTranslation();
   const content = JSON.parse(JSON.stringify(data));
   const newItems = transformItems(content);
-  const yLabels = Object.keys(content.items[0]);
-  yLabels.splice(0, 1);
 
   return (
     <>
@@ -34,7 +32,7 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
         <Box textAlign="center">{segmentText}</Box>
       </Box>
       <Box className={classes.chartWrapper}>
-        <MultiBarChart isStacked={false} isPercentage={true} data={newItems} yLabels={yLabels} />
+        <MultiBarChart isStacked={false} isPercentage={true} data={newItems} />
       </Box>
     </>
   );
