@@ -13,6 +13,7 @@ import { IUserInfo, fetchUserInfo, logoutUserFromSession, postUserInfo } from 's
 import i18next from 'services/i18n.service';
 import { IFormInput } from 'components/molecules/UserUpdateForm';
 import { fetchGpsLocation } from 'services/gpsToLocation.data.service';
+import { LANG } from 'const/languages.const';
 
 // todo: move all map defaults to one place
 const DEFAULT_TIME_FILTER = 5;
@@ -26,7 +27,7 @@ const DEFAULT_LOCATION_META = {
   location_text: '',
   dates_comment: {
     date_range: [],
-    last_update: 0
+    last_update: 0,
   },
 };
 
@@ -46,7 +47,7 @@ export default class RootStore {
   newsFlashLoading: boolean = false;
   widgetBoxLoading: boolean = false;
   currentLanguageRouteString: string = '';
-  selectedLanguage: string = 'he';
+  selectedLanguage: string = LANG.HE;
   gpsLocationData: IGpsData | null = null;
   // domain stores
   settingsStore: SettingsStore;
@@ -126,10 +127,10 @@ export default class RootStore {
     }
   }
 
-  filterNewsFlashCollection (): void {
-    runInAction(() => this.newsFlashLoading = true);
+  filterNewsFlashCollection(): void {
+    runInAction(() => (this.newsFlashLoading = true));
     fetchNews(this.newsFlashActiveFilter, this.newsFlashFetchOffSet).then((data: any) => {
-    runInAction(() => (this.newsFlashLoading = false));
+      runInAction(() => (this.newsFlashLoading = false));
       if (data) {
         runInAction(() => (this.newsFlashCollection = [...this.newsFlashCollection, ...data]));
       } else {
@@ -138,8 +139,8 @@ export default class RootStore {
     });
   }
 
-  infiniteFetchLimit (fetchSize: number): void {
-    runInAction(() => this.newsFlashFetchOffSet += fetchSize);
+  infiniteFetchLimit(fetchSize: number): void {
+    runInAction(() => (this.newsFlashFetchOffSet += fetchSize));
     if (this.newsFlashCollection.length >= this.newsFlashFetchOffSet - fetchSize) {
       this.filterNewsFlashCollection();
     }
@@ -199,7 +200,7 @@ export default class RootStore {
   changeLanguage(lngCode: string): void {
     i18next.changeLanguage(lngCode).then(() => {
       runInAction(() => {
-        lngCode === 'he'
+        lngCode === LANG.HE
           ? (this.currentLanguageRouteString = '')
           : (this.currentLanguageRouteString = `/${i18next.language}`);
         this.selectedLanguage = i18next.language;
@@ -208,15 +209,15 @@ export default class RootStore {
     });
   }
 
-  private fetchSelectedNewsFlashWidgets (id: number, lang: string, filterValue: number): void {
-    runInAction(() => this.widgetBoxLoading = true);
+  private fetchSelectedNewsFlashWidgets(id: number, lang: string, filterValue: number): void {
+    runInAction(() => (this.widgetBoxLoading = true));
     fetchWidgets(id, lang, filterValue).then((response: any) => {
       runInAction(() => {
         this.widgetBoxLoading = false;
         if (response && response.widgets && response.meta) {
           this.newsFlashWidgetsMeta = response.meta;
           this.newsFlashWidgetsData = response.widgets;
-          this.setGpsLocationData(null)
+          this.setGpsLocationData(null);
         } else {
           console.error(`fetchWidgets(id:${id}) invalid response:`, response);
         }
@@ -237,13 +238,13 @@ export default class RootStore {
         }
       });
     });
-  };
+  }
 
   setGpsLocationData(data: IGpsData | null) {
     runInAction(() => {
       this.gpsLocationData = data;
     });
-  };
+  }
 
   async fetchGpsLocation(data: IPoint) {
     runInAction(() => {
