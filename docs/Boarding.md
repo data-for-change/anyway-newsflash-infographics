@@ -1,4 +1,4 @@
-# Boarding process
+# Developer boarding process
 
 Hello there most brave contributor!
 Joining a new project can be overwhelming, so many new stuff...
@@ -7,7 +7,7 @@ But fear not - this guide is here to help you get familiar with the project.
 ### Steps
 1. Talk to the team leader and get intro message (if you are reading this, you probably done that)
 1. Check out [Anyway Background](#anyway-bg) below to get general background
-1. Read the *entire* [README](https://github.com/hasadna/anyway-newsflash-infographics/blob/dev/README.md)
+1. Read the *entire* [README](https://github.com/hasadna/anyway-newsflash-infographics/blob/dev/README.md). Make sure to cover our [code guidelines](https://github.com/hasadna/anyway-newsflash-infographics/blob/dev/docs/CodeGuidelines.md)
 1. Play a bit with the app :) Links are in the README. you can use Production / Staging environment. We recommend to try both and see the differences.
 1. Talk to team leader and set an [On-Boarding Meeting](#onboard)
 

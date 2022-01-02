@@ -6,8 +6,8 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import { oceanBlueColor, skyBlueColor } from 'style';
 import Box from '@material-ui/core/Box';
 import { Avatar } from '@material-ui/core';
-import { IAnywayUserDetails } from '../../services/user.service';
-import { ROLE_ADMIN_NAME } from '../../utils/utils';
+import { IAnywayUserDetails } from 'services/user.service';
+import { ROLE_ADMIN_NAME } from 'utils/utils';
 
 const avatarSize = '40px';
 
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     width: avatarSize,
     height: avatarSize,
-  }
+  },
 }));
 
 interface IUserProfileHeader {
@@ -44,6 +44,7 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({ userDetails, isUpdate
     lastName : userDetails.data.lastName,
     workplace : userDetails.data.roles.filter(role => role !== ROLE_ADMIN_NAME)[0], // first role that is not admin
   }
+  const userData = userDetails.data;
   const classes = useStyles();
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(isUpdateScreenOpen);
   const toggleUserUpdateScreen = (isOpen: boolean) => setIsDialogOpen(isOpen);
@@ -60,8 +61,7 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({ userDetails, isUpdate
       <Box className={classes.welcomeMsg}>
         <Typography.Body2>{`${t('header.User Greeting')} ${defaultFormInput.firstName || ''}`}</Typography.Body2>
       </Box>
-      <Avatar className={classes.avatar} alt={defaultFormInput.firstName?.substr(0,1).toUpperCase()}
-              src={userDetails.data.imgUrl} />
+      <Avatar className={classes.avatar} alt={userData.firstName?.substr(0, 1).toUpperCase()} src={userData.imgUrl} />
 
       <UserInfoForm
         defaultValues={defaultFormInput}

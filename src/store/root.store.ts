@@ -20,8 +20,8 @@ import i18next from 'services/i18n.service';
 import { IFormInput } from 'components/molecules/UserUpdateForm';
 import { fetchGpsLocation } from 'services/gpsToLocation.data.service';
 import { LANG } from 'const/languages.const';
-import { ROLE_ADMIN_NAME } from '../utils/utils';
-import { IUserInfo } from '../models/user/IUserInfo';
+import { ROLE_ADMIN_NAME } from 'utils/utils';
+import { IUserInfo } from 'models/user/IUserInfo';
 
 // todo: move all map defaults to one place
 const DEFAULT_TIME_FILTER = 5;

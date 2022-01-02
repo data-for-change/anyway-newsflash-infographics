@@ -1,6 +1,6 @@
 {
   "name": "anyway-newsflash-infographics",
-  "version": "0.10.1",
+  "version": "0.12.0",
   "private": true,
   "dependencies": {
     "@babel/eslint-parser": "^7.14.7",
@@ -10,7 +10,7 @@
     "@types/classnames": "^2.3.1",
     "@types/leaflet.heat": "^0.2.0",
     "@types/query-string": "^6.3.0",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "classnames": "^2.3.1",
     "env-cmd": "^10.1.0",
     "file-saver": "^2.0.5",
@@ -40,7 +40,7 @@
     "build": "react-scripts build",
     "build:staging": "env-cmd -f .env.staging react-scripts build",
     "build:demo": "env-cmd -f .env.demo react-scripts build",
-    "lint": "eslint src/**/*.ts src/**/*.tsx",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "git:prune": "git remote prune origin",
@@ -64,7 +64,11 @@
       ],
       "prefer-const": [
         "error"
-      ]
+      ],
+      "no-restricted-imports": ["error", {
+        "patterns": ["../.*"]
+      }],
+      "no-multiple-empty-lines": "error"
     }
   },
   "browserslist": {
