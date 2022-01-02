@@ -33,8 +33,11 @@ export const REDIRECT_ROUTE: string | undefined = process.env.REACT_APP_REDIRECT
 export const GET_USER_INFO_URL = `${authServerUrl}user/info`;
 export const UPDATE_USER_INFO_URL = `${authServerUrl}user/update`;
 export const LOG_OUT_USER_URL = `${authServerUrl}logout`;
+export const GET_ORG_LIST_URL = `${authServerUrl}user/get_organization_list`;
+export const GET_ROLES_LIST_URL = `${authServerUrl}user/get_roles_list`;
 export const GET_USERS_INFO_LIST_URL = `${authServerUrl}user/get_all_users_info`;
 export const ADD_ROLE_TO_USER_URL = `${authServerUrl}user/add_to_role`;
+export const ADD_ORG_TO_USER_URL = `${authServerUrl}/user/add_user_to_org`;
 
 AUTH_LOGIN_GOOGLE_URL.searchParams.append('redirect_url', `${window.location.origin}${REDIRECT_ROUTE!}`);
 

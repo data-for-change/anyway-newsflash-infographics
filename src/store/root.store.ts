@@ -123,7 +123,7 @@ export default class RootStore {
   }
 
   get usersManagementTableData() : any {
-    return this.usersInfoList?.map(user => ({name :`${user.first_name} ${user.last_name}` , role: user.roles[0] ,email : user.email}))
+    return this.usersInfoList?.map(user => ({name :`${user.first_name} ${user.last_name}` , org: user.organizations[0] ?? ''  ,email : user.email}))
   }
 
   getWidgetsDataByName(name: string): IWidgetBase | undefined {
@@ -133,7 +133,7 @@ export default class RootStore {
   checkuserstatus(): void {}
 
   getUsersListInfo() {
-    getUsersList().then(list => {
+    getUsersList().then( list => {
       this.usersInfoList = list
     }).catch(e => {
       console.log(`error getting user details :${JSON.stringify(e)}`);
