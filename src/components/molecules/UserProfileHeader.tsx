@@ -6,10 +6,10 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import { oceanBlueColor, skyBlueColor } from 'style';
 import Box from '@material-ui/core/Box';
 import { Avatar } from '@material-ui/core';
-import { IAnywayUserDetails } from '../../services/user.service';
-import { ROLE_ADMIN_NAME } from '../../utils/utils';
-import RootStore from '../../store/root.store';
-import { useStore } from '../../store/storeConfig';
+import { IAnywayUserDetails } from 'services/user.service';
+import RootStore from 'store/root.store';
+import { useStore } from 'store/storeConfig';
+import { ROLE_ADMIN_NAME } from 'utils/utils';
 
 const avatarSize = '40px';
 
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     width: avatarSize,
     height: avatarSize,
-  }
+  },
 }));
 
 interface IUserProfileHeader {
