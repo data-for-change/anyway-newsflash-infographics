@@ -1,5 +1,5 @@
 import { Typography } from 'components/atoms';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import UserInfoForm, { IFormInput } from './UserUpdateForm';
 import { useTranslation } from 'react-i18next';
 import makeStyles from '@material-ui/core/styles/makeStyles';
@@ -7,6 +7,8 @@ import { oceanBlueColor, skyBlueColor } from 'style';
 import Box from '@material-ui/core/Box';
 import { Avatar } from '@material-ui/core';
 import { IAnywayUserDetails } from 'services/user.service';
+import RootStore from 'store/root.store';
+import { useStore } from 'store/storeConfig';
 import { ROLE_ADMIN_NAME } from 'utils/utils';
 
 const avatarSize = '40px';
@@ -38,20 +40,26 @@ interface IUserProfileHeader {
 }
 const UserProfileHeader: React.FC<IUserProfileHeader> = ({ userDetails, isUpdateScreenOpen, handleLogout , isAdmin}) => {
   const { t } = useTranslation();
+  const store: RootStore = useStore();
   const defaultFormInput : IFormInput = {
     email: userDetails.data.email,
     firstName : userDetails.data.firstName,
     lastName : userDetails.data.lastName,
     workplace : userDetails.data.roles.filter(role => role !== ROLE_ADMIN_NAME)[0], // first role that is not admin
   }
-  const userData = userDetails.data;
   const classes = useStyles();
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(isUpdateScreenOpen);
   const toggleUserUpdateScreen = (isOpen: boolean) => setIsDialogOpen(isOpen);
 
+  useEffect(() => {
+    if(store.isAdmin) {
+      store.getUsersListInfo();
+    }
+  }, [store]);
+
   return (
     <>
-      { isAdmin && <Box className={classes.userButton}>{t('header.management')}</Box>}
+      { isAdmin && <Box className={classes.userButton} onClick={() => console.log(`${JSON.stringify(store.usersInfoList)}`) }>{t('header.management')}</Box>}
       <Box className={classes.userButton} onClick={handleLogout}>
         {t('UserProfileHeader.logout')}
       </Box>
@@ -61,7 +69,8 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({ userDetails, isUpdate
       <Box className={classes.welcomeMsg}>
         <Typography.Body2>{`${t('header.User Greeting')} ${defaultFormInput.firstName || ''}`}</Typography.Body2>
       </Box>
-      <Avatar className={classes.avatar} alt={userData.firstName?.substr(0, 1).toUpperCase()} src={userData.imgUrl} />
+      <Avatar className={classes.avatar} alt={defaultFormInput.firstName?.substr(0,1).toUpperCase()}
+              src={userDetails.data.imgUrl} />
 
       <UserInfoForm
         defaultValues={defaultFormInput}

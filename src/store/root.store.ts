@@ -122,6 +122,10 @@ export default class RootStore {
     return this.newsFlashCollection.find((item) => item.id === this.activeNewsFlashId);
   }
 
+  get usersManagementTableData() : any {
+    return this.usersInfoList?.map(user => ({name :`${user.first_name} ${user.last_name}` , org: user.organizations[0] ?? ''  ,email : user.email}))
+  }
+
   getWidgetsDataByName(name: string): IWidgetBase | undefined {
     return this.newsFlashWidgetsData.find((item) => item.name === name);
   }
@@ -129,7 +133,7 @@ export default class RootStore {
   checkuserstatus(): void {}
 
   getUsersListInfo() {
-    getUsersList().then(list => {
+    getUsersList().then( list => {
       this.usersInfoList = list
     }).catch(e => {
       console.log(`error getting user details :${JSON.stringify(e)}`);
