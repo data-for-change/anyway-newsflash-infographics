@@ -60,7 +60,7 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({
 
   return (
     <>
-      {isAdmin && (
+      {true && (
         <Box className={classes.userButton} onClick={() => toggleAdminManagementScreen(true)}>
           {t('header.management')}
         </Box>
