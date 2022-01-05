@@ -112,7 +112,7 @@ const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, isStacked,
               {data.map((barSeries) => {
                 // remove empty entries from barSeries
                 // e.g {'light':10,'fatal':0} -> {'light':10}
-                const cleanSeries: any = {};
+                const cleanSeries: BarDataMap = {};
                 for (const [key, value] of Object.entries(barSeries)) {
                   if (value !== 0) {
                     cleanSeries[key] = value;
