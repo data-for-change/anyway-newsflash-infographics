@@ -29,7 +29,6 @@ import StaticImageViewWidget from './StaticImageViewWidget';
 import TopRoadSegmentsAccidentsPerKm from './TopRoadSegmentsAccidentsPerKm';
 import AccidentCountByRoadLight from './AccidentCountByRoadLight';
 import AccidentCountByDriverType from './AccidentCountByDriverType';
-import AccidentCountByCarTypeWidget from './AccidentCountByCarTypeWidget';
 import InjuredAccidentsWithPedestrians from './InjuredAccidentsWithPedestrians';
 import { IPoint } from 'models/Point';
 import { WidgetName } from 'models/WidgetName';
@@ -45,105 +44,106 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
   const { name, data } = widget;
   let widgetComponent;
   switch (name) {
-    // case WidgetName.accidents_count_by_hour: {
-    //   widgetComponent = <AccidentsCountByHourBarWidget data={data as IWidgetAccidentsByHourBarData} />;
-    //   break;
-    // }
+    case WidgetName.accidents_count_by_hour: {
+      widgetComponent = <AccidentsCountByHourBarWidget data={data as IWidgetAccidentsByHourBarData} />;
+      break;
+    }
     //Temp - until server issues has been staged
     // case WidgetName.injured_count_per_age_group: {
     //   widgetComponent = <InjuredCountPerAgeGroupPieWidget data={data as IWidgetInjuredCountPerAgeGroupPieData} />;
     //   break;
     // }
-    // case WidgetName.most_severe_accidents: {
-    //   widgetComponent = (
-    //     <MostSevereAccidentsMapWidget data={data as IWidgetMostSevereAccidentsData} sizeOptions={sizeOptions} />
-    //   );
-    //   break;
-    // }
-    // case WidgetName.most_severe_accidents_table: {
-    //   widgetComponent = <MostSevereAccidentsTableWidget data={data as IWidgetMostSevereAccidentsTableData} />;
-    //   break;
-    // }
-    // case WidgetName.accidents_heat_map: {
-    //   widgetComponent = <HeatMap data={data.items as IPoint[]} />;
-    //   break;
-    // }
+    case WidgetName.most_severe_accidents: {
+      widgetComponent = (
+        <MostSevereAccidentsMapWidget data={data as IWidgetMostSevereAccidentsData} sizeOptions={sizeOptions} />
+      );
+      break;
+    }
+    case WidgetName.most_severe_accidents_table: {
+      widgetComponent = <MostSevereAccidentsTableWidget data={data as IWidgetMostSevereAccidentsTableData} />;
+      break;
+    }
+    case WidgetName.accidents_heat_map: {
+      widgetComponent = <HeatMap data={data.items as IPoint[]} />;
+      break;
+    }
     //remove street_view until fixed
     // case WidgetName.street_view: {
     //   widgetComponent = <StreetViewWidget data={data as IWidgetStreetViewData} />;
     //   break;
     // }
-    // case WidgetName.accident_count_by_severity: {
-    //   widgetComponent = (
-    //     <CountBySeverityTextWidget segmentText={segmentText} data={data as IWidgetCountBySeverityTextData} />
-    //   );
-    //   break;
-    // }
-    // case WidgetName.accident_count_by_accident_type: {
-    //   widgetComponent = <CountByTypePieWidget data={data as IWidgetAccidentsByTypeData} />;
-    //   break;
-    // }
+    case WidgetName.accident_count_by_severity: {
+      widgetComponent = (
+        <CountBySeverityTextWidget segmentText={segmentText} data={data as IWidgetCountBySeverityTextData} />
+      );
+      break;
+    }
+    case WidgetName.accident_count_by_accident_type: {
+      widgetComponent = <CountByTypePieWidget data={data as IWidgetAccidentsByTypeData} />;
+      break;
+    }
     case WidgetName.accident_count_by_accident_year: {
       widgetComponent = <CountByYearBarWidget data={data as IWidgetMultiBarData} />;
       break;
     }
-    // case WidgetName.injured_count_by_accident_year: {
-    //   widgetComponent = <CountInjuredByYearBarWidget data={data as IWidgetMultiBarData} />;
-    //   break;
-    // }
-    // case WidgetName.accident_count_by_day_night: {
-    //   widgetComponent = <CountAccidentsByDayNightPieWidget data={data as IWidgetAccidentsByDayNightData} />;
-    //   break;
-    // }
-    // case WidgetName.head_on_collisions_comparison: {
-    //   widgetComponent = (
-    //     <HeadOnCollisionsComparisonWidget
-    //       data={data as IWidgetHeadOnCollisionsComparisonData}
-    //       segmetText={locationText}
-    //     />
-    //   );
-    //   break;
-    // }
-    // case WidgetName.head_on_collisions_comparison_percentage: {
-    //   widgetComponent = (
-    //     <HeadOnCollisionsComparisonWidget
-    //       data={data as IWidgetHeadOnCollisionsComparisonData}
-    //       segmetText={locationText}
-    //       usePercent={true}
-    //     />
-    //   );
-    //   break;
-    // }
-    // case WidgetName.vision_zero_2_plus_1: {
-    //   widgetComponent = <StaticImageViewWidget data={data as IWidgetVisionZeroImageData} />;
-    //   break;
-    // }
-    // case WidgetName.top_road_segments_accidents_per_km: {
-    //   widgetComponent = (
-    //     <TopRoadSegmentsAccidentsPerKm data={data as IWidgetTopRoadSegmentsAccidentsPerKm} segmentText={locationText} />
-    //   );
-    //   break;
-    // }
-    // case WidgetName.accident_count_by_road_light: {
-    //   widgetComponent = (
-    //     <AccidentCountByRoadLight data={data as IWidgetAccidentCountByRoadLight} segmentText={locationText} />
-    //   );
-    //   break;
-    // }
-    // case WidgetName.accident_count_by_driver_type: {
-    //   widgetComponent = <AccidentCountByDriverType data={data as IWidgetAccidentCountByDriverType} />;
-    //   break;
-    // }
+    case WidgetName.injured_count_by_accident_year: {
+      widgetComponent = <CountInjuredByYearBarWidget data={data as IWidgetMultiBarData} />;
+      break;
+    }
+    case WidgetName.accident_count_by_day_night: {
+      widgetComponent = <CountAccidentsByDayNightPieWidget data={data as IWidgetAccidentsByDayNightData} />;
+      break;
+    }
+    case WidgetName.head_on_collisions_comparison: {
+      widgetComponent = (
+        <HeadOnCollisionsComparisonWidget
+          data={data as IWidgetHeadOnCollisionsComparisonData}
+          segmetText={locationText}
+        />
+      );
+      break;
+    }
+    case WidgetName.head_on_collisions_comparison_percentage: {
+      widgetComponent = (
+        <HeadOnCollisionsComparisonWidget
+          data={data as IWidgetHeadOnCollisionsComparisonData}
+          segmetText={locationText}
+          usePercent={true}
+        />
+      );
+      break;
+    }
+    case WidgetName.vision_zero_2_plus_1: {
+      widgetComponent = <StaticImageViewWidget data={data as IWidgetVisionZeroImageData} />;
+      break;
+    }
+    case WidgetName.top_road_segments_accidents_per_km: {
+      widgetComponent = (
+        <TopRoadSegmentsAccidentsPerKm data={data as IWidgetTopRoadSegmentsAccidentsPerKm} segmentText={locationText} />
+      );
+      break;
+    }
+    case WidgetName.accident_count_by_road_light: {
+      widgetComponent = (
+        <AccidentCountByRoadLight data={data as IWidgetAccidentCountByRoadLight} segmentText={locationText} />
+      );
+      break;
+    }
+    case WidgetName.accident_count_by_driver_type: {
+      widgetComponent = <AccidentCountByDriverType data={data as IWidgetAccidentCountByDriverType} />;
+      break;
+    }
+    // Pending BE data format change
     // case WidgetName.accident_count_by_car_type: {
     //   widgetComponent = <AccidentCountByCarTypeWidget data={data as IWidgetMultiBarData} segmentText={locationText} />;
     //   break;
     // }
-    // case WidgetName.injured_accidents_with_pedestrians: {
-    //   widgetComponent = (
-    //     <InjuredAccidentsWithPedestrians data={data as IWidgetSingleBarData} segmentText={segmentText} />
-    //   );
-    //   break;
-    // }
+    case WidgetName.injured_accidents_with_pedestrians: {
+      widgetComponent = (
+        <InjuredAccidentsWithPedestrians data={data as IWidgetSingleBarData} segmentText={segmentText} />
+      );
+      break;
+    }
     default: {
       widgetComponent = null; // do not create element for unrecognized widget
       console.warn(`widget name (${name}) was not recognize `, widget);

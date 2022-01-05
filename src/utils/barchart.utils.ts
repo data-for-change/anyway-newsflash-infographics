@@ -22,18 +22,6 @@ export const transformItems = (data: any) => {
           const { label_key, value } = dataPoint;
           const yLabel = getTranslatedLabel(label_key);
           result[yLabel] = Math.round(value);
-          /*
-          for QA: test zero in one/two/all values. (there are 7 different options that affect radius)
-           */
-          if (yLabel === 'קטלנית') {
-            result[yLabel] = 55;
-          }
-          if (yLabel === 'קשה') {
-            result[yLabel] = 15;
-          }
-          if (yLabel === 'קלה') {
-            result[yLabel] = 150;
-          }
         });
       }
       return result;

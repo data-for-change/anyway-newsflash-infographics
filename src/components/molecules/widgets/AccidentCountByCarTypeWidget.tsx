@@ -1,15 +1,16 @@
 import React, { FC } from 'react';
 import { IWidgetMultiBarData } from 'models/WidgetData';
-import { Box, makeStyles, Theme } from '@material-ui/core';
+import { Box, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { MultiBarChart } from '../GenericBarChartView';
-import { transformItems } from '../../../utils/barchart.utils';
+import { transformItems } from 'utils/barchart.utils';
 
 interface IProps {
   data: IWidgetMultiBarData;
   segmentText: string;
 }
-const useStyle = makeStyles((theme: Theme) => ({
+
+const useStyle = makeStyles(() => ({
   chartWrapper: {
     height: '80%',
     width: '100%',

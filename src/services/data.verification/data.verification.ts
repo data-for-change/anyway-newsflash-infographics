@@ -84,10 +84,7 @@ export const verifiedWidgetData = (widget: any) => {
     }
     case 'accident_count_by_accident_year': {
       isValid = items.every((item: any) => {
-        const isValidSeries = item.series.every(
-          (dataPoint: any) => validString(dataPoint.label_key) && validNumber(dataPoint.value),
-        );
-        return isValidSeries && validNumber(item.label_key);
+        return item.series.every((dataPoint: any) => validString(dataPoint.label_key) && validNumber(dataPoint.value));
       });
       break;
     }
