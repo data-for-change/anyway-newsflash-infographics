@@ -22,7 +22,7 @@ import {
   ButtonGroup,
   Button,
 } from '@material-ui/core';
-import { silverGrayColor, blackColor } from 'style';
+import { blackColor } from 'style';
 import {
   cancelEditModeHelper,
   saveEditModeHelper,
