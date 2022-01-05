@@ -1,24 +1,23 @@
 export const cancelEditModeHelper = (el: any, newObj: any) => {
-  const { id } = el;
-  newObj[id]['editMode'] = false;
-  newObj[id]['organizationValue'] = el.roles;
+  const { email } = el;
+  delete newObj[email];
   return newObj;
 };
 export const saveEditModeHelper = (element: any, newObj: any) => {
-  const { id } = element;
-  newObj[id]['editMode'] = false;
+  const { email } = element;
+  newObj[email]['editMode'] = false;
   return newObj;
 };
 
 export const changeEditObjectHelper = (element: any, newObj: any) => {
-  const { id, organizationName } = element;
-  if (!newObj[id]) {
-    newObj[id] = {
+  const { email, org } = element;
+  if (!newObj[email]) {
+    newObj[email] = {
       editMode: true,
-      organizationValue: organizationName,
+      organizationValue: org,
     };
   } else {
-    newObj[id]['editMode'] = true;
+    newObj[email]['editMode'] = true;
   }
   return newObj;
 };
@@ -29,6 +28,11 @@ export const changeCurrentSelectedRoleHelper = (newObject: any, id: any, newComp
     organizationValue: newCompanyValue,
   };
   return newObject;
+};
+
+export const sendDataToServer = (editObject: any) => {
+  console.log(editObject);
+  /// needs to send data to server
 };
 
 export type IeditObjList = Record<

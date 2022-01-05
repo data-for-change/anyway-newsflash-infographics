@@ -30,6 +30,7 @@ import {
   changeCurrentSelectedRoleHelper,
   IeditObjList,
   IProps,
+  sendDataToServer,
 } from './AdminManagementFormHelpers';
 const useStyles = makeStyles((theme: Theme) => ({
   table: {
@@ -53,13 +54,10 @@ const StyledTableRow = withStyles(() =>
 const AdminManagementForm: React.FC<IProps> = ({ labels, defaultValues, isShowing, onClose }) => {
   const store: RootStore = useStore();
   const [editObject, setEditObject] = React.useState<IeditObjList>({});
-  const [organizationList, setOrganizationList] = React.useState<any>(false);
+  const [orgList, setOrgList] = React.useState<any>([]);
   useEffect(() => {
-    console.log('get data from store');
-    const data = store.usersManagementTableData;
-    console.log(data);
-    setOrganizationList(data);
-  }, [store]);
+    setOrgList(store.usersManagementTableData);
+  }, [store.usersManagementTableData]);
   const { t } = useTranslation();
   const classes = useStyles();
   const EditMode: any = (props: any) => {
@@ -82,15 +80,14 @@ const AdminManagementForm: React.FC<IProps> = ({ labels, defaultValues, isShowin
     );
   };
   const OrganizationEditList: any = (props: any) => {
-    console.log(props);
     const orgName = editObject[props.item.email]['organizationValue']
       ? editObject[props.item.email]['organizationValue']
-      : props.item.roles;
+      : props.item.org;
     const [currentOrganization, setcurrentOrganization] = React.useState(orgName);
     const orgList = ['walla', 'ynet', 'papaya', 'lahaim', 'or yarok', 'kakal'];
     const handleChange = (e: any) => {
       setcurrentOrganization(e.target.value);
-      const newObj = changeCurrentSelectedRoleHelper({ ...editObject }, props.item.id, e.target.value);
+      const newObj = changeCurrentSelectedRoleHelper({ ...editObject }, props.item.email, e.target.value);
       setEditObject(newObj);
     };
     return (
@@ -99,7 +96,7 @@ const AdminManagementForm: React.FC<IProps> = ({ labels, defaultValues, isShowin
           <InputLabel id="demo-simple-select-label">Organization</InputLabel>
           <Select
             labelId="demo-simple-select-label"
-            name={props.item.id}
+            name={props.item.email}
             value={currentOrganization}
             label="Organization"
             onChange={handleChange}
@@ -117,10 +114,10 @@ const AdminManagementForm: React.FC<IProps> = ({ labels, defaultValues, isShowin
     );
   };
   const OrganizationViewMode: any = (item: any) => {
-    if (editObject[item.id]) {
-      return <p>{editObject[item.id]['organizationValue']}</p>;
+    if (editObject[item.email]) {
+      return <p>{editObject[item.email]['organizationValue']}</p>;
     } else {
-      return <p>{item.roles}</p>;
+      return <p>{item.org}</p>;
     }
   };
   const cancelEditMode = (el: any) => {
@@ -158,20 +155,20 @@ const AdminManagementForm: React.FC<IProps> = ({ labels, defaultValues, isShowin
             </StyledTableRow>
           </TableHead>
           <TableBody>
-            {organizationList &&
-              organizationList.map((item: any, index: number) => (
+            {orgList &&
+              orgList.map((item: any, index: number) => (
                 <TableRow key={index}>
                   <TableCell align="center">{item.name}</TableCell>
                   <TableCell align="center">{item.email}</TableCell>
                   <TableCell align="center" width="30%">
-                    {editObject[item.id] && editObject[item.id]['editMode'] ? (
+                    {editObject[item.email] && editObject[item.email]['editMode'] ? (
                       <OrganizationEditList item={item} />
                     ) : (
                       OrganizationViewMode(item)
                     )}
                   </TableCell>
                   <TableCell align="center" width="40%">
-                    {editObject[item.id] && editObject[item.id]['editMode'] ? (
+                    {editObject[item.email] && editObject[item.email]['editMode'] ? (
                       <EditMode itemData={item} />
                     ) : (
                       <ViewMode itemData={item} />
@@ -182,7 +179,7 @@ const AdminManagementForm: React.FC<IProps> = ({ labels, defaultValues, isShowin
           </TableBody>
         </Table>
       </TableContainer>
-      <Button variant="contained" className={classes.saveButton}>
+      <Button variant="contained" onClick={() => sendDataToServer(editObject)} className={classes.saveButton}>
         {t('usersManagement.saveAll')}
       </Button>
     </DialogWithHeader>
