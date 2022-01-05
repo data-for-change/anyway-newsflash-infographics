@@ -1,5 +1,5 @@
 import { Typography } from 'components/atoms';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import UserInfoForm, { IFormInput } from './UserUpdateForm';
 import AdminManagementForm from './AdminManagementForm';
 import { useTranslation } from 'react-i18next';
@@ -7,9 +7,11 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import { oceanBlueColor, skyBlueColor } from 'style';
 import Box from '@material-ui/core/Box';
 import { Avatar } from '@material-ui/core';
-import { IAnywayUserDetails } from '../../services/user.service';
-import { ROLE_ADMIN_NAME } from '../../utils/utils';
-import { mockAdminManagementData, labels } from '../../services/mocks/adminManagementData.mock.data';
+import { IAnywayUserDetails } from 'services/user.service';
+import { ROLE_ADMIN_NAME } from 'utils/utils';
+import { mockAdminManagementData, labels } from 'services/mocks/adminManagementData.mock.data';
+import RootStore from 'store/root.store';
+import { useStore } from 'store/storeConfig';
 
 const avatarSize = '40px';
 
@@ -45,6 +47,7 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({
   isAdmin,
 }) => {
   const { t } = useTranslation();
+  const store: RootStore = useStore();
   const defaultFormInput: IFormInput = {
     email: userDetails.data.email,
     firstName: userDetails.data.firstName,
@@ -54,9 +57,14 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({
   const classes = useStyles();
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(isUpdateScreenOpen);
   const toggleUserUpdateScreen = (isOpen: boolean) => setIsDialogOpen(isOpen);
-
   const [isAdminDialogOpen, setIsAdminDialogOpen] = useState<boolean>(false);
   const toggleAdminManagementScreen = (isOpen: boolean) => setIsAdminDialogOpen(isOpen);
+
+  useEffect(() => {
+    if (store.isAdmin) {
+      store.getUsersListInfo();
+    }
+  }, [store]);
 
   return (
     <>

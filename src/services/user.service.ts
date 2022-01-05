@@ -1,6 +1,9 @@
 import axios from 'axios';
 import {
+  ADD_ORG_TO_USER_URL,
   ADD_ROLE_TO_USER_URL,
+  GET_ORG_LIST_URL,
+  GET_ROLES_LIST_URL,
   GET_USER_INFO_URL,
   GET_USERS_INFO_LIST_URL,
   LOG_OUT_USER_URL,
@@ -9,6 +12,8 @@ import {
 import { IFormInput } from 'components/molecules/UserUpdateForm';
 import { StatusCodes } from 'utils/HTTPStatuesCodes';
 import { IUserInfo } from '../models/user/IUserInfo';
+import IUserOrg from '../models/user/IUserOrg';
+import IUserRole from '../models/user/IUserRole';
 export interface IAnywayUserDetails {
   data: {
     firstName?: string;
@@ -52,9 +57,16 @@ export const fetchUserInfo = async function (): Promise<IAnywayUserDetails> {
 export const addRoleToUser = async (role: string, email: string) => {
   try {
     await axios.post(ADD_ROLE_TO_USER_URL, { role, email }, { withCredentials: true });
-    return role;
   } catch (e) {
-    console.error(`Error while trying to update/create user Details : ${e}`);
+    console.error(`Error while trying to update/create user Details : ${JSON.stringify(e)}`);
+  }
+};
+
+export const addOrganizationToUser = async (org: string, email: string) => {
+  try {
+    await axios.post(ADD_ORG_TO_USER_URL, { org, email }, { withCredentials: true });
+  } catch (e) {
+    console.error(`Error while trying to update/create user Details : ${JSON.stringify(e)}`);
   }
 };
 
@@ -62,18 +74,31 @@ export const getUsersList = async () => {
   try {
     const response = await axios.get(GET_USERS_INFO_LIST_URL, { withCredentials: true });
     return response.data;
-  } catch (e) {
-    console.error(`Error while trying to get   users  details list : ${JSON.stringify(e)}`);
+  } catch (e: any) {
+    console.error(`Error while trying to get users details list : ${JSON.stringify(e.response.data)}`);
   }
 };
 
-export const getRolesList = async () => {
+export const getRolesList = async (): Promise<Array<IUserRole>> => {
+  let roleList: Array<IUserRole> = [];
   try {
-    const response = await axios.get(UPDATE_USER_INFO_URL, { withCredentials: true });
-    return response.data;
+    const response = await axios.get(GET_ROLES_LIST_URL, { withCredentials: true });
+    roleList = response.data;
   } catch (e) {
-    console.error(`Error while trying to update/create user Details : ${e}`);
+    console.error(`Error while trying to update/create user Details : ${JSON.stringify(e)}`);
   }
+  return roleList;
+};
+
+export const getOrganizationsList = async (): Promise<Array<IUserOrg>> => {
+  let orgList: Array<IUserOrg> = [];
+  try {
+    const response = await axios.get(GET_ORG_LIST_URL, { withCredentials: true });
+    orgList = response.data;
+  } catch (e: any) {
+    console.error(`Error while trying to update/create user Details : ${JSON.stringify(e)}`);
+  }
+  return orgList;
 };
 
 export const postUserInfo = async function (formInput: IFormInput): Promise<Boolean> {
@@ -88,7 +113,7 @@ export const postUserInfo = async function (formInput: IFormInput): Promise<Bool
     const response = await axios.post(UPDATE_USER_INFO_URL, dataToSent, { withCredentials: true });
     isUpdateUser = response.status === StatusCodes.OK;
   } catch (e) {
-    console.error(`Error while trying to update/create user Details : ${e}`);
+    console.error(`Error while trying to update/create user Details : ${JSON.stringify(e)}`);
   }
   return isUpdateUser;
 };
@@ -99,7 +124,7 @@ export const logoutUserFromSession = async function (): Promise<boolean> {
     const res = await axios.get(LOG_OUT_USER_URL, { withCredentials: true });
     isSessionLogOut = res.status === StatusCodes.OK;
   } catch (e) {
-    console.error(`an Error has occured while trying to log out : ${e}`);
+    console.error(`an Error has occured while trying to log out : ${JSON.stringify(e)}`);
   }
   return isSessionLogOut;
 };

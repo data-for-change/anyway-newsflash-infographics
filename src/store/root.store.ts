@@ -20,8 +20,8 @@ import i18next from 'services/i18n.service';
 import { IFormInput } from 'components/molecules/UserUpdateForm';
 import { fetchGpsLocation } from 'services/gpsToLocation.data.service';
 import { LANG } from 'const/languages.const';
-import { ROLE_ADMIN_NAME } from '../utils/utils';
-import { IUserInfo } from '../models/user/IUserInfo';
+import { ROLE_ADMIN_NAME } from 'utils/utils';
+import { IUserInfo } from 'models/user/IUserInfo';
 
 // todo: move all map defaults to one place
 const DEFAULT_TIME_FILTER = 5;
@@ -60,9 +60,8 @@ export default class RootStore {
   // domain stores
   settingsStore: SettingsStore;
   //admin role only observables
-  isAdmin : boolean = false;
-  usersInfoList : [IUserInfo] | null= null;
-
+  isAdmin: boolean = false;
+  usersInfoList: [IUserInfo] | null = null;
 
   constructor() {
     // init app data
@@ -122,6 +121,14 @@ export default class RootStore {
     return this.newsFlashCollection.find((item) => item.id === this.activeNewsFlashId);
   }
 
+  get usersManagementTableData(): any {
+    return this.usersInfoList?.map((user) => ({
+      name: `${user.first_name} ${user.last_name}`,
+      org: user.organizations[0] ?? '',
+      email: user.email,
+    }));
+  }
+
   getWidgetsDataByName(name: string): IWidgetBase | undefined {
     return this.newsFlashWidgetsData.find((item) => item.name === name);
   }
@@ -129,11 +136,13 @@ export default class RootStore {
   checkuserstatus(): void {}
 
   getUsersListInfo() {
-    getUsersList().then(list => {
-      this.usersInfoList = list
-    }).catch(e => {
-      console.log(`error getting user details :${JSON.stringify(e)}`);
-    })
+    getUsersList()
+      .then((list) => {
+        this.usersInfoList = list;
+      })
+      .catch((e) => {
+        console.log(`error getting user details :${JSON.stringify(e)}`);
+      });
   }
 
   setActiveNewsFlashFilter(filter: SourceFilterEnum) {
@@ -172,7 +181,7 @@ export default class RootStore {
         runInAction(() => {
           this.isUserAuthenticated = false;
           this.userInfo = null;
-          if(this.isAdmin){
+          if (this.isAdmin) {
             this.usersInfoList = null;
             this.isAdmin = false;
           }
