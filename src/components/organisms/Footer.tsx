@@ -7,9 +7,10 @@ import { Typography } from 'components/atoms';
 import { silverSmokeColor, oceanBlueColor, skyBlueColor } from 'style';
 import ThankYouDialog from './ThankYouDialog';
 import AboutDialog from './AboutDialog';
-import { version } from '../../../package.json';
+import { version } from '../../../package.json'; // eslint-disable-line
 
 interface IProps {}
+
 const useStyles = makeStyles({
   logo: {
     height: '30px',

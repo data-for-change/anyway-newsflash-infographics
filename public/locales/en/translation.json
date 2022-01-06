@@ -46,6 +46,7 @@
     "inYear": "In the year",
     "inYears": "In the years",
     "on": "on",
+    "onSegment": "Road segment",
     "occurred": "occurred",
     "accidents": "accidents",
     "fatal": {
@@ -106,6 +107,7 @@
       "Accidents count by vehicle type": "Accidents count by vehicle type",
       "compared to national average": "in a section compared to national average on roads of the same type"
     },
+    "lastDateUpdated": "last update",
     "No data": "No data to display"
   },
   "mapDialog": {
