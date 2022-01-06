@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { IWidgetMultiBarData } from 'models/WidgetData';
-import { transformItems } from '../../../utils/barchart.utils';
+import { transformItems } from 'utils/barchart.utils';
 import { MultiBarChart } from '../GenericBarChartView';
 
 interface IProps {
