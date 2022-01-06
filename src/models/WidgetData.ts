@@ -12,11 +12,31 @@ export interface IGpsData {
   road_segment_id: number;
   resolution: string;
 }
+
 export interface IWidgetDataBase {
   text: {
     title?: string;
+    labels_map?: {};
   };
 }
+
+export interface IWidgetMultiBarData extends IWidgetDataBase {
+  items: {
+    label_key: string;
+    series: {
+      label_key: string;
+      value: number;
+    }[];
+  }[];
+}
+
+export interface IWidgetSingleBarData extends IWidgetDataBase {
+  items: {
+    label_key: string;
+    value: number;
+  }[];
+}
+
 export interface IWidgetBase {
   rank: number; // order? (not in use)
   name: string; // unique - used as identifier
@@ -92,12 +112,7 @@ export interface IWidgetAccidentsByTypeData extends IWidgetDataBase {
     count: number;
   }[];
 }
-export interface IWidgetAccidentsByYearData extends IWidgetDataBase {
-  items: {
-    accident_year: number;
-    count: number;
-  }[];
-}
+
 export interface IWidgetInjuredByYearData extends IWidgetDataBase {
   items: {
     accident_year: number;
@@ -144,20 +159,5 @@ export interface IWidgetAccidentCountByDriverType extends IWidgetDataBase {
   items: {
     driver_type: string;
     count: number;
-  }[];
-}
-export interface IWidgetAccidentCountByCarType extends IWidgetDataBase {
-  items: {
-    car_type: string;
-    percentage_segment: number;
-    percentage_country: number;
-  }[];
-}
-export interface IWidgetInjuredAccidentsWithPedestrians extends IWidgetDataBase {
-  items: {
-    year: number;
-    killed_injury_severity_count: number;
-    severe_injury_severity_count: number;
-    light_injury_severity_count: number;
   }[];
 }

@@ -7,17 +7,15 @@ import {
   IWidgetCountBySeverityTextData,
   IWidgetCountBySeverityData,
   IWidgetAccidentsByTypeData,
-  IWidgetInjuredByYearData,
   IWidgetStreetViewData,
-  IWidgetAccidentsByYearData,
+  IWidgetSingleBarData,
+  IWidgetMultiBarData,
   IWidgetVisionZeroImageData,
   IWidgetAccidentsByHourBarData,
   IWidgetMostSevereAccidentsTableData,
   IWidgetTopRoadSegmentsAccidentsPerKm,
   IWidgetAccidentCountByRoadLight,
   IWidgetAccidentCountByDriverType,
-  IWidgetAccidentCountByCarType,
-  IWidgetInjuredAccidentsWithPedestrians,
 } from './WidgetData';
 
 export type IWidgetDataType =
@@ -29,14 +27,12 @@ export type IWidgetDataType =
   | IWidgetCountBySeverityTextData
   | IWidgetCountBySeverityData
   | IWidgetAccidentsByTypeData
-  | IWidgetInjuredByYearData
   | IWidgetStreetViewData
-  | IWidgetAccidentsByYearData
+  | IWidgetSingleBarData
+  | IWidgetMultiBarData
   | IWidgetVisionZeroImageData
   | IWidgetAccidentsByHourBarData
   | IWidgetMostSevereAccidentsTableData
   | IWidgetTopRoadSegmentsAccidentsPerKm
   | IWidgetAccidentCountByRoadLight
-  | IWidgetAccidentCountByDriverType
-  | IWidgetAccidentCountByCarType
-  | IWidgetInjuredAccidentsWithPedestrians;
+  | IWidgetAccidentCountByDriverType;
