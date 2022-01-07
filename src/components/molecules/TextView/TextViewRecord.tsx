@@ -1,25 +1,27 @@
+import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
+import { Typography } from 'components/atoms';
 import React from 'react';
-import Box from '@material-ui/core/Box';
 import { roadIconColors, silverSmokeColor } from 'style';
 import SeverityImage from './SeverityImage';
-import { makeStyles } from '@material-ui/core/styles';
-import { Typography } from 'components/atoms';
 
-interface IProps {
-  numOfAccidents: number;
-  severityDesc: string;
-  imgSrc: string;
-  isLast?: boolean;
-}
+const PREFIX = 'TextViewRecord';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
+const classes = {
+  root: `${PREFIX}-root`,
+  text: `${PREFIX}-text`,
+  acNum: `${PREFIX}-acNum`,
+};
+
+const StyledBox = styled(Box)(({ theme }) => ({
+  [`&.${classes.root}`]: {
     display: 'flex',
     justifyContent: 'space-around',
     width: '80%',
     height: '20%',
   },
-  text: {
+
+  [`& .${classes.text}`]: {
     position: 'relative',
     top: theme.spacing(2),
     display: 'flex',
@@ -28,23 +30,30 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: 0.5,
     justifyContent: 'center',
   },
-  acNum: {
+
+  [`& .${classes.acNum}`]: {
     color: roadIconColors.red,
     fontWeight: 'bold',
     fontSize: '200%',
   },
 }));
 
+interface IProps {
+  numOfAccidents: number;
+  severityDesc: string;
+  imgSrc: string;
+  isLast?: boolean;
+}
+
 const TextViewRecord: React.FC<IProps> = ({ isLast, numOfAccidents, severityDesc, imgSrc }) => {
-  const classes = useStyles();
   return (
-    <Box className={classes.root} py={1} borderBottom={isLast ? '' : `5px solid ${silverSmokeColor}`}>
+    <StyledBox className={classes.root} py={1} borderBottom={isLast ? '' : `5px solid ${silverSmokeColor}`}>
       <SeverityImage inRecord severity={imgSrc} />
       <Box className={classes.text}>
         <Box className={classes.acNum}>{numOfAccidents}</Box>
         <Typography.Title1>{severityDesc}</Typography.Title1>
       </Box>
-    </Box>
+    </StyledBox>
   );
 };
 

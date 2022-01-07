@@ -1,7 +1,23 @@
-import React, { FC } from 'react';
-import { makeStyles } from '@material-ui/core';
+import { styled } from '@mui/material/styles';
 import { ClockPosition } from 'models/ClockPosition';
+import React, { FC } from 'react';
 import { blackColor } from 'style';
+
+const PREFIX = 'TooltipArrow';
+
+const classes = {
+  arrow: `${PREFIX}-arrow`,
+};
+
+const Root = styled('i')({
+  [`&.${classes.arrow}`]: {
+    border: `solid ${blackColor}`,
+    borderWidth: '0 3px 3px 0',
+    display: 'inline-block',
+    padding: '6px',
+    transform: (type: any) => getArrowDirection(type as ClockPosition),
+  },
+});
 
 interface IProps {
   type: ClockPosition;
@@ -36,17 +52,7 @@ const getArrowDirection = (type: ClockPosition) => {
   }
 };
 
-const useStyles = makeStyles({
-  arrow: {
-    border: `solid ${blackColor}`,
-    borderWidth: '0 3px 3px 0',
-    display: 'inline-block',
-    padding: '6px',
-    transform: (type) => getArrowDirection(type as ClockPosition),
-  },
-});
 const TooltipArrow: FC<IProps> = ({ type }) => {
-  const classes = useStyles(type);
-  return <i className={classes.arrow}></i>;
+  return <Root className={classes.arrow}></Root>;
 };
 export default TooltipArrow;

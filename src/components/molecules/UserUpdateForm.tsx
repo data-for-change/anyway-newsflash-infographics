@@ -1,11 +1,41 @@
-import React, { ChangeEvent, useState } from 'react';
-import DialogWithHeader from './DialogWithHeader';
-import { Box, Grid, TextField, makeStyles, FormHelperText } from '@material-ui/core';
-import { useStore } from 'store/storeConfig';
+import { Box, FormHelperText, Grid, TextField } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import Button from 'components/atoms/Button';
 import { observer } from 'mobx-react-lite';
+import React, { ChangeEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useStore } from 'store/storeConfig';
 import { IValidationErrors, validateUserDetails } from 'utils/validations';
+import DialogWithHeader from './DialogWithHeader';
+
+const PREFIX = 'UserUpdateForm';
+
+const classes = {
+  grid: `${PREFIX}-grid`,
+  error: `${PREFIX}-error`,
+  submitButton: `${PREFIX}-submitButton`,
+  hide: `${PREFIX}-hide`,
+};
+
+const StyledDialogWithHeader = styled(DialogWithHeader)(({ theme }) => ({
+  [`& .${classes.grid}`]: {
+    marginTop: theme.spacing(1),
+  },
+
+  [`& .${classes.error}`]: {
+    textAlign: 'center',
+  },
+
+  [`& .${classes.submitButton}`]: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: theme.spacing(2),
+  },
+
+  [`& .${classes.hide}`]: {
+    visibility: 'hidden',
+  },
+}));
 
 interface IProps {
   isShowing: boolean;
@@ -19,23 +49,6 @@ export interface IFormInput {
   lastName: string;
   workplace: string;
 }
-
-const useStyles = makeStyles((theme) => ({
-  grid: {
-    marginTop: theme.spacing(1),
-  },
-  error: {
-    textAlign: 'center',
-  },
-  submitButton: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginBottom: theme.spacing(2),
-  },
-  hide: {
-    visibility: 'hidden',
-  },
-}));
 
 const initialValidations = {
   email: true,
@@ -54,7 +67,6 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
     const newValue = { [name]: value };
     setFormInput((prevState) => ({ ...prevState, ...newValue }));
   };
-  const classes = useStyles();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -70,7 +82,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
   };
 
   return (
-    <DialogWithHeader
+    <StyledDialogWithHeader
       fullWidth
       maxWidth={'sm'}
       isShowing={isShowing}
@@ -81,7 +93,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
       }}
     >
       <form onSubmit={handleSubmit} noValidate>
-        <Grid className={classes.grid} container justify={'center'} alignItems={'center'} spacing={4}>
+        <Grid className={classes.grid} container justifyContent={'center'} alignItems={'center'} spacing={4}>
           <Grid item xs={6}>
             <TextField
               defaultValue={defaultValues.lastName}
@@ -144,7 +156,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
           </Grid>
         </Grid>
       </form>
-    </DialogWithHeader>
+    </StyledDialogWithHeader>
   );
 };
 

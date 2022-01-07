@@ -1,17 +1,23 @@
+import { Avatar } from '@mui/material';
+import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
 import { Typography } from 'components/atoms';
 import React, { useState } from 'react';
-import UserInfoForm from './UserUpdateForm';
 import { useTranslation } from 'react-i18next';
-import makeStyles from '@material-ui/core/styles/makeStyles';
 import { oceanBlueColor, skyBlueColor } from 'style';
-import Box from '@material-ui/core/Box';
-import { Avatar } from '@material-ui/core';
 import { IUserInfo } from 'services/user.service';
+import UserInfoForm from './UserUpdateForm';
 
-const avatarSize = '40px';
+const PREFIX = 'UserProfileHeader';
 
-const useStyles = makeStyles((theme) => ({
-  userButton: {
+const classes = {
+  userButton: `${PREFIX}-userButton`,
+  welcomeMsg: `${PREFIX}-welcomeMsg`,
+  avatar: `${PREFIX}-avatar`,
+};
+
+const Root = styled('div')(({ theme }) => ({
+  [`& .${classes.userButton}`]: {
     color: `${oceanBlueColor}`,
     padding: theme.spacing(1),
     textDecoration: 'none',
@@ -20,14 +26,18 @@ const useStyles = makeStyles((theme) => ({
     },
     cursor: 'pointer',
   },
-  welcomeMsg: {
+
+  [`& .${classes.welcomeMsg}`]: {
     padding: theme.spacing(1),
   },
-  avatar: {
+
+  [`& .${classes.avatar}`]: {
     width: avatarSize,
     height: avatarSize,
   },
 }));
+
+const avatarSize = '40px';
 
 interface IUserProfileHeader {
   userDetails: IUserInfo;
@@ -37,12 +47,12 @@ interface IUserProfileHeader {
 const UserProfileHeader: React.FC<IUserProfileHeader> = ({ userDetails, isUpdateScreenOpen, handleLogout }) => {
   const { t } = useTranslation();
   const userData = userDetails.data;
-  const classes = useStyles();
+
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(isUpdateScreenOpen);
   const toggleUserUpdateScreen = (isOpen: boolean) => setIsDialogOpen(isOpen);
 
   return (
-    <>
+    <Root>
       <Box className={classes.userButton} onClick={handleLogout}>
         {t('UserProfileHeader.logout')}
       </Box>
@@ -53,9 +63,8 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({ userDetails, isUpdate
         <Typography.Body2>{`${t('header.User Greeting')} ${userData.firstName || ''}`}</Typography.Body2>
       </Box>
       <Avatar className={classes.avatar} alt={userData.firstName?.substr(0, 1).toUpperCase()} src={userData.imgUrl} />
-
       <UserInfoForm defaultValues={userData} isShowing={isDialogOpen} onClose={() => toggleUserUpdateScreen(false)} />
-    </>
+    </Root>
   );
 };
 

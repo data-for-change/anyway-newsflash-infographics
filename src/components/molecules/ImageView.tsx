@@ -1,32 +1,41 @@
-import React, { FC } from 'react';
-import { IWidgetVisionZeroImageData } from 'models/WidgetData';
+import { styled } from '@mui/material/styles';
 import visionZeroImage from 'assets/vision_zero_2_plus_1.jpg';
-import { makeStyles } from '@material-ui/core';
+import { IWidgetVisionZeroImageData } from 'models/WidgetData';
+import React, { FC } from 'react';
 
-interface IProps {
-  data: IWidgetVisionZeroImageData;
-}
-const useStyles = makeStyles(() => ({
-  root: {
+const PREFIX = 'ImageView';
+
+const classes = {
+  root: `${PREFIX}-root`,
+  image: `${PREFIX}-image`,
+};
+
+const Root = styled('div')(() => ({
+  [`&.${classes.root}`]: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
   },
-  image: {
+
+  [`& .${classes.image}`]: {
     borderRadius: '10px',
     border: '1px solid gray',
     maxWidth: '100%',
     maxHeight: '100%',
   },
 }));
+
+interface IProps {
+  data: IWidgetVisionZeroImageData;
+}
 const ImageView: FC<IProps> = ({ data }) => {
   // todo: set image based on data
-  const classes = useStyles();
+
   return (
-    <div className={classes.root}>
+    <Root className={classes.root}>
       <img src={visionZeroImage} className={classes.image} alt="vision zero 2 plus 1" />
-    </div>
+    </Root>
   );
 };
 export default ImageView;

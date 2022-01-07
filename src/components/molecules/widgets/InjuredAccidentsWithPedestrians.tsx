@@ -1,7 +1,23 @@
-import React, { FC } from 'react';
-import { IWidgetInjuredAccidentsWithPedestrians } from 'models/WidgetData';
+import { Box } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import StackedBarChartView from 'components/molecules/StackedBarChartView';
-import { Box, makeStyles, Theme } from '@material-ui/core';
+import { IWidgetInjuredAccidentsWithPedestrians } from 'models/WidgetData';
+import React, { FC } from 'react';
+
+const PREFIX = 'InjuredAccidentsWithPedestrians';
+
+const classes = {
+  chartWrapper: `${PREFIX}-chartWrapper`,
+};
+
+const Root = styled('div')(() => ({
+  [`& .${classes.chartWrapper}`]: {
+    height: '100%',
+    width: '90%',
+    margin: 'auto',
+    padding: '5px',
+  },
+}));
 
 const YEAR = 'year';
 const KILLED_INJURY_SEVERITY_COUNT = 'killed_injury_severity_count';
@@ -15,20 +31,11 @@ interface IProps {
   data: IWidgetInjuredAccidentsWithPedestrians;
   segmentText: string;
 }
-const useStyle = makeStyles((theme: Theme) => ({
-  chartWrapper: {
-    height: '100%',
-    width: '90%',
-    margin: 'auto',
-    padding: '5px',
-  },
-}));
 
 const InjuredAccidentsWithPedestrians: FC<IProps> = ({ data, segmentText }) => {
-  const classes = useStyle();
   const { items } = data;
   return (
-    <>
+    <Root>
       <Box textAlign="center">{segmentText}</Box>
       <Box className={classes.chartWrapper}>
         <StackedBarChartView
@@ -42,7 +49,7 @@ const InjuredAccidentsWithPedestrians: FC<IProps> = ({ data, segmentText }) => {
           name3={NAME3}
         />
       </Box>
-    </>
+    </Root>
   );
 };
 export default InjuredAccidentsWithPedestrians;

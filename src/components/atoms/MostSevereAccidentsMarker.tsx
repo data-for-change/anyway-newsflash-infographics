@@ -1,22 +1,26 @@
-import React, { FC, useState } from 'react';
-import { makeStyles } from '@material-ui/core';
+import { styled } from '@mui/material/styles';
+import { useLocale } from 'hooks/date.hooks';
 import L from 'leaflet';
-import { Marker, Popup } from 'react-leaflet';
-
-import { AnyWayButton } from './AnyWayButton';
-import { Typography, MapIcon, TooltipMarker, TooltipArrow } from '.';
 import { ClockPosition } from 'models/ClockPosition';
+import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Marker, Popup } from 'react-leaflet';
 import { defaultBorderRadius, silverSmokeColor } from 'style';
-import { useLocale } from 'hooks/date.hooks'
+import { MapIcon, TooltipArrow, TooltipMarker, Typography } from '.';
+import { AnyWayButton } from './AnyWayButton';
 
-interface IProps {
-  data: any;
-  tooltipOffset: ClockPosition;
-}
+const PREFIX = 'MostSevereAccidentsMarker';
 
-const useStyles = makeStyles({
-  root: {
+const classes = {
+  root: `${PREFIX}-root`,
+  button: `${PREFIX}-button`,
+  arrowContainer: `${PREFIX}-arrowContainer`,
+  tooltipTitle: `${PREFIX}-tooltipTitle`,
+  icon: `${PREFIX}-icon`,
+};
+
+const Root = styled('div')({
+  [`& .${classes.root}`]: {
     '& .leaflet-popup-content-wrapper': {
       borderRadius: defaultBorderRadius,
       backgroundColor: silverSmokeColor,
@@ -29,39 +33,44 @@ const useStyles = makeStyles({
       backgroundColor: silverSmokeColor,
     },
   },
-  button: {
+  [`& .${classes.button}`]: {
     padding: 10,
     minWidth: 0,
   },
-  arrowContainer: {
+  [`& .${classes.arrowContainer}`]: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingBottom: 3,
   },
-  tooltipTitle: {
+  [`& .${classes.tooltipTitle}`]: {
     margin: '5px 0 0',
     textAlign: 'center',
   },
-  icon: {
+  [`& .${classes.icon}`]: {
     width: 35,
     height: 35,
     margin: '0 10px',
   },
 });
+
+interface IProps {
+  data: any;
+  tooltipOffset: ClockPosition;
+}
+
 const MostSevereAccidentsMarker: FC<IProps> = ({ data, tooltipOffset = ClockPosition.LEFT }) => {
-  const classes = useStyles();
   const { t } = useTranslation();
   const [offset, setOffset] = useState(tooltipOffset);
   const { latitude, longitude, accident_severity, accident_timestamp } = data;
   const position: L.LatLng = new L.LatLng(latitude, longitude);
-  const locale = useLocale()
+  const locale = useLocale();
 
   const icon: L.Icon = MapIcon.getIconBySeverity('carIcon', data.accident_severity);
   const isValid = accident_timestamp && accident_severity;
   return !isValid ? null : (
-    <>
-      <TooltipMarker data={data} position={position} offset={offset} locale={locale}/>
+    <Root>
+      <TooltipMarker data={data} position={position} offset={offset} locale={locale} />
       <Marker icon={icon} position={position}>
         {
           <Popup className={classes.root}>
@@ -102,7 +111,7 @@ const MostSevereAccidentsMarker: FC<IProps> = ({ data, tooltipOffset = ClockPosi
           </Popup>
         }
       </Marker>
-    </>
+    </Root>
   );
 };
 

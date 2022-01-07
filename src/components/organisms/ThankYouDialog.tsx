@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
-import DialogWithHeader from 'components/molecules/DialogWithHeader';
+import { Box } from '@mui/material';
 import { Typography } from 'components/atoms';
-import { Box } from '@material-ui/core';
+import DialogWithHeader from 'components/molecules/DialogWithHeader';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const maxWidth = 'sm';

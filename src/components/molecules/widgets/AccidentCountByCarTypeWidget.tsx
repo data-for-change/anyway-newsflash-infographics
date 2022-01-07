@@ -1,8 +1,22 @@
-import React, { FC } from 'react';
-import { IWidgetAccidentCountByCarType } from 'models/WidgetData';
+import { Box } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import DoubleBarChartView from 'components/molecules/DoubleBarChartView';
-import { Box, makeStyles, Theme } from '@material-ui/core';
+import { IWidgetAccidentCountByCarType } from 'models/WidgetData';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+const PREFIX = 'AccidentCountByCarType';
+
+const classes = {
+  chartWrapper: `${PREFIX}-chartWrapper`,
+};
+
+const Root = styled('div')(({ theme: Theme }) => ({
+  [`& .${classes.chartWrapper}`]: {
+    height: '80%',
+    width: '100%',
+  },
+}));
+
 const CAR_TYPE = 'car_type';
 const PERCENTAGE_SEGMENT = 'percentage_segment';
 const PERCENTAGE_COUNTRY = 'percentage_country';
@@ -11,15 +25,8 @@ interface IProps {
   data: IWidgetAccidentCountByCarType;
   segmentText: string;
 }
-const useStyle = makeStyles((theme: Theme) => ({
-  chartWrapper: {
-    height: '80%',
-    width: '100%',
-  },
-}));
 
 const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
-  const classes = useStyle();
   const { t } = useTranslation();
   const { items } = data;
   const roundedItems = items.map((i) => ({
@@ -29,7 +36,7 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
   }));
 
   return (
-    <>
+    <Root>
       <Box display="flex" flexDirection="column">
         <span>{t('widgets.countByCarType.Accidents count by vehicle type')}</span>
         <span>{t('widgets.countByCarType.compared to national average')}</span>
@@ -45,7 +52,7 @@ const AccidentCountByCarType: FC<IProps> = ({ data, segmentText }) => {
           xLabel2={PERCENTAGE_COUNTRY}
         />
       </Box>
-    </>
+    </Root>
   );
 };
 export default AccidentCountByCarType;

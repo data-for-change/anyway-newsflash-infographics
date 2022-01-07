@@ -1,23 +1,28 @@
-import { FC, useEffect, useState } from 'react';
-import { observer } from 'mobx-react-lite';
-import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@material-ui/core/styles';
-import { Box } from '@material-ui/core';
-import { AppBar,Button, Logo } from 'components/atoms';
-import LogInLinkGoogle from './LogInLinkGoogle';
-import { useStore } from 'store/storeConfig';
-import RootStore from 'store/root.store';
-import UserProfileHeader from './UserProfileHeader';
-import LanguageMenu from 'components/organisms/LanguageMenu';
-import { FEATURE_FLAGS } from 'utils/env.utils';
+import { Box } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import anywayLogo from 'assets/anyway.png';
+import { AppBar, Button, Logo } from 'components/atoms';
 import { SignInIcon } from 'components/atoms/SignInIcon';
 import MapDialog from 'components/molecules/MapDialog';
+import LanguageMenu from 'components/organisms/LanguageMenu';
+import { observer } from 'mobx-react-lite';
 import { IPoint } from 'models/Point';
+import { FC, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import RootStore from 'store/root.store';
+import { useStore } from 'store/storeConfig';
+import { FEATURE_FLAGS } from 'utils/env.utils';
+import LogInLinkGoogle from './LogInLinkGoogle';
+import UserProfileHeader from './UserProfileHeader';
 
+const PREFIX = 'Header';
 
-const useStyles = makeStyles({
-  userSection: {
+const classes = {
+  userSection: `${PREFIX}-userSection`,
+};
+
+const StyledAppBar = styled(AppBar)({
+  [`& .${classes.userSection}`]: {
     display: 'flex',
     alignItems: 'center',
   },
@@ -37,8 +42,6 @@ const Header: FC = () => {
   const selectedLanguage = store.selectedLanguage;
   const { t } = useTranslation();
 
-  const classes = useStyles();
-
   const onLocationChange = (location: IPoint) => {
     store.fetchGpsLocation(location);
     setLocation(location);
@@ -49,7 +52,7 @@ const Header: FC = () => {
       store.fetchSelectedNewsFlashWidgetsByLocation(roadSegmentLocation?.road_segment_id, selectedLanguage);
       setOpen(false);
     }
-  }
+  };
 
   useEffect(() => {
     store.getUserLoginDetails();
@@ -72,15 +75,17 @@ const Header: FC = () => {
         />
       );
     } else {
-      authElement = <>
-        <LogInLinkGoogle />
-        <SignInIcon/>
-      </>;
+      authElement = (
+        <>
+          <LogInLinkGoogle />
+          <SignInIcon />
+        </>
+      );
     }
   }
 
   return (
-    <AppBar>
+    <StyledAppBar>
       <Logo src={logo} alt={'Anyway'} height={30} onClick={reloadHomePage} />
       <Box className={classes.userSection}>
         <Button.Standard onClick={() => setOpen(true)}>{t('header.Search')}</Button.Standard>
@@ -98,7 +103,7 @@ const Header: FC = () => {
         }}
         onSearch={onLocationSearch}
       />
-    </AppBar>
+    </StyledAppBar>
   );
 };
 

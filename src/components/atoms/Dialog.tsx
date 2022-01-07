@@ -1,5 +1,5 @@
+import MaterialDialog from '@mui/material/Dialog';
 import React, { FC } from 'react';
-import MaterialDialog from '@material-ui/core/Dialog';
 
 interface IProps {
   isShowing: boolean;

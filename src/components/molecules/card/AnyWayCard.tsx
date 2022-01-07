@@ -1,23 +1,58 @@
-import React, { FC, useState } from 'react';
-import { Card, CardContent, Box } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import widgetToImage from 'services/to-image.service';
+import GetAppOutlinedIcon from '@mui/icons-material/GetAppOutlined';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import SettingsOverscanIcon from '@mui/icons-material/SettingsOverscan';
+import { Box, Card, CardContent } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import Tooltip from '@mui/material/Tooltip';
 import { AnyWayButton } from 'components/atoms/AnyWayButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
-import SettingsOverscanIcon from '@material-ui/icons/SettingsOverscan';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-
-import { fontFamilyString } from 'style';
-import CardHeader from './CardHeader';
 import SocialShare from 'components/atoms/SocialShare';
+import CardEditor from 'components/organisms/CardEditorDialog';
+import { IDateComments } from 'models/WidgetData';
+import React, { FC, useState } from 'react';
+import widgetToImage from 'services/to-image.service';
 import { FooterVariant, getWidgetVariant, HeaderVariant } from 'services/widgets.style.service';
+import { fontFamilyString, transparent } from 'style';
 import { getSizes } from './card.util';
 import CardBackgroundImage from './CardBackgroundImage';
 import CardFooter from './CardFooter';
-import CardEditor from 'components/organisms/CardEditorDialog';
-import { transparent } from 'style';
-import { IDateComments } from 'models/WidgetData';
+import CardHeader from './CardHeader';
+
+const PREFIX = 'AnyWayCard';
+
+const classes = {
+  root: `${PREFIX}-root`,
+  content: `${PREFIX}-content`,
+  button: `${PREFIX}-button`,
+  information: `${PREFIX}-information`,
+};
+
+const Root = styled('div')(({ theme }) => ({
+  [`& .${classes.root}`]: {
+    fontFamily: fontFamilyString,
+    position: 'relative', // for meta tags
+    boxSizing: 'border-box',
+    zIndex: 0,
+  },
+
+  [`& .${classes.content}`]: {
+    height: '100%',
+    boxSizing: 'border-box',
+    padding: 0,
+  },
+
+  [`& .${classes.button}`]: {
+    '&:hover': {
+      backgroundColor: transparent,
+    },
+  },
+
+  [`& .${classes.information}`]: {
+    minWidth: theme.spacing(8),
+    textAlign: 'center',
+    lineHeight: '0.75',
+    cursor: 'pointer',
+  },
+}));
 
 const DEFAULTE_SIZE = 1;
 export interface CardSizeOptions {
@@ -35,31 +70,6 @@ interface IProps {
 }
 
 const getSizeFactor = (options: CardSizeOptions | undefined): number => (options?.size ? options.size : DEFAULTE_SIZE);
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    fontFamily: fontFamilyString,
-    position: 'relative', // for meta tags
-    boxSizing: 'border-box',
-    zIndex: 0,
-  },
-  content: {
-    height: '100%',
-    boxSizing: 'border-box',
-    padding: 0,
-  },
-  button: {
-    '&:hover': {
-      backgroundColor: transparent,
-    },
-  },
-  information: {
-    minWidth: theme.spacing(8),
-    textAlign: 'center',
-    lineHeight: '0.75',
-    cursor: 'pointer',
-  },
-}));
 
 const AnyWayCard: FC<IProps> = ({
   widgetName,
@@ -80,14 +90,13 @@ const AnyWayCard: FC<IProps> = ({
   const factor = getSizeFactor(sizeOptions);
   const sizes = getSizes(variant, factor);
 
-  const classes = useStyles();
   const imgDownloadHandler = () => {
     if (element && element instanceof HTMLElement) {
       widgetToImage(widgetName, element);
     }
   };
   const buttons = !actionButtons ? null : (
-    <>
+    <Root>
       <AnyWayButton className={classes.button} disableRipple={true} onClick={imgDownloadHandler}>
         <GetAppOutlinedIcon />
       </AnyWayButton>
@@ -103,7 +112,7 @@ const AnyWayCard: FC<IProps> = ({
           </Tooltip>
         </Box>
       )}
-    </>
+    </Root>
   );
 
   const refFn = (element: HTMLDivElement) => {
@@ -114,7 +123,7 @@ const AnyWayCard: FC<IProps> = ({
   };
 
   return (
-    <>
+    <Root>
       <Card ref={refFn} className={classes.root} variant="outlined">
         <Box height={sizes.height} width={sizes.width} position="relative" padding={3}>
           {/* BACKGROUND IMAGE */}
@@ -147,7 +156,7 @@ const AnyWayCard: FC<IProps> = ({
         </Box>
         <SocialShare />
       </Box>
-    </>
+    </Root>
   );
 };
 export default AnyWayCard;

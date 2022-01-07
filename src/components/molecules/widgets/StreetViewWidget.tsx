@@ -1,22 +1,27 @@
-import React, { FC } from 'react';
-import { mapApiKey } from 'utils/utils';
-import ReactStreetview from 'services/streetView';
-import { makeStyles } from '@material-ui/core';
+import { styled } from '@mui/material/styles';
 import { IWidgetStreetViewData } from 'models/WidgetData';
+import React, { FC } from 'react';
+import ReactStreetview from 'services/streetView';
+import { mapApiKey } from 'utils/utils';
 
-interface IProps {
-  data: IWidgetStreetViewData;
-}
+const PREFIX = 'StreetViewWidget';
 
-const useStyles = makeStyles({
-  root: {
+const classes = {
+  root: `${PREFIX}-root`,
+};
+
+const Root = styled('div')({
+  [`&.${classes.root}`]: {
     width: '100%',
     height: '100%',
   },
 });
 
+interface IProps {
+  data: IWidgetStreetViewData;
+}
+
 const StreetViewWidget: FC<IProps> = ({ data }) => {
-  const classes = useStyles();
   const { latitude, longitude } = data.items;
 
   const streetViewPanoramaOptions = {
@@ -25,13 +30,13 @@ const StreetViewWidget: FC<IProps> = ({ data }) => {
   };
 
   return (
-    <div className={classes.root}>
+    <Root className={classes.root}>
       <ReactStreetview
         apiKey={mapApiKey}
         position={{ lat: latitude, lng: longitude }}
         streetViewPanoramaOptions={streetViewPanoramaOptions}
       />
-    </div>
+    </Root>
   );
 };
 export default StreetViewWidget;

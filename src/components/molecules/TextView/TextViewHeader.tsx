@@ -1,11 +1,26 @@
-import React, { FC } from 'react';
-import Box from '@material-ui/core/Box';
-import { roadIconColors } from 'style';
+import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
 import { Typography } from 'components/atoms';
-import { useTranslation } from 'react-i18next';
 import { IWidgetCountBySeverityTextData } from 'models/WidgetData';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
+import { roadIconColors } from 'style';
 import { LANG } from 'const/languages.const';
+
+const PREFIX = 'TextViewHeader';
+
+const classes = {
+  numOfAcc: `${PREFIX}-numOfAcc`,
+};
+
+const Root = styled('div')(({ theme }) => ({
+  [`& .${classes.numOfAcc}`]: {
+    position: 'relative',
+    bottom: theme.spacing(2),
+    color: roadIconColors.red,
+    marginRight: theme.spacing(1),
+  },
+}));
 
 interface IProps {
   data: IWidgetCountBySeverityTextData;
@@ -17,18 +32,9 @@ interface AProps {
   singleType: string;
 }
 
-const useStyles = makeStyles((theme) => ({
-  numOfAcc: {
-    position: 'relative',
-    bottom: theme.spacing(2),
-    color: roadIconColors.red,
-    marginRight: theme.spacing(1),
-  },
-}));
-
 const AccidentsOccurred: FC<AProps> = ({ accidentsCount, singleType }) => {
   const { t, i18n } = useTranslation();
-  const classes = useStyles();
+
   const elements = [
     <Box mr={1} key={1}>
       <Typography.Body1>{t('textView.occurred')}</Typography.Body1>
@@ -60,7 +66,7 @@ const AccidentsOccurred: FC<AProps> = ({ accidentsCount, singleType }) => {
 const TextViewHeader: React.FC<IProps> = ({ data: { items }, segmentText, singleType }) => {
   const { t, i18n } = useTranslation();
   return (
-    <>
+    <Root>
       {items.end_year === items.start_year ? (
         <Box mb={1}>
           <Typography.Body1>{t('textView.inYear')} </Typography.Body1>
@@ -78,12 +84,11 @@ const TextViewHeader: React.FC<IProps> = ({ data: { items }, segmentText, single
         <Typography.Body1>{`${t('textView.onSegment')} ${
           i18n.language === LANG.EN ? ' ' : ''
         }${segmentText}`}</Typography.Body1>
-        
       </Box>
       <Box>
         <AccidentsOccurred singleType={singleType} accidentsCount={items.total_accidents_count} />
       </Box>
-    </>
+    </Root>
   );
 };
 

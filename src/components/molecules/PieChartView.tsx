@@ -1,7 +1,22 @@
 import React, { FC, useCallback } from 'react';
+import { styled } from '@mui/material/styles';
 import { ResponsiveContainer, PieChart, Pie, Cell, PieLabelRenderProps } from 'recharts';
 import { fontFamilyString, pieChartColors, whiteColor } from 'style';
-import { makeStyles } from '@material-ui/core';
+
+const PREFIX = 'PieChartView';
+const COLORS = pieChartColors;
+const RADIAN = Math.PI / 180;
+const PIE_SHADOW_ID = 'pie-shadow';
+
+const classes = {
+  shadow: `${PREFIX}-shadow`,
+};
+
+const StyledResponsiveContainer = styled(ResponsiveContainer)({
+  [`& .${classes.shadow}`]: {
+    filter: `url(#${PIE_SHADOW_ID})`,
+  },
+});
 
 const TEXT_RELATIVE_WIDTH = 0.8;
 
@@ -20,15 +35,6 @@ interface IProps {
   width?: string;
   labelProps?: ILabelProps;
 }
-
-const COLORS = pieChartColors;
-const RADIAN = Math.PI / 180;
-const PIE_SHADOW_ID = 'pie-shadow';
-const useStyles = makeStyles({
-  shadow: {
-    filter: `url(#${PIE_SHADOW_ID})`,
-  },
-});
 
 export const renderCollisionCustomizedLabel = (props: any, fontSize = '100%', usePercent = false, single = false) => {
   const { percent, value, name, cx, cy, outerRadius, midAngle } = props;
@@ -153,14 +159,12 @@ export const PieChartView: FC<IProps> = ({
     [labelProps, usePercent, data, yLabel],
   );
 
-  const classes = useStyles();
-
   return (
-    <ResponsiveContainer width={width} height={'100%'}>
+    <StyledResponsiveContainer width={width} height={'100%'}>
       <PieChart>
         <defs>
           <filter id={PIE_SHADOW_ID}>
-            <feDropShadow dx="-3" dy="1" stdDeviation="2.5" flood-opacity='0.5'/>
+            <feDropShadow dx="-3" dy="1" stdDeviation="2.5" floodOpacity="0.5" />
           </filter>
         </defs>
         <Pie
@@ -181,7 +185,7 @@ export const PieChartView: FC<IProps> = ({
           ))}
         </Pie>
       </PieChart>
-    </ResponsiveContainer>
+    </StyledResponsiveContainer>
   );
 };
 export default PieChartView;

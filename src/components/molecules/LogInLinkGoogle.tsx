@@ -1,11 +1,18 @@
-import { makeStyles } from '@material-ui/core/styles';
-import { oceanBlueColor, skyBlueColor } from 'style';
+import { styled } from '@mui/material/styles';
 import React from 'react';
-import { AUTH_LOGIN_GOOGLE_URL } from 'utils/utils';
-import { openSignInWindow } from 'services/signInWindow';
 import { useTranslation } from 'react-i18next';
-const useStyles = makeStyles((theme) => ({
-  userButton: {
+import { openSignInWindow } from 'services/signInWindow';
+import { oceanBlueColor, skyBlueColor } from 'style';
+import { AUTH_LOGIN_GOOGLE_URL } from 'utils/utils';
+
+const PREFIX = 'LogInLinkGoogle';
+
+const classes = {
+  userButton: `${PREFIX}-userButton`,
+};
+
+const Root = styled('div')(({ theme }) => ({
+  [`&.${classes.userButton}`]: {
     padding: theme.spacing(1),
     color: `${oceanBlueColor}`,
     textDecoration: 'none',
@@ -17,15 +24,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LogInLinkGoogle = () => {
-  const classes = useStyles();
   const { t } = useTranslation();
   const handleClick = () => {
     openSignInWindow(AUTH_LOGIN_GOOGLE_URL, 'Google Authentication');
   };
   return (
-    <div onClick={handleClick} className={classes.userButton}>
+    <Root onClick={handleClick} className={classes.userButton}>
       {t('login')}
-    </div>
+    </Root>
   );
 };
 
