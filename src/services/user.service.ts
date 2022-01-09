@@ -10,7 +10,6 @@ import {
 import { IFormInput } from 'components/molecules/UserUpdateForm';
 import { StatusCodes } from 'utils/HTTPStatuesCodes';
 import { IUserInfo } from '../models/user/IUserInfo';
-import IUserOrg from '../models/user/IUserOrg';
 import IUserRole from '../models/user/IUserRole';
 export interface IAnywayUserDetails {
   data: {
