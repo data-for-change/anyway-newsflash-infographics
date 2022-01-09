@@ -9,7 +9,7 @@ import { IPoint } from 'models/Point';
 interface IProps {
   section?: string;
   open: boolean;
-  location: IPoint | undefined;
+  location: IPoint | null;
   onClose: () => void;
   onLocationChange: (location: IPoint) => void;
   onSearch: () => void;

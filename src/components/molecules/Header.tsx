@@ -35,7 +35,7 @@ const Header: FC = () => {
   const store: RootStore = useStore();
 
   const [open, setOpen] = useState(false);
-  const [location, setLocation] = useState<IPoint | undefined>();
+  const [location, setLocation] = useState<IPoint | null>(null);
 
   const isUserDetailsRequired: boolean = !store.userInfo?.meta.isCompleteRegistration;
   const roadSegmentLocation = store.gpsLocationData;
@@ -50,7 +50,7 @@ const Header: FC = () => {
       history.push(`${store.currentLanguageRouteString}/location/${roadSegmentLocation?.road_segment_id}`);
       setOpen(false);
       store.setGpsLocationData(null);
-      setLocation(undefined);
+      setLocation(null);
     }
   }
 
@@ -97,7 +97,7 @@ const Header: FC = () => {
         onLocationChange={onLocationChange}
         onClose={() => {
           setOpen(false);
-          setLocation(undefined);
+          setLocation(null);
           store.setGpsLocationData(null);
         }}
         onSearch={onLocationSearch}
