@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite';
-import React, { useEffect } from 'react';
+import React from 'react';
 import DialogWithHeader from './DialogWithHeader';
 import { useTranslation } from 'react-i18next';
 import { makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
