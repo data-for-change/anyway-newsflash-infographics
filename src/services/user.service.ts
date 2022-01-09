@@ -11,9 +11,8 @@ import {
 } from 'utils/utils';
 import { IFormInput } from 'components/molecules/UserUpdateForm';
 import { StatusCodes } from 'utils/HTTPStatuesCodes';
-import { IUserInfo } from 'models/user/IUserInfo';
-import IUserOrg from 'models/user/IUserOrg';
-import IUserRole from 'models/user/IUserRole';
+import { IUserInfo } from '../models/user/IUserInfo';
+import IUserRole from '../models/user/IUserRole';
 export interface IAnywayUserDetails {
   data: {
     firstName?: string;
@@ -90,8 +89,8 @@ export const getRolesList = async (): Promise<Array<IUserRole>> => {
   return roleList;
 };
 
-export const getOrganizationsList = async (): Promise<Array<IUserOrg>> => {
-  let orgList: Array<IUserOrg> = [];
+export const getOrganizationsDataList = async (): Promise<Array<string>> => {
+  let orgList: Array<string> = [];
   try {
     const response = await axios.get(GET_ORG_LIST_URL, { withCredentials: true });
     orgList = response.data;

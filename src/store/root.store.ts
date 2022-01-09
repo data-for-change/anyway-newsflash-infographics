@@ -15,6 +15,8 @@ import {
   logoutUserFromSession,
   postUserInfo,
   getUsersList,
+  getOrganizationsDataList,
+  addOrganizationToUser,
 } from 'services/user.service';
 import i18next from 'services/i18n.service';
 import { IFormInput } from 'components/molecules/UserUpdateForm';
@@ -62,6 +64,7 @@ export default class RootStore {
   //admin role only observables
   isAdmin: boolean = false;
   usersInfoList: [IUserInfo] | null = null;
+  organizationsList: Array<String> | null = null;
 
   constructor() {
     // init app data
@@ -143,6 +146,26 @@ export default class RootStore {
       .catch((e) => {
         console.log(`error getting user details :${JSON.stringify(e)}`);
       });
+  }
+
+  getOrganizationsData() {
+    getOrganizationsDataList()
+      .then((list) => {
+        this.organizationsList = list;
+      })
+      .catch((e) => {
+        console.log(`error getting organization list :${JSON.stringify(e)}`);
+      });
+  }
+
+  setOrgToUser(org: string, email: string) {
+    addOrganizationToUser(org, email)
+      .then((res) => {})
+      .catch((e) => console.log(`error set organization to user ${email} : ${JSON.stringify(e)}`));
+  }
+
+  get orgNamesList() {
+    return this.organizationsList;
   }
 
   setActiveNewsFlashFilter(filter: SourceFilterEnum) {

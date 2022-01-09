@@ -12,6 +12,7 @@ import { ROLE_ADMIN_NAME } from 'utils/utils';
 import { mockAdminManagementData, labels } from 'services/mocks/adminManagementData.mock.data';
 import RootStore from 'store/root.store';
 import { useStore } from 'store/storeConfig';
+import { observer } from 'mobx-react-lite';
 
 const avatarSize = '40px';
 
@@ -54,6 +55,16 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({
     lastName: userDetails.data.lastName,
     workplace: userDetails.data.roles.filter((role) => role !== ROLE_ADMIN_NAME)[0], // first role that is not admin
   };
+  const saveEditModeHelper = (email: any, prevOrgName: string, newObj: any) => {
+    const changeToOrg = newObj[email]['organizationValue'];
+    if (changeToOrg !== prevOrgName) {
+      console.log(changeToOrg, email);
+      store.setOrgToUser(changeToOrg, email);
+    }
+    delete newObj[email];
+    return newObj;
+  };
+
   const classes = useStyles();
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(isUpdateScreenOpen);
   const toggleUserUpdateScreen = (isOpen: boolean) => setIsDialogOpen(isOpen);
@@ -63,6 +74,7 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({
   useEffect(() => {
     if (store.isAdmin) {
       store.getUsersListInfo();
+      store.getOrganizationsData();
     }
   }, [store]);
 
@@ -99,9 +111,10 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({
         defaultValues={mockAdminManagementData}
         isShowing={isAdminDialogOpen}
         onClose={() => toggleAdminManagementScreen(false)}
+        saveEditModeHelper={saveEditModeHelper}
       />
     </>
   );
 };
 
-export default UserProfileHeader;
+export default observer(UserProfileHeader);

@@ -6,6 +6,7 @@ import { makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
 import { Typography } from 'components/atoms';
 import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
+import { silverGrayColor } from 'style';
 import {
   TableContainer,
   Table,
@@ -25,12 +26,10 @@ import {
 import { blackColor } from 'style';
 import {
   cancelEditModeHelper,
-  saveEditModeHelper,
   changeEditObjectHelper,
   changeCurrentSelectedRoleHelper,
   IeditObjList,
   IProps,
-  sendDataToServer,
 } from './AdminManagementFormHelpers';
 const useStyles = makeStyles((theme: Theme) => ({
   table: {
@@ -43,7 +42,24 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: '10px',
   },
 }));
-const StyledTableCell = withStyles((theme: Theme) => createStyles({}))(TableCell);
+const StyledTableCell = withStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      textAlign: 'center',
+      padding: theme.spacing(0.7, 0),
+      borderBottom: `1px solid ${blackColor}`,
+    },
+    sizeSmall: {
+      '&:last-child': {
+        padding: theme.spacing(0.7, 1),
+      },
+    },
+    head: {
+      backgroundColor: silverGrayColor,
+      color: theme.palette.common.black,
+    },
+  }),
+)(TableCell);
 const StyledTableRow = withStyles(() =>
   createStyles({
     root: {
@@ -51,13 +67,10 @@ const StyledTableRow = withStyles(() =>
     },
   }),
 )(TableRow);
-const AdminManagementForm: React.FC<IProps> = ({ labels, defaultValues, isShowing, onClose }) => {
+const AdminManagementForm: React.FC<IProps> = ({ labels, saveEditModeHelper, isShowing, onClose }) => {
   const store: RootStore = useStore();
   const [editObject, setEditObject] = React.useState<IeditObjList>({});
-  const [orgList, setOrgList] = React.useState<any>([]);
-  useEffect(() => {
-    setOrgList(store.usersManagementTableData);
-  }, [store.usersManagementTableData]);
+
   const { t } = useTranslation();
   const classes = useStyles();
   const EditMode: any = (props: any) => {
@@ -79,15 +92,12 @@ const AdminManagementForm: React.FC<IProps> = ({ labels, defaultValues, isShowin
       </Button>
     );
   };
-  const OrganizationEditList: any = (props: any) => {
-    const orgName = editObject[props.item.email]['organizationValue']
-      ? editObject[props.item.email]['organizationValue']
-      : props.item.org;
+  const OrganizationEditList: any = ({ itemOrg, itemEmail }: any) => {
+    const orgName = editObject[itemEmail]['organizationValue'] ? editObject[itemEmail]['organizationValue'] : itemOrg;
     const [currentOrganization, setcurrentOrganization] = React.useState(orgName);
-    const orgList = ['walla', 'ynet', 'papaya', 'lahaim', 'or yarok', 'kakal'];
     const handleChange = (e: any) => {
       setcurrentOrganization(e.target.value);
-      const newObj = changeCurrentSelectedRoleHelper({ ...editObject }, props.item.email, e.target.value);
+      const newObj = changeCurrentSelectedRoleHelper({ ...editObject }, itemEmail, e.target.value);
       setEditObject(newObj);
     };
     return (
@@ -96,36 +106,30 @@ const AdminManagementForm: React.FC<IProps> = ({ labels, defaultValues, isShowin
           <InputLabel id="demo-simple-select-label">Organization</InputLabel>
           <Select
             labelId="demo-simple-select-label"
-            name={props.item.email}
+            name={itemEmail}
             value={currentOrganization}
             label="Organization"
             onChange={handleChange}
           >
-            {orgList.map((org) => {
-              return (
-                <MenuItem key={org} value={org}>
-                  {org}
-                </MenuItem>
-              );
-            })}
+            {store.organizationsList &&
+              store.organizationsList.map((org: any) => {
+                return (
+                  <MenuItem key={org} value={org}>
+                    {org}
+                  </MenuItem>
+                );
+              })}
           </Select>
         </FormControl>
       </Box>
     );
   };
-  const OrganizationViewMode: any = (item: any) => {
-    if (editObject[item.email]) {
-      return <p>{editObject[item.email]['organizationValue']}</p>;
-    } else {
-      return <p>{item.org}</p>;
-    }
-  };
   const cancelEditMode = (el: any) => {
-    const newObj = cancelEditModeHelper(el, { ...editObject });
+    const newObj = cancelEditModeHelper(el.email, { ...editObject });
     setEditObject(newObj);
   };
   const saveEditMode = (element: any) => {
-    const newObj = saveEditModeHelper(element, { ...editObject });
+    const newObj = saveEditModeHelper(element.email, element.org, { ...editObject });
     setEditObject(newObj);
   };
   const changeEditObject = (element: any) => {
@@ -142,7 +146,7 @@ const AdminManagementForm: React.FC<IProps> = ({ labels, defaultValues, isShowin
         onClose();
       }}
     >
-      <TableContainer style={{ maxHeight: 250 }}>
+      <TableContainer style={{ maxHeight: 250, paddingBottom: 30 }}>
         <Table className={classes.table} size="small" aria-label="a dense table">
           <TableHead>
             <StyledTableRow>
@@ -155,33 +159,26 @@ const AdminManagementForm: React.FC<IProps> = ({ labels, defaultValues, isShowin
             </StyledTableRow>
           </TableHead>
           <TableBody>
-            {orgList &&
-              orgList.map((item: any, index: number) => (
+            {store.usersManagementTableData &&
+              store.usersManagementTableData.map((item: any, index: number) => (
                 <TableRow key={index}>
                   <TableCell align="center">{item.name}</TableCell>
                   <TableCell align="center">{item.email}</TableCell>
                   <TableCell align="center" width="30%">
-                    {editObject[item.email] && editObject[item.email]['editMode'] ? (
-                      <OrganizationEditList item={item} />
+                    {editObject[item.email] ? (
+                      <OrganizationEditList itemOrg={item.org} itemEmail={item.email} />
                     ) : (
-                      OrganizationViewMode(item)
+                      <p>{item.org}</p>
                     )}
                   </TableCell>
                   <TableCell align="center" width="40%">
-                    {editObject[item.email] && editObject[item.email]['editMode'] ? (
-                      <EditMode itemData={item} />
-                    ) : (
-                      <ViewMode itemData={item} />
-                    )}
+                    {editObject[item.email] ? <EditMode itemData={item} /> : <ViewMode itemData={item} />}
                   </TableCell>
                 </TableRow>
               ))}
           </TableBody>
         </Table>
       </TableContainer>
-      <Button variant="contained" onClick={() => sendDataToServer(editObject)} className={classes.saveButton}>
-        {t('usersManagement.saveAll')}
-      </Button>
     </DialogWithHeader>
   );
 };
