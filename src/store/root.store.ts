@@ -2,7 +2,7 @@
 // https://mobx.js.org/best/store.html#combining-multiple-stores
 import { runInAction, makeAutoObservable } from 'mobx';
 import { initService } from 'services/init.service';
-import { fetchWidgets, fetchWidgetsByLocation } from 'services/widgets.data.service';
+import { fetchWidgets, IWidgetInput } from 'services/widgets.data.service';
 import { INewsFlash } from 'models/NewFlash';
 import { IDateComments, IGpsData, ILocationMeta, IWidgetBase } from 'models/WidgetData';
 import { SourceFilterEnum } from 'models/SourceFilter';
@@ -39,6 +39,7 @@ export default class RootStore {
   userApiError: boolean = false;
   userInfo: IUserInfo | null = null;
   activeNewsFlashId: number = 0; // active newsflash id
+  locationId: number = 0; // data by location id
   newsFlashFetchOffSet = 0;
   newsFlashActiveFilter: SourceFilterEnum = SourceFilterEnum.all;
   newsFlashWidgetsMeta: ILocationMeta = DEFAULT_LOCATION_META;
@@ -186,14 +187,35 @@ export default class RootStore {
   }
 
   selectNewsFlash(id: number): void {
-    runInAction(() => (this.activeNewsFlashId = id));
-    this.fetchSelectedNewsFlashWidgets(id, this.selectedLanguage, this.newsFlashWidgetsTimerFilter);
+    runInAction(() => {this.locationId = 0; this.activeNewsFlashId = id;});
+    const widgetInput = {
+      lang: this.selectedLanguage,
+      newsId: id,
+      yearAgo: this.newsFlashWidgetsTimerFilter,
+    };
+    this.fetchSelectedWidgets(widgetInput);
+  }
+
+  selectLocationId(id: number): void {
+    runInAction(() => { this.activeNewsFlashId = 0; this.locationId = id});
+    const widgetInput = {
+      lang: this.selectedLanguage,
+      gpsId: id,
+      yearAgo: this.newsFlashWidgetsTimerFilter,
+    };
+    this.fetchSelectedWidgets(widgetInput);
   }
 
   changeTimeFilter(filterValue: number): void {
     if (this.newsFlashWidgetsTimerFilter !== filterValue) {
       runInAction(() => (this.newsFlashWidgetsTimerFilter = filterValue));
-      this.fetchSelectedNewsFlashWidgets(this.activeNewsFlashId, this.selectedLanguage, filterValue);
+      const widgetInput = {
+        lang: this.selectedLanguage,
+        newsId: this.activeNewsFlashId,
+        yearAgo: filterValue,
+        gpsId: this.locationId,
+      };
+      this.fetchSelectedWidgets(widgetInput);
     }
   }
 
@@ -205,36 +227,26 @@ export default class RootStore {
           : (this.currentLanguageRouteString = `/${i18next.language}`);
         this.selectedLanguage = i18next.language;
       });
-      this.fetchSelectedNewsFlashWidgets(this.activeNewsFlashId, i18next.language, this.newsFlashWidgetsTimerFilter);
+      const widgetInput = {
+        lang: i18next.language,
+        newsId: this.activeNewsFlashId,
+        yearAgo: this.newsFlashWidgetsTimerFilter,
+        gpsId: this.locationId,
+      };
+      this.fetchSelectedWidgets(widgetInput);
     });
   }
 
-  private fetchSelectedNewsFlashWidgets(id: number, lang: string, filterValue: number): void {
+  private fetchSelectedWidgets({ lang, newsId, yearAgo, gpsId }: IWidgetInput): void {
     runInAction(() => (this.widgetBoxLoading = true));
-    fetchWidgets(id, lang, filterValue).then((response: any) => {
-      runInAction(() => {
-        this.widgetBoxLoading = false;
-        if (response && response.widgets && response.meta) {
-          this.newsFlashWidgetsMeta = response.meta;
-          this.newsFlashWidgetsData = response.widgets;
-          this.setGpsLocationData(null);
-        } else {
-          console.error(`fetchWidgets(id:${id}) invalid response:`, response);
-        }
-      });
-    });
-  }
-
-  fetchSelectedNewsFlashWidgetsByLocation(id: number, lang: string, filterValue?: number): void {
-    runInAction(() => (this.widgetBoxLoading = true));
-    fetchWidgetsByLocation(id, lang, filterValue).then((response: any) => {
+    fetchWidgets({ lang, newsId, yearAgo, gpsId }).then((response: any) => {
       runInAction(() => {
         this.widgetBoxLoading = false;
         if (response && response.widgets && response.meta) {
           this.newsFlashWidgetsMeta = response.meta;
           this.newsFlashWidgetsData = response.widgets;
         } else {
-          console.error(`fetchWidgets(id:${id}) invalid response:`, response);
+          console.error(`fetchWidgets(id:${newsId || gpsId}) invalid response:`, response);
         }
       });
     });

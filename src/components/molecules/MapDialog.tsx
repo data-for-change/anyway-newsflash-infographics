@@ -9,7 +9,7 @@ import { IPoint } from 'models/Point';
 interface IProps {
   section?: string;
   open: boolean;
-  location: IPoint | undefined;
+  location: IPoint | null;
   onClose: () => void;
   onLocationChange: (location: IPoint) => void;
   onSearch: () => void;
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const MapDialog: FC<IProps> = ({ section='', open, onClose, location, onLocationChange, onSearch }) => {
+const MapDialog: FC<IProps> = ({ section, open, onClose, location, onLocationChange, onSearch }) => {
   const classes = useStyles();
   const { t } = useTranslation();
 
@@ -58,7 +58,7 @@ const MapDialog: FC<IProps> = ({ section='', open, onClose, location, onLocation
           </div>
         </Box>
         <DialogActions className={classes.actions}>
-          <Button.Standard onClick={onSearch}>{t('mapDialog.searchButton')}</Button.Standard>
+          <Button.Standard disabled={!section} onClick={onSearch}>{t('mapDialog.searchButton')}</Button.Standard>
           <Button.Outlined onClick={onClose}>{t('mapDialog.cancelButton')}</Button.Outlined>
         </DialogActions>
       </Box>

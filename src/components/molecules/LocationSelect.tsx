@@ -19,7 +19,7 @@ const LocationPicker: FC<ILocation> = ({ onLocationChange }) => {
 };
 
 interface IProps {
-  location?: IPoint;
+  location: IPoint | null;
   onLocationChange: (location: IPoint) => void;
 }
 
