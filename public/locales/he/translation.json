@@ -114,7 +114,8 @@
     "searchButton": "חיפוש",
     "cancelButton": "ביטול",
     "chosenSegment": "המקטע שנבחר:",
-    "searchSection": "חיפוש מקטע"
+    "searchSection": "חיפוש מקטע",
+    "road": "כביש"
   },
   "locationIndicator": "(תוצאות חיפוש מקטע)"
 }

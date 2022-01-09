@@ -94,6 +94,7 @@ const Header: FC = () => {
         open={open}
         location={location}
         section={roadSegmentLocation?.road_segment_name}
+        roadNumber={roadSegmentLocation?.road1}
         onLocationChange={onLocationChange}
         onClose={() => {
           setOpen(false);

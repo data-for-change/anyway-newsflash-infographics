@@ -8,6 +8,7 @@ import { IPoint } from 'models/Point';
 
 interface IProps {
   section?: string;
+  roadNumber?: string;
   open: boolean;
   location: IPoint | null;
   onClose: () => void;
@@ -38,27 +39,29 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const MapDialog: FC<IProps> = ({ section, open, onClose, location, onLocationChange, onSearch }) => {
+const MapDialog: FC<IProps> = ({ section, open, onClose, location, roadNumber, onLocationChange, onSearch }) => {
   const classes = useStyles();
   const { t } = useTranslation();
 
   return (
-    <Dialog isShowing={open} onClose={onClose} maxWidth='lg' fullWidth>
+    <Dialog isShowing={open} onClose={onClose} maxWidth="lg" fullWidth>
       <Box className={classes.wrapper}>
         <Box className={classes.dialogHeader}>
           <Typography.Title1>{t('mapDialog.searchSection')}</Typography.Title1>
         </Box>
-        <Box display='flex' flexDirection='column' height='75vh'>
-          <Box display='contents'>
+        <Box display="flex" flexDirection="column" height="75vh">
+          <Box display="contents">
             <LocationSelect location={location} onLocationChange={onLocationChange} />
           </Box>
           <div className={classes.chosenSection}>
             <Typography.Body1 bold>{t('mapDialog.chosenSegment')}</Typography.Body1>
-            <Typography.Body1>{section}</Typography.Body1>
+            <Typography.Body1>{roadNumber && section &&` ${t('mapDialog.road')} ${roadNumber} - ${section}`}</Typography.Body1>
           </div>
         </Box>
         <DialogActions className={classes.actions}>
-          <Button.Standard disabled={!section} onClick={onSearch}>{t('mapDialog.searchButton')}</Button.Standard>
+          <Button.Standard disabled={!section} onClick={onSearch}>
+            {t('mapDialog.searchButton')}
+          </Button.Standard>
           <Button.Outlined onClick={onClose}>{t('mapDialog.cancelButton')}</Button.Outlined>
         </DialogActions>
       </Box>
