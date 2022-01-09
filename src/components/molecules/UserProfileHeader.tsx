@@ -10,6 +10,7 @@ import { IAnywayUserDetails } from 'services/user.service';
 import RootStore from 'store/root.store';
 import { useStore } from 'store/storeConfig';
 import { ROLE_ADMIN_NAME } from 'utils/utils';
+import { observer } from 'mobx-react-lite';
 
 const avatarSize = '40px';
 
@@ -54,6 +55,7 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({ userDetails, isUpdate
   useEffect(() => {
     if(store.isAdmin) {
       store.getUsersListInfo();
+      store.getOrganizationsData();
     }
   }, [store]);
 
@@ -81,4 +83,4 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({ userDetails, isUpdate
   );
 };
 
-export default UserProfileHeader;
+export default observer(UserProfileHeader);

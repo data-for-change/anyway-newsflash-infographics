@@ -88,11 +88,11 @@ export const getRolesList = async ()  : Promise<Array<IUserRole>> => {
   return roleList;
 };
 
-export const getOrganizationsList = async () : Promise<Array<IUserOrg>>  => {
-  let orgList : Array<IUserOrg> = [] ;
+export const getOrganizationsDataList = async () : Promise<Array<string>>  => {
+  let orgList : Array<string> = [] ;
   try {
      const response = await axios.get(GET_ORG_LIST_URL, { withCredentials: true });
-     orgList = response.data;
+    orgList = response.data;
   } catch (e : any) {
     console.error(`Error while trying to update/create user Details : ${JSON.stringify(e)}`);
   }
