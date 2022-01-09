@@ -14,7 +14,7 @@ import {
   fetchUserInfo,
   logoutUserFromSession,
   postUserInfo,
-  getUsersList, getOrganizationsDataList,
+  getUsersList, getOrganizationsDataList, addOrganizationToUser,
 } from 'services/user.service';
 import i18next from 'services/i18n.service';
 import { IFormInput } from 'components/molecules/UserUpdateForm';
@@ -147,6 +147,12 @@ export default class RootStore {
     }).catch(e => {
       console.log(`error getting organization list :${JSON.stringify(e)}`);
     })
+  }
+
+  setOrgToUser (org : string, email :string) {
+    addOrganizationToUser(org,email).then(res =>{
+    }).catch(e=> console.log(`error set organization to user ${email} : ${JSON.stringify(e)}`)
+    );
   }
 
    get orgNamesList() {
