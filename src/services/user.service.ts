@@ -4,7 +4,7 @@ import {
   ADD_ROLE_TO_USER_URL, GET_ORG_LIST_URL, GET_ROLES_LIST_URL,
   GET_USER_INFO_URL,
   GET_USERS_INFO_LIST_URL,
-  LOG_OUT_USER_URL,
+  LOG_OUT_USER_URL, REMOVE_USER_FROM_ORG_URL,
   UPDATE_USER_INFO_URL,
 } from 'utils/utils';
 import { IFormInput } from 'components/molecules/UserUpdateForm';
@@ -64,6 +64,16 @@ export const addOrganizationToUser = async (org: string, email: string) => {
     await axios.post(ADD_ORG_TO_USER_URL, { org, email }, { withCredentials: true });
   } catch (e) {
     console.error(`Error while trying to update/create user Details : ${JSON.stringify(e)}`);
+  }
+};
+
+export const removeUserFromOrg = async (org: string, email: string) => {
+  try {
+    const res = await axios.post(REMOVE_USER_FROM_ORG_URL, { org, email }, { withCredentials: true });
+    return res.status;
+  } catch (e) {
+    console.error(`Error while trying to update/create user Details : ${JSON.stringify(e)}`);
+    return e.status;
   }
 };
 
