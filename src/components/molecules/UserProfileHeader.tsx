@@ -62,14 +62,18 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({
         setLoading(true);
         await store.setOrgToUser(changeToOrg, email);
         store.getUsersListInfo();
-        setLoading(false);
       } catch (err) {
+        setLoading(false);
         console.log(err);
       }
     }
     delete newObj[email];
     return newObj;
   };
+
+  useEffect(() => {
+    setLoading(false);
+  }, [store.usersManagementTableData]);
 
   const classes = useStyles();
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(isUpdateScreenOpen);
