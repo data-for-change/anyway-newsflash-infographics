@@ -16,8 +16,6 @@ import { LANG } from 'const/languages.const';
 
 interface IProps {}
 
-
-
 const useStyles = makeStyles({
   mainBox: {
     height: 'inherit',
