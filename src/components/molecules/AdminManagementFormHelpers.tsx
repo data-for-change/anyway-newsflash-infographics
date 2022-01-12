@@ -13,6 +13,8 @@ export const changeEditObjectHelper = (element: any, newObj: any) => {
   return newObj;
 };
 
+export const labels = ['Name', 'Email', 'Organization'];
+
 export const changeCurrentSelectedRoleHelper = (newObject: any, id: any, newCompanyValue: any) => {
   newObject[id] = {
     organizationValue: newCompanyValue,
@@ -30,7 +32,6 @@ export type IeditObjList = Record<
 export interface IProps {
   isShowing: boolean;
   onClose: () => void;
-  defaultValues: Array<{ name: string; mail: string; roles: string; id: string }>;
-  labels: Array<string>;
   saveEditModeHelper: any;
+  loading: boolean;
 }

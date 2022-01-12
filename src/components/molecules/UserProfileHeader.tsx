@@ -9,7 +9,6 @@ import Box from '@material-ui/core/Box';
 import { Avatar } from '@material-ui/core';
 import { IAnywayUserDetails } from 'services/user.service';
 import { ROLE_ADMIN_NAME } from 'utils/utils';
-import { mockAdminManagementData, labels } from 'services/mocks/adminManagementData.mock.data';
 import RootStore from 'store/root.store';
 import { useStore } from 'store/storeConfig';
 import { observer } from 'mobx-react-lite';
@@ -48,6 +47,7 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({
   isAdmin,
 }) => {
   const { t } = useTranslation();
+  const [loading, setLoading] = useState(false);
   const store: RootStore = useStore();
   const defaultFormInput: IFormInput = {
     email: userDetails.data.email,
@@ -58,12 +58,13 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({
   const saveEditModeHelper = async (email: any, prevOrgName: string, newObj: any) => {
     const changeToOrg = newObj[email]['organizationValue'];
     if (changeToOrg !== prevOrgName) {
-      console.log(changeToOrg, email);
-
       try {
+        setLoading(true);
         await store.setOrgToUser(changeToOrg, email);
+        store.getUsersListInfo();
+        setLoading(false);
       } catch (err) {
-        console.log('err here!!!', err);
+        console.log(err);
       }
     }
     delete newObj[email];
@@ -112,11 +113,10 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({
       />
 
       <AdminManagementForm
-        labels={labels}
-        defaultValues={mockAdminManagementData}
         isShowing={isAdminDialogOpen}
         onClose={() => toggleAdminManagementScreen(false)}
         saveEditModeHelper={saveEditModeHelper}
+        loading={loading}
       />
     </>
   );

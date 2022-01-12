@@ -101,7 +101,8 @@
     "Last Name": "שם משפחה",
     "First Name": "שם פרטי",
     "Email": "דואר אלקטרוני",
-    "Organization": "ארגון"
+    "Organization": "ארגון",
+    "Name": "שם"
   },
   "usersManagement": {
     "title": "ניהול משתמשים",

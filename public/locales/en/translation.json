@@ -96,7 +96,8 @@
     "Last Name": "Last Name",
     "First Name": "First Name",
     "Email": "Email",
-    "Organization": "Organization"
+    "Organization": "Organization",
+    "Name": "Name"
   },
   "usersManagement": {
     "title": "Users Management",

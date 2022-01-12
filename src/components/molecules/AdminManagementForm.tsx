@@ -6,6 +6,7 @@ import { makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
 import { Typography } from 'components/atoms';
 import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
+import OverlayLoader from 'components/molecules/OverlayLoader';
 import { silverGrayColor } from 'style';
 import {
   TableContainer,
@@ -30,6 +31,7 @@ import {
   changeCurrentSelectedRoleHelper,
   IeditObjList,
   IProps,
+  labels,
 } from './AdminManagementFormHelpers';
 const useStyles = makeStyles((theme: Theme) => ({
   table: {
@@ -67,7 +69,7 @@ const StyledTableRow = withStyles(() =>
     },
   }),
 )(TableRow);
-const AdminManagementForm: React.FC<IProps> = ({ labels, saveEditModeHelper, isShowing, onClose }) => {
+const AdminManagementForm: React.FC<IProps> = ({ saveEditModeHelper, isShowing, onClose, loading }) => {
   const store: RootStore = useStore();
   const [editObject, setEditObject] = React.useState<IeditObjList>({});
 
@@ -103,7 +105,7 @@ const AdminManagementForm: React.FC<IProps> = ({ labels, saveEditModeHelper, isS
     return (
       <Box>
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Organization</InputLabel>
+          <InputLabel id="demo-simple-select-label">{t('userDetailsForm.Organization')}</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             name={itemEmail}
@@ -147,12 +149,13 @@ const AdminManagementForm: React.FC<IProps> = ({ labels, saveEditModeHelper, isS
       }}
     >
       <TableContainer style={{ maxHeight: 250, paddingBottom: 30 }}>
+        <OverlayLoader show={loading} />
         <Table className={classes.table} size="small" aria-label="a dense table">
           <TableHead>
             <StyledTableRow>
               {labels.map((label: string, index: number) => (
                 <StyledTableCell key={index}>
-                  <Typography.Body5>{label}</Typography.Body5>
+                  <Typography.Body5>{t(`userDetailsForm.${label}`)}</Typography.Body5>
                 </StyledTableCell>
               ))}
               <StyledTableCell></StyledTableCell>
