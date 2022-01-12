@@ -55,11 +55,16 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({
     lastName: userDetails.data.lastName,
     workplace: userDetails.data.roles.filter((role) => role !== ROLE_ADMIN_NAME)[0], // first role that is not admin
   };
-  const saveEditModeHelper = (email: any, prevOrgName: string, newObj: any) => {
+  const saveEditModeHelper = async (email: any, prevOrgName: string, newObj: any) => {
     const changeToOrg = newObj[email]['organizationValue'];
     if (changeToOrg !== prevOrgName) {
       console.log(changeToOrg, email);
-      store.setOrgToUser(changeToOrg, email);
+
+      try {
+        await store.setOrgToUser(changeToOrg, email);
+      } catch (err) {
+        console.log('err here!!!', err);
+      }
     }
     delete newObj[email];
     return newObj;

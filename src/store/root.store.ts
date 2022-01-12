@@ -14,9 +14,13 @@ import {
   fetchUserInfo,
   logoutUserFromSession,
   postUserInfo,
+<<<<<<< HEAD
   getUsersList,
   getOrganizationsDataList,
   addOrganizationToUser,
+=======
+  getUsersList, getOrganizationsDataList, addOrganizationToUser, removeUserFromOrg,
+>>>>>>> 22a53e0a4bba7567a27b47763df2e3fbb5c030ce
 } from 'services/user.service';
 import i18next from 'services/i18n.service';
 import { IFormInput } from 'components/molecules/UserUpdateForm';
@@ -149,6 +153,7 @@ export default class RootStore {
   }
 
   getOrganizationsData() {
+<<<<<<< HEAD
     getOrganizationsDataList()
       .then((list) => {
         this.organizationsList = list;
@@ -162,6 +167,27 @@ export default class RootStore {
     addOrganizationToUser(org, email)
       .then((res) => {})
       .catch((e) => console.log(`error set organization to user ${email} : ${JSON.stringify(e)}`));
+=======
+    getOrganizationsDataList().then(list =>{
+      this.organizationsList = list;
+    }).catch(e => {
+      console.error(`error getting organization list :${JSON.stringify(e)}`);
+    })
+  }
+
+  async setOrgToUser (org : string, email :string) {
+    const userPrevOrg = this.usersInfoList?.find(user => user.email === email)?.organizations[0];
+   try {
+     if (userPrevOrg) {
+       await removeUserFromOrg(userPrevOrg, email);
+     }
+
+    await  addOrganizationToUser(org, email);
+   }
+   catch(e){
+     console.error(`error adding user to org  :${JSON.stringify(e)}`);
+   }
+>>>>>>> 22a53e0a4bba7567a27b47763df2e3fbb5c030ce
   }
 
   get orgNamesList() {
@@ -229,6 +255,7 @@ export default class RootStore {
         console.error(err);
       });
   }
+
 
   async updateUserInfo(formInput: IFormInput) {
     runInAction(async () => {
