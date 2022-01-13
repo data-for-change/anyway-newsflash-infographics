@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const StyledTableCell = withStyles((theme: Theme) =>
+export const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
     root: {
       textAlign: 'center',
@@ -35,7 +35,7 @@ const StyledTableCell = withStyles((theme: Theme) =>
     },
   }),
 )(TableCell);
-const StyledTableRow = withStyles(() =>
+export const StyledTableRow = withStyles(() =>
   createStyles({
     root: {
       // styles can be added here
