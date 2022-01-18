@@ -1,7 +1,7 @@
 import { Typography } from 'components/atoms';
 import React, { useEffect, useState } from 'react';
 import UserInfoForm, { IFormInput } from './UserUpdateForm';
-import AdminManagementForm from './AdminManagementForm';
+import AdminManagementForm from './adminManagement/AdminManagementForm';
 import { useTranslation } from 'react-i18next';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { oceanBlueColor, skyBlueColor } from 'style';
@@ -55,8 +55,9 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({
     lastName: userDetails.data.lastName,
     workplace: userDetails.data.roles.filter((role) => role !== ROLE_ADMIN_NAME)[0], // first role that is not admin
   };
-  const saveEditModeHelper = async (email: any, prevOrgName: string, newObj: any) => {
-    const changeToOrg = newObj[email]['organizationValue'];
+  const saveUserChanges = async (email: any, prevOrgName: string, newObj: any) => {
+    const changeToOrg = newObj[email];
+    console.log(changeToOrg);
     if (changeToOrg !== prevOrgName) {
       try {
         setLoading(true);
@@ -119,7 +120,7 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({
       <AdminManagementForm
         isShowing={isAdminDialogOpen}
         onClose={() => toggleAdminManagementScreen(false)}
-        saveEditModeHelper={saveEditModeHelper}
+        saveUserChanges={saveUserChanges}
         loading={loading}
       />
     </>

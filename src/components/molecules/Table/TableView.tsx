@@ -35,10 +35,11 @@ export const StyledTableCell = withStyles((theme: Theme) =>
     },
   }),
 )(TableCell);
+
 export const StyledTableRow = withStyles(() =>
   createStyles({
     root: {
-      // styles can be added here
+      height: '60px',
     },
   }),
 )(TableRow);
