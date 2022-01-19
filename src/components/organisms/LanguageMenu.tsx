@@ -29,8 +29,15 @@ const LanguageMenu: FC = () => {
 
   const LangClickHandler = (lang: string) => {
     if (lang !== i18n.language) {
-      const prefix = lang !== LANG.HE ? `/${lang}` : '';
-      return window.location.assign(`${prefix}/newsflash/${store.activeNewsFlashId}`);
+      const prefix = lang !== 'he' ? `/${lang}` : '';
+      let path = '';
+      if (store.activeNewsFlashId) {
+        path = `newsflash/${store.activeNewsFlashId}`;
+      }
+      if (store.locationId) {
+        path = `location/${store.locationId}`;
+      }
+      return window.location.assign(`${prefix}/${path}`);
     }
   };
 

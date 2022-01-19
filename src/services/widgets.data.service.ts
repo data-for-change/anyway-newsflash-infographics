@@ -8,47 +8,39 @@ import { getVerifiedWidgetsData } from './data.verification/data.verification.se
 const NEWS_FLASH_API: string = '/api/infographics-data';
 const WIDGETS_BY_LOCATION_API: string = 'api/infographics-data-by-location';
 
-export const fetchWidgets = async (id: number, lang: string, yearAgo?: number): Promise<ILocationData | undefined> => {
-  if (showDemoCards && id === DEMO_ID) {
+export interface IWidgetInput {
+  lang: string;
+  newsId?: number;
+  gpsId?: number;
+  yearAgo?: number;
+}
+
+const getWidgetUrl = ({lang, newsId, yearAgo, gpsId}:IWidgetInput): string => {
+   const query = [];
+   if (newsId) {
+     query.push(`${NEWS_FLASH_API}?lang=${lang}&news_flash_id=${newsId}`);
+   }
+   if (gpsId) {
+     query.push(`${WIDGETS_BY_LOCATION_API}?lang=${lang}&road_segment_id=${gpsId}`);
+   }
+   if (yearAgo) {
+     query.push(`years_ago=${yearAgo}`);
+   }
+   if (SHOW_MOCK) {
+     query.push(`mock=${SHOW_MOCK}`);
+  }
+
+  return query.join('&');
+}
+
+
+export const fetchWidgets = async ({ lang, newsId, yearAgo, gpsId }: IWidgetInput): Promise<ILocationData | undefined> => {
+  if (showDemoCards && newsId === DEMO_ID) {
     return getDemoWidgetData();
   }
 
   try {
-    const query = [`lang=${lang}&news_flash_id=${id}`];
-    if (yearAgo) {
-      query.push(`years_ago=${yearAgo}`);
-    }
-    if (SHOW_MOCK) {
-      query.push(`mock=${SHOW_MOCK}`);
-    }
-
-    const widgetsUrl = `${NEWS_FLASH_API}?${query.join('&')}`;
-    const response = await axios.get(widgetsUrl);
-    return processWidgetsFetchResponse(response);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-export const fetchWidgetsByLocation = async (
-  id: number,
-  lang: string,
-  yearAgo?: number,
-): Promise<ILocationData | undefined> => {
-  if (showDemoCards && id === DEMO_ID) {
-    return getDemoWidgetData();
-  }
-
-  try {
-    const query = [`lang=${lang}&road_segment_id=${id}`];
-    if (yearAgo) {
-      query.push(`years_ago=${yearAgo}`);
-    }
-    if (SHOW_MOCK) {
-      query.push(`mock=${SHOW_MOCK}`);
-    }
-
-    const widgetsUrl = `${WIDGETS_BY_LOCATION_API}?${query.join('&')}`;
+    const widgetsUrl = getWidgetUrl({ lang, newsId, yearAgo, gpsId });
     console.log(widgetsUrl);
     const response = await axios.get(widgetsUrl);
     return processWidgetsFetchResponse(response);

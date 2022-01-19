@@ -14,6 +14,7 @@ import anywayLogo from 'assets/anyway.png';
 import { SignInIcon } from 'components/atoms/SignInIcon';
 import MapDialog from 'components/molecules/MapDialog';
 import { IPoint } from 'models/Point';
+import { useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles({
@@ -28,16 +29,16 @@ const reloadHomePage = () => {
 };
 
 const Header: FC = () => {
+  const history = useHistory();
+  const { t } = useTranslation();
+  const classes = useStyles();
   const store: RootStore = useStore();
+
   const [open, setOpen] = useState(false);
-  const [location, setLocation] = useState<IPoint | undefined>();
+  const [location, setLocation] = useState<IPoint | null>(null);
 
   const isUserDetailsRequired: boolean = !store.userInfo?.meta.isCompleteRegistration;
   const roadSegmentLocation = store.gpsLocationData;
-  const selectedLanguage = store.selectedLanguage;
-  const { t } = useTranslation();
-
-  const classes = useStyles();
 
   const onLocationChange = (location: IPoint) => {
     store.fetchGpsLocation(location);
@@ -46,8 +47,10 @@ const Header: FC = () => {
 
   const onLocationSearch = () => {
     if (roadSegmentLocation) {
-      store.fetchSelectedNewsFlashWidgetsByLocation(roadSegmentLocation?.road_segment_id, selectedLanguage);
+      history.push(`${store.currentLanguageRouteString}/location/${roadSegmentLocation?.road_segment_id}`);
       setOpen(false);
+      store.setGpsLocationData(null);
+      setLocation(null);
     }
   }
 
@@ -94,7 +97,8 @@ const Header: FC = () => {
         onLocationChange={onLocationChange}
         onClose={() => {
           setOpen(false);
-          setLocation(undefined);
+          setLocation(null);
+          store.setGpsLocationData(null);
         }}
         onSearch={onLocationSearch}
       />
