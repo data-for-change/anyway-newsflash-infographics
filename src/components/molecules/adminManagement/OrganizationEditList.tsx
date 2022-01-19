@@ -1,23 +1,24 @@
 import { useTranslation } from 'react-i18next';
 import { Box, InputLabel, MenuItem, Select, FormControl } from '@material-ui/core';
+import { IPropsSelectBox } from './AdminManagementFormHelpers';
 import React from 'react';
 
-export const OrganizationEditList: any = ({
+export const OrganizationEditList: React.FC<IPropsSelectBox> = ({
   itemOrg,
   itemEmail,
   usersToUpadte,
   organizationsList,
   setUsersForUpdateFunction,
-}: any) => {
+}) => {
   const { t } = useTranslation();
 
   const [currentOrganization, setcurrentOrganization] = React.useState(itemOrg);
   const handleChange = (e: any) => {
     setcurrentOrganization(e.target.value);
-    const newObj = { ...usersToUpadte };
-    newObj[itemEmail] = e.target.value;
+    const changeUsersForUpdate = { ...usersToUpadte };
+    changeUsersForUpdate[itemEmail] = e.target.value;
 
-    setUsersForUpdateFunction(newObj);
+    setUsersForUpdateFunction(changeUsersForUpdate);
   };
   return (
     <Box>

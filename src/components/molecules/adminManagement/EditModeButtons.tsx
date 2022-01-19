@@ -1,14 +1,16 @@
 import { ButtonGroup, Button } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
+import { IPropsEditButtons } from './AdminManagementFormHelpers';
+import React from 'react';
 
-export const EditModeButtons: any = ({ saveEditMode, cancelEditMode, itemData }: any) => {
+export const EditModeButtons: React.FC<IPropsEditButtons> = ({ saveEditModeAndDelete, cancelEditMode, itemData }) => {
   const { t } = useTranslation();
   return (
     <ButtonGroup>
-      <Button variant="contained" onClick={() => saveEditMode(itemData)}>
+      <Button variant="contained" onClick={() => saveEditModeAndDelete(itemData)}>
         {t('usersManagement.save')}
       </Button>
-      <Button variant="contained" onClick={() => cancelEditMode(itemData)}>
+      <Button variant="contained" onClick={() => cancelEditMode(itemData.email)}>
         {t('usersManagement.cancel')}
       </Button>
     </ButtonGroup>

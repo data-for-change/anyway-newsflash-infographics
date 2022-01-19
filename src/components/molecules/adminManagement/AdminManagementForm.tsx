@@ -12,7 +12,7 @@ import { TableContainer, Button, Box, Table, TableBody, TableCell, TableHead, Th
 import { blackColor } from 'style';
 import { EditModeButtons } from './EditModeButtons';
 import { OrganizationEditList } from './OrganizationEditList';
-import { IeditObjList, IProps, labels } from './AdminManagementFormHelpers';
+import { IusersForUpdateMap, IProps, labels, ISingleOrgDetails } from './AdminManagementFormHelpers';
 
 const useStyles = makeStyles((theme: Theme) => ({
   table: {
@@ -32,27 +32,27 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const AdminManagementForm: React.FC<IProps> = ({ saveUserChanges, isShowing, onClose, loading }) => {
   const store: RootStore = useStore();
-  const [usersToUpadte, setUsersForUpdate] = React.useState<IeditObjList>({});
+  const [usersToUpadte, setUsersForUpdate] = React.useState<IusersForUpdateMap>({});
   const { t } = useTranslation();
   const classes = useStyles();
 
-  const setUsersForUpdateFunction = (newUsersForUpdate: IeditObjList) => {
+  const setUsersForUpdateFunction = (newUsersForUpdate: IusersForUpdateMap) => {
     setUsersForUpdate(newUsersForUpdate);
   };
 
-  const cancelEditMode = (el: any) => {
-    const newObj = { ...usersToUpadte };
-    delete newObj[el.email];
-    setUsersForUpdate(newObj);
+  const cancelEditMode = (email: string) => {
+    const removeUsersFromUpdate = { ...usersToUpadte };
+    delete removeUsersFromUpdate[email];
+    setUsersForUpdate(removeUsersFromUpdate);
   };
-  const saveEditMode = (element: any) => {
-    const newObj = saveUserChanges(element.email, element.org, { ...usersToUpadte });
-    setUsersForUpdate(newObj);
+  const saveEditModeAndDelete = (element: ISingleOrgDetails) => {
+    saveUserChanges(element.email, element.org, usersToUpadte[element.email]);
+    cancelEditMode(element.email);
   };
-  const changeEditObject = (element: any) => {
-    const newEditObject = { ...usersToUpadte };
-    newEditObject[element.email] = element.name;
-    setUsersForUpdate(newEditObject);
+  const addUsersToUpdate = (element: ISingleOrgDetails) => {
+    const addUserToUpdate = { ...usersToUpadte };
+    addUserToUpdate[element.email] = element.name;
+    setUsersForUpdate(addUserToUpdate);
   };
   return (
     <DialogWithHeader
@@ -98,10 +98,14 @@ const AdminManagementForm: React.FC<IProps> = ({ saveUserChanges, isShowing, onC
                   </TableCell>
                   <TableCell align="center" width="40%">
                     {usersToUpadte[item.email] ? (
-                      <EditModeButtons saveEditMode={saveEditMode} cancelEditMode={cancelEditMode} itemData={item} />
+                      <EditModeButtons
+                        saveEditModeAndDelete={saveEditModeAndDelete}
+                        cancelEditMode={cancelEditMode}
+                        itemData={item}
+                      />
                     ) : (
                       <Box>
-                        <Button onClick={() => changeEditObject(item)} variant="contained">
+                        <Button onClick={() => addUsersToUpdate(item)} variant="contained">
                           {t('usersManagement.edit')}
                         </Button>
                       </Box>
