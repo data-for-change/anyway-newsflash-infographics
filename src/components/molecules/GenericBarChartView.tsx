@@ -4,10 +4,20 @@ import { roseColor, honeyColor, yellowColor, blackColor, whiteColor } from 'styl
 import { Typography } from 'components/atoms';
 import tinycolor from 'tinycolor2';
 
-const COLORS = [yellowColor, honeyColor, roseColor];
+const colors = [yellowColor, honeyColor, roseColor];
 
 type BarDataMap = {
   [key: string]: number | string;
+};
+
+type CustomizedLabelProps = {
+  x?: number;
+  y?: number;
+  value?: number;
+  height?: number;
+  width?: number;
+  isPercentage?: boolean;
+  isStacked?: boolean;
 };
 
 interface IBarChartBaseProps {
@@ -29,16 +39,15 @@ const borderRadius: Record<'Bottom' | 'Top' | 'All' | 'None', [number, number, n
   All: [10, 10, 10, 10],
   None: [0, 0, 0, 0],
 };
-
-const borderRadiusForCell: Record<'Bottom' | 'Top' | 'All' | 'None', string> = {
-  Bottom: ['0', '0', '10', '10'] as unknown as string,
-  Top: ['10', '10', '0', '0'] as unknown as string,
-  All: ['10', '10', '10', '10'] as unknown as string,
-  None: ['0', '0', '0', '0'] as unknown as string,
+const parseBorderRadiusToString = (borderRadiusArray: [number, number, number, number]) => {
+  const radiusAsString = borderRadiusArray.map((border) => {
+    return border.toString();
+  });
+  return radiusAsString as unknown as string;
 };
 
-const CustomizedLabel = (props: any) => {
-  const { x, y, value, height, width, isPercentage, isStacked } = props;
+const CustomizedLabel = (props: CustomizedLabelProps) => {
+  const { x = 0, y = 0, value = 0, height = 0, width = 0, isPercentage, isStacked } = props;
   const calculatedValue = isPercentage ? value + '%' : value;
   return (
     <g>
@@ -49,6 +58,43 @@ const CustomizedLabel = (props: any) => {
   );
 };
 
+const removeEmptyValues = (barSeries: BarDataMap) => {
+  const barSeriesNonEmpty: BarDataMap = {};
+  for (const [key, value] of Object.entries(barSeries)) {
+    if (value !== 0) {
+      barSeriesNonEmpty[key] = value;
+    }
+  }
+  return barSeriesNonEmpty;
+};
+
+const calculateBarsForRadius = (barSeriesNonEmpty: BarDataMap, barsNumInCurrStack: number, yLabels: string[]) => {
+  /*
+           options             (1)(2)(3)(4)
+           thirdLabel  fatal:   0  T  T  T
+           secondLabel severe:  T  B  0  N
+           firstLabel   light:   B  0  B  B
+           */
+  const firstLabel = yLabels[0];
+  const secondLabel = yLabels[1];
+  const thirdLabel = yLabels[2];
+  let firstBar, lastBar;
+  if (barSeriesNonEmpty[firstLabel]) {
+    // option (1)
+    firstBar = firstLabel;
+    lastBar = secondLabel;
+  } else {
+    // option (2)
+    firstBar = secondLabel;
+    lastBar = thirdLabel;
+  }
+  if (barsNumInCurrStack >= 3 || !barSeriesNonEmpty[secondLabel]) {
+    // option (3)(4)
+    firstBar = firstLabel;
+    lastBar = thirdLabel;
+  }
+  return [firstBar, lastBar];
+};
 const BarChartContainer: FC<IBarChartBaseProps> = ({ data, textLabel, children }) => {
   return (
     <>
@@ -91,60 +137,48 @@ const SingleBarChart: FC<ISingleBarChartProps> = ({ data, isPercentage, textLabe
 };
 
 const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, isStacked, textLabel }) => {
-  const yLabels = Object.keys(data[0]);
+  let yLabels = Object.keys(data[0]);
   yLabels.splice(0, 1);
+  yLabels = yLabels.reverse();
   const maxBarsNum = yLabels.length;
+
   return (
     <>
       <BarChartContainer data={data} isPercentage={isPercentage} textLabel={textLabel}>
         {Array.from({ length: maxBarsNum }, (_, i) => {
           const barStyle = {
-            filter: `drop-shadow(1mm ${isStacked ? '0' : '1mm'} 0 ${tinycolor(COLORS[i]).darken().toString()})`,
+            filter: `drop-shadow(1mm ${isStacked ? '0' : '1mm'} 0 ${tinycolor(colors[i]).darken().toString()})`,
           };
+          const getCellRadius = (barSeries: BarDataMap) => {
+            const barSeriesNonEmpty = removeEmptyValues(barSeries);
 
+            const barsNumInCurrStack = Object.keys(barSeriesNonEmpty).length - 1;
+            const isOneBar = !isStacked || barsNumInCurrStack <= 1;
+            if (isOneBar) {
+              return <Cell radius={parseBorderRadiusToString(borderRadius.All)} />;
+            }
+
+            const [firstBar, lastBar] = calculateBarsForRadius(barSeriesNonEmpty, barsNumInCurrStack, yLabels);
+
+            switch (yLabels[i]) {
+              case firstBar:
+                return <Cell radius={parseBorderRadiusToString(borderRadius.Bottom)} />;
+              case lastBar:
+                return <Cell radius={parseBorderRadiusToString(borderRadius.Top)} />;
+              default:
+                return <Cell radius={parseBorderRadiusToString(borderRadius.None)} />;
+            }
+          };
           return (
             <Bar
               stackId={isStacked ? 'stack_1' : undefined}
-              fill={COLORS[i]}
+              fill={colors[i]}
               dataKey={yLabels[i]}
               style={barStyle}
               isAnimationActive={false}
             >
               {data.map((barSeries) => {
-                // remove empty entries from barSeries
-                // e.g {'light':10,'fatal':0} -> {'light':10}
-                const cleanSeries: BarDataMap = {};
-                for (const [key, value] of Object.entries(barSeries)) {
-                  if (value !== 0) {
-                    cleanSeries[key] = value;
-                  }
-                }
-
-                const barsNumInCurrStack = Object.keys(cleanSeries).length - 1;
-
-                if (!isStacked || barsNumInCurrStack <= 1) {
-                  return <Cell radius={borderRadiusForCell.All} />;
-                }
-
-                // handle custom border radius
-                const firstLabel = yLabels[0];
-                const secondLabel = yLabels[1];
-                let optionOne = !cleanSeries[firstLabel] ? yLabels[1] : yLabels[0];
-                let optionTwo = !cleanSeries[firstLabel] ? yLabels[2] : yLabels[1];
-
-                if (barsNumInCurrStack >= 3 || !cleanSeries[secondLabel]) {
-                  optionOne = yLabels[0];
-                  optionTwo = yLabels[2];
-                }
-
-                switch (yLabels[i]) {
-                  case optionOne:
-                    return <Cell radius={borderRadiusForCell.Bottom} />;
-                  case optionTwo:
-                    return <Cell radius={borderRadiusForCell.Top} />;
-                  default:
-                    return <Cell radius={borderRadiusForCell.None} />;
-                }
+                return getCellRadius(barSeries);
               })}
               <LabelList
                 content={<CustomizedLabel isPercentage={isPercentage} isStacked={isStacked} />}
