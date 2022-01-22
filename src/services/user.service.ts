@@ -1,7 +1,9 @@
 import axios from 'axios';
 import {
-  ADD_ORG_TO_USER_URL,
-  ADD_ROLE_TO_USER_URL, GET_ORG_LIST_URL, GET_ROLES_LIST_URL,
+  UPDATE_USER_ORG_URL,
+  ADD_ROLE_TO_USER_URL,
+  GET_ORG_LIST_URL,
+  GET_ROLES_LIST_URL,
   GET_USER_INFO_URL,
   GET_USERS_INFO_LIST_URL,
   LOG_OUT_USER_URL, REMOVE_USER_FROM_ORG_URL,
@@ -59,9 +61,9 @@ export const addRoleToUser = async (role: string, email: string) => {
   }
 };
 
-export const addOrganizationToUser = async (org: string, email: string) => {
+export const updateUserOrganization = async (org: string, email: string) => {
   try {
-    await axios.post(ADD_ORG_TO_USER_URL, { org, email }, { withCredentials: true });
+    await axios.post(UPDATE_USER_ORG_URL, { org, email }, { withCredentials: true });
   } catch (e) {
     console.error(`Error while trying to update/create user Details : ${JSON.stringify(e)}`);
   }

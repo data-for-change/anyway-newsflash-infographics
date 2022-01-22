@@ -14,7 +14,9 @@ import {
   fetchUserInfo,
   logoutUserFromSession,
   postUserInfo,
-  getUsersList, getOrganizationsDataList, addOrganizationToUser, removeUserFromOrg,
+  getUsersList,
+  getOrganizationsDataList,
+  updateUserOrganization,
 } from 'services/user.service';
 import i18next from 'services/i18n.service';
 import { IFormInput } from 'components/molecules/UserUpdateForm';
@@ -149,18 +151,12 @@ export default class RootStore {
     })
   }
 
-  async setOrgToUser (org : string, email :string) {
-    const userPrevOrg = this.usersInfoList?.find(user => user.email === email)?.organizations[0];
-   try {
-     if (userPrevOrg) {
-       await removeUserFromOrg(userPrevOrg, email);
-     }
-
-    await  addOrganizationToUser(org, email);
-   }
-   catch(e){
-     console.error(`error adding user to org  :${JSON.stringify(e)}`);
-   }
+  async setOrgToUser(org: string, email: string) {
+    try {
+      await updateUserOrganization(org, email);
+    } catch (e) {
+      console.error(`error adding user to org  :${JSON.stringify(e)}`);
+    }
   }
 
    get orgNamesList() {
