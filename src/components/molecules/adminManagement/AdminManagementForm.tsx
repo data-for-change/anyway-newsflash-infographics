@@ -7,8 +7,17 @@ import { Typography } from 'components/atoms';
 import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
 import OverlayLoader from 'components/molecules/OverlayLoader';
-import { StyledTableRow, StyledTableCell } from '../Table/TableView';
-import { TableContainer, Button, Box, Table, TableBody, TableCell, TableHead, Theme } from '@material-ui/core';
+import { StyledTableCell, StyledTableRow } from '../Table/TableView';
+import {
+  TableContainer,
+  Button,
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  Theme,
+} from '@material-ui/core';
 import { blackColor } from 'style';
 import { EditModeButtons } from './EditModeButtons';
 import { OrganizationEditList } from './OrganizationEditList';
@@ -19,6 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: `1px solid ${blackColor}`,
     borderBottom: 0,
     borderCollapse: 'separate',
+    width:'100%'
   },
   tableContainer: {
     maxHeight: 450,
@@ -28,6 +38,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: '20px',
     marginBottom: '10px',
   },
+  row:{
+    height :'65px'
+  }
 }));
 
 const AdminManagementForm: React.FC<IProps> = ({ saveUserChanges, isShowing, onClose, loading }) => {
@@ -57,7 +70,7 @@ const AdminManagementForm: React.FC<IProps> = ({ saveUserChanges, isShowing, onC
   return (
     <DialogWithHeader
       fullWidth
-      maxWidth={'sm'}
+      maxWidth={'md'}
       isShowing={isShowing}
       title={t('usersManagement.title')}
       onClose={() => {
@@ -68,7 +81,7 @@ const AdminManagementForm: React.FC<IProps> = ({ saveUserChanges, isShowing, onC
         <OverlayLoader show={loading} />
         <Table className={classes.table} size="small" aria-label="a dense table">
           <TableHead>
-            <StyledTableRow>
+            <StyledTableRow  >
               {labels.map((label: string, index: number) => (
                 <StyledTableCell key={index}>
                   <Typography.Body5>{t(`userDetailsForm.${label}`)}</Typography.Body5>
@@ -80,7 +93,7 @@ const AdminManagementForm: React.FC<IProps> = ({ saveUserChanges, isShowing, onC
           <TableBody>
             {store.usersManagementTableData &&
               store.usersManagementTableData.map((item: any, index: number) => (
-                <StyledTableRow key={index}>
+                <StyledTableRow className={classes.row} key={index}>
                   <TableCell align="center">{item.name}</TableCell>
                   <TableCell align="center">{item.email}</TableCell>
                   <TableCell align="center" width="30%">
