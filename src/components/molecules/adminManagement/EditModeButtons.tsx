@@ -1,6 +1,6 @@
 import { ButtonGroup, Button } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import { IPropsEditButtons } from './AdminManagementFormHelpers';
+import { IPropsEditButtons } from './types';
 import React from 'react';
 
 export const EditModeButtons: React.FC<IPropsEditButtons> = ({ saveEditModeAndDelete, cancelEditMode, itemData }) => {

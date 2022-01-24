@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Box, InputLabel, MenuItem, Select, FormControl } from '@material-ui/core';
-import { IPropsSelectBox } from './AdminManagementFormHelpers';
+import { IPropsSelectBox } from './types';
 import React from 'react';
 
 export const OrganizationEditList: React.FC<IPropsSelectBox> = ({
@@ -24,7 +24,14 @@ export const OrganizationEditList: React.FC<IPropsSelectBox> = ({
     <Box>
       <FormControl fullWidth>
         <InputLabel>{t('userDetailsForm.Organization')}</InputLabel>
-        <Select name={itemEmail} value={currentOrganization} label="Organization" onChange={handleChange}>
+        <Select   MenuProps={{
+          anchorOrigin: {
+            vertical: "bottom",
+            horizontal: "left"
+          },
+          getContentAnchorEl: null
+        }}
+                  name={itemEmail} value={currentOrganization} label="Organization" onChange={handleChange}>
           {organizationsList &&
             organizationsList.map((org: any) => {
               return (
