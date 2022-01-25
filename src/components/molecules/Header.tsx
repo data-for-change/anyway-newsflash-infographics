@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
@@ -35,24 +35,21 @@ const Header: FC = () => {
   const store: RootStore = useStore();
 
   const [open, setOpen] = useState(false);
-  const [location, setLocation] = useState<IPoint | null>(null);
 
   const isUserDetailsRequired: boolean = !store.userInfo?.meta.isCompleteRegistration;
   const roadSegmentLocation = store.gpsLocationData;
 
-  const onLocationChange = (location: IPoint) => {
+  const onLocationChange = useCallback((location: IPoint) => {
     store.fetchGpsLocation(location);
-    setLocation(location);
-  };
+  },[store]);
 
   const onLocationSearch = () => {
     if (roadSegmentLocation) {
       history.push(`${store.currentLanguageRouteString}/location/${roadSegmentLocation?.road_segment_id}`);
       setOpen(false);
       store.setGpsLocationData(null);
-      setLocation(null);
-    }
-  }
+    };
+  };
 
   useEffect(() => {
     store.getUserLoginDetails();
@@ -92,12 +89,10 @@ const Header: FC = () => {
       </Box>
       <MapDialog
         open={open}
-        location={location}
         section={roadSegmentLocation?.road_segment_name}
         onLocationChange={onLocationChange}
         onClose={() => {
           setOpen(false);
-          setLocation(null);
           store.setGpsLocationData(null);
         }}
         onSearch={onLocationSearch}

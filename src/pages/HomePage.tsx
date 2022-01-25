@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import WidgetsTemplate from '../components/organisms/WidgetsTemplate';
 import { Box } from '@material-ui/core';
 import SideBar from 'components/organisms/SideBar';
@@ -15,8 +15,6 @@ import { IRouteProps } from 'models/Route';
 import { LANG } from 'const/languages.const';
 
 interface IProps {}
-
-
 
 const useStyles = makeStyles({
   mainBox: {
