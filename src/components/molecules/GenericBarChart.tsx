@@ -68,7 +68,7 @@ const BarChartContainer: FC<IBarChartBaseProps> = ({ data, textLabel, children }
 };
 
 const SingleBarChart: FC<ISingleBarChartProps> = ({ data, isPercentage, textLabel }) => {
-  const yLabels = Object.keys(data[0]);
+  const yLabels = data ? Object.keys(data[0]) : [];
   yLabels.splice(0, 1);
 
   const barStyle = {
@@ -84,9 +84,8 @@ const SingleBarChart: FC<ISingleBarChartProps> = ({ data, isPercentage, textLabe
 };
 
 const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, isStacked, textLabel }) => {
-  let yLabels = Object.keys(data[0]);
+  const yLabels = data ? Object.keys(data[0]) : [];
   yLabels.splice(0, 1);
-  yLabels = yLabels.reverse();
   const maxBarsNum = yLabels.length;
 
   return (
