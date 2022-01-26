@@ -6,6 +6,8 @@ import tinycolor from 'tinycolor2';
 
 const colors = [yellowColor, honeyColor, roseColor];
 const Y_AXIS_OFFSET = 20;
+const MIN_BAR_HEIGHT = 20;
+
 type BarDataMap = {
   [key: string]: number | string;
 };
@@ -38,7 +40,7 @@ const CustomizedLabel = (props: CustomizedLabelProps) => {
   return (
     <g>
       <text fill={isStacked ? blackColor : whiteColor} textAnchor="middle" x={x + width / 2} y={y + Y_AXIS_OFFSET}>
-        {height < 20 ? null : calculatedValue}
+        {height < MIN_BAR_HEIGHT ? null : calculatedValue}
       </text>
     </g>
   );
