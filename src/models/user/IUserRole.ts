@@ -4,5 +4,3 @@ export default  interface IUserRole {
   name: string;
   description: string
 }
-
-

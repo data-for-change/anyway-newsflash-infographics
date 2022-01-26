@@ -4,5 +4,3 @@ export default  interface IUserOrg {
   name: string;
   description: string
 }
-
-
