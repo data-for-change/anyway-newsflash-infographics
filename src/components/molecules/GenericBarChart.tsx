@@ -72,7 +72,7 @@ const SingleBarChart: FC<ISingleBarChartProps> = ({ data, isPercentage, textLabe
   yLabels.splice(0, 1);
 
   const barStyle = {
-    filter: `drop-shadow(1mm 1mm 0 ${tinycolor(roseColor).darken().toString()})`,
+    filter: `drop-shadow(0.2em 0.2em 0 ${tinycolor(roseColor).darken().toString()})`,
   };
   return (
     <BarChartContainer data={data} isPercentage={isPercentage} textLabel={textLabel}>
@@ -92,7 +92,7 @@ const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, isStacked,
     <BarChartContainer data={data} isPercentage={isPercentage} textLabel={textLabel}>
       {Array.from({ length: maxBarsNum }, (_, i) => {
         const barStyle = {
-          filter: `drop-shadow(1mm ${isStacked ? '0' : '1mm'} 0 ${tinycolor(colors[i]).darken().toString()})`,
+          filter: `drop-shadow(0.2em ${isStacked ? '0' : '0.2em'} 0 ${tinycolor(colors[i]).darken().toString()})`,
         };
 
         return (
