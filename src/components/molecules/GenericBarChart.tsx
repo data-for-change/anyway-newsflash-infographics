@@ -5,7 +5,7 @@ import { Typography } from 'components/atoms';
 import tinycolor from 'tinycolor2';
 
 const colors = [yellowColor, honeyColor, roseColor];
-
+const Y_AXIS_OFFSET = 20;
 type BarDataMap = {
   [key: string]: number | string;
 };
@@ -37,7 +37,7 @@ const CustomizedLabel = (props: CustomizedLabelProps) => {
   const calculatedValue = isPercentage ? value + '%' : value;
   return (
     <g>
-      <text fill={isStacked ? blackColor : whiteColor} textAnchor="middle" x={x + width / 2} y={y + 20}>
+      <text fill={isStacked ? blackColor : whiteColor} textAnchor="middle" x={x + width / 2} y={y + Y_AXIS_OFFSET}>
         {height < 20 ? null : calculatedValue}
       </text>
     </g>
