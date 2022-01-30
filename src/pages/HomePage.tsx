@@ -1,5 +1,4 @@
 import React, { FC, useEffect } from 'react';
-import WidgetsTemplate from '../components/organisms/WidgetsTemplate';
 import { Box } from '@material-ui/core';
 import SideBar from 'components/organisms/SideBar';
 import makeStyles from '@material-ui/core/styles/makeStyles';
@@ -9,12 +8,13 @@ import OverlayLoader from 'components/molecules/OverlayLoader';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
-import DemoPage from './DemoPage';
-import { Navigate, Route, Routes, useParams } from 'react-router-dom';
-// import { IRouteProps } from 'models/Route';
+import { Navigate, useParams } from 'react-router-dom';
+import { IRouteProps } from 'models/Route';
 import { LANG } from 'const/languages.const';
 
-interface IProps {}
+interface IProps {
+  component: any;
+}
 
 const useStyles = makeStyles({
   mainBox: {
@@ -30,10 +30,11 @@ const useStyles = makeStyles({
   },
 });
 
-const HomePage: FC<IProps> = () => {
+const HomePage: FC<IProps> = ({ component: Component }) => {
   const classes = useStyles();
   const store: RootStore = useStore();
-  const { gpsId, newsId, lng } = useParams<any>(); // removed "IRouteProps" it wasn't accurate
+  const { gpsId, newsId, lng } = useParams<IRouteProps>();
+  console.log('useParams', useParams());
   const loading = store.widgetBoxLoading;
 
   useEffect(() => {
@@ -66,11 +67,7 @@ const HomePage: FC<IProps> = () => {
         <OverlayLoader show={loading} />
         <FilterBar />
         {/* main Content */}
-        <Routes>
-          <Route path="/:lng?/newsflash/999" element={<DemoPage />} />
-          <Route path="/:lng?/newsflash/:newsId" element={<WidgetsTemplate />} />
-          <Route path="/:lng?/location/:gpsId" element={<WidgetsTemplate />} />
-        </Routes>
+        <Component />
       </Box>
     </Box>
   );

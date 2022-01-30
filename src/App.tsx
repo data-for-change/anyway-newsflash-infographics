@@ -10,6 +10,7 @@ import HomePageRedirect from './pages/HomePageRedirect';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@material-ui/core/styles';
 import PopUpRedirect from './components/atoms/PopUpRedirect';
+import WidgetsTemplate from './components/organisms/WidgetsTemplate';
 // main components height - must add up to 100
 const headerHeight = '5vh';
 const pageContentHeight = '88vh';
@@ -48,8 +49,10 @@ const App: FC = () => {
             <Box height={pageContentHeight} className={classes.pageContent}>
               <Routes>
                 <Route path="/" element={<HomePageRedirect />} />
-                <Route path="/:lng?/newsflash/:newsId" element={<HomePage />} />
-                <Route path="/:lng?/location/:gpsId" element={<HomePage />} />
+                <Route path="/:lng/newsflash/:newsId/*" element={<HomePage component={WidgetsTemplate} />} />
+                <Route path="/newsflash/:newsId/*" element={<HomePage component={WidgetsTemplate} />} />
+                <Route path="/:lng/location/:gpsId/*" element={<HomePage component={WidgetsTemplate} />} />
+                <Route path="/location/:gpsId/*" element={<HomePage component={WidgetsTemplate} />} />
                 <Route path="/login-popup-redirect" element={<PopUpRedirect />} />
               </Routes>
             </Box>
