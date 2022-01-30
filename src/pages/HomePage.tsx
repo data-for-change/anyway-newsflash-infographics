@@ -10,8 +10,8 @@ import { observer } from 'mobx-react-lite';
 import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
 import DemoPage from './DemoPage';
-import { Redirect, Route, Switch, useParams } from 'react-router-dom';
-import { IRouteProps } from 'models/Route';
+import { Navigate, Route, Routes, useParams } from 'react-router-dom';
+// import { IRouteProps } from 'models/Route';
 import { LANG } from 'const/languages.const';
 
 interface IProps {}
@@ -33,7 +33,7 @@ const useStyles = makeStyles({
 const HomePage: FC<IProps> = () => {
   const classes = useStyles();
   const store: RootStore = useStore();
-  const { gpsId, newsId, lng } = useParams<IRouteProps>();
+  const { gpsId, newsId, lng } = useParams<any>(); // removed "IRouteProps" it wasn't accurate
   const loading = store.widgetBoxLoading;
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const HomePage: FC<IProps> = () => {
   }, [lng, store]);
 
   if (!newsId && !gpsId) {
-    return <Redirect to="/" />;
+    return <Navigate to="/" replace />;
   }
 
   return (
@@ -66,11 +66,11 @@ const HomePage: FC<IProps> = () => {
         <OverlayLoader show={loading} />
         <FilterBar />
         {/* main Content */}
-        <Switch>
-          <Route path="/:lng?/newsflash/999" component={DemoPage} />
-          <Route path="/:lng?/newsflash/:newsId" component={WidgetsTemplate} />
-          <Route path="/:lng?/location/:gpsId" component={WidgetsTemplate} />
-        </Switch>
+        <Routes>
+          <Route path="/:lng?/newsflash/999" element={<DemoPage />} />
+          <Route path="/:lng?/newsflash/:newsId" element={<WidgetsTemplate />} />
+          <Route path="/:lng?/location/:gpsId" element={<WidgetsTemplate />} />
+        </Routes>
       </Box>
     </Box>
   );

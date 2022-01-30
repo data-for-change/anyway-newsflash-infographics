@@ -9,7 +9,7 @@ import { observer } from 'mobx-react-lite';
 import { dateFormat } from 'utils/time.utils';
 import { useLocale } from 'hooks/date.hooks';
 import LocationSearchIndicator from 'components/molecules/LocationSearchIndicator';
-import { IRouteProps } from 'models/Route';
+// import { IRouteProps } from 'models/Route';
 
 const useStyles = makeStyles({
   container: {},
@@ -25,13 +25,13 @@ const News: FC = () => {
   const store: RootStore = useStore();
   const classes = useStyles();
   const locale = useLocale();
-  const { gpsId } = useParams<IRouteProps>();
+  const { gpsId } = useParams<any>(); // removed "IRouteProps" doesn't satisfy the condition
 
   return (
     <Box flexGrow={1} display="flex" flexDirection="column" className={classes.newsFeed}>
       <Box flexGrow={1}>
         <Box className={classes.container} flexDirection={'column'}>
-          {gpsId && <LocationSearchIndicator/>}
+          {gpsId && <LocationSearchIndicator />}
           {store.newsFlashCollection.length > 0 ? (
             store.newsFlashCollection.map((news) => {
               const className = news.id === store.activeNewsFlashId ? classes.activeNewsFlash : '';

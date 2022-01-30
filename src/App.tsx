@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import { Footer } from './components/organisms/Footer';
 import { Box, createStyles, makeStyles, Theme, ThemeProvider } from '@material-ui/core';
@@ -46,12 +46,12 @@ const App: FC = () => {
               <Header />
             </Box>
             <Box height={pageContentHeight} className={classes.pageContent}>
-              <Switch>
-                <Route exact path="/" component={HomePageRedirect} />
-                <Route path="/:lng?/newsflash/:newsId" component={HomePage} />
-                <Route path="/:lng?/location/:gpsId" component={HomePage} />
-                <Route path="/login-popup-redirect" component={PopUpRedirect} />
-              </Switch>
+              <Routes>
+                <Route path="/" element={<HomePageRedirect />} />
+                <Route path="/:lng?/newsflash/:newsId" element={<HomePage />} />
+                <Route path="/:lng?/location/:gpsId" element={<HomePage />} />
+                <Route path="/login-popup-redirect" element={<PopUpRedirect />} />
+              </Routes>
             </Box>
             <Box height={footerHeight} display="flex">
               <Footer />
