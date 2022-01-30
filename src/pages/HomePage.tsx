@@ -13,7 +13,7 @@ import { IRouteProps } from 'models/Route';
 import { LANG } from 'const/languages.const';
 
 interface IProps {
-  component: any;
+  component: React.FunctionComponent<{}>;
 }
 
 const useStyles = makeStyles({
