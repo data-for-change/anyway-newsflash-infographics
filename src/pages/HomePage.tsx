@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Box } from '@material-ui/core';
 import SideBar from 'components/organisms/SideBar';
 import makeStyles from '@material-ui/core/styles/makeStyles';
@@ -8,13 +8,9 @@ import OverlayLoader from 'components/molecules/OverlayLoader';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams, Outlet } from 'react-router-dom';
 import { IRouteProps } from 'models/Route';
 import { LANG } from 'const/languages.const';
-
-interface IProps {
-  component: React.FunctionComponent<{}>;
-}
 
 const useStyles = makeStyles({
   mainBox: {
@@ -30,11 +26,10 @@ const useStyles = makeStyles({
   },
 });
 
-const HomePage: FC<IProps> = ({ component: Component }) => {
+const HomePage = () => {
   const classes = useStyles();
   const store: RootStore = useStore();
   const { gpsId, newsId, lng } = useParams<IRouteProps>();
-  console.log('useParams', useParams());
   const loading = store.widgetBoxLoading;
 
   useEffect(() => {
@@ -66,8 +61,7 @@ const HomePage: FC<IProps> = ({ component: Component }) => {
       <Box flexGrow={5} className={classes.widgetBox} position="relative">
         <OverlayLoader show={loading} />
         <FilterBar />
-        {/* main Content */}
-        <Component />
+        <Outlet />
       </Box>
     </Box>
   );

@@ -48,12 +48,14 @@ const App: FC = () => {
             </Box>
             <Box height={pageContentHeight} className={classes.pageContent}>
               <Routes>
-                <Route path="/" element={<HomePageRedirect />} />
-                <Route path="/:lng/newsflash/:newsId/*" element={<HomePage component={WidgetsTemplate} />} />
-                <Route path="/newsflash/:newsId/*" element={<HomePage component={WidgetsTemplate} />} />
-                <Route path="/:lng/location/:gpsId/*" element={<HomePage component={WidgetsTemplate} />} />
-                <Route path="/location/:gpsId/*" element={<HomePage component={WidgetsTemplate} />} />
-                <Route path="/login-popup-redirect" element={<PopUpRedirect />} />
+                <Route element={<HomePage />}>
+                  <Route path="/" element={<HomePageRedirect />} />
+                  <Route path="/:lng/newsflash/:newsId/*" element={<WidgetsTemplate />} />
+                  <Route path="/newsflash/:newsId/*" element={<WidgetsTemplate />} />
+                  <Route path="/:lng/location/:gpsId/*" element={<WidgetsTemplate />} />
+                  <Route path="/location/:gpsId/*" element={<WidgetsTemplate />} />
+                  <Route path="/login-popup-redirect" element={<PopUpRedirect />} />
+                </Route>
               </Routes>
             </Box>
             <Box height={footerHeight} display="flex">
