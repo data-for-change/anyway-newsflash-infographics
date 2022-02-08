@@ -48,8 +48,8 @@ const App: FC = () => {
             </Box>
             <Box height={pageContentHeight} className={classes.pageContent}>
               <Routes>
+                <Route path="/" element={<HomePageRedirect />} />
                 <Route element={<HomePage />}>
-                  <Route path="/" element={<HomePageRedirect />} />
                   <Route path="/:lng/newsflash/:newsId/*" element={<WidgetsTemplate />} />
                   <Route path="/newsflash/:newsId/*" element={<WidgetsTemplate />} />
                   <Route path="/:lng/location/:gpsId/*" element={<WidgetsTemplate />} />
