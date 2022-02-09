@@ -12,7 +12,7 @@ type ISeverityCounts<T> = {
   fatal: T;
   severe: T;
   light: T;
-} & ({ total: T } | { noun: T, verb: T });
+} & ({ total: T } | { noun: T; verb: T });
 
 export type ICountBySeverity = ISeverityCounts<number>;
 export type ISeverityFieldNames = ISeverityCounts<string>;
@@ -22,7 +22,7 @@ export interface ITextViewLabels {
   severe: string;
   light: string;
   noun: string;
-  verb: string
+  verb: string;
 }
 
 interface IProps {
@@ -32,8 +32,7 @@ interface IProps {
   labels: ITextViewLabels;
 }
 
-
-export type IFormattedWidgetCountBySeverity = IWidgetCountBySeverityTextDataBase<ICountBySeverity>
+export type IFormattedWidgetCountBySeverity = IWidgetCountBySeverityTextDataBase<ICountBySeverity>;
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -83,16 +82,21 @@ function getSingleType(countBySeverity: ICountBySeverity): string {
   }
 }
 
-const TextView: FC<IProps> = ({ data, segmentText, severityFieldNames: { fatal: fatalFieldName, severe: severeFieldName, light: lightFieldName, light: totalFieldName }, labels }) => {
+const TextView: FC<IProps> = ({
+  data,
+  segmentText,
+  severityFieldNames: { fatal: fatalFieldName, severe: severeFieldName, light: lightFieldName, light: totalFieldName },
+  labels,
+}) => {
   const classes = useStyles();
 
-  const items: IWidgetCountBySeverityTextDataBase["items"] & any = data?.items || {};
+  const items: IWidgetCountBySeverityTextDataBase['items'] & any = data?.items || {};
 
   const countBySeverity = {
     fatal: items[fatalFieldName],
     severe: items[severeFieldName],
     light: items[lightFieldName],
-    total: items[totalFieldName]
+    total: items[totalFieldName],
   };
   const howManySeverities = [!!countBySeverity.fatal, !!countBySeverity.severe, !!countBySeverity.light];
   const isSingleType = howManySeverities.filter(Boolean).length === 1;
