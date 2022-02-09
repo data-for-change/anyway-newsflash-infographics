@@ -4,7 +4,8 @@ import {
   IWidgetAccidentsHeatMapData,
   IWidgetAccidentsByDayNightData,
   IWidgetHeadOnCollisionsComparisonData,
-  IWidgetCountBySeverityTextData,
+  IWidgetAccidentsBySeverityTextData,
+  IWidgetInjuredBySeverityTextData,
   IWidgetCountBySeverityData,
   IWidgetAccidentsByTypeData,
   IWidgetInjuredByYearData,
@@ -26,7 +27,8 @@ export type IWidgetDataType =
   | IWidgetAccidentsHeatMapData
   | IWidgetAccidentsByDayNightData
   | IWidgetHeadOnCollisionsComparisonData
-  | IWidgetCountBySeverityTextData
+  | IWidgetAccidentsBySeverityTextData
+  | IWidgetInjuredBySeverityTextData
   | IWidgetCountBySeverityData
   | IWidgetAccidentsByTypeData
   | IWidgetInjuredByYearData

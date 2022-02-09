@@ -48,7 +48,9 @@
     "on": "ב",
     "onSegment": "במקטע",
     "occurred": "התרחשו",
+    "hurt": "נהרגו ונפצעו",
     "accidents": "תאונות",
+    "injured": "נפגעים",
     "fatal": {
       "singular": "קטלנית",
       "plural": "קטלניות"
@@ -60,6 +62,18 @@
     "light": {
       "singular": "קלה",
       "plural": "קלות"
+    },
+    "killed": {
+      "singular": "הרוג",
+      "plural": "הרוגים"
+    },
+    "severeInjured": {
+      "singular": "פצוע קשה",
+      "plural": "פצועים קשה"
+    },
+    "lightInjured": {
+      "singular": "פצוע קל",
+      "plural": "פצועים קל"
     }
   },
   "onUrban": {

@@ -3,18 +3,22 @@ import Box from '@material-ui/core/Box';
 import { roadIconColors } from 'style';
 import { Typography } from 'components/atoms';
 import { useTranslation } from 'react-i18next';
-import { IWidgetCountBySeverityTextData } from 'models/WidgetData';
+import { IWidgetCountBySeverityTextDataBase } from 'models/WidgetData';
 import { makeStyles } from '@material-ui/core/styles';
+import { ITextViewLabels } from './TextView';
 import { LANG } from 'const/languages.const';
 
 interface IProps {
-  data: IWidgetCountBySeverityTextData;
+  data: IWidgetCountBySeverityTextDataBase;
   segmentText: string;
   singleType: string;
+  totalCount: number;
+  labels: ITextViewLabels;
 }
 interface AProps {
   accidentsCount: Number;
   singleType: string;
+  labels: ITextViewLabels;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -26,18 +30,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AccidentsOccurred: FC<AProps> = ({ accidentsCount, singleType }) => {
+const AccidentsOccurred: FC<AProps> = ({ accidentsCount, singleType, labels }) => {
   const { t, i18n } = useTranslation();
   const classes = useStyles();
   const elements = [
     <Box mr={1} key={1}>
-      <Typography.Body1>{t('textView.occurred')}</Typography.Body1>
+      <Typography.Body1>{t(`textView.${labels.verb}`)}</Typography.Body1>
     </Box>,
     <Typography.Title1 key={2} bold>
       <Box className={classes.numOfAcc}>{accidentsCount}</Box>
     </Typography.Title1>,
     <Box mr={1} key={3}>
-      <Typography.Body1>{t('textView.accidents')}</Typography.Body1>
+      <Typography.Body1>{t(`textView.${labels.noun}`)}</Typography.Body1>
     </Box>,
     singleType && (
       <Box mr={1} key={4}>
@@ -57,7 +61,7 @@ const AccidentsOccurred: FC<AProps> = ({ accidentsCount, singleType }) => {
   );
 };
 
-const TextViewHeader: React.FC<IProps> = ({ data: { items }, segmentText, singleType }) => {
+const TextViewHeader: React.FC<IProps> = ({ data: { items }, segmentText, singleType, totalCount, labels }) => {
   const { t, i18n } = useTranslation();
   return (
     <>
@@ -81,7 +85,7 @@ const TextViewHeader: React.FC<IProps> = ({ data: { items }, segmentText, single
 
       </Box>
       <Box>
-        <AccidentsOccurred singleType={singleType} accidentsCount={items.total_accidents_count} />
+        <AccidentsOccurred singleType={singleType} accidentsCount={totalCount} labels={labels} />
       </Box>
     </>
   );
