@@ -15,7 +15,7 @@ interface IProps {
 
 export interface IFormInput {
   email: string;
-  firstName: string;
+  firstName?: string;
   lastName: string;
   workplace: string;
 }

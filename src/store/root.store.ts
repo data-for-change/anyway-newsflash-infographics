@@ -9,11 +9,21 @@ import { SourceFilterEnum } from 'models/SourceFilter';
 import { fetchNews } from 'services/news.data.service';
 import SettingsStore from './settings.store';
 import { IPoint } from 'models/Point';
-import { IUserInfo, fetchUserInfo, logoutUserFromSession, postUserInfo } from 'services/user.service';
+import {
+  IAnywayUserDetails,
+  fetchUserInfo,
+  logoutUserFromSession,
+  postUserInfo,
+  getUsersList,
+  getOrganizationsDataList,
+  updateUserOrganization,
+} from 'services/user.service';
 import i18next from 'services/i18n.service';
 import { IFormInput } from 'components/molecules/UserUpdateForm';
 import { fetchGpsLocation } from 'services/gpsToLocation.data.service';
 import { LANG } from 'const/languages.const';
+import { ROLE_ADMIN_NAME } from 'utils/utils';
+import { IUserInfo } from 'models/user/IUserInfo';
 
 // todo: move all map defaults to one place
 const DEFAULT_TIME_FILTER = 5;
@@ -37,7 +47,7 @@ export default class RootStore {
   newsFlashCollection: Array<INewsFlash> = [];
   isUserAuthenticated: boolean = false;
   userApiError: boolean = false;
-  userInfo: IUserInfo | null = null;
+  userInfo: IAnywayUserDetails | null = null;
   activeNewsFlashId: number = 0; // active newsflash id
   locationId: number = 0; // data by location id
   newsFlashFetchOffSet = 0;
@@ -52,6 +62,11 @@ export default class RootStore {
   gpsLocationData: IGpsData | null = null;
   // domain stores
   settingsStore: SettingsStore;
+  //admin role only observables
+  isAdmin : boolean = false;
+  usersInfoList : [IUserInfo] | null= null;
+  organizationsList : Array<String>  | null = null;
+
 
   constructor() {
     // init app data
@@ -111,11 +126,43 @@ export default class RootStore {
     return this.newsFlashCollection.find((item) => item.id === this.activeNewsFlashId);
   }
 
+  get usersManagementTableData() : any {
+    return this.usersInfoList?.map(user => ({name :`${user.first_name} ${user.last_name}` , org: user.organizations[0] ?? ''  ,email : user.email}))
+  }
+
   getWidgetsDataByName(name: string): IWidgetBase | undefined {
     return this.newsFlashWidgetsData.find((item) => item.name === name);
   }
 
   checkuserstatus(): void {}
+
+  getUsersListInfo() {
+    getUsersList().then( list => {
+      this.usersInfoList = list
+    }).catch(e => {
+      console.log(`error getting user details :${JSON.stringify(e)}`);
+    })
+  }
+
+  getOrganizationsData() {
+    getOrganizationsDataList().then(list =>{
+      this.organizationsList = list;
+    }).catch(e => {
+      console.error(`error getting organization list :${JSON.stringify(e)}`);
+    })
+  }
+
+  async setOrgToUser(org: string, email: string) {
+    try {
+      await updateUserOrganization(org, email);
+    } catch (e) {
+      console.error(`error adding user to org  :${JSON.stringify(e)}`);
+    }
+  }
+
+   get orgNamesList() {
+    return this.organizationsList;
+   }
 
   setActiveNewsFlashFilter(filter: SourceFilterEnum) {
     if (filter !== this.newsFlashActiveFilter) {
@@ -153,6 +200,10 @@ export default class RootStore {
         runInAction(() => {
           this.isUserAuthenticated = false;
           this.userInfo = null;
+          if(this.isAdmin){
+            this.usersInfoList = null;
+            this.isAdmin = false;
+          }
         });
       }
     });
@@ -163,6 +214,7 @@ export default class RootStore {
       .then((userData) => {
         runInAction(() => {
           this.userInfo = userData;
+          this.isAdmin = userData.data.roles.includes(ROLE_ADMIN_NAME);
           this.isUserAuthenticated = true;
         });
       })
@@ -173,6 +225,7 @@ export default class RootStore {
         console.error(err);
       });
   }
+
 
   async updateUserInfo(formInput: IFormInput) {
     runInAction(async () => {

@@ -87,7 +87,8 @@
   "header": {
     "Search": "חיפוש",
     "User Greeting": "שלום",
-    "User Info Update": "פרטי משתמש"
+    "User Info Update": "פרטי משתמש",
+    "management": "ניהול"
   },
   "sideBar": "מיקום משוער:",
   "UserProfileHeader": {
@@ -100,7 +101,15 @@
     "Last Name": "שם משפחה",
     "First Name": "שם פרטי",
     "Email": "דואר אלקטרוני",
-    "Organization": "ארגון"
+    "Organization": "ארגון",
+    "Name": "שם"
+  },
+  "usersManagement": {
+    "title": "ניהול משתמשים",
+    "cancel": "בטל",
+    "save": "שמור",
+    "saveAll": "שמור שינויים",
+    "edit": "עריכה"
   },
   "widgets": {
     "countByCarType": {
