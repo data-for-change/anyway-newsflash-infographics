@@ -1,7 +1,8 @@
 {
   "footer": {
     "about": "אודות",
-    "acknowledgements": "תודות"
+    "acknowledgements": "תודות",
+    "version": "גרסה"
   },
   "thankYouDialog": {
     "Acknowledgements": "תודות",
@@ -45,6 +46,7 @@
     "inYear": "בשנה",
     "inYears": "בשנים",
     "on": "ב",
+    "onSegment": "במקטע",
     "occurred": "התרחשו",
     "hurt": "נהרגו ונפצעו",
     "accidents": "תאונות",
@@ -97,9 +99,10 @@
     "all": "הכל"
   },
   "header": {
-    "Search":"חיפוש",
+    "Search": "חיפוש",
     "User Greeting": "שלום",
-    "User Info Update": "פרטי משתמש"
+    "User Info Update": "פרטי משתמש",
+    "management": "ניהול"
   },
   "sideBar": "מיקום משוער:",
   "UserProfileHeader": {
@@ -112,13 +115,22 @@
     "Last Name": "שם משפחה",
     "First Name": "שם פרטי",
     "Email": "דואר אלקטרוני",
-    "Organization": "ארגון"
+    "Organization": "ארגון",
+    "Name": "שם"
+  },
+  "usersManagement": {
+    "title": "ניהול משתמשים",
+    "cancel": "בטל",
+    "save": "שמור",
+    "saveAll": "שמור שינויים",
+    "edit": "עריכה"
   },
   "widgets": {
     "countByCarType": {
       "Accidents count by vehicle type": "השוואת אחוז התאונות ע\"פ כלי רכב",
       "compared to national average": "במקטע לעומת ממוצע ארצי בכבישים מאותו הסוג"
     },
+    "lastDateUpdated": "עדכון אחרון",
     "No data": "אין נתונים להצגה"
   },
   "mapDialog": {

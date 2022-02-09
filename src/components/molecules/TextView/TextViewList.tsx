@@ -12,21 +12,21 @@ const TextViewList: React.FC<IProps> = ({ data, labels }) => {
   const { t } = useTranslation();
   return (
     <>
-      {data.fatal && (
+      {data.fatal > 0 && (
         <TextViewRecord
           numOfAccidents={data.fatal}
           severityDesc={t(`textView.${labels.fatal}.${data.fatal > 1 ? 'plural' : 'singular'}`)}
           imgSrc={'fatal'}
         />
       )}
-      {data.severe && (
+      {data.severe > 0 && (
         <TextViewRecord
           numOfAccidents={data.severe}
           severityDesc={t(`textView.${labels.severe}.${data.severe > 1 ? 'plural' : 'singular'}`)}
           imgSrc={'severe'}
         />
       )}
-      {data.light && (
+      {data.light > 0 && (
         <TextViewRecord
           isLast={true}
           numOfAccidents={data.light}

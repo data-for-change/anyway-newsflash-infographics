@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo, useState } from 'react';
 import { useMapEvents } from 'react-leaflet';
 import { IPoint } from 'models/Point';
 import { Marker } from 'components/atoms';
@@ -9,27 +9,29 @@ interface ILocation {
 }
 
 const LocationPicker: FC<ILocation> = ({ onLocationChange }) => {
+  const [position, setPosition] = useState<IPoint | null>(null);
+
   useMapEvents({
     click: (event) => {
       const {latlng: { lng, lat }} = event;
-      onLocationChange({ longitude: lng,latitude: lat });
+      setPosition({ longitude: lng, latitude: lat });
+      onLocationChange({ longitude: lng, latitude: lat });
     },
   });
-  return null;
+
+  return position === null ? null : <Marker markerdata={position}/>
 };
 
 interface IProps {
-  location?: IPoint;
   onLocationChange: (location: IPoint) => void;
 }
 
-const LocationSelect: FC<IProps> = ({ location, onLocationChange }) => {
+const LocationSelect: FC<IProps> = ({ onLocationChange }) => {
   return (
     <Map>
       <LocationPicker onLocationChange={onLocationChange} />
-      {location && <Marker markerdata={location} />}
     </Map>
   );
 };
 
-export default LocationSelect;
+export default memo(LocationSelect);

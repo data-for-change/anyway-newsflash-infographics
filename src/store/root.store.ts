@@ -2,17 +2,28 @@
 // https://mobx.js.org/best/store.html#combining-multiple-stores
 import { runInAction, makeAutoObservable } from 'mobx';
 import { initService } from 'services/init.service';
-import { fetchWidgets, fetchWidgetsByLocation } from 'services/widgets.data.service';
+import { fetchWidgets, IWidgetInput } from 'services/widgets.data.service';
 import { INewsFlash } from 'models/NewFlash';
 import { IDateComments, IGpsData, ILocationMeta, IWidgetBase } from 'models/WidgetData';
 import { SourceFilterEnum } from 'models/SourceFilter';
 import { fetchNews } from 'services/news.data.service';
 import SettingsStore from './settings.store';
 import { IPoint } from 'models/Point';
-import { IUserInfo, fetchUserInfo, logoutUserFromSession, postUserInfo } from 'services/user.service';
+import {
+  IAnywayUserDetails,
+  fetchUserInfo,
+  logoutUserFromSession,
+  postUserInfo,
+  getUsersList,
+  getOrganizationsDataList,
+  updateUserOrganization,
+} from 'services/user.service';
 import i18next from 'services/i18n.service';
 import { IFormInput } from 'components/molecules/UserUpdateForm';
 import { fetchGpsLocation } from 'services/gpsToLocation.data.service';
+import { LANG } from 'const/languages.const';
+import { ROLE_ADMIN_NAME } from 'utils/utils';
+import { IUserInfo } from 'models/user/IUserInfo';
 
 // todo: move all map defaults to one place
 const DEFAULT_TIME_FILTER = 5;
@@ -26,7 +37,7 @@ const DEFAULT_LOCATION_META = {
   location_text: '',
   dates_comment: {
     date_range: [],
-    last_update: 0
+    last_update: 0,
   },
 };
 
@@ -36,8 +47,9 @@ export default class RootStore {
   newsFlashCollection: Array<INewsFlash> = [];
   isUserAuthenticated: boolean = false;
   userApiError: boolean = false;
-  userInfo: IUserInfo | null = null;
+  userInfo: IAnywayUserDetails | null = null;
   activeNewsFlashId: number = 0; // active newsflash id
+  locationId: number = 0; // data by location id
   newsFlashFetchOffSet = 0;
   newsFlashActiveFilter: SourceFilterEnum = SourceFilterEnum.all;
   newsFlashWidgetsMeta: ILocationMeta = DEFAULT_LOCATION_META;
@@ -46,10 +58,15 @@ export default class RootStore {
   newsFlashLoading: boolean = false;
   widgetBoxLoading: boolean = false;
   currentLanguageRouteString: string = '';
-  selectedLanguage: string = 'he';
+  selectedLanguage: string = LANG.HE;
   gpsLocationData: IGpsData | null = null;
   // domain stores
   settingsStore: SettingsStore;
+  //admin role only observables
+  isAdmin : boolean = false;
+  usersInfoList : [IUserInfo] | null= null;
+  organizationsList : Array<String>  | null = null;
+
 
   constructor() {
     // init app data
@@ -109,11 +126,43 @@ export default class RootStore {
     return this.newsFlashCollection.find((item) => item.id === this.activeNewsFlashId);
   }
 
+  get usersManagementTableData() : any {
+    return this.usersInfoList?.map(user => ({name :`${user.first_name} ${user.last_name}` , org: user.organizations[0] ?? ''  ,email : user.email}))
+  }
+
   getWidgetsDataByName(name: string): IWidgetBase | undefined {
     return this.newsFlashWidgetsData.find((item) => item.name === name);
   }
 
   checkuserstatus(): void {}
+
+  getUsersListInfo() {
+    getUsersList().then( list => {
+      this.usersInfoList = list
+    }).catch(e => {
+      console.log(`error getting user details :${JSON.stringify(e)}`);
+    })
+  }
+
+  getOrganizationsData() {
+    getOrganizationsDataList().then(list =>{
+      this.organizationsList = list;
+    }).catch(e => {
+      console.error(`error getting organization list :${JSON.stringify(e)}`);
+    })
+  }
+
+  async setOrgToUser(org: string, email: string) {
+    try {
+      await updateUserOrganization(org, email);
+    } catch (e) {
+      console.error(`error adding user to org  :${JSON.stringify(e)}`);
+    }
+  }
+
+   get orgNamesList() {
+    return this.organizationsList;
+   }
 
   setActiveNewsFlashFilter(filter: SourceFilterEnum) {
     if (filter !== this.newsFlashActiveFilter) {
@@ -126,10 +175,10 @@ export default class RootStore {
     }
   }
 
-  filterNewsFlashCollection (): void {
-    runInAction(() => this.newsFlashLoading = true);
+  filterNewsFlashCollection(): void {
+    runInAction(() => (this.newsFlashLoading = true));
     fetchNews(this.newsFlashActiveFilter, this.newsFlashFetchOffSet).then((data: any) => {
-    runInAction(() => (this.newsFlashLoading = false));
+      runInAction(() => (this.newsFlashLoading = false));
       if (data) {
         runInAction(() => (this.newsFlashCollection = [...this.newsFlashCollection, ...data]));
       } else {
@@ -138,8 +187,8 @@ export default class RootStore {
     });
   }
 
-  infiniteFetchLimit (fetchSize: number): void {
-    runInAction(() => this.newsFlashFetchOffSet += fetchSize);
+  infiniteFetchLimit(fetchSize: number): void {
+    runInAction(() => (this.newsFlashFetchOffSet += fetchSize));
     if (this.newsFlashCollection.length >= this.newsFlashFetchOffSet - fetchSize) {
       this.filterNewsFlashCollection();
     }
@@ -151,6 +200,10 @@ export default class RootStore {
         runInAction(() => {
           this.isUserAuthenticated = false;
           this.userInfo = null;
+          if(this.isAdmin){
+            this.usersInfoList = null;
+            this.isAdmin = false;
+          }
         });
       }
     });
@@ -161,6 +214,7 @@ export default class RootStore {
       .then((userData) => {
         runInAction(() => {
           this.userInfo = userData;
+          this.isAdmin = userData.data.roles.includes(ROLE_ADMIN_NAME);
           this.isUserAuthenticated = true;
         });
       })
@@ -171,6 +225,7 @@ export default class RootStore {
         console.error(err);
       });
   }
+
 
   async updateUserInfo(formInput: IFormInput) {
     runInAction(async () => {
@@ -185,65 +240,76 @@ export default class RootStore {
   }
 
   selectNewsFlash(id: number): void {
-    runInAction(() => (this.activeNewsFlashId = id));
-    this.fetchSelectedNewsFlashWidgets(id, this.selectedLanguage, this.newsFlashWidgetsTimerFilter);
+    runInAction(() => {this.locationId = 0; this.activeNewsFlashId = id;});
+    const widgetInput = {
+      lang: this.selectedLanguage,
+      newsId: id,
+      yearAgo: this.newsFlashWidgetsTimerFilter,
+    };
+    this.fetchSelectedWidgets(widgetInput);
+  }
+
+  selectLocationId(id: number): void {
+    runInAction(() => { this.activeNewsFlashId = 0; this.locationId = id});
+    const widgetInput = {
+      lang: this.selectedLanguage,
+      gpsId: id,
+      yearAgo: this.newsFlashWidgetsTimerFilter,
+    };
+    this.fetchSelectedWidgets(widgetInput);
   }
 
   changeTimeFilter(filterValue: number): void {
     if (this.newsFlashWidgetsTimerFilter !== filterValue) {
       runInAction(() => (this.newsFlashWidgetsTimerFilter = filterValue));
-      this.fetchSelectedNewsFlashWidgets(this.activeNewsFlashId, this.selectedLanguage, filterValue);
+      const widgetInput = {
+        lang: this.selectedLanguage,
+        newsId: this.activeNewsFlashId,
+        yearAgo: filterValue,
+        gpsId: this.locationId,
+      };
+      this.fetchSelectedWidgets(widgetInput);
     }
   }
 
   changeLanguage(lngCode: string): void {
     i18next.changeLanguage(lngCode).then(() => {
       runInAction(() => {
-        lngCode === 'he'
+        lngCode === LANG.HE
           ? (this.currentLanguageRouteString = '')
           : (this.currentLanguageRouteString = `/${i18next.language}`);
         this.selectedLanguage = i18next.language;
       });
-      this.fetchSelectedNewsFlashWidgets(this.activeNewsFlashId, i18next.language, this.newsFlashWidgetsTimerFilter);
+      const widgetInput = {
+        lang: i18next.language,
+        newsId: this.activeNewsFlashId,
+        yearAgo: this.newsFlashWidgetsTimerFilter,
+        gpsId: this.locationId,
+      };
+      this.fetchSelectedWidgets(widgetInput);
     });
   }
 
-  private fetchSelectedNewsFlashWidgets (id: number, lang: string, filterValue: number): void {
-    runInAction(() => this.widgetBoxLoading = true);
-    fetchWidgets(id, lang, filterValue).then((response: any) => {
-      runInAction(() => {
-        this.widgetBoxLoading = false;
-        if (response && response.widgets && response.meta) {
-          this.newsFlashWidgetsMeta = response.meta;
-          this.newsFlashWidgetsData = response.widgets;
-          this.setGpsLocationData(null)
-        } else {
-          console.error(`fetchWidgets(id:${id}) invalid response:`, response);
-        }
-      });
-    });
-  }
-
-  fetchSelectedNewsFlashWidgetsByLocation(id: number, lang: string, filterValue?: number): void {
+  private fetchSelectedWidgets({ lang, newsId, yearAgo, gpsId }: IWidgetInput): void {
     runInAction(() => (this.widgetBoxLoading = true));
-    fetchWidgetsByLocation(id, lang, filterValue).then((response: any) => {
+    fetchWidgets({ lang, newsId, yearAgo, gpsId }).then((response: any) => {
       runInAction(() => {
         this.widgetBoxLoading = false;
         if (response && response.widgets && response.meta) {
           this.newsFlashWidgetsMeta = response.meta;
           this.newsFlashWidgetsData = response.widgets;
         } else {
-          console.error(`fetchWidgets(id:${id}) invalid response:`, response);
+          console.error(`fetchWidgets(id:${newsId || gpsId}) invalid response:`, response);
         }
       });
     });
-  };
+  }
 
   setGpsLocationData(data: IGpsData | null) {
     runInAction(() => {
       this.gpsLocationData = data;
     });
-  };
+  }
 
   async fetchGpsLocation(data: IPoint) {
     runInAction(() => {

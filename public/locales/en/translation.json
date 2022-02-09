@@ -1,7 +1,8 @@
 {
   "footer": {
     "about": "About",
-    "acknowledgements": "Acknowledgements"
+    "acknowledgements": "Acknowledgements",
+    "version": "Version"
   },
   "thankYouDialog": {
     "Acknowledgements": "Acknowledgements",
@@ -45,6 +46,7 @@
     "inYear": "In the year",
     "inYears": "In the years",
     "on": "on",
+    "onSegment": "Road segment",
     "occurred": "occurred",
     "accidents": "accidents",
     "fatal": {
@@ -83,9 +85,10 @@
     "all": "all"
   },
   "header": {
-    "Search":"Search",
+    "Search": "Search",
     "User Greeting": "Hello",
-    "User Info Update": "Update Info"
+    "User Info Update": "Update Info",
+    "management": "Management"
   },
   "userDetailsForm": {
     "Update": "Update",
@@ -93,7 +96,15 @@
     "Last Name": "Last Name",
     "First Name": "First Name",
     "Email": "Email",
-    "Organization": "Organization"
+    "Organization": "Organization",
+    "Name": "Name"
+  },
+  "usersManagement": {
+    "title": "Users Management",
+    "cancel": "cancel",
+    "save": "save",
+    "saveAll": "save all",
+    "edit": "edit"
   },
   "sideBar": "Approximate location:",
   "UserProfileHeader": {
@@ -105,6 +116,7 @@
       "Accidents count by vehicle type": "Accidents count by vehicle type",
       "compared to national average": "in a section compared to national average on roads of the same type"
     },
+    "lastDateUpdated": "last update",
     "No data": "No data to display"
   },
   "mapDialog": {

@@ -1,11 +1,10 @@
-import { IPoint } from '../../models/Point';
+import { IPoint } from 'models/Point';
 
 const mostExtremeLongitude = 36;
 const mostExtremeLatitude = 29;
 const validCoords = (coords: any) => coords < mostExtremeLongitude && coords > mostExtremeLatitude;
 const validNumber = (value: any) => typeof value === 'number' && value >= 0;
 const validString = (value: any) => typeof value === 'string';
-
 
 export const isVerifiedWidgetData = (widget: any) => {
   let isValid = false;
@@ -15,7 +14,7 @@ export const isVerifiedWidgetData = (widget: any) => {
     console.error('isVerifiedWidgetData - data structure error', widget, err);
   }
   return isValid;
-}
+};
 
 export const verifiedWidgetData = (widget: any) => {
   const {
@@ -165,7 +164,7 @@ export const verifiedWidgetData = (widget: any) => {
       break;
     }
     default: {
-      isValid = false
+      isValid = false;
     }
   }
 

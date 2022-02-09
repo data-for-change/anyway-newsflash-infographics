@@ -9,7 +9,6 @@ import { IPoint } from 'models/Point';
 interface IProps {
   section?: string;
   open: boolean;
-  location: IPoint | undefined;
   onClose: () => void;
   onLocationChange: (location: IPoint) => void;
   onSearch: () => void;
@@ -38,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const MapDialog: FC<IProps> = ({ section='', open, onClose, location, onLocationChange, onSearch }) => {
+const MapDialog: FC<IProps> = ({ section, open, onClose, onLocationChange, onSearch }) => {
   const classes = useStyles();
   const { t } = useTranslation();
 
@@ -50,7 +49,7 @@ const MapDialog: FC<IProps> = ({ section='', open, onClose, location, onLocation
         </Box>
         <Box display='flex' flexDirection='column' height='75vh'>
           <Box display='contents'>
-            <LocationSelect location={location} onLocationChange={onLocationChange} />
+            <LocationSelect onLocationChange={onLocationChange} />
           </Box>
           <div className={classes.chosenSection}>
             <Typography.Body1 bold>{t('mapDialog.chosenSegment')}</Typography.Body1>
@@ -58,7 +57,7 @@ const MapDialog: FC<IProps> = ({ section='', open, onClose, location, onLocation
           </div>
         </Box>
         <DialogActions className={classes.actions}>
-          <Button.Standard onClick={onSearch}>{t('mapDialog.searchButton')}</Button.Standard>
+          <Button.Standard disabled={!section} onClick={onSearch}>{t('mapDialog.searchButton')}</Button.Standard>
           <Button.Outlined onClick={onClose}>{t('mapDialog.cancelButton')}</Button.Outlined>
         </DialogActions>
       </Box>

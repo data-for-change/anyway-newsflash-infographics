@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { IWidgetCountBySeverityTextDataBase } from 'models/WidgetData';
 import { makeStyles } from '@material-ui/core/styles';
 import { ITextViewLabels } from './TextView';
+import { LANG } from 'const/languages.const';
 
 interface IProps {
   data: IWidgetCountBySeverityTextDataBase;
@@ -55,7 +56,7 @@ const AccidentsOccurred: FC<AProps> = ({ accidentsCount, singleType, labels }) =
   const elementsEnglish = [b, d, c, a];
   return (
     <Box display="flex" justifyContent="center">
-      {i18n.language === 'he' ? elements : elementsEnglish}
+      {i18n.language === LANG.HE ? elements : elementsEnglish}
     </Box>
   );
 };
@@ -78,7 +79,10 @@ const TextViewHeader: React.FC<IProps> = ({ data: { items }, segmentText, single
         </Box>
       )}
       <Box mb={1}>
-        <Typography.Body1>{`${t('textView.on')}${i18n.language === 'en' ? ' ' : ''}${segmentText}`}</Typography.Body1>
+        <Typography.Body1>{`${t('textView.onSegment')} ${
+          i18n.language === LANG.EN ? ' ' : ''
+        }${segmentText}`}</Typography.Body1>
+
       </Box>
       <Box>
         <AccidentsOccurred singleType={singleType} accidentsCount={totalCount} labels={labels} />

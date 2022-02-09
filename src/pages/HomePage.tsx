@@ -1,9 +1,8 @@
-import React, { FC, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import WidgetsTemplate from '../components/organisms/WidgetsTemplate';
 import { Box } from '@material-ui/core';
 import SideBar from 'components/organisms/SideBar';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import { RouteComponentProps, Redirect } from 'react-router';
 import { silverSmokeColor } from '../style';
 import FilterBar from 'components/organisms/FilterBar';
 import OverlayLoader from 'components/molecules/OverlayLoader';
@@ -11,14 +10,11 @@ import { observer } from 'mobx-react-lite';
 import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
 import DemoPage from './DemoPage';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch, useParams } from 'react-router-dom';
+import { IRouteProps } from 'models/Route';
+import { LANG } from 'const/languages.const';
 
 interface IProps {}
-
-interface IRouteProps {
-  id?: string;
-  lng?: string;
-}
 
 const useStyles = makeStyles({
   mainBox: {
@@ -34,27 +30,30 @@ const useStyles = makeStyles({
   },
 });
 
-const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
+const HomePage: FC<IProps> = () => {
   const classes = useStyles();
   const store: RootStore = useStore();
-  const id = match.params.id ? parseInt(match.params.id) : null;
+  const { gpsId, newsId, lng } = useParams<IRouteProps>();
   const loading = store.widgetBoxLoading;
 
   useEffect(() => {
-    if (id) {
-      store.selectNewsFlash(id);
+    if (newsId) {
+      store.selectNewsFlash(parseInt(newsId));
     }
-  }, [id, store]);
+    if (gpsId) {
+      store.selectLocationId(parseInt(gpsId));
+    }
+  }, [newsId, store, gpsId]);
 
   useEffect(() => {
-    if (match.params.lng) {
-      store.changeLanguage(match.params.lng);
+    if (lng) {
+      store.changeLanguage(lng);
     } else {
-      store.changeLanguage('he');
+      store.changeLanguage(LANG.HE);
     }
-  }, [match.params.lng, store]);
+  }, [lng, store]);
 
-  if (!id) {
+  if (!newsId && !gpsId) {
     return <Redirect to="/" />;
   }
 
@@ -69,7 +68,8 @@ const HomePage: FC<IProps & RouteComponentProps<IRouteProps>> = ({ match }) => {
         {/* main Content */}
         <Switch>
           <Route path="/:lng?/newsflash/999" component={DemoPage} />
-          <Route path="/:lng?/newsflash/:id" component={WidgetsTemplate} />
+          <Route path="/:lng?/newsflash/:newsId" component={WidgetsTemplate} />
+          <Route path="/:lng?/location/:gpsId" component={WidgetsTemplate} />
         </Switch>
       </Box>
     </Box>
