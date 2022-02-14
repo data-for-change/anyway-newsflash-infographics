@@ -33,8 +33,8 @@ const Map: FC<IProps> = ({ zoom = INITIAL_ZOOM, center=INITIAL_CENTER, data, chi
   const bounds = getBounds(data);
 
   return (
-    <MapContainer zoom={zoom} className={classes.root}>
-      <MapViewControl bounds={bounds} center={center} zoom={INITIAL_ZOOM} />
+    <MapContainer zoom={zoom} center={center} className={classes.root}>
+      <MapViewControl bounds={bounds} />
       <GoogleMapsLayer />
       {children}
     </MapContainer>

@@ -87,7 +87,8 @@
   "header": {
     "Search": "Search",
     "User Greeting": "Hello",
-    "User Info Update": "Update Info"
+    "User Info Update": "Update Info",
+    "management": "Management"
   },
   "userDetailsForm": {
     "Update": "Update",
@@ -95,7 +96,15 @@
     "Last Name": "Last Name",
     "First Name": "First Name",
     "Email": "Email",
-    "Organization": "Organization"
+    "Organization": "Organization",
+    "Name": "Name"
+  },
+  "usersManagement": {
+    "title": "Users Management",
+    "cancel": "cancel",
+    "save": "save",
+    "saveAll": "save all",
+    "edit": "edit"
   },
   "sideBar": "Approximate location:",
   "UserProfileHeader": {

@@ -55,6 +55,16 @@ export const verifiedWidgetData = (widget: any) => {
         validNumber(items.total_accidents_count);
       break;
     }
+    case 'injured_count_by_severity': {
+      isValid =
+        validNumber(items.end_year) &&
+        validNumber(items.killed_count) &&
+        validNumber(items.severe_injured_count) &&
+        validNumber(items.light_injured_count) &&
+        validNumber(items.start_year) &&
+        validNumber(items.total_injured_count);
+      break;
+    }
     case 'most_severe_accidents_table': {
       isValid = items.every(
         (item: any) =>

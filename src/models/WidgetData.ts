@@ -70,16 +70,28 @@ export interface IWidgetMostSevereAccidentsTableData extends IWidgetDataBase {
 export interface IWidgetAccidentsHeatMapData extends IWidgetDataBase {
   items: IPoint[];
 }
-export interface IWidgetCountBySeverityTextData extends IWidgetDataBase {
+
+export interface IWidgetCountBySeverityTextDataBase<T = {}> {
   items: {
-    severity_light_count: number;
-    severity_fatal_count: number;
-    severity_severe_count: number;
     start_year: string;
     end_year: string;
     total_accidents_count: number;
-  };
+  } & T;
 }
+export type IWidgetAccidentsBySeverityTextData = { text: any } & IWidgetCountBySeverityTextDataBase<{
+  severity_light_count: number;
+  severity_fatal_count: number;
+  severity_severe_count: number;
+  total_accidents_count: number;
+}>
+
+// TODO: Change field names once fixed in API
+export type IWidgetInjuredBySeverityTextData = { text: any } & IWidgetCountBySeverityTextDataBase<{
+  'light_injured_count': number;
+  'severe_injured_count': number;
+  killed_count: number;
+  total_injured_count: number;
+}>
 export interface IWidgetCountBySeverityData extends IWidgetDataBase {
   items: {
     accident_severity: string;

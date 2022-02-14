@@ -5,7 +5,8 @@ import {
   IWidgetAccidentsByHourBarData,
   IWidgetMostSevereAccidentsData,
   IWidgetMostSevereAccidentsTableData,
-  IWidgetCountBySeverityTextData,
+  IWidgetAccidentsBySeverityTextData,
+  IWidgetInjuredBySeverityTextData,
   IWidgetAccidentsByTypeData,
   IWidgetAccidentsByYearData,
   IWidgetInjuredByYearData,
@@ -79,7 +80,45 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
     // }
     case WidgetName.accident_count_by_severity: {
       widgetComponent = (
-        <CountBySeverityTextWidget segmentText={segmentText} data={data as IWidgetCountBySeverityTextData} />
+        <CountBySeverityTextWidget
+          segmentText={segmentText}
+          data={data as IWidgetAccidentsBySeverityTextData}
+          severityFieldNames={{
+            fatal: 'severity_fatal_count',
+            severe: 'severity_severe_count',
+            light: 'severity_light_count',
+            total: 'total_accidents_count',
+          }}
+          labels={{
+            fatal: 'fatal',
+            severe: 'severe',
+            light: 'light',
+            noun: 'accidents',
+            verb: 'occurred',
+          }}
+        />
+      );
+      break;
+    }
+    case WidgetName.injured_count_by_severity: {
+      widgetComponent = (
+        <CountBySeverityTextWidget
+          segmentText={segmentText}
+          data={data as IWidgetInjuredBySeverityTextData}
+          severityFieldNames={{
+            fatal: 'killed_count',
+            severe: 'severe_injured_count',
+            light: 'light_injured_count',
+            total: 'total_injured_count',
+          }}
+          labels={{
+            fatal: 'killed',
+            severe: 'severeInjured',
+            light: 'lightInjured',
+            noun: 'injured',
+            verb: 'hurt',
+          }}
+        />
       );
       break;
     }
@@ -155,7 +194,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
     }
     default: {
       widgetComponent = null; // do not create element for unrecognized widget
-      console.warn(`widget name (${name}) was not recognize `, widget);
+      console.warn(`widget name (${name}) was not recognized `, widget);
       break;
     }
   }
