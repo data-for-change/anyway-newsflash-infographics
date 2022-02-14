@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-import React, { useEffect } from 'react';
-=======
-import { FC, useEffect } from 'react';
-import WidgetsTemplate from '../components/organisms/WidgetsTemplate';
->>>>>>> dev
+import { useEffect } from 'react';
 import { Box } from '@material-ui/core';
 import SideBar from 'components/organisms/SideBar';
 import makeStyles from '@material-ui/core/styles/makeStyles';

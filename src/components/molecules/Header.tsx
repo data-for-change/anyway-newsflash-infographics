@@ -38,21 +38,19 @@ const Header: FC = () => {
   const isUserDetailsRequired: boolean = !store.userInfo?.meta.isCompleteRegistration;
   const roadSegmentLocation = store.gpsLocationData;
 
-  const onLocationChange = useCallback((location: IPoint) => {
-    store.fetchGpsLocation(location);
-  },[store]);
+  const onLocationChange = useCallback(
+    (location: IPoint) => {
+      store.fetchGpsLocation(location);
+    },
+    [store],
+  );
 
   const onLocationSearch = () => {
     if (roadSegmentLocation) {
       navigate(`${store.currentLanguageRouteString}/location/${roadSegmentLocation?.road_segment_id}`);
       setOpen(false);
       store.setGpsLocationData(null);
-<<<<<<< HEAD
-      setLocation(null);
     }
-=======
-    };
->>>>>>> dev
   };
 
   useEffect(() => {
