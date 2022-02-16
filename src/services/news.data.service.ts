@@ -30,7 +30,7 @@ export function fetchNews(source = '', offSet = 0, limit = 100): Promise<any> {
   }
   query.push(`offset=${offSet}`);
 
-  query.push('resolution=suburban_road');
+  query.push('resolution=suburban_road&resolution=street');
 
   const url = `${NEWS_FLASH_API}?${query.join('&')}`;
 
