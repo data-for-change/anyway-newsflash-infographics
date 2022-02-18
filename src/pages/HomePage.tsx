@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, FC } from 'react';
 import { Box } from '@material-ui/core';
 import SideBar from 'components/organisms/SideBar';
 import makeStyles from '@material-ui/core/styles/makeStyles';
@@ -11,6 +11,8 @@ import RootStore from 'store/root.store';
 import { Navigate, useParams, Outlet } from 'react-router-dom';
 import { IRouteProps } from 'models/Route';
 import { LANG } from 'const/languages.const';
+
+interface IProps {}
 
 const useStyles = makeStyles({
   mainBox: {
@@ -26,7 +28,7 @@ const useStyles = makeStyles({
   },
 });
 
-const HomePage = () => {
+const HomePage: FC<IProps> = () => {
   const classes = useStyles();
   const store: RootStore = useStore();
   const { gpsId, newsId, lng } = useParams<IRouteProps>();
