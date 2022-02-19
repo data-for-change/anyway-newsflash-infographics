@@ -1,5 +1,3 @@
-import { JsxElement } from 'typescript';
-
 export const labels = ['Name', 'Email', 'Organization'];
 
 export interface IProps {
