@@ -24,14 +24,19 @@ export const OrganizationEditList: React.FC<IPropsSelectBox> = ({
     <Box>
       <FormControl fullWidth>
         <InputLabel>{t('userDetailsForm.Organization')}</InputLabel>
-        <Select   MenuProps={{
-          anchorOrigin: {
-            vertical: "bottom",
-            horizontal: "left"
-          },
-          getContentAnchorEl: null
-        }}
-                  name={itemEmail} value={currentOrganization} label="Organization" onChange={handleChange}>
+        <Select
+          MenuProps={{
+            anchorOrigin: {
+              vertical: 'bottom',
+              horizontal: 'left',
+            },
+            getContentAnchorEl: null,
+          }}
+          name={itemEmail}
+          value={currentOrganization}
+          label="Organization"
+          onChange={handleChange}
+        >
           {organizationsList &&
             organizationsList.map((org: any) => {
               return (
