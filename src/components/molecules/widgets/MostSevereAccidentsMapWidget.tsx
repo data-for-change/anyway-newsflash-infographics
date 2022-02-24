@@ -45,16 +45,16 @@ const MostSevereAccidentsMapWidget: FC<IProps> = ({ data, sizeOptions }) => {
       <Box style={{ height: '95%' }}>
         <LocationMap items={items} />
       </Box>
-      <div className={classes.iconsContainer}>
-        <div className={classes.singleIcon}>
+      <Box className={classes.iconsContainer}>
+        <Box className={classes.singleIcon}>
           <img className={classes.carLogo} src={carRedIcon} alt="fatal car accident" />
-          <div className={classes.logoTextSpace}>{t('textView.fatal.singular')}</div>
-        </div>
-        <div className={classes.singleIcon}>
+          <Box className={classes.logoTextSpace}>{t('textView.fatal.singular')}</Box>
+        </Box>
+        <Box className={classes.singleIcon}>
           <img className={classes.carLogo} src={carOrangeIcon} alt="severe car accident" />
-          <div className={classes.logoTextSpace}>{t('textView.severe.singular')} </div>
-        </div>
-      </div>
+          <Box className={classes.logoTextSpace}>{t('textView.severe.singular')} </Box>
+        </Box>
+      </Box>
     </Box>
   );
 };
