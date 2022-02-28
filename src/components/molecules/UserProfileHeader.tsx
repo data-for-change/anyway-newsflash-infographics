@@ -48,7 +48,7 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({
 }) => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
-  const store: RootStore = useStore();
+  const { rootStore, userStore } =  useStore();
   const defaultFormInput: IFormInput = {
     email: userDetails.data.email,
     firstName: userDetails.data.firstName,
@@ -59,8 +59,8 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({
     if (newOrgName !== prevOrgName) {
       try {
         setLoading(true);
-        await store.setOrgToUser(newOrgName, email);
-        store.getUsersListInfo();
+        await rootStore.setOrgToUser(newOrgName, email);
+        userStore.getUsersListInfo();
       } catch (err) {
         setLoading(false);
         console.log(err);
@@ -70,7 +70,7 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({
 
   useEffect(() => {
     setLoading(false);
-  }, [store.usersManagementTableData]);
+  }, [userStore.usersManagementTableData]);
 
   const classes = useStyles();
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(isUpdateScreenOpen);
@@ -79,11 +79,11 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({
   const toggleAdminManagementScreen = (isOpen: boolean) => setIsAdminDialogOpen(isOpen);
 
   useEffect(() => {
-    if (store.isAdmin) {
-      store.getUsersListInfo();
-      store.getOrganizationsData();
+    if (userStore.isAdmin) {
+      userStore.getUsersListInfo();
+      rootStore.getOrganizationsData();
     }
-  }, [store]);
+  }, [userStore,rootStore]);
 
   return (
     <>

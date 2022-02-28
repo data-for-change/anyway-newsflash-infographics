@@ -26,7 +26,8 @@ const useStyles = makeStyles((theme: Theme) =>
 const App: FC = () => {
   const { i18n } = useTranslation();
   const classes = useStyles();
-  const store = useStore();
+  // const store = useStore();
+  const settingsStore = useStore().settingsStore
   const theme = useTheme();
 
   const appDir = i18n.dir();
@@ -38,8 +39,8 @@ const App: FC = () => {
   }, [i18n, theme, theme.direction, appDir]);
 
   return (
-    <StoreContext.Provider value={store}>
-      <ThemeProvider theme={store.settingsStore.theme}>
+    // <StoreContext.Provider value={store}>
+      <ThemeProvider theme={settingsStore.theme}>
         <Router>
           <Box>
             <Box height={headerHeight} display="flex">
@@ -59,7 +60,7 @@ const App: FC = () => {
           </Box>
         </Router>
       </ThemeProvider>
-    </StoreContext.Provider>
+    // </StoreContext.Provider>
   );
 };
 export default App;

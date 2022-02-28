@@ -24,7 +24,7 @@ const useStyles = makeStyles(() =>
 
 const SelectButton: FC<IProps> = ({ onChange }) => {
   const classes = useStyles();
-  const store = useStore();
+  const store = useStore().rootStore;
   const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);
   const history = useHistory();

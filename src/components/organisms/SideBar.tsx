@@ -29,7 +29,7 @@ const useStyles = makeStyles({
 });
 
 const SideBar: FC<IProps> = () => {
-  const store: RootStore = useStore();
+  const store = useStore().newsFlashStore;
   const classes = useStyles();
   const { t } = useTranslation();
 

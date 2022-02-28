@@ -12,6 +12,6 @@ export const locales: Locales = {
 };
 
 export function useLocale() {
-    const store: RootStore = useStore();
+    const store = useStore().rootStore;
     return locales[store.selectedLanguage] || locales.he;
 }

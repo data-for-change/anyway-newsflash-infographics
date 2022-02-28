@@ -6,7 +6,7 @@ import { Box } from '@material-ui/core';
 import { AppBar,Button, Logo } from 'components/atoms';
 import LogInLinkGoogle from './LogInLinkGoogle';
 import { useStore } from 'store/storeConfig';
-import RootStore from 'store/root.store';
+// import RootStore from 'store/root.store';
 import UserProfileHeader from './UserProfileHeader';
 import LanguageMenu from 'components/organisms/LanguageMenu';
 import { FEATURE_FLAGS } from 'utils/env.utils';
@@ -32,41 +32,41 @@ const Header: FC = () => {
   const history = useHistory();
   const { t } = useTranslation();
   const classes = useStyles();
-  const store: RootStore = useStore();
+  const {rootStore, userStore } = useStore();
 
   const [open, setOpen] = useState(false);
 
-  const isUserDetailsRequired: boolean = !store.userInfo?.meta.isCompleteRegistration;
-  const roadSegmentLocation = store.gpsLocationData;
+  const isUserDetailsRequired: boolean = !userStore.userInfo?.meta.isCompleteRegistration;
+  const roadSegmentLocation = rootStore.gpsLocationData;
 
   const onLocationChange = useCallback((location: IPoint) => {
-    store.fetchGpsLocation(location);
-  },[store]);
+    rootStore.fetchGpsLocation(location);
+  },[rootStore]);
 
   const onLocationSearch = () => {
     if (roadSegmentLocation) {
-      history.push(`${store.currentLanguageRouteString}/location/${roadSegmentLocation?.road_segment_id}`);
+      history.push(`${rootStore.currentLanguageRouteString}/location/${roadSegmentLocation?.road_segment_id}`);
       setOpen(false);
-      store.setGpsLocationData(null);
+      rootStore.setGpsLocationData(null);
     };
   };
 
   useEffect(() => {
-    store.getUserLoginDetails();
-  }, [store]);
+    userStore.getUserLoginDetails();
+  }, [userStore]);
 
   let authElement;
   const logo = anywayLogo;
   if (FEATURE_FLAGS.login) {
     //login or logout- depend on authentication state
-    if (store.isUserAuthenticated) {
-      const { ...userDetails } = store.userInfo;
+    if (userStore.isUserAuthenticated) {
+      const { ...userDetails } = userStore.userInfo;
       const handleLogout = () => {
-        store.logOutUser();
+        userStore.logOutUser();
       };
       authElement = (
         <UserProfileHeader
-          isAdmin={store.isAdmin}
+          isAdmin={userStore.isAdmin}
           handleLogout={handleLogout}
           isUpdateScreenOpen={isUserDetailsRequired}
           userDetails={userDetails}
@@ -94,7 +94,7 @@ const Header: FC = () => {
         onLocationChange={onLocationChange}
         onClose={() => {
           setOpen(false);
-          store.setGpsLocationData(null);
+          rootStore.setGpsLocationData(null);
         }}
         onSearch={onLocationSearch}
       />

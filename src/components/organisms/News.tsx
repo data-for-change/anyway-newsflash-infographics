@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 });
 
 const News: FC = () => {
-  const store: RootStore = useStore();
+  const {rootStore, newsFlashStore} = useStore();
   const classes = useStyles();
   const locale = useLocale();
   const { gpsId } = useParams<IRouteProps>();
@@ -32,12 +32,12 @@ const News: FC = () => {
       <Box flexGrow={1}>
         <Box className={classes.container} flexDirection={'column'}>
           {gpsId && <LocationSearchIndicator/>}
-          {store.newsFlashCollection.length > 0 ? (
-            store.newsFlashCollection.map((news) => {
-              const className = news.id === store.activeNewsFlashId ? classes.activeNewsFlash : '';
+          {newsFlashStore.newsFlashCollection.length > 0 ? (
+            newsFlashStore.newsFlashCollection.map((news) => {
+              const className = news.id === newsFlashStore.activeNewsFlashId ? classes.activeNewsFlash : '';
               const date = news.date == null ? '' : dateFormat(new Date(news.date.replace(/-/g, '/')), locale);
               return (
-                <Link key={news.id} to={`${store.currentLanguageRouteString}/newsflash/${news.id}`}>
+                <Link key={news.id} to={`${rootStore.currentLanguageRouteString}/newsflash/${news.id}`}>
                   <Box border={1} borderColor={silverSmokeColor} p={1} className={className}>
                     <p>
                       <Typography.Body5>

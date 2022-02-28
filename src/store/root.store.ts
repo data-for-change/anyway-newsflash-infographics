@@ -19,15 +19,15 @@ import {
   updateUserOrganization,
 } from 'services/user.service';
 import i18next from 'services/i18n.service';
-import { IFormInput } from 'components/molecules/UserUpdateForm';
+// import { IFormInput } from 'components/molecules/UserUpdateForm';
 import { fetchGpsLocation } from 'services/gpsToLocation.data.service';
 import { LANG } from 'const/languages.const';
-import { ROLE_ADMIN_NAME } from 'utils/utils';
-import { IUserInfo } from 'models/user/IUserInfo';
+// import { ROLE_ADMIN_NAME } from 'utils/utils';
+// import { IUserInfo } from 'models/user/IUserInfo';
 
 // todo: move all map defaults to one place
 const DEFAULT_TIME_FILTER = 5;
-const DEFAULT_LOCATION = { latitude: 32.0853, longitude: 34.7818 };
+// const DEFAULT_LOCATION = { latitude: 32.0853, longitude: 34.7818 };
 const DEFAULT_LOCATION_META = {
   location_info: {
     resolution: '',
@@ -45,15 +45,17 @@ export default class RootStore {
   appInitialized = false;
 
   newsFlashCollection: Array<INewsFlash> = [];
-  isUserAuthenticated: boolean = false;
-  userApiError: boolean = false;
-  userInfo: IAnywayUserDetails | null = null;
+  widgetsMeta: ILocationMeta = DEFAULT_LOCATION_META;
+  widgetsData: Array<IWidgetBase> = [];
+  // isUserAuthenticated: boolean = false;
+  // userApiError: boolean = false;
+  // userInfo: IAnywayUserDetails | null = null;
   activeNewsFlashId: number = 0; // active newsflash id
   locationId: number = 0; // data by location id
-  newsFlashFetchOffSet = 0;
-  newsFlashActiveFilter: SourceFilterEnum = SourceFilterEnum.all;
+  // newsFlashFetchOffSet = 0;
+  // newsFlashActiveFilter: SourceFilterEnum = SourceFilterEnum.all;
   newsFlashWidgetsMeta: ILocationMeta = DEFAULT_LOCATION_META;
-  newsFlashWidgetsData: Array<IWidgetBase> = [];
+  // newsFlashWidgetsData: Array<IWidgetBase> = [];
   newsFlashWidgetsTimerFilter = DEFAULT_TIME_FILTER; // newsflash time filter (in years ago, 5 is the default)
   newsFlashLoading: boolean = false;
   widgetBoxLoading: boolean = false;
@@ -63,10 +65,10 @@ export default class RootStore {
   // domain stores
   settingsStore: SettingsStore;
   //admin role only observables
-  isAdmin : boolean = false;
-  usersInfoList : [IUserInfo] | null= null;
-  organizationsList : Array<String>  | null = null;
-
+  // isAdmin : boolean = false;
+  // usersInfoList : [IUserInfo] | null= null;
+  organizationsList: Array<String> | null = null;
+  usersManagementTableData: any;
 
   constructor() {
     // init app data
@@ -76,80 +78,82 @@ export default class RootStore {
         if (initData.newsFlashCollection) {
           this.newsFlashCollection = initData.newsFlashCollection;
         }
-        if (initData.newsFlashWidgetsData) {
-          this.newsFlashWidgetsData = initData.newsFlashWidgetsData.widgets;
-          this.newsFlashWidgetsMeta = initData.newsFlashWidgetsData.meta;
+        if (initData.widgetsData) {
+          this.widgetsData = initData.widgetsData.widgets;
+          this.widgetsMeta = initData.widgetsMeta.meta;
         }
         this.appInitialized = true;
       });
     });
     // settings store - settings of the app such as num of results returned etc.
-    this.settingsStore = new SettingsStore(this);
+    this.settingsStore = new SettingsStore();
   }
 
-  get newsFlashWidgetsMetaLocation(): string {
-    const { location_text } = this.newsFlashWidgetsMeta;
-    return location_text ? location_text : '';
-  }
+  // get newsFlashWidgetsMetaLocation(): string {
+  //   const { location_text } = this.newsFlashWidgetsMeta;
+  //   return location_text ? location_text : '';
+  // }
 
-  get newsFlashWidgetsMetaSegmentName(): string {
-    const { road_segment_name } = this.newsFlashWidgetsMeta.location_info;
-    return road_segment_name ? road_segment_name : '';
-  }
+  // get newsFlashWidgetsMetaSegmentName(): string {
+  //   const { road_segment_name } = this.newsFlashWidgetsMeta.location_info;
+  //   return road_segment_name ? road_segment_name : '';
+  // }
 
-  get newsFlashWidgetsMetaRoadNumber(): number {
-    const {
-      location_info: { road1 },
-    } = this.newsFlashWidgetsMeta;
-    return road1;
-  }
+  // get newsFlashWidgetsMetaRoadNumber(): number {
+  //   const {
+  //     location_info: { road1 },
+  //   } = this.newsFlashWidgetsMeta;
+  //   return road1;
+  // }
 
-  get newsFlashWidgetsMetaDateComment(): IDateComments {
-    const { dates_comment } = this.newsFlashWidgetsMeta;
-    return dates_comment;
-  }
+  // get newsFlashWidgetsMetaDateComment(): IDateComments {
+  //   const { dates_comment } = this.newsFlashWidgetsMeta;
+  //   return dates_comment;
+  // }
 
-  get activeNewsFlashLocation() {
-    let location: IPoint = DEFAULT_LOCATION; // default location
-    if (this.activeNewsFlash) {
-      location = {
-        latitude: this.activeNewsFlash.lat,
-        longitude: this.activeNewsFlash.lon,
-      };
-    } else {
-      location = DEFAULT_LOCATION;
-    }
-    return location;
-  }
+  // get activeNewsFlashLocation() {
+  //   let location: IPoint = DEFAULT_LOCATION; // default location
+  //   if (this.activeNewsFlash) {
+  //     location = {
+  //       latitude: this.activeNewsFlash.lat,
+  //       longitude: this.activeNewsFlash.lon,
+  //     };
+  //   } else {
+  //     location = DEFAULT_LOCATION;
+  //   }
+  //   return location;
+  // }
 
-  get activeNewsFlash(): INewsFlash | undefined {
-    return this.newsFlashCollection.find((item) => item.id === this.activeNewsFlashId);
-  }
+  // get activeNewsFlash(): INewsFlash | undefined {
+  //   return this.newsFlashCollection.find((item) => item.id === this.activeNewsFlashId);
+  // }
 
-  get usersManagementTableData() : any {
-    return this.usersInfoList?.map(user => ({name :`${user.first_name} ${user.last_name}` , org: user.organizations[0] ?? ''  ,email : user.email}))
-  }
+  // get usersManagementTableData() : any {
+  //   return this.usersInfoList?.map(user => ({name :`${user.first_name} ${user.last_name}` , org: user.organizations[0] ?? ''  ,email : user.email}))
+  // }
 
-  getWidgetsDataByName(name: string): IWidgetBase | undefined {
-    return this.newsFlashWidgetsData.find((item) => item.name === name);
-  }
+  // getWidgetsDataByName(name: string): IWidgetBase | undefined {
+  //   return this.newsFlashWidgetsData.find((item) => item.name === name);
+  // }
 
   checkuserstatus(): void {}
 
-  getUsersListInfo() {
-    getUsersList().then( list => {
-      this.usersInfoList = list
-    }).catch(e => {
-      console.log(`error getting user details :${JSON.stringify(e)}`);
-    })
-  }
+  // getUsersListInfo() {
+  //   getUsersList().then( list => {
+  //     this.usersInfoList = list
+  //   }).catch(e => {
+  //     console.log(`error getting user details :${JSON.stringify(e)}`);
+  //   })
+  // }
 
   getOrganizationsData() {
-    getOrganizationsDataList().then(list =>{
-      this.organizationsList = list;
-    }).catch(e => {
-      console.error(`error getting organization list :${JSON.stringify(e)}`);
-    })
+    getOrganizationsDataList()
+      .then((list) => {
+        this.organizationsList = list;
+      })
+      .catch((e) => {
+        console.error(`error getting organization list :${JSON.stringify(e)}`);
+      });
   }
 
   async setOrgToUser(org: string, email: string) {
@@ -160,87 +164,89 @@ export default class RootStore {
     }
   }
 
-   get orgNamesList() {
+  get orgNamesList() {
     return this.organizationsList;
-   }
-
-  setActiveNewsFlashFilter(filter: SourceFilterEnum) {
-    if (filter !== this.newsFlashActiveFilter) {
-      runInAction(() => {
-        this.newsFlashActiveFilter = filter;
-        this.newsFlashCollection = [];
-        this.newsFlashFetchOffSet = 0;
-      });
-      this.filterNewsFlashCollection();
-    }
   }
 
-  filterNewsFlashCollection(): void {
-    runInAction(() => (this.newsFlashLoading = true));
-    fetchNews(this.newsFlashActiveFilter, this.newsFlashFetchOffSet).then((data: any) => {
-      runInAction(() => (this.newsFlashLoading = false));
-      if (data) {
-        runInAction(() => (this.newsFlashCollection = [...this.newsFlashCollection, ...data]));
-      } else {
-        console.error(`filterNewsFlashCollection(filter:${this.newsFlashActiveFilter}) invalid data:`, data);
-      }
-    });
-  }
+  // setActiveNewsFlashFilter(filter: SourceFilterEnum) {
+  //   if (filter !== this.newsFlashActiveFilter) {
+  //     runInAction(() => {
+  //       this.newsFlashActiveFilter = filter;
+  //       this.newsFlashCollection = [];
+  //       this.newsFlashFetchOffSet = 0;
+  //     });
+  //     this.filterNewsFlashCollection();
+  //   }
+  // }
 
-  infiniteFetchLimit(fetchSize: number): void {
-    runInAction(() => (this.newsFlashFetchOffSet += fetchSize));
-    if (this.newsFlashCollection.length >= this.newsFlashFetchOffSet - fetchSize) {
-      this.filterNewsFlashCollection();
-    }
-  }
+  // filterNewsFlashCollection(): void {
+  //   runInAction(() => (this.newsFlashLoading = true));
+  //   fetchNews(this.newsFlashActiveFilter, this.newsFlashFetchOffSet).then((data: any) => {
+  //     runInAction(() => (this.newsFlashLoading = false));
+  //     if (data) {
+  //       runInAction(() => (this.newsFlashCollection = [...this.newsFlashCollection, ...data]));
+  //     } else {
+  //       console.error(`filterNewsFlashCollection(filter:${this.newsFlashActiveFilter}) invalid data:`, data);
+  //     }
+  //   });
+  // }
 
-  logOutUser() {
-    logoutUserFromSession().then((isOk) => {
-      if (isOk) {
-        runInAction(() => {
-          this.isUserAuthenticated = false;
-          this.userInfo = null;
-          if(this.isAdmin){
-            this.usersInfoList = null;
-            this.isAdmin = false;
-          }
-        });
-      }
-    });
-  }
+  // infiniteFetchLimit(fetchSize: number): void {
+  //   runInAction(() => (this.newsFlashFetchOffSet += fetchSize));
+  //   if (this.newsFlashCollection.length >= this.newsFlashFetchOffSet - fetchSize) {
+  //     this.filterNewsFlashCollection();
+  //   }
+  // }
 
-  getUserLoginDetails() {
-    fetchUserInfo()
-      .then((userData) => {
-        runInAction(() => {
-          this.userInfo = userData;
-          this.isAdmin = userData.data.roles.includes(ROLE_ADMIN_NAME);
-          this.isUserAuthenticated = true;
-        });
-      })
-      .catch((err) => {
-        runInAction(() => {
-          this.isUserAuthenticated = false;
-        });
-        console.error(err);
-      });
-  }
+  // logOutUser() {
+  //   logoutUserFromSession().then((isOk) => {
+  //     if (isOk) {
+  //       runInAction(() => {
+  //         this.isUserAuthenticated = false;
+  //         this.userInfo = null;
+  //         if(this.isAdmin){
+  //           this.usersInfoList = null;
+  //           this.isAdmin = false;
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
 
+  // getUserLoginDetails() {
+  //   fetchUserInfo()
+  //     .then((userData) => {
+  //       runInAction(() => {
+  //         this.userInfo = userData;
+  //         this.isAdmin = userData.data.roles.includes(ROLE_ADMIN_NAME);
+  //         this.isUserAuthenticated = true;
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       runInAction(() => {
+  //         this.isUserAuthenticated = false;
+  //       });
+  //       console.error(err);
+  //     });
+  // }
 
-  async updateUserInfo(formInput: IFormInput) {
-    runInAction(async () => {
-      const isValid = await postUserInfo(formInput);
-      if (isValid) {
-        this.getUserLoginDetails();
-        this.userApiError = false;
-      } else {
-        this.userApiError = true;
-      }
-    });
-  }
+  // async updateUserInfo(formInput: IFormInput) {
+  //   runInAction(async () => {
+  //     const isValid = await postUserInfo(formInput);
+  //     if (isValid) {
+  //       this.getUserLoginDetails();
+  //       this.userApiError = false;
+  //     } else {
+  //       this.userApiError = true;
+  //     }
+  //   });
+  // }
 
   selectNewsFlash(id: number): void {
-    runInAction(() => {this.locationId = 0; this.activeNewsFlashId = id;});
+    runInAction(() => {
+      this.locationId = 0;
+      this.activeNewsFlashId = id;
+    });
     const widgetInput = {
       lang: this.selectedLanguage,
       newsId: id,
@@ -250,7 +256,10 @@ export default class RootStore {
   }
 
   selectLocationId(id: number): void {
-    runInAction(() => { this.activeNewsFlashId = 0; this.locationId = id});
+    runInAction(() => {
+      this.activeNewsFlashId = 0;
+      this.locationId = id;
+    });
     const widgetInput = {
       lang: this.selectedLanguage,
       gpsId: id,
@@ -296,8 +305,8 @@ export default class RootStore {
       runInAction(() => {
         this.widgetBoxLoading = false;
         if (response && response.widgets && response.meta) {
-          this.newsFlashWidgetsMeta = response.meta;
-          this.newsFlashWidgetsData = response.widgets;
+          this.widgetsMeta = response.meta;
+          this.widgetsData = response.widgets;
         } else {
           console.error(`fetchWidgets(id:${newsId || gpsId}) invalid response:`, response);
         }

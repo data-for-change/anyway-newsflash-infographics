@@ -22,7 +22,7 @@ interface IProps {
 const InfiniteScroll: FC<IProps> = ({ children, onScrollEnd }) => {
   const classes = useStyles();
   const scrollList = useRef<HTMLDivElement>(null);
-  const store = useStore();
+  const store = useStore().newsFlashStore;
 
   const handleScroll = useCallback(() => {
     if (scrollList.current !== null && !store.newsFlashLoading) {

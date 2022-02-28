@@ -25,17 +25,17 @@ const LANGUAGES = [
 const LanguageMenu: FC = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const { i18n } = useTranslation();
-  const store = useStore();
+  const {rootStore,newsFlashStore} = useStore();
 
   const LangClickHandler = (lang: string) => {
     if (lang !== i18n.language) {
       const prefix = lang !== 'he' ? `/${lang}` : '';
       let path = '';
-      if (store.activeNewsFlashId) {
-        path = `newsflash/${store.activeNewsFlashId}`;
+      if (newsFlashStore.activeNewsFlashId) {
+        path = `newsflash/${newsFlashStore.activeNewsFlashId}`;
       }
-      if (store.locationId) {
-        path = `location/${store.locationId}`;
+      if (rootStore.locationId) {
+        path = `location/${rootStore.locationId}`;
       }
       return window.location.assign(`${prefix}/${path}`);
     }

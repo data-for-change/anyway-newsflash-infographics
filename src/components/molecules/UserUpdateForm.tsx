@@ -44,7 +44,7 @@ const initialValidations = {
 };
 
 const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) => {
-  const store = useStore();
+  const store = useStore().userStore;
   const { t } = useTranslation();
   const [formInput, setFormInput] = useState<IFormInput>(defaultValues);
   const [validations, setValidations] = useState<IValidationErrors>(initialValidations);

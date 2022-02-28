@@ -45,7 +45,7 @@ interface IProps {}
 const NewsFlashFilterPanel: FC<IProps> = () => {
   const classes = useStyles();
   const { t } = useTranslation();
-  const store: RootStore = useStore();
+  const store = useStore().newsFlashStore;
 
   const getLogoByFilter = (type: SourceFilterEnum) => {
     switch (type) {

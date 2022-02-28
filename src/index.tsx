@@ -6,13 +6,16 @@ import './services/i18n.service';
 import * as serviceWorker from './serviceWorker';
 import OverlayLoader from './components/molecules/OverlayLoader';
 import { ErrorBoundary } from 'components/atoms';
+import { store, StoreContext } from './store/storeConfig';
 
 ReactDOM.render(
-  <Suspense fallback={<OverlayLoader show />}>
-    <ErrorBoundary>
-      <App />
-    </ErrorBoundary>
-  </Suspense>,
+  <StoreContext.Provider value={store}>
+    <Suspense fallback={<OverlayLoader show />}>
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
+    </Suspense>,
+  </StoreContext.Provider>,
   document.getElementById('root'),
 );
 

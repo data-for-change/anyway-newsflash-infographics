@@ -12,9 +12,9 @@ import WidgetWrapper from 'components/molecules/widgets/WidgetWrapper';
 import { useTranslation } from 'react-i18next';
 
 const WidgetsTemplate: FC = () => {
-  const store: RootStore = useStore();
+  const store = useStore().widgetStore;
   const { t } = useTranslation();
-  const widgetsData = store.newsFlashWidgetsData;
+  const widgetsData = store.widgetsData;
   const widgetCards = widgetsData.map((widget, index, sizeOptions) => {
     const widgetComponent = (
       <WidgetWrapper

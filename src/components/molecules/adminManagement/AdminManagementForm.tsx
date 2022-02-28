@@ -4,8 +4,8 @@ import DialogWithHeader from '../DialogWithHeader';
 import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from 'components/atoms';
-import { useStore } from 'store/storeConfig';
-import RootStore from 'store/root.store';
+import { useStore, store } from 'store/storeConfig';
+// import RootStore from 'store/root.store';
 import OverlayLoader from 'components/molecules/OverlayLoader';
 import { StyledTableCell, StyledTableRow } from '../Table/TableView';
 import {
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const AdminManagementForm: React.FC<IProps> = ({ saveUserChanges, isShowing, onClose, loading }) => {
-  const store: RootStore = useStore();
+  const { userStore, rootStore } = useStore();
   const [usersToUpadte, setUsersForUpdate] = React.useState<IusersForUpdateMap>({});
   const { t } = useTranslation();
   const classes = useStyles();
@@ -86,8 +86,8 @@ const AdminManagementForm: React.FC<IProps> = ({ saveUserChanges, isShowing, onC
             </StyledTableRow>
           </TableHead>
           <TableBody>
-            {store.usersManagementTableData &&
-              store.usersManagementTableData.map((item: any, index: number) => (
+            {userStore.usersManagementTableData &&
+              userStore.usersManagementTableData.map((item: any, index: number) => (
                 <StyledTableRow className={classes.row} key={index}>
                   <TableCell align="center" width={'20%'}>{item.name}</TableCell>
                   <TableCell align="center"  width={'20%'}>{item.email}</TableCell>
@@ -97,7 +97,7 @@ const AdminManagementForm: React.FC<IProps> = ({ saveUserChanges, isShowing, onC
                         itemOrg={item.org}
                         itemEmail={item.email}
                         usersToUpadte={usersToUpadte}
-                        organizationsList={store.organizationsList}
+                        organizationsList={rootStore.organizationsList}
                         setUsersForUpdateFunction={setUsersForUpdateFunction}
                       />
                     ) : (

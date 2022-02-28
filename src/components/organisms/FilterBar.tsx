@@ -25,9 +25,9 @@ const useStyles = makeStyles(() =>
 );
 
 const FilterBar: FC<IProps> = () => {
-  const store: RootStore = useStore();
+  const {rootStore,widgetStore,newsFlashStore} = useStore();
   const classes = useStyles();
-  const onFilterChange = useCallback((value: number) => store.changeTimeFilter(value), [store]);
+  const onFilterChange = useCallback((value: number) => rootStore.changeTimeFilter(value), [rootStore]);
   const { t } = useTranslation();
   const [isDescOpen, setIsDescOpen] = useState(false);
 
@@ -37,9 +37,9 @@ const FilterBar: FC<IProps> = () => {
       ? parseInt(queryString.parse(queryParam)['years_ago'] as string)
       : null;
     if (filterValFromUrl) {
-      store.changeTimeFilter(filterValFromUrl);
+      rootStore.changeTimeFilter(filterValFromUrl);
     }
-  }, [queryParam, store]);
+  }, [queryParam, rootStore]);
 
   return (
     <div className={classes.grow}>
@@ -52,7 +52,7 @@ const FilterBar: FC<IProps> = () => {
             <Grid item>
               <Grid item container spacing={2} className={classes.descriptionHeader}>
                 <Grid item>
-                  <Typography.Body2 bold>{store.newsFlashWidgetsMetaLocation}</Typography.Body2>
+                  <Typography.Body2 bold>{widgetStore.newsFlashWidgetsMetaLocation}</Typography.Body2>
                 </Grid>
                 <Grid item>
                   <Button.Standard onClick={() => setIsDescOpen(!isDescOpen)}>
@@ -64,7 +64,7 @@ const FilterBar: FC<IProps> = () => {
             <Collapse in={isDescOpen} timeout="auto">
               <Grid item lg={12}>
                 <Box mb={2} px={3}>
-                  <Typography.Body3>{store.activeNewsFlash?.description}</Typography.Body3>
+                  <Typography.Body3>{newsFlashStore.activeNewsFlash?.description}</Typography.Body3>
                 </Box>
               </Grid>
             </Collapse>

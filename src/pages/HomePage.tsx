@@ -32,26 +32,26 @@ const useStyles = makeStyles({
 
 const HomePage: FC<IProps> = () => {
   const classes = useStyles();
-  const store: RootStore = useStore();
+  const {rootStore, widgetStore} = useStore();
   const { gpsId, newsId, lng } = useParams<IRouteProps>();
-  const loading = store.widgetBoxLoading;
+  const loading = widgetStore.widgetBoxLoading;
 
   useEffect(() => {
     if (newsId) {
-      store.selectNewsFlash(parseInt(newsId));
+      rootStore.selectNewsFlash(parseInt(newsId));
     }
     if (gpsId) {
-      store.selectLocationId(parseInt(gpsId));
+      rootStore.selectLocationId(parseInt(gpsId));
     }
-  }, [newsId, store, gpsId]);
+  }, [newsId, rootStore, gpsId]);
 
   useEffect(() => {
     if (lng) {
-      store.changeLanguage(lng);
+      rootStore.changeLanguage(lng);
     } else {
-      store.changeLanguage(LANG.HE);
+      rootStore.changeLanguage(LANG.HE);
     }
-  }, [lng, store]);
+  }, [lng, rootStore]);
 
   if (!newsId && !gpsId) {
     return <Redirect to="/" />;

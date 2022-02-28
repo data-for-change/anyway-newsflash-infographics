@@ -19,7 +19,7 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
   const [cardElement, setCardElement] = useState({});
   const [size, setSize] = useState(1);
   const { t } = useTranslation();
-  const store = useStore();
+  const store = useStore().widgetStore;
   const widget = store.getWidgetsDataByName(widgetName);
   const roadNumber = store.newsFlashWidgetsMetaRoadNumber;
   const dateComment = store.newsFlashWidgetsMetaDateComment;

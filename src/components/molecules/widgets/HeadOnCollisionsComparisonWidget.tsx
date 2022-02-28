@@ -61,7 +61,7 @@ const useStyles = makeStyles(() => ({
 
 const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePercent }) => {
   const classes = useStyles();
-  const store: RootStore = useStore();
+  const store = useStore().widgetStore;
   const { t } = useTranslation();
   const bigPieData = data.items.specific_road_segment_fatal_accidents;
   const smallPieData = data.items.all_roads_fatal_accidents;
