@@ -9,7 +9,6 @@ import OverlayLoader from 'components/molecules/OverlayLoader';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
-import DemoPage from './DemoPage';
 import { Redirect, Route, Switch, useParams } from 'react-router-dom';
 import { IRouteProps } from 'models/Route';
 import { LANG } from 'const/languages.const';
@@ -67,7 +66,6 @@ const HomePage: FC<IProps> = () => {
         <FilterBar />
         {/* main Content */}
         <Switch>
-          <Route path="/:lng?/newsflash/999" component={DemoPage} />
           <Route path="/:lng?/newsflash/:newsId" component={WidgetsTemplate} />
           <Route path="/:lng?/location/:gpsId" component={WidgetsTemplate} />
         </Switch>
