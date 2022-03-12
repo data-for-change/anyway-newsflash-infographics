@@ -15,6 +15,7 @@ const WidgetsTemplate: FC = () => {
   const store: RootStore = useStore();
   const { t } = useTranslation();
   const widgetsData = store.newsFlashWidgetsData;
+
   const widgetCards = widgetsData.map((widget, index, sizeOptions) => {
     const widgetComponent = (
       <WidgetWrapper

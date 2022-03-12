@@ -7,7 +7,7 @@ import { FormControl } from '@material-ui/core';
 import { Select } from '@material-ui/core';
 import { CalendarTodayOutlined } from '@material-ui/icons';
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 import { useStore } from 'store/storeConfig';
 
 interface IProps {
@@ -27,16 +27,17 @@ const SelectButton: FC<IProps> = ({ onChange }) => {
   const store = useStore();
   const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<{ value: unknown }>) => {
       onChange(event.target.value as number);
-      const url: string = history.location.pathname;
+      const url: string = location.pathname;
       const queryPrefix = url.indexOf('?') === -1 ? '?' : '&';
-      history.push(`${url}${queryPrefix}years_ago=${store.newsFlashWidgetsTimerFilter}`);
+      navigate(`${url}${queryPrefix}years_ago=${store.newsFlashWidgetsTimerFilter}`);
     },
-    [onChange, history, store.newsFlashWidgetsTimerFilter],
+    [onChange, location.pathname, navigate, store.newsFlashWidgetsTimerFilter],
   );
 
   const handleClose = () => {

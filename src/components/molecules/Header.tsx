@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
-import { AppBar,Button, Logo } from 'components/atoms';
+import { AppBar, Button, Logo } from 'components/atoms';
 import LogInLinkGoogle from './LogInLinkGoogle';
 import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
@@ -14,8 +14,7 @@ import anywayLogo from 'assets/anyway.png';
 import { SignInIcon } from 'components/atoms/SignInIcon';
 import MapDialog from 'components/molecules/MapDialog';
 import { IPoint } from 'models/Point';
-import { useHistory } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles({
   userSection: {
@@ -29,7 +28,7 @@ const reloadHomePage = () => {
 };
 
 const Header: FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const classes = useStyles();
   const store: RootStore = useStore();
@@ -39,16 +38,19 @@ const Header: FC = () => {
   const isUserDetailsRequired: boolean = !store.userInfo?.meta.isCompleteRegistration;
   const roadSegmentLocation = store.gpsLocationData;
 
-  const onLocationChange = useCallback((location: IPoint) => {
-    store.fetchGpsLocation(location);
-  },[store]);
+  const onLocationChange = useCallback(
+    (location: IPoint) => {
+      store.fetchGpsLocation(location);
+    },
+    [store],
+  );
 
   const onLocationSearch = () => {
     if (roadSegmentLocation) {
-      history.push(`${store.currentLanguageRouteString}/location/${roadSegmentLocation?.road_segment_id}`);
+      navigate(`${store.currentLanguageRouteString}/location/${roadSegmentLocation?.road_segment_id}`);
       setOpen(false);
       store.setGpsLocationData(null);
-    };
+    }
   };
 
   useEffect(() => {
@@ -73,10 +75,12 @@ const Header: FC = () => {
         />
       );
     } else {
-      authElement = <>
-        <LogInLinkGoogle />
-        <SignInIcon/>
-      </>;
+      authElement = (
+        <>
+          <LogInLinkGoogle />
+          <SignInIcon />
+        </>
+      );
     }
   }
 
