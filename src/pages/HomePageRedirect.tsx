@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Redirect } from 'react-router';
+import { Navigate } from 'react-router';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
@@ -10,7 +10,7 @@ interface IProps {}
 const HomePageRedirect: FC<IProps> = () => {
   const store: RootStore = useStore();
   const defaultId = store?.newsFlashCollection[0]?.id;
-  return defaultId ? <Redirect to={`/newsflash/${defaultId}`} /> : null;
+  return defaultId ? <Navigate to={`/newsflash/${defaultId}`} replace /> : null;
 };
 
 export default observer(HomePageRedirect);
