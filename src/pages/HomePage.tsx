@@ -1,5 +1,4 @@
-import { FC, useEffect } from 'react';
-import WidgetsTemplate from '../components/organisms/WidgetsTemplate';
+import { useEffect, FC } from 'react';
 import { Box } from '@material-ui/core';
 import SideBar from 'components/organisms/SideBar';
 import makeStyles from '@material-ui/core/styles/makeStyles';
@@ -9,8 +8,7 @@ import OverlayLoader from 'components/molecules/OverlayLoader';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
-import DemoPage from './DemoPage';
-import { Redirect, Route, Switch, useParams } from 'react-router-dom';
+import { Navigate, useParams, Outlet } from 'react-router-dom';
 import { IRouteProps } from 'models/Route';
 import { LANG } from 'const/languages.const';
 
@@ -54,7 +52,7 @@ const HomePage: FC<IProps> = () => {
   }, [lng, store]);
 
   if (!newsId && !gpsId) {
-    return <Redirect to="/" />;
+    return <Navigate to="/" replace />;
   }
 
   return (
@@ -65,12 +63,7 @@ const HomePage: FC<IProps> = () => {
       <Box flexGrow={5} className={classes.widgetBox} position="relative">
         <OverlayLoader show={loading} />
         <FilterBar />
-        {/* main Content */}
-        <Switch>
-          <Route path="/:lng?/newsflash/999" component={DemoPage} />
-          <Route path="/:lng?/newsflash/:newsId" component={WidgetsTemplate} />
-          <Route path="/:lng?/location/:gpsId" component={WidgetsTemplate} />
-        </Switch>
+        <Outlet />
       </Box>
     </Box>
   );

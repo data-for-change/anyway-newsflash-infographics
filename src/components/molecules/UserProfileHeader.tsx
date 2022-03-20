@@ -49,10 +49,11 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const store: RootStore = useStore();
+  const { email, firstName, lastName } = userDetails.data;
   const defaultFormInput: IFormInput = {
-    email: userDetails.data.email,
-    firstName: userDetails.data.firstName,
-    lastName: userDetails.data.lastName,
+    email,
+    firstName,
+    lastName,
     workplace: userDetails.data.roles.filter((role) => role !== ROLE_ADMIN_NAME)[0], // first role that is not admin
   };
   const saveUserChanges = async (email: string, prevOrgName: string, newOrgName: string) => {
@@ -87,7 +88,7 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({
 
   return (
     <>
-      {true && (
+      {isAdmin && (
         <Box className={classes.userButton} onClick={() => toggleAdminManagementScreen(true)}>
           {t('header.management')}
         </Box>

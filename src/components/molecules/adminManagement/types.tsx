@@ -3,7 +3,7 @@ export const labels = ['Name', 'Email', 'Organization'];
 export interface IProps {
   isShowing: boolean;
   onClose: () => void;
-  saveUserChanges: any;
+  saveUserChanges: (email: string, prevOrgName: string, newOrgName: string) => void;
   loading: boolean;
 }
 

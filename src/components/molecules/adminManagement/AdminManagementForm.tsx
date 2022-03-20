@@ -8,16 +8,8 @@ import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
 import OverlayLoader from 'components/molecules/OverlayLoader';
 import { StyledTableCell, StyledTableRow } from '../Table/TableView';
-import {
-  TableContainer,
-  Button,
-  Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  Theme,
-} from '@material-ui/core';
+import { maxHeightTable } from 'style/_sizes';
+import { TableContainer, Button, Box, Table, TableBody, TableCell, TableHead, Theme } from '@material-ui/core';
 import { blackColor } from 'style';
 import { EditModeButtons } from './EditModeButtons';
 import { OrganizationEditList } from './OrganizationEditList';
@@ -30,12 +22,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderCollapse: 'separate',
   },
   tableContainer: {
-    maxHeight: 450,
-    paddingBottom: 30,
+    maxHeight: maxHeightTable,
+    paddingBottom: theme.spacing(3),
   },
-  row:{
-    height :'65px',
-  }
+  row: {
+    height: '65px',
+  },
 }));
 
 const AdminManagementForm: React.FC<IProps> = ({ saveUserChanges, isShowing, onClose, loading }) => {
@@ -89,8 +81,12 @@ const AdminManagementForm: React.FC<IProps> = ({ saveUserChanges, isShowing, onC
             {store.usersManagementTableData &&
               store.usersManagementTableData.map((item: any, index: number) => (
                 <StyledTableRow className={classes.row} key={index}>
-                  <TableCell align="center" width={'20%'}>{item.name}</TableCell>
-                  <TableCell align="center"  width={'20%'}>{item.email}</TableCell>
+                  <TableCell align="center" width={'20%'}>
+                    {item.name}
+                  </TableCell>
+                  <TableCell align="center" width={'20%'}>
+                    {item.email}
+                  </TableCell>
                   <TableCell align="center" width={'25%'}>
                     {usersToUpadte[item.email] ? (
                       <OrganizationEditList
@@ -104,7 +100,7 @@ const AdminManagementForm: React.FC<IProps> = ({ saveUserChanges, isShowing, onC
                       <Typography.Body2>{item.org}</Typography.Body2>
                     )}
                   </TableCell>
-                  <TableCell align="center"  width={'35%'}>
+                  <TableCell align="center" width={'35%'}>
                     {usersToUpadte[item.email] ? (
                       <EditModeButtons
                         saveEditModeAndDelete={saveEditModeAndDelete}

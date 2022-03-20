@@ -26,12 +26,11 @@ const News: FC = () => {
   const classes = useStyles();
   const locale = useLocale();
   const { gpsId } = useParams<IRouteProps>();
-
   return (
     <Box flexGrow={1} display="flex" flexDirection="column" className={classes.newsFeed}>
       <Box flexGrow={1}>
         <Box className={classes.container} flexDirection={'column'}>
-          {gpsId && <LocationSearchIndicator/>}
+          {gpsId && <LocationSearchIndicator />}
           {store.newsFlashCollection.length > 0 ? (
             store.newsFlashCollection.map((news) => {
               const className = news.id === store.activeNewsFlashId ? classes.activeNewsFlash : '';
