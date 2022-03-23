@@ -8,8 +8,10 @@ const colors = [yellowColor, honeyColor, roseColor];
 const Y_AXIS_OFFSET = 20;
 const MIN_BAR_HEIGHT = 20;
 
-type BarDataMap = {
-  [key: string]: number | string;
+export const BAR_CHART_X_LABEL = 'xLabel'
+
+export type BarDataMap = {
+  [key: string]: string | number;
 };
 
 type CustomizedLabelProps = {
@@ -55,7 +57,7 @@ const BarChartContainer: FC<IBarChartBaseProps> = ({ data, textLabel, children }
           <XAxis
             angle={-7}
             interval={0}
-            dataKey={'xType'}
+            dataKey={BAR_CHART_X_LABEL}
             tickLine={false}
             axisLine={false}
             style={{ fill: blackColor }}
