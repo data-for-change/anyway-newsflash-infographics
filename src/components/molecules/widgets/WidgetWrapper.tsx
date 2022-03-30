@@ -8,7 +8,7 @@ import {
   IWidgetAccidentsBySeverityTextData,
   IWidgetInjuredBySeverityTextData,
   IWidgetAccidentsByTypeData,
-  IWidgetAccidentsByYearData,
+  IWidgetMultiBarData,
   IWidgetInjuredByYearData,
   IWidgetAccidentsByDayNightData,
   IWidgetHeadOnCollisionsComparisonData,
@@ -127,7 +127,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
       break;
     }
     case WidgetName.accident_count_by_accident_year: {
-      widgetComponent = <CountByYearBarWidget data={data as IWidgetAccidentsByYearData} />;
+      widgetComponent = <CountByYearBarWidget data={data as IWidgetMultiBarData} />;
       break;
     }
     case WidgetName.injured_count_by_accident_year: {
