@@ -45,12 +45,13 @@ const CardHeader: FC<IProps> = ({ variant, text, road }) => {
 
   let headerContent = null;
   const headerText = splitTextHeader(text);
+const roadNumberComp : JSX.Element | null = road ? <RoadNumberImage roadNumber={road} /> : null;
 
   switch (variant) {
     case HeaderVariant.Centered:
       headerContent = (
         <Box display="flex" alignItems="center" flex={1}>
-          <RoadNumberImage roadNumber={road} />
+          {roadNumberComp}
           <Box display="flex" justifyContent="center" px={2} className={classes.textWrapper}>
             <Box display="flex" flexDirection="column">
               <Typography.Body1>{headerText?.textLine1}</Typography.Body1>
@@ -64,7 +65,7 @@ const CardHeader: FC<IProps> = ({ variant, text, road }) => {
       headerContent = (
         <Box className={classes.labelWrapper} pr={2}>
           <Box display="flex" justifyContent="center" alignItems="center" mr={4}>
-            <RoadNumberImage roadNumber={road} />
+            {roadNumberComp}
           </Box>
           <Box textAlign="center" px={2} className={classes.label}>
             <Typography.Body1>{text}</Typography.Body1>
@@ -76,7 +77,7 @@ const CardHeader: FC<IProps> = ({ variant, text, road }) => {
       headerContent = (
         <Box display="flex" flex={1}>
           <Box className={classes.roadImageWrapper}>
-            <RoadNumberImage roadNumber={road} />
+            {roadNumberComp}
           </Box>
           <Box ml={'7%'} display="flex" flex={1} justifyContent="flex-end" alignItems="flex-end" height={30}>
             <Box className={classes.logosContainer} mx={1}>
