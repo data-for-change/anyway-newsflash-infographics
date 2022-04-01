@@ -49,12 +49,12 @@ const App: FC = () => {
             <Box height={pageContentHeight} className={classes.pageContent}>
               <Routes>
                 <Route path="/" element={<HomePageRedirect />} />
+                <Route path="/login-popup-redirect" element={<PopUpRedirect />} />
                 <Route element={<HomePage />}>
                   <Route path="/:lng/newsflash/:newsId/*" element={<WidgetsTemplate />} />
                   <Route path="/newsflash/:newsId/*" element={<WidgetsTemplate />} />
                   <Route path="/:lng/location/:gpsId/*" element={<WidgetsTemplate />} />
                   <Route path="/location/:gpsId/*" element={<WidgetsTemplate />} />
-                  <Route path="/login-popup-redirect" element={<PopUpRedirect />} />
                 </Route>
               </Routes>
             </Box>
