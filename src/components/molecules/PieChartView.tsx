@@ -2,6 +2,7 @@ import React, { FC, useCallback } from 'react';
 import { ResponsiveContainer, PieChart, Pie, Cell, PieLabelRenderProps } from 'recharts';
 import { fontFamilyString, pieChartColors, whiteColor } from 'style';
 import { makeStyles } from '@material-ui/core';
+import { toJS } from 'mobx';
 
 const TEXT_RELATIVE_WIDTH = 0.8;
 
@@ -154,7 +155,6 @@ export const PieChartView: FC<IProps> = ({
   );
 
   const classes = useStyles();
-
   return (
     <ResponsiveContainer width={width} height={'100%'}>
       <PieChart>

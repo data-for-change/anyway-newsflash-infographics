@@ -10,6 +10,7 @@ export enum HeaderVariant {
 export enum FooterVariant {
   None,
   Logo,
+  LogoNoYearsRange,
 }
 
 export interface CardVariant {
@@ -28,7 +29,10 @@ const widgetVariants: { [index: string]: CardVariant } = {
   [WidgetName.most_severe_accidents_table]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
   [WidgetName.accident_count_by_severity]: { header: HeaderVariant.Logo, footer: FooterVariant.None },
   [WidgetName.injured_count_by_severity]: { header: HeaderVariant.Logo, footer: FooterVariant.None },
-  [WidgetName.accident_count_by_accident_type]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
+  [WidgetName.accident_count_by_accident_type]: {
+    header: HeaderVariant.Centered,
+    footer: FooterVariant.LogoNoYearsRange,
+  },
   [WidgetName.accident_count_by_accident_year]: { header: HeaderVariant.Logo, footer: FooterVariant.None },
   [WidgetName.injured_count_by_accident_year]: { header: HeaderVariant.Logo, footer: FooterVariant.None },
   [WidgetName.accident_count_by_day_night]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
