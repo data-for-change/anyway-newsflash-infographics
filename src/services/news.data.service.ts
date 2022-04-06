@@ -2,7 +2,6 @@ import axios from 'axios';
 import { INewsFlash } from 'models/NewFlash';
 import { showDemoCards } from 'utils/utils';
 import { addDemoNewsflash } from './mocks/mock.service';
-import { isProd } from 'utils/env.utils';
 
 const errorNews: INewsFlash = {
   lat: -1,
