@@ -32,10 +32,11 @@ const Header: FC = () => {
   const { t } = useTranslation();
   const classes = useStyles();
   const store: RootStore = useStore();
+  const { userStore } = store;
 
   const [open, setOpen] = useState(false);
 
-  const isUserDetailsRequired: boolean = !store.userInfo?.meta.isCompleteRegistration;
+  const isUserDetailsRequired: boolean = !userStore.userInfo?.meta.isCompleteRegistration;
   const roadSegmentLocation = store.gpsLocationData;
 
   const onLocationChange = useCallback(
@@ -54,21 +55,21 @@ const Header: FC = () => {
   };
 
   useEffect(() => {
-    store.getUserLoginDetails();
-  }, [store]);
+    userStore.getUserLoginDetails();
+  }, [userStore]);
 
   let authElement;
   const logo = anywayLogo;
   if (FEATURE_FLAGS.login) {
     //login or logout- depend on authentication state
-    if (store.isUserAuthenticated) {
-      const { ...userDetails } = store.userInfo;
+    if (userStore.isUserAuthenticated) {
+      const { ...userDetails } = userStore.userInfo;
       const handleLogout = () => {
-        store.logOutUser();
+        userStore.logOutUser();
       };
       authElement = (
         <UserProfileHeader
-          isAdmin={store.isAdmin}
+          isAdmin={userStore.isAdmin}
           handleLogout={handleLogout}
           isUpdateScreenOpen={isUserDetailsRequired}
           userDetails={userDetails}

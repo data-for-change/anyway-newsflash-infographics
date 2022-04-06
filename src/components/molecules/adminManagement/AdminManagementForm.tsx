@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const AdminManagementForm: React.FC<IProps> = ({ saveUserChanges, isShowing, onClose, loading }) => {
   const store: RootStore = useStore();
+  const { userStore } = store;
   const [usersToUpadte, setUsersForUpdate] = React.useState<IusersForUpdateMap>({});
   const { t } = useTranslation();
   const classes = useStyles();
@@ -78,8 +79,8 @@ const AdminManagementForm: React.FC<IProps> = ({ saveUserChanges, isShowing, onC
             </StyledTableRow>
           </TableHead>
           <TableBody>
-            {store.usersManagementTableData &&
-              store.usersManagementTableData.map((item: any, index: number) => (
+            {userStore.usersManagementTableData &&
+              userStore.usersManagementTableData.map((item: any, index: number) => (
                 <StyledTableRow className={classes.row} key={index}>
                   <TableCell align="center" width={'20%'}>
                     {item.name}
@@ -93,7 +94,7 @@ const AdminManagementForm: React.FC<IProps> = ({ saveUserChanges, isShowing, onC
                         itemOrg={item.org}
                         itemEmail={item.email}
                         usersToUpadte={usersToUpadte}
-                        organizationsList={store.organizationsList}
+                        organizationsList={userStore.organizationsList}
                         setUsersForUpdateFunction={setUsersForUpdateFunction}
                       />
                     ) : (

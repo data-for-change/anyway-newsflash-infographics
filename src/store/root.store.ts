@@ -8,21 +8,11 @@ import { IDateComments, IGpsData, ILocationMeta, IWidgetBase } from 'models/Widg
 import { SourceFilterEnum } from 'models/SourceFilter';
 import { fetchNews } from 'services/news.data.service';
 import SettingsStore from './settings.store';
+import UserStore from './userStore';
 import { IPoint } from 'models/Point';
-import {
-  IAnywayUserDetails,
-  fetchUserInfo,
-  logoutUserFromSession,
-  postUserInfo,
-  getUsersList,
-  getOrganizationsDataList,
-  updateUserOrganization,
-} from 'services/user.service';
 import i18next from 'services/i18n.service';
-import { IFormInput } from 'components/molecules/UserUpdateForm';
 import { fetchGpsLocation } from 'services/gpsToLocation.data.service';
 import { LANG } from 'const/languages.const';
-import { ROLE_ADMIN_NAME } from 'utils/utils';
 import { IUserInfo } from 'models/user/IUserInfo';
 
 // todo: move all map defaults to one place
@@ -45,9 +35,6 @@ export default class RootStore {
   appInitialized = false;
 
   newsFlashCollection: Array<INewsFlash> = [];
-  isUserAuthenticated: boolean = false;
-  userApiError: boolean = false;
-  userInfo: IAnywayUserDetails | null = null;
   activeNewsFlashId: number = 0; // active newsflash id
   locationId: number = 0; // data by location id
   newsFlashFetchOffSet = 0;
@@ -62,11 +49,8 @@ export default class RootStore {
   gpsLocationData: IGpsData | null = null;
   // domain stores
   settingsStore: SettingsStore;
-  //admin role only observables
-  isAdmin : boolean = false;
-  usersInfoList : [IUserInfo] | null= null;
-  organizationsList : Array<String>  | null = null;
-
+  //different stores
+  userStore: UserStore;
 
   constructor() {
     // init app data
@@ -85,6 +69,7 @@ export default class RootStore {
     });
     // settings store - settings of the app such as num of results returned etc.
     this.settingsStore = new SettingsStore(this);
+    this.userStore = new UserStore(this);
   }
 
   get newsFlashWidgetsMetaLocation(): string {
@@ -126,43 +111,11 @@ export default class RootStore {
     return this.newsFlashCollection.find((item) => item.id === this.activeNewsFlashId);
   }
 
-  get usersManagementTableData() : any {
-    return this.usersInfoList?.map(user => ({name :`${user.first_name} ${user.last_name}` , org: user.organizations[0] ?? ''  ,email : user.email}))
-  }
-
   getWidgetsDataByName(name: string): IWidgetBase | undefined {
     return this.newsFlashWidgetsData.find((item) => item.name === name);
   }
 
   checkuserstatus(): void {}
-
-  getUsersListInfo() {
-    getUsersList().then( list => {
-      this.usersInfoList = list
-    }).catch(e => {
-      console.log(`error getting user details :${JSON.stringify(e)}`);
-    })
-  }
-
-  getOrganizationsData() {
-    getOrganizationsDataList().then(list =>{
-      this.organizationsList = list;
-    }).catch(e => {
-      console.error(`error getting organization list :${JSON.stringify(e)}`);
-    })
-  }
-
-  async setOrgToUser(org: string, email: string) {
-    try {
-      await updateUserOrganization(org, email);
-    } catch (e) {
-      console.error(`error adding user to org  :${JSON.stringify(e)}`);
-    }
-  }
-
-   get orgNamesList() {
-    return this.organizationsList;
-   }
 
   setActiveNewsFlashFilter(filter: SourceFilterEnum) {
     if (filter !== this.newsFlashActiveFilter) {
@@ -194,53 +147,11 @@ export default class RootStore {
     }
   }
 
-  logOutUser() {
-    logoutUserFromSession().then((isOk) => {
-      if (isOk) {
-        runInAction(() => {
-          this.isUserAuthenticated = false;
-          this.userInfo = null;
-          if(this.isAdmin){
-            this.usersInfoList = null;
-            this.isAdmin = false;
-          }
-        });
-      }
-    });
-  }
-
-  getUserLoginDetails() {
-    fetchUserInfo()
-      .then((userData) => {
-        runInAction(() => {
-          this.userInfo = userData;
-          this.isAdmin = userData.data.roles.includes(ROLE_ADMIN_NAME);
-          this.isUserAuthenticated = true;
-        });
-      })
-      .catch((err) => {
-        runInAction(() => {
-          this.isUserAuthenticated = false;
-        });
-        console.error(err);
-      });
-  }
-
-
-  async updateUserInfo(formInput: IFormInput) {
-    runInAction(async () => {
-      const isValid = await postUserInfo(formInput);
-      if (isValid) {
-        this.getUserLoginDetails();
-        this.userApiError = false;
-      } else {
-        this.userApiError = true;
-      }
-    });
-  }
-
   selectNewsFlash(id: number): void {
-    runInAction(() => {this.locationId = 0; this.activeNewsFlashId = id;});
+    runInAction(() => {
+      this.locationId = 0;
+      this.activeNewsFlashId = id;
+    });
     const widgetInput = {
       lang: this.selectedLanguage,
       newsId: id,
@@ -250,7 +161,10 @@ export default class RootStore {
   }
 
   selectLocationId(id: number): void {
-    runInAction(() => { this.activeNewsFlashId = 0; this.locationId = id});
+    runInAction(() => {
+      this.activeNewsFlashId = 0;
+      this.locationId = id;
+    });
     const widgetInput = {
       lang: this.selectedLanguage,
       gpsId: id,
