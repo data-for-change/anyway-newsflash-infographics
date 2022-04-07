@@ -28,10 +28,12 @@ export default class UserStore {
     makeAutoObservable(this);
   }
 
+  checkuserstatus(): void {}
+
   getOrganizationsData() {
     getOrganizationsDataList()
       .then((list) => {
-        this.rootStore.userStore.organizationsList = list;
+        this.organizationsList = list;
       })
       .catch((e) => {
         console.error(`error getting organization list :${JSON.stringify(e)}`);
@@ -47,11 +49,11 @@ export default class UserStore {
   }
 
   get orgNamesList() {
-    return this.rootStore.userStore.organizationsList;
+    return this.organizationsList;
   }
 
   get usersManagementTableData(): any {
-    return this.rootStore.userStore.usersInfoList?.map((user) => ({
+    return this.usersInfoList?.map((user) => ({
       name: `${user.first_name} ${user.last_name}`,
       org: user.organizations[0] ?? '',
       email: user.email,
@@ -61,7 +63,7 @@ export default class UserStore {
   getUsersListInfo() {
     getUsersList()
       .then((list) => {
-        this.rootStore.userStore.usersInfoList = list;
+        this.usersInfoList = list;
       })
       .catch((e) => {
         console.log(`error getting user details :${JSON.stringify(e)}`);
@@ -72,14 +74,14 @@ export default class UserStore {
     fetchUserInfo()
       .then((userData) => {
         runInAction(() => {
-          this.rootStore.userStore.userInfo = userData;
-          this.rootStore.userStore.isAdmin = userData.data.roles.includes(ROLE_ADMIN_NAME);
-          this.rootStore.userStore.isUserAuthenticated = true;
+          this.userInfo = userData;
+          this.isAdmin = userData.data.roles.includes(ROLE_ADMIN_NAME);
+          this.isUserAuthenticated = true;
         });
       })
       .catch((err) => {
         runInAction(() => {
-          this.rootStore.userStore.isUserAuthenticated = false;
+          this.isUserAuthenticated = false;
         });
         console.error(err);
       });
@@ -89,10 +91,10 @@ export default class UserStore {
     runInAction(async () => {
       const isValid = await postUserInfo(formInput);
       if (isValid) {
-        this.rootStore.userStore.getUserLoginDetails();
-        this.rootStore.userStore.userApiError = false;
+        this.getUserLoginDetails();
+        this.userApiError = false;
       } else {
-        this.rootStore.userStore.userApiError = true;
+        this.userApiError = true;
       }
     });
   }
@@ -101,11 +103,11 @@ export default class UserStore {
     logoutUserFromSession().then((isOk) => {
       if (isOk) {
         runInAction(() => {
-          this.rootStore.userStore.isUserAuthenticated = false;
-          this.rootStore.userStore.userInfo = null;
-          if (this.rootStore.userStore.isAdmin) {
-            this.rootStore.userStore.usersInfoList = null;
-            this.rootStore.userStore.isAdmin = false;
+          this.isUserAuthenticated = false;
+          this.userInfo = null;
+          if (this.isAdmin) {
+            this.usersInfoList = null;
+            this.isAdmin = false;
           }
         });
       }

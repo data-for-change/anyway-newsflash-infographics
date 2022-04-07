@@ -23,14 +23,15 @@ const InfiniteScroll: FC<IProps> = ({ children, onScrollEnd }) => {
   const classes = useStyles();
   const scrollList = useRef<HTMLDivElement>(null);
   const store = useStore();
+  const { newsFlashStore } = store;
 
   const handleScroll = useCallback(() => {
-    if (scrollList.current !== null && !store.newsFlashLoading) {
+    if (scrollList.current !== null && !newsFlashStore.newsFlashLoading) {
       if (isScrollEnd(scrollList.current)) {
         onScrollEnd();
       }
     }
-  }, [scrollList, onScrollEnd, store.newsFlashLoading]);
+  }, [scrollList, onScrollEnd, newsFlashStore.newsFlashLoading]);
 
   useEffect(() => {
     if (scrollList.current) {

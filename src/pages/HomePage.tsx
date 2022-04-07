@@ -33,15 +33,16 @@ const HomePage: FC<IProps> = () => {
   const store: RootStore = useStore();
   const { gpsId, newsId, lng } = useParams<IRouteProps>();
   const loading = store.widgetBoxLoading;
+  const { newsFlashStore } = store;
 
   useEffect(() => {
     if (newsId) {
-      store.selectNewsFlash(parseInt(newsId));
+      newsFlashStore.selectNewsFlash(parseInt(newsId));
     }
     if (gpsId) {
-      store.selectLocationId(parseInt(gpsId));
+      newsFlashStore.selectLocationId(parseInt(gpsId));
     }
-  }, [newsId, store, gpsId]);
+  }, [newsId, newsFlashStore, gpsId]);
 
   useEffect(() => {
     if (lng) {

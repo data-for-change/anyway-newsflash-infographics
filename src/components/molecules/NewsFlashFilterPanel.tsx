@@ -46,6 +46,7 @@ const NewsFlashFilterPanel: FC<IProps> = () => {
   const classes = useStyles();
   const { t } = useTranslation();
   const store: RootStore = useStore();
+  const { newsFlashStore } = store;
 
   const getLogoByFilter = (type: SourceFilterEnum) => {
     switch (type) {
@@ -68,9 +69,9 @@ const NewsFlashFilterPanel: FC<IProps> = () => {
         return (
           <AnyWayButton
             className={classnames(classes.button, {
-              [classes.active]: store.newsFlashActiveFilter === filter,
+              [classes.active]: newsFlashStore.newsFlashActiveFilter === filter,
             })}
-            onClick={() => store.setActiveNewsFlashFilter(filter)}
+            onClick={() => newsFlashStore.setActiveNewsFlashFilter(filter)}
             key={filter}
           >
             {filter === SourceFilterEnum.all ? (

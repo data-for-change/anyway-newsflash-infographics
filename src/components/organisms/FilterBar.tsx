@@ -27,7 +27,8 @@ const useStyles = makeStyles(() =>
 const FilterBar: FC<IProps> = () => {
   const store: RootStore = useStore();
   const classes = useStyles();
-  const onFilterChange = useCallback((value: number) => store.changeTimeFilter(value), [store]);
+  const { newsFlashStore } = store;
+  const onFilterChange = useCallback((value: number) => newsFlashStore.changeTimeFilter(value), [newsFlashStore]);
   const { t } = useTranslation();
   const [isDescOpen, setIsDescOpen] = useState(false);
 
@@ -37,9 +38,9 @@ const FilterBar: FC<IProps> = () => {
       ? parseInt(queryString.parse(queryParam)['years_ago'] as string)
       : null;
     if (filterValFromUrl) {
-      store.changeTimeFilter(filterValFromUrl);
+      newsFlashStore.changeTimeFilter(filterValFromUrl);
     }
-  }, [queryParam, store]);
+  }, [queryParam, newsFlashStore]);
 
   return (
     <div className={classes.grow}>
@@ -64,7 +65,7 @@ const FilterBar: FC<IProps> = () => {
             <Collapse in={isDescOpen} timeout="auto">
               <Grid item lg={12}>
                 <Box mb={2} px={3}>
-                  <Typography.Body3>{store.activeNewsFlash?.description}</Typography.Body3>
+                  <Typography.Body3>{newsFlashStore.activeNewsFlash?.description}</Typography.Body3>
                 </Box>
               </Grid>
             </Collapse>
