@@ -1,4 +1,3 @@
-import { getDemoWidgetData } from './mocks/mock.service';
 import { ILocationData, IWidgetBase } from 'models/WidgetData';
 import axios from 'axios';
 import {  showOnlyOperCards, SHOW_MOCK } from 'utils/utils';
