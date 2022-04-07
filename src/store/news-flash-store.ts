@@ -32,7 +32,7 @@ export default class NewsFlashStore {
       this.activeNewsFlashId = id;
     });
     const widgetInput = {
-      lang: this.rootStore.selectedLanguage,
+      lang: this.rootStore.settingsStore.selectedLanguage,
       newsId: id,
       yearAgo: this.newsFlashWidgetsTimerFilter,
     };
@@ -45,7 +45,7 @@ export default class NewsFlashStore {
       this.rootStore.locationId = id;
     });
     const widgetInput = {
-      lang: this.rootStore.selectedLanguage,
+      lang: this.rootStore.settingsStore.selectedLanguage,
       gpsId: id,
       yearAgo: this.newsFlashWidgetsTimerFilter,
     };
@@ -56,7 +56,7 @@ export default class NewsFlashStore {
     if (this.newsFlashWidgetsTimerFilter !== filterValue) {
       runInAction(() => (this.newsFlashWidgetsTimerFilter = filterValue));
       const widgetInput = {
-        lang: this.rootStore.selectedLanguage,
+        lang: this.rootStore.settingsStore.selectedLanguage,
         newsId: this.activeNewsFlashId,
         yearAgo: filterValue,
         gpsId: this.rootStore.locationId,

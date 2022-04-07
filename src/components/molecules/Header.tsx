@@ -32,7 +32,7 @@ const Header: FC = () => {
   const { t } = useTranslation();
   const classes = useStyles();
   const store: RootStore = useStore();
-  const { userStore } = store;
+  const { userStore, settingsStore } = store;
 
   const [open, setOpen] = useState(false);
 
@@ -48,7 +48,7 @@ const Header: FC = () => {
 
   const onLocationSearch = () => {
     if (roadSegmentLocation) {
-      navigate(`${store.currentLanguageRouteString}/location/${roadSegmentLocation?.road_segment_id}`);
+      navigate(`${settingsStore.currentLanguageRouteString}/location/${roadSegmentLocation?.road_segment_id}`);
       setOpen(false);
       store.setGpsLocationData(null);
     }

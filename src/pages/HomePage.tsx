@@ -31,10 +31,9 @@ const useStyles = makeStyles({
 const HomePage: FC<IProps> = () => {
   const classes = useStyles();
   const store: RootStore = useStore();
-  const { widgetsStore } = store;
+  const { newsFlashStore, widgetsStore, settingsStore } = store;
   const { gpsId, newsId, lng } = useParams<IRouteProps>();
   const loading = widgetsStore.widgetBoxLoading;
-  const { newsFlashStore } = store;
 
   useEffect(() => {
     if (newsId) {
@@ -47,11 +46,11 @@ const HomePage: FC<IProps> = () => {
 
   useEffect(() => {
     if (lng) {
-      store.changeLanguage(lng);
+      settingsStore.changeLanguage(lng);
     } else {
-      store.changeLanguage(LANG.HE);
+      settingsStore.changeLanguage(LANG.HE);
     }
-  }, [lng, store]);
+  }, [lng, settingsStore]);
 
   if (!newsId && !gpsId) {
     return <Navigate to="/" replace />;
