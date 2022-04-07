@@ -26,6 +26,7 @@ const useStyles = makeStyles(() =>
 
 const FilterBar: FC<IProps> = () => {
   const store: RootStore = useStore();
+  const { widgetsStore } = store;
   const classes = useStyles();
   const { newsFlashStore } = store;
   const onFilterChange = useCallback((value: number) => newsFlashStore.changeTimeFilter(value), [newsFlashStore]);
@@ -53,7 +54,7 @@ const FilterBar: FC<IProps> = () => {
             <Grid item>
               <Grid item container spacing={2} className={classes.descriptionHeader}>
                 <Grid item>
-                  <Typography.Body2 bold>{store.newsFlashWidgetsMetaLocation}</Typography.Body2>
+                  <Typography.Body2 bold>{widgetsStore.newsFlashWidgetsMetaLocation}</Typography.Body2>
                 </Grid>
                 <Grid item>
                   <Button.Standard onClick={() => setIsDescOpen(!isDescOpen)}>

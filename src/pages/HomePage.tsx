@@ -31,8 +31,9 @@ const useStyles = makeStyles({
 const HomePage: FC<IProps> = () => {
   const classes = useStyles();
   const store: RootStore = useStore();
+  const { widgetsStore } = store;
   const { gpsId, newsId, lng } = useParams<IRouteProps>();
-  const loading = store.widgetBoxLoading;
+  const loading = widgetsStore.widgetBoxLoading;
   const { newsFlashStore } = store;
 
   useEffect(() => {

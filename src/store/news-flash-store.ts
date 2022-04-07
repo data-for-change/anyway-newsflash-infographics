@@ -3,8 +3,8 @@ import { SourceFilterEnum } from 'models/SourceFilter';
 import { fetchNews } from 'services/news.data.service';
 import { INewsFlash } from 'models/NewFlash';
 import { IPoint } from 'models/Point';
-
 import RootStore from './root.store';
+
 const DEFAULT_TIME_FILTER = 5;
 const DEFAULT_LOCATION = { latitude: 32.0853, longitude: 34.7818 };
 
@@ -36,7 +36,7 @@ export default class NewsFlashStore {
       newsId: id,
       yearAgo: this.newsFlashWidgetsTimerFilter,
     };
-    this.rootStore.fetchSelectedWidgets(widgetInput);
+    this.rootStore.widgetsStore.fetchSelectedWidgets(widgetInput);
   }
 
   selectLocationId(id: number): void {
@@ -49,7 +49,7 @@ export default class NewsFlashStore {
       gpsId: id,
       yearAgo: this.newsFlashWidgetsTimerFilter,
     };
-    this.rootStore.fetchSelectedWidgets(widgetInput);
+    this.rootStore.widgetsStore.fetchSelectedWidgets(widgetInput);
   }
 
   changeTimeFilter(filterValue: number): void {
@@ -61,7 +61,7 @@ export default class NewsFlashStore {
         yearAgo: filterValue,
         gpsId: this.rootStore.locationId,
       };
-      this.rootStore.fetchSelectedWidgets(widgetInput);
+      this.rootStore.widgetsStore.fetchSelectedWidgets(widgetInput);
     }
   }
 
