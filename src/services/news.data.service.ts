@@ -1,7 +1,5 @@
 import axios from 'axios';
 import { INewsFlash } from 'models/NewFlash';
-import { showDemoCards } from 'utils/utils';
-import { addDemoNewsflash } from './mocks/mock.service';
 import { isProd } from 'utils/env.utils';
 
 const errorNews: INewsFlash = {
@@ -43,7 +41,7 @@ export function fetchNews(source = '', offSet = 0, limit = 100): Promise<any> {
       .get(url)
       .then((res) => res.data)
       // if showDemoCards - add demoNewsflash to newsflash data
-      .then((data) => (showDemoCards ? addDemoNewsflash(data) : data))
+      .then((data) => (data))
       .catch(onErrorFetchNewsFlash)
   );
 }

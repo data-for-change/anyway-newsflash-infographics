@@ -1,7 +1,7 @@
 import { getDemoWidgetData } from './mocks/mock.service';
 import { ILocationData, IWidgetBase } from 'models/WidgetData';
 import axios from 'axios';
-import { showDemoCards, showOnlyOperCards, SHOW_MOCK } from 'utils/utils';
+import {  showOnlyOperCards, SHOW_MOCK } from 'utils/utils';
 import { operationalCards } from 'const/cards.const';
 import { getVerifiedWidgetsData } from './data.verification/data.verification.service';
 
