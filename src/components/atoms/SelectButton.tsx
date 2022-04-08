@@ -29,15 +29,16 @@ const SelectButton: FC<IProps> = ({ onChange }) => {
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { newsFlashStore } = store;
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<{ value: unknown }>) => {
       onChange(event.target.value as number);
       const url: string = location.pathname;
       const queryPrefix = url.indexOf('?') === -1 ? '?' : '&';
-      navigate(`${url}${queryPrefix}years_ago=${store.newsFlashWidgetsTimerFilter}`);
+      navigate(`${url}${queryPrefix}years_ago=${newsFlashStore.newsFlashWidgetsTimerFilter}`);
     },
-    [onChange, location.pathname, navigate, store.newsFlashWidgetsTimerFilter],
+    [onChange, location.pathname, navigate, newsFlashStore.newsFlashWidgetsTimerFilter],
   );
 
   const handleClose = () => {
@@ -61,7 +62,7 @@ const SelectButton: FC<IProps> = ({ onChange }) => {
             open={open}
             onClose={handleClose}
             onOpen={handleOpen}
-            value={store.newsFlashWidgetsTimerFilter}
+            value={newsFlashStore.newsFlashWidgetsTimerFilter}
             onChange={handleChange}
           >
             <MenuItem value={1}>

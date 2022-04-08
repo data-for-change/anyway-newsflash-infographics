@@ -20,9 +20,10 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
   const [size, setSize] = useState(1);
   const { t } = useTranslation();
   const store = useStore();
-  const widget = store.getWidgetsDataByName(widgetName);
-  const roadNumber = store.newsFlashWidgetsMetaRoadNumber;
-  const dateComment = store.newsFlashWidgetsMetaDateComment;
+  const { widgetsStore } = store;
+  const widget = widgetsStore.getWidgetsDataByName(widgetName);
+  const roadNumber = widgetsStore.newsFlashWidgetsMetaRoadNumber;
+  const dateComment = widgetsStore.newsFlashWidgetsMetaDateComment;
 
   const getCardRef = (element: HTMLElement) => setCardElement(element);
   const imgDownloadHandler = () => {
@@ -40,9 +41,9 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
   };
   const widgetComponent = !widget ? null : (
     <WidgetWrapper
-      segmentText={store.newsFlashWidgetsMetaSegmentName}
+      segmentText={widgetsStore.newsFlashWidgetsMetaSegmentName}
       widget={widget}
-      locationText={store.newsFlashWidgetsMetaLocation}
+      locationText={widgetsStore.newsFlashWidgetsMetaLocation}
       sizeOptions={sizeOptions.size}
     />
   );

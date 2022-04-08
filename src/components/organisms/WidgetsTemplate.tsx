@@ -14,14 +14,15 @@ import { useTranslation } from 'react-i18next';
 const WidgetsTemplate: FC = () => {
   const store: RootStore = useStore();
   const { t } = useTranslation();
-  const widgetsData = store.newsFlashWidgetsData;
+  const { widgetsStore } = store;
+  const widgetsData = widgetsStore.newsFlashWidgetsData;
 
   const widgetCards = widgetsData.map((widget, index, sizeOptions) => {
     const widgetComponent = (
       <WidgetWrapper
         widget={widget}
-        locationText={store.newsFlashWidgetsMetaLocation}
-        segmentText={store.newsFlashWidgetsMetaSegmentName}
+        locationText={widgetsStore.newsFlashWidgetsMetaLocation}
+        segmentText={widgetsStore.newsFlashWidgetsMetaSegmentName}
         sizeOptions={sizeOptions}
       />
     );
@@ -34,8 +35,8 @@ const WidgetsTemplate: FC = () => {
           information={widget.meta.information}
           widgetName={widget.name}
           title={widget.data?.text?.title}
-          dateComment={store.newsFlashWidgetsMetaDateComment}
-          roadNumber={store.newsFlashWidgetsMetaRoadNumber}
+          dateComment={widgetsStore.newsFlashWidgetsMetaDateComment}
+          roadNumber={widgetsStore.newsFlashWidgetsMetaRoadNumber}
         >
           <MetaTag>{widget.name}</MetaTag>
           <ErrorBoundary>{widgetComponent}</ErrorBoundary>
