@@ -1,7 +1,6 @@
-import { getDemoWidgetData } from './mocks/mock.service';
 import { ILocationData, IWidgetBase } from 'models/WidgetData';
 import axios from 'axios';
-import { DEMO_ID, showDemoCards, showOnlyOperCards, SHOW_MOCK } from 'utils/utils';
+import {  showOnlyOperCards, SHOW_MOCK } from 'utils/utils';
 import { operationalCards } from 'const/cards.const';
 import { getVerifiedWidgetsData } from './data.verification/data.verification.service';
 
@@ -39,9 +38,7 @@ export const fetchWidgets = async ({
   yearAgo,
   gpsId,
 }: IWidgetInput): Promise<ILocationData | undefined> => {
-  if (showDemoCards && newsId === DEMO_ID) {
-    return getDemoWidgetData();
-  }
+ 
 
   try {
     const widgetsUrl = getWidgetUrl({ lang, newsId, yearAgo, gpsId });
