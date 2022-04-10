@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { INewsFlash } from 'models/NewFlash';
-import { isProd } from 'utils/env.utils';
 
 const errorNews: INewsFlash = {
   lat: -1,
@@ -38,8 +37,6 @@ export function fetchNews(source = '', offSet = 0, limit = 100): Promise<any> {
     axios
       .get(url)
       .then((res) => res.data)
-      // if showDemoCards - add demoNewsflash to newsflash data
-      .then((data) => (data))
       .catch(onErrorFetchNewsFlash)
   );
 }
