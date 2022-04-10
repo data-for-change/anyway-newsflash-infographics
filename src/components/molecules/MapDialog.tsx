@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const MapDialog: FC<IProps> = ({ section, open, onClose, roadNumber,onLocationChange, onSearch }) => {
+const MapDialog: FC<IProps> = ({ section, open, onClose, roadNumber, onLocationChange, onSearch }) => {
   const classes = useStyles();
   const { t } = useTranslation();
 
