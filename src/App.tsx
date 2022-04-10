@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import { Footer } from './components/organisms/Footer';
 import { Box, createStyles, makeStyles, Theme, ThemeProvider } from '@material-ui/core';
@@ -10,6 +10,7 @@ import HomePageRedirect from './pages/HomePageRedirect';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@material-ui/core/styles';
 import PopUpRedirect from './components/atoms/PopUpRedirect';
+import WidgetsTemplate from './components/organisms/WidgetsTemplate';
 // main components height - must add up to 100
 const headerHeight = '5vh';
 const pageContentHeight = '88vh';
@@ -46,12 +47,16 @@ const App: FC = () => {
               <Header />
             </Box>
             <Box height={pageContentHeight} className={classes.pageContent}>
-              <Switch>
-                <Route exact path="/" component={HomePageRedirect} />
-                <Route path="/:lng?/newsflash/:newsId" component={HomePage} />
-                <Route path="/:lng?/location/:gpsId" component={HomePage} />
-                <Route path="/login-popup-redirect" component={PopUpRedirect} />
-              </Switch>
+              <Routes>
+                <Route path="/" element={<HomePageRedirect />} />
+                <Route element={<HomePage />}>
+                  <Route path="/:lng/newsflash/:newsId/*" element={<WidgetsTemplate />} />
+                  <Route path="/newsflash/:newsId/*" element={<WidgetsTemplate />} />
+                  <Route path="/:lng/location/:gpsId/*" element={<WidgetsTemplate />} />
+                  <Route path="/location/:gpsId/*" element={<WidgetsTemplate />} />
+                  <Route path="/login-popup-redirect" element={<PopUpRedirect />} />
+                </Route>
+              </Routes>
             </Box>
             <Box height={footerHeight} display="flex">
               <Footer />

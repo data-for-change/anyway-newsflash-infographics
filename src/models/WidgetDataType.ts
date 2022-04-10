@@ -4,12 +4,13 @@ import {
   IWidgetAccidentsHeatMapData,
   IWidgetAccidentsByDayNightData,
   IWidgetHeadOnCollisionsComparisonData,
-  IWidgetCountBySeverityTextData,
+  IWidgetAccidentsBySeverityTextData,
+  IWidgetInjuredBySeverityTextData,
   IWidgetCountBySeverityData,
   IWidgetAccidentsByTypeData,
   IWidgetInjuredByYearData,
   IWidgetStreetViewData,
-  IWidgetAccidentsByYearData,
+  IWidgetMultiBarData,
   IWidgetVisionZeroImageData,
   IWidgetAccidentsByHourBarData,
   IWidgetMostSevereAccidentsTableData,
@@ -26,12 +27,13 @@ export type IWidgetDataType =
   | IWidgetAccidentsHeatMapData
   | IWidgetAccidentsByDayNightData
   | IWidgetHeadOnCollisionsComparisonData
-  | IWidgetCountBySeverityTextData
+  | IWidgetAccidentsBySeverityTextData
+  | IWidgetInjuredBySeverityTextData
   | IWidgetCountBySeverityData
   | IWidgetAccidentsByTypeData
   | IWidgetInjuredByYearData
   | IWidgetStreetViewData
-  | IWidgetAccidentsByYearData
+  | IWidgetMultiBarData
   | IWidgetVisionZeroImageData
   | IWidgetAccidentsByHourBarData
   | IWidgetMostSevereAccidentsTableData

@@ -9,3 +9,6 @@ export const cardFooterHeight = 50;
 
 //road number icon && font
 export const roadIconFont = 'sans-serif';
+
+//max height table
+export const maxHeightTable = 450;

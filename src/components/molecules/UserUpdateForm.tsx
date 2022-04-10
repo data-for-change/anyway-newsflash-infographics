@@ -15,7 +15,7 @@ interface IProps {
 
 export interface IFormInput {
   email: string;
-  firstName: string;
+  firstName?: string;
   lastName: string;
   workplace: string;
 }
@@ -45,6 +45,7 @@ const initialValidations = {
 
 const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) => {
   const store = useStore();
+  const { userStore } = store;
   const { t } = useTranslation();
   const [formInput, setFormInput] = useState<IFormInput>(defaultValues);
   const [validations, setValidations] = useState<IValidationErrors>(initialValidations);
@@ -60,8 +61,8 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
     e.preventDefault();
     const inputValidations: IValidationErrors = validateUserDetails(formInput);
     if (Object.values(inputValidations).every(Boolean)) {
-      await store.updateUserInfo(formInput);
-      if (!store.userApiError) {
+      await userStore.updateUserInfo(formInput);
+      if (!userStore.userApiError) {
         setValidations(initialValidations);
         onClose();
       }

@@ -1,12 +1,15 @@
 import React, { FC } from 'react';
-import { IWidgetCountBySeverityTextData } from 'models/WidgetData';
-import TextView from 'components/molecules/TextView/TextView';
+import { IWidgetCountBySeverityTextDataBase } from 'models/WidgetData';
+import TextView, { ISeverityFieldNames, ITextViewLabels } from 'components/molecules/TextView/TextView';
 
 interface IProps {
-  data: IWidgetCountBySeverityTextData;
+  data: IWidgetCountBySeverityTextDataBase;
   segmentText: string;
+  severityFieldNames: ISeverityFieldNames;
+  labels: ITextViewLabels;
+  
 }
-const CountBySeverityTextWidget: FC<IProps> = ({ data, segmentText }) => {
-  return <TextView data={data} segmentText={segmentText} />;
+const CountBySeverityTextWidget: FC<IProps> = ({ data, segmentText, severityFieldNames, labels }) => {
+  return <TextView data={data} segmentText={segmentText} severityFieldNames={severityFieldNames} labels={labels} />;
 };
 export default CountBySeverityTextWidget;

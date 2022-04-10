@@ -1,7 +1,6 @@
-import { getDemoWidgetData } from './mocks/mock.service';
 import { ILocationData, IWidgetBase } from 'models/WidgetData';
 import axios from 'axios';
-import { DEMO_ID, showDemoCards, showOnlyOperCards, SHOW_MOCK } from 'utils/utils';
+import {  showOnlyOperCards, SHOW_MOCK } from 'utils/utils';
 import { operationalCards } from 'const/cards.const';
 import { getVerifiedWidgetsData } from './data.verification/data.verification.service';
 
@@ -15,29 +14,31 @@ export interface IWidgetInput {
   yearAgo?: number;
 }
 
-const getWidgetUrl = ({lang, newsId, yearAgo, gpsId}:IWidgetInput): string => {
-   const query = [];
-   if (newsId) {
-     query.push(`${NEWS_FLASH_API}?lang=${lang}&news_flash_id=${newsId}`);
-   }
-   if (gpsId) {
-     query.push(`${WIDGETS_BY_LOCATION_API}?lang=${lang}&road_segment_id=${gpsId}`);
-   }
-   if (yearAgo) {
-     query.push(`years_ago=${yearAgo}`);
-   }
-   if (SHOW_MOCK) {
-     query.push(`mock=${SHOW_MOCK}`);
+const getWidgetUrl = ({ lang, newsId, yearAgo, gpsId }: IWidgetInput): string => {
+  const query = [];
+  if (newsId) {
+    query.push(`${NEWS_FLASH_API}?lang=${lang}&news_flash_id=${newsId}`);
+  }
+  if (gpsId) {
+    query.push(`${WIDGETS_BY_LOCATION_API}?lang=${lang}&road_segment_id=${gpsId}`);
+  }
+  if (yearAgo) {
+    query.push(`years_ago=${yearAgo}`);
+  }
+  if (SHOW_MOCK) {
+    query.push(`mock=${SHOW_MOCK}`);
   }
 
   return query.join('&');
-}
+};
 
-
-export const fetchWidgets = async ({ lang, newsId, yearAgo, gpsId }: IWidgetInput): Promise<ILocationData | undefined> => {
-  if (showDemoCards && newsId === DEMO_ID) {
-    return getDemoWidgetData();
-  }
+export const fetchWidgets = async ({
+  lang,
+  newsId,
+  yearAgo,
+  gpsId,
+}: IWidgetInput): Promise<ILocationData | undefined> => {
+ 
 
   try {
     const widgetsUrl = getWidgetUrl({ lang, newsId, yearAgo, gpsId });

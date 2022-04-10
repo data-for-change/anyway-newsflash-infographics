@@ -9,6 +9,7 @@ interface IProps {
   textLabel?: string;
 }
 
+// TODO: Consider deprecation once replaced by SingleBarChart
 const BarChartView: FC<IProps> = ({ data, xLabel, yLabel, textLabel }) => {
   return (
     <>

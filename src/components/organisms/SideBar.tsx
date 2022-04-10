@@ -32,14 +32,15 @@ const SideBar: FC<IProps> = () => {
   const store: RootStore = useStore();
   const classes = useStyles();
   const { t } = useTranslation();
+  const { newsFlashStore } = store;
 
   const mapTitle = `${t('sideBar')}`;
-  const location = store.activeNewsFlashLocation;
-  const loading = store.newsFlashLoading;
+  const location = newsFlashStore.activeNewsFlashLocation;
+  const loading = newsFlashStore.newsFlashLoading;
 
   const fetchMoreNewsItems = useCallback(() => {
-    store.infiniteFetchLimit(INFINITE_SCROLL_FETCH_SIZE);
-  }, [store]);
+    newsFlashStore.infiniteFetchLimit(INFINITE_SCROLL_FETCH_SIZE);
+  }, [newsFlashStore]);
 
   return (
     <Box display="flex" flexDirection="column" justifyContent="center" alignItems="stretch">

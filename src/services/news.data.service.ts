@@ -1,7 +1,5 @@
 import axios from 'axios';
 import { INewsFlash } from 'models/NewFlash';
-import { showDemoCards } from 'utils/utils';
-import { addDemoNewsflash } from './mocks/mock.service';
 
 const errorNews: INewsFlash = {
   lat: -1,
@@ -31,6 +29,7 @@ export function fetchNews(source = '', offSet = 0, limit = 100): Promise<any> {
   query.push(`offset=${offSet}`);
 
   query.push('resolution=suburban_road');
+  query.push('resolution=street');
 
   const url = `${NEWS_FLASH_API}?${query.join('&')}`;
 
@@ -38,8 +37,6 @@ export function fetchNews(source = '', offSet = 0, limit = 100): Promise<any> {
     axios
       .get(url)
       .then((res) => res.data)
-      // if showDemoCards - add demoNewsflash to newsflash data
-      .then((data) => (showDemoCards ? addDemoNewsflash(data) : data))
       .catch(onErrorFetchNewsFlash)
   );
 }
