@@ -96,6 +96,7 @@ const Header: FC = () => {
       <MapDialog
         open={open}
         section={roadSegmentLocation?.road_segment_name}
+        roadNumber={roadSegmentLocation?.road1}
         onLocationChange={onLocationChange}
         onClose={() => {
           setOpen(false);

@@ -8,7 +8,7 @@ export interface ILocationData {
 }
 
 export interface IGpsData {
-  road1: number;
+  road1: string;
   road_segment_name: string;
   road_segment_id: number;
   resolution: string;
