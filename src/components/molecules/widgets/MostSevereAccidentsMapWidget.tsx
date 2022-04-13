@@ -11,30 +11,28 @@ interface IProps {
   data: IWidgetMostSevereAccidentsData;
   sizeOptions: number;
 }
-const useStyles = makeStyles(() =>
-  createStyles({
-    carLogo: {
-      height: '20px',
-      width: '20px',
-    },
-    iconsContainer: {
-      display: 'flex',
-      paddingTop: '8px',
-      marginInlineStart: '5px',
-    },
-    singleIcon: {
-      display: 'flex',
-      paddingTop: '4px',
-      marginInlineEnd: '20px',
-      fontWeight: 400,
-      fontSize: '13px',
-      alignItems: 'center',
-    },
-    logoTextSpace: {
-      marginInlineStart: '5px',
-    },
-  }),
-);
+const useStyles = makeStyles({
+  carLogo: {
+    height: '20px',
+    width: '20px',
+  },
+  iconsContainer: {
+    display: 'flex',
+    paddingTop: '8px',
+    marginInlineStart: '5px',
+  },
+  singleIcon: {
+    display: 'flex',
+    paddingTop: '4px',
+    marginInlineEnd: '20px',
+    fontWeight: 400,
+    fontSize: '13px',
+    alignItems: 'center',
+  },
+  logoTextSpace: {
+    marginInlineStart: '5px',
+  },
+});
 
 const MostSevereAccidentsMapWidget: FC<IProps> = ({ data, sizeOptions }) => {
   const classes = useStyles();
