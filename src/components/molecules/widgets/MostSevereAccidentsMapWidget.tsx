@@ -4,7 +4,7 @@ import { IWidgetMostSevereAccidentsData } from 'models/WidgetData';
 import { Box } from '@material-ui/core';
 import carOrangeIcon from 'assets/map/car-orange-marker.png';
 import carRedIcon from 'assets/map/car-red-marker.png';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 
 interface IProps {
