@@ -41,8 +41,8 @@ const MostSevereAccidentsMapWidget: FC<IProps> = ({ data, sizeOptions }) => {
   const { items } = data;
   const { t } = useTranslation();
   return (
-    <Box style={{ height: '100%' }}>
-      <Box style={{ height: '95%' }}>
+    <Box height={'100%'}>
+      <Box height={'95%'}>
         <LocationMap items={items} />
       </Box>
       <Box className={classes.iconsContainer}>
