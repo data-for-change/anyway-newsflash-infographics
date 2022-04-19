@@ -124,7 +124,10 @@
     "cancelButton": "Cancel",
     "chosenSegment": "Chosen section:",
     "searchSection": "Search section",
-    "road": "road"
+    "searchStreetAndCity": "Search city/street",
+    "road": "road",
+    "city": "city",
+    "street": "street"
   },
   "locationIndicator": "(Chosen Section Search Result)"
 }
