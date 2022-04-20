@@ -24,7 +24,7 @@ const widgetVariants: { [index: string]: CardVariant } = {
   defaultVariant: { header: HeaderVariant.None, footer: FooterVariant.Logo },
   [WidgetName.accidents_count_by_hour]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
   [WidgetName.injured_count_per_age_group]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
-  [WidgetName.most_severe_accidents]: { header: HeaderVariant.None, footer: FooterVariant.Logo },
+  [WidgetName.most_severe_accidents]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
   [WidgetName.most_severe_accidents_table]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
   [WidgetName.accident_count_by_severity]: { header: HeaderVariant.Logo, footer: FooterVariant.None },
   [WidgetName.injured_count_by_severity]: { header: HeaderVariant.Logo, footer: FooterVariant.None },
