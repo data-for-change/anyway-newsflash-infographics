@@ -1,7 +1,8 @@
-import { FC, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Box, DialogActions, TextField } from '@material-ui/core';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import { Dialog, Button, Typography } from 'components/atoms';
 import LocationSelect from 'components/molecules/LocationSelect';
 import { IPoint } from 'models/Point';
@@ -57,6 +58,20 @@ const MapDialog: FC<IProps> = ({ section, open, onClose, roadNumber, onLocationC
   const classes = useStyles();
   const { t } = useTranslation();
   const [searchScreen, setSearchScreen] = useState<'segment' | 'cityAndStreet'>('segment');
+  const [streetsOptions, setStreetsOptions] = useState<[]>([]);
+  const [citiesList, setCitiesList] = useState<[]>([]);
+
+  useEffect(() => {
+    // need to add api call to get all cities list
+  }, []);
+
+  function setCityGetStreets(event: ChangeEvent<{}>, value: { title: string } | null) {
+    console.log('event is ', event);
+    if (value) {
+      //need to add api call to get streets in selected city
+      console.log(value.title);
+    }
+  }
 
   const SearchSegmentScreen = () => {
     return (
@@ -85,18 +100,22 @@ const MapDialog: FC<IProps> = ({ section, open, onClose, roadNumber, onLocationC
   const SearchCityAndStreetScreen = () => {
     return (
       <Box>
-        <Box height="60vh">
-          <TextField
+        <Box height="60vh" display="flex">
+          <Autocomplete
             className={classes.inputSpace}
-            id="outlined-basic"
-            label={t('mapDialog.city')}
-            variant="outlined"
+            options={[{ title: 'haifa' }]}
+            getOptionLabel={(option) => option.title}
+            onChange={(event, value) => setCityGetStreets(event, value)}
+            style={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label={t('mapDialog.city')} variant="outlined" />}
           />
-          <TextField
+          <Autocomplete
             className={classes.inputSpace}
-            id="outlined-basic"
-            label={t('mapDialog.street')}
-            variant="outlined"
+            options={[{ title: '1 str.' }]}
+            getOptionLabel={(option) => option.title}
+            style={{ width: 300 }}
+            disabled={streetsOptions.length === 0}
+            renderInput={(params) => <TextField {...params} label={t('mapDialog.street')} variant="outlined" />}
           />
         </Box>
         <DialogActions className={classes.actions}>
@@ -106,6 +125,7 @@ const MapDialog: FC<IProps> = ({ section, open, onClose, roadNumber, onLocationC
       </Box>
     );
   };
+
   return (
     <Dialog isShowing={open} onClose={onClose} maxWidth="lg" fullWidth>
       <Box className={classes.wrapper}>
