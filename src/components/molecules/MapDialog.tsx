@@ -59,7 +59,7 @@ const MapDialog: FC<IProps> = ({ section, open, onClose, roadNumber, onLocationC
   const { t } = useTranslation();
   const [searchScreen, setSearchScreen] = useState<'segment' | 'cityAndStreet'>('segment');
   const [streetsOptions, setStreetsOptions] = useState<[]>([]);
-  const [citiesList, setCitiesList] = useState<[]>([]);
+  // const [citiesList, setCitiesList] = useState<[]>([]);
 
   useEffect(() => {
     // need to add api call to get all cities list
