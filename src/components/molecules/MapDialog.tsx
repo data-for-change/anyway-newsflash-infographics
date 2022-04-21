@@ -67,6 +67,7 @@ const MapDialog: FC<IProps> = ({ section, open, onClose, roadNumber, onLocationC
 
   function setCityGetStreets(event: ChangeEvent<{}>, value: { title: string } | null) {
     console.log('event is ', event);
+    setStreetsOptions([]);
     if (value) {
       //need to add api call to get streets in selected city
       console.log(value.title);
