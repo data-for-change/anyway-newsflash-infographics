@@ -5,6 +5,9 @@ const mostExtremeLatitude = 29;
 const validCoords = (coords: any) => coords < mostExtremeLongitude && coords > mostExtremeLatitude;
 const validNumber = (value: any) => typeof value === 'number' && value >= 0;
 const validString = (value: any) => typeof value === 'string';
+const validStringOrNumber = (value: any) => validString(value) || validNumber(value);
+const validDataSeries = (value: any) =>
+  Array.isArray(value) && value.every((item: any) => validString(item.label_key) && validNumber(item.value));
 
 export const isVerifiedWidgetData = (widget: any) => {
   let isValid = false;
@@ -93,7 +96,10 @@ export const verifiedWidgetData = (widget: any) => {
       break;
     }
     case 'accident_count_by_accident_year': {
-      isValid = items.every((item: any) => validNumber(item.accident_year) && validNumber(item.count));
+      isValid = items.every(
+        (item: { label_key: string; value?: number; series: any }) =>
+          validStringOrNumber(item.label_key) && (validNumber(item.value) || validDataSeries(item.series)),
+      );
       break;
     }
     case 'injured_count_by_accident_year': {

@@ -10,7 +10,7 @@ import {
   IWidgetAccidentsByTypeData,
   IWidgetInjuredByYearData,
   IWidgetStreetViewData,
-  IWidgetAccidentsByYearData,
+  IWidgetMultiBarData,
   IWidgetVisionZeroImageData,
   IWidgetAccidentsByHourBarData,
   IWidgetMostSevereAccidentsTableData,
@@ -33,7 +33,7 @@ export type IWidgetDataType =
   | IWidgetAccidentsByTypeData
   | IWidgetInjuredByYearData
   | IWidgetStreetViewData
-  | IWidgetAccidentsByYearData
+  | IWidgetMultiBarData
   | IWidgetVisionZeroImageData
   | IWidgetAccidentsByHourBarData
   | IWidgetMostSevereAccidentsTableData

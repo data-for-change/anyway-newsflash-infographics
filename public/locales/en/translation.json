@@ -123,7 +123,8 @@
     "searchButton": "Search",
     "cancelButton": "Cancel",
     "chosenSegment": "Chosen section:",
-    "searchSection": "Search section"
+    "searchSection": "Search section",
+    "road": "road"
   },
   "locationIndicator": "(Chosen Section Search Result)"
 }

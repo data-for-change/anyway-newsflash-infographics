@@ -62,10 +62,11 @@ const useStyles = makeStyles(() => ({
 const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePercent }) => {
   const classes = useStyles();
   const store: RootStore = useStore();
+  const { widgetsStore } = store;
   const { t } = useTranslation();
   const bigPieData = data.items.specific_road_segment_fatal_accidents;
   const smallPieData = data.items.all_roads_fatal_accidents;
-  const roadNumberSegment: string = ` ${t('onUrban.route')} ${store.newsFlashWidgetsMetaRoadNumber}`;
+  const roadNumberSegment: string = ` ${t('onUrban.route')} ${widgetsStore.newsFlashWidgetsMetaRoadNumber}`;
   const descSegment: string = roadNumberSegment == null ? '' : segmetText.substr(roadNumberSegment.length);
   return (
     <Box height={'100%'} display="flex" flexDirection="column" mr={'80px'}>

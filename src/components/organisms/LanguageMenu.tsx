@@ -26,13 +26,14 @@ const LanguageMenu: FC = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const { i18n } = useTranslation();
   const store = useStore();
+  const { newsFlashStore } = store;
 
   const LangClickHandler = (lang: string) => {
     if (lang !== i18n.language) {
       const prefix = lang !== 'he' ? `/${lang}` : '';
       let path = '';
-      if (store.activeNewsFlashId) {
-        path = `newsflash/${store.activeNewsFlashId}`;
+      if (newsFlashStore.activeNewsFlashId) {
+        path = `newsflash/${newsFlashStore.activeNewsFlashId}`;
       }
       if (store.locationId) {
         path = `location/${store.locationId}`;

@@ -26,17 +26,18 @@ const News: FC = () => {
   const classes = useStyles();
   const locale = useLocale();
   const { gpsId } = useParams<IRouteProps>();
+  const { newsFlashStore, settingsStore } = store;
   return (
     <Box flexGrow={1} display="flex" flexDirection="column" className={classes.newsFeed}>
       <Box flexGrow={1}>
         <Box className={classes.container} flexDirection={'column'}>
           {gpsId && <LocationSearchIndicator />}
-          {store.newsFlashCollection.length > 0 ? (
-            store.newsFlashCollection.map((news) => {
-              const className = news.id === store.activeNewsFlashId ? classes.activeNewsFlash : '';
+          {newsFlashStore.newsFlashCollection.length > 0 ? (
+            newsFlashStore.newsFlashCollection.map((news) => {
+              const className = news.id === newsFlashStore.activeNewsFlashId ? classes.activeNewsFlash : '';
               const date = news.date == null ? '' : dateFormat(new Date(news.date.replace(/-/g, '/')), locale);
               return (
-                <Link key={news.id} to={`${store.currentLanguageRouteString}/newsflash/${news.id}`}>
+                <Link key={news.id} to={`${settingsStore.currentLanguageRouteString}/newsflash/${news.id}`}>
                   <Box border={1} borderColor={silverSmokeColor} p={1} className={className}>
                     <p>
                       <Typography.Body5>

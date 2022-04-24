@@ -32,10 +32,11 @@ const Header: FC = () => {
   const { t } = useTranslation();
   const classes = useStyles();
   const store: RootStore = useStore();
+  const { userStore, settingsStore } = store;
 
   const [open, setOpen] = useState(false);
 
-  const isUserDetailsRequired: boolean = !store.userInfo?.meta.isCompleteRegistration;
+  const isUserDetailsRequired: boolean = !userStore.userInfo?.meta.isCompleteRegistration;
   const roadSegmentLocation = store.gpsLocationData;
 
   const onLocationChange = useCallback(
@@ -47,28 +48,28 @@ const Header: FC = () => {
 
   const onLocationSearch = () => {
     if (roadSegmentLocation) {
-      navigate(`${store.currentLanguageRouteString}/location/${roadSegmentLocation?.road_segment_id}`);
+      navigate(`${settingsStore.currentLanguageRouteString}/location/${roadSegmentLocation?.road_segment_id}`);
       setOpen(false);
       store.setGpsLocationData(null);
     }
   };
 
   useEffect(() => {
-    store.getUserLoginDetails();
-  }, [store]);
+    userStore.getUserLoginDetails();
+  }, [userStore]);
 
   let authElement;
   const logo = anywayLogo;
   if (FEATURE_FLAGS.login) {
     //login or logout- depend on authentication state
-    if (store.isUserAuthenticated) {
-      const { ...userDetails } = store.userInfo;
+    if (userStore.isUserAuthenticated) {
+      const { ...userDetails } = userStore.userInfo;
       const handleLogout = () => {
-        store.logOutUser();
+        userStore.logOutUser();
       };
       authElement = (
         <UserProfileHeader
-          isAdmin={store.isAdmin}
+          isAdmin={userStore.isAdmin}
           handleLogout={handleLogout}
           isUpdateScreenOpen={isUserDetailsRequired}
           userDetails={userDetails}
@@ -95,6 +96,7 @@ const Header: FC = () => {
       <MapDialog
         open={open}
         section={roadSegmentLocation?.road_segment_name}
+        roadNumber={roadSegmentLocation?.road1}
         onLocationChange={onLocationChange}
         onClose={() => {
           setOpen(false);

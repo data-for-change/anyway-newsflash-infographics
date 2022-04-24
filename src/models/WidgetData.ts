@@ -1,3 +1,4 @@
+import { LabelsMap, MultiSeriesDataItems } from './MultiSeriesData';
 import { IPoint, IPointAccident } from './Point';
 import { IWidgetDataType } from './WidgetDataType';
 
@@ -7,7 +8,7 @@ export interface ILocationData {
 }
 
 export interface IGpsData {
-  road1: number;
+  road1: string;
   road_segment_name: string;
   road_segment_id: number;
   resolution: string;
@@ -104,12 +105,6 @@ export interface IWidgetAccidentsByTypeData extends IWidgetDataBase {
     count: number;
   }[];
 }
-export interface IWidgetAccidentsByYearData extends IWidgetDataBase {
-  items: {
-    accident_year: number;
-    count: number;
-  }[];
-}
 export interface IWidgetInjuredByYearData extends IWidgetDataBase {
   items: {
     accident_year: number;
@@ -172,4 +167,12 @@ export interface IWidgetInjuredAccidentsWithPedestrians extends IWidgetDataBase 
     severe_injury_severity_count: number;
     light_injury_severity_count: number;
   }[];
+}
+
+export interface IWidgetMultiBarData extends IWidgetDataBase {
+  items:  MultiSeriesDataItems[];
+  text: {
+    title?: string;
+    labels_map: LabelsMap;
+  };
 }
