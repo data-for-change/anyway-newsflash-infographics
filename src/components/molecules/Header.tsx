@@ -54,6 +54,14 @@ const Header: FC = () => {
     }
   };
 
+  const onStreetAndCitySearch = (street: string, city: string) => {
+    // change to constant values until backend issues are fixed
+    city = 'רמת גן';
+    street = 'דרך ששת הימים';
+    navigate(`${settingsStore.currentLanguageRouteString}/cityAndStreet/${city}/${street}`);
+    setOpen(false);
+  };
+
   useEffect(() => {
     userStore.getUserLoginDetails();
   }, [userStore]);
@@ -103,6 +111,7 @@ const Header: FC = () => {
           store.setGpsLocationData(null);
         }}
         onSearch={onLocationSearch}
+        onStreetAndCitySearch={onStreetAndCitySearch}
       />
     </AppBar>
   );

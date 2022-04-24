@@ -39,6 +39,16 @@ export default class NewsFlashStore {
     this.rootStore.widgetsStore.fetchSelectedWidgets(widgetInput);
   }
 
+  selectNewsFlashByCityAndStreet(city: string, street: string): void {
+    const widgetInput = {
+      lang: this.rootStore.settingsStore.selectedLanguage,
+      yearAgo: this.newsFlashWidgetsTimerFilter,
+      city,
+      street,
+    };
+    this.rootStore.widgetsStore.fetchSelectedWidgets(widgetInput);
+  }
+
   selectLocationId(id: number): void {
     runInAction(() => {
       this.activeNewsFlashId = 0;

@@ -19,7 +19,7 @@ export default class RootStore {
 
   locationId: number = 0; // data by location id
   gpsLocationData: IGpsData | null = null;
-  citiesList: [string?];
+  citiesList: Array<{ title: string }> = [];
 
   //different stores
   settingsStore: SettingsStore;
@@ -45,7 +45,6 @@ export default class RootStore {
           this.widgetsStore.newsFlashWidgetsData = initData.newsFlashWidgetsData.widgets;
           this.widgetsStore.newsFlashWidgetsMeta = initData.newsFlashWidgetsData.meta;
         }
-        this.fetchCitiesList();
         this.appInitialized = true;
       });
     });
@@ -73,9 +72,15 @@ export default class RootStore {
   }
 
   setCitiesList(data: any) {
+    // waiting for normal data to arrive from backend
+
     runInAction(() => {
-      this.citiesList = data;
+      this.citiesList = [{ title: 'חיפה' }, { title: 'תל אביב' }, { title: 'ירושלים' }];
     });
+
+    // runInAction(() => {
+    //   this.citiesList = data;
+    // });
   }
 
   async fetchCitiesList() {

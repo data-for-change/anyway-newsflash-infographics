@@ -55,9 +55,9 @@ export default class WidgetsStore {
     return this.newsFlashWidgetsData.find((item) => item.name === name);
   }
 
-  fetchSelectedWidgets({ lang, newsId, yearAgo, gpsId }: IWidgetInput): void {
+  fetchSelectedWidgets({ lang, newsId, yearAgo, gpsId, city, street }: IWidgetInput): void {
     runInAction(() => (this.widgetBoxLoading = true));
-    fetchWidgets({ lang, newsId, yearAgo, gpsId }).then((response: any) => {
+    fetchWidgets({ lang, newsId, yearAgo, gpsId, city, street }).then((response: any) => {
       runInAction(() => {
         this.widgetBoxLoading = false;
         if (response && response.widgets && response.meta) {

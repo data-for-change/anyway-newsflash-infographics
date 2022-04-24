@@ -55,6 +55,8 @@ const App: FC = () => {
                   <Route path="/newsflash/:newsId/*" element={<WidgetsTemplate />} />
                   <Route path="/:lng/location/:gpsId/*" element={<WidgetsTemplate />} />
                   <Route path="/location/:gpsId/*" element={<WidgetsTemplate />} />
+                  <Route path="/:lng/cityAndStreet/:city/:street/*" element={<WidgetsTemplate />} />
+                  <Route path="/cityAndStreet/:city/:street/*" element={<WidgetsTemplate />} />
                 </Route>
               </Routes>
             </Box>

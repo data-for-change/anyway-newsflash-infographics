@@ -32,17 +32,20 @@ const HomePage: FC<IProps> = () => {
   const classes = useStyles();
   const store: RootStore = useStore();
   const { newsFlashStore, widgetsStore, settingsStore } = store;
-  const { gpsId, newsId, lng } = useParams<IRouteProps>();
+  const { gpsId, newsId, lng, city, street } = useParams<IRouteProps>();
   const loading = widgetsStore.widgetBoxLoading;
 
   useEffect(() => {
+    if (city && street) {
+      newsFlashStore.selectNewsFlashByCityAndStreet(city, street);
+    }
     if (newsId) {
       newsFlashStore.selectNewsFlash(parseInt(newsId));
     }
     if (gpsId) {
       newsFlashStore.selectLocationId(parseInt(gpsId));
     }
-  }, [newsId, newsFlashStore, gpsId]);
+  }, [newsId, newsFlashStore, gpsId, city, street]);
 
   useEffect(() => {
     if (lng) {
@@ -52,7 +55,7 @@ const HomePage: FC<IProps> = () => {
     }
   }, [lng, settingsStore]);
 
-  if (!newsId && !gpsId) {
+  if (!newsId && !gpsId && !street && !city) {
     return <Navigate to="/" replace />;
   }
 
