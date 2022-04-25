@@ -143,5 +143,6 @@
     "city": "עיר",
     "street": "רחוב"
   },
-  "locationIndicator": "(תוצאות חיפוש מקטע)"
+  "locationIndicator": "(תוצאות חיפוש מקטע)",
+  "cityAndStreetIndicator": "(תוצאות חיפוש עיר ורחוב)"
 }

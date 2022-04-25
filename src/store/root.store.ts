@@ -20,6 +20,7 @@ export default class RootStore {
   locationId: number = 0; // data by location id
   gpsLocationData: IGpsData | null = null;
   citiesList: Array<{ title: string }> = [];
+  cityAndStreet: { city?: string; street?: string };
 
   //different stores
   settingsStore: SettingsStore;
@@ -35,6 +36,7 @@ export default class RootStore {
     this.newsFlashStore = new NewsFlashStore(this);
     this.widgetsStore = new WidgetsStore(this);
     this.citiesList = [];
+    this.cityAndStreet = {};
 
     initService().then((initData) => {
       runInAction(() => {

@@ -8,20 +8,20 @@ import { oceanBlueColor, secondaryBgColor } from 'style';
 
 const useStyles = makeStyles({
   root: {
-	color: oceanBlueColor,
+    color: oceanBlueColor,
     backgroundColor: secondaryBgColor,
   },
 });
 
-
-const LocationSearchIndicator: FC = () => {
-	const classes = useStyles();
-  	const { t } = useTranslation();
-
-
+const LocationSearchIndicator: FC<any> = ({ searchType }) => {
+  const classes = useStyles();
+  const { t } = useTranslation();
   return (
     <Box className={classes.root} display="flex" justifyContent="center" p={2}>
-      <Typography.Body5>{t('locationIndicator')}</Typography.Body5>
+      <Typography.Body5>
+        {searchType === 'gps' && t('locationIndicator')}
+        {searchType === 'cityAndStreet' && t('cityAndStreetIndicator')}
+      </Typography.Body5>
     </Box>
   );
 };

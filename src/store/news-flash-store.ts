@@ -28,6 +28,7 @@ export default class NewsFlashStore {
 
   selectNewsFlash(id: number): void {
     runInAction(() => {
+      this.rootStore.cityAndStreet = {};
       this.rootStore.locationId = 0;
       this.activeNewsFlashId = id;
     });
@@ -40,6 +41,11 @@ export default class NewsFlashStore {
   }
 
   selectNewsFlashByCityAndStreet(city: string, street: string): void {
+    runInAction(() => {
+      this.rootStore.locationId = 0;
+      this.activeNewsFlashId = 0;
+      this.rootStore.cityAndStreet = { city, street };
+    });
     const widgetInput = {
       lang: this.rootStore.settingsStore.selectedLanguage,
       yearAgo: this.newsFlashWidgetsTimerFilter,
@@ -51,6 +57,7 @@ export default class NewsFlashStore {
 
   selectLocationId(id: number): void {
     runInAction(() => {
+      this.rootStore.cityAndStreet = {};
       this.activeNewsFlashId = 0;
       this.rootStore.locationId = id;
     });
@@ -70,6 +77,8 @@ export default class NewsFlashStore {
         newsId: this.activeNewsFlashId,
         yearAgo: filterValue,
         gpsId: this.rootStore.locationId,
+        city: this.rootStore.cityAndStreet.city,
+        street: this.rootStore.cityAndStreet.street,
       };
       this.rootStore.widgetsStore.fetchSelectedWidgets(widgetInput);
     }

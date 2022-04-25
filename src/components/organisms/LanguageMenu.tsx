@@ -38,6 +38,9 @@ const LanguageMenu: FC = () => {
       if (store.locationId) {
         path = `location/${store.locationId}`;
       }
+      if (store.cityAndStreet) {
+        path = `cityAndStreet/${store.cityAndStreet.city}/${store.cityAndStreet.street}`;
+      }
       return window.location.assign(`${prefix}/${path}`);
     }
   };
