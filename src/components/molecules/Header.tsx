@@ -54,11 +54,11 @@ const Header: FC = () => {
     }
   };
 
-  const onStreetAndCitySearch = (street: string, city: string) => {
+  const onStreetAndCitySearch = (street?: string, city?: string) => {
     // change to constant values until backend issues are fixed
-    city = 'רמת גן';
-    street = 'דרך ששת הימים';
-    navigate(`${settingsStore.currentLanguageRouteString}/cityAndStreet/${city}/${street}`);
+    console.log('city is', city);
+    console.log('street is', street);
+    navigate(`${settingsStore.currentLanguageRouteString}/cityAndStreet/${street}/${city}`);
     setOpen(false);
   };
 

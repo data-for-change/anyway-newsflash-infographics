@@ -7,6 +7,7 @@ import { Dialog, Button, Typography } from 'components/atoms';
 import LocationSelect from 'components/molecules/LocationSelect';
 import { IPoint } from 'models/Point';
 import { useStore } from 'store/storeConfig';
+import axios from 'axios';
 
 interface IProps {
   section?: string;
@@ -15,7 +16,7 @@ interface IProps {
   onClose: () => void;
   onLocationChange: (location: IPoint) => void;
   onSearch: () => void;
-  onStreetAndCitySearch: (street: string, city: string) => void;
+  onStreetAndCitySearch: (street?: string, city?: string) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -68,37 +69,46 @@ const MapDialog: FC<IProps> = ({
   const classes = useStyles();
   const { t } = useTranslation();
   const [searchScreen, setSearchScreen] = useState<'segment' | 'cityAndStreet'>('segment');
-  const [streetsOptions, setStreetsOptions] = useState<Array<{ title: string }>>([]);
-  const [cityValue, setCityValue] = useState<string>('');
-  const [streetValue, setStreetValue] = useState<string>('');
+  const [streetsOptions, setStreetsOptions] = useState<Array<streetOption>>([]);
+  const [cityValue, setCityValue] = useState<cityOption>({});
+  const [streetValue, setStreetValue] = useState<streetOption>({});
   const store = useStore();
+
+  interface cityOption {
+    yishuv_name?: string;
+    yishuv_symbol?: string;
+  }
+  interface streetOption {
+    street?: number;
+    street_hebrew?: string;
+  }
 
   useEffect(() => {
     // api call to get all cities list
     store.fetchCitiesList();
   }, [store]);
 
-  function setCityGetStreets(event: ChangeEvent<{}>, value: { title: string } | null | undefined) {
+  function setCityGetStreets(event: ChangeEvent<{}>, value: cityOption | null | undefined) {
     setStreetsOptions([]);
-    setStreetValue('');
+    setStreetValue({});
     if (value) {
-      //need to add api call to get streets in selected city
-      console.log(value);
-      setCityValue(value.title);
-      setStreetsOptions([{ title: value.title }]);
+      setCityValue({ yishuv_name: value.yishuv_name, yishuv_symbol: value.yishuv_symbol });
+      axios.get(`/api/streets?yishuv_symbol=${value.yishuv_symbol}`).then((res) => {
+        setStreetsOptions(res.data);
+      });
     }
   }
 
-  function setChosenStreet(event: ChangeEvent<{}>, value: { title: string } | null | undefined) {
+  function setChosenStreet(event: ChangeEvent<{}>, value: streetOption | null | undefined) {
     if (value) {
-      setStreetValue(value.title);
+      setStreetValue(value);
     }
   }
 
   function streetCityResultsPage() {
-    setCityValue('');
-    setStreetValue('');
-    onStreetAndCitySearch(cityValue, streetValue);
+    setCityValue({});
+    setStreetValue({});
+    onStreetAndCitySearch(cityValue.yishuv_name, streetValue.street_hebrew);
   }
 
   const SearchSegmentScreen = () => {
@@ -132,25 +142,25 @@ const MapDialog: FC<IProps> = ({
           <Autocomplete
             className={classes.inputSpace}
             options={store.citiesList}
-            getOptionLabel={(option) => option.title}
+            getOptionLabel={(option) => (option.yishuv_name ? option.yishuv_name : '')}
             onChange={(event, value) => setCityGetStreets(event, value)}
-            value={{ title: cityValue }}
+            value={{ yishuv_name: cityValue.yishuv_name, yishuv_symbol: cityValue.yishuv_symbol }}
             style={{ width: 300 }}
             renderInput={(params) => <TextField {...params} label={t('mapDialog.city')} variant="outlined" />}
           />
           <Autocomplete
             className={classes.inputSpace}
             options={streetsOptions}
-            getOptionLabel={(option) => option.title}
+            getOptionLabel={(option) => (option.street_hebrew ? option.street_hebrew : '')}
             style={{ width: 300 }}
-            value={{ title: streetValue }}
+            value={{ street: streetValue.street, street_hebrew: streetValue.street_hebrew }}
             onChange={(event, value) => setChosenStreet(event, value)}
             disabled={streetsOptions.length === 0}
             renderInput={(params) => <TextField {...params} label={t('mapDialog.street')} variant="outlined" />}
           />
         </Box>
         <DialogActions className={classes.actions}>
-          <Button.Standard onClick={streetCityResultsPage} disabled={!(cityValue && streetValue)}>
+          <Button.Standard onClick={streetCityResultsPage} disabled={!cityValue.yishuv_name || !streetValue.street}>
             {t('mapDialog.searchButton')}
           </Button.Standard>
           <Button.Outlined onClick={onClose}>{t('mapDialog.cancelButton')}</Button.Outlined>

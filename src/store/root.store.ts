@@ -19,7 +19,7 @@ export default class RootStore {
 
   locationId: number = 0; // data by location id
   gpsLocationData: IGpsData | null = null;
-  citiesList: Array<{ title: string }> = [];
+  citiesList: Array<{ yishuv_name: string; yishuv_symbol: string }> = [];
   cityAndStreet: { city?: string; street?: string };
 
   //different stores
@@ -74,15 +74,9 @@ export default class RootStore {
   }
 
   setCitiesList(data: any) {
-    // waiting for normal data to arrive from backend
-
     runInAction(() => {
-      this.citiesList = [{ title: 'חיפה' }, { title: 'תל אביב' }, { title: 'ירושלים' }];
+      this.citiesList = data;
     });
-
-    // runInAction(() => {
-    //   this.citiesList = data;
-    // });
   }
 
   async fetchCitiesList() {
@@ -91,7 +85,6 @@ export default class RootStore {
         runInAction(() => {
           if (response) {
             this.setCitiesList(response);
-            console.log(response);
           } else {
             console.error(`cities list invalid response:`, response);
           }
