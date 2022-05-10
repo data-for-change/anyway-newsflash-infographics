@@ -55,7 +55,7 @@ const BarChartContainer: FC<IBarChartBaseProps> = ({ data, textLabel, children }
       <ResponsiveContainer>
         <BarChart data={data} margin={{ bottom: 20 }}>
           <XAxis
-            angle={-7}
+            angle={0}
             interval={0}
             dataKey={BAR_CHART_X_LABEL}
             tickLine={false}
