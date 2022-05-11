@@ -9,10 +9,11 @@ import TextViewHeader from './TextViewHeader';
 import SeverityImage from './SeverityImage';
 
 type ISeverityCounts<T> = {
-  fatal: T;
-  severe: T;
-  light: T;
-} & ({ total: T } | { noun: T; verb: T });
+  fatal:T;
+  severe:T;
+  light:T;
+  total:T;
+} 
 
 export type ICountBySeverity = ISeverityCounts<number>;
 export type ISeverityFieldNames = ISeverityCounts<string>;
@@ -85,7 +86,7 @@ function getSingleType(countBySeverity: ICountBySeverity): string {
 const TextView: FC<IProps> = ({
   data,
   segmentText,
-  severityFieldNames: { fatal: fatalFieldName, severe: severeFieldName, light: lightFieldName, light: totalFieldName },
+  severityFieldNames: { fatal: fatalFieldName, severe: severeFieldName, light: lightFieldName, total: totalFieldName },
   labels,
 }) => {
   const classes = useStyles();
