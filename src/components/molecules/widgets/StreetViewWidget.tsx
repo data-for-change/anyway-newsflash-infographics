@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { mapApiKey } from 'utils/utils';
-import ReactStreetview from 'services/streetView';
+import ReactStreetview from 'components/molecules/widgets/streetView';
 import { makeStyles } from '@material-ui/core';
 import { IWidgetStreetViewData } from 'models/WidgetData';
 
