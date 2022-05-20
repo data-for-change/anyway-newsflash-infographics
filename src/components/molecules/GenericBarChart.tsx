@@ -4,11 +4,11 @@ import { roseColor, honeyColor, yellowColor, blackColor, whiteColor } from 'styl
 import { Typography } from 'components/atoms';
 import tinycolor from 'tinycolor2';
 
-const colors = [yellowColor, honeyColor, roseColor];
+const colors = [roseColor, honeyColor, yellowColor];
 const Y_AXIS_OFFSET = 20;
 const MIN_BAR_HEIGHT = 20;
 
-export const BAR_CHART_X_LABEL = 'xLabel'
+export const BAR_CHART_X_LABEL = 'xLabel';
 
 export type BarDataMap = {
   [key: string]: string | number;
@@ -55,7 +55,7 @@ const BarChartContainer: FC<IBarChartBaseProps> = ({ data, textLabel, children }
       <ResponsiveContainer>
         <BarChart data={data} margin={{ bottom: 20 }}>
           <XAxis
-            angle={-7}
+            angle={0}
             interval={0}
             dataKey={BAR_CHART_X_LABEL}
             tickLine={false}
