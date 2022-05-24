@@ -32,15 +32,20 @@ const useStyles = makeStyles({
   logoTextSpace: {
     marginInlineStart: '5px',
   },
+  mapCustomHeight: {
+    height: '90%',
+    alignSelf: 'flex-end',
+  },
 });
-
+// design={mapCustomStyle}
 const MostSevereAccidentsMapWidget: FC<IProps> = ({ data, sizeOptions }) => {
   const classes = useStyles();
   const { items } = data;
   const { t } = useTranslation();
+  const mapCustomStyle = classes.mapCustomHeight;
   return (
     <Box height={'100%'}>
-      <Box height={'95%'}>
+      <Box height={'95%'} display={'flex'}>
         <LocationMap items={items} />
       </Box>
       <Box className={classes.iconsContainer}>

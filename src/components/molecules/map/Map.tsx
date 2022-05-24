@@ -27,13 +27,13 @@ interface IProps {
   data?: IPoint[];
 }
 
-const Map: FC<IProps> = ({ zoom = INITIAL_ZOOM, center=INITIAL_CENTER, data, children }) => {
+const Map: FC<IProps> = ({ zoom = INITIAL_ZOOM, center = INITIAL_CENTER, data, children }) => {
   const classes = useStyles();
 
   const bounds = getBounds(data);
 
   return (
-    <MapContainer zoom={zoom} center={center} className={classes.root}>
+    <MapContainer zoom={zoom} center={center} className={classes.root} style={{ height: '90%', alignSelf: 'end' }}>
       <MapViewControl bounds={bounds} />
       <GoogleMapsLayer />
       {children}
