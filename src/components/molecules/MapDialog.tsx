@@ -7,7 +7,7 @@ import { Dialog, Button, Typography } from 'components/atoms';
 import LocationSelect from 'components/molecules/LocationSelect';
 import { IPoint } from 'models/Point';
 import { useStore } from 'store/storeConfig';
-import axios from 'axios';
+import { fetchStreetsByCity } from 'services/getCitiesAndStreets.service';
 
 interface IProps {
   section?: string;
@@ -76,7 +76,7 @@ const MapDialog: FC<IProps> = ({
 
   interface cityOption {
     yishuv_name?: string;
-    yishuv_symbol?: string;
+    yishuv_symbol?: number;
   }
   interface streetOption {
     street?: number;
@@ -88,14 +88,13 @@ const MapDialog: FC<IProps> = ({
     store.fetchCitiesList();
   }, [store]);
 
-  function setCityGetStreets(event: ChangeEvent<{}>, value: cityOption | null | undefined) {
+  async function setCityGetStreets(event: ChangeEvent<{}>, value: cityOption | null | undefined) {
     setStreetsOptions([]);
     setStreetValue({});
     if (value) {
       setCityValue({ yishuv_name: value.yishuv_name, yishuv_symbol: value.yishuv_symbol });
-      axios.get(`/api/streets?yishuv_symbol=${value.yishuv_symbol}`).then((res) => {
-        setStreetsOptions(res.data);
-      });
+      const streetsData = await fetchStreetsByCity(value.yishuv_symbol);
+      setStreetsOptions(streetsData);
     }
   }
 
@@ -138,21 +137,21 @@ const MapDialog: FC<IProps> = ({
   const SearchCityAndStreetScreen = () => {
     return (
       <Box>
-        <Box height="60vh" display="flex">
+        <Box height="60vh" display="flex" flexWrap="wrap">
           <Autocomplete
             className={classes.inputSpace}
             options={store.citiesList}
             getOptionLabel={(option) => (option.yishuv_name ? option.yishuv_name : '')}
             onChange={(event, value) => setCityGetStreets(event, value)}
             value={{ yishuv_name: cityValue.yishuv_name, yishuv_symbol: cityValue.yishuv_symbol }}
-            style={{ width: 300 }}
+            style={{ minWidth: 300 }}
             renderInput={(params) => <TextField {...params} label={t('mapDialog.city')} variant="outlined" />}
           />
           <Autocomplete
             className={classes.inputSpace}
             options={streetsOptions}
             getOptionLabel={(option) => (option.street_hebrew ? option.street_hebrew : '')}
-            style={{ width: 300 }}
+            style={{ minWidth: 300 }}
             value={{ street: streetValue.street, street_hebrew: streetValue.street_hebrew }}
             onChange={(event, value) => setChosenStreet(event, value)}
             disabled={streetsOptions.length === 0}

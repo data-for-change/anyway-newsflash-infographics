@@ -19,7 +19,7 @@ export default class RootStore {
 
   locationId: number = 0; // data by location id
   gpsLocationData: IGpsData | null = null;
-  citiesList: Array<{ yishuv_name: string; yishuv_symbol: string }> = [];
+  citiesList: Array<{ yishuv_name: string; yishuv_symbol: number }> = [];
   cityAndStreet: { city?: string; street?: string };
 
   //different stores
