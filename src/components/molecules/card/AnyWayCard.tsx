@@ -135,10 +135,7 @@ const AnyWayCard: FC<IProps> = ({
           {/* FOOTER */}
           {variant.footer !== FooterVariant.None && (
             <Box height={sizes.footerHeight} width="100%">
-              <CardFooter
-                dateComment={dateComment}
-                showRange={variant.footer === FooterVariant.LogoNoYearsRange ? false : true}
-              />
+              <CardFooter dateComment={dateComment} showRange={variant.footer === FooterVariant.LogoWithRange} />
             </Box>
           )}
           <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} text={title} />
