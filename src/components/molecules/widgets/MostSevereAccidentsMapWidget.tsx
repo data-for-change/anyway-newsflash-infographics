@@ -37,6 +37,10 @@ const useStyles = makeStyles({
     height: '90%',
     alignSelf: 'flex-end',
   },
+  mapBox: {
+    height: '95%',
+    display: 'flex',
+  },
 });
 
 const MostSevereAccidentsMapWidget: FC<IProps> = ({ data, sizeOptions }) => {
@@ -46,7 +50,7 @@ const MostSevereAccidentsMapWidget: FC<IProps> = ({ data, sizeOptions }) => {
 
   return (
     <Box height={'100%'}>
-      <Box height={'95%'} display={'flex'}>
+      <Box className={classes.mapBox}>
         <LocationMap items={items} customHeightStyle={classes.mapCustomHeight as unknown as CSSProperties} />
       </Box>
       <Box className={classes.iconsContainer}>
