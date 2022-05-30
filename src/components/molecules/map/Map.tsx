@@ -8,6 +8,7 @@ import { INITIAL_CENTER, INITIAL_ZOOM } from 'utils/utils';
 import { uniquePoints } from 'utils/utils';
 import MapViewControl from 'services/MapViewControl';
 import GoogleMapsLayer from './GoogleMapsLayer';
+import { CSSProperties } from '@material-ui/core/styles/withStyles';
 
 const useStyles = makeStyles({
   root: {
@@ -25,15 +26,16 @@ interface IProps {
   center?: { lat: number; lng: number };
   zoom?: number;
   data?: IPoint[];
+  customHeightStyle?: CSSProperties;
 }
 
-const Map: FC<IProps> = ({ zoom = INITIAL_ZOOM, center = INITIAL_CENTER, data, children }) => {
+const Map: FC<IProps> = ({ zoom = INITIAL_ZOOM, center = INITIAL_CENTER, data, children, customHeightStyle }) => {
   const classes = useStyles();
 
   const bounds = getBounds(data);
 
   return (
-    <MapContainer zoom={zoom} center={center} className={classes.root} style={{ height: '90%', alignSelf: 'end' }}>
+    <MapContainer zoom={zoom} center={center} className={`${classes.root} ${customHeightStyle}`}>
       <MapViewControl bounds={bounds} />
       <GoogleMapsLayer />
       {children}
