@@ -34,7 +34,7 @@ const useStyles = makeStyles({
     marginInlineStart: '5px',
   },
   mapCustomHeight: {
-    height: '90%',
+    maxHeight: '90%',
     alignSelf: 'flex-end',
   },
   mapBox: {
