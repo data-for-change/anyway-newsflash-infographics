@@ -42,10 +42,9 @@ interface IProps {
 }
 const CardHeader: FC<IProps> = ({ variant, text, road }) => {
   const classes = useStyles();
-
   let headerContent = null;
   const headerText = splitTextHeader(text);
-const roadNumberComp : JSX.Element | null = road ? <RoadNumberImage roadNumber={road} /> : null;
+  const roadNumberComp: JSX.Element | null = road ? <RoadNumberImage roadNumber={road} /> : null;
 
   switch (variant) {
     case HeaderVariant.Centered:
@@ -76,9 +75,7 @@ const roadNumberComp : JSX.Element | null = road ? <RoadNumberImage roadNumber={
     case HeaderVariant.Logo:
       headerContent = (
         <Box display="flex" flex={1}>
-          <Box className={classes.roadImageWrapper}>
-            {roadNumberComp}
-          </Box>
+          <Box className={classes.roadImageWrapper}>{roadNumberComp}</Box>
           <Box ml={'7%'} display="flex" flex={1} justifyContent="flex-end" alignItems="flex-end" height={30}>
             <Box className={classes.logosContainer} mx={1}>
               <Logo src={LamasImage} alt={'Lamas'} height={30} />
