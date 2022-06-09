@@ -138,7 +138,11 @@
     "cancelButton": "ביטול",
     "chosenSegment": "המקטע שנבחר:",
     "searchSection": "חיפוש מקטע",
-    "road": "כביש"
+    "searchStreetAndCity": "חיפוש רחוב בעיר/יישוב",
+    "road": "כביש",
+    "city": "עיר",
+    "street": "רחוב"
   },
-  "locationIndicator": "(תוצאות חיפוש מקטע)"
+  "locationIndicator": "(תוצאות חיפוש מקטע)",
+  "cityAndStreetIndicator": "(תוצאות חיפוש עיר ורחוב)"
 }

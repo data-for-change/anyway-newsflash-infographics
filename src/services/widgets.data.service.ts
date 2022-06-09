@@ -1,6 +1,6 @@
 import { ILocationData, IWidgetBase } from 'models/WidgetData';
 import axios from 'axios';
-import {  showOnlyOperCards, SHOW_MOCK } from 'utils/utils';
+import { showOnlyOperCards, SHOW_MOCK } from 'utils/utils';
 import { operationalCards } from 'const/cards.const';
 import { getVerifiedWidgetsData } from './data.verification/data.verification.service';
 
@@ -12,15 +12,20 @@ export interface IWidgetInput {
   newsId?: number;
   gpsId?: number;
   yearAgo?: number;
+  city?: string;
+  street?: string;
 }
 
-const getWidgetUrl = ({ lang, newsId, yearAgo, gpsId }: IWidgetInput): string => {
+const getWidgetUrl = ({ lang, newsId, yearAgo, gpsId, city, street }: IWidgetInput): string => {
   const query = [];
   if (newsId) {
     query.push(`${NEWS_FLASH_API}?lang=${lang}&news_flash_id=${newsId}`);
   }
   if (gpsId) {
     query.push(`${WIDGETS_BY_LOCATION_API}?lang=${lang}&road_segment_id=${gpsId}`);
+  }
+  if (city && street) {
+    query.push(`${NEWS_FLASH_API}?lang=${lang}&street1_hebrew=${street}&yishuv_name=${city}`);
   }
   if (yearAgo) {
     query.push(`years_ago=${yearAgo}`);
@@ -37,11 +42,11 @@ export const fetchWidgets = async ({
   newsId,
   yearAgo,
   gpsId,
+  city,
+  street,
 }: IWidgetInput): Promise<ILocationData | undefined> => {
- 
-
   try {
-    const widgetsUrl = getWidgetUrl({ lang, newsId, yearAgo, gpsId });
+    const widgetsUrl = getWidgetUrl({ lang, newsId, yearAgo, gpsId, city, street });
     console.log(widgetsUrl);
     const response = await axios.get(widgetsUrl);
     return processWidgetsFetchResponse(response);
