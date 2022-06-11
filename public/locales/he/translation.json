@@ -123,7 +123,8 @@
     "cancel": "בטל",
     "save": "שמור",
     "saveAll": "שמור שינויים",
-    "edit": "עריכה"
+    "edit": "עריכה",
+    "delete" : "מחיקת משתמש"
   },
   "widgets": {
     "countByCarType": {

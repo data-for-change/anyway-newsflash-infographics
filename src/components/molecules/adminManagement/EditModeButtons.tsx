@@ -7,7 +7,7 @@ export const EditModeButtons: React.FC<IPropsEditButtons> = ({ saveEditModeAndDe
   const { t } = useTranslation();
   return (
     <ButtonGroup>
-      <Button variant="contained" onClick={() => saveEditModeAndDelete(itemData)}>
+      <Button variant="contained" onClick={() => saveEditModeAndDelete(itemData,'EDIT')}>
         {t('usersManagement.save')}
       </Button>
       <Button variant="contained" onClick={() => cancelEditMode(itemData.email)}>

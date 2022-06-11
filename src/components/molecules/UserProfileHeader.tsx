@@ -12,6 +12,7 @@ import { ROLE_ADMIN_NAME } from 'utils/utils';
 import RootStore from 'store/root.store';
 import { useStore } from 'store/storeConfig';
 import { observer } from 'mobx-react-lite';
+import { IUserAdminTableData, UserManagementActions } from './adminManagement/types';
 
 const avatarSize = '40px';
 
@@ -40,6 +41,8 @@ interface IUserProfileHeader {
   handleLogout: () => any;
   isAdmin: boolean;
 }
+
+
 const UserProfileHeader: React.FC<IUserProfileHeader> = ({
   userDetails,
   isUpdateScreenOpen,
@@ -57,16 +60,14 @@ const UserProfileHeader: React.FC<IUserProfileHeader> = ({
     lastName,
     workplace: userDetails.data.roles.filter((role) => role !== ROLE_ADMIN_NAME)[0], // first role that is not admin
   };
-  const saveUserChanges = async (email: string, prevOrgName: string, newOrgName: string) => {
-    if (newOrgName !== prevOrgName) {
+  const saveUserChanges = async (action : UserManagementActions,userData : IUserAdminTableData) => {
       try {
         setLoading(true);
-        await userStore.setOrgToUser(newOrgName, email);
+        await userStore.setOrgToUser(userData.org, email);
         userStore.getUsersListInfo();
       } catch (err) {
         setLoading(false);
         console.log(err);
-      }
     }
   };
 

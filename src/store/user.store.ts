@@ -18,7 +18,7 @@ export default class UserStore {
   isUserAuthenticated: boolean = false;
   isAdmin: boolean = false;
   usersInfoList: [IUserInfo] | null = null;
-  organizationsList: Array<String> | null = null;
+  organizationsList: Array<string> | null = null;
   userInfo: IAnywayUserDetails | null = null;
   userApiError: boolean = false;
   rootStore: RootStore;

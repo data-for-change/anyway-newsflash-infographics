@@ -104,7 +104,8 @@
     "cancel": "cancel",
     "save": "save",
     "saveAll": "save all",
-    "edit": "edit"
+    "edit": "edit",
+    "delete" : "delete user"
   },
   "sideBar": "Approximate location:",
   "UserProfileHeader": {

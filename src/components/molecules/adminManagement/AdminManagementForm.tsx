@@ -13,7 +13,7 @@ import { TableContainer, Button, Box, Table, TableBody, TableCell, TableHead, Th
 import { blackColor } from 'style';
 import { EditModeButtons } from './EditModeButtons';
 import { OrganizationEditList } from './OrganizationEditList';
-import { IusersForUpdateMap, IProps, labels, ISingleOrgDetails } from './types';
+import { IusersForUpdateMap, IProps, labels, IUserAdminTableData , UserManagementActions} from './types';
 
 const useStyles = makeStyles((theme: Theme) => ({
   table: {
@@ -28,6 +28,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   row: {
     height: '65px',
   },
+  userActions:{
+    display:'flex',
+    justifyContent:'space-around'
+  }
 }));
 
 const AdminManagementForm: React.FC<IProps> = ({ saveUserChanges, isShowing, onClose, loading }) => {
@@ -46,15 +50,26 @@ const AdminManagementForm: React.FC<IProps> = ({ saveUserChanges, isShowing, onC
     delete removeUsersFromUpdate[email];
     setUsersForUpdate(removeUsersFromUpdate);
   };
-  const saveEditModeAndDelete = (element: ISingleOrgDetails) => {
-    saveUserChanges(element.email, element.org, usersToUpadte[element.email]);
+  const saveEditModeAndDelete = (element: IUserAdminTableData, action :UserManagementActions) => {
+    //if nothing changed, no need to perform save
+    const currentUserData = usersToUpadte[element.email];
+    if(element.org !== currentUserData.org){
+      const userNewData : IUserAdminTableData = {
+        email : element.email,
+        org : usersToUpadte[element.email].org,
+        name : element.name
+      }
+      saveUserChanges(action,userNewData);
+    }
     cancelEditMode(element.email);
   };
-  const addUsersToUpdate = (element: ISingleOrgDetails) => {
+  const addUsersToUpdate = (element: IUserAdminTableData) => {
     const addUserToUpdate = { ...usersToUpadte };
-    addUserToUpdate[element.email] = element.name;
+    addUserToUpdate[element.email] = {...element};
     setUsersForUpdate(addUserToUpdate);
   };
+
+
   return (
     <DialogWithHeader
       fullWidth
@@ -101,7 +116,7 @@ const AdminManagementForm: React.FC<IProps> = ({ saveUserChanges, isShowing, onC
                       <Typography.Body2>{item.org}</Typography.Body2>
                     )}
                   </TableCell>
-                  <TableCell align="center" width={'35%'}>
+                  <TableCell align="center" width={'50%'}>
                     {usersToUpadte[item.email] ? (
                       <EditModeButtons
                         saveEditModeAndDelete={saveEditModeAndDelete}
@@ -109,12 +124,15 @@ const AdminManagementForm: React.FC<IProps> = ({ saveUserChanges, isShowing, onC
                         itemData={item}
                       />
                     ) : (
-                      <Box>
+                      <Box className={classes.userActions}>
                         <Button onClick={() => addUsersToUpdate(item)} variant="contained">
                           {t('usersManagement.edit')}
                         </Button>
+                        <Button  onClick={() => saveUserChanges('DELETE',item.email)} variant="contained">
+                          {t('usersManagement.delete')}
+                        </Button>
                       </Box>
-                    )}
+                      )}
                   </TableCell>
                 </StyledTableRow>
               ))}

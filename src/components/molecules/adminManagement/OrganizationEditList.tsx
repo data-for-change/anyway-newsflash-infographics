@@ -13,10 +13,11 @@ export const OrganizationEditList: React.FC<IPropsSelectBox> = ({
   const { t } = useTranslation();
 
   const [currentOrganization, setcurrentOrganization] = React.useState(itemOrg);
-  const handleChange = (e: any) => {
-    setcurrentOrganization(e.target.value);
+  const handleChange = (e: React.ChangeEvent<{ name?: string; value: unknown }>) => {
+    const selectedOrg : string = e.target.value as string;
+    setcurrentOrganization(selectedOrg);
     const changeUsersForUpdate = { ...usersToUpadte };
-    changeUsersForUpdate[itemEmail] = e.target.value;
+    changeUsersForUpdate[itemEmail] = {...changeUsersForUpdate[itemEmail], org : selectedOrg};
 
     setUsersForUpdateFunction(changeUsersForUpdate);
   };
@@ -38,7 +39,7 @@ export const OrganizationEditList: React.FC<IPropsSelectBox> = ({
           onChange={handleChange}
         >
           {organizationsList &&
-            organizationsList.map((org: any) => {
+            organizationsList.map((org: string) => {
               return (
                 <MenuItem key={org} value={org}>
                   {org}
