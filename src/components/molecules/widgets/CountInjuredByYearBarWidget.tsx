@@ -1,11 +1,8 @@
 import React, { FC } from 'react';
-import BarChartView from 'components/molecules/BarChartView';
-import { IWidgetInjuredByYearData, IWidgetMultiBarData } from 'models/WidgetData';
+import { IWidgetMultiBarData } from 'models/WidgetData';
 import { convertToBarSeries } from 'utils/barChart.utils';
 import { MultiBarChart } from '../GenericBarChart';
 
-const ACCIDENT_YEAR = 'accident_year';
-const COUNT = 'count';
 
 interface IProps {
   data: IWidgetMultiBarData;

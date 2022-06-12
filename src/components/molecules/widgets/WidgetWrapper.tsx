@@ -9,7 +9,6 @@ import {
   IWidgetInjuredBySeverityTextData,
   IWidgetAccidentsByTypeData,
   IWidgetMultiBarData,
-  IWidgetInjuredByYearData,
   IWidgetAccidentsByDayNightData,
   IWidgetHeadOnCollisionsComparisonData,
   IWidgetVisionZeroImageData,
