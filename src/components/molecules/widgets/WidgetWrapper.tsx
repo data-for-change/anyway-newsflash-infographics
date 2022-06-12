@@ -68,9 +68,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
       break;
     }
     case WidgetName.accidents_heat_map: {
-      widgetComponent = (
-        <HeatMap data={data.items as IPoint[]} />
-      );
+      widgetComponent = <HeatMap data={data.items as IPoint[]} />;
       break;
     }
     // remove street_view until fixed
@@ -131,7 +129,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
       break;
     }
     case WidgetName.injured_count_by_accident_year: {
-      widgetComponent = <CountInjuredByYearBarWidget data={data as IWidgetInjuredByYearData} />;
+      widgetComponent = <CountInjuredByYearBarWidget data={data as IWidgetMultiBarData} />;
       break;
     }
     case WidgetName.accident_count_by_day_night: {
