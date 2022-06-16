@@ -78,7 +78,7 @@
   },
   "labelPosition": "Label Position",
   "table": {
-    "labels": ["Date", "Hour", "Type", "Killed", "Severe injured", "Light injured"]
+    "labels": ["Date", "Hour", "Type", "Killed", "Severe", "Light"]
   },
   "login": "LOGIN",
   "filterPanel": {
