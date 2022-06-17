@@ -4,7 +4,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Box, DialogActions, TextField } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { Dialog, Button, Typography } from 'components/atoms';
-import LocationSelect from 'components/molecules/LocationSelect';
+import { LocationSelect, PlacesAutocomplete } from 'components/molecules/LocationSelect';
 import { IPoint } from 'models/Point';
 import { useStore } from 'store/storeConfig';
 import { fetchStreetsByCity } from 'services/getCitiesAndStreets.service';
@@ -115,6 +115,7 @@ const MapDialog: FC<IProps> = ({
       <Box>
         <Box display="flex" flexDirection="column" height="60vh">
           <Box display="contents">
+            <PlacesAutocomplete onLocationChange={onLocationChange} />
             <LocationSelect onLocationChange={onLocationChange} />
           </Box>
           <div className={classes.chosenSection}>
