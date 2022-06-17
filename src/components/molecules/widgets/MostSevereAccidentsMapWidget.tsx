@@ -1,4 +1,4 @@
-import React, { FC, ReactText } from 'react';
+import React, { FC } from 'react';
 import LocationMap from 'components/molecules/LocationMap';
 import { IWidgetMostSevereAccidentsData } from 'models/WidgetData';
 import { Box } from '@material-ui/core';
@@ -6,7 +6,6 @@ import carOrangeIcon from 'assets/map/car-orange-marker.png';
 import carRedIcon from 'assets/map/car-red-marker.png';
 import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
-import { CSSProperties } from '@material-ui/core/styles/withStyles';
 
 interface IProps {
   data: IWidgetMostSevereAccidentsData;
@@ -33,13 +32,9 @@ const useStyles = makeStyles({
   logoTextSpace: {
     marginInlineStart: '5px',
   },
-  mapCustomHeight: {
-    maxHeight: '90%',
-    alignSelf: 'flex-end',
-  },
   mapBox: {
-    height: '95%',
-    display: 'flex',
+    height: '85%',
+    paddingTop: '2rem',
   },
 });
 
@@ -51,7 +46,7 @@ const MostSevereAccidentsMapWidget: FC<IProps> = ({ data, sizeOptions }) => {
   return (
     <Box height={'100%'}>
       <Box className={classes.mapBox}>
-        <LocationMap items={items} customHeightStyle={classes.mapCustomHeight as unknown as CSSProperties} />
+        <LocationMap items={items} />
       </Box>
       <Box className={classes.iconsContainer}>
         <Box className={classes.singleIcon}>

@@ -23,11 +23,7 @@ const LocationMap: FC<IProps> = ({ items, customHeightStyle }) => {
     return null;
   });
 
-  return (
-    <Map data={items} customHeightStyle={customHeightStyle}>
-      {markers}
-    </Map>
-  );
+  return <Map data={items}>{markers}</Map>;
 };
 
 export default LocationMap;
