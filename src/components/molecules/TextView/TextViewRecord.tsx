@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     lineHeight: 0.5,
     justifyContent: 'center',
+    width: '50%',
   },
   acNum: {
     color: roadIconColors.red,
