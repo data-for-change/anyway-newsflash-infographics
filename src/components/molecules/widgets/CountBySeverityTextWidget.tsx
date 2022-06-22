@@ -7,9 +7,11 @@ interface IProps {
   segmentText: string;
   severityFieldNames: ISeverityFieldNames;
   labels: ITextViewLabels;
-  
+  large_numbers?: boolean;
 }
-const CountBySeverityTextWidget: FC<IProps> = ({ data, segmentText, severityFieldNames, labels }) => {
-  return <TextView data={data} segmentText={segmentText} severityFieldNames={severityFieldNames} labels={labels} />;
+const CountBySeverityTextWidget: FC<IProps> = ({ data, segmentText, severityFieldNames,
+                                                 labels, large_numbers= false}) => {
+  return <TextView data={data} segmentText={segmentText} severityFieldNames={severityFieldNames}
+                   labels={labels} large_numbers={large_numbers} />;
 };
 export default CountBySeverityTextWidget;

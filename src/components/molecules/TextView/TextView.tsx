@@ -31,6 +31,7 @@ interface IProps {
   severityFieldNames: ISeverityFieldNames;
   segmentText: string;
   labels: ITextViewLabels;
+  large_numbers: boolean;
 }
 
 export type IFormattedWidgetCountBySeverity = IWidgetCountBySeverityTextDataBase<ICountBySeverity>;
@@ -88,6 +89,7 @@ const TextView: FC<IProps> = ({
   segmentText,
   severityFieldNames: { fatal: fatalFieldName, severe: severeFieldName, light: lightFieldName, total: totalFieldName },
   labels,
+  large_numbers,
 }) => {
   const classes = useStyles();
 
@@ -118,7 +120,7 @@ const TextView: FC<IProps> = ({
         <SeverityImage severity={getSingleType(countBySeverity)!} />
       ) : (
         <Box color="text.secondary" className={classes.list}>
-          <TextViewList data={countBySeverity} labels={labels} />
+          <TextViewList data={countBySeverity} labels={labels} large_numbers={large_numbers}/>
         </Box>
       )}
     </div>
