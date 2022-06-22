@@ -15,23 +15,20 @@ interface IProps {
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    top: theme.spacing(2),
     justifyContent: 'space-around',
     width: '80%',
     height: '20%',
   },
   text: {
-    position: 'relative',
-    top: theme.spacing(0.2),
+    top: theme.spacing(2),
     display: 'flex',
     alignItems: 'center',
     textAlign: 'center',
     justifyContent: 'center',
-    width: 110,
+    width: '30%',
   },
   acNum: {
     position: 'relative',
-    top: theme.spacing(0.2),
     display: 'flex',
     alignItems: 'center',
     textAlign: 'center',
@@ -39,11 +36,11 @@ const useStyles = makeStyles((theme) => ({
     color: roadIconColors.red,
     fontWeight: 'bold',
     fontSize: '350%',
-    width: 110,
+    width: '30%',
   },
 }));
 
-const TextViewRecord: React.FC<IProps> = ({ isLast, numOfAccidents, severityDesc, imgSrc }) => {
+const TextViewRecordLargeNumbers: React.FC<IProps> = ({ isLast, numOfAccidents, severityDesc, imgSrc }) => {
   const classes = useStyles();
   return (
     <Box className={classes.root} py={1} borderBottom={isLast ? '' : `5px solid ${silverSmokeColor}`}>
@@ -56,4 +53,4 @@ const TextViewRecord: React.FC<IProps> = ({ isLast, numOfAccidents, severityDesc
   );
 };
 
-export default TextViewRecord;
+export default TextViewRecordLargeNumbers;

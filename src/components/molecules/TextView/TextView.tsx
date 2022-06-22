@@ -13,7 +13,7 @@ type ISeverityCounts<T> = {
   severe:T;
   light:T;
   total:T;
-} 
+}
 
 export type ICountBySeverity = ISeverityCounts<number>;
 export type ISeverityFieldNames = ISeverityCounts<string>;
@@ -49,8 +49,8 @@ const useStyles = makeStyles(() => ({
     alignItems: 'center',
   },
   headerBase: {
-    width: '70%',
-    height: '20%',
+    width: '80%',
+    height: '25%',
   },
   list: {
     width: '80%',
