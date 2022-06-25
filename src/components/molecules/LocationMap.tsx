@@ -10,7 +10,7 @@ interface IProps {
   customHeightStyle?: CSSProperties;
 }
 
-const LocationMap: FC<IProps> = ({ items, customHeightStyle }) => {
+const LocationMap: FC<IProps> = ({ items }) => {
   const markers = items.map((x: IPoint, i: number) => {
     if (x.latitude !== null && x.longitude !== null) {
       const tooltipOffset = i % 2 === 0 ? ClockPosition.RIGHT : ClockPosition.LEFT;
