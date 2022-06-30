@@ -34,8 +34,6 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     justifyContent: 'center',
     color: roadIconColors.red,
-    fontWeight: 'bold',
-    fontSize: '350%',
     width: '30%',
   },
 }));
@@ -45,7 +43,9 @@ const TextViewRecordLargeNumbers: React.FC<IProps> = ({ isLast, numOfAccidents, 
   return (
     <Box className={classes.root} py={1} borderBottom={isLast ? '' : `5px solid ${silverSmokeColor}`}>
       <SeverityImage inRecord severity={imgSrc} />
-      <Box className={classes.acNum}>{numOfAccidents}</Box>
+      <Box className={classes.acNum}>
+        <Typography.TextBody1>{numOfAccidents}</Typography.TextBody1>
+      </Box>
       <Box className={classes.text}>
         <Typography.Title1>{severityDesc}</Typography.Title1>
       </Box>

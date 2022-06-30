@@ -48,6 +48,10 @@ const defaultThemeOptions: ThemeOptions = {
     h6: {
       fontSize: 13,
     },
+    body1: {
+      fontSize: '350%',
+      fontWeight: "bold",
+    },
   },
 };
 
