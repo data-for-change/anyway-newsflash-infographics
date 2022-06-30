@@ -7,12 +7,12 @@ import { ICountBySeverity, ITextViewLabels } from './TextView';
 interface IProps {
   data: ICountBySeverity;
   labels: ITextViewLabels;
-  large_numbers: boolean;
+  largeNumbers: boolean;
 }
 
-const TextViewList: React.FC<IProps> = ({ data, labels , large_numbers}) => {
+const TextViewList: React.FC<IProps> = ({ data, labels , largeNumbers}) => {
   const { t } = useTranslation();
-  const ViewRecord = large_numbers ? TextViewRecordLargeNumbers : TextViewRecord;
+  const ViewRecord = largeNumbers ? TextViewRecordLargeNumbers : TextViewRecord;
   return (
     <>
       {data.fatal > 0 && (
