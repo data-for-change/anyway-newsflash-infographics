@@ -9,7 +9,6 @@ interface IProps {
   numOfAccidents: number;
   severityDesc: string;
   imgSrc: string;
-  isLast?: boolean;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -19,6 +18,11 @@ const useStyles = makeStyles((theme) => ({
     width: '80%',
     height: '20%',
     py: 1,
+    borderBottom: '5px solid',
+    borderBlockColor: silverSmokeColor,
+    '&:last-child': {
+      borderBottom: '0px',
+    },
   },
   text: {
     position: 'relative',
@@ -37,10 +41,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TextViewRecord: React.FC<IProps> = ({ isLast, numOfAccidents, severityDesc, imgSrc }) => {
+const TextViewRecord: React.FC<IProps> = ({numOfAccidents, severityDesc, imgSrc }) => {
   const classes = useStyles();
   return (
-    <Box className={classes.root} borderBottom={isLast ? '' : `5px solid ${silverSmokeColor}`}>
+    <Box className={classes.root}>
       <SeverityImage inRecord severity={imgSrc} />
       <Box className={classes.text}>
         <Box className={classes.acNum}>{numOfAccidents}</Box>

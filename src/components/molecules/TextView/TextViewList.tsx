@@ -31,7 +31,6 @@ const TextViewList: React.FC<IProps> = ({ data, labels , largeNumbers}) => {
       )}
       {data.light > 0 && (
         <ViewRecord
-          isLast={true}
           numOfAccidents={data.light}
           severityDesc={t(`textView.${labels.light}.${data.light > 1 ? 'plural' : 'singular'}`)}
           imgSrc={'light'}
