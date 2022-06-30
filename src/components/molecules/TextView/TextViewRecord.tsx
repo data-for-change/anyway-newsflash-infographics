@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-around',
     width: '80%',
     height: '20%',
+    py: 1,
   },
   text: {
     position: 'relative',
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 const TextViewRecord: React.FC<IProps> = ({ isLast, numOfAccidents, severityDesc, imgSrc }) => {
   const classes = useStyles();
   return (
-    <Box className={classes.root} py={1} borderBottom={isLast ? '' : `5px solid ${silverSmokeColor}`}>
+    <Box className={classes.root} borderBottom={isLast ? '' : `5px solid ${silverSmokeColor}`}>
       <SeverityImage inRecord severity={imgSrc} />
       <Box className={classes.text}>
         <Box className={classes.acNum}>{numOfAccidents}</Box>
