@@ -1,7 +1,7 @@
 import { BarDataMap, BAR_CHART_X_LABEL } from 'components/molecules/GenericBarChart';
-import { LabelsMap, MultiSeriesDataItems } from 'models/MultiSeriesData';
+import { LabelsMap, MultiSeriesDataItems, SeriesDataItem } from 'models/MultiSeriesData';
 
-const getTranslatedLabel = (key: string, labelsMap: LabelsMap): string  => labelsMap[key] || key;
+const getTranslatedLabel = (key: string, labelsMap: LabelsMap): string => labelsMap[key] || key;
 
 // convert input to data series, for example:
 // [
@@ -27,7 +27,7 @@ export function convertToBarSeries(items: MultiSeriesDataItems[], labelsMap: Lab
     const label = item.label_key.toString();
 
     const result: BarDataMap = {
-      [BAR_CHART_X_LABEL]: getTranslatedLabel(label, labelsMap)
+      [BAR_CHART_X_LABEL]: getTranslatedLabel(label, labelsMap),
     };
 
     if (!item.series) {
@@ -42,6 +42,16 @@ export function convertToBarSeries(items: MultiSeriesDataItems[], labelsMap: Lab
         result[yLabel] = Math.round(value);
       });
     }
+    return result;
+  });
+}
+
+//Not very generic by me. Check it with Daniel
+export function convertItemsToBarSeries(items: SeriesDataItem[]): BarDataMap[] {
+  return items.map((item: any) => {
+    const result: BarDataMap = {};
+    result[BAR_CHART_X_LABEL] = item.label_key;
+    result['נפגעים'] = item.value;
     return result;
   });
 }

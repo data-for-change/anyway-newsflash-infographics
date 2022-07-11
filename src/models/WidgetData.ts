@@ -1,4 +1,4 @@
-import { LabelsMap, MultiSeriesDataItems } from './MultiSeriesData';
+import { LabelsMap, MultiSeriesDataItems, SeriesDataItem } from './MultiSeriesData';
 import { IPoint, IPointAccident } from './Point';
 import { IWidgetDataType } from './WidgetDataType';
 
@@ -99,12 +99,6 @@ export interface IWidgetCountBySeverityData extends IWidgetDataBase {
     count: number;
   }[];
 }
-export interface IWidgetKilledAndInjuredCountPerAgeGroup extends IWidgetDataBase {
-  items: {
-    label_key: string;
-    value: number;
-  }[];
-}
 
 export interface IWidgetAccidentsByTypeData extends IWidgetDataBase {
   items: {
@@ -181,5 +175,13 @@ export interface IWidgetMultiBarData extends IWidgetDataBase {
   text: {
     title?: string;
     labels_map: LabelsMap;
+  };
+}
+
+export interface IWidgetKilledAndInjuredCountPerAgeGroup extends IWidgetDataBase {
+  items: SeriesDataItem[];
+  text: {
+    subtitles?: string;
+    title?: string;
   };
 }
