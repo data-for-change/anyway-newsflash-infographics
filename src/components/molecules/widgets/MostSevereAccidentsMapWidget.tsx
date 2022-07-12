@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import LocationMap from 'components/molecules/LocationMap';
 import { IWidgetMostSevereAccidentsData } from 'models/WidgetData';
 import { Box } from '@material-ui/core';
@@ -32,15 +32,20 @@ const useStyles = makeStyles({
   logoTextSpace: {
     marginInlineStart: '5px',
   },
+  mapBox: {
+    height: '85%',
+    paddingTop: '2rem',
+  },
 });
 
 const MostSevereAccidentsMapWidget: FC<IProps> = ({ data, sizeOptions }) => {
   const classes = useStyles();
   const { items } = data;
   const { t } = useTranslation();
+
   return (
     <Box height={'100%'}>
-      <Box height={'95%'}>
+      <Box className={classes.mapBox}>
         <LocationMap items={items} />
       </Box>
       <Box className={classes.iconsContainer}>

@@ -1,11 +1,13 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { IPoint } from 'models/Point';
 import { MostSevereAccidentsMarker } from 'components/atoms';
 import { ClockPosition } from 'models/ClockPosition';
 import Map from './map/Map';
+import { CSSProperties } from '@material-ui/core/styles/withStyles';
 
 interface IProps {
   items: IPoint[] | any;
+  customHeightStyle?: CSSProperties;
 }
 
 const LocationMap: FC<IProps> = ({ items }) => {
