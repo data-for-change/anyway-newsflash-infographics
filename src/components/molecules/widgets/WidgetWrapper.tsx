@@ -93,7 +93,6 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
             noun: 'accidents',
             verb: 'occurred',
           }}
-          largeNumbers={true}
         />
       );
       break;
@@ -116,6 +115,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
             noun: 'injured',
             verb: 'hurt',
           }}
+          largeNumbers={true}
         />
       );
       break;

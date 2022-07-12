@@ -4,6 +4,7 @@ import { roadIconColors, silverSmokeColor } from 'style';
 import SeverityImage from './SeverityImage';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from 'components/atoms';
+import classNames from 'classnames';
 
 interface IProps {
   numOfAccidents: number;
@@ -14,32 +15,31 @@ interface IProps {
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    justifyContent: 'space-around',
-    width: '80%',
+    width: '90%',
     height: '20%',
-    py: 1,
     borderBottom: '5px solid',
     borderBlockColor: silverSmokeColor,
     '&:last-child': {
       borderBottom: '0px',
     },
   },
+  padding : {
+    padding : '0 10px'
+  },
   text: {
-    top: theme.spacing(2),
-    display: 'flex',
-    alignItems: 'center',
+    display:'flex',
+    alignItems: 'end',
     textAlign: 'center',
-    justifyContent: 'center',
-    width: '30%',
   },
   acNum: {
     position: 'relative',
     display: 'flex',
-    alignItems: 'center',
-    textAlign: 'center',
+    paddingLeft : theme.spacing(1),
+    paddingRight : theme.spacing(1),
+    alignItems: 'end',
+    textAlign: 'end',
     justifyContent: 'center',
     color: roadIconColors.red,
-    width: '30%',
   },
 }));
 
@@ -47,11 +47,11 @@ const TextViewRecordLargeNumbers: React.FC<IProps> = ({ numOfAccidents, severity
   const classes = useStyles();
   return (
     <Box className={classes.root}>
-      <SeverityImage inRecord severity={imgSrc} />
-      <Box className={classes.acNum}>
+      <SeverityImage  inRecord severity={imgSrc} />
+      <Box className={classNames(classes.acNum)}>
         <Typography.TextBody1>{numOfAccidents}</Typography.TextBody1>
       </Box>
-      <Box className={classes.text}>
+      <Box className={classNames(classes.text,classes.padding)}>
         <Typography.Title1>{severityDesc}</Typography.Title1>
       </Box>
     </Box>

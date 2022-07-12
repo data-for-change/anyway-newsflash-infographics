@@ -49,8 +49,10 @@ const defaultThemeOptions: ThemeOptions = {
       fontSize: 13,
     },
     body1: {
-      fontSize: '350%',
+      fontSize: 56,
       fontWeight: "bold",
+      lineHeight:1
+
     },
   },
 };

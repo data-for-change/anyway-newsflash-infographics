@@ -4,7 +4,6 @@ import Ambulance from 'assets/Ambulance.png';
 import Crutches from 'assets/Crutches.png';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
 
 interface SProps {
   severity: string;
@@ -12,9 +11,7 @@ interface SProps {
 }
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '50%',
-  },
+
   singleType: {
     height: '40%',
     width: 'auto',
@@ -37,7 +34,7 @@ const SeverityImage: FC<SProps> = ({ severity, inRecord }) => {
     [index: string]: string;
   }
   const imgBySeverity: SeverityTypesImages = { fatal: Person, severe: Ambulance, light: Crutches };
-  const root = classNames(classes.root, inRecord ? classes.list : classes.singleType);
+  const root =  inRecord ? classes.list : classes.singleType;
   return (
     <Box className={root}>
       <img className={classes.image} src={imgBySeverity[severity]} alt={imgBySeverity[severity]} />
