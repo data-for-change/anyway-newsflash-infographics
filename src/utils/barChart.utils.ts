@@ -45,13 +45,3 @@ export function convertToBarSeries(items: any[], labelsMap: any): BarDataMap[] {
     return result;
   });
 }
-
-//Not very generic by me. Check it with Daniel
-export function convertItemsToBarSeries(items: SeriesDataItem[]): BarDataMap[] {
-  return items.map((item: any) => {
-    const result: BarDataMap = {};
-    result[BAR_CHART_X_LABEL] = item.label_key;
-    result['נפגעים'] = item.value;
-    return result;
-  });
-}

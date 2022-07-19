@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { IWidgetKilledAndInjuredCountPerAgeGroup } from 'models/WidgetData';
 import { MultiBarChart } from '../GenericBarChart';
-import { convertItemsToBarSeries, convertToBarSeries } from 'utils/barChart.utils';
+import { convertToBarSeries } from 'utils/barChart.utils';
 
 interface IProps {
   data: IWidgetKilledAndInjuredCountPerAgeGroup;
