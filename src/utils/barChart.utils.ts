@@ -1,6 +1,6 @@
-import { BarDataMap, BAR_CHART_X_LABEL, MultiBarChart } from 'components/molecules/GenericBarChart';
-import { LabelsMap, MultiSeriesDataItems, SeriesDataItem } from 'models/MultiSeriesData';
-
+import { BarDataMap, BAR_CHART_X_LABEL } from 'components/molecules/GenericBarChart';
+import { LabelsMap } from 'models/MultiSeriesData';
+//, MultiBarChart, MultiSeriesDataItems, SeriesDataItem
 const getTranslatedLabel = (key: string, labelsMap: LabelsMap): string => labelsMap[key] || key;
 
 // convert input to data series, for example:
