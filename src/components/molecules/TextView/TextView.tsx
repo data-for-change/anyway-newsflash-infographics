@@ -31,6 +31,7 @@ interface IProps {
   severityFieldNames: ISeverityFieldNames;
   segmentText: string;
   labels: ITextViewLabels;
+  isStreet: boolean;
 }
 
 export type IFormattedWidgetCountBySeverity = IWidgetCountBySeverityTextDataBase<ICountBySeverity>;
@@ -88,6 +89,7 @@ const TextView: FC<IProps> = ({
   segmentText,
   severityFieldNames: { fatal: fatalFieldName, severe: severeFieldName, light: lightFieldName, total: totalFieldName },
   labels,
+  isStreet,
 }) => {
   const classes = useStyles();
 

@@ -94,6 +94,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
             noun: 'accidents',
             verb: 'occurred',
           }}
+          isStreet={isStreet}
         />
       );
       break;
@@ -116,6 +117,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
             noun: 'injured',
             verb: 'hurt',
           }}
+          isStreet={isStreet}
         />
       );
       break;

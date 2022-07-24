@@ -7,9 +7,11 @@ interface IProps {
   segmentText: string;
   severityFieldNames: ISeverityFieldNames;
   labels: ITextViewLabels;
-  
+  isStreet: boolean;
 }
-const CountBySeverityTextWidget: FC<IProps> = ({ data, segmentText, severityFieldNames, labels }) => {
-  return <TextView data={data} segmentText={segmentText} severityFieldNames={severityFieldNames} labels={labels} />;
+const CountBySeverityTextWidget: FC<IProps> = ({ data, segmentText, severityFieldNames, labels,
+                                                 isStreet }) => {
+  return <TextView data={data} segmentText={segmentText} severityFieldNames={severityFieldNames} labels={labels}
+                   isStreet={isStreet} />;
 };
 export default CountBySeverityTextWidget;
