@@ -41,9 +41,10 @@ interface IProps {
   locationText: string;
   sizeOptions: any;
   segmentText: string;
+  isStreet: boolean;
 }
 
-const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentText }) => {
+const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentText, isStreet }) => {
   const { name, data } = widget;
   let widgetComponent;
   switch (name) {

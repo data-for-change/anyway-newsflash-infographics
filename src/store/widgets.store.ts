@@ -55,6 +55,10 @@ export default class WidgetsStore {
     return this.newsFlashWidgetsData.find((item) => item.name === name);
   }
 
+  get isStreet(): boolean {
+    return this.newsFlashWidgetsMeta.location_info.resolution === "STREET";
+  }
+
   fetchSelectedWidgets({ lang, newsId, yearAgo, gpsId, city, street }: IWidgetInput): void {
     runInAction(() => (this.widgetBoxLoading = true));
     fetchWidgets({ lang, newsId, yearAgo, gpsId, city, street }).then((response: any) => {
