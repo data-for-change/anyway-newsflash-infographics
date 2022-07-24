@@ -114,6 +114,7 @@ const TextView: FC<IProps> = ({
           data={data}
           segmentText={segmentText}
           labels={labels}
+          isStreet={isStreet}
         />
       </Box>
       {isSingleType ? (

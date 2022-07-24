@@ -79,7 +79,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
     case WidgetName.accident_count_by_severity: {
       widgetComponent = (
         <CountBySeverityTextWidget
-          segmentText={segmentText}
+          segmentText={isStreet ? locationText : segmentText}
           data={data as IWidgetAccidentsBySeverityTextData}
           severityFieldNames={{
             fatal: 'severity_fatal_count',
@@ -102,7 +102,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
     case WidgetName.injured_count_by_severity: {
       widgetComponent = (
         <CountBySeverityTextWidget
-          segmentText={segmentText}
+          segmentText={isStreet ? locationText : segmentText}
           data={data as IWidgetInjuredBySeverityTextData}
           severityFieldNames={{
             fatal: 'killed_count',
