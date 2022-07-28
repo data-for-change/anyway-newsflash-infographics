@@ -181,7 +181,7 @@ export interface IWidgetMultiBarData extends IWidgetDataBase {
 export interface IWidgetKilledAndInjuredCountPerAgeGroup extends IWidgetDataBase {
   items: SeriesDataItem[];
   text: {
-    subtitles?: string;
+    subtitle?: string;
     title?: string;
   };
 }
