@@ -27,7 +27,7 @@ interface IProps {
   data?: IPoint[];
 }
 
-const Map: FC<IProps> = ({ zoom = INITIAL_ZOOM, center=INITIAL_CENTER, data, children }) => {
+const Map: FC<IProps> = ({ zoom = INITIAL_ZOOM, center = INITIAL_CENTER, data, children }) => {
   const classes = useStyles();
 
   const bounds = getBounds(data);

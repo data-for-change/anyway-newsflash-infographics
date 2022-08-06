@@ -12,6 +12,7 @@ import { useLocale } from 'hooks/date.hooks';
 
 interface IProps {
   dateComment: IDateComments;
+  showRange: boolean;
 }
 
 const useStyles = makeStyles({
@@ -25,7 +26,7 @@ const useStyles = makeStyles({
   },
 });
 
-const CardFooter: React.FC<IProps> = ({ dateComment }) => {
+const CardFooter: React.FC<IProps> = ({ dateComment, showRange }) => {
   const { t } = useTranslation();
   const classes = useStyles();
   const locale = useLocale();
@@ -33,10 +34,9 @@ const CardFooter: React.FC<IProps> = ({ dateComment }) => {
   const dateRange = dateComment.date_range ? dateComment.date_range.join('-') : null;
   return (
     <div className={classes.main}>
-      <Typography.Body3>{dateRange}</Typography.Body3>
+      {showRange && <Typography.Body3>{dateRange},</Typography.Body3>}
       {lastUpdateDate && (
         <Typography.Body3>
-          ,
           <Box px={1} component="span">
             {t('widgets.lastDateUpdated')}:
           </Box>
