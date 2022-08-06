@@ -101,6 +101,7 @@ const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, isStacked,
 
         return (
           <Bar
+            key={i}
             stackId={isStacked ? 'stack_1' : undefined}
             fill={colors[i]}
             dataKey={yLabels[i]}
