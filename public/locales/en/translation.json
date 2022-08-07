@@ -73,6 +73,8 @@
     "display": "Display",
     "landscape": "Portrait",
     "portrait": "Landscape",
+    "showAccidents": "Show Accidents",
+    "showInjured": "Show Injured",
     "size": "Size",
     "download": "Download as PNG"
   },

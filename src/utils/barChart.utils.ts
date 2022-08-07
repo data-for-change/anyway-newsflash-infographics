@@ -24,6 +24,7 @@ const getTranslatedLabel = (key: string, labelsMap: LabelsMap): string => labels
 export function convertToBarSeries(
   items: SeriesDataItem[] | MultiSeriesDataItems[],
   labelsMap?: LabelsMap | string,
+  excludeList: any = [],
 ): BarDataMap[] {
   return items.map((item: any) => {
     const label: string = item.label_key.toString();
@@ -48,8 +49,10 @@ export function convertToBarSeries(
       const series = item.series;
       series.forEach((dataPoint: any) => {
         const { label_key, value } = dataPoint;
-        const yLabel = getTranslatedLabel(label_key, labelsMap as LabelsMap);
-        result[yLabel] = Math.round(value);
+        if (!excludeList.includes(label_key)) {
+          const yLabel = getTranslatedLabel(label_key, labelsMap as LabelsMap);
+          result[yLabel] = Math.round(value);
+        }
       });
     }
     return result;
