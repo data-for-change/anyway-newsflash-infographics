@@ -42,11 +42,12 @@ interface IProps {
   widget: IWidgetBase;
   locationText: string;
   sizeOptions: any;
+  barOptions: any;
   segmentText: string;
   isStreet: boolean;
 }
 
-const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentText, isStreet }) => {
+const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, barOptions, segmentText, isStreet }) => {
   const { name, data } = widget;
   let widgetComponent;
   switch (name) {
@@ -136,11 +137,11 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
       break;
     }
     case WidgetName.accident_count_by_accident_year: {
-      widgetComponent = <CountByYearBarWidget data={data as IWidgetMultiBarData} />;
+      widgetComponent = <CountByYearBarWidget data={data as IWidgetMultiBarData} barOptions={barOptions} />;
       break;
     }
     case WidgetName.injured_count_by_accident_year: {
-      widgetComponent = <CountInjuredByYearBarWidget data={data as IWidgetMultiBarData} />;
+      widgetComponent = <CountInjuredByYearBarWidget data={data as IWidgetMultiBarData} barOptions={barOptions} />;
       break;
     }
     case WidgetName.accident_count_by_day_night: {
