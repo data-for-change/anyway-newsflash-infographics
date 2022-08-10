@@ -1,4 +1,4 @@
-import { FC, memo, useState } from 'react';
+import { FC, memo, useState,useEffect } from 'react';
 import { useMapEvents } from 'react-leaflet';
 import { IPoint } from 'models/Point';
 import { Marker } from 'components/atoms';

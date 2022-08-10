@@ -110,30 +110,6 @@ const MapDialog: FC<IProps> = ({
     onStreetAndCitySearch(cityValue.yishuv_name, streetValue.street_hebrew);
   }
 
-  const SearchSegmentScreen = () => {
-    return (
-      <Box>
-        <Box display="flex" flexDirection="column" height="60vh">
-          <Box display="contents">
-            <LocationSelect onLocationChange={onLocationChange} />
-          </Box>
-          <div className={classes.chosenSection}>
-            <Typography.Body1 bold>{t('mapDialog.chosenSegment')}</Typography.Body1>
-            <Typography.Body1>
-              {roadNumber && section && ` ${t('mapDialog.road')} ${roadNumber} - ${section}`}
-            </Typography.Body1>
-          </div>
-        </Box>
-        <DialogActions className={classes.actions}>
-          <Button.Standard disabled={!section} onClick={onSearch}>
-            {t('mapDialog.searchButton')}
-          </Button.Standard>
-          <Button.Outlined onClick={onClose}>{t('mapDialog.cancelButton')}</Button.Outlined>
-        </DialogActions>
-      </Box>
-    );
-  };
-
   const SearchCityAndStreetScreen = () => {
     return (
       <Box>
@@ -185,11 +161,41 @@ const MapDialog: FC<IProps> = ({
             <Typography.Title1>{t('mapDialog.searchStreetAndCity')}</Typography.Title1>
           </Box>
         </Box>
-        {searchScreen === 'segment' && <SearchSegmentScreen />}
+        {searchScreen === 'segment' && <SearchSegmentScreen onLocationChange={onLocationChange} onClose={onClose}
+                                                           onSearch={onSearch} section={section} roadNumber={roadNumber}/>}
         {searchScreen === 'cityAndStreet' && <SearchCityAndStreetScreen />}
       </Box>
     </Dialog>
   );
 };
+
+
+const SearchSegmentScreen : FC<any> = ({section, roadNumber, onLocationChange, onSearch, onClose}) => {
+  const classes = useStyles();
+  const { t } = useTranslation();
+
+  return (
+    <Box>
+      <Box display="flex" flexDirection="column" height="60vh">
+        <Box display="contents">
+          <LocationSelect onLocationChange={onLocationChange} />
+        </Box>
+        <div className={classes.chosenSection}>
+          <Typography.Body1 bold>{t('mapDialog.chosenSegment')}</Typography.Body1>
+          <Typography.Body1>
+            {roadNumber && section && ` ${t('mapDialog.road')} ${roadNumber} - ${section}`}
+          </Typography.Body1>
+        </div>
+      </Box>
+      <DialogActions className={classes.actions}>
+        <Button.Standard disabled={!section} onClick={onSearch}>
+          {t('mapDialog.searchButton')}
+        </Button.Standard>
+        <Button.Outlined onClick={onClose}>{t('mapDialog.cancelButton')}</Button.Outlined>
+      </DialogActions>
+    </Box>
+  );
+};
+
 
 export default MapDialog;
