@@ -8,6 +8,8 @@ import LocationSelect from 'components/molecules/LocationSelect';
 import { IPoint } from 'models/Point';
 import { useStore } from 'store/storeConfig';
 import { fetchStreetsByCity } from 'services/getCitiesAndStreets.service';
+import SearchCityAndStreetScreen from 'components/molecules/SearchCityAndStreetScreen';
+import SearchSegmentScreen from 'components/molecules/SearchSegmentScreen';
 
 interface IProps {
   section?: string;
@@ -110,63 +112,8 @@ const MapDialog: FC<IProps> = ({
     onStreetAndCitySearch(cityValue.yishuv_name, streetValue.street_hebrew);
   }
 
-  const SearchSegmentScreen = () => {
-    return (
-      <Box>
-        <Box display="flex" flexDirection="column" height="60vh">
-          <Box display="contents">
-            <LocationSelect onLocationChange={onLocationChange} />
-          </Box>
-          <div className={classes.chosenSection}>
-            <Typography.Body1 bold>{t('mapDialog.chosenSegment')}</Typography.Body1>
-            <Typography.Body1>
-              {roadNumber && section && ` ${t('mapDialog.road')} ${roadNumber} - ${section}`}
-            </Typography.Body1>
-          </div>
-        </Box>
-        <DialogActions className={classes.actions}>
-          <Button.Standard disabled={!section} onClick={onSearch}>
-            {t('mapDialog.searchButton')}
-          </Button.Standard>
-          <Button.Outlined onClick={onClose}>{t('mapDialog.cancelButton')}</Button.Outlined>
-        </DialogActions>
-      </Box>
-    );
-  };
-
-  const SearchCityAndStreetScreen = () => {
-    return (
-      <Box>
-        <Box height="60vh" display="flex" flexWrap="wrap">
-          <Autocomplete
-            className={classes.inputSpace}
-            options={store.citiesList}
-            getOptionLabel={(option) => (option.yishuv_name ? option.yishuv_name : '')}
-            onChange={(event, value) => setCityGetStreets(event, value)}
-            value={{ yishuv_name: cityValue.yishuv_name, yishuv_symbol: cityValue.yishuv_symbol }}
-            style={{ minWidth: 300 }}
-            renderInput={(params) => <TextField {...params} label={t('mapDialog.city')} variant="outlined" />}
-          />
-          <Autocomplete
-            className={classes.inputSpace}
-            options={streetsOptions}
-            getOptionLabel={(option) => (option.street_hebrew ? option.street_hebrew : '')}
-            style={{ minWidth: 300 }}
-            value={{ street: streetValue.street, street_hebrew: streetValue.street_hebrew }}
-            onChange={(event, value) => setChosenStreet(event, value)}
-            disabled={streetsOptions.length === 0}
-            renderInput={(params) => <TextField {...params} label={t('mapDialog.street')} variant="outlined" />}
-          />
-        </Box>
-        <DialogActions className={classes.actions}>
-          <Button.Standard onClick={streetCityResultsPage} disabled={!cityValue.yishuv_name || !streetValue.street}>
-            {t('mapDialog.searchButton')}
-          </Button.Standard>
-          <Button.Outlined onClick={onClose}>{t('mapDialog.cancelButton')}</Button.Outlined>
-        </DialogActions>
-      </Box>
-    );
-  };
+// the code I deleted should be here...
+// SearchCityAndStreetScreen()
 
   return (
     <Dialog isShowing={open} onClose={onClose} maxWidth="lg" fullWidth>
@@ -185,8 +132,10 @@ const MapDialog: FC<IProps> = ({
             <Typography.Title1>{t('mapDialog.searchStreetAndCity')}</Typography.Title1>
           </Box>
         </Box>
-        {searchScreen === 'segment' && <SearchSegmentScreen />}
-        {searchScreen === 'cityAndStreet' && <SearchCityAndStreetScreen />}
+        {searchScreen === 'segment' && <SearchSegmentScreen onLocationChange={onLocationChange} roadNumber={roadNumber} section={section} onSearch={onSearch} onClose={onClose}/>}
+        {searchScreen === 'cityAndStreet' && <SearchCityAndStreetScreen cityValue={cityValue} setCityGetStreets={setCityGetStreets} setChosenStreet={setChosenStreet}
+        streetsOptions={streetsOptions} streetValue={streetValue} streetCityResultsPage={streetCityResultsPage} onClose={onClose}
+        />}
       </Box>
     </Dialog>
   );
