@@ -31,6 +31,7 @@ interface IProps {
   severityFieldNames: ISeverityFieldNames;
   segmentText: string;
   labels: ITextViewLabels;
+  isStreet: boolean;
   largeNumbers: boolean;
 }
 
@@ -89,6 +90,7 @@ const TextView: FC<IProps> = ({
   segmentText,
   severityFieldNames: { fatal: fatalFieldName, severe: severeFieldName, light: lightFieldName, total: totalFieldName },
   labels,
+  isStreet,
   largeNumbers,
 }) => {
   const classes = useStyles();
@@ -114,6 +116,7 @@ const TextView: FC<IProps> = ({
           data={data}
           segmentText={segmentText}
           labels={labels}
+          isStreet={isStreet}
         />
       </Box>
       {isSingleType ? (

@@ -14,6 +14,7 @@ interface IProps {
   singleType: string;
   totalCount: number;
   labels: ITextViewLabels;
+  isStreet: boolean;
 }
 interface AProps {
   accidentsCount: Number;
@@ -61,7 +62,7 @@ const AccidentsOccurred: FC<AProps> = ({ accidentsCount, singleType, labels }) =
   );
 };
 
-const TextViewHeader: React.FC<IProps> = ({ data: { items }, segmentText, singleType, totalCount, labels }) => {
+const TextViewHeader: React.FC<IProps> = ({ data: { items }, segmentText, singleType, totalCount, labels, isStreet }) => {
   const { t, i18n } = useTranslation();
   return (
     <>
@@ -79,10 +80,10 @@ const TextViewHeader: React.FC<IProps> = ({ data: { items }, segmentText, single
         </Box>
       )}
       <Box mb={1}>
-        <Typography.Body1>{`${t('textView.onSegment')} ${
+        <Typography.Body1>{`
+        ${isStreet ? t('textView.on') : t('textView.onSegment')  + ' '}${
           i18n.language === LANG.EN ? ' ' : ''
         }${segmentText}`}</Typography.Body1>
-
       </Box>
       <Box>
         <AccidentsOccurred singleType={singleType} accidentsCount={totalCount} labels={labels} />

@@ -1,3 +1,5 @@
+import { Resolution } from 'models/WidgetData';
+
 const demo = {
   meta: {
     location_info: { resolution: 'אחר', road1: 90, road_segment_name: 'ייצוג אזרחים ערבים בכלל עובדי המדינה' },
@@ -6,6 +8,7 @@ const demo = {
       date_range: [],
       last_update: 0,
     },
+    resolution: Resolution.SUBURBAN_ROAD,
   },
   widgets: [],
 };
