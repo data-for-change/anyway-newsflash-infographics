@@ -1,12 +1,11 @@
 import { runInAction, makeAutoObservable } from 'mobx';
 import RootStore from './root.store';
-import { IDateComments, ILocationMeta, IWidgetBase } from 'models/WidgetData';
+import { IDateComments, ILocationMeta, IWidgetBase, Resolution } from 'models/WidgetData';
 
 import { fetchWidgets, IWidgetInput } from 'services/widgets.data.service';
 
 const DEFAULT_LOCATION_META = {
   location_info: {
-    resolution: '',
     road1: 0,
     road_segment_name: '',
   },
@@ -15,6 +14,7 @@ const DEFAULT_LOCATION_META = {
     date_range: [],
     last_update: 0,
   },
+  resolution: Resolution.NONE,
 };
 
 export default class WidgetsStore {
@@ -53,6 +53,11 @@ export default class WidgetsStore {
 
   getWidgetsDataByName(name: string): IWidgetBase | undefined {
     return this.newsFlashWidgetsData.find((item) => item.name === name);
+  }
+
+  get isStreet(): boolean {
+    const { resolution } = this.newsFlashWidgetsMeta;
+    return resolution === Resolution.STREET;
   }
 
   fetchSelectedWidgets({ lang, newsId, yearAgo, gpsId, city, street }: IWidgetInput): void {

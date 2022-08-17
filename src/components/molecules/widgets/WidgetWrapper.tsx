@@ -41,9 +41,10 @@ interface IProps {
   locationText: string;
   sizeOptions: any;
   segmentText: string;
+  isStreet: boolean;
 }
 
-const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentText }) => {
+const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentText, isStreet }) => {
   const { name, data } = widget;
   let widgetComponent;
   switch (name) {
@@ -78,7 +79,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
     case WidgetName.accident_count_by_severity: {
       widgetComponent = (
         <CountBySeverityTextWidget
-          segmentText={segmentText}
+          segmentText={isStreet ? locationText : segmentText}
           data={data as IWidgetAccidentsBySeverityTextData}
           severityFieldNames={{
             fatal: 'severity_fatal_count',
@@ -93,6 +94,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
             noun: 'accidents',
             verb: 'occurred',
           }}
+          isStreet={isStreet}
         />
       );
       break;
@@ -100,7 +102,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
     case WidgetName.injured_count_by_severity: {
       widgetComponent = (
         <CountBySeverityTextWidget
-          segmentText={segmentText}
+          segmentText={isStreet ? locationText : segmentText}
           data={data as IWidgetInjuredBySeverityTextData}
           severityFieldNames={{
             fatal: 'killed_count',
@@ -115,6 +117,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
             noun: 'injured',
             verb: 'hurt',
           }}
+          isStreet={isStreet}
         />
       );
       break;
