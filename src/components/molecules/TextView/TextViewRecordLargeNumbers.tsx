@@ -4,6 +4,7 @@ import { roadIconColors, silverSmokeColor } from 'style';
 import SeverityImage from './SeverityImage';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from 'components/atoms';
+import classNames from 'classnames';
 
 interface IProps {
   numOfAccidents: number;
@@ -14,44 +15,47 @@ interface IProps {
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    justifyContent: 'space-around',
-    width: '80%',
+    width: '90%',
     height: '20%',
-    py: 1,
     borderBottom: '5px solid',
     borderBlockColor: silverSmokeColor,
     '&:last-child': {
       borderBottom: '0px',
     },
   },
+  padding : {
+    padding : '0 10px'
+  },
   text: {
-    position: 'relative',
-    top: theme.spacing(2),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    lineHeight: 0.5,
-    justifyContent: 'center',
-    width: '50%',
+    display:'flex',
+    alignItems: 'end',
+    textAlign: 'center',
   },
   acNum: {
+    position: 'relative',
+    display: 'flex',
+    paddingLeft : theme.spacing(1),
+    paddingRight : theme.spacing(1),
+    alignItems: 'end',
+    textAlign: 'end',
+    justifyContent: 'center',
     color: roadIconColors.red,
-    fontWeight: 'bold',
-    fontSize: '200%',
   },
 }));
 
-const TextViewRecord: React.FC<IProps> = ({numOfAccidents, severityDesc, imgSrc }) => {
+const TextViewRecordLargeNumbers: React.FC<IProps> = ({ numOfAccidents, severityDesc, imgSrc }) => {
   const classes = useStyles();
   return (
     <Box className={classes.root}>
-      <SeverityImage inRecord severity={imgSrc} />
-      <Box className={classes.text}>
-        <Box className={classes.acNum}>{numOfAccidents}</Box>
+      <SeverityImage  inRecord severity={imgSrc} />
+      <Box className={classNames(classes.acNum)}>
+        <Typography.TextBody1>{numOfAccidents}</Typography.TextBody1>
+      </Box>
+      <Box className={classNames(classes.text,classes.padding)}>
         <Typography.Title1>{severityDesc}</Typography.Title1>
       </Box>
     </Box>
   );
 };
 
-export default TextViewRecord;
+export default TextViewRecordLargeNumbers;

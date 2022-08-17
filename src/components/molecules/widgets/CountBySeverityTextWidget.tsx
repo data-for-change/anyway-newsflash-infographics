@@ -8,10 +8,11 @@ interface IProps {
   severityFieldNames: ISeverityFieldNames;
   labels: ITextViewLabels;
   isStreet: boolean;
+  largeNumbers?: boolean;
 }
 const CountBySeverityTextWidget: FC<IProps> = ({ data, segmentText, severityFieldNames, labels,
-                                                 isStreet }) => {
+                                                 isStreet,  largeNumbers= false }) => {
   return <TextView data={data} segmentText={segmentText} severityFieldNames={severityFieldNames} labels={labels}
-                   isStreet={isStreet} />;
+                   isStreet={isStreet} largeNumbers={largeNumbers}/>;
 };
 export default CountBySeverityTextWidget;

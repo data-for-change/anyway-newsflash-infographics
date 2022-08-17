@@ -118,6 +118,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
             verb: 'hurt',
           }}
           isStreet={isStreet}
+          largeNumbers={true}
         />
       );
       break;
