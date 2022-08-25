@@ -130,5 +130,6 @@
     "street": "street"
   },
   "locationIndicator": "(Chosen Section Search Result)",
-  "cityAndStreetIndicator": "(Chosen City And Street Search Result)"
+  "cityAndStreetIndicator": "(Chosen City And Street Search Result)",
+  "googleSearch": "Search Google maps"
 }
