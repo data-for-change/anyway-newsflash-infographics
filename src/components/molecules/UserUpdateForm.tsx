@@ -99,6 +99,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
           </Grid>
           <Grid item xs={6}>
             <TextField
+
               required
               defaultValue={defaultValues.firstName}
               onChange={handleInput}
@@ -124,7 +125,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
               placeholder={'Please enter your name'}
             />
             <FormHelperText error className={!validations.email ? '' : classes.hide}>
-              {'Please provide a valid Email'}
+              {'Please provide a v  alid Email'}
             </FormHelperText>
           </Grid>
           <Grid item xs={12}>

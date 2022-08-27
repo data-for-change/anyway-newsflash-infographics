@@ -29,7 +29,7 @@ const useBold = (bold = false) => {
 };
 
 const TypographyBase: FC<ITypographyBase> = ({ bold, variant, component, children }) => (
-  <MaterialTypography className={useBold(bold)} variant={variant} component={component}>
+  <MaterialTypography  className={useBold(bold)} variant={variant} component={component}>
     {children}
   </MaterialTypography>
 );
@@ -44,7 +44,6 @@ const Typography: IText = {
   Body4: (props) => <TypographyBase variant="h4" component="span" {...props} />,
   Body5: (props) => <TypographyBase variant="h5" component="span" {...props} />,
   Body6: (props) => <TypographyBase variant="h6" component="span" {...props} />,
-  TextBody1: (props) => <TypographyBase variant="body1" component="h1" {...props} />,
 };
 
 export default Typography;
