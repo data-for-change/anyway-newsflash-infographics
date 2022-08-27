@@ -3,7 +3,7 @@ import Box from '@material-ui/core/Box';
 import { roadIconColors, silverSmokeColor } from 'style';
 import SeverityImage from './SeverityImage';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography } from 'components/atoms';
+import { Typography , CustomTypography} from 'components/atoms';
 import classNames from 'classnames';
 
 interface IProps {
@@ -41,6 +41,12 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     color: roadIconColors.red,
   },
+
+  numOfAccLarge : {
+    fontSize : 56,
+    fontWeight: "bold",
+    lineHeight:1
+  }
 }));
 
 const TextViewRecordLargeNumbers: React.FC<IProps> = ({ numOfAccidents, severityDesc, imgSrc }) => {
@@ -49,7 +55,7 @@ const TextViewRecordLargeNumbers: React.FC<IProps> = ({ numOfAccidents, severity
     <Box className={classes.root}>
       <SeverityImage  inRecord severity={imgSrc} />
       <Box className={classNames(classes.acNum)}>
-        <Typography.TextBody1>{numOfAccidents}</Typography.TextBody1>
+        <CustomTypography.Span className={classes.numOfAccLarge}>{numOfAccidents}</CustomTypography.Span>
       </Box>
       <Box className={classNames(classes.text,classes.padding)}>
         <Typography.Title1>{severityDesc}</Typography.Title1>

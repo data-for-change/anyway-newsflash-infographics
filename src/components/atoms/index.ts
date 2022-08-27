@@ -2,6 +2,7 @@ export { default as Grid } from './Grid';
 export { default as Button } from './Button';
 export { default as Link } from './Link';
 export { default as Typography } from './Typography';
+export { default as CustomTypography } from './CustomTypography';
 export { default as Textbox } from './Textbox';
 export { default as ErrorBoundary } from './ErrorBoundary';
 export { default as MetaTag } from './MetaTag';
