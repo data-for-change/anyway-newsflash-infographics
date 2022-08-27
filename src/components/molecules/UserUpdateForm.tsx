@@ -99,7 +99,6 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
           </Grid>
           <Grid item xs={6}>
             <TextField
-
               required
               defaultValue={defaultValues.firstName}
               onChange={handleInput}
