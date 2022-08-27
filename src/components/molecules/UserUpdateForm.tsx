@@ -125,7 +125,7 @@ const UserInfoForm: React.FC<IProps> = ({ isShowing, onClose, defaultValues }) =
               placeholder={'Please enter your name'}
             />
             <FormHelperText error className={!validations.email ? '' : classes.hide}>
-              {'Please provide a v  alid Email'}
+              {'Please provide a valid Email'}
             </FormHelperText>
           </Grid>
           <Grid item xs={12}>
