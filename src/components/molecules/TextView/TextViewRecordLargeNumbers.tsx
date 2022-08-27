@@ -44,6 +44,8 @@ const useStyles = makeStyles((theme) => ({
 
   numOfAccLarge : {
     fontSize : 56,
+    fontWeight: "bold",
+    lineHeight:1
   }
 }));
 
