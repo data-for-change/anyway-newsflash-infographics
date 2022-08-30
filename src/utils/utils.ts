@@ -39,6 +39,7 @@ export const GET_USERS_INFO_LIST_URL = `${authServerUrl}user/get_all_users_info`
 export const ADD_ROLE_TO_USER_URL = `${authServerUrl}user/add_to_role`;
 export const UPDATE_USER_ORG_URL = `${authServerUrl}/user/update_user_org`;
 export const REMOVE_USER_FROM_ORG_URL = `${authServerUrl}/user/remove_user_from_org`;
+export const GET_IS_USER_LOGGED_IN_URL = `${authServerUrl}/user/is_user_logged_in`;
 
 AUTH_LOGIN_GOOGLE_URL.searchParams.append('redirect_url', `${window.location.origin}${REDIRECT_ROUTE!}`);
 

@@ -11,8 +11,9 @@ import {
   updateUserOrganization,
 } from 'services/user.service';
 import { IUserInfo } from 'models/user/IUserInfo';
-import { ROLE_ADMIN_NAME } from 'utils/utils';
+import { ROLE_ADMIN_NAME, GET_IS_USER_LOGGED_IN_URL } from 'utils/utils';
 import { IFormInput } from 'components/molecules/UserUpdateForm';
+import axios from 'axios';
 
 export default class UserStore {
   isUserAuthenticated: boolean = false;
@@ -70,8 +71,19 @@ export default class UserStore {
       });
   }
 
-  getUserLoginDetails() {
-    fetchUserInfo()
+  async getUserLoginDetails() {
+    let isUserLoggedIn = false;
+
+    await axios.get(GET_IS_USER_LOGGED_IN_URL, { withCredentials: true })
+    .then((response) => {
+      isUserLoggedIn = response.data['is_user_logged_in']
+    }).catch((err) => {
+      console.log('Unable to determine whether user is logged in');
+      console.error(err);
+    });
+
+    if (isUserLoggedIn){
+      fetchUserInfo()
       .then((userData) => {
         runInAction(() => {
           this.userInfo = userData;
@@ -85,6 +97,7 @@ export default class UserStore {
         });
         console.error(err);
       });
+    }
   }
 
   async updateUserInfo(formInput: IFormInput) {
