@@ -154,13 +154,12 @@ export const PieChartView: FC<IProps> = ({
   );
 
   const classes = useStyles();
-
   return (
     <ResponsiveContainer width={width} height={'100%'}>
       <PieChart>
         <defs>
           <filter id={PIE_SHADOW_ID}>
-            <feDropShadow dx="-3" dy="1" stdDeviation="2.5" flood-opacity='0.5'/>
+            <feDropShadow dx="-3" dy="1" stdDeviation="2.5" floodOpacity="0.5" />
           </filter>
         </defs>
         <Pie

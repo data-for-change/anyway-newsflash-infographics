@@ -29,7 +29,7 @@ const useBold = (bold = false) => {
 };
 
 const TypographyBase: FC<ITypographyBase> = ({ bold, variant, component, children }) => (
-  <MaterialTypography className={useBold(bold)} variant={variant} component={component}>
+  <MaterialTypography  className={useBold(bold)} variant={variant} component={component}>
     {children}
   </MaterialTypography>
 );

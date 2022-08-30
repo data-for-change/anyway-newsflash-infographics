@@ -48,6 +48,7 @@ const defaultThemeOptions: ThemeOptions = {
     h6: {
       fontSize: 13,
     },
+
   },
 };
 
