@@ -4,14 +4,23 @@ import { Button } from 'components/atoms';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { useStore } from 'store/storeConfig';
 import { useTranslation } from 'react-i18next';
+import { ChangeEvent, FC } from 'react';
+import { ICityOption, IStreetOption } from 'models/Map';
 
-export default function SearchCityAndStreetScreen(
-{setCityGetStreets, cityValue, streetsOptions, streetValue,
-setChosenStreet, streetCityResultsPage, onClose}:
-{setCityGetStreets:any, cityValue:any,
-  streetsOptions:any, streetValue:any, setChosenStreet:any, streetCityResultsPage:any, onClose:any
+
+interface ISearchCityAndStreetScreen{
+  streetsOptions:Array<IStreetOption>;
+  streetValue:IStreetOption;
+  setChosenStreet:Function;
+  streetCityResultsPage:() => void;
+  onClose:() => void;
+  setCityGetStreets:(event : ChangeEvent<{}> ,value? : ICityOption | null) => void,
+  cityValue:ICityOption,
 }
-){
+const  SearchCityAndStreetScreen : FC<ISearchCityAndStreetScreen> = (
+{setCityGetStreets, cityValue, streetsOptions, streetValue,
+setChosenStreet, streetCityResultsPage, onClose}
+) => {
 
   const { t } = useTranslation();
 const useStyles = makeStyles((theme: Theme) =>
@@ -60,4 +69,6 @@ return(<> <Box>
   </DialogActions>
 </Box></>)
 }
+
+export default SearchCityAndStreetScreen;
 

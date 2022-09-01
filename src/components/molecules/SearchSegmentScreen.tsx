@@ -3,6 +3,16 @@ import { Button, Typography } from 'components/atoms';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 import LocationSelect from 'components/molecules/LocationSelect';
+import { FC } from 'react';
+import { IPoint } from 'models/Point';
+
+interface ISearchSegmentScreen{
+  onClose : () => void;
+  onLocationChange : (location: IPoint) => void;
+  onSearch: () => void;
+  roadNumber? : string;
+  section? : string;
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,9 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function SearchSegmentScreen ({onLocationChange, roadNumber, section, onSearch, onClose}:{
-    onLocationChange:any, roadNumber:any, section:any, onSearch:any, onClose:any
-}){
+const  SearchSegmentScreen : FC<ISearchSegmentScreen>  = ({onLocationChange, roadNumber, section, onSearch, onClose}) => {
 
     const { t } = useTranslation();
     const classes = useStyles();
@@ -44,4 +52,6 @@ export default function SearchSegmentScreen ({onLocationChange, roadNumber, sect
       </Box>
     );
   };
+
+export default SearchSegmentScreen;
 

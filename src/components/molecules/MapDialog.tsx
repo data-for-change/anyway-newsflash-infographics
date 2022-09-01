@@ -8,6 +8,7 @@ import { useStore } from 'store/storeConfig';
 import { fetchStreetsByCity } from 'services/getCitiesAndStreets.service';
 import SearchCityAndStreetScreen from 'components/molecules/SearchCityAndStreetScreen';
 import SearchSegmentScreen from 'components/molecules/SearchSegmentScreen';
+import { ICityOption, IStreetOption } from 'models/Map';
 
 interface IProps {
   section?: string;
@@ -69,26 +70,17 @@ const MapDialog: FC<IProps> = ({
   const classes = useStyles();
   const { t } = useTranslation();
   const [searchScreen, setSearchScreen] = useState<'segment' | 'cityAndStreet'>('segment');
-  const [streetsOptions, setStreetsOptions] = useState<Array<streetOption>>([]);
-  const [cityValue, setCityValue] = useState<cityOption>({});
-  const [streetValue, setStreetValue] = useState<streetOption>({});
+  const [streetsOptions, setStreetsOptions] = useState<Array<IStreetOption>>([]);
+  const [cityValue, setCityValue] = useState<ICityOption>({});
+  const [streetValue, setStreetValue] = useState<IStreetOption>({});
   const store = useStore();
-
-  interface cityOption {
-    yishuv_name?: string;
-    yishuv_symbol?: number;
-  }
-  interface streetOption {
-    street?: number;
-    street_hebrew?: string;
-  }
 
   useEffect(() => {
     // api call to get all cities list
     store.fetchCitiesList();
   }, [store]);
 
-  async function setCityGetStreets(event: ChangeEvent<{}>, value: cityOption | null | undefined) {
+  async function setCityGetStreets(event: ChangeEvent<{}>, value?: ICityOption | null) {
     setStreetsOptions([]);
     setStreetValue({});
     if (value) {
@@ -98,7 +90,7 @@ const MapDialog: FC<IProps> = ({
     }
   }
 
-  function setChosenStreet(event: ChangeEvent<{}>, value: streetOption | null | undefined) {
+  function setChosenStreet(event: ChangeEvent<{}>, value?:IStreetOption) {
     if (value) {
       setStreetValue(value);
     }
