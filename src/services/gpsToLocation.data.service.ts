@@ -8,12 +8,8 @@ export const fetchGpsLocation = async (data:IPoint): Promise<IGpsData | undefine
   try {
   const { longitude, latitude } = data;
 	const locationUrl = `${GPS_LOCATION_API}?longitude=${longitude}&latitude=${latitude}`;
-    console.log(locationUrl);
     const response = await axios.get(locationUrl);
-    console.log(locationUrl)
-    console.log(response.data, 'my data')
 	  return response.data;
-    // return (response.data.longitude,response.data.latitude );
   } catch (error) {
     console.error(error);
   }

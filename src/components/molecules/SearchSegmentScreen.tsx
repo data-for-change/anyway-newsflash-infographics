@@ -6,48 +6,23 @@ import { useStore } from 'store/storeConfig';
 import { useTranslation } from 'react-i18next';
 import LocationSelect from 'components/molecules/LocationSelect';
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    actions: {
+      gap: theme.spacing(1),
+    },
+    chosenSection: {
+      marginBlock: theme.spacing(2),
+    },
+  }),
+);
+
 export default function SearchSegmentScreen ({onLocationChange, roadNumber, section, onSearch, onClose}:{
     onLocationChange:any, roadNumber:any, section:any, onSearch:any, onClose:any
 }){
 
     const { t } = useTranslation();
-    const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-      dialogFooter: {
-        display: 'flex',
-        justifyContent: 'flex-end',
-        gap: theme.spacing(1),
-      },
-      wrapper: {
-        minWidth: 500,
-        padding: theme.spacing(2),
-      },
-      dialogHeader: {
-        padding: 0,
-        display: 'flex',
-      },
-      actions: {
-        gap: theme.spacing(1),
-      },
-      chosenSection: {
-        marginBlock: theme.spacing(2),
-      },
-      notChosen: {
-        marginInlineEnd: 60,
-        color: 'grey',
-        cursor: 'pointer',
-      },
-      chosen: {
-        marginInlineEnd: 60,
-        color: 'black',
-        cursor: 'pointer',
-      },
-      inputSpace: {
-        marginTop: 20,
-        marginInlineEnd: 20,
-      },
-    }),
-    );
+
 
     const classes = useStyles();
     const store = useStore();

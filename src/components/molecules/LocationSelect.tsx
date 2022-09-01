@@ -16,17 +16,11 @@ const LocationPicker: FC<ILocation> = ({ onLocationChange }) => {
   useMapEvents( {
 
     click: (event) => {
-      
       const {latlng: { lng, lat }} = event;
-      
-      // onLocationChange({ longitude: lng, latitude: lat })
       setPosition({ longitude: lng, latitude: lat });
       onLocationChange({ longitude: lng, latitude: lat });
-      
- 
     },
   },);
-  console.log(position, 'after the click')
   return position === null ? null : <Marker markerdata={position}/>
 };
 
@@ -38,7 +32,7 @@ interface IProps {
 const LocationSelect: FC<IProps> = ({ onLocationChange }) => {
   return (
   <Map>
- <LocationPicker  onLocationChange={onLocationChange} /> 
+ <LocationPicker  onLocationChange={onLocationChange} />
     </Map>
   );
 };

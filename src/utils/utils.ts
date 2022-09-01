@@ -20,7 +20,6 @@ export function uniquePoints(points: IPoint[]) {
 }
 // pop up login window dimensions
 
-
 export const loginPopUpDim = {
   width: window.screen.width / 3.5,
   height: window.screen.height / 1.8,
