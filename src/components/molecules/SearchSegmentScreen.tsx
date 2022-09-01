@@ -1,8 +1,6 @@
-import { Box, DialogActions, TextField } from '@material-ui/core';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import { Dialog, Button, Typography } from 'components/atoms';
+import { Box, DialogActions } from '@material-ui/core';
+import { Button, Typography } from 'components/atoms';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { useStore } from 'store/storeConfig';
 import { useTranslation } from 'react-i18next';
 import LocationSelect from 'components/molecules/LocationSelect';
 
@@ -22,10 +20,7 @@ export default function SearchSegmentScreen ({onLocationChange, roadNumber, sect
 }){
 
     const { t } = useTranslation();
-
-
     const classes = useStyles();
-    const store = useStore();
 
     return (
       <Box>
