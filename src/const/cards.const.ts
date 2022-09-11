@@ -8,3 +8,8 @@ export const operationalCards: WidgetName[] = [
   WidgetName.head_on_collisions_comparison_percentage,
   WidgetName.vision_zero_2_plus_1,
 ];
+
+
+export const logosSorceMap = [
+  {key:'or yarok',path:'assets/greenlight.png'}
+]
