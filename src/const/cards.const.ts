@@ -1,4 +1,5 @@
 import { WidgetName } from 'models/WidgetName';
+import  orYarokLogo  from 'assets/greenlight.png';
 
 // cards is this least will be avaiaable for operation environments (all non-staging environments)
 export const operationalCards: WidgetName[] = [
@@ -11,5 +12,5 @@ export const operationalCards: WidgetName[] = [
 
 
 export const logosSorceMap = [
-  {key:'or yarok',path:'assets/greenlight.png'}
+  {key:'or_yarok',path:orYarokLogo}
 ]

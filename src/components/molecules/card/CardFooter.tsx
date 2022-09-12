@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { dateFormat } from 'utils/time.utils';
 import { useLocale } from 'hooks/date.hooks';
 import { logosSorceMap } from 'const/cards.const';
+import { observer } from 'mobx-react-lite';
 interface IProps {
   dateComment: IDateComments;
   showRange: boolean;
@@ -32,15 +33,15 @@ const CardFooter: React.FC<IProps> = ({ dateComment, showRange }) => {
   const store = useStore()
   const { userStore } = store;
 
-  const organizationName =  userStore.orgNamesList?userStore.orgNamesList[0]:''
+  const organizationName =  userStore.userOrganizations ? userStore.userOrganizations[0] : '';
   const organizationData = logosSorceMap.find( p => p.key === organizationName)
- 
+
   const { t } = useTranslation();
   const classes = useStyles();
   const locale = useLocale();
   const lastUpdateDate = dateComment.last_update ? dateFormat(new Date(dateComment.last_update), locale) : null;
   const dateRange = dateComment.date_range ? dateComment.date_range.join('-') : null;
-  
+
   return (
     <div className={classes.main}>
       {showRange && <Typography.Body3>{dateRange},</Typography.Body3>}
@@ -53,10 +54,10 @@ const CardFooter: React.FC<IProps> = ({ dateComment, showRange }) => {
         </Typography.Body3>
       )}
       <Box display="flex" flex={1} />
-      <Logo src={organizationData?organizationData.key:LamasImage} alt={'Lamas'} height={30} />
-      <Logo src={organizationData?organizationData.path:AnywayImage} alt={'Anyway'} height={20} />
+      <Logo src={organizationData ? organizationData.path: LamasImage} alt={'Lamas'} height={30} />
+      <Logo src={AnywayImage} alt={'Anyway'} height={20} />
     </div>
   );
 };
 
-export default CardFooter;
+export default observer(CardFooter);

@@ -12,7 +12,6 @@ import { useTheme } from '@material-ui/core/styles';
 import PopUpRedirect from './components/atoms/PopUpRedirect';
 import WidgetsTemplate from './components/organisms/WidgetsTemplate';
 // main components height - must add up to 100
-// AIzaSyCfluirCgaQ769osh7560kST3Yo0eQIqg8
 
 const headerHeight = '5vh';
 const pageContentHeight = '88vh';
