@@ -8,9 +8,10 @@ export const operationalCards: WidgetName[] = [
   WidgetName.most_severe_accidents,
   WidgetName.head_on_collisions_comparison_percentage,
   WidgetName.vision_zero_2_plus_1,
+  WidgetName.injured_count_by_severity,
 ];
 
 
-export const logosSorceMap = [
+export const logosSourceMap = [
   {key:'or_yarok',path:orYarokLogo}
 ]

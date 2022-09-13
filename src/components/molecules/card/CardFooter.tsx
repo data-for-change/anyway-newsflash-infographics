@@ -10,7 +10,7 @@ import { IDateComments } from 'models/WidgetData';
 import { useTranslation } from 'react-i18next';
 import { dateFormat } from 'utils/time.utils';
 import { useLocale } from 'hooks/date.hooks';
-import { logosSorceMap } from 'const/cards.const';
+import { logosSourceMap } from 'const/cards.const';
 import { observer } from 'mobx-react-lite';
 interface IProps {
   dateComment: IDateComments;
@@ -34,7 +34,7 @@ const CardFooter: React.FC<IProps> = ({ dateComment, showRange }) => {
   const { userStore } = store;
 
   const organizationName =  userStore.userOrganizations ? userStore.userOrganizations[0] : '';
-  const organizationData = logosSorceMap.find( p => p.key === organizationName)
+  const organizationData = logosSourceMap.find(p => p.key === organizationName)
 
   const { t } = useTranslation();
   const classes = useStyles();
