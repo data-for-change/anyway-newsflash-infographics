@@ -3,6 +3,7 @@ import { WidgetName } from 'models/WidgetName';
 export enum HeaderVariant {
   None,
   Centered,
+  CenteredNoTitle,
   Label,
   Logo,
 }
@@ -27,8 +28,8 @@ const widgetVariants: { [index: string]: CardVariant } = {
   [WidgetName.injured_count_per_age_group]: { header: HeaderVariant.Centered, footer: FooterVariant.LogoWithRange },
   [WidgetName.most_severe_accidents]: { header: HeaderVariant.Centered, footer: FooterVariant.LogoWithRange },
   [WidgetName.most_severe_accidents_table]: { header: HeaderVariant.Centered, footer: FooterVariant.LogoWithRange },
-  [WidgetName.accident_count_by_severity]: { header: HeaderVariant.Logo, footer: FooterVariant.LogoWithRange },
-  [WidgetName.injured_count_by_severity]: { header: HeaderVariant.Logo, footer: FooterVariant.LogoWithRange },
+  [WidgetName.accident_count_by_severity]: { header: HeaderVariant.CenteredNoTitle, footer: FooterVariant.LogoWithRange },
+  [WidgetName.injured_count_by_severity]: { header: HeaderVariant.CenteredNoTitle, footer: FooterVariant.LogoWithRange },
   [WidgetName.accident_count_by_accident_type]: {
     header: HeaderVariant.Centered,
     footer: FooterVariant.Logo,

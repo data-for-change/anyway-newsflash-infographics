@@ -11,7 +11,9 @@ export const operationalCards: WidgetName[] = [
   WidgetName.injured_count_by_severity,
 ];
 
+export type OrgLogoData =  {key : string, path:string} ;
 
-export const logosSourceMap = [
+export const logosSourceMap  : [OrgLogoData] = [
   {key:'or_yarok',path:orYarokLogo}
 ]
+

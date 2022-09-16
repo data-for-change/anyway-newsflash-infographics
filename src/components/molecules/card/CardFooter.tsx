@@ -3,39 +3,36 @@ import { Logo, Typography } from 'components/atoms';
 import LamasImage from 'assets/cbs.png';
 import AnywayImage from 'assets/anyway.png';
 import { makeStyles } from '@material-ui/core/styles';
-import {useStore} from 'store/storeConfig'
 import { cardFooterHeight } from 'style';
 import { Box } from '@material-ui/core';
 import { IDateComments } from 'models/WidgetData';
 import { useTranslation } from 'react-i18next';
 import { dateFormat } from 'utils/time.utils';
 import { useLocale } from 'hooks/date.hooks';
-import { logosSourceMap } from 'const/cards.const';
 import { observer } from 'mobx-react-lite';
 interface IProps {
   dateComment: IDateComments;
   showRange: boolean;
+  orgIconPath?: string;
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   main: {
     width: '100%',
     display: 'flex',
     boxSizing: 'border-box',
     height: cardFooterHeight,
     alignItems: 'flex-end',
-    justifyContent: 'flex-end',
+    justifyContent:'space-between'
   },
-});
 
-const CardFooter: React.FC<IProps> = ({ dateComment, showRange }) => {
+  logoBox:{
+    display:'flex',
+    gap: theme.spacing(1),
+  }
+}));
 
-  const store = useStore()
-  const { userStore } = store;
-
-  const organizationName =  userStore.userOrganizations ? userStore.userOrganizations[0] : '';
-  const organizationData = logosSourceMap.find(p => p.key === organizationName)
-
+const CardFooter: React.FC<IProps> = ({ dateComment, showRange,orgIconPath }) => {
   const { t } = useTranslation();
   const classes = useStyles();
   const locale = useLocale();
@@ -44,6 +41,7 @@ const CardFooter: React.FC<IProps> = ({ dateComment, showRange }) => {
 
   return (
     <div className={classes.main}>
+      <Box>
       {showRange && <Typography.Body3>{dateRange},</Typography.Body3>}
       {lastUpdateDate && (
         <Typography.Body3>
@@ -53,9 +51,11 @@ const CardFooter: React.FC<IProps> = ({ dateComment, showRange }) => {
           {lastUpdateDate}
         </Typography.Body3>
       )}
-      <Box display="flex" flex={1} />
-      <Logo src={organizationData ? organizationData.path: LamasImage} alt={'Lamas'} height={30} />
-      <Logo src={AnywayImage} alt={'Anyway'} height={20} />
+      </Box>
+      <Box className={classes.logoBox}>
+      <Logo src={AnywayImage} alt={'Anyway'} height={orgIconPath ? 20 : 22} />
+      <Logo src={  orgIconPath ||  LamasImage} alt={'Lamas'} height={orgIconPath ? 24 : 25}  />
+      </Box>
     </div>
   );
 };
