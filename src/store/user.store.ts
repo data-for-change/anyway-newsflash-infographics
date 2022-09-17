@@ -52,6 +52,10 @@ export default class UserStore {
     return this.organizationsList;
   }
 
+  get userOrganizations(){
+    return this.userInfo?.data.organizations;
+  }
+
   get usersManagementTableData(): any {
     return this.usersInfoList?.map((user) => ({
       name: `${user.first_name} ${user.last_name}`,

@@ -28,6 +28,7 @@ const CardBackgroundImage: FC<IProps> = ({ variant }) => {
 
   switch (variant) {
     case HeaderVariant.Centered:
+    case HeaderVariant.CenteredNoTitle:
     case HeaderVariant.Logo:
       src = CardBackgrounRoadImage;
       height = ROAD_IMAGE_HEIGHT;
