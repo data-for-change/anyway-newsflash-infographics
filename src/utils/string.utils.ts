@@ -6,7 +6,7 @@ export const splitTextHeader = (text = '') => {
   const textWordsArr = text?.split(' ');
   const textWordLength = textWordsArr?.length;
   if (textWordLength && textWordLength <= MAX_WORDS_PER_TITLE_LINE) {
-    return;
+    return { textLine1 };
   } else {
     const indexToSplit = Math.floor(textWordLength / 2);
     textLine1 = textWordsArr?.slice(0, indexToSplit).join(' ');

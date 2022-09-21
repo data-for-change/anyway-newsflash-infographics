@@ -78,7 +78,7 @@
   },
   "labelPosition": "Label Position",
   "table": {
-    "labels": ["Date", "Hour", "Type", "Killed", "Severe injured", "Light injured"]
+    "labels": ["Date", "Hour", "Type", "Killed", "Severe", "Light"]
   },
   "login": "LOGIN",
   "filterPanel": {
@@ -124,7 +124,11 @@
     "cancelButton": "Cancel",
     "chosenSegment": "Chosen section:",
     "searchSection": "Search section",
-    "road": "road"
+    "searchStreetAndCity": "Search city/street",
+    "road": "road",
+    "city": "city",
+    "street": "street"
   },
-  "locationIndicator": "(Chosen Section Search Result)"
+  "locationIndicator": "(Chosen Section Search Result)",
+  "cityAndStreetIndicator": "(Chosen City And Street Search Result)"
 }

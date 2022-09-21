@@ -54,6 +54,14 @@ const Header: FC = () => {
     }
   };
 
+  const onStreetAndCitySearch = (street?: string, city?: string) => {
+    // change to constant values until backend issues are fixed
+    console.log('city is', city);
+    console.log('street is', street);
+    navigate(`${settingsStore.currentLanguageRouteString}/cityAndStreet/${street}/${city}`);
+    setOpen(false);
+  };
+
   useEffect(() => {
     userStore.getUserLoginDetails();
   }, [userStore]);
@@ -103,6 +111,7 @@ const Header: FC = () => {
           store.setGpsLocationData(null);
         }}
         onSearch={onLocationSearch}
+        onStreetAndCitySearch={onStreetAndCitySearch}
       />
     </AppBar>
   );

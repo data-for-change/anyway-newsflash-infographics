@@ -13,7 +13,7 @@ type ISeverityCounts<T> = {
   severe:T;
   light:T;
   total:T;
-} 
+}
 
 export type ICountBySeverity = ISeverityCounts<number>;
 export type ISeverityFieldNames = ISeverityCounts<string>;
@@ -31,6 +31,8 @@ interface IProps {
   severityFieldNames: ISeverityFieldNames;
   segmentText: string;
   labels: ITextViewLabels;
+  isStreet: boolean;
+  largeNumbers: boolean;
 }
 
 export type IFormattedWidgetCountBySeverity = IWidgetCountBySeverityTextDataBase<ICountBySeverity>;
@@ -48,8 +50,8 @@ const useStyles = makeStyles(() => ({
     alignItems: 'center',
   },
   headerBase: {
-    width: '70%',
-    height: '20%',
+    width: '80%',
+    height: '25%',
   },
   list: {
     width: '80%',
@@ -88,6 +90,8 @@ const TextView: FC<IProps> = ({
   segmentText,
   severityFieldNames: { fatal: fatalFieldName, severe: severeFieldName, light: lightFieldName, total: totalFieldName },
   labels,
+  isStreet,
+  largeNumbers,
 }) => {
   const classes = useStyles();
 
@@ -112,13 +116,14 @@ const TextView: FC<IProps> = ({
           data={data}
           segmentText={segmentText}
           labels={labels}
+          isStreet={isStreet}
         />
       </Box>
       {isSingleType ? (
         <SeverityImage severity={getSingleType(countBySeverity)!} />
       ) : (
         <Box color="text.secondary" className={classes.list}>
-          <TextViewList data={countBySeverity} labels={labels} />
+          <TextViewList data={countBySeverity} labels={labels} largeNumbers={largeNumbers}/>
         </Box>
       )}
     </div>

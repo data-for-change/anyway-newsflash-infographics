@@ -45,6 +45,7 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
       widget={widget}
       locationText={widgetsStore.newsFlashWidgetsMetaLocation}
       sizeOptions={sizeOptions.size}
+      isStreet={widgetsStore.isStreet}
     />
   );
 

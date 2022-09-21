@@ -7,7 +7,7 @@ interface IProps {
 
 const MapViewControl: React.FC<IProps> = ({ bounds }) => {
   const map = useMap();
-  map.invalidateSize();
+  map.invalidateSize(bounds);
   map.fitBounds(bounds);
   return null;
 };

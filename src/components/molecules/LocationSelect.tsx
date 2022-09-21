@@ -9,18 +9,21 @@ interface ILocation {
 }
 
 const LocationPicker: FC<ILocation> = ({ onLocationChange }) => {
-  const [position, setPosition] = useState<IPoint | null>(null);
+  // const [position, setPosition] = useState<IPoint | null>(null);
+  const [position, setPosition] = useState<IPoint | null>(null)
+  console.log(position, 'before the click')
 
-  useMapEvents({
+  useMapEvents( {
+
     click: (event) => {
       const {latlng: { lng, lat }} = event;
       setPosition({ longitude: lng, latitude: lat });
       onLocationChange({ longitude: lng, latitude: lat });
     },
-  });
-
+  },);
   return position === null ? null : <Marker markerdata={position}/>
 };
+
 
 interface IProps {
   onLocationChange: (location: IPoint) => void;
@@ -28,8 +31,8 @@ interface IProps {
 
 const LocationSelect: FC<IProps> = ({ onLocationChange }) => {
   return (
-    <Map>
-      <LocationPicker onLocationChange={onLocationChange} />
+  <Map>
+ <LocationPicker  onLocationChange={onLocationChange} />
     </Map>
   );
 };

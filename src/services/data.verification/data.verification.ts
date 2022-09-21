@@ -103,7 +103,7 @@ export const verifiedWidgetData = (widget: any) => {
       break;
     }
     case 'injured_count_by_accident_year': {
-      isValid = items.every((item: any) => validNumber(item.accident_year) && validNumber(item.count));
+      isValid = items.every((item: any) => validNumber(item.label_key) && validDataSeries(item.series));
       break;
     }
     case 'accident_count_by_day_night': {

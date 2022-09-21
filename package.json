@@ -6,6 +6,7 @@
     "@babel/eslint-parser": "^7.14.7",
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.61",
     "@react-leaflet/core": "^1.0.2",
     "@types/classnames": "^2.3.1",
     "@types/leaflet.heat": "^0.2.0",
@@ -38,7 +39,7 @@
     "typescript": "^4.3.5"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "build:staging": "env-cmd -f .env.staging react-scripts build",
     "build:demo": "env-cmd -f .env.demo react-scripts build",

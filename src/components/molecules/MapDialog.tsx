@@ -1,10 +1,14 @@
-import { FC } from 'react';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Box, DialogActions } from '@material-ui/core';
-import { Dialog, Button, Typography } from 'components/atoms';
-import LocationSelect from 'components/molecules/LocationSelect';
+import { Box } from '@material-ui/core';
+import { Dialog , Typography } from 'components/atoms';
 import { IPoint } from 'models/Point';
+import { useStore } from 'store/storeConfig';
+import { fetchStreetsByCity } from 'services/getCitiesAndStreets.service';
+import SearchCityAndStreetScreen from 'components/molecules/SearchCityAndStreetScreen';
+import SearchSegmentScreen from 'components/molecules/SearchSegmentScreen';
+import { ICityOption, IStreetOption } from 'models/Map';
 
 interface IProps {
   section?: string;
@@ -13,6 +17,7 @@ interface IProps {
   onClose: () => void;
   onLocationChange: (location: IPoint) => void;
   onSearch: () => void;
+  onStreetAndCitySearch: (street?: string, city?: string) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -28,6 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     dialogHeader: {
       padding: 0,
+      display: 'flex',
     },
     actions: {
       gap: theme.spacing(1),
@@ -35,34 +41,91 @@ const useStyles = makeStyles((theme: Theme) =>
     chosenSection: {
       marginBlock: theme.spacing(2),
     },
+    notChosen: {
+      marginInlineEnd: 60,
+      color: 'grey',
+      cursor: 'pointer',
+    },
+    chosen: {
+      marginInlineEnd: 60,
+      color: 'black',
+      cursor: 'pointer',
+    },
+    inputSpace: {
+      marginTop: 20,
+      marginInlineEnd: 20,
+    },
   }),
 );
 
-const MapDialog: FC<IProps> = ({ section, open, onClose, roadNumber, onLocationChange, onSearch }) => {
+const MapDialog: FC<IProps> = ({
+  section,
+  open,
+  onClose,
+  roadNumber,
+  onLocationChange,
+  onSearch,
+  onStreetAndCitySearch,
+}) => {
   const classes = useStyles();
   const { t } = useTranslation();
+  const [searchScreen, setSearchScreen] = useState<'segment' | 'cityAndStreet'>('segment');
+  const [streetsOptions, setStreetsOptions] = useState<Array<IStreetOption>>([]);
+  const [cityValue, setCityValue] = useState<ICityOption>({});
+  const [streetValue, setStreetValue] = useState<IStreetOption>({});
+  const store = useStore();
+
+  useEffect(() => {
+    // api call to get all cities list
+    store.fetchCitiesList();
+  }, [store]);
+
+  async function setCityGetStreets(event: ChangeEvent<{}>, value?: ICityOption | null) {
+    setStreetsOptions([]);
+    setStreetValue({});
+    if (value) {
+      setCityValue({ yishuv_name: value.yishuv_name, yishuv_symbol: value.yishuv_symbol });
+      const streetsData = await fetchStreetsByCity(value.yishuv_symbol);
+      setStreetsOptions(streetsData);
+    }
+  }
+
+  function setChosenStreet(event: ChangeEvent<{}>, value?:IStreetOption) {
+    if (value) {
+      setStreetValue(value);
+    }
+  }
+
+  function streetCityResultsPage() {
+    setCityValue({});
+    setStreetValue({});
+    onStreetAndCitySearch(cityValue.yishuv_name, streetValue.street_hebrew);
+  }
+
+// the code I deleted should be here...
+// SearchCityAndStreetScreen()
 
   return (
-    <Dialog isShowing={open} onClose={onClose} maxWidth='lg' fullWidth>
+    <Dialog isShowing={open} onClose={onClose} maxWidth="lg" fullWidth>
       <Box className={classes.wrapper}>
         <Box className={classes.dialogHeader}>
-          <Typography.Title1>{t('mapDialog.searchSection')}</Typography.Title1>
-        </Box>
-        <Box display='flex' flexDirection='column' height='75vh'>
-          <Box display='contents'>
-            <LocationSelect onLocationChange={onLocationChange} />
+          <Box
+            className={searchScreen === 'segment' ? classes.chosen : classes.notChosen}
+            onClick={() => setSearchScreen('segment')}
+          >
+            <Typography.Title1>{t('mapDialog.searchSection')}</Typography.Title1>
           </Box>
-          <div className={classes.chosenSection}>
-            <Typography.Body1 bold>{t('mapDialog.chosenSegment')}</Typography.Body1>
-            <Typography.Body1>{roadNumber && section &&` ${t('mapDialog.road')} ${roadNumber} - ${section}`}</Typography.Body1>
-          </div>
+          <Box
+            className={searchScreen === 'cityAndStreet' ? classes.chosen : classes.notChosen}
+            onClick={() => setSearchScreen('cityAndStreet')}
+          >
+            <Typography.Title1>{t('mapDialog.searchStreetAndCity')}</Typography.Title1>
+          </Box>
         </Box>
-        <DialogActions className={classes.actions}>
-          <Button.Standard disabled={!section} onClick={onSearch}>
-            {t('mapDialog.searchButton')}
-          </Button.Standard>
-          <Button.Outlined onClick={onClose}>{t('mapDialog.cancelButton')}</Button.Outlined>
-        </DialogActions>
+        {searchScreen === 'segment' && <SearchSegmentScreen onLocationChange={onLocationChange} roadNumber={roadNumber} section={section} onSearch={onSearch} onClose={onClose}/>}
+        {searchScreen === 'cityAndStreet' && <SearchCityAndStreetScreen cityValue={cityValue} setCityGetStreets={setCityGetStreets} setChosenStreet={setChosenStreet}
+        streetsOptions={streetsOptions} streetValue={streetValue} streetCityResultsPage={streetCityResultsPage} onClose={onClose}
+        />}
       </Box>
     </Dialog>
   );

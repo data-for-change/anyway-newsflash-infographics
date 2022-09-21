@@ -6,7 +6,7 @@ import { initService } from 'services/init.service';
 import { IGpsData } from 'models/WidgetData';
 import { IPoint } from 'models/Point';
 import { fetchGpsLocation } from 'services/gpsToLocation.data.service';
-
+import { fetchCitiesList } from 'services/getCitiesAndStreets.service';
 import SettingsStore from './settings.store';
 import NewsFlashStore from './news-flash-store';
 import UserStore from './user.store';
@@ -19,6 +19,8 @@ export default class RootStore {
 
   locationId: number = 0; // data by location id
   gpsLocationData: IGpsData | null = null;
+  citiesList: Array<{ yishuv_name: string; yishuv_symbol: number }> = [];
+  cityAndStreet: { city?: string; street?: string };
 
   //different stores
   settingsStore: SettingsStore;
@@ -33,6 +35,8 @@ export default class RootStore {
     this.userStore = new UserStore(this);
     this.newsFlashStore = new NewsFlashStore(this);
     this.widgetsStore = new WidgetsStore(this);
+    this.citiesList = [];
+    this.cityAndStreet = {};
 
     initService().then((initData) => {
       runInAction(() => {
@@ -63,6 +67,26 @@ export default class RootStore {
             this.setGpsLocationData(response);
           } else {
             console.error(`gpsLocation invalid response:`, response);
+          }
+        });
+      });
+    });
+  }
+
+  setCitiesList(data: any) {
+    runInAction(() => {
+      this.citiesList = data;
+    });
+  }
+
+  async fetchCitiesList() {
+    runInAction(() => {
+      fetchCitiesList().then((response: any) => {
+        runInAction(() => {
+          if (response) {
+            this.setCitiesList(response);
+          } else {
+            console.error(`cities list invalid response:`, response);
           }
         });
       });

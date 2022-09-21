@@ -2,6 +2,12 @@ import { LabelsMap, MultiSeriesDataItems, SeriesDataItem } from './MultiSeriesDa
 import { IPoint, IPointAccident } from './Point';
 import { IWidgetDataType } from './WidgetDataType';
 
+export enum Resolution {
+  STREET = "STREET",
+  SUBURBAN_ROAD = "SUBURBAN_ROAD",
+  NONE = "",
+}
+
 export interface ILocationData {
   meta: ILocationMeta;
   widgets: IWidgetBase[];
@@ -34,12 +40,12 @@ export interface IDateComments {
 
 export interface ILocationMeta {
   location_info: {
-    resolution: string;
     road1: number;
     road_segment_name: string;
   };
   location_text: string;
   dates_comment: IDateComments;
+  resolution: Resolution;
 }
 export interface IWidgetAccidentsByHourBarData extends IWidgetDataBase {
   items: {

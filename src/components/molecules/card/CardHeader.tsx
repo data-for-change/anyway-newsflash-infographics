@@ -39,23 +39,28 @@ interface IProps {
   variant: HeaderVariant;
   text: string | undefined;
   road: number;
+  orgIconPath?: string;
 }
-const CardHeader: FC<IProps> = ({ variant, text, road }) => {
+const CardHeader: FC<IProps> = ({ variant, text, road,orgIconPath }) => {
   const classes = useStyles();
-
   let headerContent = null;
   const headerText = splitTextHeader(text);
-const roadNumberComp : JSX.Element | null = road ? <RoadNumberImage roadNumber={road} /> : null;
+  const roadNumberComp: JSX.Element | null = road ? <RoadNumberImage roadNumber={road} /> : null;
 
   switch (variant) {
-    case HeaderVariant.Centered:
+    case HeaderVariant.Centered :
+    case HeaderVariant.CenteredNoTitle:
       headerContent = (
         <Box display="flex" alignItems="center" flex={1}>
           {roadNumberComp}
           <Box display="flex" justifyContent="center" px={2} className={classes.textWrapper}>
             <Box display="flex" flexDirection="column">
-              <Typography.Body1>{headerText?.textLine1}</Typography.Body1>
-              <Typography.Body1>{headerText?.textLine2}</Typography.Body1>
+              { variant === HeaderVariant.Centered &&
+                <>
+                <Typography.Body1>{headerText?.textLine1}</Typography.Body1>
+                <Typography.Body1>{headerText?.textLine2}</Typography.Body1>
+                </>
+              }
             </Box>
           </Box>
         </Box>
@@ -76,14 +81,13 @@ const roadNumberComp : JSX.Element | null = road ? <RoadNumberImage roadNumber={
     case HeaderVariant.Logo:
       headerContent = (
         <Box display="flex" flex={1}>
-          <Box className={classes.roadImageWrapper}>
-            {roadNumberComp}
-          </Box>
+          <Box className={classes.roadImageWrapper}>{roadNumberComp}</Box>
           <Box ml={'7%'} display="flex" flex={1} justifyContent="flex-end" alignItems="flex-end" height={30}>
             <Box className={classes.logosContainer} mx={1}>
-              <Logo src={LamasImage} alt={'Lamas'} height={30} />
+              <Logo src={AnywayImage} alt={'Anyway'} height={20} />
             </Box>
-            <Logo src={AnywayImage} alt={'Anyway'} height={20} />
+            <Logo src={orgIconPath || LamasImage} alt={'Lamas'} height={30} />
+
           </Box>
         </Box>
       );

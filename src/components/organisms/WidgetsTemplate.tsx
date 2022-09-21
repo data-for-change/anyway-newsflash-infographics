@@ -10,12 +10,15 @@ import { Typography } from 'components/atoms';
 import { Box } from '@material-ui/core';
 import WidgetWrapper from 'components/molecules/widgets/WidgetWrapper';
 import { useTranslation } from 'react-i18next';
+import { logosSourceMap, OrgLogoData } from 'const/cards.const';
 
 const WidgetsTemplate: FC = () => {
   const store: RootStore = useStore();
   const { t } = useTranslation();
-  const { widgetsStore } = store;
+  const { userStore , widgetsStore } = store;
   const widgetsData = widgetsStore.newsFlashWidgetsData;
+  const organizationName =  userStore.userOrganizations ? userStore.userOrganizations[0] : '';
+  const organizationData : OrgLogoData | undefined = logosSourceMap.find(p => p.key === organizationName)
 
   const widgetCards = widgetsData.map((widget, index, sizeOptions) => {
     const widgetComponent = (
@@ -24,6 +27,7 @@ const WidgetsTemplate: FC = () => {
         locationText={widgetsStore.newsFlashWidgetsMetaLocation}
         segmentText={widgetsStore.newsFlashWidgetsMetaSegmentName}
         sizeOptions={sizeOptions}
+        isStreet={widgetsStore.isStreet}
       />
     );
     if (!widgetComponent) {
@@ -32,6 +36,7 @@ const WidgetsTemplate: FC = () => {
     return (
       <Box m={2} key={index}>
         <AnyWayCard
+          organizationData = {organizationData}
           information={widget.meta.information}
           widgetName={widget.name}
           title={widget.data?.text?.title}

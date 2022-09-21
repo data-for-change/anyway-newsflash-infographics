@@ -18,6 +18,7 @@ import CardFooter from './CardFooter';
 import CardEditor from 'components/organisms/CardEditorDialog';
 import { transparent } from 'style';
 import { IDateComments } from 'models/WidgetData';
+import { OrgLogoData } from 'const/cards.const';
 
 const DEFAULTE_SIZE = 1;
 export interface CardSizeOptions {
@@ -32,6 +33,7 @@ interface IProps {
   title: string | undefined;
   dateComment: IDateComments;
   information?: string;
+  organizationData? : OrgLogoData;
 }
 
 const getSizeFactor = (options: CardSizeOptions | undefined): number => (options?.size ? options.size : DEFAULTE_SIZE);
@@ -71,6 +73,7 @@ const AnyWayCard: FC<IProps> = ({
   title,
   dateComment,
   information,
+  organizationData
 }) => {
   const [element, setElement] = useState({});
   const [isOpen, setOpen] = useState(false);
@@ -123,7 +126,7 @@ const AnyWayCard: FC<IProps> = ({
           {/* HEADER */}
           {variant.header !== HeaderVariant.None && (
             <Box height={sizes.headerHeight} width="100%">
-              <CardHeader variant={variant.header} text={title} road={roadNumber} />
+              <CardHeader orgIconPath={organizationData?.path} variant={variant.header} text={title} road={roadNumber} />
             </Box>
           )}
 
@@ -135,7 +138,7 @@ const AnyWayCard: FC<IProps> = ({
           {/* FOOTER */}
           {variant.footer !== FooterVariant.None && (
             <Box height={sizes.footerHeight} width="100%">
-              <CardFooter dateComment={dateComment} />
+              <CardFooter  orgIconPath={organizationData?.path} dateComment={dateComment} showRange={variant.footer === FooterVariant.LogoWithRange} />
             </Box>
           )}
           <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} text={title} />
