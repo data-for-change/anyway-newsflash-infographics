@@ -15,10 +15,10 @@ import { logosSourceMap, OrgLogoData } from 'const/cards.const';
 const WidgetsTemplate: FC = () => {
   const store: RootStore = useStore();
   const { t } = useTranslation();
-  const { userStore , widgetsStore } = store;
+  const { userStore, widgetsStore } = store;
   const widgetsData = widgetsStore.newsFlashWidgetsData;
-  const organizationName =  userStore.userOrganizations ? userStore.userOrganizations[0] : '';
-  const organizationData : OrgLogoData | undefined = logosSourceMap.find(p => p.key === organizationName)
+  const organizationName = userStore.userOrganizations ? userStore.userOrganizations[0] : '';
+  const organizationData: OrgLogoData | undefined = logosSourceMap.find((p) => p.key === organizationName);
 
   const widgetCards = widgetsData.map((widget, index, sizeOptions) => {
     const widgetComponent = (
@@ -30,16 +30,18 @@ const WidgetsTemplate: FC = () => {
         isStreet={widgetsStore.isStreet}
       />
     );
+    console.log(widget.data?.text?.subtitle);
     if (!widgetComponent) {
       return null;
     }
     return (
       <Box m={2} key={index}>
         <AnyWayCard
-          organizationData = {organizationData}
+          organizationData={organizationData}
           information={widget.meta.information}
           widgetName={widget.name}
           title={widget.data?.text?.title}
+          subtitle={widget.data?.text?.subtitle}
           dateComment={widgetsStore.newsFlashWidgetsMetaDateComment}
           roadNumber={widgetsStore.newsFlashWidgetsMetaRoadNumber}
         >

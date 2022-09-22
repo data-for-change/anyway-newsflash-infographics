@@ -53,13 +53,7 @@ const CustomizedLabel = (props: CustomizedLabelProps) => {
 const BarChartContainer: FC<IBarChartBaseProps> = ({ data, textLabel, subtitle, children, isStacked }) => {
   return (
     <>
-      {textLabel && <Typography.Body3>{textLabel}</Typography.Body3>}
-      {subtitle && (
-        <Typography.Body5>
-          <br></br>
-          {subtitle}
-        </Typography.Body5>
-      )}
+      {!subtitle && <Typography.Body3>{textLabel}</Typography.Body3>}
       <ResponsiveContainer>
         <BarChart data={data} margin={{ bottom: 20 }}>
           <XAxis
