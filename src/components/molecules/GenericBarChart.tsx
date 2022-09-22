@@ -28,6 +28,8 @@ interface IBarChartBaseProps {
   data: Array<BarDataMap>;
   isPercentage: boolean;
   textLabel?: string;
+  subtitle?: string;
+  isStacked?: boolean;
 }
 
 interface ISingleBarChartProps extends IBarChartBaseProps {}
@@ -48,10 +50,10 @@ const CustomizedLabel = (props: CustomizedLabelProps) => {
   );
 };
 
-const BarChartContainer: FC<IBarChartBaseProps> = ({ data, textLabel, children }) => {
+const BarChartContainer: FC<IBarChartBaseProps> = ({ data, textLabel, subtitle, children, isStacked }) => {
   return (
     <>
-      {textLabel && <Typography.Body3>{textLabel}</Typography.Body3>}
+      {!subtitle && <Typography.Body3>{textLabel}</Typography.Body3>}
       <ResponsiveContainer>
         <BarChart data={data} margin={{ bottom: 20 }}>
           <XAxis
@@ -63,7 +65,7 @@ const BarChartContainer: FC<IBarChartBaseProps> = ({ data, textLabel, children }
             style={{ fill: blackColor }}
           />
           <Tooltip />
-          <Legend verticalAlign="top" align="right" iconType="circle" height={35} />
+          {isStacked && <Legend verticalAlign="top" align="right" iconType="circle" height={35} />}
           {children}
         </BarChart>
       </ResponsiveContainer>
@@ -79,7 +81,7 @@ const SingleBarChart: FC<ISingleBarChartProps> = ({ data, isPercentage, textLabe
     filter: `drop-shadow(0.2em 0.2em 0 ${tinycolor(roseColor).darken().toString()})`,
   };
   return (
-    <BarChartContainer data={data} isPercentage={isPercentage} textLabel={textLabel}>
+    <BarChartContainer data={data} isPercentage={isPercentage} textLabel={textLabel} isStacked={false}>
       <Bar fill={roseColor} dataKey={yLabels[0]} style={barStyle} isAnimationActive={false}>
         <LabelList content={<CustomizedLabel isPercentage={isPercentage} />} dataKey={yLabels[0]} />
       </Bar>
@@ -87,13 +89,19 @@ const SingleBarChart: FC<ISingleBarChartProps> = ({ data, isPercentage, textLabe
   );
 };
 
-const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, isStacked, textLabel }) => {
+const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, isStacked, textLabel, subtitle }) => {
   const yLabels = data ? Object.keys(data[0]) : [];
   yLabels.splice(0, 1);
   const maxBarsNum = yLabels.length;
 
   return (
-    <BarChartContainer data={data} isPercentage={isPercentage} textLabel={textLabel}>
+    <BarChartContainer
+      data={data}
+      isPercentage={isPercentage}
+      textLabel={textLabel}
+      subtitle={subtitle}
+      isStacked={isStacked}
+    >
       {Array.from({ length: maxBarsNum }, (_, i) => {
         const barStyle = {
           filter: `drop-shadow(0.2em ${isStacked ? '0' : '0.2em'} 0 ${tinycolor(colors[i]).darken().toString()})`,

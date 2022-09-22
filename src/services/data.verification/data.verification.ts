@@ -122,6 +122,10 @@ export const verifiedWidgetData = (widget: any) => {
       isValid = items.every((item: any) => validString(item.driver_type) && validNumber(item.count));
       break;
     }
+    case 'killed_and_injured_count_per_age_group': {
+      isValid = items.every((item: any) => validString(item.label_key) && validNumber(item.value));
+      break;
+    }
     case 'accident_count_by_car_type': {
       isValid = items.every(
         (item: any) =>
