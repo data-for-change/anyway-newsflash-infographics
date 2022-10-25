@@ -13,6 +13,7 @@ const CountByYearBarWidget: FC<IProps> = ({ data, barOptions }) => {
   const excludeList = barOptions ? Object.values(barOptions).map((include: any, index: number) => {
       if (include) {return null} else {return items[0].series[index].label_key}}) : []
   const multiBarSeries = convertToBarSeries(items, text.labels_map, excludeList);
-  return <MultiBarChart isStacked={true} isPercentage={false} data={multiBarSeries} textLabel={text.title} />;
+  return <MultiBarChart isStacked={true} isPercentage={false} data={multiBarSeries} textLabel={text.title}
+                        barOptions={barOptions} />;
 };
 export default CountByYearBarWidget;
