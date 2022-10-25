@@ -36,6 +36,7 @@ interface ISingleBarChartProps extends IBarChartBaseProps {}
 
 interface IMultiBarChartProps extends IBarChartBaseProps {
   isStacked: boolean;
+  barOptions?: any;
 }
 
 const CustomizedLabel = (props: CustomizedLabelProps) => {
@@ -89,10 +90,12 @@ const SingleBarChart: FC<ISingleBarChartProps> = ({ data, isPercentage, textLabe
   );
 };
 
-const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, isStacked, textLabel, subtitle }) => {
+const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, isStacked, textLabel, subtitle, barOptions }) => {
   const yLabels = data ? Object.keys(data[0]) : [];
   yLabels.splice(0, 1);
   const maxBarsNum = yLabels.length;
+  const filteredColors : Record<string, any> = barOptions ? Object.values(barOptions).map((include: any, i: number) => {
+    if (include) {return colors[i]} else {return false}}).filter( Boolean ) : colors;
 
   return (
     <BarChartContainer
@@ -104,14 +107,14 @@ const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, isStacked,
     >
       {Array.from({ length: maxBarsNum }, (_, i) => {
         const barStyle = {
-          filter: `drop-shadow(0.2em ${isStacked ? '0' : '0.2em'} 0 ${tinycolor(colors[i]).darken().toString()})`,
+          filter: `drop-shadow(0.2em ${isStacked ? '0' : '0.2em'} 0 ${tinycolor(filteredColors[i]).darken().toString()})`,
         };
 
         return (
           <Bar
             key={i}
             stackId={isStacked ? 'stack_1' : undefined}
-            fill={colors[i]}
+            fill={filteredColors[i]}
             dataKey={yLabels[i]}
             style={barStyle}
             isAnimationActive={false}
