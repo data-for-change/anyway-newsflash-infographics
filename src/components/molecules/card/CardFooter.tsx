@@ -9,31 +9,39 @@ import { IDateComments } from 'models/WidgetData';
 import { useTranslation } from 'react-i18next';
 import { dateFormat } from 'utils/time.utils';
 import { useLocale } from 'hooks/date.hooks';
-
+import { observer } from 'mobx-react-lite';
 interface IProps {
   dateComment: IDateComments;
   showRange: boolean;
+  orgIconPath?: string;
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   main: {
     width: '100%',
     display: 'flex',
     boxSizing: 'border-box',
     height: cardFooterHeight,
     alignItems: 'flex-end',
-    justifyContent: 'flex-end',
+    justifyContent:'space-between'
   },
-});
 
-const CardFooter: React.FC<IProps> = ({ dateComment, showRange }) => {
+  logoBox:{
+    display:'flex',
+    gap: theme.spacing(1),
+  }
+}));
+
+const CardFooter: React.FC<IProps> = ({ dateComment, showRange,orgIconPath }) => {
   const { t } = useTranslation();
   const classes = useStyles();
   const locale = useLocale();
   const lastUpdateDate = dateComment.last_update ? dateFormat(new Date(dateComment.last_update), locale) : null;
   const dateRange = dateComment.date_range ? dateComment.date_range.join('-') : null;
+
   return (
     <div className={classes.main}>
+      <Box>
       {showRange && <Typography.Body3>{dateRange},</Typography.Body3>}
       {lastUpdateDate && (
         <Typography.Body3>
@@ -43,11 +51,13 @@ const CardFooter: React.FC<IProps> = ({ dateComment, showRange }) => {
           {lastUpdateDate}
         </Typography.Body3>
       )}
-      <Box display="flex" flex={1} />
-      <Logo src={LamasImage} alt={'Lamas'} height={30} />
-      <Logo src={AnywayImage} alt={'Anyway'} height={20} />
+      </Box>
+      <Box className={classes.logoBox}>
+      <Logo src={AnywayImage} alt={'Anyway'} height={orgIconPath ? 20 : 22} />
+      <Logo src={  orgIconPath ||  LamasImage} alt={'Lamas'} height={orgIconPath ? 24 : 25}  />
+      </Box>
     </div>
   );
 };
 
-export default CardFooter;
+export default observer(CardFooter);

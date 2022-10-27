@@ -19,8 +19,9 @@ export interface IAnywayUserDetails {
     lastName: string;
     email: string;
     workplace?: string;
-    imgUrl : string
-    roles : [string]
+    imgUrl : string;
+    roles : [string];
+    organizations : [string];
   };
   meta: {
     isCompleteRegistration: boolean;
@@ -44,7 +45,8 @@ export const fetchUserInfo = async function (): Promise<IAnywayUserDetails> {
       lastName: userInfoData.last_name,
       email: userInfoData.email,
       imgUrl : userInfoData.oauth_provider_user_picture_url,
-      roles : userInfoData.roles as [string]
+      roles : userInfoData.roles as [string],
+      organizations: userInfoData.organizations
     },
     meta: {
       isCompleteRegistration: response.data.is_user_completed_registration,
