@@ -75,8 +75,16 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
     />
   );
 
+  const onCloseInitValues = () => {
+    onClose();
+    setSize(1);
+    setBarValues(
+      Object.fromEntries(Array.from({length: NUM_OF_BARS}, (_,i)=>[i,true]))
+    );
+  }
+
   return (
-    <DialogWithHeader fullWidth={true} isShowing={isOpen} onClose={onClose} title={t('cardEditor.edit')}>
+    <DialogWithHeader fullWidth={true} isShowing={isOpen} onClose={onCloseInitValues} title={t('cardEditor.edit')}>
       <Box display="flex">
         <Box px={2} display="flex" flexDirection="column" flexBasis={200} minWidth={200} boxSizing="border-box">
           {Object.keys(barsWidgetsLabels).includes(widgetName) ?
