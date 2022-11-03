@@ -1,5 +1,7 @@
-import { BarDataMap, BAR_CHART_X_LABEL } from 'components/molecules/GenericBarChart';
+import React, {FC} from "react";
+import { BarDataMap, BAR_CHART_X_LABEL, MultiBarChart } from 'components/molecules/GenericBarChart';
 import { LabelsMap, MultiSeriesDataItems, SeriesDataItem } from 'models/MultiSeriesData';
+import {IWidgetMultiBarData} from "../models/WidgetData";
 const getTranslatedLabel = (key: string, labelsMap: LabelsMap): string => labelsMap[key] || key;
 
 // convert input to data series, for example:
@@ -57,4 +59,16 @@ export function convertToBarSeries(
     }
     return result;
   });
+}
+
+export function createBarWidget (
+  data: IWidgetMultiBarData,
+  barOptions: Record<number, boolean>
+): BarDataMap[] {
+  const { items, text } = data;
+  const excludeList = (Object.keys(barOptions).length !== 0) ?
+    Object.values(barOptions).map((include: any, index: number) => {
+      if (include) {return null} else {return items[0].series[index].label_key}
+    }) : []
+  return convertToBarSeries(items, text.labels_map, excludeList);
 }

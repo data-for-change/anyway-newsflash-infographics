@@ -36,7 +36,7 @@ interface ISingleBarChartProps extends IBarChartBaseProps {}
 
 interface IMultiBarChartProps extends IBarChartBaseProps {
   isStacked: boolean;
-  barOptions?: any;
+  barOptions?: Record<number, boolean>;
 }
 
 const CustomizedLabel = (props: CustomizedLabelProps) => {
@@ -94,8 +94,10 @@ const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, isStacked,
   const yLabels = data ? Object.keys(data[0]) : [];
   yLabels.splice(0, 1);
   const maxBarsNum = yLabels.length;
-  const filteredColors : Record<string, any> = barOptions ? Object.values(barOptions).map((include: any, i: number) => {
-    if (include) {return colors[i]} else {return false}}).filter( Boolean ) : colors;
+  const filteredColors : Record<string, any> = (barOptions && Object.keys(barOptions).length !== 0) ?
+    Object.values(barOptions).map((include: any, i: number) => {
+      if (include) {return colors[i]} else {return false}
+    }).filter( Boolean ) : colors;
 
   return (
     <BarChartContainer

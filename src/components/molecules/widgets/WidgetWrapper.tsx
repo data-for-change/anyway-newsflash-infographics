@@ -42,7 +42,7 @@ interface IProps {
   widget: IWidgetBase;
   locationText: string;
   sizeOptions: any;
-  barOptions: any;
+  barOptions: Record<number, boolean>;
   segmentText: string;
   isStreet: boolean;
 }

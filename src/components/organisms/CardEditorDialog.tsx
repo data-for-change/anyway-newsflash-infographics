@@ -14,10 +14,12 @@ interface IProps {
   isOpen: boolean;
   onClose: () => void;
   widgetName: string;
-  text: string | undefined;
+  text?: string;
 }
 
-const barsWidgetsLabels: Record<string, any> = {
+const NUM_OF_BARS = 3
+
+const barsWidgetsLabels: Record<string, Array<string>> = {
   'accident_count_by_accident_year':
     ['textView.fatal.plural', 'textView.severe.plural', 'textView.light.plural'],
   'injured_count_by_accident_year':
@@ -31,8 +33,10 @@ const barsWidgetsTitle: Record<string, string> = {
 
 const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
   const [cardElement, setCardElement] = useState({});
-  const [size, setSize] = useState(1);
-  const [barValues, setBarValues] = useState( [true, true, true] );
+  const [size, setSize] = useState(1)
+  const [barValues, setBarValues] = useState(
+    Object.fromEntries(Array.from({length: NUM_OF_BARS}, (_,i)=>[i,true]))
+  );
   const { t } = useTranslation();
   const store = useStore();
   const { widgetsStore } = store;
@@ -79,15 +83,12 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
             <Box mt={2} display="flex" flexDirection="column">
               <Typography.Body1>{t(barsWidgetsTitle[widgetName])}</Typography.Body1>
               <FormGroup>
-                <FormControlLabel label={t(barsWidgetsLabels[widgetName][0])} control={
-                  <Checkbox defaultChecked style={{color: blueVioletColor}} onChange={(e) => handleCheckChange(0, e)} />
-                }/>
-                <FormControlLabel label={t(barsWidgetsLabels[widgetName][1])} control={
-                  <Checkbox defaultChecked style={{color: blueVioletColor}} onChange={(e) => handleCheckChange(1, e)} />
-                }/>
-                <FormControlLabel label={t(barsWidgetsLabels[widgetName][2])} control={
-                  <Checkbox defaultChecked style={{color: blueVioletColor}} onChange={(e) => handleCheckChange(2, e)}/>
-                }/>
+                {Array.from({length: NUM_OF_BARS}, (_,i) => {
+                  return <FormControlLabel label={t(barsWidgetsLabels[widgetName][i])} control={
+                    <Checkbox defaultChecked style={{color: blueVioletColor}}
+                              onChange={(e) => handleCheckChange(i, e)}/>
+                  }/>
+                })}
               </FormGroup>
             </Box> : <Box></Box>
           }
