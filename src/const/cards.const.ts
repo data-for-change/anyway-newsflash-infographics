@@ -1,5 +1,5 @@
 import { WidgetName } from 'models/WidgetName';
-import orYarokLogo from 'assets/greenlight.png';
+import  orYarokLogo  from 'assets/greenlight.png';
 
 // cards is this least will be avaiaable for operation environments (all non-staging environments)
 export const operationalCards: WidgetName[] = [
