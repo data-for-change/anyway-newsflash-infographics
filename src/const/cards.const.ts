@@ -1,5 +1,5 @@
 import { WidgetName } from 'models/WidgetName';
-import  orYarokLogo  from 'assets/greenlight.png';
+import orYarokLogo from 'assets/greenlight.png';
 
 // cards is this least will be avaiaable for operation environments (all non-staging environments)
 export const operationalCards: WidgetName[] = [
@@ -9,6 +9,7 @@ export const operationalCards: WidgetName[] = [
   WidgetName.head_on_collisions_comparison_percentage,
   WidgetName.vision_zero_2_plus_1,
   WidgetName.injured_count_by_severity,
+  WidgetName.accidents_heat_map
 ];
 
 export type OrgLogoData =  {key : string, path:string} ;
