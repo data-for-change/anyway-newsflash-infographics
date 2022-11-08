@@ -16,6 +16,7 @@ import {
   IWidgetAccidentCountByDriverType,
   IWidgetAccidentCountByCarType,
   IWidgetInjuredAccidentsWithPedestrians,
+  IWidgetKilledAndInjuredCountPerAgeGroup,
 } from 'models/WidgetData';
 import AccidentsCountByHourBarWidget from './AccidentsCountByHourBarWidget';
 import MostSevereAccidentsMapWidget from './MostSevereAccidentsMapWidget';
@@ -35,6 +36,7 @@ import AccidentCountByCarTypeWidget from './AccidentCountByCarTypeWidget';
 import InjuredAccidentsWithPedestrians from './InjuredAccidentsWithPedestrians';
 import { IPoint } from 'models/Point';
 import { WidgetName } from 'models/WidgetName';
+import KilledAndInjuredCountPerAgeGroupWidget from './KilledAndInjuredCountPerAgeGroupWidget';
 
 interface IProps {
   widget: IWidgetBase;
@@ -125,6 +127,12 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
     }
     case WidgetName.accident_count_by_accident_type: {
       widgetComponent = <CountByTypePieWidget data={data as IWidgetAccidentsByTypeData} />;
+      break;
+    }
+    case WidgetName.killed_and_injured_count_per_age_group: {
+      widgetComponent = (
+        <KilledAndInjuredCountPerAgeGroupWidget data={data as IWidgetKilledAndInjuredCountPerAgeGroup} />
+      );
       break;
     }
     case WidgetName.accident_count_by_accident_year: {

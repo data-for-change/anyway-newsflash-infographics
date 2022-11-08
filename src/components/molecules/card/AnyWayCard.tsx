@@ -33,7 +33,8 @@ interface IProps {
   title: string | undefined;
   dateComment: IDateComments;
   information?: string;
-  organizationData? : OrgLogoData;
+  organizationData?: OrgLogoData;
+  subtitle?: string;
 }
 
 const getSizeFactor = (options: CardSizeOptions | undefined): number => (options?.size ? options.size : DEFAULTE_SIZE);
@@ -73,7 +74,8 @@ const AnyWayCard: FC<IProps> = ({
   title,
   dateComment,
   information,
-  organizationData
+  organizationData,
+  subtitle,
 }) => {
   const [element, setElement] = useState({});
   const [isOpen, setOpen] = useState(false);
@@ -126,7 +128,12 @@ const AnyWayCard: FC<IProps> = ({
           {/* HEADER */}
           {variant.header !== HeaderVariant.None && (
             <Box height={sizes.headerHeight} width="100%">
-              <CardHeader orgIconPath={organizationData?.path} variant={variant.header} text={title} road={roadNumber} />
+              <CardHeader
+                orgIconPath={organizationData?.path}
+                variant={variant.header}
+                text={subtitle ? `${title} ${subtitle}` : title}
+                road={roadNumber}
+              />
             </Box>
           )}
 
@@ -138,7 +145,11 @@ const AnyWayCard: FC<IProps> = ({
           {/* FOOTER */}
           {variant.footer !== FooterVariant.None && (
             <Box height={sizes.footerHeight} width="100%">
-              <CardFooter  orgIconPath={organizationData?.path} dateComment={dateComment} showRange={variant.footer === FooterVariant.LogoWithRange} />
+              <CardFooter
+                orgIconPath={organizationData?.path}
+                dateComment={dateComment}
+                showRange={variant.footer === FooterVariant.LogoWithRange}
+              />
             </Box>
           )}
           <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} text={title} />
