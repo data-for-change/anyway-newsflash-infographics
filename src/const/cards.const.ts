@@ -9,6 +9,7 @@ export const operationalCards: WidgetName[] = [
   WidgetName.head_on_collisions_comparison_percentage,
   WidgetName.vision_zero_2_plus_1,
   WidgetName.injured_count_by_severity,
+  WidgetName.accidents_heat_map
 ];
 
 export type OrgLogoData =  {key : string, path:string} ;
