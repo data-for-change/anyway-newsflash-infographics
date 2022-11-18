@@ -1,5 +1,4 @@
-import React, {FC} from "react";
-import { BarDataMap, BAR_CHART_X_LABEL, MultiBarChart } from 'components/molecules/GenericBarChart';
+import { BarDataMap, BAR_CHART_X_LABEL } from 'components/molecules/GenericBarChart';
 import { LabelsMap, MultiSeriesDataItems, SeriesDataItem } from 'models/MultiSeriesData';
 import {IWidgetMultiBarData} from "../models/WidgetData";
 const getTranslatedLabel = (key: string, labelsMap: LabelsMap): string => labelsMap[key] || key;
