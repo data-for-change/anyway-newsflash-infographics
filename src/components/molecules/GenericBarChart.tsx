@@ -36,7 +36,7 @@ interface ISingleBarChartProps extends IBarChartBaseProps {}
 
 interface IMultiBarChartProps extends IBarChartBaseProps {
   isStacked: boolean;
-  barOptions?: Record<number, boolean>;
+  editorBarOptions?: Record<number, boolean>;
 }
 
 const CustomizedLabel = (props: CustomizedLabelProps) => {
@@ -90,13 +90,17 @@ const SingleBarChart: FC<ISingleBarChartProps> = ({ data, isPercentage, textLabe
   );
 };
 
-const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, isStacked, textLabel, subtitle, barOptions }) => {
+const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, isStacked, textLabel, subtitle, editorBarOptions }) => {
   const yLabels = data ? Object.keys(data[0]) : [];
   yLabels.splice(0, 1);
   const maxBarsNum = yLabels.length;
-  const filteredColors : Record<string, any> = (barOptions && Object.keys(barOptions).length !== 0) ?
-    Object.values(barOptions).map((include: any, i: number) => {
-      if (include) {return colors[i]} else {return false}
+  const filteredColors : Record<string, any> = (editorBarOptions && Object.keys(editorBarOptions).length !== 0) ?
+    Object.values(editorBarOptions).map((include: any, i: number) => {
+      if (include) {
+        return colors[i];
+      } else {
+        return false;
+      }
     }).filter( Boolean ) : colors;
 
   return (

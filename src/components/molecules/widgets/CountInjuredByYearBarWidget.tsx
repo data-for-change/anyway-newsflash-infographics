@@ -6,13 +6,13 @@ import { MultiBarChart } from '../GenericBarChart';
 
 interface IProps {
   data: IWidgetMultiBarData;
-  barOptions: Record<number, boolean>;
+  editorBarOptions: Record<number, boolean>;
 }
 
-const CountInjuredByYearBarWidget: FC<IProps> = ({ data, barOptions }) => {
+const CountInjuredByYearBarWidget: FC<IProps> = ({ data, editorBarOptions }) => {
   const { text } = data;
-  const multiBarSeries = createBarWidget(data, barOptions);
+  const multiBarSeries = createBarWidget(data, editorBarOptions);
   return <MultiBarChart isStacked={true} isPercentage={false} data={multiBarSeries} textLabel={text.title}
-                        barOptions={barOptions} />;
+                        editorBarOptions={editorBarOptions} />;
 };
 export default CountInjuredByYearBarWidget;

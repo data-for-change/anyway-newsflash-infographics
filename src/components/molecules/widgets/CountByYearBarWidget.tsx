@@ -5,13 +5,13 @@ import { createBarWidget } from 'utils/barChart.utils';
 
 interface IProps {
   data: IWidgetMultiBarData;
-  barOptions: Record<number, boolean>;
+  editorBarOptions: Record<number, boolean>;
 }
 
-const CountByYearBarWidget: FC<IProps> = ({ data, barOptions }) => {
+const CountByYearBarWidget: FC<IProps> = ({ data, editorBarOptions }) => {
   const { text } = data;
-  const multiBarSeries = createBarWidget(data, barOptions)
+  const multiBarSeries = createBarWidget(data, editorBarOptions)
   return <MultiBarChart isStacked={true} isPercentage={false} data={multiBarSeries} textLabel={text.title}
-                        barOptions={barOptions} />;
+                        editorBarOptions={editorBarOptions} />;
 };
 export default CountByYearBarWidget;

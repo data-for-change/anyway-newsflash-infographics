@@ -1,3 +1,4 @@
+/* eslint-disable max-lines*/
 import React, { FC } from 'react';
 import {
   IWidgetAccidentCountByRoadLight,
@@ -42,12 +43,12 @@ interface IProps {
   widget: IWidgetBase;
   locationText: string;
   sizeOptions: any;
-  barOptions: Record<number, boolean>;
+  editorBarOptions: Record<number, boolean>;
   segmentText: string;
   isStreet: boolean;
 }
 
-const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, barOptions, segmentText, isStreet }) => {
+const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, editorBarOptions, segmentText, isStreet }) => {
   const { name, data } = widget;
   let widgetComponent;
   switch (name) {
@@ -137,11 +138,11 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, barOptio
       break;
     }
     case WidgetName.accident_count_by_accident_year: {
-      widgetComponent = <CountByYearBarWidget data={data as IWidgetMultiBarData} barOptions={barOptions} />;
+      widgetComponent = <CountByYearBarWidget data={data as IWidgetMultiBarData} editorBarOptions={editorBarOptions} />;
       break;
     }
     case WidgetName.injured_count_by_accident_year: {
-      widgetComponent = <CountInjuredByYearBarWidget data={data as IWidgetMultiBarData} barOptions={barOptions} />;
+      widgetComponent = <CountInjuredByYearBarWidget data={data as IWidgetMultiBarData} editorBarOptions={editorBarOptions} />;
       break;
     }
     case WidgetName.accident_count_by_day_night: {

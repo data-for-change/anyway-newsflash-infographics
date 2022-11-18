@@ -9,6 +9,7 @@ import widgetToImage from 'services/to-image.service';
 import { useTranslation } from 'react-i18next';
 import { blueVioletColor } from 'style';
 import internal from "stream";
+import {initEditorBarOptions, barsWidgetsLabels, barsWidgetsTitle, NUM_OF_BARS} from "../../utils/barChart.utils";
 
 interface IProps {
   isOpen: boolean;
@@ -17,26 +18,10 @@ interface IProps {
   text?: string;
 }
 
-const NUM_OF_BARS = 3
-
-const barsWidgetsLabels: Record<string, Array<string>> = {
-  'accident_count_by_accident_year':
-    ['textView.fatal.plural', 'textView.severe.plural', 'textView.light.plural'],
-  'injured_count_by_accident_year':
-    ['textView.killed.plural', 'textView.severeInjured.plural', 'textView.lightInjured.plural'],
-}
-
-const barsWidgetsTitle: Record<string, string> = {
-  'accident_count_by_accident_year': 'cardEditor.showAccidents',
-  'injured_count_by_accident_year': 'cardEditor.showInjured',
-}
-
 const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
   const [cardElement, setCardElement] = useState({});
   const [size, setSize] = useState(1)
-  const [barValues, setBarValues] = useState(
-    Object.fromEntries(Array.from({length: NUM_OF_BARS}, (_,i)=>[i,true]))
-  );
+  const [barValues, setBarValues] = useState(initEditorBarOptions());
   const { t } = useTranslation();
   const store = useStore();
   const { widgetsStore } = store;
@@ -50,10 +35,16 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
     }
   };
 
-  const handleCheckChange = (loc: number, event: any) => {
+  /**
+   * When checkbox is changed, change barValues in place "location" to the
+   * negated value. When false change to true, when true change to false.
+   * @param location  place in barValues object
+   * @param event     not used
+   */
+  const handleCheckChange = (location: number, event: any) => {
     setBarValues((prevState) => ({
       ...prevState,
-      [loc]: !barValues[loc]
+      [location]: !barValues[location]
     }));
   };
 
@@ -70,7 +61,7 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
       widget={widget}
       locationText={widgetsStore.newsFlashWidgetsMetaLocation}
       sizeOptions={sizeOptions.size}
-      barOptions={barValues}
+      editorBarOptions={barValues}
       isStreet={widgetsStore.isStreet}
     />
   );
@@ -78,9 +69,7 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
   const onCloseInitValues = () => {
     onClose();
     setSize(1);
-    setBarValues(
-      Object.fromEntries(Array.from({length: NUM_OF_BARS}, (_,i)=>[i,true]))
-    );
+    setBarValues(initEditorBarOptions());
   }
 
   return (
