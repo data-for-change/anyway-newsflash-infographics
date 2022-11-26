@@ -8,7 +8,7 @@ import { oceanBlueColor, skyBlueColor } from 'style';
 import Box from '@material-ui/core/Box';
 import { Avatar } from '@material-ui/core';
 import { IAnywayUserDetails } from 'services/user.service';
-import { ROLE_ADMIN_NAME } from 'utils/utils';
+import { ROLE_ADMIN_NAME } from 'const/generalConst';
 import RootStore from 'store/root.store';
 import { useStore } from 'store/storeConfig';
 import { observer } from 'mobx-react-lite';

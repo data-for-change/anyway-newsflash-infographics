@@ -48,7 +48,8 @@
     "on": "ב",
     "onSegment": "במקטע",
     "occurred": "התרחשו",
-    "hurt": "נהרגו ונפצעו",
+    "killedAndHurt": "נהרגו ונפצעו",
+    "hurt": "נפצעו",
     "accidents": "תאונות",
     "injured": "נפגעים",
     "fatal": {

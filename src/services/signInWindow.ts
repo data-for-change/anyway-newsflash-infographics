@@ -1,4 +1,4 @@
-import { loginPopUpDim } from 'utils/utils';
+import { loginPopUpDim } from 'const/generalConst';
 
 let windowObjectReference: Window | null = null;
 let previousUrl: string;
