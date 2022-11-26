@@ -8,7 +8,7 @@ import {
   GET_USERS_INFO_LIST_URL,
   LOG_OUT_USER_URL, REMOVE_USER_FROM_ORG_URL,
   UPDATE_USER_INFO_URL,
-} from 'utils/utils';
+} from 'const/generalConst';
 import { IFormInput } from 'components/molecules/UserUpdateForm';
 import { StatusCodes } from 'utils/HTTPStatuesCodes';
 import { IUserInfo } from '../models/user/IUserInfo';

@@ -38,6 +38,7 @@ import InjuredAccidentsWithPedestrians from './InjuredAccidentsWithPedestrians';
 import { IPoint } from 'models/Point';
 import { WidgetName } from 'models/WidgetName';
 import KilledAndInjuredCountPerAgeGroupWidget from './KilledAndInjuredCountPerAgeGroupWidget';
+import { getInjuredBySeverityVerbLabel } from 'utils/text.utils';
 
 interface IProps {
   widget: IWidgetBase;
@@ -119,7 +120,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, editorBa
             severe: 'severeInjured',
             light: 'lightInjured',
             noun: 'injured',
-            verb: 'hurt',
+            verb: getInjuredBySeverityVerbLabel(data as IWidgetInjuredBySeverityTextData),
           }}
           isStreet={isStreet}
           largeNumbers={true}

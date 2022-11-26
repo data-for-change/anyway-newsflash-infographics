@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { fetchNews } from './news.data.service';
 import L from 'leaflet';
-import { serverUrl } from 'utils/utils';
+import { serverUrl } from 'const/generalConst';
 
 export function initService(): Promise<any> {
   setAxiosDefaults();
