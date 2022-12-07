@@ -1,5 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
+import Axios from 'axios'
 import DialogWithHeader from '../DialogWithHeader';
 import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,7 +10,7 @@ import RootStore from 'store/root.store';
 import OverlayLoader from 'components/molecules/OverlayLoader';
 import { StyledTableCell, StyledTableRow } from '../Table/TableView';
 import { maxHeightTable } from 'style/_sizes';
-import { TableContainer, Button, Box, Table, TableBody, TableCell, TableHead, Theme } from '@material-ui/core';
+import { TableContainer, Button, Box, Table, TableBody, TableCell, TableHead, Theme,ButtonGroup } from '@material-ui/core';
 import { blackColor } from 'style';
 import { EditModeButtons } from './EditModeButtons';
 import { OrganizationEditList } from './OrganizationEditList';
@@ -55,6 +56,10 @@ const AdminManagementForm: React.FC<IProps> = ({ saveUserChanges, isShowing, onC
     addUserToUpdate[element.email] = element.name;
     setUsersForUpdate(addUserToUpdate);
   };
+  const removeUser = async(element: ISingleOrgDetails) =>{
+
+    userStore.removeUser(element.email)
+  }
   return (
     <DialogWithHeader
       fullWidth
@@ -110,9 +115,14 @@ const AdminManagementForm: React.FC<IProps> = ({ saveUserChanges, isShowing, onC
                       />
                     ) : (
                       <Box>
+                        <ButtonGroup>
                         <Button onClick={() => addUsersToUpdate(item)} variant="contained">
                           {t('usersManagement.edit')}
                         </Button>
+                        <Button onClick={() => removeUser(item)} variant="contained">
+                        מחק   
+                        </Button>
+                        </ButtonGroup>
                       </Box>
                     )}
                   </TableCell>

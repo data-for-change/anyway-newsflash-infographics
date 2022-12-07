@@ -9,6 +9,7 @@ import {
   getUsersList,
   getOrganizationsDataList,
   updateUserOrganization,
+  removeUsersCall
 } from 'services/user.service';
 import { IUserInfo } from 'models/user/IUserInfo';
 import { ROLE_ADMIN_NAME } from 'const/generalConst';
@@ -17,7 +18,7 @@ import { IFormInput } from 'components/molecules/UserUpdateForm';
 export default class UserStore {
   isUserAuthenticated: boolean = false;
   isAdmin: boolean = false;
-  usersInfoList: [IUserInfo] | null = null;
+  usersInfoList: Array<IUserInfo> | null = null;
   organizationsList: Array<String> | null = null;
   userInfo: IAnywayUserDetails | null = null;
   userApiError: boolean = false;
@@ -74,6 +75,19 @@ export default class UserStore {
       });
   }
 
+  async removeUser (email:string) {
+    try{
+      await  removeUsersCall(email)
+      if(this.usersInfoList !== null && this.usersInfoList.length > 1){
+        this.usersInfoList = this.usersInfoList.filter(p =>{
+          return p.email !== email
+        })
+      }
+    }
+    catch(e){
+      console.log(e);
+    }
+  }
   getUserLoginDetails() {
     fetchUserInfo()
       .then((userData) => {
