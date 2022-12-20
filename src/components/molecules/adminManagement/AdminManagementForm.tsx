@@ -1,6 +1,5 @@
 import { observer } from 'mobx-react-lite';
 import React from 'react';
-import Axios from 'axios'
 import DialogWithHeader from '../DialogWithHeader';
 import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';

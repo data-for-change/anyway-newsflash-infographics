@@ -59,7 +59,7 @@ export const fetchUserInfo = async function (): Promise<IAnywayUserDetails> {
 export const removeUsersCall = async (email:string) =>{
 
   try{
-    const request = await axios.post('https://www.anyway.co.il/user/delete_user',{email})
+    await axios.post('https://www.anyway.co.il/user/delete_user',{email})
   }
   catch(e){
       console.log(e);

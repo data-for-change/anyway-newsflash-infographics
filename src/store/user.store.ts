@@ -78,7 +78,7 @@ export default class UserStore {
   async removeUser (email:string) {
     try{
       await  removeUsersCall(email)
-      if(this.usersInfoList !== null && this.usersInfoList.length > 1){
+      if(this.usersInfoList !== null && this.usersInfoList.length >= 1){
         this.usersInfoList = this.usersInfoList.filter(p =>{
           return p.email !== email
         })
