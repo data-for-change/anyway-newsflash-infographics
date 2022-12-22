@@ -10,6 +10,7 @@ export interface INewsFlash {
   link: string;
   lon: number;
   display_source: string;
+  newsflash_location_qualification : string;
   location: string;
   title: string;
   source: string;
