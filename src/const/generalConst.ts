@@ -1,4 +1,6 @@
-﻿// pop up login window dimensions
+﻿import { isProd } from 'utils/env.utils';
+
+// pop up login window dimensions
 
 export const loginPopUpDim = {
   width: window.screen.width / 3.5,
@@ -7,7 +9,7 @@ export const loginPopUpDim = {
 //server url can be on dev or the heroku server
 export const serverUrl = process.env.REACT_APP_BASE_URL;
 export const ROLE_ADMIN_NAME = 'admins';
-export const authServerUrl = process.env.REACT_APP_AUTH_URL;
+export const authServerUrl = isProd ? process.env.REACT_APP_AUTH_PROD_URL : process.env.REACT_APP_AUTH_DEV_URL;
 export const AUTH_LOGIN_GOOGLE_URL: URL = new URL(`${authServerUrl}authorize/google`);
 export const REDIRECT_ROUTE: string | undefined = process.env.REACT_APP_REDIRECT_URL;
 export const GET_USER_INFO_URL = `${authServerUrl}user/info`;
