@@ -3,4 +3,5 @@ export enum SourceFilterEnum {
   ynet = 'ynet',
   walla = 'walla',
   mda = 'twitter',
+  critical = 'critical'
 }

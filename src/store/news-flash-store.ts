@@ -5,8 +5,15 @@ import { INewsFlash } from 'models/NewFlash';
 import { IPoint } from 'models/Point';
 import RootStore from './root.store';
 
+function filterByCritical(newsFlashCollection: Array<INewsFlash>): Array<INewsFlash>  {
+  return newsFlashCollection.filter(news => news.hasOwnProperty("critical") && news.critical);
+}
+
 const DEFAULT_TIME_FILTER = 5;
 const DEFAULT_LOCATION = { latitude: 32.0853, longitude: 34.7818 };
+const LOCAL_FILTERS: { [key in SourceFilterEnum]?: (newsFlashCollection: Array<INewsFlash>) => Array<INewsFlash> } = {
+  [SourceFilterEnum.critical]: filterByCritical
+}
 
 export default class NewsFlashStore {
   rootStore: RootStore;
@@ -88,23 +95,34 @@ export default class NewsFlashStore {
     if (filter !== this.newsFlashActiveFilter) {
       runInAction(() => {
         this.newsFlashActiveFilter = filter;
-        this.newsFlashCollection = [];
         this.newsFlashFetchOffSet = 0;
       });
+      if (!(filter in LOCAL_FILTERS)) {
+        runInAction(() => {
+          this.newsFlashCollection = [];
+        });
+      }
       this.filterNewsFlashCollection();
     }
   }
 
   filterNewsFlashCollection(): void {
     runInAction(() => (this.newsFlashLoading = true));
-    fetchNews(this.newsFlashActiveFilter, this.newsFlashFetchOffSet).then((data: any) => {
+    if (this.newsFlashActiveFilter in LOCAL_FILTERS) {
+      const filterMethod = LOCAL_FILTERS[this.newsFlashActiveFilter];
+      const filtered = filterMethod && filterMethod(this.newsFlashCollection);
+      runInAction(() => (this.newsFlashCollection = [...(filtered || [])]));
       runInAction(() => (this.newsFlashLoading = false));
-      if (data) {
-        runInAction(() => (this.newsFlashCollection = [...this.newsFlashCollection, ...data]));
-      } else {
-        console.error(`filterNewsFlashCollection(filter:${this.newsFlashActiveFilter}) invalid data:`, data);
-      }
-    });
+    } else {
+      fetchNews(this.newsFlashActiveFilter, this.newsFlashFetchOffSet).then((data: any) => {
+        runInAction(() => (this.newsFlashLoading = false));
+        if (data) {
+          runInAction(() => (this.newsFlashCollection = [...this.newsFlashCollection, ...data]));
+        } else {
+          console.error(`filterNewsFlashCollection(filter:${this.newsFlashActiveFilter}) invalid data:`, data);
+        }
+      });
+    }
   }
   infiniteFetchLimit(fetchSize: number): void {
     runInAction(() => (this.newsFlashFetchOffSet += fetchSize));
