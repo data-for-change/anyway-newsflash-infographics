@@ -21,7 +21,8 @@ const useStyles = makeStyles({
     backgroundColor: silverSmokeColor,
   },
 });
-
+//
+<img src="" alt="" />
 const News: FC = () => {
   const store: RootStore = useStore();
   const classes = useStyles();
@@ -47,7 +48,7 @@ const News: FC = () => {
                           {date}, {news.display_source}
                         </Typography.Body5>
                       </p>
-                      {(news.hasOwnProperty('critical') && news.critical) && <img src={CriticalIcon} style={{ height: "30px", width: "30px", mixBlendMode: "multiply" }} />}
+                      {(news.hasOwnProperty('critical') && news.critical) && <img src={CriticalIcon} alt="" style={{ height: "30px", width: "30px", mixBlendMode: "multiply" }} />}
                     </Box>
                     <Typography.Body5>{news.title}</Typography.Body5>
                   </Box>
