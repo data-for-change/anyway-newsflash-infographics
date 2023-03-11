@@ -10,6 +10,7 @@ import { dateFormat } from 'utils/time.utils';
 import { useLocale } from 'hooks/date.hooks';
 import LocationSearchIndicator from 'components/molecules/LocationSearchIndicator';
 import { IRouteProps } from 'models/Route';
+import CriticalIcon from 'assets/critical.jpg';
 
 const useStyles = makeStyles({
   container: {},
@@ -20,7 +21,8 @@ const useStyles = makeStyles({
     backgroundColor: silverSmokeColor,
   },
 });
-
+//
+<img src="" alt="" />
 const News: FC = () => {
   const store: RootStore = useStore();
   const classes = useStyles();
@@ -40,11 +42,14 @@ const News: FC = () => {
               return (
                 <Link key={news.id} to={`${settingsStore.currentLanguageRouteString}/newsflash/${news.id}`}>
                   <Box border={1} borderColor={silverSmokeColor} p={1} className={className}>
-                    <p>
-                      <Typography.Body5>
-                        {date}, {news.display_source}
-                      </Typography.Body5>
-                    </p>
+                    <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+                      <p>
+                        <Typography.Body5>
+                          {date}, {news.display_source}
+                        </Typography.Body5>
+                      </p>
+                      {(news.hasOwnProperty('critical') && news.critical) && <img src={CriticalIcon} alt="" style={{ height: "30px", width: "30px", mixBlendMode: "multiply" }} />}
+                    </Box>
                     <Typography.Body5>{news.title}</Typography.Body5>
                   </Box>
                 </Link>
