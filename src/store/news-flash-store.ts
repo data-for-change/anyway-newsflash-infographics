@@ -108,7 +108,7 @@ export default class NewsFlashStore {
       runInAction(() => (this.newsFlashCollection = [...(filtered || [])]));
       runInAction(() => (this.newsFlashLoading = false));
     } else {
-      const queryParams: any = {
+      const queryParams: IFetchNewsQueryParams = {
         offSet: this.newsFlashFetchOffSet
       };
       if (this.newsFlashActiveFilter == "critical") {
