@@ -1,19 +1,13 @@
 import { runInAction, makeAutoObservable } from 'mobx';
 import { SourceFilterEnum } from 'models/SourceFilter';
-import { fetchNews } from 'services/news.data.service';
+import { fetchNews, IFetchNewsQueryParams } from 'services/news.data.service';
 import { INewsFlash } from 'models/NewFlash';
 import { IPoint } from 'models/Point';
 import RootStore from './root.store';
 
-function filterByCritical(newsFlashCollection: Array<INewsFlash>): Array<INewsFlash>  {
-  return newsFlashCollection.filter(news => news.hasOwnProperty("critical") && news.critical);
-}
-
 const DEFAULT_TIME_FILTER = 5;
 const DEFAULT_LOCATION = { latitude: 32.0853, longitude: 34.7818 };
-const LOCAL_FILTERS: { [key in SourceFilterEnum]?: (newsFlashCollection: Array<INewsFlash>) => Array<INewsFlash> } = {
-  [SourceFilterEnum.critical]: filterByCritical
-}
+const LOCAL_FILTERS: { [key in SourceFilterEnum]?: (newsFlashCollection: Array<INewsFlash>) => Array<INewsFlash> } = {};
 
 export default class NewsFlashStore {
   rootStore: RootStore;
@@ -114,7 +108,15 @@ export default class NewsFlashStore {
       runInAction(() => (this.newsFlashCollection = [...(filtered || [])]));
       runInAction(() => (this.newsFlashLoading = false));
     } else {
-      fetchNews(this.newsFlashActiveFilter, this.newsFlashFetchOffSet).then((data: any) => {
+      const queryParams: any = {
+        offSet: this.newsFlashFetchOffSet
+      };
+      if (this.newsFlashActiveFilter == "critical") {
+        queryParams["critical"] = true;
+      } else {
+        queryParams["source"] = this.newsFlashActiveFilter;
+      }
+      fetchNews(queryParams).then((data: any) => {
         runInAction(() => (this.newsFlashLoading = false));
         if (data) {
           runInAction(() => (this.newsFlashCollection = [...this.newsFlashCollection, ...data]));
