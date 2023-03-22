@@ -21,7 +21,8 @@ const useStyles = makeStyles({
     backgroundColor: silverSmokeColor,
   },
 });
-
+//
+<img src="" alt="" />
 const News: FC = () => {
   const store: RootStore = useStore();
   const classes = useStyles();
