@@ -18,13 +18,13 @@ const errorNews: INewsFlash = {
 
 const NEWS_FLASH_API: string = '/api/news-flash';
 export interface IFetchNewsQueryParams {
-  source: string;
-  offSet: number;
-  limit: number;
-  critical: boolean | null;
+  source?: string;
+  offSet?: number;
+  limit?: number;
+  critical?: boolean | null;
 };
 
-export function fetchNews({source = '', offSet = 0, limit = 100, critical = null}: IFetchNewsQueryParams): Promise<any> {
+export function fetchNews({source = '', offSet = 0, limit = 100, critical = null}: IFetchNewsQueryParams = {}): Promise<any> {
   const query = [];
   if (source) {
     query.push(`source=${source}`);
@@ -32,7 +32,7 @@ export function fetchNews({source = '', offSet = 0, limit = 100, critical = null
   if (limit) {
     query.push(`limit=${limit}`);
   }
-  if (critical) {
+  if (critical !== null) {
     query.push(`critical=${critical}`);
   }
   query.push(`offset=${offSet}`);
