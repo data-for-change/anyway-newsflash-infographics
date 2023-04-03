@@ -13,6 +13,7 @@ const errorNews: INewsFlash = {
   link: '',
   description: '',
   display_source: '',
+  newsflash_location_qualification : '',
   location: '',
 };
 
