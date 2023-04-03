@@ -14,4 +14,5 @@ export interface INewsFlash {
   location: string;
   title: string;
   source: string;
+  critical?: boolean;
 }

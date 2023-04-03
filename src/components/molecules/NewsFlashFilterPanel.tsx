@@ -5,6 +5,7 @@ import { silverSmokeColor, oceanBlueColor } from 'style';
 import ynetLogo from 'assets/ynet-website-logo.svg';
 import wallaLogo from 'assets/walla-logo.svg';
 import madaLogo from 'assets/mada-logo.svg';
+import criticalLogo from 'assets/critical.jpg';
 import { AnyWayButton } from 'components/atoms/AnyWayButton';
 import RootStore from 'store/root.store';
 import { useStore } from 'store/storeConfig';
@@ -16,6 +17,7 @@ const useStyles = makeStyles({
   image: {
     maxWidth: '50px',
     maxHeight: '35px',
+    mixBlendMode: "multiply"
   },
   button: {
     height: '50px',
@@ -58,6 +60,9 @@ const NewsFlashFilterPanel: FC<IProps> = () => {
       }
       case SourceFilterEnum.mda: {
         return madaLogo;
+      }
+      case SourceFilterEnum.critical: {
+        return criticalLogo;
       }
     }
   };
