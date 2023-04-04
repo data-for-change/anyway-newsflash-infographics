@@ -63,6 +63,7 @@ const News: FC = () => {
           {newsFlashStore.newsFlashCollection.length > 0 ? (
             newsFlashStore.newsFlashCollection.map((news) => {
               const verification_icon = getVerificationIcon(news.newsflash_location_qualification);
+              const critical_icon = news.critical && <img src={CriticalIcon} className={classes.icon} />;
               const className = news.id === newsFlashStore.activeNewsFlashId ? classes.activeNewsFlash : '';
               const date = news.date == null ? '' : dateFormat(new Date(news.date.replace(/-/g, '/')), locale);
               return (
@@ -71,10 +72,10 @@ const News: FC = () => {
                     <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
                       <p>
                         <Typography.Body5>
-                          {date}, {news.display_source} {verification_icon}
+                          {date}, {news.display_source} {verification_icon}{critical_icon}
+
                         </Typography.Body5>
                       </p>
-                      {news.critical && <img src={CriticalIcon} style={{ height: "30px", width: "30px", mixBlendMode: "multiply" }} />}
                     </Box>
                     <Typography.Body5>{news.title}</Typography.Body5>
                   </Box>
