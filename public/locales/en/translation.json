@@ -112,6 +112,7 @@
     "edit": "edit"
   },
   "sideBar": "Approximate location:",
+  "changeLocationButton": "Change/Approve location",
   "UserProfileHeader": {
     "hello": "Hello",
     "logout": "LOGOUT"

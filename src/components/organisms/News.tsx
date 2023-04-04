@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { Link, Typography } from 'components/atoms';
+import { Link, Typography, Button } from 'components/atoms';
 import { Box, makeStyles } from '@material-ui/core';
-import {cherryJamColor, oceanBlueColor, silverSmokeColor} from 'style';
+import { cherryJamColor, oceanBlueColor, silverSmokeColor } from 'style';
 import { useStore } from 'store/storeConfig';
 import { useParams } from 'react-router-dom';
 import RootStore from 'store/root.store';
@@ -13,6 +13,9 @@ import { IRouteProps } from 'models/Route';
 import { ReactComponent as CheckCircleIcon } from 'assets/check_blue_24dp.svg';
 import { ReactComponent as CancelCircleIcon } from 'assets/cancel_red_24dp.svg';
 import CriticalIcon from 'assets/critical.jpg';
+import { useTranslation } from 'react-i18next';
+
+const ICON_HEIGHT = 18
 
 const enum locationQualificationOptions {
   VERIFIED = "verified",
@@ -29,9 +32,9 @@ const useStyles = makeStyles({
     backgroundColor: silverSmokeColor,
   },
   icon: {
-    height: 18,
+    height: ICON_HEIGHT,
     width: 18,
-  }
+  },
 });
 
 <img src="" alt="" />
@@ -41,6 +44,7 @@ const News: FC = () => {
   const locale = useLocale();
   const { gpsId, street, city } = useParams<IRouteProps>();
   const { newsFlashStore, settingsStore } = store;
+  const { t } = useTranslation();
 
   function getVerificationIcon(verificationText: string) {
     if (verificationText === locationQualificationOptions.REJECTED) {
@@ -54,6 +58,10 @@ const News: FC = () => {
     }
   }
 
+  const handleClick = () => {
+    // TODO
+  };
+
   return (
     <Box flexGrow={1} display="flex" flexDirection="column" className={classes.newsFeed}>
       <Box flexGrow={1}>
@@ -62,8 +70,11 @@ const News: FC = () => {
           {street && city && <LocationSearchIndicator searchType={'cityAndStreet'} />}
           {newsFlashStore.newsFlashCollection.length > 0 ? (
             newsFlashStore.newsFlashCollection.map((news) => {
-              const verification_icon = getVerificationIcon(news.newsflash_location_qualification);
-              const critical_icon = news.critical && <img src={CriticalIcon} className={classes.icon} />;
+              const verificationIcon = getVerificationIcon(news.newsflash_location_qualification);
+              const criticalIcon = news.critical && <img src={CriticalIcon} className={classes.icon} />;
+              const locationChangeButton = <Button.Small onClick={handleClick} buttonHeight={ICON_HEIGHT}>
+                  {t('changeLocationButton')}
+                </Button.Small>
               const className = news.id === newsFlashStore.activeNewsFlashId ? classes.activeNewsFlash : '';
               const date = news.date == null ? '' : dateFormat(new Date(news.date.replace(/-/g, '/')), locale);
               return (
@@ -72,10 +83,10 @@ const News: FC = () => {
                     <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
                       <p>
                         <Typography.Body5>
-                          {date}, {news.display_source} {verification_icon}{critical_icon}
-
+                          {date}, {news.display_source} {verificationIcon}{criticalIcon}
                         </Typography.Body5>
                       </p>
+                      {locationChangeButton}
                     </Box>
                     <Typography.Body5>{news.title}</Typography.Body5>
                   </Box>

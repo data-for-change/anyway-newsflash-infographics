@@ -115,6 +115,7 @@
     "management": "ניהול"
   },
   "sideBar": "מיקום משוער:",
+  "changeLocationButton": "שינוי/אישור מיקום",
   "UserProfileHeader": {
     "hallo": "שלום",
     "logout": "התנתקות"
