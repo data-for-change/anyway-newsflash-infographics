@@ -12,7 +12,7 @@ import LocationSearchIndicator from 'components/molecules/LocationSearchIndicato
 import { IRouteProps } from 'models/Route';
 import { ReactComponent as CheckCircleIcon } from 'assets/check_blue_24dp.svg';
 import { ReactComponent as CancelCircleIcon } from 'assets/cancel_red_24dp.svg';
-import CriticalIcon from 'assets/critical.jpg';
+import CriticalIcon from 'assets/critical.gif';
 import { useTranslation } from 'react-i18next';
 
 const ICON_HEIGHT = 18
