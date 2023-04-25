@@ -1,6 +1,21 @@
 import { BarDataMap, BAR_CHART_X_LABEL } from 'components/molecules/GenericBarChart';
 import { LabelsMap, MultiSeriesDataItems, SeriesDataItem } from 'models/MultiSeriesData';
+import {IWidgetMultiBarData} from "../models/WidgetData";
 const getTranslatedLabel = (key: string, labelsMap: LabelsMap): string => labelsMap[key] || key;
+
+export const NUM_OF_BARS = 3
+
+export const barsWidgetsLabels: Record<string, Array<string>> = {
+  'accident_count_by_accident_year':
+    ['textView.fatal.plural', 'textView.severe.plural', 'textView.light.plural'],
+  'injured_count_by_accident_year':
+    ['textView.killed.plural', 'textView.severeInjured.plural', 'textView.lightInjured.plural'],
+}
+
+export const barsWidgetsTitle: Record<string, string> = {
+  'accident_count_by_accident_year': 'cardEditor.showAccidents',
+  'injured_count_by_accident_year': 'cardEditor.showInjured',
+}
 
 // convert input to data series, for example:
 // [
@@ -24,6 +39,7 @@ const getTranslatedLabel = (key: string, labelsMap: LabelsMap): string => labels
 export function convertToBarSeries(
   items: SeriesDataItem[] | MultiSeriesDataItems[],
   labelsMap?: LabelsMap | string,
+  excludeList: any = [],
 ): BarDataMap[] {
   return items.map((item: any) => {
     const label: string = item.label_key.toString();
@@ -45,13 +61,32 @@ export function convertToBarSeries(
       result['value'] = item.value;
     } else {
       // multi values per (stacked) bar return type is like: { xLabel: 'year 2017', light: 55, severe: 5 }
-      const series = item.series;
-      series.forEach((dataPoint: any) => {
-        const { label_key, value } = dataPoint;
+      const series : SeriesDataItem[] = item.series;
+      series.filter((dataPoint: SeriesDataItem) => !excludeList.includes(dataPoint.label_key)).forEach(({ label_key,value }) =>{
         const yLabel = getTranslatedLabel(label_key, labelsMap as LabelsMap);
         result[yLabel] = Math.round(value);
-      });
+      }) ;
     }
     return result;
   });
+}
+
+export function createBarWidget (
+  data: IWidgetMultiBarData,
+  editorBarOptions: Record<number, boolean>
+): BarDataMap[] {
+  const { items, text } = data;
+  const excludeList = (Object.keys(editorBarOptions).length !== 0) ?
+    Object.values(editorBarOptions).map((include: any, index: number) => {
+      if (include) {
+        return null;
+      } else {
+        return items[0].series[index].label_key;
+      }
+    }) : []
+  return convertToBarSeries(items, text.labels_map, excludeList);
+}
+
+export function initEditorBarOptions () {
+  return Object.fromEntries(Array.from({length: NUM_OF_BARS}, (_, i) => [i, true]));
 }

@@ -48,7 +48,8 @@
     "on": "ב",
     "onSegment": "במקטע",
     "occurred": "התרחשו",
-    "hurt": "נהרגו ונפצעו",
+    "killedAndHurt": "נהרגו ונפצעו",
+    "hurt": "נפצעו",
     "accidents": "תאונות",
     "injured": "נפגעים",
     "fatal": {
@@ -87,6 +88,8 @@
     "display": "הצג",
     "landscape": "לרוחב",
     "portrait": "לאורך",
+    "showAccidents": "הצגת תאונות",
+    "showInjured": "הצגת נפגעים",
     "size": "גודל",
     "download": "הורד כתמונה"
   },

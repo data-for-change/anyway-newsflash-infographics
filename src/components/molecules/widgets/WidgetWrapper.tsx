@@ -1,3 +1,4 @@
+/* eslint-disable max-lines*/
 import React, { FC } from 'react';
 import {
   IWidgetAccidentCountByRoadLight,
@@ -37,16 +38,18 @@ import InjuredAccidentsWithPedestrians from './InjuredAccidentsWithPedestrians';
 import { IPoint } from 'models/Point';
 import { WidgetName } from 'models/WidgetName';
 import KilledAndInjuredCountPerAgeGroupWidget from './KilledAndInjuredCountPerAgeGroupWidget';
+import { getInjuredBySeverityVerbLabel } from 'utils/text.utils';
 
 interface IProps {
   widget: IWidgetBase;
   locationText: string;
   sizeOptions: any;
+  editorBarOptions: Record<number, boolean>;
   segmentText: string;
   isStreet: boolean;
 }
 
-const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentText, isStreet }) => {
+const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, editorBarOptions, segmentText, isStreet }) => {
   const { name, data } = widget;
   let widgetComponent;
   switch (name) {
@@ -117,7 +120,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
             severe: 'severeInjured',
             light: 'lightInjured',
             noun: 'injured',
-            verb: 'hurt',
+            verb: getInjuredBySeverityVerbLabel(data as IWidgetInjuredBySeverityTextData),
           }}
           isStreet={isStreet}
           largeNumbers={true}
@@ -136,11 +139,11 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, segmentT
       break;
     }
     case WidgetName.accident_count_by_accident_year: {
-      widgetComponent = <CountByYearBarWidget data={data as IWidgetMultiBarData} />;
+      widgetComponent = <CountByYearBarWidget data={data as IWidgetMultiBarData} editorBarOptions={editorBarOptions} />;
       break;
     }
     case WidgetName.injured_count_by_accident_year: {
-      widgetComponent = <CountInjuredByYearBarWidget data={data as IWidgetMultiBarData} />;
+      widgetComponent = <CountInjuredByYearBarWidget data={data as IWidgetMultiBarData} editorBarOptions={editorBarOptions} />;
       break;
     }
     case WidgetName.accident_count_by_day_night: {

@@ -11,7 +11,7 @@ import {
   updateUserOrganization,
 } from 'services/user.service';
 import { IUserInfo } from 'models/user/IUserInfo';
-import { ROLE_ADMIN_NAME } from 'utils/utils';
+import { ROLE_ADMIN_NAME } from 'const/generalConst';
 import { IFormInput } from 'components/molecules/UserUpdateForm';
 
 export default class UserStore {

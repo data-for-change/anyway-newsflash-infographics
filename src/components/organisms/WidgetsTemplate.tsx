@@ -27,6 +27,7 @@ const WidgetsTemplate: FC = () => {
         locationText={widgetsStore.newsFlashWidgetsMetaLocation}
         segmentText={widgetsStore.newsFlashWidgetsMetaSegmentName}
         sizeOptions={sizeOptions}
+        editorBarOptions={{}}
         isStreet={widgetsStore.isStreet}
       />
     );

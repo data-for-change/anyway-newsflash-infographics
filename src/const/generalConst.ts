@@ -1,24 +1,4 @@
-﻿import { IPoint } from 'models/Point';
-import { useLocation } from 'react-router';
-
-export function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
-export function uniquePoints(points: IPoint[]) {
-  const uniquePoints = new Array<IPoint>();
-  const uniqueSet = new Set();
-  // fill only unique points (not yet included in uniqueSet)
-  points.forEach((p) => {
-    const pointKey = `${p.latitude}:${p.longitude}`; // use x:y to create unique key
-    if (!uniqueSet.has(pointKey)) {
-      uniquePoints.push(p);
-      uniqueSet.add(pointKey);
-    }
-  });
-
-  return uniquePoints;
-}
-// pop up login window dimensions
+﻿// pop up login window dimensions
 
 export const loginPopUpDim = {
   width: window.screen.width / 3.5,

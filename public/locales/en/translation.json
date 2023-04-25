@@ -49,6 +49,9 @@
     "onSegment": "Road segment",
     "occurred": "occurred",
     "accidents": "accidents",
+    "killedAndHurt": "killed and hurt",
+    "hurt": "hurt",
+    "injured" : "casualties",
     "fatal": {
       "singular": "fatal",
       "plural": "fatal"
@@ -73,6 +76,8 @@
     "display": "Display",
     "landscape": "Portrait",
     "portrait": "Landscape",
+    "showAccidents": "Show Accidents",
+    "showInjured": "Show Injured",
     "size": "Size",
     "download": "Download as PNG"
   },
@@ -108,7 +113,7 @@
   },
   "sideBar": "Approximate location:",
   "UserProfileHeader": {
-    "hallo": "Hallo",
+    "hello": "Hello",
     "logout": "LOGOUT"
   },
   "widgets": {
