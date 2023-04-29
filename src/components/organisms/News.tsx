@@ -12,7 +12,7 @@ import LocationSearchIndicator from 'components/molecules/LocationSearchIndicato
 import { IRouteProps } from 'models/Route';
 import { ReactComponent as CheckCircleIcon } from 'assets/check_blue_24dp.svg';
 import { ReactComponent as CancelCircleIcon } from 'assets/cancel_red_24dp.svg';
-import CriticalIcon from 'assets/critical.gif';
+import { ReactComponent as CriticalIcon } from 'assets/critical.svg';
 import { useTranslation } from 'react-i18next';
 
 const ICON_HEIGHT = 18
@@ -71,7 +71,7 @@ const News: FC = () => {
           {newsFlashStore.newsFlashCollection.length > 0 ? (
             newsFlashStore.newsFlashCollection.map((news) => {
               const verificationIcon = getVerificationIcon(news.newsflash_location_qualification);
-              const criticalIcon = news.critical && <img src={CriticalIcon} className={classes.icon} />;
+              const criticalIcon = news.critical && <CriticalIcon className={classes.icon} />;
               const locationChangeButton = <Button.Small onClick={handleClick} buttonHeight={ICON_HEIGHT}>
                   {t('changeLocationButton')}
                 </Button.Small>

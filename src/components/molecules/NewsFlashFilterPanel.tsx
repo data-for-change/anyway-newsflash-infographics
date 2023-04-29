@@ -5,7 +5,7 @@ import { silverSmokeColor, oceanBlueColor } from 'style';
 import ynetLogo from 'assets/ynet-website-logo.svg';
 import wallaLogo from 'assets/walla-logo.svg';
 import madaLogo from 'assets/mada-logo.svg';
-import criticalLogo from 'assets/critical.jpg';
+import criticalLogo from 'assets/critical.svg';
 import { AnyWayButton } from 'components/atoms/AnyWayButton';
 import RootStore from 'store/root.store';
 import { useStore } from 'store/storeConfig';
