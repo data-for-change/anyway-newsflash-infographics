@@ -81,6 +81,16 @@
     "size": "Size",
     "download": "Download as PNG"
   },
+  "LocationApprove": {
+    "title": "Change/Approve location",
+    "newsFlash": "News flash",
+    "accident": "Location of accident",
+    "changeAllowed": "changeable",
+    "updater": "User updating",
+    "status": "Status",
+    "pleaseMark": "please choose",
+    "segment": "Segment"
+  },
   "labelPosition": "Label Position",
   "table": {
     "labels": ["Date", "Hour", "Type", "Killed", "Severe", "Light"]

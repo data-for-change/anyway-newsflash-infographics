@@ -93,6 +93,16 @@
     "size": "גודל",
     "download": "הורד כתמונה"
   },
+  "LocationApprove": {
+    "title": "שינוי/אישור מיקום",
+    "newsFlash": "המבזק",
+    "accident": "מיקום התאונה",
+    "changeAllowed": "ניתן לשנות מיקום",
+    "updater": "הגורם המעדכן",
+    "status": "סטטוס",
+    "pleaseMark": "נא לסמן",
+    "segment": "המקטע"
+  },
   "labelPosition": "מיקום תווית",
   "table": {
     "labels": [
