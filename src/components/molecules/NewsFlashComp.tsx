@@ -11,11 +11,11 @@ import { ReactComponent as CancelCircleIcon } from 'assets/cancel_red_24dp.svg';
 import { ReactComponent as CriticalIcon } from 'assets/critical.svg';
 import { useTranslation } from 'react-i18next';
 import LocationApprove from 'components/organisms/LocationApproveWindow';
-import {INewsFlash} from 'models/NewFlash';
+import { INewsFlash } from 'models/NewFlash';
 
 const ICON_HEIGHT = 18
 
-const enum locationQualificationOptions {
+enum locationQualificationOptions {
   VERIFIED = "verified",
   NOT_VERIFIED = "not verified",
   REJECTED = "rejected",
@@ -40,8 +40,9 @@ const NewsFlashComp: FC<IProps> = ({ news }) => {
   const store: RootStore = useStore();
   const classes = useStyles();
   const locale = useLocale();
-  const { newsFlashStore, settingsStore } = store;
+  const { userStore, newsFlashStore, settingsStore } = store;
   const { t } = useTranslation();
+  const userAllowedChange = userStore.isUserAuthenticated && userStore.isAdmin;
 
   function getVerificationIcon(verificationText: string) {
     if (verificationText === locationQualificationOptions.REJECTED) {
@@ -62,9 +63,10 @@ const NewsFlashComp: FC<IProps> = ({ news }) => {
   const date = news.date == null ? '' : dateFormat(new Date(news.date.replace(/-/g, '/')), locale);
   const handleLocationEditorOpen = () => setOpen(true);
   const handleLocationEditorClose = () => setOpen(false);
-  const locationChangeButton = <Button.Small onClick={handleLocationEditorOpen} buttonHeight={ICON_HEIGHT}>
-    {t('changeLocationButton')}
-  </Button.Small>
+  const locationChangeButton = userAllowedChange &&
+    <Button.Small onClick={handleLocationEditorOpen} buttonHeight={ICON_HEIGHT}>
+      {t('changeLocationButton')}
+    </Button.Small>
   return (
     <Link key={news.id} to={`${settingsStore.currentLanguageRouteString}/newsflash/${news.id}`}>
       <Box border={1} borderColor={silverSmokeColor} p={1} className={className}>

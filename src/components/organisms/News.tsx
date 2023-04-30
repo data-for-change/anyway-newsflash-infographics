@@ -8,7 +8,6 @@ import { observer } from 'mobx-react-lite';
 import LocationSearchIndicator from 'components/molecules/LocationSearchIndicator';
 import { IRouteProps } from 'models/Route';
 import NewsFlashComp from "components/molecules/NewsFlashComp";
-import LocationApprove from "./LocationApproveWindow";
 
 
 const useStyles = makeStyles({
