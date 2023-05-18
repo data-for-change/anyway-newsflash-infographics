@@ -101,7 +101,11 @@
     "updater": "הגורם המעדכן",
     "status": "סטטוס",
     "pleaseMark": "נא לסמן",
-    "segment": "המקטע"
+    "verifyLocation": "זיהוי מקטע ודאי",
+    "rejectLocation": "מקטע לא זוהה נכון",
+    "segment": "המקטע",
+    "approveButton": "אישור",
+    "cancelButton": "ביטול"
   },
   "labelPosition": "מיקום תווית",
   "table": {

@@ -89,7 +89,11 @@
     "updater": "User updating",
     "status": "Status",
     "pleaseMark": "please choose",
-    "segment": "Segment"
+    "verifyLocation": "Approve segment",
+    "rejectLocation": "Reject segment",
+    "segment": "Segment",
+    "approveButton": "Approve",
+    "cancelButton": "Cancel"
   },
   "labelPosition": "Label Position",
   "table": {
