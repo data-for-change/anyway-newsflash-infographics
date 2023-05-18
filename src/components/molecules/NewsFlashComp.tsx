@@ -15,7 +15,7 @@ import { INewsFlash } from 'models/NewFlash';
 
 const ICON_HEIGHT = 18
 
-enum locationQualificationOptions {
+export enum locationQualificationOptions {
   VERIFIED = "verified",
   NOT_VERIFIED = "not verified",
   REJECTED = "rejected",
