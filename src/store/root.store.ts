@@ -92,4 +92,15 @@ export default class RootStore {
       });
     });
   }
+
+  setNewsFleshInfo(newsId: number, newLocationQualification: any) {
+    runInAction(() => {
+      const news = this.newsFlashStore.newsFlashCollection.find((element) => {
+        return element.id === newsId;
+      })
+      if (news) {
+        news.newsflash_location_qualification = newLocationQualification;
+      }
+    });
+  }
 }

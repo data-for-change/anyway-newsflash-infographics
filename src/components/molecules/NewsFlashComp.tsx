@@ -17,8 +17,9 @@ const ICON_HEIGHT = 18
 
 export enum locationQualificationOptions {
   VERIFIED = "verified",
-  NOT_VERIFIED = "not verified",
+  NOT_VERIFIED = "not_verified",
   REJECTED = "rejected",
+  MANUAL = "manual",
 }
 
 interface IProps {

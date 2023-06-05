@@ -61,9 +61,9 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
     news.location_qualifying_user = userStore.userInfo;
     if (shouldApprove) {
       // Save location changes
-      news.newsflash_location_qualification = locationQualificationOptions.VERIFIED;
+      store.setNewsFleshInfo(news.id, locationQualificationOptions.VERIFIED);
     } else {
-      news.newsflash_location_qualification = locationQualificationOptions.REJECTED;
+      store.setNewsFleshInfo(news.id, locationQualificationOptions.REJECTED);
     }
     onClose();
   }
@@ -82,15 +82,10 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
   const checkedRejectIcon = <CancelCircleIcon fill={roseColor} className={classes.icon} />
   const uncheckedRejectIcon = <CancelCircleIcon fill={silverGrayColor} className={classes.icon} />
 
-  const onLocationChange = (location: IPoint) => null;
-  // const onLocationChange = useCallback(
-  //   (location: IPoint) => {
-  //     store.fetchGpsLocation(location);
-  //     setLocation(news.location);
-  //   },
-  //   [store],
-  // );
-  onLocationChange({longitude: news.lon, latitude: news.lat})
+  const onLocationChange = (location: IPoint) => {
+    setLocation(location.latitude.toString());
+  };
+  const newsInitialLocation: IPoint = {longitude: news.lon, latitude: news.lat};
 
   return (
     <DialogWithHeader fullWidth={false} isShowing={isOpen} onClose={onClose} title={t('LocationApprove.title')}>
@@ -115,7 +110,7 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
              <Typography.Body3 bold>{t('LocationApprove.accident')}:</Typography.Body3>
              <Typography.Body3> ({t('LocationApprove.changeAllowed')})</Typography.Body3>
              <Box display="contents">
-               <LocationSelect onLocationChange={onLocationChange} />
+               <LocationSelect onLocationChange={onLocationChange} initialLocation={newsInitialLocation} />
              </Box>
            </Box>
            <Box>
