@@ -9,10 +9,16 @@ import { useStore } from "store/storeConfig";
 import {ReactComponent as CheckCircleIcon} from 'assets/check_blue_24dp.svg';
 import {ReactComponent as CancelCircleIcon} from 'assets/cancel_red_24dp.svg';
 import {IPoint} from "models/Point";
-import {locationQualificationOptions} from '../molecules/NewsFlashComp';
 import LocationSelect from "../molecules/LocationSelect";
 
 const APPROVE = "approve";
+
+export enum locationQualificationOptions {
+  VERIFIED = "verified",
+  NOT_VERIFIED = "not_verified",
+  REJECTED = "rejected",
+  MANUAL = "manual",
+}
 
 interface IProps {
   isOpen: boolean;
@@ -52,18 +58,20 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
   const store = useStore();
   const { userStore } = store;
   const [shouldApprove, setApproveStatus] = useState(true);
+  const [locationChanged, setLocationChanged] = useState(false);
   const [location, setLocation] = useState(news.location);
   const userInfo = userStore.userInfo && userStore.userInfo.data &&
                    userStore.userInfo.data.firstName ?
     userStore.userInfo.data.firstName.concat(userStore.userInfo.data.lastName) : null;
 
   function handleApproveButton () {
-    news.location_qualifying_user = userStore.userInfo;
-    if (shouldApprove) {
+    if (shouldApprove && locationChanged) {
       // Save location changes
-      store.setNewsFleshInfo(news.id, locationQualificationOptions.VERIFIED);
+      store.setNewsFleshInfo(news.id, locationQualificationOptions.MANUAL, userStore.userInfo);
+    } else if (shouldApprove) {
+      store.setNewsFleshInfo(news.id, locationQualificationOptions.VERIFIED, userStore.userInfo);
     } else {
-      store.setNewsFleshInfo(news.id, locationQualificationOptions.REJECTED);
+      store.setNewsFleshInfo(news.id, locationQualificationOptions.REJECTED, userStore.userInfo);
     }
     onClose();
   }
@@ -83,8 +91,17 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
   const uncheckedRejectIcon = <CancelCircleIcon fill={silverGrayColor} className={classes.icon} />
 
   const onLocationChange = (location: IPoint) => {
+    setLocationChanged(true);
     setLocation(location.latitude.toString());
-  };
+
+    // store.fetchGpsLocation(location).then(response => {
+    //   // if (response) {
+    //     console.log("##########");
+    //     console.log(response);
+    //     console.log("##########");
+    //   // }
+    // });
+  }
   const newsInitialLocation: IPoint = {longitude: news.lon, latitude: news.lat};
 
   return (

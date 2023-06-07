@@ -11,16 +11,10 @@ import { ReactComponent as CancelCircleIcon } from 'assets/cancel_red_24dp.svg';
 import { ReactComponent as CriticalIcon } from 'assets/critical.svg';
 import { useTranslation } from 'react-i18next';
 import LocationApprove from 'components/organisms/LocationApproveWindow';
+import {locationQualificationOptions} from 'components/organisms/LocationApproveWindow';
 import { INewsFlash } from 'models/NewFlash';
 
 const ICON_HEIGHT = 18
-
-export enum locationQualificationOptions {
-  VERIFIED = "verified",
-  NOT_VERIFIED = "not_verified",
-  REJECTED = "rejected",
-  MANUAL = "manual",
-}
 
 interface IProps {
   news: INewsFlash;
@@ -49,7 +43,8 @@ const NewsFlashComp: FC<IProps> = ({ news }) => {
   function getVerificationIcon(verificationText: string) {
     if (verificationText === locationQualificationOptions.REJECTED) {
       return <CancelCircleIcon fill={cherryJamColor} className={classes.icon} />
-    } else if (verificationText === locationQualificationOptions.VERIFIED) {
+    } else if (verificationText === locationQualificationOptions.VERIFIED ||
+                verificationText === locationQualificationOptions.MANUAL) {
       return <CheckCircleIcon fill={oceanBlueColor} className={classes.icon}/>
     } else if (verificationText === locationQualificationOptions.NOT_VERIFIED) {
       return
