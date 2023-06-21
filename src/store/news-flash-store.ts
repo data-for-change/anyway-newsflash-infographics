@@ -111,7 +111,7 @@ export default class NewsFlashStore {
       const queryParams: IFetchNewsQueryParams = {
         offSet: this.newsFlashFetchOffSet
       };
-      if (this.newsFlashActiveFilter == "critical") {
+      if (this.newsFlashActiveFilter === "critical") {
         queryParams["critical"] = true;
       } else {
         queryParams["source"] = this.newsFlashActiveFilter;
