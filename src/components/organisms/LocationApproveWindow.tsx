@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useCallback, useState} from 'react';
 import DialogWithHeader from '../molecules/DialogWithHeader';
 import {Box, RadioGroup, Radio, FormControlLabel, FormControl, makeStyles } from '@material-ui/core';
 import { Button, Typography } from 'components/atoms';
@@ -61,7 +61,7 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
   const { userStore } = store;
   const [shouldApprove, setApproveStatus] = useState(true);
   const [locationChanged, setLocationChanged] = useState(false);
-  const [location, setLocation] = useState(news.location);
+  const [locationToDisplay, setLocationToDisplay] = useState(news.location);
   const userInfo = userStore.userInfo && userStore.userInfo.data &&
                    userStore.userInfo.data.firstName ?
     userStore.userInfo.data.firstName.concat(userStore.userInfo.data.lastName) : null;
@@ -75,16 +75,16 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
     } else {
       store.setNewsFleshInfo(news.id, locationQualificationOptions.REJECTED, userStore.userInfo);
     }
-    onClose();
+    onCloseInitValues();
   }
 
-  const handleCloseButton = () => onClose();
+  const handleCloseButton = () => onCloseInitValues();
 
   const handleApproveStatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if ((event.target as HTMLInputElement).value === APPROVE) {
       setApproveStatus(true);
     } else {
-      setLocation(news.location);
+      setLocationToDisplay(news.location);
       setApproveStatus(false);
     }
   };
@@ -93,28 +93,38 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
   const checkedRejectIcon = <CancelCircleIcon fill={roseColor} className={classes.icon} />
   const uncheckedRejectIcon = <CancelCircleIcon fill={silverGrayColor} className={classes.icon} />
 
-  const onMapLocationChange = (location: IPoint) => {
-    setLocationChanged(true);
-    setLocation(location.latitude.toString());
+  const onMapLocationChange = useCallback(
+    (location: IPoint) => {
+      setLocationChanged(true);
+      store.fetchGpsLocation(location);
+      setLocationToDisplay(store.gpsLocationData ? store.gpsLocationData.road_segment_name : "");
+      console.log(store.gpsLocationData);
+      // TODO: Update location
+    },
+    [store],
+  );
 
-    // store.fetchGpsLocation(location).then(response => {
-    //   // if (response) {
-    //     console.log("##########");
-    //     console.log(response);
-    //     console.log("##########");
-    //   // }
-    // });
-  }
-  const newsInitialLocation: IPoint = {longitude: news.lon, latitude: news.lat};
+  const newsGetInitialLocation = useCallback(() => (
+    {longitude: news.lon, latitude: news.lat}),
+    [news.lat, news.lon]
+  );
 
   const onStreetAndCityChoice = (street: IStreetOption, city: ICityOption) => {
     setLocationChanged(true);
-    setLocation(t('mapDialog.street') + " " + street.street_hebrew + " " +
+    setLocationToDisplay(t('mapDialog.street') + " " + street.street_hebrew + " " +
       t('textView.on') + city.yishuv_name);
+    // TODO: Update location
+  }
+
+  const onCloseInitValues = () => {
+    setApproveStatus(true);
+    setLocationChanged(false);
+    setLocationToDisplay(news.location);
+    onClose();
   }
 
   return (
-    <DialogWithHeader fullWidth={false} isShowing={isOpen} onClose={onClose} title={t('LocationApprove.title')}>
+    <DialogWithHeader fullWidth={false} isShowing={isOpen} onClose={onCloseInitValues} title={t('LocationApprove.title')}>
        <Box className={classes.mainWindow} >
          {/*The newsflash*/}
          <Box className={classes.block} >
@@ -140,7 +150,7 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
                <SearchCityAndStreet onStreetAndCityChoice={onStreetAndCityChoice} />
              </Box>
              <Box display="contents" >
-                <LocationSelect onLocationChange={onMapLocationChange} initialLocation={newsInitialLocation} />
+                <LocationSelect onLocationChange={onMapLocationChange} initialLocationGetter={newsGetInitialLocation} />
              </Box>
            </Box>
            <Box width={300} height={350} mt={2}>
@@ -177,7 +187,7 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
                 sx={{ flexWrap: 'wrap', justifyContent: 'space-between'}} >
              <Typography.Body3 bold>{t('LocationApprove.segment')}:</Typography.Body3>
              <Box ml={1} mr={1}>
-               <Typography.Body3>{location}</Typography.Body3>
+               <Typography.Body3>{locationToDisplay}</Typography.Body3>
              </Box>
            </Box>
            {/*Buttons*/}
