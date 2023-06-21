@@ -1,4 +1,4 @@
-import React, {FC, useCallback, useState} from 'react';
+import React, {FC, useState} from 'react';
 import DialogWithHeader from '../molecules/DialogWithHeader';
 import {Box, RadioGroup, Radio, FormControlLabel, FormControl, makeStyles } from '@material-ui/core';
 import { Button, Typography } from 'components/atoms';
@@ -10,6 +10,8 @@ import {ReactComponent as CheckCircleIcon} from 'assets/check_blue_24dp.svg';
 import {ReactComponent as CancelCircleIcon} from 'assets/cancel_red_24dp.svg';
 import {IPoint} from "models/Point";
 import LocationSelect from "../molecules/LocationSelect";
+import SearchCityAndStreet from "../molecules/SearchCityAndStreet";
+import {ICityOption, IStreetOption} from "models/Map";
 
 const APPROVE = "approve";
 
@@ -34,8 +36,8 @@ const useStyles = makeStyles({
   },
   mainWindow: {
     display: "flex",
-    // width: 600,
-    // height: 600,
+    width: 1000,
+    height: 700,
     flexBasis: 200,
     minWidth: 200,
     alignContent: 'space-around',
@@ -82,6 +84,7 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
     if ((event.target as HTMLInputElement).value === APPROVE) {
       setApproveStatus(true);
     } else {
+      setLocation(news.location);
       setApproveStatus(false);
     }
   };
@@ -90,7 +93,7 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
   const checkedRejectIcon = <CancelCircleIcon fill={roseColor} className={classes.icon} />
   const uncheckedRejectIcon = <CancelCircleIcon fill={silverGrayColor} className={classes.icon} />
 
-  const onLocationChange = (location: IPoint) => {
+  const onMapLocationChange = (location: IPoint) => {
     setLocationChanged(true);
     setLocation(location.latitude.toString());
 
@@ -103,6 +106,12 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
     // });
   }
   const newsInitialLocation: IPoint = {longitude: news.lon, latitude: news.lat};
+
+  const onStreetAndCityChoice = (street: IStreetOption, city: ICityOption) => {
+    setLocationChanged(true);
+    setLocation(t('mapDialog.street') + " " + street.street_hebrew + " " +
+      t('textView.on') + city.yishuv_name);
+  }
 
   return (
     <DialogWithHeader fullWidth={false} isShowing={isOpen} onClose={onClose} title={t('LocationApprove.title')}>
@@ -122,15 +131,19 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
          </Box>
          <Box mt={2} display={'flex'}
               sx={{ flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'space-around' }}>
-           {/*Display map to choose location*/}
-           <Box>
+           {/*Display map and search to choose location*/}
+           <Box display={'flex'} width={650} height={"40vh"} sx={{ flexGrow: 1, p: 2, flexWrap: 'wrap', flexDirection: 'col',
+             justifyContent: 'space-around'}}>
              <Typography.Body3 bold>{t('LocationApprove.accident')}:</Typography.Body3>
              <Typography.Body3> ({t('LocationApprove.changeAllowed')})</Typography.Body3>
-             <Box display="contents">
-               <LocationSelect onLocationChange={onLocationChange} initialLocation={newsInitialLocation} />
+             <Box mb={2} className={classes.block}>
+               <SearchCityAndStreet onStreetAndCityChoice={onStreetAndCityChoice} />
+             </Box>
+             <Box display="contents" >
+                <LocationSelect onLocationChange={onMapLocationChange} initialLocation={newsInitialLocation} />
              </Box>
            </Box>
-           <Box>
+           <Box width={300} height={350} mt={2}>
              {/*Display user name */}
              <Box>
                <Typography.Body3 bold>{t('LocationApprove.updater')}:</Typography.Body3>
@@ -157,22 +170,26 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
              </Box>
            </Box>
          </Box>
-         {/*Segment*/}
-         <Box mt={2} className={classes.block} >
-           <Typography.Body3 bold>{t('LocationApprove.segment')}:</Typography.Body3>
-           <Box>
-             <Typography.Body3>{location}</Typography.Body3>
+         <Box mt={12} display={'flex'} height={50}
+              sx={{ flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+           {/*Segment*/}
+           <Box display={'flex'}
+                sx={{ flexWrap: 'wrap', justifyContent: 'space-between'}} >
+             <Typography.Body3 bold>{t('LocationApprove.segment')}:</Typography.Body3>
+             <Box ml={1} mr={1}>
+               <Typography.Body3>{location}</Typography.Body3>
+             </Box>
            </Box>
-         </Box>
-         {/*Buttons*/}
-         <Box mt={2} display={'flex'}
-              sx={{ flexWrap: 'wrap', flexDirection: 'row-reverse' }}>
-           <Box sx={{ ml: 2 }}><Button.Small onClick={handleCloseButton}>
-             {t('LocationApprove.cancelButton')}
-           </Button.Small></Box>
-           <Box sx={{ ml: 2 }}><Button.Small onClick={handleApproveButton}>
-             {t('LocationApprove.approveButton')}
-           </Button.Small></Box>
+           {/*Buttons*/}
+           <Box display={'flex'}
+                sx={{ flexWrap: 'wrap', flexDirection: 'row-reverse' }}>
+             <Box sx={{ ml: 2 }}><Button.Small onClick={handleCloseButton}>
+               {t('LocationApprove.cancelButton')}
+             </Button.Small></Box>
+             <Box sx={{ ml: 2 }}><Button.Small onClick={handleApproveButton}>
+               {t('LocationApprove.approveButton')}
+             </Button.Small></Box>
+           </Box>
          </Box>
        </Box>
      </DialogWithHeader>
