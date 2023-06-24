@@ -1,17 +1,17 @@
 import React, {FC, useCallback, useState} from 'react';
 import DialogWithHeader from '../molecules/DialogWithHeader';
-import {Box, RadioGroup, Radio, FormControlLabel, FormControl, makeStyles } from '@material-ui/core';
+import {Box, makeStyles } from '@material-ui/core';
 import { Button, Typography } from 'components/atoms';
 import { useTranslation } from 'react-i18next';
-import { oceanBlueColor, roseColor, silverGrayColor, silverSmokeColor } from 'style';
+import { silverSmokeColor } from 'style';
 import { INewsFlash } from "models/NewFlash";
 import { useStore } from "store/storeConfig";
-import {ReactComponent as CheckCircleIcon} from 'assets/check_blue_24dp.svg';
-import {ReactComponent as CancelCircleIcon} from 'assets/cancel_red_24dp.svg';
 import {IPoint} from "models/Point";
+import {IStreetData} from "models/WidgetData";
 import LocationSelect from "../molecules/LocationSelect";
 import SearchCityAndStreet from "../molecules/SearchCityAndStreet";
 import {ICityOption, IStreetOption} from "models/Map";
+import ApproveLocationRadioButtons from "../molecules/ApproveLocationRadioButtons";
 
 const APPROVE = "approve";
 
@@ -48,10 +48,6 @@ const useStyles = makeStyles({
     alignContent: 'space-around',
     flexDirection: 'column',
   },
-  icon: {
-    height: 23,
-    width:23,
-  },
 });
 
 const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) => {
@@ -61,6 +57,7 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
   const { userStore } = store;
   const [shouldApprove, setApproveStatus] = useState(true);
   const [locationChanged, setLocationChanged] = useState(false);
+  const [newStreetLoc, setNewStreetLoc] = useState({});
   const [locationToDisplay, setLocationToDisplay] = useState(news.location);
   const userInfo = userStore.userInfo && userStore.userInfo.data &&
                    userStore.userInfo.data.firstName ?
@@ -68,7 +65,11 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
 
   function handleApproveButton () {
     if (shouldApprove && locationChanged) {
-      // Save location changes
+      if (newStreetLoc !== {}) {
+        // TODO: Save street location changes
+      } else {
+        // TODO: Save segment location changes
+      }
       store.setNewsFleshInfo(news.id, locationQualificationOptions.MANUAL, userStore.userInfo);
     } else if (shouldApprove) {
       store.setNewsFleshInfo(news.id, locationQualificationOptions.VERIFIED, userStore.userInfo);
@@ -113,7 +114,7 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
     setLocationChanged(true);
     setLocationToDisplay(t('mapDialog.street') + " " + street.street_hebrew + " " +
       t('textView.on') + city.yishuv_name);
-    // TODO: Update location
+    setNewStreetLoc({street, city});
   }
 
   const onCloseInitValues = () => {
@@ -166,16 +167,8 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
                  <Typography.Body3> ({t('LocationApprove.pleaseMark')})</Typography.Body3>
                </Box>
                <Box>
-                 <FormControl>
-                   <RadioGroup defaultValue={APPROVE} name="location-approve" onChange={handleApproveStatusChange}>
-                     <FormControlLabel value={APPROVE}
-                                       control={<Radio checkedIcon={checkedApproveIcon} icon={uncheckedApproveIcon} />}
-                                       label={t('LocationApprove.verifyLocation')} />
-                     <FormControlLabel value="reject"
-                                       control={<Radio checkedIcon={checkedRejectIcon} icon={uncheckedRejectIcon} />}
-                                       label={t('LocationApprove.rejectLocation')} />
-                   </RadioGroup>
-                 </FormControl>
+                 <ApproveLocationRadioButtons handleApproveStatusChange={handleApproveStatusChange}
+                                              defaultValue={APPROVE} />
                </Box>
              </Box>
            </Box>
