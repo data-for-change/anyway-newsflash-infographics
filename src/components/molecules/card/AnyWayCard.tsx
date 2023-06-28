@@ -37,7 +37,7 @@ interface IProps {
   information?: string;
   organizationData?: OrgLogoData;
   subtitle?: string;
-  BoxText?:string;
+  transcription?:string;
 }
 
 const getSizeFactor = (options: CardSizeOptions | undefined): number => (options?.size ? options.size : DEFAULTE_SIZE);
@@ -79,7 +79,7 @@ const AnyWayCard: FC<IProps> = ({
   information,
   organizationData,
   subtitle,
-  BoxText
+  transcription
 }) => {
   const [element, setElement] = useState({});
   const [isOpen, setOpen] = useState(false);
@@ -107,7 +107,7 @@ const AnyWayCard: FC<IProps> = ({
   switch(widgateOpen){
 
     case 'TextBox':
-      Widget = <TextBox isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} text={BoxText} />
+      Widget = <TextBox isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} text={transcription} />
       break 
     case 'CardEditor':
       Widget = <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} text={title} />
@@ -130,9 +130,10 @@ const AnyWayCard: FC<IProps> = ({
           </Tooltip>
         </Box>
       )}
-       <AnyWayButton className={classes.button} disableRipple={true} onClick={() =>{handleCardEditorOpen('TextBox')}}>
-        <TitleIcon />
-      </AnyWayButton>
+     {transcription?(
+      <AnyWayButton className={classes.button} disableRipple={true} onClick={() =>{handleCardEditorOpen('TextBox')}}>
+      <TitleIcon />
+    </AnyWayButton>):null}  
     </>
   );
 

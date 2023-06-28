@@ -40,7 +40,7 @@ const WidgetsTemplate: FC = () => {
         <AnyWayCard
           organizationData={organizationData}
           information={widget.meta.information}
-          BoxText = {widget.data?.text?.transcription}
+          transcription = {widget.data?.text?.transcription}
           widgetName={widget.name}
           title={widget.data?.text?.title}
           subtitle={widget.data?.text?.subtitle}
