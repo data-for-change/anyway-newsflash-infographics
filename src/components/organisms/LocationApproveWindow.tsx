@@ -7,11 +7,12 @@ import { silverSmokeColor } from 'style';
 import { INewsFlash } from "models/NewFlash";
 import { useStore } from "store/storeConfig";
 import {IPoint} from "models/Point";
-import {IStreetData} from "models/WidgetData";
+import {IGpsData, IStreetData} from "models/WidgetData";
 import LocationSelect from "../molecules/LocationSelect";
 import SearchCityAndStreet from "../molecules/SearchCityAndStreet";
 import {ICityOption, IStreetOption} from "models/Map";
 import ApproveLocationRadioButtons from "../molecules/ApproveLocationRadioButtons";
+import { updateNews } from "services/news.data.service";
 
 const APPROVE = "approve";
 
@@ -57,26 +58,27 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
   const { userStore } = store;
   const [shouldApprove, setApproveStatus] = useState(true);
   const [locationChanged, setLocationChanged] = useState(false);
-  const [newStreetLoc, setNewStreetLoc] = useState({});
+  const [newStreetLoc, setNewStreetLoc] = useState<IStreetData|null>(null);
+  const [newGpsLoc, setNewGpsLoc] = useState<IGpsData|null>(null);
   const [locationToDisplay, setLocationToDisplay] = useState(news.location);
-  const userInfo = userStore.userInfo && userStore.userInfo.data &&
-                   userStore.userInfo.data.firstName ?
+  // Unauthorized user shouldn't be able to open the window in the first place
+  const userInfo = userStore.userInfo && userStore.userInfo.data && userStore.userInfo.data.firstName ?
     userStore.userInfo.data.firstName.concat(userStore.userInfo.data.lastName) : null;
 
   function handleApproveButton () {
     if (shouldApprove && locationChanged) {
-      if (newStreetLoc !== {}) {
-        // TODO: Save street location changes
+      if (newStreetLoc) {
+        updateNews(news.id, locationQualificationOptions.MANUAL, newStreetLoc, null);
       } else {
-        // TODO: Save segment location changes
+        updateNews(news.id, locationQualificationOptions.MANUAL, null, newGpsLoc);
       }
-      store.setNewsFleshInfo(news.id, locationQualificationOptions.MANUAL, userStore.userInfo);
     } else if (shouldApprove) {
-      store.setNewsFleshInfo(news.id, locationQualificationOptions.VERIFIED, userStore.userInfo);
+      updateNews(news.id, locationQualificationOptions.VERIFIED, null, null);
     } else {
-      store.setNewsFleshInfo(news.id, locationQualificationOptions.REJECTED, userStore.userInfo);
+      updateNews(news.id, locationQualificationOptions.REJECTED, null, null);
     }
     onCloseInitValues();
+    window.location.reload();
   }
 
   const handleCloseButton = () => onCloseInitValues();
@@ -89,20 +91,18 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
       setApproveStatus(false);
     }
   };
-  const checkedApproveIcon = <CheckCircleIcon fill={oceanBlueColor} className={classes.icon} />
-  const uncheckedApproveIcon = <CheckCircleIcon fill={silverGrayColor} className={classes.icon} />
-  const checkedRejectIcon = <CancelCircleIcon fill={roseColor} className={classes.icon} />
-  const uncheckedRejectIcon = <CancelCircleIcon fill={silverGrayColor} className={classes.icon} />
 
   const onMapLocationChange = useCallback(
     (location: IPoint) => {
       setLocationChanged(true);
       store.fetchGpsLocation(location);
-      setLocationToDisplay(store.gpsLocationData ? store.gpsLocationData.road_segment_name : "");
-      console.log(store.gpsLocationData);
-      // TODO: Update location
+      if (store.gpsLocationData) {
+        setNewGpsLoc(store.gpsLocationData);
+        setLocationToDisplay(t('mapDialog.road') + " " + store.gpsLocationData.road1 + " - " +
+          store.gpsLocationData.road_segment_name);
+      }
     },
-    [store],
+    [t, store],
   );
 
   const newsGetInitialLocation = useCallback(() => (

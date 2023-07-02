@@ -37,8 +37,7 @@ const NewsFlashComp: FC<IProps> = ({ news }) => {
   const locale = useLocale();
   const { userStore, newsFlashStore, settingsStore } = store;
   const { t } = useTranslation();
-  // const userAllowedChange = userStore.isUserAuthenticated && userStore.isAdmin;
-  const userAllowedChange = true; // TODO: remove his row
+  const userAllowedChange = userStore.isUserAuthenticated && userStore.isAdmin;
 
   function getVerificationIcon(verificationText: string) {
     if (verificationText === locationQualificationOptions.REJECTED) {

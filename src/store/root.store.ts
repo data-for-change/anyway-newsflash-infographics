@@ -11,7 +11,6 @@ import SettingsStore from './settings.store';
 import NewsFlashStore from './news-flash-store';
 import UserStore from './user.store';
 import WidgetsStore from './widgets.store';
-import {IAnywayUserDetails} from "../services/user.service";
 
 // todo: move all map defaults to one place
 
@@ -91,18 +90,6 @@ export default class RootStore {
           }
         });
       });
-    });
-  }
-
-  setNewsFleshInfo(newsId: number, newLocationQualification: any, userInfo: IAnywayUserDetails | null) {
-    runInAction(() => {
-      const news = this.newsFlashStore.newsFlashCollection.find((element) => {
-        return element.id === newsId;
-      })
-      if (news) {
-        news.newsflash_location_qualification = newLocationQualification;
-        news.location_qualifying_user = userInfo;
-      }
     });
   }
 }

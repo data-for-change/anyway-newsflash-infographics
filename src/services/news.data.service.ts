@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { INewsFlash } from 'models/NewFlash';
+import { IGpsData, IStreetData } from "models/WidgetData";
 
 const errorNews: INewsFlash = {
   lat: -1,
@@ -55,4 +56,22 @@ function onErrorFetchNewsFlash() {
   const errorArr: Array<INewsFlash> = new Array<INewsFlash>();
   errorArr.push(errorNews);
   return errorArr;
+}
+
+export function updateNews(newsId: number, newLocationQualification: any,
+                    streetLocation: IStreetData | null, gpsLocation: IGpsData | null) {
+  const data = [];
+  data.push(`newsflash_location_qualification=${newLocationQualification}`)
+  if (gpsLocation) {
+    data.push(`road_segment_name=${gpsLocation.road_segment_name}`)
+    // data.push(`road1=${gpsLocation.road1}`) TODO: uncomment when option added
+  } else if (streetLocation) {
+    data.push(`yishuv_name=${streetLocation.street}`)
+    data.push(`street1_hebrew=${streetLocation.city}`)
+  }
+  const url = `${NEWS_FLASH_API}?${newsId}`;
+  axios
+    .put(url)
+    .then((res) => res.data)
+    .catch(onErrorFetchNewsFlash)
 }
