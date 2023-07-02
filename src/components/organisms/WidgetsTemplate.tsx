@@ -31,15 +31,16 @@ const WidgetsTemplate: FC = () => {
         isStreet={widgetsStore.isStreet}
       />
     );
-    console.log(widget.data?.text?.subtitle);
     if (!widgetComponent) {
       return null;
     }
+        
     return (
       <Box m={2} key={index}>
         <AnyWayCard
           organizationData={organizationData}
           information={widget.meta.information}
+          BoxText = {widget.data?.text?.transcription}
           widgetName={widget.name}
           title={widget.data?.text?.title}
           subtitle={widget.data?.text?.subtitle}

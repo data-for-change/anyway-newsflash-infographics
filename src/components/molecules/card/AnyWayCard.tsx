@@ -2,12 +2,14 @@ import React, { FC, useState } from 'react';
 import { Card, CardContent, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import widgetToImage from 'services/to-image.service';
+// TEXT BOX COMPONENT ADD FEATURE
+import  TextBox from 'components/organisms/TextBox'
 import { AnyWayButton } from 'components/atoms/AnyWayButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
 import SettingsOverscanIcon from '@material-ui/icons/SettingsOverscan';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-
+import TitleIcon from '@material-ui/icons/Title';
 import { fontFamilyString } from 'style';
 import CardHeader from './CardHeader';
 import SocialShare from 'components/atoms/SocialShare';
@@ -35,6 +37,7 @@ interface IProps {
   information?: string;
   organizationData?: OrgLogoData;
   subtitle?: string;
+  BoxText?:string;
 }
 
 const getSizeFactor = (options: CardSizeOptions | undefined): number => (options?.size ? options.size : DEFAULTE_SIZE);
@@ -76,10 +79,17 @@ const AnyWayCard: FC<IProps> = ({
   information,
   organizationData,
   subtitle,
+  BoxText
 }) => {
   const [element, setElement] = useState({});
   const [isOpen, setOpen] = useState(false);
-  const handleCardEditorOpen = () => setOpen(true);
+  const [widgateOpen,SetWidgetOpen] = useState('')
+
+  const handleCardEditorOpen = (name:string) =>{ 
+    SetWidgetOpen(name)
+    setOpen(true)
+  };
+
   const handleCardEditorClose = () => setOpen(false);
   const variant = getWidgetVariant(widgetName);
   const factor = getSizeFactor(sizeOptions);
@@ -91,12 +101,24 @@ const AnyWayCard: FC<IProps> = ({
       widgetToImage(widgetName, element);
     }
   };
+
+  let Widget;
+
+  switch(widgateOpen){
+
+    case 'TextBox':
+      Widget = <TextBox isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} text={BoxText} />
+      break 
+    case 'CardEditor':
+      Widget = <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} text={title} />
+  }
+
   const buttons = !actionButtons ? null : (
     <>
       <AnyWayButton className={classes.button} disableRipple={true} onClick={imgDownloadHandler}>
         <GetAppOutlinedIcon />
       </AnyWayButton>
-      <AnyWayButton className={classes.button} disableRipple={true} onClick={handleCardEditorOpen}>
+      <AnyWayButton className={classes.button} disableRipple={true} onClick={() =>{handleCardEditorOpen('CardEditor')}}>
         <SettingsOverscanIcon />
       </AnyWayButton>
       {information && (
@@ -108,6 +130,9 @@ const AnyWayCard: FC<IProps> = ({
           </Tooltip>
         </Box>
       )}
+       <AnyWayButton className={classes.button} disableRipple={true} onClick={() =>{handleCardEditorOpen('TextBox')}}>
+        <TitleIcon />
+      </AnyWayButton>
     </>
   );
 
@@ -152,7 +177,7 @@ const AnyWayCard: FC<IProps> = ({
               />
             </Box>
           )}
-          <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} text={title} />
+          {Widget}
         </Box>
       </Card>
       <Box display="flex" justifyContent="space-between">

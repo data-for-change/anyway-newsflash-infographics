@@ -122,6 +122,9 @@
   "filterPanel": {
     "all": "הכל"
   },
+  "infografic" :{
+    "transaction":"תמלול אינפוגרפיקה"
+  },
   "header": {
     "Search": "חיפוש",
     "User Greeting": "שלום",
