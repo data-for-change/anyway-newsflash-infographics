@@ -23,7 +23,8 @@ export const REMOVE_USER_FROM_ORG_URL = `${authServerUrl}/user/remove_user_from_
 AUTH_LOGIN_GOOGLE_URL.searchParams.append('redirect_url', `${window.location.origin}${REDIRECT_ROUTE!}`);
 
 //function return api key depends on the env it running on
-export const mapApiKey = process.env.REACT_APP_GOOGLE_MAP_KEY ? process.env.REACT_APP_GOOGLE_MAP_KEY : '';
+// export const mapApiKey = process.env.REACT_APP_GOOGLE_MAP_KEY ? process.env.REACT_APP_GOOGLE_MAP_KEY : '';
+export const mapApiKey = 'AIzaSyCfluirCgaQ769osh7560kST3Yo0eQIqg8';
 
 export const showDemoCards = process.env.REACT_APP_SHOW_DEMO_CARDS === 'true';
 

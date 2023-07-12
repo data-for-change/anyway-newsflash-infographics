@@ -6,11 +6,12 @@ import Map from './map/Map';
 
 interface ILocation {
   onLocationChange: (location: IPoint) => void;
+  initialLocationGetter: (() => IPoint | null) | null;
 }
 
-const LocationPicker: FC<ILocation> = ({ onLocationChange }) => {
-  // const [position, setPosition] = useState<IPoint | null>(null);
-  const [position, setPosition] = useState<IPoint | null>(null)
+const LocationPicker: FC<ILocation> = ({ onLocationChange, initialLocationGetter }) => {
+  const initialLocation = initialLocationGetter ? initialLocationGetter() : null;
+  const [position, setPosition] = useState<IPoint | null>(initialLocation);
   console.log(position, 'before the click')
 
   useMapEvents( {
@@ -27,12 +28,13 @@ const LocationPicker: FC<ILocation> = ({ onLocationChange }) => {
 
 interface IProps {
   onLocationChange: (location: IPoint) => void;
+  initialLocationGetter?: () => IPoint | null;
 }
 
-const LocationSelect: FC<IProps> = ({ onLocationChange }) => {
+const LocationSelect: FC<IProps> = ({ onLocationChange, initialLocationGetter = null }) => {
   return (
   <Map>
- <LocationPicker  onLocationChange={onLocationChange} />
+ <LocationPicker  onLocationChange={onLocationChange} initialLocationGetter={initialLocationGetter}/>
     </Map>
   );
 };
