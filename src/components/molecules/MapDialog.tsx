@@ -1,14 +1,12 @@
-import { ChangeEvent, FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import { Dialog , Typography } from 'components/atoms';
 import { IPoint } from 'models/Point';
 import { useStore } from 'store/storeConfig';
-import { fetchStreetsByCity } from 'services/getCitiesAndStreets.service';
 import SearchCityAndStreetScreen from 'components/molecules/SearchCityAndStreetScreen';
 import SearchSegmentScreen from 'components/molecules/SearchSegmentScreen';
-import { ICityOption, IStreetOption } from 'models/Map';
 
 interface IProps {
   section?: string;
@@ -70,37 +68,12 @@ const MapDialog: FC<IProps> = ({
   const classes = useStyles();
   const { t } = useTranslation();
   const [searchScreen, setSearchScreen] = useState<'segment' | 'cityAndStreet'>('segment');
-  const [streetsOptions, setStreetsOptions] = useState<Array<IStreetOption>>([]);
-  const [cityValue, setCityValue] = useState<ICityOption>({});
-  const [streetValue, setStreetValue] = useState<IStreetOption>({});
   const store = useStore();
 
   useEffect(() => {
     // api call to get all cities list
     store.fetchCitiesList();
   }, [store]);
-
-  async function setCityGetStreets(event: ChangeEvent<{}>, value?: ICityOption | null) {
-    setStreetsOptions([]);
-    setStreetValue({});
-    if (value) {
-      setCityValue({ yishuv_name: value.yishuv_name, yishuv_symbol: value.yishuv_symbol });
-      const streetsData = await fetchStreetsByCity(value.yishuv_symbol);
-      setStreetsOptions(streetsData);
-    }
-  }
-
-  function setChosenStreet(event: ChangeEvent<{}>, value?:IStreetOption) {
-    if (value) {
-      setStreetValue(value);
-    }
-  }
-
-  function streetCityResultsPage() {
-    setCityValue({});
-    setStreetValue({});
-    onStreetAndCitySearch(cityValue.yishuv_name, streetValue.street_hebrew);
-  }
 
 // the code I deleted should be here...
 // SearchCityAndStreetScreen()
@@ -123,8 +96,7 @@ const MapDialog: FC<IProps> = ({
           </Box>
         </Box>
         {searchScreen === 'segment' && <SearchSegmentScreen onLocationChange={onLocationChange} roadNumber={roadNumber} section={section} onSearch={onSearch} onClose={onClose}/>}
-        {searchScreen === 'cityAndStreet' && <SearchCityAndStreetScreen cityValue={cityValue} setCityGetStreets={setCityGetStreets} setChosenStreet={setChosenStreet}
-        streetsOptions={streetsOptions} streetValue={streetValue} streetCityResultsPage={streetCityResultsPage} onClose={onClose}
+        {searchScreen === 'cityAndStreet' && <SearchCityAndStreetScreen onStreetAndCitySearch={onStreetAndCitySearch} onClose={onClose}
         />}
       </Box>
     </Dialog>
