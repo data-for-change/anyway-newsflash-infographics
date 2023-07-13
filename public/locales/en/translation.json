@@ -81,6 +81,20 @@
     "size": "Size",
     "download": "Download as PNG"
   },
+  "LocationApprove": {
+    "title": "Change/Approve location",
+    "newsFlash": "News flash",
+    "accident": "Location of accident",
+    "changeAllowed": "Can choose location on the map or choose city and ",
+    "updater": "User updating",
+    "status": "Status",
+    "pleaseMark": "please choose",
+    "verifyLocation": "Approve segment",
+    "rejectLocation": "Reject segment",
+    "segment": "Segment",
+    "approveButton": "Approve",
+    "cancelButton": "Cancel"
+  },
   "labelPosition": "Label Position",
   "table": {
     "labels": ["Date", "Hour", "Type", "Killed", "Severe", "Light"]
@@ -112,6 +126,7 @@
     "edit": "edit"
   },
   "sideBar": "Approximate location:",
+  "changeLocationButton": "Change/Approve location",
   "UserProfileHeader": {
     "hello": "Hello",
     "logout": "LOGOUT"

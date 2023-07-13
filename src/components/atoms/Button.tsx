@@ -5,11 +5,19 @@ interface IProps {
   onClick?: () => void;
   isSubmit?: boolean;
   disabled?: boolean;
+  buttonHeight?: number;
 }
 
 // todo: make standard buttons for entire app
 const StandardButton: FC<IProps> = ({ isSubmit = false, onClick, children, disabled = false }) => (
   <MatButton type={isSubmit ? 'submit' : 'button'} variant="contained" color="primary" onClick={onClick} disabled={disabled}>
+    {children}
+  </MatButton>
+);
+
+const SmallButton: FC<IProps> = ({ isSubmit = false, onClick, children, buttonHeight, disabled = false }) => (
+  <MatButton type={isSubmit ? 'submit' : 'button'} variant="contained" size="small"
+             color="primary" onClick={onClick} disabled={disabled} style={{height: buttonHeight}} >
     {children}
   </MatButton>
 );
@@ -33,6 +41,7 @@ const Button = {
   Icon: IconButton,
   Outlined: OutlinedButton,
   Text: TextButton,
+  Small: SmallButton,
 };
 
 export default Button;

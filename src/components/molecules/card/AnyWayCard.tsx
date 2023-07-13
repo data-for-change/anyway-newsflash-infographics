@@ -136,7 +136,6 @@ const AnyWayCard: FC<IProps> = ({
     </AnyWayButton>):null}  
     </>
   );
-
   const refFn = (element: HTMLDivElement) => {
     setElement(element);
     if (getCardRef) {

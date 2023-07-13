@@ -8,7 +8,6 @@ import { useTranslation } from 'react-i18next';
 import { Typography } from 'components/atoms';
 import { transparent } from 'style';
 
-
 interface IProps {
     isOpen: boolean;
     onClose: () => void;
@@ -39,6 +38,7 @@ const TextBox: React.FC<IProps> = ({ isOpen,text,onClose}) => {
               backgroundColor: transparent,
             },
           },
+
         copyImg:{
             height:'70px',
             width:'70px', 
