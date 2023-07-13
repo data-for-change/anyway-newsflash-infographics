@@ -15,7 +15,6 @@ interface IProps {
     text: string | undefined;
 }
 const TextBox: React.FC<IProps> = ({ isOpen,text,onClose}) => {
-
     const useStyles = makeStyles((theme) => ({
         text: {
             position: 'relative', // for meta tags

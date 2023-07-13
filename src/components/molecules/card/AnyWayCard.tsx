@@ -133,7 +133,7 @@ const AnyWayCard: FC<IProps> = ({
      {transcription?(
       <AnyWayButton className={classes.button} disableRipple={true} onClick={() =>{handleCardEditorOpen('TextBox')}}>
       <TitleIcon />
-    </AnyWayButton>):null}  
+    </AnyWayButton>):null}
     </>
   );
   const refFn = (element: HTMLDivElement) => {
