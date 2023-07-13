@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import DialogWithHeader from '../molecules/DialogWithHeader';
 import { AnyWayButton } from 'components/atoms/AnyWayButton';
 import { Box, makeStyles} from '@material-ui/core'
+import CopyImageWhite from 'assets/copyImageWhite.jpeg';
+import CopyImageGrey from 'assets/copyImageGrey.jpeg';
 import { useTranslation } from 'react-i18next';
 import { Typography } from 'components/atoms';
 import { transparent } from 'style';
-
 
 interface IProps {
     isOpen: boolean;
@@ -14,9 +15,6 @@ interface IProps {
     text: string | undefined;
 }
 const TextBox: React.FC<IProps> = ({ isOpen,text,onClose}) => {
-
-    console.log('transaction ',text);
-    
 
     const useStyles = makeStyles((theme) => ({
         text: {
@@ -40,19 +38,33 @@ const TextBox: React.FC<IProps> = ({ isOpen,text,onClose}) => {
               backgroundColor: transparent,
             },
           },
-        img:{
-            height:'100px',
-            width:'100px'
+
+        copyImg:{
+            height:'70px',
+            width:'70px', 
+        },
+        copyMessage:{
+            color:'blue'
         }
-
-
     }));
 
     const { t } = useTranslation();
+
+    const [copyToClickBoard,SetCopyToClickBoard] = useState(false)    
+    const [copyMessage,SetCopyMessage] = useState('')
+
     const onCloseInitValues = () => {
         onClose();
+        SetCopyMessage('')
+        SetCopyToClickBoard(false)
     }
     
+    const copyHandler = () =>{
+        navigator.clipboard.writeText(text?text:'')
+        SetCopyToClickBoard(true)
+        SetCopyMessage('הטקסט העותק ללוח')
+    }
+
     const classes = useStyles();
 
     return (
@@ -64,8 +76,13 @@ const TextBox: React.FC<IProps> = ({ isOpen,text,onClose}) => {
                     </Typography.Body1>
                 </Box>
                 <Box>
-                    <AnyWayButton onClick={() =>{navigator.clipboard.writeText(text?text:'asdsadasd')}} className={classes.button} >
-                        <img className={classes.img} src="https://play-lh.googleusercontent.com/pcns8ys8bh1GJaCc0K2vSMSqJ_1cjWWRECAoXYgFN5fDJxAM5ZBHWuJqFRnMR5NVRlJp" alt="" />
+                    <AnyWayButton onClick={copyHandler} className={classes.button}>
+                        <Box>
+                            <img className={classes.copyImg} src={copyToClickBoard?CopyImageGrey:CopyImageWhite} alt="" />
+                            <Box className={classes.copyMessage}>
+                            <Typography.Body2>{copyMessage}</Typography.Body2>
+                            </Box>
+                        </Box>
                     </AnyWayButton>
                 </Box>
             </Box>
