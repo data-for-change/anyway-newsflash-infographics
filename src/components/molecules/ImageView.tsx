@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { IWidgetVisionZeroImageData } from 'models/WidgetData';
-import visionZeroImage from 'assets/vision_zero_2_plus_1.jpg';
+
+
 import { makeStyles } from '@material-ui/core';
 
 interface IProps {
@@ -16,16 +17,16 @@ const useStyles = makeStyles(() => ({
   image: {
     borderRadius: '10px',
     border: '1px solid gray',
-    maxWidth: '100%',
-    maxHeight: '100%',
+    width: '100%',
+    height: '100%',
   },
 }));
 const ImageView: FC<IProps> = ({ data }) => {
-  // todo: set image based on data
+
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <img src={visionZeroImage} className={classes.image} alt="vision zero 2 plus 1" />
+      <img src={data.items.image_src} className={classes.image} alt="vision zero 2 plus 1" />
     </div>
   );
 };
