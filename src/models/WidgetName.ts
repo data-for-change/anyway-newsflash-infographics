@@ -14,6 +14,7 @@ export enum WidgetName {
   head_on_collisions_comparison_percentage = 'head_on_collisions_comparison_percentage',
   vision_zero_2_plus_1 = 'vision_zero_2_plus_1',
   vision_zero_10_50_90 = 'vision_zero_10_50_90',
+
   top_road_segments_accidents_per_km = 'top_road_segments_accidents_per_km',
   accident_count_by_road_light = 'accident_count_by_road_light',
   accident_count_by_driver_type = 'accident_count_by_driver_type',

@@ -175,8 +175,10 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, editorBa
       widgetComponent = <StaticImageViewWidget data={{items:{image_src:visionZeroImage},text:{}} as IWidgetVisionZeroImageData} />;
       break;
     }
+
     case WidgetName.vision_zero_10_50_90: {
       widgetComponent = <StaticImageViewWidget data={{items:{image_src:vision_zero_10_50_90},text:{}} as IWidgetVisionZeroImageData} />;
+
       break;
     }
 
