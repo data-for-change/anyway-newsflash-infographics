@@ -20,7 +20,7 @@ import {
   IWidgetKilledAndInjuredCountPerAgeGroup,
 } from 'models/WidgetData';
 import visionZeroImage from 'assets/vision_zero_2_plus_1.jpg';
-import vision_10_30_90 from 'assets/vision_10_30_90.png';
+import vision_zero_10_50_90 from 'assets/vision_zero_10_50_90.png';
 import AccidentsCountByHourBarWidget from './AccidentsCountByHourBarWidget';
 import MostSevereAccidentsMapWidget from './MostSevereAccidentsMapWidget';
 import MostSevereAccidentsTableWidget from './MostSevereAccidentsTableWidget';
@@ -175,8 +175,10 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, editorBa
       widgetComponent = <StaticImageViewWidget data={{items:{image_src:visionZeroImage},text:{}} as IWidgetVisionZeroImageData} />;
       break;
     }
-    case WidgetName.vision_zero_10_30_90: {
-      widgetComponent = <StaticImageViewWidget data={{items:{image_src:vision_10_30_90},text:{}} as IWidgetVisionZeroImageData} />;
+
+    case WidgetName.vision_zero_10_50_90: {
+      widgetComponent = <StaticImageViewWidget data={{items:{image_src:vision_zero_10_50_90},text:{}} as IWidgetVisionZeroImageData} />;
+
       break;
     }
 
