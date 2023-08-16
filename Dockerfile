@@ -13,6 +13,7 @@ EXPOSE 3000
 
 
 #start app
+RUN npx browserslist@latest --update-db
 CMD ["npm","start"]
 
 
