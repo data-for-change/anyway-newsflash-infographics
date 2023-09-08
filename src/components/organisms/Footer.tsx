@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import logoHasdna from 'assets/NATUN-LOGO-FINAL-COLOR.png';
+import logoNatun from 'assets/NATUN-LOGO-FINAL-COLOR.png';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import { Typography } from 'components/atoms';
@@ -54,8 +54,8 @@ export const Footer: FC<IProps> = () => {
     <footer className={classes.footer}>
       <Box className={classes.items}>
         <Box pr={1}>
-          <a href="https://www.hasadna.org.il/" target="_blank" rel="noopener noreferrer">
-            <img src={logoHasdna} alt="logo-hasadna" className={classes.logo} />
+          <a href="https://www.paypal.com/paypalme/dataforchange" target="_blank" rel="noopener noreferrer">
+            <img src={logoNatun} alt="logo-natun" className={classes.logo} />
           </a>
         </Box>
         <Box px={2} className={classes.infoItem}>

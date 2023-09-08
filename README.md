@@ -1,6 +1,6 @@
 <img src="./src/assets/anyway.png" alt="ANYWAY" style="width:auto;height:50px;" align="right" />
 
-[![deploy-development](https://github.com/hasadna/anyway-newsflash-infographics/workflows/deploy-development/badge.svg)](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development) [![CI](https://github.com/hasadna/anyway-newsflash-infographics/workflows/CI/badge.svg)](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3ACI)
+[![deploy-development](https://github.com/data-for-change/anyway-newsflash-infographics/workflows/deploy-development/badge.svg)](https://github.com/data-for-change/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development) [![CI](https://github.com/data-for-change/anyway-newsflash-infographics/workflows/CI/badge.svg)](https://github.com/data-for-change/anyway-newsflash-infographics/actions?query=workflow%3ACI)
 
 # ANYWAY: Newsflash InfoGraphics
 
@@ -27,29 +27,29 @@
 
 ## About this project: <a id="about"></a>
 
-Learn more about our [Vision](https://github.com/hasadna/anyway-newsflash-infographics/blob/development/docs/Vision.md)
+Learn more about our [Vision](https://github.com/data-for-change/anyway-newsflash-infographics/blob/development/docs/Vision.md)
 
 ## Want to help? <a id="help"></a>
-* Found a bug? feel free to open file a [bug report](https://github.com/hasadna/anyway-newsflash-infographics/issues/new?assignees=&labels=bug&template=bug-report.md&title=%5BBug%5D). If you're new to github - see our [How To](https://github.com/hasadna/anyway-newsflash-infographics/blob/dev/docs/HowTo.md) step by step tutorial. You can also contact use on email or slack(see below)
+* Found a bug? feel free to open file a [bug report](https://github.com/data-for-change/anyway-newsflash-infographics/issues/new?assignees=&labels=bug&template=bug-report.md&title=%5BBug%5D). If you're new to github - see our [How To](https://github.com/data-for-change/anyway-newsflash-infographics/blob/dev/docs/HowTo.md) step by step tutorial. You can also contact use on email or slack(see below)
 * Want contribute some code, help with our UI or improve documentation? Excellent! Please follow these steps
 
 ### First thing first
 
 - Contact us - email would be great :) anyway@anyway.co.il
 - After we've got your mail, you'll able to join our [Slack Channel](https://app.slack.com/client/T02G85W3A/CLWT1CLDQ). For any issues - contact Yuval or Atalya to get invitation.
-- Optional: install [ZenHub](https://chrome.google.com/webstore/detail/zenhub-for-github/ogcgkffhplmphkaahpmffcafajaocjbd), so you can see our project [board](https://github.com/hasadna/anyway-newsflash-infographics#workspaces/anyway-5e00f3aa79454c5108bf2370/).
+- Optional: install [ZenHub](https://chrome.google.com/webstore/detail/zenhub-for-github/ogcgkffhplmphkaahpmffcafajaocjbd), so you can see our project [board](https://github.com/data-for-change/anyway-newsflash-infographics#workspaces/anyway-5e00f3aa79454c5108bf2370/).
 
 ### Diving in <a id="diving"></a>
 
 - For improving documentation:
-  - see issues marked as [documentation](https://github.com/hasadna/anyway-newsflash-infographics/issues?q=is%3Aopen+is%3Aissue+label%3Adocumentation) and contact Yuval for guidance
+  - see issues marked as [documentation](https://github.com/data-for-change/anyway-newsflash-infographics/issues?q=is%3Aopen+is%3Aissue+label%3Adocumentation) and contact Yuval for guidance
   - This is a [good summary](https://medium.com/@kvosswinkel/coding-like-a-journalist-ee52360a16bc) for things to keep in mind when writing technical docs
 - For feature development, bug fixing etc:
-  - Read the [Technical Overview](https://github.com/hasadna/anyway-newsflash-infographics#technical-overview)
-    and [Project directory structure](https://github.com/hasadna/anyway-newsflash-infographics#project-directory-structure) sections
+  - Read the [Technical Overview](https://github.com/data-for-change/anyway-newsflash-infographics#technical-overview)
+    and [Project directory structure](https://github.com/data-for-change/anyway-newsflash-infographics#project-directory-structure) sections
   - Contact one of the project's leaders, which can help you getting into things easily
-  - Select one of the issues marked as [good first issue](https://github.com/hasadna/anyway-newsflash-infographics/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
-  - Read [Contribution Guidelines](https://github.com/hasadna/anyway-newsflash-infographics#contribution-guidelines) before start working on an issue
+  - Select one of the issues marked as [good first issue](https://github.com/data-for-change/anyway-newsflash-infographics/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22)
+  - Read [Contribution Guidelines](https://github.com/data-for-change/anyway-newsflash-infographics#contribution-guidelines) before start working on an issue
 - If you have any question - feel free to contact Yuval or Atalya from AnyWAY Project
 
 ### Technical Overview for Developers <a id="technical-overview"></a>
@@ -120,7 +120,7 @@ https://github.com/edmund-dev/react-async-loader/blob/master/example/GoogleMap.j
 ### Contribution Guidelines <a id="contribution-guidelines"></a>
 
 ##### Code  Guidelines <a id="code-guidelines"></a>
-Can be found in a separate file. Check them out [here](https://github.com/hasadna/anyway-newsflash-infographics/blob/dev/docs/CodeGuidelines.md)
+Can be found in a separate file. Check them out [here](https://github.com/data-for-change/anyway-newsflash-infographics/blob/dev/docs/CodeGuidelines.md)
 
 ##### Branch naming <a id="branch-naming"></a>
 
@@ -173,7 +173,7 @@ A standard procedure for working on an issue would be to:
 8. After approval, merge your PR
 9. GitHub will automatically delete the branch, after the merge is done. (they can still be restored).
 
-If you never opened a PR on github - see our [How To](https://github.com/hasadna/anyway-newsflash-infographics/blob/dev/docs/HowTo.md) step by step tutorial
+If you never opened a PR on github - see our [How To](https://github.com/data-for-change/anyway-newsflash-infographics/blob/dev/docs/HowTo.md) step by step tutorial
 
 ### Server code <a id="server-code"></a>
 
@@ -181,7 +181,7 @@ We have app server (written in [express](https://expressjs.com/), a node.js-base
 
 - Cache API requests (from the backend data cluster)
 - Provide user management capabilities
-  [Our server repo](https://github.com/hasadna/anyway-newsflash-infographics-backend)
+  [Our server repo](https://github.com/data-for-change/anyway-newsflash-infographics-backend)
 
 ### Server API <a id="server-api"></a>
 
@@ -201,12 +201,12 @@ Each environment has a specific environment file which can be used to override `
 
 We use [github actions](https://github.com/marketplace?type=actions) for the following flows:
 
-1. [on-push CI](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3ACI) - provide per-PR CI testing and a live PR preview (see below)
-1. [deploy-dev](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuous deployment of `dev` branch to Staging Environment - https://anyway-infographics-staging.web.app/
-1. [deploy-master](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuous deployment of master branch to Production Environment:
+1. [on-push CI](https://github.com/data-for-change/anyway-newsflash-infographics/actions?query=workflow%3ACI) - provide per-PR CI testing and a live PR preview (see below)
+1. [deploy-dev](https://github.com/data-for-change/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuous deployment of `dev` branch to Staging Environment - https://anyway-infographics-staging.web.app/
+1. [deploy-master](https://github.com/data-for-change/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuous deployment of master branch to Production Environment:
 * https://anyway-infographics.web.app/
 * https://media.anyway.co.il/
-1. [Deprecated] [deploy-demo](https://github.com/hasadna/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuous deployment of demo branch to Demo Environment - https://anyway-infographics-demo.web.app/
+1. [Deprecated] [deploy-demo](https://github.com/data-for-change/anyway-newsflash-infographics/actions?query=workflow%3Adeploy-development): continuous deployment of demo branch to Demo Environment - https://anyway-infographics-demo.web.app/
 
 Live Preview
 Once you open a PR and all test pass successfully, a temporary live preview site will be created. Use it to see the changes and make sure everything works, before asking for a code review.
