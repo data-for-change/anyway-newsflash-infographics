@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import logoHasdna from 'assets/hasadna.png';
+import logoHasdna from 'assets/NATUN-LOGO-FINAL-COLOR.png';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import { Typography } from 'components/atoms';
