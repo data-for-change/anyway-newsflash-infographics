@@ -34,7 +34,7 @@ export const barsWidgetsTitle: Record<string, string> = {
 //     ]
 //   }
 //  will be converted to: [{ xLabel: 'year 2017', light: 55, severe: 5 }, { xLabel: 'year 2017', light: 50, severe: 3 }]
-// see more info in https://github.com/hasadna/anyway-newsflash-infographics/issues/779
+// see more info in https://github.com/data-for-change/anyway-newsflash-infographics/issues/779
 
 export function convertToBarSeries(
   items: SeriesDataItem[] | MultiSeriesDataItems[],
