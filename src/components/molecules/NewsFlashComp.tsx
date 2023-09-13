@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import LocationApprove from 'components/organisms/LocationApproveWindow';
 import {locationQualificationOptions} from 'components/organisms/LocationApproveWindow';
 import { INewsFlash } from 'models/NewFlash';
+import {useParams} from 'react-router-dom'
 
 const ICON_HEIGHT = 18
 
@@ -35,7 +36,7 @@ const NewsFlashComp: FC<IProps> = ({ news }) => {
   const store: RootStore = useStore();
   const classes = useStyles();
   const locale = useLocale();
-  const { userStore, newsFlashStore, settingsStore } = store;
+  const { userStore, settingsStore } = store;
   const { t } = useTranslation();
   const userAllowedChange = userStore.isUserAuthenticated && userStore.isAdmin;
 
@@ -55,7 +56,11 @@ const NewsFlashComp: FC<IProps> = ({ news }) => {
   const [isOpen, setOpen] = useState(false);
   const verificationIcon = getVerificationIcon(news.newsflash_location_qualification);
   const criticalIcon = news.critical && <CriticalIcon className={classes.icon} />;
-  const className = news.id === newsFlashStore.activeNewsFlashId ? classes.activeNewsFlash : '';
+  const {newsId} = useParams()
+  const newsID = newsId ? parseInt(newsId) : '' 
+  
+  const className = news.id === newsID ? classes.activeNewsFlash : '';
+
   const date = news.date == null ? '' : dateFormat(new Date(news.date.replace(/-/g, '/')), locale);
   const handleLocationEditorOpen = () => setOpen(true);
   const handleLocationEditorClose = () => setOpen(false);
@@ -79,6 +84,7 @@ const NewsFlashComp: FC<IProps> = ({ news }) => {
       <LocationApprove isOpen={isOpen} onClose={handleLocationEditorClose}
                        newFlashTitle={date.concat(", ", news.display_source)} news={news} />
     </Link>
+ 
   );
 }
 
