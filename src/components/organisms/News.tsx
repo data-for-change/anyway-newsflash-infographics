@@ -32,7 +32,7 @@ const News: FC = () => {
           {street && city && <LocationSearchIndicator searchType={'cityAndStreet'} />}
           {newsFlashStore.newsFlashCollection.length > 0 ? (
             newsFlashStore.newsFlashCollection.map((news) =>
-              <NewsFlashComp news={news} />
+              <NewsFlashComp news={news} /> 
             )
           ) : (
             <Box p={1}>
