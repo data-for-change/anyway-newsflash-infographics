@@ -54,11 +54,11 @@ const CardHeader: FC<IProps> = ({ variant, text, road,orgIconPath }) => {
         <Box display="flex" alignItems="center" flex={1}>
           {roadNumberComp}
           <Box display="flex" justifyContent="center" px={2} className={classes.textWrapper}>
-            <Box display="flex" flexDirection="column">
+            <Box display="flex" flexDirection="column" textAlign="center">
               { variant === HeaderVariant.Centered &&
                 <>
                 <Typography.Body1>{headerText?.textLine1}</Typography.Body1>
-                <Typography.Body1>{headerText?.textLine2}</Typography.Body1>
+                <Typography.Body2>{headerText?.textLine2}</Typography.Body2>
                 </>
               }
             </Box>

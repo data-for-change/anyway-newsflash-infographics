@@ -27,7 +27,7 @@ const defaultThemeOptions: ThemeOptions = {
     h1: {
       fontSize: 20,
       fontColor: darkGrey,
-      fontWeight: 400,
+      fontWeight: 900,
     },
     h2: {
       fontSize: 18,
