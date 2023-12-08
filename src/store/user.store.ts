@@ -56,6 +56,10 @@ export default class UserStore {
     return this.userInfo?.data.organizations;
   }
 
+  get isUserAdmin(){
+    return this.isUserAuthenticated && this.isAdmin;
+  }
+
   get usersManagementTableData(): any {
     return this.usersInfoList?.map((user) => ({
       name: `${user.first_name} ${user.last_name}`,
