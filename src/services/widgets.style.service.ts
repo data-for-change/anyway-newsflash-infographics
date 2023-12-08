@@ -37,8 +37,8 @@ const widgetVariants: { [index: string]: CardVariant } = {
     footer: FooterVariant.LogoWithRange,
   },
   [WidgetName.accident_count_by_accident_type]: { header: HeaderVariant.Centered, footer: FooterVariant.Logo },
-  [WidgetName.accident_count_by_accident_year]: { header: HeaderVariant.Logo, footer: FooterVariant.None },
-  [WidgetName.injured_count_by_accident_year]: { header: HeaderVariant.Logo, footer: FooterVariant.None },
+  [WidgetName.accident_count_by_accident_year]: { header: HeaderVariant.Centered, footer: FooterVariant.LogoWithRange },
+  [WidgetName.injured_count_by_accident_year]: { header: HeaderVariant.Centered, footer: FooterVariant.LogoWithRange },
   [WidgetName.accident_count_by_day_night]: { header: HeaderVariant.Centered, footer: FooterVariant.LogoWithRange },
   [WidgetName.head_on_collisions_comparison]: { header: HeaderVariant.Label, footer: FooterVariant.LogoWithRange },
   [WidgetName.head_on_collisions_comparison_percentage]: {
