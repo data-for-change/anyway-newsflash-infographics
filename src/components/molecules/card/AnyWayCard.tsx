@@ -156,7 +156,8 @@ const AnyWayCard: FC<IProps> = ({
               <CardHeader
                 orgIconPath={organizationData?.path}
                 variant={variant.header}
-                text={subtitle ? `${title} ${subtitle}` : title}
+                title={title}
+                subtitle={subtitle}
                 road={roadNumber}
               />
             </Box>
