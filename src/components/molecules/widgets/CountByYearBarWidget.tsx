@@ -11,7 +11,9 @@ interface IProps {
 const CountByYearBarWidget: FC<IProps> = ({ data, editorBarOptions }) => {
   const { text } = data;
   const multiBarSeries = createBarWidget(data, editorBarOptions)
-  return <MultiBarChart isStacked={true} isPercentage={false} data={multiBarSeries} textLabel={text.title}
+  return <MultiBarChart isStacked={true} isPercentage={false} data={multiBarSeries}
+                        textLabel={text.title}
+                        subtitle={text.subtitle}
                         editorBarOptions={editorBarOptions} />;
 };
 export default CountByYearBarWidget;
