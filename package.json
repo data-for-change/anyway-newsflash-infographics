@@ -129,5 +129,6 @@
     "*.{html,css,scss,stylus,js,ts,tsx,json,yml,md}": [
       "prettier --write"
     ]
-  }
+  },
+  "engines": {"node": "18"}
 }
