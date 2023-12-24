@@ -185,6 +185,7 @@ export interface IWidgetMultiBarData extends IWidgetDataBase {
   items: MultiSeriesDataItems[];
   text: {
     title?: string;
+    subtitle?: string;
     labels_map: LabelsMap;
   };
 }
