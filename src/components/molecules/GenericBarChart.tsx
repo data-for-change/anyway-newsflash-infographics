@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { ResponsiveContainer, BarChart, LabelList, XAxis, Bar, Tooltip, Legend } from 'recharts';
 import { roseColor, honeyColor, yellowColor, blackColor, whiteColor } from 'style';
-import { Typography } from 'components/atoms';
 import tinycolor from 'tinycolor2';
 
 const colors = [roseColor, honeyColor, yellowColor];
@@ -54,7 +53,6 @@ const CustomizedLabel = (props: CustomizedLabelProps) => {
 const BarChartContainer: FC<IBarChartBaseProps> = ({ data, textLabel, subtitle, children, isStacked }) => {
   return (
     <>
-      {!subtitle && <Typography.Body3>{textLabel}</Typography.Body3>}
       <ResponsiveContainer>
         <BarChart data={data} margin={{ bottom: 20 }}>
           <XAxis
@@ -66,7 +64,7 @@ const BarChartContainer: FC<IBarChartBaseProps> = ({ data, textLabel, subtitle, 
             style={{ fill: blackColor }}
           />
           <Tooltip />
-          {isStacked && <Legend verticalAlign="top" align="right" iconType="circle" height={35} />}
+          {isStacked && <Legend verticalAlign="bottom" align="right" iconType="circle" height={35} />}
           {children}
         </BarChart>
       </ResponsiveContainer>
