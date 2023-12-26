@@ -48,3 +48,8 @@ svg {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+/* Add left padding for legend icons (for hebrew compatibility) */
+.recharts-legend-item-text {
+  padding-right: 5px;
+}
