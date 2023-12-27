@@ -64,7 +64,7 @@ const BarChartContainer: FC<IBarChartBaseProps> = ({ data, textLabel, subtitle, 
             style={{ fill: blackColor }}
           />
           <Tooltip />
-          {isStacked && <Legend verticalAlign="bottom" align="right" iconType="circle" height={35} />}
+          {isStacked && <Legend verticalAlign="bottom" align="right" iconType="circle" height={5} />}
           {children}
         </BarChart>
       </ResponsiveContainer>
