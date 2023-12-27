@@ -12,7 +12,7 @@ export const operationalCards: WidgetName[] = [
   WidgetName.accidents_heat_map,
   WidgetName.accident_count_by_accident_year,
   WidgetName.injured_count_by_accident_year,
-  WidgetName.accident_count_by_driver_type,
+  // WidgetName.accident_count_by_driver_type,
   WidgetName.accident_count_by_day_night
 ];
 
