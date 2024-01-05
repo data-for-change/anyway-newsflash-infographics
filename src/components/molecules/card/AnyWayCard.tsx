@@ -3,7 +3,7 @@ import { Card, CardContent, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import widgetToImage from 'services/to-image.service';
 // TEXT BOX COMPONENT ADD FEATURE
-import TextBox from 'components/organisms/TextBox'
+import  TextBox from 'components/organisms/TextBox'
 import { AnyWayButton } from 'components/atoms/AnyWayButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import GetAppOutlinedIcon from '@material-ui/icons/GetAppOutlined';
@@ -37,7 +37,7 @@ interface IProps {
   information?: string;
   organizationData?: OrgLogoData;
   subtitle?: string;
-  transcription?: string;
+  transcription?:string;
 }
 
 const getSizeFactor = (options: CardSizeOptions | undefined): number => (options?.size ? options.size : DEFAULTE_SIZE);
@@ -53,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
     height: '100%',
     boxSizing: 'border-box',
     padding: 0,
-
   },
   button: {
     '&:hover': {
@@ -65,7 +64,6 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     lineHeight: '0.75',
     cursor: 'pointer',
-
   },
   tooltip: {
     fontSize: '13px',
@@ -88,9 +86,9 @@ const AnyWayCard: FC<IProps> = ({
 }) => {
   const [element, setElement] = useState({});
   const [isOpen, setOpen] = useState(false);
-  const [widgateOpen, SetWidgetOpen] = useState('')
+  const [widgateOpen,SetWidgetOpen] = useState('')
 
-  const handleCardEditorOpen = (name: string) => {
+  const handleCardEditorOpen = (name:string) => {
     SetWidgetOpen(name)
     setOpen(true)
   };
@@ -110,7 +108,7 @@ const AnyWayCard: FC<IProps> = ({
 
   let Widget;
 
-  switch (widgateOpen) {
+  switch(widgateOpen){
 
     case 'TextBox':
       Widget = <TextBox isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} text={transcription} />
@@ -124,7 +122,7 @@ const AnyWayCard: FC<IProps> = ({
       <AnyWayButton className={classes.button} disableRipple={true} onClick={imgDownloadHandler}>
         <GetAppOutlinedIcon />
       </AnyWayButton>
-      <AnyWayButton className={classes.button} disableRipple={true} onClick={() => { handleCardEditorOpen('CardEditor') }}>
+      <AnyWayButton className={classes.button} disableRipple={true} onClick={() => {handleCardEditorOpen('CardEditor')}}>
         <SettingsOverscanIcon />
       </AnyWayButton>
       {information && (
@@ -136,10 +134,10 @@ const AnyWayCard: FC<IProps> = ({
           </Tooltip>
         </Box>
       )}
-      {transcription ? (
-        <AnyWayButton className={classes.button} disableRipple={true} onClick={() => { handleCardEditorOpen('TextBox') }}>
+      {transcription?(
+        <AnyWayButton className={classes.button} disableRipple={true} onClick={() => {handleCardEditorOpen('TextBox') }}>
           <TitleIcon />
-        </AnyWayButton>) : null}
+        </AnyWayButton>):null}
     </>
   );
   const refFn = (element: HTMLDivElement) => {
