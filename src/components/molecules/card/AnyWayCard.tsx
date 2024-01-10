@@ -65,6 +65,9 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: '0.75',
     cursor: 'pointer',
   },
+  tooltip: {
+    fontSize: '13px',
+  },
 }));
 
 const AnyWayCard: FC<IProps> = ({
@@ -118,22 +121,22 @@ const AnyWayCard: FC<IProps> = ({
       <AnyWayButton className={classes.button} disableRipple={true} onClick={imgDownloadHandler}>
         <GetAppOutlinedIcon />
       </AnyWayButton>
-      <AnyWayButton className={classes.button} disableRipple={true} onClick={() =>{handleCardEditorOpen('CardEditor')}}>
+      <AnyWayButton className={classes.button} disableRipple={true} onClick={() => { handleCardEditorOpen('CardEditor') }}>
         <SettingsOverscanIcon />
       </AnyWayButton>
       {information && (
         <Box className={classes.information}>
-          <Tooltip title={information} placement="top" aria-label="info">
+          <Tooltip title={information} placement="top" aria-label="info" className={classes.tooltip}>
             <span>
               <InfoOutlinedIcon />
             </span>
           </Tooltip>
         </Box>
       )}
-     {transcription?(
-      <AnyWayButton className={classes.button} disableRipple={true} onClick={() =>{handleCardEditorOpen('TextBox')}}>
-      <TitleIcon />
-    </AnyWayButton>):null}
+      {transcription ? (
+        <AnyWayButton className={classes.button} disableRipple={true} onClick={() => { handleCardEditorOpen('TextBox') }}>
+          <TitleIcon />
+        </AnyWayButton>) : null}
     </>
   );
   const refFn = (element: HTMLDivElement) => {
