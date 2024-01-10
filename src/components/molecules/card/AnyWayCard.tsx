@@ -126,7 +126,7 @@ const AnyWayCard: FC<IProps> = ({
       </AnyWayButton>
       {information && (
         <Box className={classes.information}>
-          <Tooltip title={information} placement="top" aria-label="info" className={classes.tooltip}>
+          <Tooltip title={information} placement="top" aria-label="info" classes={{ tooltip: classes.tooltip }}>
             <span>
               <InfoOutlinedIcon />
             </span>
