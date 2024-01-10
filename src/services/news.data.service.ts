@@ -64,14 +64,14 @@ export function updateNews(newsId: number, newLocationQualification: any,
   data.push(`newsflash_location_qualification=${newLocationQualification}`)
   if (gpsLocation) {
     data.push(`road_segment_name=${gpsLocation.road_segment_name}`)
-    // data.push(`road1=${gpsLocation.road1}`) TODO: uncomment when option added
+    data.push(`road1=${gpsLocation.road1}`)
   } else if (streetLocation) {
-    data.push(`yishuv_name=${streetLocation.street}`)
-    data.push(`street1_hebrew=${streetLocation.city}`)
+    data.push(`yishuv_name=${streetLocation.city.yishuv_name}`)
+    data.push(`street1_hebrew=${streetLocation.street.street_hebrew}`)
   }
-  const url = `${NEWS_FLASH_API}?${newsId}`;
+  const url = `${NEWS_FLASH_API}/${newsId}?${data.join('&')}`;
   axios
-    .put(url)
+    .patch(url)
     .then((res) => res.data)
     .catch(onErrorFetchNewsFlash)
 }
