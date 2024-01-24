@@ -59,19 +59,24 @@ function onErrorFetchNewsFlash() {
 }
 
 export function updateNews(newsId: number, newLocationQualification: any,
-                    streetLocation: IStreetData | null, gpsLocation: IGpsData | null) {
-  const data = [];
-  data.push(`newsflash_location_qualification=${newLocationQualification}`)
+                           streetLocation: IStreetData | null, gpsLocation: IGpsData | null) {
+  const data : Record<string, string | undefined> = {}; // object to hold request data
+  data['newsflash_location_qualification'] = newLocationQualification;
+
   if (gpsLocation) {
-    data.push(`road_segment_name=${gpsLocation.road_segment_name}`)
-    data.push(`road1=${gpsLocation.road1}`)
+    data['road_segment_name'] = gpsLocation.road_segment_name;
+    data['road1'] = gpsLocation.road1;
   } else if (streetLocation) {
-    data.push(`yishuv_name=${streetLocation.city.yishuv_name}`)
-    data.push(`street1_hebrew=${streetLocation.street.street_hebrew}`)
+    data['yishuv_name'] = streetLocation.city.yishuv_name;
+    data['street1_hebrew'] = streetLocation.street.street_hebrew;
   }
-  const url = `${NEWS_FLASH_API}/${newsId}?${data.join('&')}`;
+  const url = `${NEWS_FLASH_API}/${newsId}`;
   axios
-    .patch(url)
+    .patch(url, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
     .then((res) => res.data)
     .catch(onErrorFetchNewsFlash)
 }
