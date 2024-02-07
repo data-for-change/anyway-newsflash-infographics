@@ -1,5 +1,6 @@
 import { WidgetName } from 'models/WidgetName';
 import  orYarokLogo  from 'assets/greenlight.png';
+import n12Logo from 'assets/n12Logo.png';
 
 // cards in this list will be available for operation environments (all non-staging environments)
 export const operationalCards: WidgetName[] = [
@@ -18,7 +19,8 @@ export const operationalCards: WidgetName[] = [
 
 export type OrgLogoData =  {key : string, path:string} ;
 
-export const logosSourceMap  : [OrgLogoData] = [
-  {key:'or_yarok',path:orYarokLogo}
+export const logosSourceMap  : OrgLogoData[] = [
+  {key: 'or_yarok', path: orYarokLogo},
+  {key: 'n12', path: n12Logo},
 ]
 
