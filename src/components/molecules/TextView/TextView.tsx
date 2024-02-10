@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { IWidgetCountBySeverityTextDataBase } from 'models/WidgetData';
 import { makeStyles } from '@material-ui/core';
-import { brightGreyColor } from 'style';
+import { brightGreyColor } from 'style/default/_defaultColors';
 import Box from '@material-ui/core/Box';
 import classNames from 'classnames';
 import TextViewList from './TextViewList';
@@ -122,7 +122,7 @@ const TextView: FC<IProps> = ({
       {isSingleType ? (
         <SeverityImage severity={getSingleType(countBySeverity)!} />
       ) : (
-        <Box color="text.secondary" className={classes.list}>
+        <Box className={classes.list}>
           <TextViewList data={countBySeverity} labels={labels} largeNumbers={largeNumbers}/>
         </Box>
       )}

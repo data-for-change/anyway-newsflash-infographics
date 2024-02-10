@@ -2,7 +2,7 @@ import {FormControl, FormControlLabel, makeStyles, Radio, RadioGroup} from "@mat
 import React, {FC} from "react";
 import {useTranslation} from "react-i18next";
 import {ReactComponent as CheckCircleIcon} from "assets/check_blue_24dp.svg";
-import {oceanBlueColor, roseColor, silverGrayColor} from "style";
+import {oceanBlueColor, roseColor, silverGrayColor} from "style/default/_defaultColors";
 import {ReactComponent as CancelCircleIcon} from "assets/cancel_red_24dp.svg";
 
 

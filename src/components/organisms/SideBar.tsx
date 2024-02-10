@@ -3,7 +3,7 @@ import { Box, makeStyles } from '@material-ui/core';
 import News from './News';
 import NewsFlashFilterPanel from 'components/molecules/NewsFlashFilterPanel';
 import OverlayLoader from '../molecules/OverlayLoader';
-import { silverSmokeColor } from 'style';
+import { silverSmokeColor } from 'style/default/_defaultColors';
 import { Typography, ErrorBoundary } from 'components/atoms';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'store/storeConfig';

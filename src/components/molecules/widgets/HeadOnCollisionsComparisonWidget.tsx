@@ -3,7 +3,7 @@ import { Typography } from 'components/atoms';
 import PieChartView, { renderCollisionCustomizedLabel } from '../PieChartView';
 import { IWidgetHeadOnCollisionsComparisonData } from 'models/WidgetData';
 import { Box, makeStyles } from '@material-ui/core';
-import { cherryJamColor, silverSpoonColor } from 'style';
+import { cherryJamColor, silverSpoonColor } from 'style/default/_defaultColors';
 import { useTranslation } from 'react-i18next';
 import RootStore from 'store/root.store';
 import { useStore } from 'store/storeConfig';

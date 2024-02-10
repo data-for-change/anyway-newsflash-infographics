@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,11 +10,13 @@ import RootStore from 'store/root.store';
 import UserProfileHeader from './UserProfileHeader';
 import LanguageMenu from 'components/organisms/LanguageMenu';
 import { FEATURE_FLAGS } from 'utils/env.utils';
-import anywayLogo from 'assets/anyway.png';
 import { SignInIcon } from 'components/atoms/SignInIcon';
 import MapDialog from 'components/molecules/MapDialog';
 import { IPoint } from 'models/Point';
 import { useNavigate } from 'react-router-dom';
+import n12Logo from 'assets/n12Logo.png';
+import anywayLogo from 'assets/anyway.png';
+
 
 const useStyles = makeStyles({
   userSection: {
@@ -44,6 +46,13 @@ const Header: FC = () => {
       store.fetchGpsLocation(location);
     },
     [store],
+  );
+
+  const changeTheme = useCallback(
+    (themeName : string) => {
+      store.settingsStore.changeTheme(themeName);
+    },
+    [store.settingsStore],
   );
 
   const onLocationSearch = () => {
@@ -97,6 +106,12 @@ const Header: FC = () => {
     <AppBar>
       <Logo src={logo} alt={'Anyway'} height={30} onClick={reloadHomePage} />
       <Box className={classes.userSection}>
+        <Button.Standard onClick={() => changeTheme('n12')}>
+          <Logo src={n12Logo} alt={'n12'} height={25} />
+        </Button.Standard>
+        <Button.Standard onClick={() => changeTheme('default')}>
+          <Logo src={anywayLogo} alt={'anyway'} height={25} />
+        </Button.Standard>
         <Button.Standard onClick={() => setOpen(true)}>{t('header.Search')}</Button.Standard>
         {FEATURE_FLAGS.language && <LanguageMenu />}
         {authElement}
