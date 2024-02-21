@@ -7,7 +7,7 @@ import { AnyWayButton } from './AnyWayButton';
 import { Typography, MapIcon, TooltipMarker, TooltipArrow } from '.';
 import { ClockPosition } from 'models/ClockPosition';
 import { useTranslation } from 'react-i18next';
-import { defaultBorderRadius, silverSmokeColor } from 'style';
+import { silverSmokeColor, defaultBorderRadius } from 'style';
 import { useLocale } from 'hooks/date.hooks'
 
 interface IProps {

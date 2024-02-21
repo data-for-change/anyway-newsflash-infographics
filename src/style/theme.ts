@@ -1,5 +1,4 @@
-import {n12ThemeOptions} from "./n12/n12Theme";
-import {defaultThemeOptions} from "./default/defaultTheme";
+import {defaultThemeOptions, n12ThemeOptions} from "style";
 import {createMuiTheme, Theme} from "@material-ui/core";
 
 export enum ThemeNames {

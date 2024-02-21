@@ -62,7 +62,7 @@ const SideBar: FC<IProps> = () => {
         {location && (
           <ErrorBoundary>
             <SideBarMap items={[location]} />
-          </ErrorBoundary>  
+          </ErrorBoundary>
         )}
       </Box>
     </Box>

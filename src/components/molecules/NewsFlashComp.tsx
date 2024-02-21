@@ -57,7 +57,7 @@ const NewsFlashComp: FC<IProps> = ({ news }) => {
   const verificationIcon = getVerificationIcon(news.newsflash_location_qualification);
   const criticalIcon = news.critical && <CriticalIcon className={classes.icon} />;
   const {newsId} = useParams()
-  const newsID = newsId ? parseInt(newsId) : '' 
+  const newsID = newsId ? parseInt(newsId) : ''
   const className = news.id === newsID ? classes.activeNewsFlash : '';
   const date = news.date == null ? '' : dateFormat(new Date(news.date.replace(/-/g, '/')), locale);
   const handleLocationEditorOpen = () => setOpen(true);
