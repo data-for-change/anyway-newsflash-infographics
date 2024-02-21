@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { ResponsiveContainer, BarChart, XAxis, Bar, Legend } from 'recharts';
-import { roseColor, honeyColor, yellowColor } from 'style/default/_defaultColors';
+import { roseColor, honeyColor, yellowColor } from 'style';
 
 interface IProps {
   data: Array<object>;

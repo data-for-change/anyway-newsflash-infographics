@@ -1,7 +1,6 @@
 import React from 'react';
 import Box from '@material-ui/core/Box';
-import { roadIconColors } from 'style';
-import { silverSmokeColor } from 'style/default/_defaultColors';
+import { roadIconColors, silverSmokeColor } from 'style';
 import SeverityImage from './SeverityImage';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from 'components/atoms';

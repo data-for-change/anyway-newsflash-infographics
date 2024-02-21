@@ -4,7 +4,7 @@ import UserInfoForm, { IFormInput } from './UserUpdateForm';
 import AdminManagementForm from './adminManagement/AdminManagementForm';
 import { useTranslation } from 'react-i18next';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import { oceanBlueColor, skyBlueColor } from 'style/default/_defaultColors';
+import { oceanBlueColor, skyBlueColor } from 'style';
 import Box from '@material-ui/core/Box';
 import { Avatar } from '@material-ui/core';
 import { IAnywayUserDetails } from 'services/user.service';

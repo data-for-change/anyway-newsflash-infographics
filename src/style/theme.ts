@@ -1,11 +1,14 @@
-import {n12ThemeOptions} from "./n12/n12Theme";
-import {defaultThemeOptions} from "./default/defaultTheme";
-import { ThemeOptions } from "@material-ui/core";
+import {defaultThemeOptions, n12ThemeOptions} from "style";
+import {createMuiTheme, Theme} from "@material-ui/core";
 
-export type ThemeData =  {key : string, theme : ThemeOptions} ;
+export enum ThemeNames {
+  DEFAULT= 'default',
+  N12 = 'n12',
+}
+
+export type ThemeData =  {key : ThemeNames, theme : Theme} ;
 
 export const themeOptions : ThemeData[] = [
-    // {key: 'or_yarok', path: orYarokTheme},
-    {key: 'default', theme: defaultThemeOptions},
-    {key: 'n12', theme: n12ThemeOptions},
+    {key: ThemeNames.DEFAULT, theme: createMuiTheme(defaultThemeOptions)},
+    {key: ThemeNames.N12, theme: createMuiTheme(n12ThemeOptions)},
   ]

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import Box from '@material-ui/core/Box';
 import { Typography } from 'components/atoms';
-import { oceanBlueColor, secondaryBgColor } from 'style/default/_defaultColors';
+import { oceanBlueColor, secondaryBgColor } from 'style';
 
 const useStyles = makeStyles({
   root: {

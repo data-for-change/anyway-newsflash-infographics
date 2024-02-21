@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { ResponsiveContainer, BarChart, LabelList, XAxis, Bar, Tooltip, Legend } from 'recharts';
-import {blackColor, ColorScheme, whiteColor} from 'style';
-import { roseColor } from 'style/default/_defaultColors';
+import {roseColor, blackColor, ColorScheme, whiteColor} from 'style';
 import tinycolor from 'tinycolor2';
 import {useTheme} from "@material-ui/core/styles";
 

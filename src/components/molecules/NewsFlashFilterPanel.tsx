@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import classnames from 'classnames';
 import { Box, makeStyles } from '@material-ui/core';
-import { silverSmokeColor, oceanBlueColor } from 'style/default/_defaultColors';
+import { silverSmokeColor, oceanBlueColor } from 'style';
 import ynetLogo from 'assets/ynet-website-logo.svg';
 import wallaLogo from 'assets/walla-logo.svg';
 import madaLogo from 'assets/mada-logo.svg';

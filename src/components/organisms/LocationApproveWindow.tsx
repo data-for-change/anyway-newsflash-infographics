@@ -3,7 +3,7 @@ import DialogWithHeader from '../molecules/DialogWithHeader';
 import {Box, makeStyles } from '@material-ui/core';
 import { Button, Typography } from 'components/atoms';
 import { useTranslation } from 'react-i18next';
-import { silverSmokeColor } from 'style/default/_defaultColors';
+import { silverSmokeColor } from 'style';
 import { INewsFlash } from "models/NewFlash";
 import { useStore } from "store/storeConfig";
 import {IPoint} from "models/Point";

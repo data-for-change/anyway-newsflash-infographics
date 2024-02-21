@@ -5,8 +5,7 @@ import RoadNumberImage from './RoadNumberImage';
 import LamasImage from 'assets/cbs.png';
 import AnywayImage from 'assets/anyway.png';
 import { Typography, Logo } from 'components/atoms';
-import {ColorScheme, opacity80percent} from 'style/';
-import {silverSmokeColor} from "style/default/_defaultColors";
+import {ColorScheme, opacity80percent, silverSmokeColor} from 'style/';
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {

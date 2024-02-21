@@ -1,6 +1,5 @@
 import { ThemeOptions } from '@material-ui/core';
-import { ColorScheme, defaultThemeColors, fontFamilyString } from 'style';
-import { darkGrey } from 'style/default/_defaultColors'
+import { darkGrey, defaultThemeColors, fontFamilyString } from 'style';
 
 const defaultThemeOptions: ThemeOptions = {
   palette: {

@@ -3,7 +3,7 @@ import { Box, makeStyles } from '@material-ui/core';
 import News from './News';
 import NewsFlashFilterPanel from 'components/molecules/NewsFlashFilterPanel';
 import OverlayLoader from '../molecules/OverlayLoader';
-import { silverSmokeColor } from 'style/default/_defaultColors';
+import { silverSmokeColor } from 'style';
 import { Typography, ErrorBoundary } from 'components/atoms';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'store/storeConfig';
@@ -62,7 +62,7 @@ const SideBar: FC<IProps> = () => {
         {location && (
           <ErrorBoundary>
             <SideBarMap items={[location]} />
-          </ErrorBoundary>  
+          </ErrorBoundary>
         )}
       </Box>
     </Box>

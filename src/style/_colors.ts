@@ -1,5 +1,3 @@
-// import { PaletteColorOptions } from "@material-ui/core";
-
 import {barColors, blueVioletColor, pieChartColors, silverGrayColor} from "./default/_defaultColors";
 import {
   grayBeige,

@@ -2,7 +2,7 @@ import { useEffect, FC } from 'react';
 import { Box } from '@material-ui/core';
 import SideBar from 'components/organisms/SideBar';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import { silverSmokeColor } from 'style/default/_defaultColors';
+import { silverSmokeColor } from 'style';
 import FilterBar from 'components/organisms/FilterBar';
 import OverlayLoader from 'components/molecules/OverlayLoader';
 import { observer } from 'mobx-react-lite';

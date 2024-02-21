@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
 import { Link, Typography, Button } from 'components/atoms';
 import { Box, makeStyles } from '@material-ui/core';
-import { cherryJamColor, oceanBlueColor, silverSmokeColor } from 'style/default/_defaultColors';
+import { cherryJamColor, oceanBlueColor, silverSmokeColor } from 'style';
 import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
 import { dateFormat } from 'utils/time.utils';

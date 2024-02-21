@@ -2,8 +2,7 @@ import React, { FC } from 'react';
 import { makeStyles, withStyles, createStyles } from '@material-ui/core/styles';
 import { Typography } from 'components/atoms';
 import { Table, TableBody, TableCell, TableHead, TableRow, Theme } from '@material-ui/core';
-import { blackColor } from 'style';
-import { silverGrayColor } from 'style/default/_defaultColors'
+import { silverGrayColor, blackColor } from 'style';
 import { ITableData } from './formatTableData.service';
 
 interface IProps {
