@@ -3,7 +3,7 @@ import { Typography } from 'components/atoms';
 import PieChartView, { renderCollisionCustomizedLabel } from '../PieChartView';
 import { IWidgetHeadOnCollisionsComparisonData } from 'models/WidgetData';
 import { Box, makeStyles } from '@material-ui/core';
-import { cherryJamColor, silverSpoonColor } from 'style';
+import { cherryJamColor, silverSpoonColor } from 'style/default/_defaultColors';
 import { useTranslation } from 'react-i18next';
 import RootStore from 'store/root.store';
 import { useStore } from 'store/storeConfig';
@@ -69,8 +69,8 @@ const HeadOnCollisionsComparisonWidget: FC<IProps> = ({ data, segmetText, usePer
   const roadNumberSegment: string = ` ${t('onUrban.route')} ${widgetsStore.newsFlashWidgetsMetaRoadNumber}`;
   const descSegment: string = roadNumberSegment == null ? '' : segmetText.substr(roadNumberSegment.length);
   return (
-    <Box height={'100%'} display="flex" flexDirection="column" mr={'80px'}>
-      <Box className={classes.primaryContent}>
+    <Box height={'100%'} display="flex" flexDirection="column" mr={'25px'}>
+      <Box className={classes.primaryContent} mt={'28px'}>
         <Box className={classes.primaryDesc}>
           <Box className={classes.textHighlight}>
             <Typography.Body2>{roadNumberSegment == null ? null : roadNumberSegment}</Typography.Body2>
