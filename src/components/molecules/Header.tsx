@@ -48,13 +48,6 @@ const Header: FC = () => {
     [store],
   );
 
-  const changeTheme = useCallback(
-    (themeName : string) => {
-      store.settingsStore.changeTheme(themeName);
-    },
-    [store.settingsStore],
-  );
-
   const onLocationSearch = () => {
     if (roadSegmentLocation) {
       navigate(`${settingsStore.currentLanguageRouteString}/location/${roadSegmentLocation?.road_segment_id}`);
