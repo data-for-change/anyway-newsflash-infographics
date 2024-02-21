@@ -14,7 +14,6 @@ import { SignInIcon } from 'components/atoms/SignInIcon';
 import MapDialog from 'components/molecules/MapDialog';
 import { IPoint } from 'models/Point';
 import { useNavigate } from 'react-router-dom';
-import n12Logo from 'assets/n12Logo.png';
 import anywayLogo from 'assets/anyway.png';
 
 
@@ -99,12 +98,6 @@ const Header: FC = () => {
     <AppBar>
       <Logo src={logo} alt={'Anyway'} height={30} onClick={reloadHomePage} />
       <Box className={classes.userSection}>
-        <Button.Standard onClick={() => changeTheme('n12')}>
-          <Logo src={n12Logo} alt={'n12'} height={25} />
-        </Button.Standard>
-        <Button.Standard onClick={() => changeTheme('default')}>
-          <Logo src={anywayLogo} alt={'anyway'} height={25} />
-        </Button.Standard>
         <Button.Standard onClick={() => setOpen(true)}>{t('header.Search')}</Button.Standard>
         {FEATURE_FLAGS.language && <LanguageMenu />}
         {authElement}
