@@ -1,7 +1,7 @@
 import { ThemeOptions } from '@material-ui/core';
 import { defaultThemeOptions } from 'style/default/defaultTheme'
-import { n12FontFamilyString } from "style";
-import {n12ThemeColors, whiteColor} from "style";
+import { n12FontFamilyString } from "../_fonts";
+import {n12ThemeColors, whiteColor} from "../_colors";
 
 const n12ThemeOptions: ThemeOptions = { ...defaultThemeOptions };
 n12ThemeOptions.palette = {
