@@ -1,13 +1,15 @@
-import { makeAutoObservable, runInAction } from 'mobx';
-import { Theme, createMuiTheme } from '@material-ui/core';
-import { defaultThemeOptions } from 'style';
-import { LANG } from 'const/languages.const';
+import {makeAutoObservable, runInAction} from 'mobx';
+import {createMuiTheme, Theme} from '@material-ui/core';
+import {defaultThemeOptions} from 'style';
+import {LANG} from 'const/languages.const';
 import i18next from 'services/i18n.service';
 import RootStore from './root.store';
+import {ThemeData, ThemeNames, themeOptions} from "style/theme";
 
 export default class SettingsStore {
   rootStore: RootStore;
-  private _theme: Theme = createMuiTheme(defaultThemeOptions);
+  private themeName : ThemeNames = ThemeNames.DEFAULT;
+  _theme : Theme = createMuiTheme(defaultThemeOptions);
   currentLanguageRouteString: string = '';
   selectedLanguage: string = LANG.HE;
 
@@ -17,6 +19,13 @@ export default class SettingsStore {
   }
 
   get theme(): Theme {
+    let new_theme : Theme | undefined = undefined;
+    const organizationName = this.rootStore.userStore.orgNamesList ? this.rootStore.userStore.orgNamesList[0] : '';
+    if (organizationName) {
+      const new_theme_data :  ThemeData | undefined = themeOptions.find((p) => p.key === this.themeName);
+      new_theme = new_theme_data?.theme;
+    }
+    this._theme = new_theme ? new_theme : this._theme;
     return this._theme;
   }
 
