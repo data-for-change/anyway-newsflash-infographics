@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Dialog, Typography } from 'components/atoms';
 import { Box, makeStyles, createStyles, Theme, IconButton, DialogTitle, DialogContent } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import { shadowColor, blueVioletColor } from 'style';
+import { shadowColor, blueVioletColor } from 'style/default/_defaultColors';
 
 interface IProps {
   title: string;

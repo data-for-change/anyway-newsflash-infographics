@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link as RouterLink, LinkProps } from 'react-router-dom';
-import { oceanBlueColor, skyBlueColor } from 'style';
+import { oceanBlueColor, skyBlueColor } from 'style/default/_defaultColors';
 
 const useStyles = makeStyles({
   link: {

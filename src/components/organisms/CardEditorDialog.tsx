@@ -7,7 +7,7 @@ import AnyWayCard, { CardSizeOptions } from 'components/molecules/card/AnyWayCar
 import { MetaTag, ErrorBoundary, Typography, Button, Slider } from 'components/atoms';
 import widgetToImage from 'services/to-image.service';
 import { useTranslation } from 'react-i18next';
-import { blueVioletColor } from 'style';
+import { blueVioletColor } from 'style/default/_defaultColors';
 
 import {initEditorBarOptions, barsWidgetsLabels, barsWidgetsTitle, NUM_OF_BARS} from 'utils/barChart.utils';
 

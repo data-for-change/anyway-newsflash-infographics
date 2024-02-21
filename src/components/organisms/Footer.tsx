@@ -4,7 +4,7 @@ import logoNatun from 'assets/NATUN-LOGO-FINAL-COLOR.png';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import { Typography } from 'components/atoms';
-import { silverSmokeColor, oceanBlueColor, skyBlueColor } from 'style';
+import { silverSmokeColor, oceanBlueColor, skyBlueColor } from 'style/default/_defaultColors';
 import ThankYouDialog from './ThankYouDialog';
 import AboutDialog from './AboutDialog';
 import { version } from '../../../package.json'; // eslint-disable-line

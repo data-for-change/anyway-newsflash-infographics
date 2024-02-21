@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { oceanBlueColor, skyBlueColor } from 'style';
+import { oceanBlueColor, skyBlueColor } from 'style/default/_defaultColors';
 import React from 'react';
 import { AUTH_LOGIN_GOOGLE_URL } from 'const/generalConst';
 import { openSignInWindow } from 'services/signInWindow';
