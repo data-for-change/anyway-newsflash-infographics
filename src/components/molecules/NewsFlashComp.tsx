@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
 import { Link, Typography, Button } from 'components/atoms';
 import { Box, makeStyles } from '@material-ui/core';
-import { cherryJamColor, oceanBlueColor, silverSmokeColor } from 'style';
+import { cherryJamColor, oceanBlueColor, silverSmokeColor } from 'style/default/_defaultColors';
 import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
 import { dateFormat } from 'utils/time.utils';
@@ -57,7 +57,7 @@ const NewsFlashComp: FC<IProps> = ({ news }) => {
   const verificationIcon = getVerificationIcon(news.newsflash_location_qualification);
   const criticalIcon = news.critical && <CriticalIcon className={classes.icon} />;
   const {newsId} = useParams()
-  const newsID = newsId ? parseInt(newsId) : '' 
+  const newsID = newsId ? parseInt(newsId) : ''
   const className = news.id === newsID ? classes.activeNewsFlash : '';
   const date = news.date == null ? '' : dateFormat(new Date(news.date.replace(/-/g, '/')), locale);
   const handleLocationEditorOpen = () => setOpen(true);

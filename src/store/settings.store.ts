@@ -4,10 +4,12 @@ import { defaultThemeOptions } from 'style';
 import { LANG } from 'const/languages.const';
 import i18next from 'services/i18n.service';
 import RootStore from './root.store';
+import {themeOptions} from "../style/theme";
 
 export default class SettingsStore {
   rootStore: RootStore;
-  private _theme: Theme = createMuiTheme(defaultThemeOptions);
+  private themeName = 'default';
+  _theme: Theme = createMuiTheme(defaultThemeOptions);
   currentLanguageRouteString: string = '';
   selectedLanguage: string = LANG.HE;
 
@@ -18,6 +20,14 @@ export default class SettingsStore {
 
   get theme(): Theme {
     return this._theme;
+  }
+
+  changeTheme(newThemeName: string) {
+    const newThemeOption = themeOptions.find((p) => p.key === newThemeName);
+    if (newThemeOption) {
+      this.themeName = newThemeName;
+      this._theme = createMuiTheme(newThemeOption.theme);
+    }
   }
 
   changeLanguage(lngCode: string): void {
