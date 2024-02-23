@@ -21,6 +21,7 @@ import {
 } from 'models/WidgetData';
 import visionZeroImage from 'assets/vision_zero_2_plus_1.jpg';
 import vision_zero_10_50_90 from 'assets/vision_zero_10_50_90.png';
+import vision_zero_bike from 'assets/vision_zero_bike.png';
 import AccidentsCountByHourBarWidget from './AccidentsCountByHourBarWidget';
 import MostSevereAccidentsMapWidget from './MostSevereAccidentsMapWidget';
 import MostSevereAccidentsTableWidget from './MostSevereAccidentsTableWidget';
