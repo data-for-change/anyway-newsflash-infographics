@@ -122,7 +122,7 @@ const AnyWayCard: FC<IProps> = ({
       <AnyWayButton className={classes.button} disableRipple={true} onClick={imgDownloadHandler}>
         <GetAppOutlinedIcon />
       </AnyWayButton>
-      <AnyWayButton className={classes.button} disableRipple={true} onClick={() => {handleCardEditorOpen('CardEditor')}}>
+      <AnyWayButton className={classes.button} disableRipple={true} onClick={() => { handleCardEditorOpen('CardEditor') }}>
         <SettingsOverscanIcon />
       </AnyWayButton>
       {information && (
@@ -134,10 +134,10 @@ const AnyWayCard: FC<IProps> = ({
           </Tooltip>
         </Box>
       )}
-      {transcription?(
-        <AnyWayButton className={classes.button} disableRipple={true} onClick={() => {handleCardEditorOpen('TextBox') }}>
+      {transcription ? (
+        <AnyWayButton className={classes.button} disableRipple={true} onClick={() => { handleCardEditorOpen('TextBox') }}>
           <TitleIcon />
-        </AnyWayButton>):null}
+        </AnyWayButton>) : null}
     </>
   );
   const refFn = (element: HTMLDivElement) => {
@@ -160,7 +160,8 @@ const AnyWayCard: FC<IProps> = ({
               <CardHeader
                 orgIconPath={organizationData?.path}
                 variant={variant.header}
-                text={subtitle ? `${title} ${subtitle}` : title}
+                title={title}
+                subtitle={subtitle}
                 road={roadNumber}
               />
             </Box>

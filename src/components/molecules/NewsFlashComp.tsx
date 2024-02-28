@@ -14,6 +14,7 @@ import LocationApprove from 'components/organisms/LocationApproveWindow';
 import {locationQualificationOptions} from 'components/organisms/LocationApproveWindow';
 import { INewsFlash } from 'models/NewFlash';
 import {useParams} from 'react-router-dom'
+import { observer } from "mobx-react-lite";
 
 const ICON_HEIGHT = 18
 
@@ -38,7 +39,6 @@ const NewsFlashComp: FC<IProps> = ({ news }) => {
   const locale = useLocale();
   const { userStore, settingsStore } = store;
   const { t } = useTranslation();
-  const userAllowedChange = userStore.isUserAuthenticated && userStore.isAdmin;
 
   function getVerificationIcon(verificationText: string) {
     if (verificationText === locationQualificationOptions.REJECTED) {
@@ -58,16 +58,16 @@ const NewsFlashComp: FC<IProps> = ({ news }) => {
   const criticalIcon = news.critical && <CriticalIcon className={classes.icon} />;
   const {newsId} = useParams()
   const newsID = newsId ? parseInt(newsId) : '' 
-  
   const className = news.id === newsID ? classes.activeNewsFlash : '';
-
   const date = news.date == null ? '' : dateFormat(new Date(news.date.replace(/-/g, '/')), locale);
   const handleLocationEditorOpen = () => setOpen(true);
   const handleLocationEditorClose = () => setOpen(false);
-  const locationChangeButton = userAllowedChange &&
+
+  const locationChangeButton = userStore.isUserAdmin &&
     <Button.Small onClick={handleLocationEditorOpen} buttonHeight={ICON_HEIGHT}>
       {t('changeLocationButton')}
     </Button.Small>
+
   return (
     <Link key={news.id} to={`${settingsStore.currentLanguageRouteString}/newsflash/${news.id}`}>
       <Box border={1} borderColor={silverSmokeColor} p={1} className={className}>
@@ -84,8 +84,7 @@ const NewsFlashComp: FC<IProps> = ({ news }) => {
       <LocationApprove isOpen={isOpen} onClose={handleLocationEditorClose}
                        newFlashTitle={date.concat(", ", news.display_source)} news={news} />
     </Link>
- 
   );
 }
 
-export default NewsFlashComp;
+export default observer(NewsFlashComp);

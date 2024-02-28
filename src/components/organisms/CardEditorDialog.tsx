@@ -107,7 +107,8 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
             actionButtons={false}
             sizeOptions={sizeOptions}
             dateComment={dateComment}
-            title={text}
+            title={widget?.data?.text?.title}
+            subtitle={widget?.data?.text?.subtitle}
           >
             <MetaTag>{widgetName}</MetaTag>
             <ErrorBoundary>{widgetComponent}</ErrorBoundary>
