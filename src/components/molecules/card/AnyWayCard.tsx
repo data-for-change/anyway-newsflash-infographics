@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
+import {ColorScheme} from 'style'
 import { Card, CardContent, Box } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import widgetToImage from 'services/to-image.service';
 // TEXT BOX COMPONENT ADD FEATURE
 import  TextBox from 'components/organisms/TextBox'
@@ -21,6 +22,7 @@ import CardEditor from 'components/organisms/CardEditorDialog';
 import { transparent } from 'style';
 import { IDateComments } from 'models/WidgetData';
 import { OrgLogoData } from 'const/cards.const';
+import {observer} from "mobx-react-lite";
 
 const DEFAULTE_SIZE = 1;
 export interface CardSizeOptions {
@@ -48,11 +50,15 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative', // for meta tags
     boxSizing: 'border-box',
     zIndex: 0,
+    backgroundColor: (theme.palette.primary as ColorScheme).backgroundColor,
+    color: (theme.palette.primary as ColorScheme).fontColor,
   },
   content: {
     height: '100%',
     boxSizing: 'border-box',
     padding: 0,
+    backgroundColor: (theme.palette.primary as ColorScheme).containerColor,
+    borderRadius: '16px',
   },
   button: {
     '&:hover': {
@@ -87,7 +93,6 @@ const AnyWayCard: FC<IProps> = ({
   const [element, setElement] = useState({});
   const [isOpen, setOpen] = useState(false);
   const [widgateOpen,SetWidgetOpen] = useState('')
-
   const handleCardEditorOpen = (name:string) => {
     SetWidgetOpen(name)
     setOpen(true)
@@ -194,4 +199,4 @@ const AnyWayCard: FC<IProps> = ({
     </>
   );
 };
-export default AnyWayCard;
+export default observer(AnyWayCard);
