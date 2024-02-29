@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,12 +10,11 @@ import RootStore from 'store/root.store';
 import UserProfileHeader from './UserProfileHeader';
 import LanguageMenu from 'components/organisms/LanguageMenu';
 import { FEATURE_FLAGS } from 'utils/env.utils';
+import anywayLogo from 'assets/anyway.png';
 import { SignInIcon } from 'components/atoms/SignInIcon';
 import MapDialog from 'components/molecules/MapDialog';
 import { IPoint } from 'models/Point';
 import { useNavigate } from 'react-router-dom';
-import anywayLogo from 'assets/anyway.png';
-
 
 const useStyles = makeStyles({
   userSection: {

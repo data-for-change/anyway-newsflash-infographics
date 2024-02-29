@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { ResponsiveContainer, BarChart, LabelList, XAxis, Bar, Tooltip, Legend } from 'recharts';
-import {roseColor, blackColor, ColorScheme, whiteColor} from 'style';
+import { roseColor, honeyColor, yellowColor, blackColor, whiteColor } from 'style';
 import tinycolor from 'tinycolor2';
-import {useTheme} from "@material-ui/core/styles";
 
+const colors = [roseColor, honeyColor, yellowColor];
 const Y_AXIS_OFFSET = 20;
 const MIN_BAR_HEIGHT = 20;
 
@@ -51,7 +51,6 @@ const CustomizedLabel = (props: CustomizedLabelProps) => {
 };
 
 const BarChartContainer: FC<IBarChartBaseProps> = ({ data, textLabel, subtitle, children, isStacked }) => {
-  const theme = useTheme();
   return (
     <>
       <ResponsiveContainer>
@@ -62,7 +61,7 @@ const BarChartContainer: FC<IBarChartBaseProps> = ({ data, textLabel, subtitle, 
             dataKey={BAR_CHART_X_LABEL}
             tickLine={false}
             axisLine={false}
-            style={{ fill: (theme.palette.primary as ColorScheme).fontColor }}
+            style={{ fill: blackColor }}
           />
           <Tooltip />
           {isStacked && <Legend verticalAlign="bottom" align="right" iconType="circle" height={5} />}
@@ -90,9 +89,6 @@ const SingleBarChart: FC<ISingleBarChartProps> = ({ data, isPercentage, textLabe
 };
 
 const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, isStacked, textLabel, subtitle, editorBarOptions }) => {
-  const theme = useTheme();
-  const colors = (theme.palette.primary as ColorScheme).barChartColors;
-
   const yLabels = data ? Object.keys(data[0]) : [];
   yLabels.splice(0, 1);
   const maxBarsNum = yLabels.length;

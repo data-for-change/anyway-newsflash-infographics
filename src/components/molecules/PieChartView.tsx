@@ -1,8 +1,7 @@
 import React, { FC, useCallback } from 'react';
 import { ResponsiveContainer, PieChart, Pie, Cell, PieLabelRenderProps } from 'recharts';
-import {ColorScheme, fontFamilyString, whiteColor} from 'style';
+import { fontFamilyString, pieChartColors, whiteColor } from 'style';
 import { makeStyles } from '@material-ui/core';
-import {useTheme} from "@material-ui/core/styles";
 
 const TEXT_RELATIVE_WIDTH = 0.8;
 
@@ -22,6 +21,7 @@ interface IProps {
   labelProps?: ILabelProps;
 }
 
+const COLORS = pieChartColors;
 const RADIAN = Math.PI / 180;
 const PIE_SHADOW_ID = 'pie-shadow';
 const useStyles = makeStyles({
@@ -142,9 +142,6 @@ export const PieChartView: FC<IProps> = ({
   usePercent,
   labelProps = { customizedLabel: renderCustomizedLabel },
 }) => {
-  const theme = useTheme();
-  const colors = (theme.palette.primary as ColorScheme).pieChartColors;
-
   const renderLabel = useCallback(
     (props: PieLabelRenderProps) =>
       labelProps.customizedLabel(
@@ -179,7 +176,7 @@ export const PieChartView: FC<IProps> = ({
           isAnimationActive={false}
         >
           {data.map((entry: any, index: any) => (
-            <Cell key={index} fill={colors[index % colors.length]} />
+            <Cell key={index} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
       </PieChart>
