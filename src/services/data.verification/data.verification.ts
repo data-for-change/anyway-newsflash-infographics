@@ -173,6 +173,14 @@ export const verifiedWidgetData = (widget: any) => {
       isValid = validString(items.image_src);
       break;
     }
+    case 'vision_zero_10_50_90': {
+      isValid = validString(items.image_src);
+      break;
+    }
+    case 'vision_zero_bike': {
+      isValid = validString(items.image_src);
+      break;
+    }
     default: {
       isValid = false;
     }

@@ -93,8 +93,7 @@ const AnyWayCard: FC<IProps> = ({
   const [element, setElement] = useState({});
   const [isOpen, setOpen] = useState(false);
   const [widgateOpen,SetWidgetOpen] = useState('')
-
-  const handleCardEditorOpen = (name:string) =>{
+  const handleCardEditorOpen = (name:string) => {
     SetWidgetOpen(name)
     setOpen(true)
   };
@@ -105,6 +104,7 @@ const AnyWayCard: FC<IProps> = ({
   const sizes = getSizes(variant, factor);
 
   const classes = useStyles();
+
   const imgDownloadHandler = () => {
     if (element && element instanceof HTMLElement) {
       widgetToImage(widgetName, element);

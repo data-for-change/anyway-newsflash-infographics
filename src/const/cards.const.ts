@@ -9,6 +9,8 @@ export const operationalCards: WidgetName[] = [
   WidgetName.most_severe_accidents,
   WidgetName.head_on_collisions_comparison_percentage,
   WidgetName.vision_zero_2_plus_1,
+  WidgetName.vision_zero_10_50_90,
+  WidgetName.vision_zero_bike,
   WidgetName.injured_count_by_severity,
   WidgetName.accidents_heat_map,
   WidgetName.accident_count_by_accident_year,
