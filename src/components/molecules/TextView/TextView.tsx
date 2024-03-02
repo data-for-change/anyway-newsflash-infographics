@@ -122,7 +122,7 @@ const TextView: FC<IProps> = ({
       {isSingleType ? (
         <SeverityImage severity={getSingleType(countBySeverity)!} />
       ) : (
-        <Box color="text.secondary" className={classes.list}>
+        <Box className={classes.list}>
           <TextViewList data={countBySeverity} labels={labels} largeNumbers={largeNumbers}/>
         </Box>
       )}

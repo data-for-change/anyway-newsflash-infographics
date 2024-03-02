@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import {ColorScheme} from 'style'
 import { Card, CardContent, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import widgetToImage from 'services/to-image.service';
@@ -48,11 +49,15 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative', // for meta tags
     boxSizing: 'border-box',
     zIndex: 0,
+    backgroundColor: (theme.palette.primary as ColorScheme).backgroundColor,
+    color: (theme.palette.primary as ColorScheme).fontColor,
   },
   content: {
     height: '100%',
     boxSizing: 'border-box',
     padding: 0,
+    backgroundColor: (theme.palette.primary as ColorScheme).containerColor,
+    borderRadius: '16px',
   },
   button: {
     '&:hover': {
