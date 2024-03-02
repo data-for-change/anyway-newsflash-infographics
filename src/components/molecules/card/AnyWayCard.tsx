@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import { Card, CardContent, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import widgetToImage from 'services/to-image.service';
+
 // TEXT BOX COMPONENT ADD FEATURE
 import  TextBox from 'components/organisms/TextBox'
 import { AnyWayButton } from 'components/atoms/AnyWayButton';
@@ -151,7 +152,7 @@ const AnyWayCard: FC<IProps> = ({
       <Card ref={refFn} className={classes.root} variant="outlined">
         <Box height={sizes.height} width={sizes.width} position="relative" padding={3}>
           {/* BACKGROUND IMAGE */}
-          <CardBackgroundImage variant={variant.header} />
+          {/* <CardBackgroundImage variant={variant.header} /> */}
 
           {/* HEADER */}
           {variant.header !== HeaderVariant.None && (
