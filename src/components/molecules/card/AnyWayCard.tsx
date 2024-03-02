@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import {ColorScheme} from 'style'
 import { Card, CardContent, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import widgetToImage from 'services/to-image.service';
@@ -48,11 +49,15 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative', // for meta tags
     boxSizing: 'border-box',
     zIndex: 0,
+    backgroundColor: (theme.palette.primary as ColorScheme).backgroundColor,
+    color: (theme.palette.primary as ColorScheme).fontColor,
   },
   content: {
     height: '100%',
     boxSizing: 'border-box',
     padding: 0,
+    backgroundColor: (theme.palette.primary as ColorScheme).containerColor,
+    borderRadius: '16px',
   },
   button: {
     '&:hover': {
@@ -88,7 +93,7 @@ const AnyWayCard: FC<IProps> = ({
   const [isOpen, setOpen] = useState(false);
   const [widgateOpen,SetWidgetOpen] = useState('')
 
-  const handleCardEditorOpen = (name:string) =>{ 
+  const handleCardEditorOpen = (name:string) => {
     SetWidgetOpen(name)
     setOpen(true)
   };
@@ -99,6 +104,7 @@ const AnyWayCard: FC<IProps> = ({
   const sizes = getSizes(variant, factor);
 
   const classes = useStyles();
+
   const imgDownloadHandler = () => {
     if (element && element instanceof HTMLElement) {
       widgetToImage(widgetName, element);
@@ -111,7 +117,7 @@ const AnyWayCard: FC<IProps> = ({
 
     case 'TextBox':
       Widget = <TextBox isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} text={transcription} />
-      break 
+      break
     case 'CardEditor':
       Widget = <CardEditor isOpen={isOpen} onClose={handleCardEditorClose} widgetName={widgetName} text={title} />
   }
