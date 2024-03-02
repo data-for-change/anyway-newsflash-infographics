@@ -1,5 +1,4 @@
 //blue base collection
-import {darkestRed, grayBeige, softRed} from "../n12/_n12_colors";
 
 export const blueVioletColor = '#3f51b5';
 export const skyBlueColor = '#00aaff';
