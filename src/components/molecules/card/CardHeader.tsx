@@ -5,9 +5,9 @@ import RoadNumberImage from './RoadNumberImage';
 import LamasImage from 'assets/cbs.png';
 import AnywayImage from 'assets/anyway.png';
 import { Typography, Logo } from 'components/atoms';
-import { silverSmokeColor, opacity80percent } from 'style/';
+import {ColorScheme, opacity80percent, silverSmokeColor} from 'style/';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   wrapper: {
     width: '100%',
     height: '100%',
@@ -18,6 +18,13 @@ const useStyles = makeStyles({
   roadImageWrapper: {
     position: 'relative',
     top: '40%',
+  },
+  titlesContainer: {
+    backgroundColor: (theme.palette.primary as ColorScheme).titleContainerColor,
+    paddingRight: '25px',
+    paddingLeft: '25px',
+    paddingBottom: '15px',
+    paddingTop: '5px',
   },
   logosContainer: {
     height: '100%',
@@ -32,7 +39,7 @@ const useStyles = makeStyles({
   label: {
     maxWidth: 'min-content',
   },
-});
+}));
 
 interface IProps {
   variant: HeaderVariant;
@@ -55,7 +62,7 @@ const CardHeader: FC<IProps> = ({ variant, title, subtitle, road,orgIconPath }) 
           <Box display="flex" justifyContent="center" px={2} className={classes.textWrapper}>
             <Box display="flex" flexDirection="column">
               { variant === HeaderVariant.Centered &&
-                <Box textAlign="center">
+                <Box textAlign="center" className={classes.titlesContainer} >
                   <Typography.Title2 bold>{title}</Typography.Title2>
                   <Typography.Body2>{subtitle}</Typography.Body2>
                 </Box>
