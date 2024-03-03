@@ -1,7 +1,7 @@
 import React from 'react';
 import { Logo, Typography } from 'components/atoms';
 import LamasImage from 'assets/cbs.png';
-import AnywayImage from 'assets/anyway.png';
+import NatunLogo from 'assets/NATUN-LOGO-FINAL-COLOR-WITH-BACK.png';
 import { makeStyles } from '@material-ui/core/styles';
 import { cardFooterHeight } from 'style';
 import { Box } from '@material-ui/core';
@@ -53,7 +53,7 @@ const CardFooter: React.FC<IProps> = ({ dateComment, showRange,orgIconPath }) =>
       )}
       </Box>
       <Box className={classes.logoBox}>
-      <Logo src={AnywayImage} alt={'Anyway'} height={orgIconPath ? 20 : 22} />
+      <Logo src={NatunLogo} alt={'Anyway'} height={orgIconPath ? 20 : 22} />
       <Logo src={  orgIconPath ||  LamasImage} alt={'Lamas'} height={orgIconPath ? 24 : 25}  />
       </Box>
     </div>
