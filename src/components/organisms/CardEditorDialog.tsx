@@ -8,6 +8,7 @@ import { MetaTag, ErrorBoundary, Typography, Button, Slider } from 'components/a
 import widgetToImage from 'services/to-image.service';
 import { useTranslation } from 'react-i18next';
 import { blueVioletColor } from 'style';
+import { logosSourceMap, OrgLogoData } from 'const/cards.const';
 
 import {initEditorBarOptions, barsWidgetsLabels, barsWidgetsTitle, NUM_OF_BARS} from 'utils/barChart.utils';
 
@@ -24,11 +25,13 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
   const [barValues, setBarValues] = useState(initEditorBarOptions());
   const { t } = useTranslation();
   const store = useStore();
-  const { widgetsStore } = store;
+  const { userStore, widgetsStore } = store;
   const widget = widgetsStore.getWidgetsDataByName(widgetName);
   const roadNumber = widgetsStore.newsFlashWidgetsMetaRoadNumber;
   const dateComment = widgetsStore.newsFlashWidgetsMetaDateComment;
   const getCardRef = (element: HTMLElement) => setCardElement(element);
+  const organizationName = userStore.userOrganizations ? userStore.userOrganizations[0] : '';
+  const organizationData: OrgLogoData | undefined = logosSourceMap.find((p) => p.key === organizationName);
   const imgDownloadHandler = () => {
     if (cardElement && cardElement instanceof HTMLElement) {
       widgetToImage(widgetName, cardElement);
@@ -102,6 +105,7 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
         <Box px={2} display="flex" justifyContent="center" flexGrow={1}>
           <AnyWayCard
             getCardRef={getCardRef}
+            organizationData={organizationData}
             widgetName={widgetName}
             roadNumber={roadNumber}
             actionButtons={false}
