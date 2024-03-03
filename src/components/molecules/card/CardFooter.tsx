@@ -53,7 +53,7 @@ const CardFooter: React.FC<IProps> = ({ dateComment, showRange,orgIconPath }) =>
       )}
       </Box>
       <Box className={classes.logoBox}>
-      <Logo src={NatunLogo} alt={'Anyway'} height={orgIconPath ? 20 : 22} />
+      <Logo src={NatunLogo} alt={'Anyway'} height={orgIconPath ? 27 : 29} />
       <Logo src={  orgIconPath ||  LamasImage} alt={'Lamas'} height={orgIconPath ? 24 : 25}  />
       </Box>
     </div>
