@@ -3,6 +3,7 @@ import {ColorScheme} from 'style'
 import { Card, CardContent, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import widgetToImage from 'services/to-image.service';
+
 // TEXT BOX COMPONENT ADD FEATURE
 import  TextBox from 'components/organisms/TextBox'
 import { AnyWayButton } from 'components/atoms/AnyWayButton';
@@ -16,7 +17,6 @@ import CardHeader from './CardHeader';
 import SocialShare from 'components/atoms/SocialShare';
 import { FooterVariant, getWidgetVariant, HeaderVariant } from 'services/widgets.style.service';
 import { getSizes } from './card.util';
-import CardBackgroundImage from './CardBackgroundImage';
 import CardFooter from './CardFooter';
 import CardEditor from 'components/organisms/CardEditorDialog';
 import { transparent } from 'style';
@@ -156,9 +156,6 @@ const AnyWayCard: FC<IProps> = ({
     <>
       <Card ref={refFn} className={classes.root} variant="outlined">
         <Box height={sizes.height} width={sizes.width} position="relative" padding={3}>
-          {/* BACKGROUND IMAGE */}
-          <CardBackgroundImage variant={variant.header} />
-
           {/* HEADER */}
           {variant.header !== HeaderVariant.None && (
             <Box height={sizes.headerHeight} width="100%">
