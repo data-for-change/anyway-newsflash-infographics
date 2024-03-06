@@ -19,7 +19,7 @@ import {
   IWidgetInjuredAccidentsWithPedestrians,
   IWidgetKilledAndInjuredCountPerAgeGroup,
 } from 'models/WidgetData';
-import visionZeroImage from 'assets/vision_zero_2_plus_1.jpg';
+import visionZeroImage from 'assets/vision_zero_2_plus_1.png';
 import vision_zero_10_50_90 from 'assets/vision_zero_10_50_90.png';
 import vision_zero_bike from 'assets/vision_zero_bike.png';
 import AccidentsCountByHourBarWidget from './AccidentsCountByHourBarWidget';
