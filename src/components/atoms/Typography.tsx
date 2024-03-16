@@ -3,18 +3,20 @@ import MaterialTypography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Variant } from '@material-ui/core/styles/createTypography';
 
-interface IBold {
+interface IProps {
   bold?: boolean;
+  defaultTheme?: boolean;
 }
 
 interface IText {
-  [property: string]: FC<IBold>;
+  [property: string]: FC<IProps>;
 }
 
 interface ITypographyBase {
   bold?: boolean;
   variant: Variant;
   component: ElementType;
+  defaultTheme?: boolean;
 }
 
 const useStyles = makeStyles(() => ({
@@ -28,8 +30,8 @@ const useBold = (bold = false) => {
   return bold ? classes.bold : '';
 };
 
-const TypographyBase: FC<ITypographyBase> = ({ bold, variant, component, children }) => (
-  <MaterialTypography  className={useBold(bold)} variant={variant} component={component}>
+const TypographyBase: FC<ITypographyBase> = ({ bold, defaultTheme, variant, component, children }) => (
+  <MaterialTypography  className={useBold(bold)} variant={variant} component={component} color={defaultTheme ? "textPrimary" : undefined}>
     {children}
   </MaterialTypography>
 );
