@@ -18,7 +18,7 @@ export default class SettingsStore {
   }
 
   get theme(): Theme {
-    const organizationName = this.rootStore.userStore.userOrganizations ? this.rootStore.userStore.userOrganizations[0] : '';
+    const organizationName = this.rootStore.userStore.userOrganizations ? this.rootStore.userStore.userOrganizations[0] : ThemeNames.DEFAULT;
     if (organizationName !== this.currentThemeName) {
       this.currentThemeName = organizationName as ThemeNames;
       const new_theme_data :  Theme | undefined = themeOptions[this.currentThemeName];
