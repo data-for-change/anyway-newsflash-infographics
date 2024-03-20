@@ -80,7 +80,7 @@ const NewsFlashFilterPanel: FC<IProps> = () => {
             key={filter}
           >
             {filter === SourceFilterEnum.all ? (
-              <Typography.Title2>{t('filterPanel.all')}</Typography.Title2>
+              <Typography.Title2 defaultTheme>{t('filterPanel.all')}</Typography.Title2>
             ) : (
               <img className={classes.image} src={logo} alt={filter} />
             )}
