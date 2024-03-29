@@ -22,6 +22,7 @@ import CardEditor from 'components/organisms/CardEditorDialog';
 import { transparent } from 'style';
 import { IDateComments } from 'models/WidgetData';
 import { OrgLogoData } from 'const/cards.const';
+import CardBackgroundImage from './CardBackgroundImage';
 
 const DEFAULTE_SIZE = 1;
 export interface CardSizeOptions {
@@ -111,6 +112,7 @@ const AnyWayCard: FC<IProps> = ({
     }
   };
 
+  
   let Widget;
 
   switch(widgateOpen){
@@ -157,6 +159,7 @@ const AnyWayCard: FC<IProps> = ({
       <Card ref={refFn} className={classes.root} variant="outlined">
         <Box height={sizes.height} width={sizes.width} position="relative" padding={3}>
           {/* HEADER */}
+          {organizationData?.key !== 'n12'?<CardBackgroundImage variant={variant.header} />:<></>}
           {variant.header !== HeaderVariant.None && (
             <Box height={sizes.headerHeight} width="100%">
               <CardHeader
@@ -168,7 +171,7 @@ const AnyWayCard: FC<IProps> = ({
               />
             </Box>
           )}
-
+  
           {/* CONTENT */}
           <Box height={sizes.contentHeight} width="100%">
             <CardContent className={classes.content}>{children}</CardContent>
