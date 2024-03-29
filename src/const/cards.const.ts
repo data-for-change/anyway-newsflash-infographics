@@ -25,4 +25,3 @@ export const logosSourceMap  : OrgLogoData[] = [
   {key: 'or_yarok', path: orYarokLogo},
   {key: 'n12', path: n12Logo},
 ]
-
