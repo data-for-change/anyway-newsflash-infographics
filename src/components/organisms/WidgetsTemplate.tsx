@@ -33,8 +33,8 @@ const WidgetsTemplate: FC = () => {
     );
     if (!widgetComponent) {
       return null;
-    }
-        
+    }     
+
     return (
       <Box m={2} key={index}>
         <AnyWayCard
