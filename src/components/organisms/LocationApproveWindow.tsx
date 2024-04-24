@@ -178,9 +178,9 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
            {/*Segment*/}
            <Box display={'flex'}
                 sx={{ flexWrap: 'wrap', justifyContent: 'space-between'}} >
-             <Typography.Body3 bold>{t('LocationApprove.segment')}:</Typography.Body3>
+             <Typography.Body3 bold defaultTheme>{t('LocationApprove.segment')}:</Typography.Body3>
              <Box ml={1} mr={1}>
-               <Typography.Body3>{locationToDisplay}</Typography.Body3>
+               <Typography.Body3 defaultTheme>{locationToDisplay}</Typography.Body3>
              </Box>
            </Box>
            {/*Buttons*/}
