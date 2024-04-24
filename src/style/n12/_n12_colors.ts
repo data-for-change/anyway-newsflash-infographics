@@ -9,5 +9,7 @@ export const beige = '#e3cfac';
 export const darkBlue = '#0057c7';
 export const mediumBlue = '#027be2';
 export const lightBlue = '#61b2ff';
+export const darkGrey = '#818386';
+
 export const n12PieChartColors = [beige, darkBlue, mediumBlue, lightBlue];
-export const n12BarColors = [darkestRed, softRed, grayBeige];
+export const n12BarColors = [darkestRed, softRed, darkGrey];

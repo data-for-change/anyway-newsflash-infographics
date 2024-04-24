@@ -66,7 +66,7 @@ const FilterBar: FC<IProps> = () => {
             <Collapse in={isDescOpen} timeout="auto">
               <Grid item lg={12}>
                 <Box mb={2} px={3}>
-                  <Typography.Body3>{newsFlashStore.activeNewsFlash?.description}</Typography.Body3>
+                  <Typography.Body3 defaultTheme>{newsFlashStore.activeNewsFlash?.description}</Typography.Body3>
                 </Box>
               </Grid>
             </Collapse>
