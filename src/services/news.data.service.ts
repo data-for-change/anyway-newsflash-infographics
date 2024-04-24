@@ -71,7 +71,7 @@ export function updateNews(newsId: number, newLocationQualification: any,
   }
   const url = `${NEWS_FLASH_API}/${newsId}?${data.join('&')}`;
   axios
-    .patch(url)
+    .patch(url, {}, { withCredentials: true })
     .then((res) => res.data)
     .catch(onErrorFetchNewsFlash)
 }
