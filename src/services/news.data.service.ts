@@ -16,6 +16,7 @@ const errorNews: INewsFlash = {
   display_source: '',
   newsflash_location_qualification : '',
   location: '',
+  curr_cbs_location_text: '',
 };
 
 const NEWS_FLASH_API: string = '/api/news-flash';
