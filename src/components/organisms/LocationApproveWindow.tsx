@@ -60,7 +60,7 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
   const [locationChanged, setLocationChanged] = useState(false);
   const [newStreetLoc, setNewStreetLoc] = useState<IStreetData|null>(null);
   const [newGpsLoc, setNewGpsLoc] = useState<IGpsData|null>(null);
-  const [locationToDisplay, setLocationToDisplay] = useState(news.location);
+  const [locationToDisplay, setLocationToDisplay] = useState(news.curr_cbs_location_text);
   // Unauthorized user shouldn't be able to open the window in the first place
   const userInfo = userStore.userInfo && userStore.userInfo.data && userStore.userInfo.data.firstName ?
     userStore.userInfo.data.firstName.concat(userStore.userInfo.data.lastName) : null;
