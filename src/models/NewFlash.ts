@@ -12,6 +12,7 @@ export interface INewsFlash {
   display_source: string;
   newsflash_location_qualification: string;
   location: string;
+  curr_cbs_location_text: string;
   title: string;
   source: string;
   critical?: boolean;
