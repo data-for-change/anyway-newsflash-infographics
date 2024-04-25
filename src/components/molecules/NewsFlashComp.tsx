@@ -63,7 +63,7 @@ const NewsFlashComp: FC<IProps> = ({ news }) => {
   const handleLocationEditorOpen = () => setOpen(true);
   const handleLocationEditorClose = () => setOpen(false);
 
-  const locationChangeButton = userStore.isUserAdmin &&
+  const locationChangeButton = (userStore.isUserAdmin || userStore.isUserLocationApprover) &&
     <Button.Small onClick={handleLocationEditorOpen} buttonHeight={ICON_HEIGHT}>
       {t('changeLocationButton')}
     </Button.Small>
