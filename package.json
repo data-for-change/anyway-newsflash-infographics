@@ -1,6 +1,6 @@
 {
   "name": "anyway-newsflash-infographics",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "private": true,
   "dependencies": {
     "@babel/eslint-parser": "^7.14.7",
@@ -40,7 +40,7 @@
     "typescript": "^4.3.5"
   },
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "build:staging": "env-cmd -f .env.staging react-scripts build",
     "build:demo": "env-cmd -f .env.demo react-scripts build",
