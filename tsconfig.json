@@ -24,10 +24,11 @@
     "noImplicitAny": true,
     "noImplicitThis": true,
     "strictNullChecks": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "useUnknownInCatchVariables": false,
   },
   "include": [
     "src"
-  ]
+  ],
 }
 
