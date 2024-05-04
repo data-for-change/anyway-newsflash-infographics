@@ -7,7 +7,7 @@ import { Typography } from 'components/atoms';
 import { silverSmokeColor, oceanBlueColor, skyBlueColor } from 'style';
 import ThankYouDialog from './ThankYouDialog';
 import AboutDialog from './AboutDialog';
-import packageInfo from '../../../package.json'; // eslint-disable-line
+import { version } from '../../../package.json'; // eslint-disable-line
 
 interface IProps {}
 const useStyles = makeStyles({
@@ -60,7 +60,7 @@ export const Footer: FC<IProps> = () => {
         </Box>
         <Box px={2} className={classes.infoItem}>
           <Typography.Body5>
-            {t('footer.version')} {packageInfo.version}
+            {t('footer.version')} {version}
           </Typography.Body5>
         </Box>
         <Box px={2} className={classes.linkItem} onClick={toggleAbout}>
