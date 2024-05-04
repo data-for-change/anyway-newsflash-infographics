@@ -1,4 +1,4 @@
-FROM node:13.12.0-alpine
+FROM node:22.0.0-alpine
 
 WORKDIR /app/front/
 
@@ -11,7 +11,7 @@ COPY . ./
 #expose the app port
 EXPOSE 3000
 
-
+RUN npx update-browserslist-db@latest
 #start app
 RUN npx browserslist@latest --update-db
 CMD ["npm","start"]
