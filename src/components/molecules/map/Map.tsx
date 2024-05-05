@@ -15,9 +15,7 @@ const useStyles = makeStyles({
     width: '100%',
 
     '& img': {
-      'position': 'relative',
       'display': 'block',
-      'max-width': '100%'
     },
   },
 });
