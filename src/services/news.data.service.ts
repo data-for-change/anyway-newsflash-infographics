@@ -64,7 +64,7 @@ export function updateNews(newsId: number, newLocationQualification: any,
   const data = [];
   data.push(`newsflash_location_qualification=${newLocationQualification}`)
   if (gpsLocation) {
-    data.push(`road_segment_name=${gpsLocation.road_segment_name}`)
+    data.push(`road_segment_id=${gpsLocation.road_segment_id}`)
     data.push(`road1=${gpsLocation.road1}`)
   } else if (streetLocation) {
     data.push(`yishuv_name=${streetLocation.city.yishuv_name}`)
