@@ -13,6 +13,12 @@ const useStyles = makeStyles({
   root: {
     height: '100%',
     width: '100%',
+
+    '& img': {
+      'position': 'relative',
+      'display': 'block',
+      'max-width': '100%'
+    },
   },
 });
 
