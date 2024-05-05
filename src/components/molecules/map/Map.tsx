@@ -13,6 +13,10 @@ const useStyles = makeStyles({
   root: {
     height: '100%',
     width: '100%',
+
+    '& img': {
+      'display': 'block',
+    },
   },
 });
 
