@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ResponsiveContainer, BarChart, LabelList, XAxis, Bar, Tooltip, Legend, YAxis } from 'recharts';
+import { ResponsiveContainer, BarChart, LabelList, XAxis, Bar, Tooltip, Legend, YAxis, CartesianGrid } from 'recharts';
 import { roseColor, blackColor, ColorScheme, whiteColor } from 'style';
 import tinycolor from 'tinycolor2';
 import { useTheme } from '@material-ui/core/styles';
@@ -72,9 +72,11 @@ const BarChartContainer: FC<IBarChartBaseProps> = ({ data, textLabel, subtitle, 
               style={{ fill: (theme.palette.primary as ColorScheme).fontColor }}
               mirror
               tickLine={false}
-              tickMargin={-5}
+              tickMargin={-10}
+              interval={0}
             />
           )}
+          {isStacked && <CartesianGrid vertical={false} />}
           {children}
         </BarChart>
       </ResponsiveContainer>
