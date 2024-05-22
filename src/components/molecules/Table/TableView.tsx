@@ -12,6 +12,7 @@ interface IProps {
 const useStyles = makeStyles((theme: Theme) => ({
   table: {
     border: `1px solid ${blackColor}`,
+    margin: '15px 0',
     borderBottom: 0,
     borderCollapse: 'separate',
   },
