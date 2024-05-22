@@ -59,7 +59,6 @@ const useStyles = makeStyles(() => ({
     height: '100%',
     alignSelf: 'flex-end',
     marginTop: '25px',
-
   },
   singleTypeImage: {
     height: '40%',
