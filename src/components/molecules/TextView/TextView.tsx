@@ -52,11 +52,13 @@ const useStyles = makeStyles(() => ({
   headerBase: {
     width: '80%',
     height: '25%',
+    marginBottom: '20px'
   },
   list: {
     width: '80%',
     height: '100%',
     alignSelf: 'flex-end',
+    marginTop: '25px',
   },
   singleTypeImage: {
     height: '40%',
