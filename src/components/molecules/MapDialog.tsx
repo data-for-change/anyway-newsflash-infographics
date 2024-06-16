@@ -2,11 +2,12 @@ import { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
-import { Dialog , Typography } from 'components/atoms';
+import { Dialog, Typography } from 'components/atoms';
 import { IPoint } from 'models/Point';
 import { useStore } from 'store/storeConfig';
 import SearchCityAndStreetScreen from 'components/molecules/SearchCityAndStreetScreen';
 import SearchSegmentScreen from 'components/molecules/SearchSegmentScreen';
+import Map from 'components/molecules/map/Map'
 
 interface IProps {
   section?: string;
@@ -16,6 +17,7 @@ interface IProps {
   onLocationChange: (location: IPoint) => void;
   onSearch: () => void;
   onStreetAndCitySearch: (street?: string, city?: string) => void;
+  zoom: number;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -64,6 +66,7 @@ const MapDialog: FC<IProps> = ({
   onLocationChange,
   onSearch,
   onStreetAndCitySearch,
+  zoom,
 }) => {
   const classes = useStyles();
   const { t } = useTranslation();
@@ -75,8 +78,8 @@ const MapDialog: FC<IProps> = ({
     store.fetchCitiesList();
   }, [store]);
 
-// the code I deleted should be here...
-// SearchCityAndStreetScreen()
+  // the code I deleted should be here...
+  // SearchCityAndStreetScreen()
 
   return (
     <Dialog isShowing={open} onClose={onClose} maxWidth="lg" fullWidth>
@@ -95,9 +98,10 @@ const MapDialog: FC<IProps> = ({
             <Typography.Title1>{t('mapDialog.searchStreetAndCity')}</Typography.Title1>
           </Box>
         </Box>
-        {searchScreen === 'segment' && <SearchSegmentScreen onLocationChange={onLocationChange} roadNumber={roadNumber} section={section} onSearch={onSearch} onClose={onClose}/>}
+        {searchScreen === 'segment' && <SearchSegmentScreen onLocationChange={onLocationChange} roadNumber={roadNumber} section={section} onSearch={onSearch} onClose={onClose} />}
         {searchScreen === 'cityAndStreet' && <SearchCityAndStreetScreen onStreetAndCitySearch={onStreetAndCitySearch} onClose={onClose}
         />}
+        <Map />
       </Box>
     </Dialog>
   );

@@ -36,6 +36,7 @@ const Header: FC = () => {
   const { userStore, settingsStore } = store;
 
   const [open, setOpen] = useState(false);
+  const [zoomLevel] = useState(parseInt(process.env.REACT_APP_DEFAULT_MAP_ZOOM!));
 
   const isUserDetailsRequired: boolean = !userStore.userInfo?.meta.isCompleteRegistration;
   const roadSegmentLocation = store.gpsLocationData;
@@ -113,6 +114,8 @@ const Header: FC = () => {
         }}
         onSearch={onLocationSearch}
         onStreetAndCitySearch={onStreetAndCitySearch}
+        zoom={zoomLevel}
+
       />
     </AppBar>
   );
