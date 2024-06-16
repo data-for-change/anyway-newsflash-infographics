@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { MapContainer } from 'react-leaflet';
+import { MapContainer, TileLayer } from 'react-leaflet';
 import L, { LatLng } from 'leaflet';
 import { IPoint } from 'models/Point';
 import { INITIAL_CENTER, INITIAL_ZOOM } from 'const/generalConst';
@@ -34,11 +34,16 @@ interface IProps {
 const Map: FC<IProps> = ({ zoom = INITIAL_ZOOM, center = INITIAL_CENTER, data, children }) => {
   const classes = useStyles();
 
-  const bounds = getBounds(data);
+
+  const bounds = data && getBounds(data);
+
 
   return (
     <MapContainer zoom={zoom} center={center} className={classes.root}>
-      <MapViewControl bounds={bounds} />
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      {bounds && <MapViewControl bounds={bounds} />}
       <GoogleMapsLayer />
       {children}
     </MapContainer>
