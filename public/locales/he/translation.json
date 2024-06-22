@@ -129,7 +129,8 @@
     "Search": "חיפוש",
     "User Greeting": "שלום",
     "User Info Update": "פרטי משתמש",
-    "management": "ניהול"
+    "management": "ניהול",
+    "download":"הורדת מידע"
   },
   "sideBar": "מיקום משוער:",
   "changeLocationButton": "שינוי/אישור מיקום",

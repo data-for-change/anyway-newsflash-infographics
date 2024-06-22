@@ -76,3 +76,21 @@ export function updateNews(newsId: number, newLocationQualification: any,
     .then((res) => res.data)
     .catch(onErrorFetchNewsFlash)
 }
+
+export const downloadNewsflashHandler = async function (street1_hebrew:string,yishuv_name:string,years_ago:number) {
+  
+  try{
+    const res = await axios.get(`${NEWS_FLASH_API}/download-data`,{
+      params:{
+        street1_hebrew,
+        yishuv_name,
+        years_ago
+      }
+    })
+    return res
+  }
+  catch(e){
+    console.error(`an Error has occured while trying to download newsFlash : ${JSON.stringify(e)}`);
+  }
+
+}

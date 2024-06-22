@@ -140,3 +140,4 @@ export const logoutUserFromSession = async function (): Promise<boolean> {
   }
   return isSessionLogOut;
 };
+
