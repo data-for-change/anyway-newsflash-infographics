@@ -16,7 +16,6 @@ import { IPoint } from 'models/Point';
 import { useNavigate } from 'react-router-dom';
 import anywayLogo from 'assets/anyway.png';
 
-
 const useStyles = makeStyles({
   userSection: {
     display: 'flex',
@@ -33,11 +32,10 @@ const Header: FC = () => {
   const { t } = useTranslation();
   const classes = useStyles();
   const store: RootStore = useStore();
-  const { userStore, settingsStore } = store;
-
+  const { userStore,newsFlashStore,settingsStore } = store;
+  
   const [open, setOpen] = useState(false);
   const [zoomLevel] = useState(parseInt(process.env.REACT_APP_DEFAULT_MAP_ZOOM!));
-
   const isUserDetailsRequired: boolean = !userStore.userInfo?.meta.isCompleteRegistration;
   const roadSegmentLocation = store.gpsLocationData;
 
@@ -58,11 +56,18 @@ const Header: FC = () => {
 
   const onStreetAndCitySearch = (street?: string, city?: string) => {
     // change to constant values until backend issues are fixed
-    console.log('city is', city);
-    console.log('street is', street);
     navigate(`${settingsStore.currentLanguageRouteString}/cityAndStreet/${street}/${city}`);
     setOpen(false);
   };
+
+  
+  const DownLoadCSVNews = () =>{
+    
+    const newsId = parseInt( window.location.href.split('/')[window.location.href.split('/').length-1]);
+    newsFlashStore.downloadNewsflash(newsId)
+    
+  }
+
 
   useEffect(() => {
     userStore.getUserLoginDetails();
@@ -95,10 +100,12 @@ const Header: FC = () => {
     }
   }
 
+
   return (
     <AppBar>
       <Logo src={logo} alt={'Anyway'} height={30} onClick={reloadHomePage} />
       <Box className={classes.userSection}>
+        <Button.Standard onClick={DownLoadCSVNews}>{t('header.download')}</Button.Standard>
         <Button.Standard onClick={() => setOpen(true)}>{t('header.Search')}</Button.Standard>
         {FEATURE_FLAGS.language && <LanguageMenu />}
         {authElement}

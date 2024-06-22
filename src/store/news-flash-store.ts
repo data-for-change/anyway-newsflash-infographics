@@ -1,10 +1,9 @@
-import { runInAction, makeAutoObservable } from 'mobx';
+import { runInAction, makeAutoObservable,toJS } from 'mobx';
 import { SourceFilterEnum } from 'models/SourceFilter';
-import { fetchNews, IFetchNewsQueryParams } from 'services/news.data.service';
+import { fetchNews, IFetchNewsQueryParams,downloadNewsflashHandler } from 'services/news.data.service';
 import { INewsFlash } from 'models/NewFlash';
 import { IPoint } from 'models/Point';
 import RootStore from './root.store';
-
 const DEFAULT_TIME_FILTER = 5;
 const DEFAULT_LOCATION = { latitude: 32.0853, longitude: 34.7818 };
 const LOCAL_FILTERS: { [key in SourceFilterEnum]?: (newsFlashCollection: Array<INewsFlash>) => Array<INewsFlash> } = {};
@@ -17,7 +16,7 @@ export default class NewsFlashStore {
   newsFlashActiveFilter: SourceFilterEnum = SourceFilterEnum.all;
   newsFlashLoading: boolean = false;
   newsFlashWidgetsTimerFilter = DEFAULT_TIME_FILTER; // newsflash time filter (in years ago, 5 is the default)
-
+  
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
     makeAutoObservable(this);
@@ -144,5 +143,16 @@ export default class NewsFlashStore {
       location = DEFAULT_LOCATION;
     }
     return location;
+  }
+   downloadNewsflash(Id:number | undefined){
+      
+    const years_ago = this.newsFlashWidgetsTimerFilter
+    const NewsFlash = this.newsFlashCollection.filter(news =>{      
+      return  Id === news.id
+    })
+
+    const {yishuv_name,street1_hebrew} = NewsFlash[0]
+
+    downloadNewsflashHandler(yishuv_name,street1_hebrew,years_ago)
   }
 }

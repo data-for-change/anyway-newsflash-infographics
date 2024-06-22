@@ -10,7 +10,7 @@ import queryString from 'query-string';
 import { Typography, Button } from 'components/atoms';
 import { useTranslation } from 'react-i18next';
 import Collapse from '@material-ui/core/Collapse';
-
+import { toJS } from 'mobx';
 interface IProps {}
 
 const useStyles = makeStyles(() =>
@@ -43,6 +43,8 @@ const FilterBar: FC<IProps> = () => {
     }
   }, [queryParam, newsFlashStore]);
 
+  console.log(toJS(newsFlashStore.newsFlashWidgetsTimerFilter));
+  
   return (
     <div className={classes.grow}>
       <AppBar position="static" color="transparent" elevation={0}>
