@@ -6,6 +6,8 @@ import carOrangeIcon from 'assets/map/car-orange-marker.png';
 import carRedIcon from 'assets/map/car-red-marker.png';
 import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
+import { aggregatePoints } from 'utils/map.utils';
+import { IAggregatePointAccident } from 'models/Point';
 
 interface IProps {
   data: IWidgetMostSevereAccidentsData;
@@ -38,15 +40,16 @@ const useStyles = makeStyles({
   },
 });
 
-const MostSevereAccidentsMapWidget: FC<IProps> = ({ data, sizeOptions }) => {
+const MostSevereAccidentsMapWidget: FC<IProps> = ({ data }) => {
   const classes = useStyles();
   const { items } = data;
   const { t } = useTranslation();
+  const aggregatedItems : IAggregatePointAccident[] = aggregatePoints(items);
 
   return (
     <Box height={'100%'}>
       <Box className={classes.mapBox}>
-        <LocationMap items={items} />
+        <LocationMap items={aggregatedItems} />
       </Box>
       <Box className={classes.iconsContainer}>
         <Box className={classes.singleIcon}>
