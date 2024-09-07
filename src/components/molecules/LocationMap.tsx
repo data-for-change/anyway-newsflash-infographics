@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { IPoint } from 'models/Point';
+import { IPoint, IPointAccident } from 'models/Point';
 import { MostSevereAccidentsMarker } from 'components/atoms';
 import { ClockPosition } from 'models/ClockPosition';
 import Map from './map/Map';
@@ -11,7 +11,7 @@ interface IProps {
 }
 
 const LocationMap: FC<IProps> = ({ items }) => {
-  const markers = items.map((x: IPoint, i: number) => {
+  const markers = items.map((x: IPointAccident, i: number) => {
     if (x.latitude !== null && x.longitude !== null) {
       const tooltipOffset = i % 2 === 0 ? ClockPosition.RIGHT : ClockPosition.LEFT;
       return (
