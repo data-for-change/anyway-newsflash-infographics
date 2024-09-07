@@ -129,7 +129,7 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
        <Box className={classes.mainWindow} >
          {/*The newsflash*/}
          <Box className={classes.block} >
-           <Typography.Body3 bold>{t('LocationApprove.newsFlash')}:</Typography.Body3>
+           <Typography.Body3 bold defaultTheme>{t('LocationApprove.newsFlash')}:</Typography.Body3>
            <Box mt={1} flexDirection={'column'} className={classes.newsFlashBox}>
              <Box style={{fontStyle: "italic"}}>
                <Typography.Body4>{newFlashTitle}</Typography.Body4>
@@ -145,8 +145,8 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
            {/*Display map and search to choose location*/}
            <Box display={'flex'} width={650} height={"40vh"} sx={{ flexGrow: 1, p: 2, flexWrap: 'wrap', flexDirection: 'col',
              justifyContent: 'space-around'}}>
-             <Typography.Body3 bold>{t('LocationApprove.accident')}:</Typography.Body3>
-             <Typography.Body3> ({t('LocationApprove.changeAllowed')})</Typography.Body3>
+             <Typography.Body3 bold defaultTheme>{t('LocationApprove.accident')}:</Typography.Body3>
+             <Typography.Body3 defaultTheme> ({t('LocationApprove.changeAllowed')})</Typography.Body3>
              <Box mb={2} className={classes.block}>
                <SearchCityAndStreet onStreetAndCityChoice={onStreetAndCityChoice} />
              </Box>
@@ -157,14 +157,14 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
            <Box width={300} height={350} mt={2}>
              {/*Display user name */}
              <Box>
-               <Typography.Body3 bold>{t('LocationApprove.updater')}:</Typography.Body3>
+               <Typography.Body3 bold defaultTheme>{t('LocationApprove.updater')}:</Typography.Body3>
                <Typography.Body3> {userInfo}</Typography.Body3>
              </Box>
              {/*Status chooser*/}
              <Box mt={2} className={classes.block} >
                <Box>
-                 <Typography.Body3 bold>{t('LocationApprove.status')}:</Typography.Body3>
-                 <Typography.Body3> ({t('LocationApprove.pleaseMark')})</Typography.Body3>
+                 <Typography.Body3 bold defaultTheme>{t('LocationApprove.status')}:</Typography.Body3>
+                 <Typography.Body3 defaultTheme> ({t('LocationApprove.pleaseMark')})</Typography.Body3>
                </Box>
                <Box>
                  <ApproveLocationRadioButtons handleApproveStatusChange={handleApproveStatusChange}

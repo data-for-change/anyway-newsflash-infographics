@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'space-between',
       alignItems: 'center',
     },
+    scroll: {
+      overflowY: 'scroll'
+    },
     close: {
       color: shadowColor,
     },
@@ -46,7 +49,9 @@ const DialogWithHeader: FC<IProps> = ({ onClose, isShowing, title, fullWidth, ch
           </IconButton>
         </Box>
       </DialogTitle>
-      <DialogContent className={classes.content}>{children}</DialogContent>
+        <Box className={classes.scroll}>
+          <DialogContent className={classes.content}>{children}</DialogContent>
+        </Box>
     </Dialog>
   );
 };

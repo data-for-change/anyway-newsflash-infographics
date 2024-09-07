@@ -9,9 +9,10 @@ import { ClockPosition } from 'models/ClockPosition';
 import { useTranslation } from 'react-i18next';
 import { defaultBorderRadius, silverSmokeColor } from 'style';
 import { useLocale } from 'hooks/date.hooks'
+import { IPointAccident } from 'models/Point';
 
 interface IProps {
-  data: any;
+  data: IPointAccident;
   tooltipOffset: ClockPosition;
 }
 
@@ -49,7 +50,7 @@ const useStyles = makeStyles({
     margin: '0 10px',
   },
 });
-const MostSevereAccidentsMarker: FC<IProps> = ({ data, tooltipOffset = ClockPosition.LEFT }) => {
+const  MostSevereAccidentsMarker: FC<IProps> = ({ data, tooltipOffset = ClockPosition.LEFT }) => {
   const classes = useStyles();
   const { t } = useTranslation();
   const [offset, setOffset] = useState(tooltipOffset);
