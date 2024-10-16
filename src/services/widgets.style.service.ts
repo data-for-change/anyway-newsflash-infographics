@@ -6,6 +6,7 @@ export enum HeaderVariant {
   CenteredNoTitle,
   Label,
   Logo,
+  LogoOrYarok
 }
 
 export enum FooterVariant {
