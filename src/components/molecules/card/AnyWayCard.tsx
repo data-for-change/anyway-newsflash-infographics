@@ -159,7 +159,15 @@ const AnyWayCard: FC<IProps> = ({
       <Card ref={refFn} className={classes.root} variant="outlined">
         <Box height={sizes.height} width={sizes.width} position="relative" padding={3}>
           {/* HEADER */}
-          {organizationData?.key !== 'n12'?<CardBackgroundImage variant={variant.header} />:<></>}
+          {organizationData?.key !== 'n12' ? (
+            organizationData?.key == 'or' ? (
+              <CardBackgroundImage variant={variant.LogoOrYarok} />
+            ) : (
+              <CardBackgroundImage variant={variant.header} />
+            )
+          ) : (
+            <></>
+          )}
           {variant.header !== HeaderVariant.None && (
             <Box height={sizes.headerHeight} width="100%">
               <CardHeader

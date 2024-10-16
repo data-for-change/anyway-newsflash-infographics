@@ -2,6 +2,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 import React, { FC } from 'react';
 import { HeaderVariant } from 'services/widgets.style.service';
 import CardBackgrounRoadImage from 'assets/card-bg-road.png';
+import CardBackgrounRoadImageOrYarok from 'assets/card-bg-road-oryarok.png';
 import CardBackgrounMapImage from 'assets/card-bg-map.png';
 
 const ROAD_IMAGE_HEIGHT = 130;
@@ -31,6 +32,10 @@ const CardBackgroundImage: FC<IProps> = ({ variant }) => {
     case HeaderVariant.CenteredNoTitle:
     case HeaderVariant.Logo:
       src = CardBackgrounRoadImage;
+      height = ROAD_IMAGE_HEIGHT;
+      break;
+    case HeaderVariant.LogoOrYarok:
+      src = CardBackgrounRoadImageOrYarok;
       height = ROAD_IMAGE_HEIGHT;
       break;
     case HeaderVariant.Label:
