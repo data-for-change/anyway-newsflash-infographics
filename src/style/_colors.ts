@@ -49,7 +49,7 @@ export const defaultThemeColors : ColorScheme = {
   main: blueVioletColor,
   fontColor: blackColor,
   backgroundColor: whiteColor,
-  containerColor: whiteColor,
+  containerColor: transparentColor,
   titleContainerColor: transparentColor,
   pieChartColors: pieChartColors,
   barChartColors: barColors,
