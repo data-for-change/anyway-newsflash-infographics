@@ -50,7 +50,7 @@ export const defaultThemeColors : ColorScheme = {
   fontColor: blackColor,
   backgroundColor: whiteColor,
   containerColor: whiteColor,
-  titleContainerColor: whiteColor,
+  titleContainerColor: transparentColor,
   pieChartColors: pieChartColors,
   barChartColors: barColors,
   roadNumberBackground: silverGrayColor,
