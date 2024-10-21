@@ -1,7 +1,7 @@
 import { saveAs } from 'file-saver';
 import html2canvas from 'html2canvas';
 
-const DEFAULT_SCALE = 1;
+const DEFAULT_SCALE = 3;
 
 const removeMapControllers = (el: Document) => {
   const elementList = el.querySelectorAll(
