@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box',
     padding: 0,
     backgroundColor: (theme.palette.primary as ColorScheme).containerColor,
-    borderRadius: '16px',
+    borderRadius: '40px',
   },
   button: {
     '&:hover': {
