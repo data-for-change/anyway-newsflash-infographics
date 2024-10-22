@@ -22,8 +22,6 @@ const usingHtml2Canvas = (fileName: string, widgetElement: HTMLElement, scale: n
     useCORS: true, // to allow loading maps
     imageTimeout: 3000,
     scale,
-    backgroundColor:null,
-    foreignObjectRendering: true,
     onclone: (el) => removeMapControllers(el),
   })
     .then(function (canvas) {
