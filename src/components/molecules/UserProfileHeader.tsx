@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     color: `${oceanBlueColor}`,
     padding: theme.spacing(1),
     textDecoration: 'none',
+    fontFamily: 'Rubik',
     '&:hover': {
       color: `${skyBlueColor}`,
     },
