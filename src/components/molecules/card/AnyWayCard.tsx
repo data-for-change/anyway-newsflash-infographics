@@ -24,7 +24,7 @@ import { IDateComments } from 'models/WidgetData';
 import { OrgLogoData } from 'const/cards.const';
 import CardBackgroundImage from './CardBackgroundImage';
 
-const DEFAULTE_SIZE = 1;
+const DEFAULTE_SIZE = 0.9;
 export interface CardSizeOptions {
   size?: number;
 }
