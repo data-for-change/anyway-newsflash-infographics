@@ -57,12 +57,12 @@ const useStyles = makeStyles((theme) => ({
     height: 'calc(100% - 60px)',
     width: 'calc(100% - 80px)',
     marginTop: '60px',
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    marginLeft: '40px',
+    marginRight: '40px',
     boxSizing: 'border-box',
-    padding: 0,
+    padding: theme.spacing(2),
     backgroundColor: (theme.palette.primary as ColorScheme).containerColor,
-    borderRadius: '40px',
+    borderRadius: '16px',
   },
   button: {
     '&:hover': {
