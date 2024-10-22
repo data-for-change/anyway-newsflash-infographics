@@ -14,7 +14,7 @@ export function getSizes(variant: CardVariant, factor: number): CardSizes {
   const width = cardWidth * factor;
   const headerHeight = variant.header === HeaderVariant.None ? 0 : cardHeaderHeight * factor;
   const footerHeight = variant.footer === FooterVariant.None ? 0 : cardFooterHeight * factor;
-  const contentHeight = height - headerHeight - 2 * footerHeight;
+  const contentHeight = height - headerHeight - footerHeight;
 
   return {
     height,
