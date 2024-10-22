@@ -54,15 +54,15 @@ const useStyles = makeStyles((theme) => ({
     color: (theme.palette.primary as ColorScheme).fontColor,
   },
   content: {
-    height: 'calc(100% - 20px)',
-    width: 'calc(100% - 40px)',
-    marginTop: '20px',
+    height: 'calc(100% - 60px)',
+    width: 'calc(100% - 80px)',
+    marginTop: '60px',
     marginLeft: 'auto',
     marginRight: 'auto',
     boxSizing: 'border-box',
     padding: 0,
     backgroundColor: (theme.palette.primary as ColorScheme).containerColor,
-    borderRadius: '16px',
+    borderRadius: '40px',
   },
   button: {
     '&:hover': {
