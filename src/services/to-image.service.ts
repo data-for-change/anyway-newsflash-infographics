@@ -23,6 +23,7 @@ const usingHtml2Canvas = (fileName: string, widgetElement: HTMLElement, scale: n
     imageTimeout: 3000,
     scale,
     backgroundColor:null,
+    foreignObjectRendering: true,
     onclone: (el) => removeMapControllers(el),
   })
     .then(function (canvas) {
