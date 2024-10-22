@@ -54,7 +54,11 @@ const useStyles = makeStyles((theme) => ({
     color: (theme.palette.primary as ColorScheme).fontColor,
   },
   content: {
-    height: '100%',
+    height: 'calc(100% - 20px)',
+    width: 'calc(100% - 40px)',
+    marginTop: '20px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     boxSizing: 'border-box',
     padding: 0,
     backgroundColor: (theme.palette.primary as ColorScheme).containerColor,
