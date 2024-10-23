@@ -22,7 +22,7 @@ jobs:
       - name: Build
         run: npm run build
       - name: Deploy
-        uses: w9jds/firebase-action@master
+        uses: w9jds/firebase-action@v13.22.1
         with:
           args: deploy --only hosting:master
         env:
