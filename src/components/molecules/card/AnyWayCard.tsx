@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
   },
   tooltip: {
-    fontSize: '13px',
+    fontSize: '20px',
   },
 }));
 
