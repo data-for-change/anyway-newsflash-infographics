@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
   },
   tooltip: {
-    fontSize: '13px',
+    fontSize: '20px',
   },
 }));
 
@@ -163,7 +163,7 @@ const AnyWayCard: FC<IProps> = ({
       <Card ref={refFn} className={classes.root} variant="outlined">
         <Box height={sizes.height} width={sizes.width} position="relative" padding={3}>
           {/* HEADER */}
-          {organizationData?.key !== 'n12'?<CardBackgroundImage variant={variant.header} />:<></>}
+          {organizationData?.key !== 'n12' ? (<CardBackgroundImage variant={variant.header} {...(organizationData?.key && { org: organizationData.key })} />) : null}
           {variant.header !== HeaderVariant.None && (
             <Box height={sizes.headerHeight} width="100%">
               <CardHeader

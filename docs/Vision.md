@@ -2,7 +2,10 @@
 
 ## About ANYWAY
 
-ANYWAY give interactive map, Database engine, and information on Traffic accidents in israel. the data originating from the Central Bureau of Statistics and United Hazalah’s, as well as traffic violations as reported by road vigilantes.
+ANYWAY is Data For Change’s first community based project aiming to reduce road fatalities via data driven decisions, public awareness and government’s data transparency.
+Our community of devoted volunteers build technological tools for analysis and accessibility of reliable information of road accidents, and their prevention, in line with the "Vision Zero" approach.
+The first tool we developed, is an interactive map showing car accidents [found here](www.anyway.co.il)
+ANYWAY MAP is an interactive map, Database engine, and information on Traffic accidents in israel. the data originating from the Central Bureau of Statistics, as well as traffic violations as reported by road vigilantes.
 
 The goal of the project is to primarily raise public awareness for Road Hazard and about available
 solution's to improve road safety. This is used to create pressure on decision makers to perform necessary infrastructural repairs as well as create discourse regarding solutions.
