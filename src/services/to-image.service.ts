@@ -17,8 +17,8 @@ export const widgetToImageH2I = (fileName: string, widgetElement: HTMLElement) =
 
 // https://github.com/bubkoo/html-to-image
 const usingHtml2Image = (fileName: string, widgetElement: HTMLElement, scale = DEFAULT_SCALE) => {
-  const canvasWidth = widgetElement.offsetWidth * scale;
-  const canvasHeight = widgetElement.offsetHeight * scale;
+  const canvasWidth = 3300;
+  const canvasHeight = 3300;
 
   htmlToImage.toPng(widgetElement, {
     canvasWidth,
