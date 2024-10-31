@@ -16,9 +16,14 @@ export const widgetToImageH2I = (fileName: string, widgetElement: HTMLElement) =
 };
 
 // https://github.com/bubkoo/html-to-image
-const usingHtml2Image = (fileName: string, widgetElement: HTMLElement) => {
+const usingHtml2Image = (fileName: string, widgetElement: HTMLElement, scale = DEFAULT_SCALE) => {
+  const canvasWidth = widgetElement.offsetWidth * scale;
+  const canvasHeight = widgetElement.offsetHeight * scale;
 
-  htmlToImage.toPng(widgetElement)
+  htmlToImage.toPng(widgetElement, {
+    canvasWidth,
+    canvasHeight,
+  })
   .then(function (blob: any) {
     saveAs(blob, `${fileName}.png`);
   });
