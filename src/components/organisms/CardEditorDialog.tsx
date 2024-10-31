@@ -5,7 +5,8 @@ import WidgetWrapper from 'components/molecules/widgets/WidgetWrapper';
 import { Box, Checkbox, FormControlLabel, FormGroup } from '@material-ui/core';
 import AnyWayCard, { CardSizeOptions } from 'components/molecules/card/AnyWayCard';
 import { MetaTag, ErrorBoundary, Typography, Button, Slider } from 'components/atoms';
-import widgetToImage from 'services/to-image.service';
+import { getWidgetType, CardType } from 'services/widgets.style.service';
+import {widgetToImageH2I, widgetToImageH2C} from 'services/to-image.service';
 import { useTranslation } from 'react-i18next';
 import { blueVioletColor } from 'style';
 import { logosSourceMap, OrgLogoData } from 'const/cards.const';
@@ -32,9 +33,14 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
   const getCardRef = (element: HTMLElement) => setCardElement(element);
   const organizationName = userStore.userOrganizations ? userStore.userOrganizations[0] : '';
   const organizationData: OrgLogoData | undefined = logosSourceMap.find((p) => p.key === organizationName);
+  const widgetType = getWidgetType(widgetName);
   const imgDownloadHandler = () => {
     if (cardElement && cardElement instanceof HTMLElement) {
-      widgetToImage(widgetName, cardElement);
+      if (widgetType === CardType.Map) {
+        widgetToImageH2C(widgetName, cardElement);
+      } else {
+        widgetToImageH2I(widgetName, cardElement);
+      }
     }
   };
 

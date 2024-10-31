@@ -1,7 +1,8 @@
 import { saveAs } from 'file-saver';
+import * as htmlToImage from 'html-to-image';
 import html2canvas from 'html2canvas';
 
-const DEFAULT_SCALE = 1;
+const DEFAULT_SCALE = 3;
 
 const removeMapControllers = (el: Document) => {
   const elementList = el.querySelectorAll(
@@ -10,7 +11,20 @@ const removeMapControllers = (el: Document) => {
   Array.from(elementList).forEach((el) => el.remove());
 };
 
-const widgetToImage = (fileName: string, widgetElement: HTMLElement, scale = DEFAULT_SCALE) => {
+export const widgetToImageH2I = (fileName: string, widgetElement: HTMLElement) => {
+  usingHtml2Image(fileName, widgetElement);
+};
+
+// https://github.com/bubkoo/html-to-image
+const usingHtml2Image = (fileName: string, widgetElement: HTMLElement) => {
+
+  htmlToImage.toPng(widgetElement)
+  .then(function (blob: any) {
+    saveAs(blob, `${fileName}.png`);
+  });
+};
+
+export const widgetToImageH2C = (fileName: string, widgetElement: HTMLElement, scale = DEFAULT_SCALE) => {
   usingHtml2Canvas(fileName, widgetElement, scale);
 };
 
@@ -31,5 +45,3 @@ const usingHtml2Canvas = (fileName: string, widgetElement: HTMLElement, scale: n
       saveAs(blob, `${fileName}.png`);
     });
 };
-
-export default widgetToImage;
