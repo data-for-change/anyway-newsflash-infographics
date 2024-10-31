@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import {ColorScheme} from 'style'
 import { Card, CardContent, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import widgetToImage from 'services/to-image.service';
+import {widgetToImageH2I, widgetToImageH2C} from 'services/to-image.service';
 
 // TEXT BOX COMPONENT ADD FEATURE
 import  TextBox from 'components/organisms/TextBox'
@@ -15,7 +15,7 @@ import TitleIcon from '@material-ui/icons/Title';
 import { fontFamilyString } from 'style';
 import CardHeader from './CardHeader';
 import SocialShare from 'components/atoms/SocialShare';
-import { FooterVariant, getWidgetVariant, HeaderVariant } from 'services/widgets.style.service';
+import { FooterVariant, getWidgetVariant, HeaderVariant, getWidgetType, CardType } from 'services/widgets.style.service';
 import { getSizes } from './card.util';
 import CardFooter from './CardFooter';
 import CardEditor from 'components/organisms/CardEditorDialog';
@@ -103,15 +103,19 @@ const AnyWayCard: FC<IProps> = ({
   const variant = getWidgetVariant(widgetName);
   const factor = getSizeFactor(sizeOptions);
   const sizes = getSizes(variant, factor);
+  const widgetType = getWidgetType(widgetName);
 
   const classes = useStyles();
 
   const imgDownloadHandler = () => {
     if (element && element instanceof HTMLElement) {
-      widgetToImage(widgetName, element);
+      if (widgetType === CardType.Map) {
+        widgetToImageH2C(widgetName, element);
+      } else {
+        widgetToImageH2I(widgetName, element);
+      }
     }
   };
-
   
   let Widget;
 
