@@ -14,10 +14,15 @@ export enum FooterVariant {
   LogoWithRange,
 }
 
+export enum CardType {
+  None,
+  Map,
+}
 export interface CardVariant {
   header: HeaderVariant;
   footer: FooterVariant;
 }
+
 
 // === widgets variants === //
 // determine the footer and  header style for each card
@@ -65,4 +70,15 @@ const widgetVariants: { [index: string]: CardVariant } = {
 export function getWidgetVariant(widgetName: string) {
   const variant = widgetVariants[widgetName];
   return variant || widgetVariants.defaultVariant;
+}
+
+const widgetTypes: { [index: string]: CardType } = {
+  defaultType: CardType.None,
+  [WidgetName.most_severe_accidents]: CardType.Map ,
+  [WidgetName.accidents_heat_map]:CardType.Map,
+};
+
+export function getWidgetType(widgetName: string) {
+  const widgetType = widgetTypes[widgetName];
+  return widgetType || widgetTypes.defaultType;
 }
