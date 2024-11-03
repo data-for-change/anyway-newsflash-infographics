@@ -109,7 +109,7 @@ const AnyWayCard: FC<IProps> = ({
 
   const imgDownloadHandler = () => {
     if (element && element instanceof HTMLElement) {
-      if (widgetType === CardType.Map) {
+      if (widgetType === CardType.MapAndDesigns) {
         widgetToImageH2C(widgetName, element);
       } else {
         widgetToImageH2I(widgetName, element);

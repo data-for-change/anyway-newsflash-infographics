@@ -36,7 +36,7 @@ const CardEditor: FC<IProps> = ({ isOpen, onClose, widgetName, text }) => {
   const widgetType = getWidgetType(widgetName);
   const imgDownloadHandler = () => {
     if (cardElement && cardElement instanceof HTMLElement) {
-      if (widgetType === CardType.Map) {
+      if (widgetType === CardType.MapAndDesigns) {
         widgetToImageH2C(widgetName, cardElement);
       } else {
         widgetToImageH2I(widgetName, cardElement);
