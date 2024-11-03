@@ -2,7 +2,7 @@ import { saveAs } from 'file-saver';
 import * as htmlToImage from 'html-to-image';
 import html2canvas from 'html2canvas';
 
-const DEFAULT_SCALE = 3;
+const DEFAULT_SCALE = 4;
 
 const removeMapControllers = (el: Document) => {
   const elementList = el.querySelectorAll(
@@ -16,7 +16,7 @@ export const widgetToImageH2I = (fileName: string, widgetElement: HTMLElement) =
 };
 
 // https://github.com/bubkoo/html-to-image
-const usingHtml2Image = (fileName: string, widgetElement: HTMLElement, scale = DEFAULT_SCALE) => {
+const usingHtml2Image = (fileName: string, widgetElement: HTMLElement) => {
   const canvasWidth = 3300;
   const canvasHeight = 3300;
 

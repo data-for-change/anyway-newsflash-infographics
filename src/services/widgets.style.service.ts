@@ -16,7 +16,7 @@ export enum FooterVariant {
 
 export enum CardType {
   None,
-  Map,
+  MapAndDesigns,
 }
 export interface CardVariant {
   header: HeaderVariant;
@@ -74,8 +74,13 @@ export function getWidgetVariant(widgetName: string) {
 
 const widgetTypes: { [index: string]: CardType } = {
   defaultType: CardType.None,
-  [WidgetName.most_severe_accidents]: CardType.Map ,
-  [WidgetName.accidents_heat_map]:CardType.Map,
+  [WidgetName.most_severe_accidents]: CardType.MapAndDesigns ,
+  [WidgetName.accidents_heat_map]:CardType.MapAndDesigns,
+  [WidgetName.injured_count_by_severity]:CardType.MapAndDesigns,
+  [WidgetName.accident_count_by_severity]:CardType.MapAndDesigns,
+  [WidgetName.vision_zero_2_plus_1]:CardType.MapAndDesigns,
+  [WidgetName.vision_zero_10_50_90]:CardType.MapAndDesigns,
+  [WidgetName.vision_zero_bike]:CardType.MapAndDesigns,
 };
 
 export function getWidgetType(widgetName: string) {
