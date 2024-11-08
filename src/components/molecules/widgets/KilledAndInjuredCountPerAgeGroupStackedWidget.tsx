@@ -9,7 +9,7 @@ interface IProps {
   editorBarOptions: Record<number, boolean>;
 }
 
-const : FC<IProps> = ({ data, editorBarOptions }) => {
+const KilledAndInjuredCountPerAgeGroupStackedWidget: FC<IProps> = ({ data, editorBarOptions }) => {
   const { text } = data;
   debugger;
   const multiBarSeries = createBarWidget(data, editorBarOptions);
