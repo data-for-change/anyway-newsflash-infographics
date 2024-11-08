@@ -65,6 +65,8 @@ const widgetVariants: { [index: string]: CardVariant } = {
     footer: FooterVariant.LogoWithRange,
   },
   [WidgetName.accidents_heat_map]: { header: HeaderVariant.Centered, footer: FooterVariant.LogoWithRange },
+  [WidgetName.killed_and_injured_count_per_age_group_stacked]: { header: HeaderVariant.Centered, footer: FooterVariant.LogoWithRange },
+
 };
 
 export function getWidgetVariant(widgetName: string) {

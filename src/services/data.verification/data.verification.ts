@@ -106,6 +106,10 @@ export const verifiedWidgetData = (widget: any) => {
       isValid = items.every((item: any) => validNumber(item.label_key) && validDataSeries(item.series));
       break;
     }
+    case 'killed_and_injured_count_per_age_group_stacked': {
+      isValid = items.every((item: any) => validString(item.label_key) && validDataSeries(item.series));
+      break;
+    }
     case 'accident_count_by_day_night': {
       isValid = items.every((item: any) => validString(item.day_night) && validNumber(item.count));
       break;

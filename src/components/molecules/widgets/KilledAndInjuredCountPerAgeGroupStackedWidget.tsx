@@ -9,13 +9,14 @@ interface IProps {
   editorBarOptions: Record<number, boolean>;
 }
 
-const CountInjuredByYearBarWidget: FC<IProps> = ({ data, editorBarOptions }) => {
+const : FC<IProps> = ({ data, editorBarOptions }) => {
   const { text } = data;
-  debugger
+  debugger;
   const multiBarSeries = createBarWidget(data, editorBarOptions);
   return <MultiBarChart isStacked={true} isPercentage={false} data={multiBarSeries}
                         textLabel={text.title}
+                        yLabels={Object.values(text.labels_map)}
                         subtitle={text.subtitle}
                         editorBarOptions={editorBarOptions} />;
 };
-export default CountInjuredByYearBarWidget;
+export default KilledAndInjuredCountPerAgeGroupStackedWidget;

@@ -123,6 +123,7 @@ export interface IWidgetInjuredByYearData extends IWidgetDataBase {
     count: number;
   }[];
 }
+
 export interface IWidgetStreetViewData extends IWidgetDataBase {
   items: IPoint;
 }

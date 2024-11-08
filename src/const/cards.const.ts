@@ -17,7 +17,8 @@ export const operationalCards: WidgetName[] = [
   WidgetName.injured_count_by_accident_year,
   // WidgetName.accident_count_by_driver_type,
   WidgetName.killed_and_injured_count_per_age_group,
-  WidgetName.accident_count_by_day_night
+  WidgetName.accident_count_by_day_night,
+  WidgetName.killed_and_injured_count_per_age_group_stacked
 ];
 
 export type OrgLogoData =  {key : string, path:string} ;

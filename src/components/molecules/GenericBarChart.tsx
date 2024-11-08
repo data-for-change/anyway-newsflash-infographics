@@ -35,6 +35,7 @@ interface ISingleBarChartProps extends IBarChartBaseProps {}
 
 interface IMultiBarChartProps extends IBarChartBaseProps {
   isStacked: boolean;
+  yLabels?: string[];
   editorBarOptions?: Record<number, boolean>;
 }
 
@@ -106,14 +107,16 @@ const MultiBarChart: FC<IMultiBarChartProps> = ({
   isStacked,
   textLabel,
   subtitle,
+  yLabels,
   editorBarOptions,
 }) => {
   const theme = useTheme();
   const colors = (theme.palette.primary as ColorScheme).barChartColors;
 
-  const yLabels = data ? Object.keys(data[0]) : [];
-  yLabels.splice(0, 1);
-  const maxBarsNum = yLabels.length;
+  const defaultYLabels = data ? Object.keys(data[0]) : [];
+  const costumeYLabels = yLabels || defaultYLabels.slice(1);
+
+  const maxBarsNum = costumeYLabels.length;
   const filteredColors: Record<string, any> =
     editorBarOptions && Object.keys(editorBarOptions).length !== 0
       ? Object.values(editorBarOptions)
@@ -147,14 +150,14 @@ const MultiBarChart: FC<IMultiBarChartProps> = ({
             key={i}
             stackId={isStacked ? 'stack_1' : undefined}
             fill={filteredColors[i]}
-            dataKey={yLabels[i]}
+            dataKey={costumeYLabels[i]}
             style={barStyle}
             isAnimationActive={false}
           >
             {!isStacked && (
               <LabelList
                 content={<CustomizedLabel isPercentage={isPercentage} isStacked={isStacked} />}
-                dataKey={yLabels[i]}
+                dataKey={costumeYLabels[i]}
               />
             )}
           </Bar>
