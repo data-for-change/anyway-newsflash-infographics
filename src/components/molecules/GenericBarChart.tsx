@@ -114,9 +114,9 @@ const MultiBarChart: FC<IMultiBarChartProps> = ({
   const colors = (theme.palette.primary as ColorScheme).barChartColors;
 
   const defaultYLabels = data ? Object.keys(data[0]) : [];
-  const costumeYLabels = yLabels || defaultYLabels.slice(1);
+  const customYLabels = yLabels || defaultYLabels.slice(1);
 
-  const maxBarsNum = costumeYLabels.length;
+  const maxBarsNum = customYLabels.length;
   const filteredColors: Record<string, any> =
     editorBarOptions && Object.keys(editorBarOptions).length !== 0
       ? Object.values(editorBarOptions)
@@ -150,14 +150,14 @@ const MultiBarChart: FC<IMultiBarChartProps> = ({
             key={i}
             stackId={isStacked ? 'stack_1' : undefined}
             fill={filteredColors[i]}
-            dataKey={costumeYLabels[i]}
+            dataKey={customYLabels[i]}
             style={barStyle}
             isAnimationActive={false}
           >
             {!isStacked && (
               <LabelList
                 content={<CustomizedLabel isPercentage={isPercentage} isStacked={isStacked} />}
-                dataKey={costumeYLabels[i]}
+                dataKey={customYLabels[i]}
               />
             )}
           </Bar>
