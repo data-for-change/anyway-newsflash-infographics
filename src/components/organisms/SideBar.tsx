@@ -11,8 +11,7 @@ import RootStore from 'store/root.store';
 import { InfiniteScroll } from 'components/atoms';
 import SideBarMap from 'components/molecules/SideBarMap';
 import { useTranslation } from 'react-i18next';
-
-const INFINITE_SCROLL_FETCH_SIZE = 100;
+import { Direction } from 'hooks/useScrollObserver.hooks';
 
 interface IProps {}
 
@@ -37,10 +36,20 @@ const SideBar: FC<IProps> = () => {
   const mapTitle = `${t('sideBar')}`;
   const location = newsFlashStore.activeNewsFlashLocation;
   const loading = newsFlashStore.newsFlashLoading;
+  const initialPageNumber = newsFlashStore.newsFlashInitialPageNumber;
+  const currentPageNumber = newsFlashStore.newsFlashPageNumber;
+  const totalPages = newsFlashStore.newsFlashCollection.pagination.totalPages;
 
-  const fetchMoreNewsItems = useCallback(() => {
-    newsFlashStore.infiniteFetchLimit(INFINITE_SCROLL_FETCH_SIZE);
-  }, [newsFlashStore]);
+  const fetchMoreNewsItems = useCallback(
+    (direction: Direction) => {
+      if (direction === Direction.PREV && initialPageNumber !== 1 && currentPageNumber > 1) {
+        newsFlashStore.filterNewsFlashCollection(direction);
+      } else if (totalPages > currentPageNumber) {
+        newsFlashStore.filterNewsFlashCollection(Direction.NEXT);
+      }
+    },
+    [currentPageNumber, initialPageNumber, newsFlashStore, totalPages],
+  );
 
   return (
     <Box display="flex" flexDirection="column" justifyContent="center" alignItems="stretch">
@@ -51,7 +60,7 @@ const SideBar: FC<IProps> = () => {
             <NewsFlashFilterPanel />
           </ErrorBoundary>
         </Box>
-        <InfiniteScroll onScrollEnd={fetchMoreNewsItems}>
+        <InfiniteScroll onScroll={fetchMoreNewsItems} loading={newsFlashStore.newsFlashLoading}>
           <News />
         </InfiniteScroll>
       </Box>
@@ -62,7 +71,7 @@ const SideBar: FC<IProps> = () => {
         {location && (
           <ErrorBoundary>
             <SideBarMap items={[location]} />
-          </ErrorBoundary>  
+          </ErrorBoundary>
         )}
       </Box>
     </Box>

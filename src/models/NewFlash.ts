@@ -17,3 +17,15 @@ export interface INewsFlash {
   source: string;
   critical?: boolean;
 }
+
+export interface IPagination {
+  pageNumber: number;
+  pageSize: number;
+  totalRecords: number;
+  totalPages: number;
+}
+
+export interface INewsFlashCollection {
+  data: INewsFlash[];
+  pagination: IPagination;
+}

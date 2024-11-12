@@ -1,9 +1,10 @@
 import { runInAction, makeAutoObservable } from 'mobx';
 import { SourceFilterEnum } from 'models/SourceFilter';
 import { fetchNews, IFetchNewsQueryParams } from 'services/news.data.service';
-import { INewsFlash } from 'models/NewFlash';
+import { INewsFlash, INewsFlashCollection } from 'models/NewFlash';
 import { IPoint } from 'models/Point';
 import RootStore from './root.store';
+import { Direction } from 'hooks/useScrollObserver.hooks';
 
 const DEFAULT_TIME_FILTER = 5;
 const DEFAULT_LOCATION = { latitude: 32.0853, longitude: 34.7818 };
@@ -11,9 +12,13 @@ const LOCAL_FILTERS: { [key in SourceFilterEnum]?: (newsFlashCollection: Array<I
 
 export default class NewsFlashStore {
   rootStore: RootStore;
-  newsFlashCollection: Array<INewsFlash> = [];
+  newsFlashCollection: INewsFlashCollection = {
+    data: [] as INewsFlash[],
+    pagination: { pageNumber: 1, pageSize: 100, totalRecords: 0, totalPages: 0 },
+  };
   activeNewsFlashId: number = 0; // active newsflash id
-  newsFlashFetchOffSet = 0;
+  newsFlashPageNumber = 1;
+  newsFlashInitialPageNumber = 1;
   newsFlashActiveFilter: SourceFilterEnum = SourceFilterEnum.all;
   newsFlashLoading: boolean = false;
   newsFlashWidgetsTimerFilter = DEFAULT_TIME_FILTER; // newsflash time filter (in years ago, 5 is the default)
@@ -24,7 +29,7 @@ export default class NewsFlashStore {
   }
 
   get activeNewsFlash(): INewsFlash | undefined {
-    return this.newsFlashCollection.find((item) => item.id === this.activeNewsFlashId);
+    return this.newsFlashCollection?.data.find((item) => item.id === this.activeNewsFlashId);
   }
 
   selectNewsFlash(id: number): void {
@@ -89,47 +94,49 @@ export default class NewsFlashStore {
     if (filter !== this.newsFlashActiveFilter) {
       runInAction(() => {
         this.newsFlashActiveFilter = filter;
-        this.newsFlashFetchOffSet = 0;
+        this.newsFlashPageNumber = 0;
       });
       if (!(filter in LOCAL_FILTERS)) {
         runInAction(() => {
-          this.newsFlashCollection = [];
+          this.newsFlashCollection.data = [];
         });
       }
       this.filterNewsFlashCollection();
     }
   }
 
-  filterNewsFlashCollection(): void {
+  async filterNewsFlashCollection(direction: Direction = Direction.NEXT) {
     runInAction(() => (this.newsFlashLoading = true));
     if (this.newsFlashActiveFilter in LOCAL_FILTERS) {
       const filterMethod = LOCAL_FILTERS[this.newsFlashActiveFilter];
-      const filtered = filterMethod && filterMethod(this.newsFlashCollection);
-      runInAction(() => (this.newsFlashCollection = [...(filtered || [])]));
+      const filtered = filterMethod && filterMethod(this.newsFlashCollection.data);
+      runInAction(() => (this.newsFlashCollection.data = [...(filtered || [])]));
       runInAction(() => (this.newsFlashLoading = false));
     } else {
+      const prevPage = this.newsFlashInitialPageNumber - 1;
       const queryParams: IFetchNewsQueryParams = {
-        offSet: this.newsFlashFetchOffSet
+        pageNumber: direction === Direction.NEXT ? this.newsFlashPageNumber + 1 : prevPage,
       };
-      if (this.newsFlashActiveFilter === "critical") {
-        queryParams["critical"] = true;
+      if (this.newsFlashActiveFilter === 'critical') {
+        queryParams['critical'] = true;
       } else {
-        queryParams["source"] = this.newsFlashActiveFilter;
+        queryParams['source'] = this.newsFlashActiveFilter;
       }
-      fetchNews(queryParams).then((data: any) => {
+
+      fetchNews(queryParams).then((res: any) => {
         runInAction(() => (this.newsFlashLoading = false));
-        if (data) {
-          runInAction(() => (this.newsFlashCollection = [...this.newsFlashCollection, ...data]));
+        if (res) {
+          runInAction(() => {
+            this.newsFlashCollection = {
+              data: res.data,
+              pagination: res.pagination,
+            };
+            runInAction(() => (this.newsFlashPageNumber = res.pagination.pageNumber));
+          });
         } else {
-          console.error(`filterNewsFlashCollection(filter:${this.newsFlashActiveFilter}) invalid data:`, data);
+          console.error(`filterNewsFlashCollection(filter:${this.newsFlashActiveFilter}) invalid data:`, res);
         }
       });
-    }
-  }
-  infiniteFetchLimit(fetchSize: number): void {
-    runInAction(() => (this.newsFlashFetchOffSet += fetchSize));
-    if (this.newsFlashCollection.length >= this.newsFlashFetchOffSet - fetchSize) {
-      this.filterNewsFlashCollection();
     }
   }
 

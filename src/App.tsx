@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useParams } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import { Footer } from './components/organisms/Footer';
 import { Box, createStyles, makeStyles, Theme, ThemeProvider } from '@material-ui/core';
@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '@material-ui/core/styles';
 import PopUpRedirect from './components/atoms/PopUpRedirect';
 import WidgetsTemplate from './components/organisms/WidgetsTemplate';
-import {observer} from "mobx-react-lite";
+import { observer } from 'mobx-react-lite';
 // main components height - must add up to 100
 
 const headerHeight = '5vh';
@@ -31,7 +31,8 @@ const App: FC = () => {
   const classes = useStyles();
   const store = useStore();
   const theme = useTheme();
-
+  const { newsId } = useParams();
+  console.log('🚀 ~ newsId:', newsId);
   const appDir = i18n.dir();
 
   useEffect(() => {
