@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { MapContainer } from 'react-leaflet';
 import L, { LatLng } from 'leaflet';
 import { IPoint } from 'models/Point';
-import { INITIAL_CENTER, INITIAL_ZOOM } from 'const/generalConst';
+import { INITIAL_CENTER } from 'const/generalConst';
 import { uniquePoints } from 'utils/map.utils';
 import MapViewControl from 'services/MapViewControl';
 import GoogleMapsLayer from './GoogleMapsLayer';
@@ -20,9 +20,10 @@ const useStyles = makeStyles({
   },
 });
 
+// Default bounds set the default zoom when no default location in data param
 const DEFAULT_BOUNDS = [
-  L.latLng(29.5, 34.22), // most possible south-west point
-  L.latLng(33.271, 35.946), // most possible north-east point
+  L.latLng(31.761, 33.809), // most possible south-west point
+  L.latLng(32.329, 35.743), // most possible north-east point
 ];
 
 interface IProps {
@@ -31,13 +32,13 @@ interface IProps {
   data?: IPoint[];
 }
 
-const Map: FC<IProps> = ({ zoom = INITIAL_ZOOM, center = INITIAL_CENTER, data, children }) => {
+const Map: FC<IProps> = ({ center = INITIAL_CENTER, data, children }) => {
   const classes = useStyles();
 
   const bounds = getBounds(data);
 
   return (
-    <MapContainer zoom={zoom} center={center} className={classes.root}>
+    <MapContainer center={center} className={classes.root}>
       <MapViewControl bounds={bounds} />
       <GoogleMapsLayer />
       {children}
