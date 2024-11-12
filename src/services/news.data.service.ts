@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { INewsFlash } from 'models/NewFlash';
 import { IGpsData, IStreetData } from "models/WidgetData";
+import {IPoint} from "../models/Point";
 
 const errorNews: INewsFlash = {
   lat: -1,
@@ -68,16 +69,33 @@ function onErrorFetchNewsFlash() {
   return errorArr;
 }
 
-export function updateNews(newsId: number, newLocationQualification: any,
-                    streetLocation: IStreetData | null, gpsLocation: IGpsData | null) {
+interface IUpdateNews {
+  newsId: number,
+  newLocationQualification: any,
+  streetLocation?: IStreetData,
+  gpsLocation?: IGpsData,
+  pointLocation?: IPoint,
+}
+
+export function updateNews({
+  newsId,
+  newLocationQualification,
+  streetLocation,
+  gpsLocation,
+  pointLocation,
+} : IUpdateNews) {
   const data = [];
-  data.push(`newsflash_location_qualification=${newLocationQualification}`)
+  data.push(`newsflash_location_qualification=${newLocationQualification}`);
+  if (pointLocation) {
+    data.push(`lat=${pointLocation.latitude}`);
+    data.push(`lng=${pointLocation.longitude}`);
+  }
   if (gpsLocation) {
-    data.push(`road_segment_id=${gpsLocation.road_segment_id}`)
-    data.push(`road1=${gpsLocation.road1}`)
+    data.push(`road_segment_id=${gpsLocation.road_segment_id}`);
+    data.push(`road1=${gpsLocation.road1}`);
   } else if (streetLocation) {
-    data.push(`yishuv_name=${streetLocation.city.yishuv_name}`)
-    data.push(`street1_hebrew=${streetLocation.street.street_hebrew}`)
+    data.push(`yishuv_name=${streetLocation.city.yishuv_name}`);
+    data.push(`street1_hebrew=${streetLocation.street.street_hebrew}`);
   }
   const url = `${NEWS_FLASH_API}/${newsId}?${data.join('&')}`;
   axios
