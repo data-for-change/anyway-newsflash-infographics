@@ -32,8 +32,11 @@ interface IProps {
 }
 
 const LocationSelect: FC<IProps> = ({ onLocationChange, initialLocationGetter = null }) => {
+  const initialLocation = initialLocationGetter ? initialLocationGetter() : null;
+  const items = initialLocation ? [initialLocation] : [];
+
   return (
-  <Map>
+  <Map data={items}>
  <LocationPicker  onLocationChange={onLocationChange} initialLocationGetter={initialLocationGetter}/>
     </Map>
   );

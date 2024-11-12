@@ -34,6 +34,5 @@ export const showDemoCards = process.env.REACT_APP_SHOW_DEMO_CARDS === 'true';
 export const showOnlyOperCards = process.env.REACT_APP_SHOW_ONLY_OPER_CARDS === 'true';
 
 export const INITIAL_CENTER = { lat: 32.0853, lng: 34.7818 };
-export const INITIAL_ZOOM = parseInt(process.env.REACT_APP_DEFAULT_MAP_ZOOM!);
 
 export const SHOW_MOCK = process.env.REACT_APP_SHOW_MOCK_INFORMATION === 'true';
