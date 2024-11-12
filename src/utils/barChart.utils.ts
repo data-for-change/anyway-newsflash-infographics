@@ -10,7 +10,7 @@ export const barsWidgetsLabels: Record<string, Array<string>> = {
     ['textView.fatal.plural', 'textView.severe.plural', 'textView.light.plural'],
   'injured_count_by_accident_year':
     ['textView.killed.plural', 'textView.severeInjured.plural', 'textView.lightInjured.plural'],
-  }
+}
 
 export const barsWidgetsTitle: Record<string, string> = {
   'accident_count_by_accident_year': 'cardEditor.showAccidents',
@@ -75,7 +75,6 @@ export function createBarWidget (
   data: IWidgetMultiBarData,
   editorBarOptions: Record<number, boolean>
 ): BarDataMap[] {
-  debugger
   const { items, text } = data;
   const excludeList = (Object.keys(editorBarOptions).length !== 0) ?
     Object.values(editorBarOptions).map((include: any, index: number) => {

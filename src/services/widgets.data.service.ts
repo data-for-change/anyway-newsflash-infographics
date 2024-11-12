@@ -47,6 +47,7 @@ export const fetchWidgets = async ({
 }: IWidgetInput): Promise<ILocationData | undefined> => {
   try {
     const widgetsUrl = getWidgetUrl({ lang, newsId, yearAgo, gpsId, city, street });
+    console.log(widgetsUrl);
     const response = await axios.get(widgetsUrl);
     return processWidgetsFetchResponse(response);
   } catch (error) {

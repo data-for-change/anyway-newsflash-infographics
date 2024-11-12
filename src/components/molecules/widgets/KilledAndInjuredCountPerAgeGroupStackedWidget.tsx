@@ -11,11 +11,10 @@ interface IProps {
 
 const KilledAndInjuredCountPerAgeGroupStackedWidget: FC<IProps> = ({ data, editorBarOptions }) => {
   const { text } = data;
-  debugger;
   const multiBarSeries = createBarWidget(data, editorBarOptions);
   return <MultiBarChart isStacked={true} isPercentage={false} data={multiBarSeries}
                         textLabel={text.title}
-                        yLabels={Object.values(text.labels_map)}
+                        customYLabels={Object.values(text.labels_map)}
                         subtitle={text.subtitle}
                         editorBarOptions={editorBarOptions} />;
 };
