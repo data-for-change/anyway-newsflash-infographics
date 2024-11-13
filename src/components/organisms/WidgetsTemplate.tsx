@@ -21,7 +21,6 @@ const WidgetsTemplate: FC = () => {
   const organizationData: OrgLogoData | undefined = logosSourceMap.find((p) => p.key === organizationName);
 
   const widgetCards = widgetsData.map((widget, index, sizeOptions) => {
-    
     const widgetComponent = (
       <WidgetWrapper
         widget={widget}
