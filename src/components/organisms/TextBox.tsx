@@ -70,7 +70,7 @@ const TextBox: React.FC<IProps> = ({ isOpen,text,onClose}) => {
         <DialogWithHeader   fullWidth={false} isShowing={isOpen} onClose={onCloseInitValues} title={t('infografic.transaction')}>
             <Box className={classes.root}>
                 <Box className={classes.text} maxWidth={380}>
-                    <Typography.Body1>
+                    <Typography.Body1 defaultTheme>
                             {text}
                     </Typography.Body1>
                 </Box>
@@ -79,7 +79,7 @@ const TextBox: React.FC<IProps> = ({ isOpen,text,onClose}) => {
                         <Box>
                             <img className={classes.copyImg} src={copyToClickBoard?CopyImageGrey:CopyImageWhite} alt="" />
                             <Box className={classes.copyMessage}>
-                            <Typography.Body2>{copyMessage}</Typography.Body2>
+                            <Typography.Body2 defaultTheme>{copyMessage}</Typography.Body2>
                             </Box>
                         </Box>
                     </AnyWayButton>

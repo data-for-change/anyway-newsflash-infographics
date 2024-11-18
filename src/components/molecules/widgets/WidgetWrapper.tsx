@@ -42,6 +42,7 @@ import { IPoint } from 'models/Point';
 import { WidgetName } from 'models/WidgetName';
 import KilledAndInjuredCountPerAgeGroupWidget from './KilledAndInjuredCountPerAgeGroupWidget';
 import { getInjuredBySeverityVerbLabel } from 'utils/text.utils';
+import KilledAndInjuredCountPerAgeGroupStackedWidget from './KilledAndInjuredCountPerAgeGroupStackedWidget';
 
 interface IProps {
   widget: IWidgetBase;
@@ -147,6 +148,10 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, editorBa
     }
     case WidgetName.injured_count_by_accident_year: {
       widgetComponent = <CountInjuredByYearBarWidget data={data as IWidgetMultiBarData} editorBarOptions={editorBarOptions} />;
+      break;
+    }
+    case WidgetName.killed_and_injured_count_per_age_group_stacked: {
+      widgetComponent = <KilledAndInjuredCountPerAgeGroupStackedWidget data={data as IWidgetMultiBarData} editorBarOptions={editorBarOptions} />;
       break;
     }
     case WidgetName.accident_count_by_day_night: {

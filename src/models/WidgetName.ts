@@ -22,4 +22,5 @@ export enum WidgetName {
   injured_accidents_with_pedestrians = 'injured_accidents_with_pedestrians',
   injured_count_by_severity = 'injured_count_by_severity',
   killed_and_injured_count_per_age_group = 'killed_and_injured_count_per_age_group',
+  killed_and_injured_count_per_age_group_stacked = 'killed_and_injured_count_per_age_group_stacked',
 }
