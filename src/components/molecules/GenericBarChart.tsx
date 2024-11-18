@@ -35,6 +35,7 @@ interface ISingleBarChartProps extends IBarChartBaseProps {}
 
 interface IMultiBarChartProps extends IBarChartBaseProps {
   isStacked: boolean;
+  customYLabels?: string[];
   editorBarOptions?: Record<number, boolean>;
 }
 
@@ -106,13 +107,15 @@ const MultiBarChart: FC<IMultiBarChartProps> = ({
   isStacked,
   textLabel,
   subtitle,
+  customYLabels,
   editorBarOptions,
 }) => {
   const theme = useTheme();
   const colors = (theme.palette.primary as ColorScheme).barChartColors;
 
-  const yLabels = data ? Object.keys(data[0]) : [];
-  yLabels.splice(0, 1);
+  const defaultYLabels = data ? Object.keys(data[0]) : [];
+  const yLabels= customYLabels  || defaultYLabels.slice(1);
+
   const maxBarsNum = yLabels.length;
   const filteredColors: Record<string, any> =
     editorBarOptions && Object.keys(editorBarOptions).length !== 0
