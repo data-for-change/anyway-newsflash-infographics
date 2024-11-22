@@ -18,6 +18,7 @@ import {
   IWidgetAccidentCountByCarType,
   IWidgetInjuredAccidentsWithPedestrians,
   IWidgetKilledAndInjuredCountPerAgeGroup,
+  IWidgetAccidentSeverityByCrossLocationData,
 } from 'models/WidgetData';
 import visionZeroImage from 'assets/vision_zero_2_plus_1.png';
 import vision_zero_10_50_90 from 'assets/vision_zero_10_50_90.png';
@@ -43,6 +44,7 @@ import { WidgetName } from 'models/WidgetName';
 import KilledAndInjuredCountPerAgeGroupWidget from './KilledAndInjuredCountPerAgeGroupWidget';
 import { getInjuredBySeverityVerbLabel } from 'utils/text.utils';
 import KilledAndInjuredCountPerAgeGroupStackedWidget from './KilledAndInjuredCountPerAgeGroupStackedWidget';
+import AccidentSeverityByCrossLocation from './AccidentSeverityByCrossLocation';
 
 interface IProps {
   widget: IWidgetBase;
@@ -219,6 +221,12 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, editorBa
           data={data as IWidgetInjuredAccidentsWithPedestrians}
           segmentText={segmentText}
         />
+      );
+      break;
+    }
+    case WidgetName.accident_severity_by_cross_location: {
+      widgetComponent = (
+        <AccidentSeverityByCrossLocation  data={data as IWidgetAccidentSeverityByCrossLocationData} />
       );
       break;
     }

@@ -66,6 +66,7 @@ const widgetVariants: { [index: string]: CardVariant } = {
   },
   [WidgetName.accidents_heat_map]: { header: HeaderVariant.Centered, footer: FooterVariant.LogoWithRange },
   [WidgetName.killed_and_injured_count_per_age_group_stacked]: { header: HeaderVariant.Centered, footer: FooterVariant.LogoWithRange },
+  [WidgetName.accident_severity_by_cross_location]: { header: HeaderVariant.Centered, footer: FooterVariant.LogoWithRange },
 
 };
 
@@ -80,6 +81,7 @@ const widgetTypes: { [index: string]: CardType } = {
   [WidgetName.accidents_heat_map]:CardType.MapAndDesigns,
   [WidgetName.injured_count_by_severity]:CardType.MapAndDesigns,
   [WidgetName.accident_count_by_severity]:CardType.MapAndDesigns,
+  [WidgetName.accident_severity_by_cross_location]:CardType.MapAndDesigns,
   [WidgetName.vision_zero_2_plus_1]:CardType.MapAndDesigns,
   [WidgetName.vision_zero_10_50_90]:CardType.MapAndDesigns,
   [WidgetName.vision_zero_bike]:CardType.MapAndDesigns,

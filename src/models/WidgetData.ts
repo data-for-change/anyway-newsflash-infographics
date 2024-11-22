@@ -181,6 +181,15 @@ export interface IWidgetInjuredAccidentsWithPedestrians extends IWidgetDataBase 
   }[];
 }
 
+export interface IWidgetAccidentSeverityByCrossLocationData extends IWidgetDataBase {
+  items: {
+    cross_location_text: string;
+    killed_injury_severity_count: number;
+    severe_injury_severity_count: number;
+    light_injury_severity_count: number;
+  }[];
+}
+
 export interface IWidgetMultiBarData extends IWidgetDataBase {
   items: MultiSeriesDataItems[];
   text: {
