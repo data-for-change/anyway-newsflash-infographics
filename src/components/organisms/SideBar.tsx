@@ -8,10 +8,9 @@ import { Typography, ErrorBoundary } from 'components/atoms';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
-import { InfiniteScroll } from 'components/atoms';
 import SideBarMap from 'components/molecules/SideBarMap';
 import { useTranslation } from 'react-i18next';
-import { Direction } from 'hooks/useScrollObserver.hooks';
+import { Direction } from 'models/ScrollObserver.model';
 
 interface IProps {}
 
@@ -36,19 +35,22 @@ const SideBar: FC<IProps> = () => {
   const mapTitle = `${t('sideBar')}`;
   const location = newsFlashStore.activeNewsFlashLocation;
   const loading = newsFlashStore.newsFlashLoading;
-  const initialPageNumber = newsFlashStore.newsFlashInitialPageNumber;
   const currentPageNumber = newsFlashStore.newsFlashPageNumber;
+  const lastPrevPage = newsFlashStore.newsFlashLastPrevPage;
   const totalPages = newsFlashStore.newsFlashCollection.pagination.totalPages;
 
   const fetchMoreNewsItems = useCallback(
     (direction: Direction) => {
-      if (direction === Direction.PREV && initialPageNumber !== 1 && currentPageNumber > 1) {
+      if (loading) return;
+      if (direction === Direction.PREV && currentPageNumber > 1 && lastPrevPage > 1) {
         newsFlashStore.filterNewsFlashCollection(direction);
-      } else if (totalPages > currentPageNumber) {
-        newsFlashStore.filterNewsFlashCollection(Direction.NEXT);
+        return;
+      }
+      if (direction === Direction.NEXT && totalPages > currentPageNumber) {
+        newsFlashStore.filterNewsFlashCollection(direction);
       }
     },
-    [currentPageNumber, initialPageNumber, newsFlashStore, totalPages],
+    [currentPageNumber, lastPrevPage, loading, newsFlashStore, totalPages],
   );
 
   return (
@@ -60,9 +62,7 @@ const SideBar: FC<IProps> = () => {
             <NewsFlashFilterPanel />
           </ErrorBoundary>
         </Box>
-        <InfiniteScroll onScroll={fetchMoreNewsItems} loading={newsFlashStore.newsFlashLoading}>
-          <News />
-        </InfiniteScroll>
+        <News onScroll={fetchMoreNewsItems} />
       </Box>
       <Box borderTop={`1px solid ${silverSmokeColor}`} flexShrink={0} flexGrow={0} p={1}>
         <Typography.Body4 children={mapTitle} />

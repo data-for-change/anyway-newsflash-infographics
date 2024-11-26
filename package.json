@@ -30,6 +30,7 @@
     "react-async-loader": "^0.1.2",
     "react-dom": "^17.0.2",
     "react-i18next": "^14.1.1",
+    "react-intersection-observer": "^9.13.1",
     "react-leaflet": "3.2.5",
     "react-leaflet-google-layer": "^2.2.0",
     "react-router-dom": "^6.23.0",
@@ -133,7 +134,7 @@
       "prettier --write"
     ]
   },
-"overrides": {
-  "react-refresh": "0.11.0"
-}
+  "overrides": {
+    "react-refresh": "0.11.0"
+  }
 }

@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from 'react';
+import { FC, useRef } from 'react';
 import { Typography } from 'components/atoms';
 import { Box, makeStyles } from '@material-ui/core';
 import { useStore } from 'store/storeConfig';
@@ -8,6 +8,9 @@ import { observer } from 'mobx-react-lite';
 import LocationSearchIndicator from 'components/molecules/LocationSearchIndicator';
 import { IRouteProps } from 'models/Route';
 import NewsFlashComp from 'components/molecules/NewsFlashComp';
+import { useScrollObserver } from 'hooks/useScrollObserver.hooks';
+import { Direction } from 'models/ScrollObserver.model';
+import { combineRefs } from 'utils/element.util';
 
 const useStyles = makeStyles({
   container: {},
@@ -19,32 +22,24 @@ const useStyles = makeStyles({
   },
 });
 
-<img src="" alt="" />;
+interface InfiniteScrollProps {
+  onScroll: (direction: Direction) => void;
+}
 
-const News: FC = () => {
+const News: FC<InfiniteScrollProps> = ({ onScroll }) => {
   const store: RootStore = useStore();
   const classes = useStyles();
   const { gpsId, street, city, newsId = '' } = useParams<IRouteProps>();
   const { newsFlashStore } = store;
-  const selectedItemRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (newsId && newsFlashStore.newsFlashCollection.data.length > 0 && !newsFlashStore.newsFlashLoading) {
-      // Find selected item index
-      const itemIndex = newsFlashStore.newsFlashCollection.data.findIndex((item) => item.id.toString() === newsId);
-
-      if (itemIndex !== -1) {
-        setTimeout(() => {
-          selectedItemRef.current?.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center',
-          });
-        }, 100);
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { firstItemRef, lastItemRef, selectedItemRef } = useScrollObserver({
+    newsId,
+    onScroll,
+    containerRef,
+    newsData: newsFlashStore.newsFlashCollection.data,
+    newsLoading: newsFlashStore.newsFlashLoading,
+  });
 
   return (
     <div ref={containerRef} className={classes.newsFeed}>
@@ -52,8 +47,15 @@ const News: FC = () => {
       {street && city && <LocationSearchIndicator searchType={'cityAndStreet'} />}
       {newsFlashStore.newsFlashCollection.data.length > 0 ? (
         newsFlashStore.newsFlashCollection.data.map((news, index) => {
+          const isFirst = index === 0;
+          const isLast = index === newsFlashStore.newsFlashCollection.data.length - 1;
+          const selectedItem = news.id === +newsId ? selectedItemRef : undefined;
+
           return (
-            <div key={news.id} ref={selectedItemRef}>
+            <div
+              key={news.id}
+              ref={combineRefs(isFirst ? firstItemRef : undefined, isLast ? lastItemRef : undefined, selectedItem)}
+            >
               <NewsFlashComp news={news} />
             </div>
           );

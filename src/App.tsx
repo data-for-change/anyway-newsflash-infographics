@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import { Footer } from './components/organisms/Footer';
 import { Box, createStyles, makeStyles, Theme, ThemeProvider } from '@material-ui/core';
@@ -31,8 +31,6 @@ const App: FC = () => {
   const classes = useStyles();
   const store = useStore();
   const theme = useTheme();
-  const { newsId } = useParams();
-  console.log('🚀 ~ newsId:', newsId);
   const appDir = i18n.dir();
 
   useEffect(() => {

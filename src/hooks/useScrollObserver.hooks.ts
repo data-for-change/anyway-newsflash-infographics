@@ -1,112 +1,87 @@
-import { useCallback, useEffect, useRef } from 'react';
-
-export enum Direction {
-  PREV = 'PREV',
-  NEXT = 'NEXT',
-}
+import { Direction } from 'models/ScrollObserver.model';
+import { useEffect, useRef } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 interface IProps {
-  loading: boolean;
-  currentPage: number;
-  totalPages: number;
-  onFetch: (direction: Direction) => void;
+  newsId: string;
+  containerRef: React.RefObject<HTMLDivElement>;
+  newsData: any[];
+  newsLoading: boolean;
+  onScroll: (direction: Direction) => void;
 }
 
-export const useScrollObserver = ({ onFetch, loading, currentPage, totalPages }: IProps) => {
-  const topObserver = useRef<IntersectionObserver>();
-  const bottomObserver = useRef<IntersectionObserver>();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const prevHeightRef = useRef<number>(0);
-  const hasScrolledDown = useRef(false);
+export const useScrollObserver = ({ newsId, onScroll, containerRef, newsData, newsLoading }: IProps) => {
+  const selectedItemRef = useRef<HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
+  const isInViewFirstRender = useRef(true);
 
-  // Track scroll direction
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+    if (isFirstRender.current && newsId && newsData.length > 0 && !newsLoading) {
+      const itemIndex = newsData.findIndex((item) => item.id.toString() === newsId);
 
-    let lastScrollTop = 0;
-    const handleScroll = () => {
-      const scrollTop = container.scrollTop;
-      hasScrolledDown.current = scrollTop > lastScrollTop;
-      lastScrollTop = scrollTop;
-    };
-
-    container.addEventListener('scroll', handleScroll);
-    return () => container.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const handlePrevFetch = useCallback(() => {
-    // Only fetch prev if we've scrolled down before
-    if (!hasScrolledDown.current) return;
-
-    if (containerRef.current) {
-      prevHeightRef.current = containerRef.current.scrollHeight;
+      if (itemIndex !== -1) {
+        requestAnimationFrame(() => {
+          selectedItemRef.current?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+          });
+        });
+      }
+      isFirstRender.current = false;
     }
+  }, [newsId, newsData, newsLoading]);
 
-    onFetch(Direction.PREV);
-
-    setTimeout(() => {
-      if (containerRef.current) {
-        const newHeight = containerRef.current.scrollHeight;
-        const heightDiff = newHeight - prevHeightRef.current;
-        containerRef.current.scrollTop = heightDiff;
+  const [firstItemRef] = useInView({
+    threshold: 0.1,
+    delay: 100,
+    onChange: (inView) => {
+      if (isInViewFirstRender.current) {
+        isInViewFirstRender.current = false;
+        return;
       }
-    }, 100);
-  }, [onFetch]);
+      if (inView && !newsLoading) {
+        const container = containerRef.current;
+        if (!container) return;
 
-  const firstElementRef = useCallback(
-    (node: HTMLDivElement) => {
-      //Return if already fetching
-      if (loading || !node) return;
+        const oldScrollHeight = container.scrollHeight;
+        const oldScrollTop = container.scrollTop;
 
-      // Disconnect if already observer exists
-      if (topObserver.current) topObserver.current.disconnect();
+        // Create mutation observer before fetching
+        const observer = new MutationObserver(() => {
+          const newScrollHeight = container.scrollHeight;
+          const heightDiff = newScrollHeight - oldScrollHeight;
 
-      //Create new observer for the last element, and call fetchNextPage if visible(isIntersecting)
-      topObserver.current = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting && currentPage < totalPages) {
-            handlePrevFetch();
-          }
-        },
-        {
-          root: null,
-          rootMargin: '100px',
-          threshold: 0.1,
-        },
-      );
+          // Adjust scroll position to prevent jump
+          container.scrollTop = oldScrollTop + heightDiff;
+          observer.disconnect();
+        });
+        // Start observing before fetch
+        observer.observe(container, { childList: true, subtree: true });
 
-      if (node) {
-        topObserver.current.observe(node);
+        onScroll(Direction.PREV);
+        isInViewFirstRender.current = true;
       }
     },
-    [currentPage, loading, handlePrevFetch, totalPages],
-  );
+  });
 
-  const lastElementRef = useCallback(
-    (node: HTMLDivElement) => {
-      if (loading || !node) return;
-      if (bottomObserver.current) bottomObserver.current.disconnect();
-
-      bottomObserver.current = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting && currentPage > 1) {
-            onFetch(Direction.NEXT);
-          }
-        },
-        {
-          root: null,
-          rootMargin: '100px',
-          threshold: 0.1,
-        },
-      );
-
-      if (node) {
-        bottomObserver.current.observe(node);
+  const [lastItemRef] = useInView({
+    threshold: 0.1,
+    delay: 100,
+    onChange: (inView) => {
+      if (isInViewFirstRender.current) {
+        isInViewFirstRender.current = false;
+        return;
+      }
+      if (inView && !newsLoading) {
+        onScroll(Direction.NEXT);
+        isInViewFirstRender.current = true;
       }
     },
-    [currentPage, loading, onFetch],
-  );
+  });
 
-  return { lastElementRef, firstElementRef, containerRef };
+  return {
+    firstItemRef,
+    lastItemRef,
+    selectedItemRef,
+  };
 };

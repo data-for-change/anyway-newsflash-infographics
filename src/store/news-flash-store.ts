@@ -4,7 +4,7 @@ import { fetchNews, IFetchNewsQueryParams } from 'services/news.data.service';
 import { INewsFlash, INewsFlashCollection } from 'models/NewFlash';
 import { IPoint } from 'models/Point';
 import RootStore from './root.store';
-import { Direction } from 'hooks/useScrollObserver.hooks';
+import { Direction } from 'models/ScrollObserver.model';
 
 const DEFAULT_TIME_FILTER = 5;
 const DEFAULT_LOCATION = { latitude: 32.0853, longitude: 34.7818 };
@@ -18,7 +18,8 @@ export default class NewsFlashStore {
   };
   activeNewsFlashId: number = 0; // active newsflash id
   newsFlashPageNumber = 1;
-  newsFlashInitialPageNumber = 1;
+  newsFlashLastNextPage = 1;
+  newsFlashLastPrevPage = 1;
   newsFlashActiveFilter: SourceFilterEnum = SourceFilterEnum.all;
   newsFlashLoading: boolean = false;
   newsFlashWidgetsTimerFilter = DEFAULT_TIME_FILTER; // newsflash time filter (in years ago, 5 is the default)
@@ -94,7 +95,7 @@ export default class NewsFlashStore {
     if (filter !== this.newsFlashActiveFilter) {
       runInAction(() => {
         this.newsFlashActiveFilter = filter;
-        this.newsFlashPageNumber = 0;
+        this.newsFlashPageNumber = 1;
       });
       if (!(filter in LOCAL_FILTERS)) {
         runInAction(() => {
@@ -107,16 +108,20 @@ export default class NewsFlashStore {
 
   async filterNewsFlashCollection(direction: Direction = Direction.NEXT) {
     runInAction(() => (this.newsFlashLoading = true));
+
     if (this.newsFlashActiveFilter in LOCAL_FILTERS) {
       const filterMethod = LOCAL_FILTERS[this.newsFlashActiveFilter];
       const filtered = filterMethod && filterMethod(this.newsFlashCollection.data);
-      runInAction(() => (this.newsFlashCollection.data = [...(filtered || [])]));
-      runInAction(() => (this.newsFlashLoading = false));
+      runInAction(() => {
+        this.newsFlashCollection.data = [...(filtered || [])];
+        this.newsFlashLoading = false;
+      });
     } else {
-      const prevPage = this.newsFlashInitialPageNumber - 1;
       const queryParams: IFetchNewsQueryParams = {
-        pageNumber: direction === Direction.NEXT ? this.newsFlashPageNumber + 1 : prevPage,
+        pageNumber:
+          direction === Direction.NEXT ? this.newsFlashLastNextPage + 1 : Math.max(this.newsFlashLastPrevPage - 1, 1),
       };
+
       if (this.newsFlashActiveFilter === 'critical') {
         queryParams['critical'] = true;
       } else {
@@ -128,13 +133,23 @@ export default class NewsFlashStore {
         if (res) {
           runInAction(() => {
             this.newsFlashCollection = {
-              data: res.data,
+              data:
+                direction === Direction.NEXT
+                  ? [...this.newsFlashCollection.data, ...res.data]
+                  : [...res.data, ...this.newsFlashCollection.data],
               pagination: res.pagination,
             };
-            runInAction(() => (this.newsFlashPageNumber = res.pagination.pageNumber));
+            if (direction === Direction.NEXT) {
+              this.newsFlashLastNextPage = res.pagination.pageNumber;
+            } else {
+              this.newsFlashLastPrevPage = res.pagination.pageNumber;
+            }
+            this.newsFlashPageNumber = res.pagination.pageNumber;
+            this.newsFlashLoading = false;
           });
         } else {
           console.error(`filterNewsFlashCollection(filter:${this.newsFlashActiveFilter}) invalid data:`, res);
+          runInAction(() => (this.newsFlashLoading = false));
         }
       });
     }
