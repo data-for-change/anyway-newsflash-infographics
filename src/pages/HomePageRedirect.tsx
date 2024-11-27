@@ -10,7 +10,7 @@ interface IProps {}
 const HomePageRedirect: FC<IProps> = () => {
   const store: RootStore = useStore();
   const { newsFlashStore } = store;
-  const defaultId = newsFlashStore?.newsFlashCollection[0]?.id;
+  const defaultId = newsFlashStore?.newsFlashCollection.data[0]?.id;
   return defaultId ? <Navigate to={`/newsflash/${defaultId}`} replace /> : null;
 };
 
