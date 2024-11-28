@@ -22,35 +22,44 @@ const errorNews: INewsFlash = {
 const NEWS_FLASH_API: string = '/api/news-flash';
 export interface IFetchNewsQueryParams {
   source?: string;
-  offSet?: number;
-  limit?: number;
   critical?: boolean | null;
-};
+  newsFlashId?: number;
+  pageNumber?: number;
+  pageSize?: number;
+}
 
-export function fetchNews({source = '', offSet = 0, limit = 100, critical = null}: IFetchNewsQueryParams = {}): Promise<any> {
+export function fetchNews({
+  source = '',
+  pageNumber,
+  pageSize = 100,
+  critical = null,
+  newsFlashId,
+}: IFetchNewsQueryParams): Promise<any> {
   const query = [];
   if (source) {
     query.push(`source=${source}`);
   }
-  if (limit) {
-    query.push(`limit=${limit}`);
+  if (pageSize) {
+    query.push(`pageSize=${pageSize}`);
   }
   if (critical !== null) {
     query.push(`critical=${critical}`);
   }
-  query.push(`offset=${offSet}`);
-
+  if (newsFlashId) {
+    query.push(`newsFlashId=${newsFlashId}`);
+  }
+  if (pageNumber) {
+    query.push(`pageNumber=${pageNumber}`);
+  }
   query.push('resolution=suburban_road');
   query.push('resolution=street');
 
   const url = `${NEWS_FLASH_API}?${query.join('&')}`;
 
-  return (
-    axios
-      .get(url)
-      .then((res) => res.data)
-      .catch(onErrorFetchNewsFlash)
-  );
+  return axios
+    .get(url)
+    .then((res) => res.data)
+    .catch(onErrorFetchNewsFlash);
 }
 
 function onErrorFetchNewsFlash() {
