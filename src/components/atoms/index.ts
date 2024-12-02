@@ -7,7 +7,6 @@ export { default as Textbox } from './Textbox';
 export { default as ErrorBoundary } from './ErrorBoundary';
 export { default as MetaTag } from './MetaTag';
 export { default as Loader } from './Loader';
-export { default as InfiniteScroll } from './InfiniteScroll';
 export { default as Dialog } from './Dialog';
 export { default as AppBar } from './AppBar';
 export { default as Logo } from './Logo';
