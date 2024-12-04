@@ -33,8 +33,7 @@ export const verifiedWidgetData = (widget: any) => {
       break;
     }
     case 'street_view': {
-      //temporary till fixing widget
-      // isValid = validCoords(items.latitude) && validCoords(items.longitude);
+      isValid = validCoords(items.latitude) && validCoords(items.longitude);
       break;
     }
     case 'most_severe_accidents': {
