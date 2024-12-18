@@ -55,6 +55,18 @@ export const fetchUserInfo = async function (): Promise<IAnywayUserDetails> {
   return userInfo;
 };
 
+
+export const removeUsersCall = async (email:string) =>{
+
+  try{
+    await axios.post('https://www.anyway.co.il/user/delete_user',{email})
+  }
+  catch(e){
+      console.log(e);
+  }
+}
+
+
 export const addRoleToUser = async (role: string, email: string) => {
   try {
     await axios.post(ADD_ROLE_TO_USER_URL, { role, email }, { withCredentials: true });
