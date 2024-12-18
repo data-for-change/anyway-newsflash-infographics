@@ -25,7 +25,7 @@ const getLabelXPosition = (offset: ClockPosition): string => {
     case ClockPosition.TOPRIGHT:
       return '120%';
     case ClockPosition.RIGHT:
-      return '135%';
+      return '140%';
     case ClockPosition.TOPLEFT:
     case ClockPosition.BOTTOMLEFT:
       return '8px';
@@ -46,7 +46,7 @@ const getLabelYPosition = (offset: ClockPosition): string => {
     case ClockPosition.BOTTOMRIGHT:
       return '32px';
     default:
-      return '0';
+      return '44%';
   }
 };
 const getLabelFlexFlow = (offset: ClockPosition): string => {
@@ -121,11 +121,13 @@ const TooltipMarker = ({ data, position, offset }: any) => {
   const { i18n } = useTranslation();
   const order = i18n.language === LANG.EN;
   const classes = useStyles({ offset, order });
-  const locale = useLocale();
-  const iconText = `${dateFormat(data.accident_timestamp, locale)}`;
+ const locale = useLocale();
+  const iconText : string[] =  data.accident_timestamp.map((date : string) => `${dateFormat(date, locale)}`);
   const TooltipTemplate = (
     <div className={classes.root}>
-      <div className={classes.content}>{iconText}</div>
+      <div className={classes.content}>{iconText.map(date => {
+        return <p>{date}</p>
+      })}</div>
       <div className={classes.arrow}></div>
     </div>
   );

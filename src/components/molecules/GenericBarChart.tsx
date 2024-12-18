@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
-import { ResponsiveContainer, BarChart, LabelList, XAxis, Bar, Tooltip, Legend } from 'recharts';
-import { roseColor, honeyColor, yellowColor, blackColor, whiteColor } from 'style';
-import { Typography } from 'components/atoms';
+import { ResponsiveContainer, BarChart, LabelList, XAxis, Bar, Tooltip, Legend, YAxis, CartesianGrid } from 'recharts';
+import { roseColor, blackColor, ColorScheme, whiteColor } from 'style';
 import tinycolor from 'tinycolor2';
+import { useTheme } from '@material-ui/core/styles';
 
-const colors = [roseColor, honeyColor, yellowColor];
 const Y_AXIS_OFFSET = 20;
 const MIN_BAR_HEIGHT = 20;
 
@@ -36,6 +35,7 @@ interface ISingleBarChartProps extends IBarChartBaseProps {}
 
 interface IMultiBarChartProps extends IBarChartBaseProps {
   isStacked: boolean;
+  customYLabels?: string[];
   editorBarOptions?: Record<number, boolean>;
 }
 
@@ -52,21 +52,32 @@ const CustomizedLabel = (props: CustomizedLabelProps) => {
 };
 
 const BarChartContainer: FC<IBarChartBaseProps> = ({ data, textLabel, subtitle, children, isStacked }) => {
+  const theme = useTheme();
   return (
     <>
-      {!subtitle && <Typography.Body3>{textLabel}</Typography.Body3>}
       <ResponsiveContainer>
-        <BarChart data={data} margin={{ bottom: 20 }}>
+        <BarChart data={data} margin={isStacked ? { left: 20 } : undefined}>
           <XAxis
             angle={0}
             interval={0}
             dataKey={BAR_CHART_X_LABEL}
             tickLine={false}
             axisLine={false}
-            style={{ fill: blackColor }}
+            style={{ fill: (theme.palette.primary as ColorScheme).fontColor }}
           />
           <Tooltip />
-          {isStacked && <Legend verticalAlign="top" align="right" iconType="circle" height={35} />}
+          {isStacked && <Legend verticalAlign="bottom" align="right" iconType="circle" height={5} />}
+          {isStacked && (
+            <YAxis
+              axisLine={false}
+              style={{ fill: (theme.palette.primary as ColorScheme).fontColor }}
+              mirror
+              tickLine={false}
+              tickMargin={-10}
+              interval={0}
+            />
+          )}
+          {isStacked && <CartesianGrid vertical={false} />}
           {children}
         </BarChart>
       </ResponsiveContainer>
@@ -90,18 +101,34 @@ const SingleBarChart: FC<ISingleBarChartProps> = ({ data, isPercentage, textLabe
   );
 };
 
-const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, isStacked, textLabel, subtitle, editorBarOptions }) => {
-  const yLabels = data ? Object.keys(data[0]) : [];
-  yLabels.splice(0, 1);
+const MultiBarChart: FC<IMultiBarChartProps> = ({
+  data,
+  isPercentage,
+  isStacked,
+  textLabel,
+  subtitle,
+  customYLabels,
+  editorBarOptions,
+}) => {
+  const theme = useTheme();
+  const colors = (theme.palette.primary as ColorScheme).barChartColors;
+
+  const defaultYLabels = data ? Object.keys(data[0]) : [];
+  const yLabels= customYLabels  || defaultYLabels.slice(1);
+
   const maxBarsNum = yLabels.length;
-  const filteredColors : Record<string, any> = (editorBarOptions && Object.keys(editorBarOptions).length !== 0) ?
-    Object.values(editorBarOptions).map((include: any, i: number) => {
-      if (include) {
-        return colors[i];
-      } else {
-        return false;
-      }
-    }).filter( Boolean ) : colors;
+  const filteredColors: Record<string, any> =
+    editorBarOptions && Object.keys(editorBarOptions).length !== 0
+      ? Object.values(editorBarOptions)
+          .map((include: any, i: number) => {
+            if (include) {
+              return colors[i];
+            } else {
+              return false;
+            }
+          })
+          .filter(Boolean)
+      : colors;
 
   return (
     <BarChartContainer
@@ -113,7 +140,9 @@ const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, isStacked,
     >
       {Array.from({ length: maxBarsNum }, (_, i) => {
         const barStyle = {
-          filter: `drop-shadow(0.2em ${isStacked ? '0' : '0.2em'} 0 ${tinycolor(filteredColors[i]).darken().toString()})`,
+          filter: `drop-shadow(0.2em ${isStacked ? '0' : '0.2em'} 0 ${tinycolor(filteredColors[i])
+            .darken()
+            .toString()})`,
         };
 
         return (
@@ -125,10 +154,12 @@ const MultiBarChart: FC<IMultiBarChartProps> = ({ data, isPercentage, isStacked,
             style={barStyle}
             isAnimationActive={false}
           >
-            <LabelList
-              content={<CustomizedLabel isPercentage={isPercentage} isStacked={isStacked} />}
-              dataKey={yLabels[i]}
-            />
+            {!isStacked && (
+              <LabelList
+                content={<CustomizedLabel isPercentage={isPercentage} isStacked={isStacked} />}
+                dataKey={yLabels[i]}
+              />
+            )}
           </Bar>
         );
       })}

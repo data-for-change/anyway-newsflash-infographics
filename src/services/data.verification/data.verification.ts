@@ -33,8 +33,7 @@ export const verifiedWidgetData = (widget: any) => {
       break;
     }
     case 'street_view': {
-      //temporary till fixing widget
-      // isValid = validCoords(items.latitude) && validCoords(items.longitude);
+      isValid = validCoords(items.latitude) && validCoords(items.longitude);
       break;
     }
     case 'most_severe_accidents': {
@@ -106,6 +105,10 @@ export const verifiedWidgetData = (widget: any) => {
       isValid = items.every((item: any) => validNumber(item.label_key) && validDataSeries(item.series));
       break;
     }
+    case 'killed_and_injured_count_per_age_group_stacked': {
+      isValid = items.every((item: any) => validString(item.label_key) && validDataSeries(item.series));
+      break;
+    }
     case 'accident_count_by_day_night': {
       isValid = items.every((item: any) => validString(item.day_night) && validNumber(item.count));
       break;
@@ -170,6 +173,14 @@ export const verifiedWidgetData = (widget: any) => {
       break;
     }
     case 'vision_zero_2_plus_1': {
+      isValid = validString(items.image_src);
+      break;
+    }
+    case 'vision_zero_10_50_90': {
+      isValid = validString(items.image_src);
+      break;
+    }
+    case 'vision_zero_bike': {
       isValid = validString(items.image_src);
       break;
     }

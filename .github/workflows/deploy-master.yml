@@ -14,13 +14,15 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@master
         with:
-          node-version: '16.x'
+          node-version: '22.x'
       - name: Install Dependencies
         run: npm install
+      - name: Update browserlist DB
+        run: npx update-browserslist-db@latest
       - name: Build
         run: npm run build
       - name: Deploy
-        uses: w9jds/firebase-action@master
+        uses: w9jds/firebase-action@v13.22.1
         with:
           args: deploy --only hosting:master
         env:

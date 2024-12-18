@@ -12,14 +12,15 @@ import {
   removeUsersCall
 } from 'services/user.service';
 import { IUserInfo } from 'models/user/IUserInfo';
-import { ROLE_ADMIN_NAME } from 'const/generalConst';
+import { ROLE_ADMIN_NAME, ROLE_LOCATION_APPROVER_NAME } from 'const/generalConst';
 import { IFormInput } from 'components/molecules/UserUpdateForm';
 
 export default class UserStore {
   isUserAuthenticated: boolean = false;
   isAdmin: boolean = false;
-  usersInfoList: Array<IUserInfo> | null = null;
-  organizationsList: Array<String> | null = null;
+  isLocationApprover: boolean = false;
+  usersInfoList: [IUserInfo] | null = null;
+  organizationsList: Array<string> | null = null;
   userInfo: IAnywayUserDetails | null = null;
   userApiError: boolean = false;
   rootStore: RootStore;
@@ -55,6 +56,14 @@ export default class UserStore {
 
   get userOrganizations(){
     return this.userInfo?.data.organizations;
+  }
+
+  get isUserAdmin(){
+    return this.isUserAuthenticated && this.isAdmin;
+  }
+
+  get isUserLocationApprover(){
+    return this.isUserAuthenticated && this.isLocationApprover;
   }
 
   get usersManagementTableData(): any {
@@ -94,6 +103,7 @@ export default class UserStore {
         runInAction(() => {
           this.userInfo = userData;
           this.isAdmin = userData.data.roles.includes(ROLE_ADMIN_NAME);
+          this.isLocationApprover = userData.data.roles.includes(ROLE_LOCATION_APPROVER_NAME);
           this.isUserAuthenticated = true;
         });
       })

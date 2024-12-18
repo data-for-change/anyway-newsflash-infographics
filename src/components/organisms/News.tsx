@@ -1,63 +1,71 @@
-import { FC } from 'react';
-import { Link, Typography } from 'components/atoms';
+import { FC, useRef } from 'react';
+import { Typography } from 'components/atoms';
 import { Box, makeStyles } from '@material-ui/core';
-import { silverSmokeColor } from 'style';
 import { useStore } from 'store/storeConfig';
 import { useParams } from 'react-router-dom';
 import RootStore from 'store/root.store';
 import { observer } from 'mobx-react-lite';
-import { dateFormat } from 'utils/time.utils';
-import { useLocale } from 'hooks/date.hooks';
 import LocationSearchIndicator from 'components/molecules/LocationSearchIndicator';
 import { IRouteProps } from 'models/Route';
+import NewsFlashComp from 'components/molecules/NewsFlashComp';
+import { useScrollObserver } from 'hooks/useScrollObserver.hooks';
+import { Direction } from 'models/ScrollObserver.model';
+import { combineRefs } from 'utils/element.util';
 
 const useStyles = makeStyles({
   container: {},
   newsFeed: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
     overflow: 'auto',
-  },
-  activeNewsFlash: {
-    backgroundColor: silverSmokeColor,
   },
 });
 
-const News: FC = () => {
+interface InfiniteScrollProps {
+  onScroll: (direction: Direction) => void;
+}
+
+const News: FC<InfiniteScrollProps> = ({ onScroll }) => {
   const store: RootStore = useStore();
   const classes = useStyles();
-  const locale = useLocale();
-  const { gpsId, street, city } = useParams<IRouteProps>();
-  const { newsFlashStore, settingsStore } = store;
+  const { gpsId, street, city, newsId = '' } = useParams<IRouteProps>();
+  const { newsFlashStore } = store;
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const { firstItemRef, lastItemRef, selectedItemRef } = useScrollObserver({
+    newsId,
+    onScroll,
+    containerRef,
+    newsData: newsFlashStore.newsFlashCollection.data,
+    newsLoading: newsFlashStore.newsFlashLoading,
+  });
+
   return (
-    <Box flexGrow={1} display="flex" flexDirection="column" className={classes.newsFeed}>
-      <Box flexGrow={1}>
-        <Box className={classes.container} flexDirection={'column'}>
-          {gpsId && <LocationSearchIndicator searchType={'gps'} />}
-          {street && city && <LocationSearchIndicator searchType={'cityAndStreet'} />}
-          {newsFlashStore.newsFlashCollection.length > 0 ? (
-            newsFlashStore.newsFlashCollection.map((news) => {
-              const className = news.id === newsFlashStore.activeNewsFlashId ? classes.activeNewsFlash : '';
-              const date = news.date == null ? '' : dateFormat(new Date(news.date.replace(/-/g, '/')), locale);
-              return (
-                <Link key={news.id} to={`${settingsStore.currentLanguageRouteString}/newsflash/${news.id}`}>
-                  <Box border={1} borderColor={silverSmokeColor} p={1} className={className}>
-                    <p>
-                      <Typography.Body5>
-                        {date}, {news.display_source}
-                      </Typography.Body5>
-                    </p>
-                    <Typography.Body5>{news.title}</Typography.Body5>
-                  </Box>
-                </Link>
-              );
-            })
-          ) : (
-            <Box p={1}>
-              <Typography.Body4>לא נמצאו תוצאות מהמקור המבוקש</Typography.Body4>
-            </Box>
-          )}
+    <div ref={containerRef} className={classes.newsFeed}>
+      {gpsId && <LocationSearchIndicator searchType={'gps'} />}
+      {street && city && <LocationSearchIndicator searchType={'cityAndStreet'} />}
+      {newsFlashStore.newsFlashCollection.data.length > 0 ? (
+        newsFlashStore.newsFlashCollection.data.map((news, index) => {
+          const isFirst = index === 0;
+          const isLast = index === newsFlashStore.newsFlashCollection.data.length - 1;
+          const selectedItem = news.id === +newsId ? selectedItemRef : undefined;
+
+          return (
+            <div
+              key={news.id}
+              ref={combineRefs(isFirst ? firstItemRef : undefined, isLast ? lastItemRef : undefined, selectedItem)}
+            >
+              <NewsFlashComp news={news} />
+            </div>
+          );
+        })
+      ) : (
+        <Box p={1}>
+          <Typography.Body4>לא נמצאו תוצאות מהמקור המבוקש</Typography.Body4>
         </Box>
-      </Box>
-    </Box>
+      )}
+    </div>
   );
 };
 

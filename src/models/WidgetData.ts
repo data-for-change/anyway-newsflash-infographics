@@ -1,6 +1,7 @@
 import { LabelsMap, MultiSeriesDataItems, SeriesDataItem } from './MultiSeriesData';
 import { IPoint, IPointAccident } from './Point';
 import { IWidgetDataType } from './WidgetDataType';
+import {ICityOption, IStreetOption} from "./Map";
 
 export enum Resolution {
   STREET = "STREET",
@@ -18,6 +19,10 @@ export interface IGpsData {
   road_segment_name: string;
   road_segment_id: number;
   resolution: string;
+}
+export interface IStreetData {
+  street: IStreetOption;
+  city: ICityOption;
 }
 export interface IWidgetDataBase {
   text: {
@@ -152,7 +157,10 @@ export interface IWidgetTopRoadSegmentsAccidentsPerKm extends IWidgetDataBase {
   items: {}[];
 }
 export interface IWidgetAccidentCountByRoadLight extends IWidgetDataBase {
-  items: {}[];
+  items: {
+    count: number;
+    road_light: string;
+  }[];
 }
 export interface IWidgetAccidentCountByDriverType extends IWidgetDataBase {
   items: {
@@ -180,6 +188,7 @@ export interface IWidgetMultiBarData extends IWidgetDataBase {
   items: MultiSeriesDataItems[];
   text: {
     title?: string;
+    subtitle?: string;
     labels_map: LabelsMap;
   };
 }

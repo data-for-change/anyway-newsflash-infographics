@@ -8,11 +8,9 @@ import { Typography, ErrorBoundary } from 'components/atoms';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'store/storeConfig';
 import RootStore from 'store/root.store';
-import { InfiniteScroll } from 'components/atoms';
 import SideBarMap from 'components/molecules/SideBarMap';
 import { useTranslation } from 'react-i18next';
-
-const INFINITE_SCROLL_FETCH_SIZE = 100;
+import { Direction } from 'models/ScrollObserver.model';
 
 interface IProps {}
 
@@ -37,10 +35,23 @@ const SideBar: FC<IProps> = () => {
   const mapTitle = `${t('sideBar')}`;
   const location = newsFlashStore.activeNewsFlashLocation;
   const loading = newsFlashStore.newsFlashLoading;
+  const currentPageNumber = newsFlashStore.newsFlashPageNumber;
+  const lastPrevPage = newsFlashStore.newsFlashLastPrevPage;
+  const totalPages = newsFlashStore.newsFlashCollection.pagination.totalPages;
 
-  const fetchMoreNewsItems = useCallback(() => {
-    newsFlashStore.infiniteFetchLimit(INFINITE_SCROLL_FETCH_SIZE);
-  }, [newsFlashStore]);
+  const fetchMoreNewsItems = useCallback(
+    (direction: Direction) => {
+      if (loading) return;
+      if (direction === Direction.PREV && currentPageNumber > 1 && lastPrevPage > 1) {
+        newsFlashStore.filterNewsFlashCollection(direction);
+        return;
+      }
+      if (direction === Direction.NEXT && totalPages > currentPageNumber) {
+        newsFlashStore.filterNewsFlashCollection(direction);
+      }
+    },
+    [currentPageNumber, lastPrevPage, loading, newsFlashStore, totalPages],
+  );
 
   return (
     <Box display="flex" flexDirection="column" justifyContent="center" alignItems="stretch">
@@ -51,9 +62,7 @@ const SideBar: FC<IProps> = () => {
             <NewsFlashFilterPanel />
           </ErrorBoundary>
         </Box>
-        <InfiniteScroll onScrollEnd={fetchMoreNewsItems}>
-          <News />
-        </InfiniteScroll>
+        <News onScroll={fetchMoreNewsItems} />
       </Box>
       <Box borderTop={`1px solid ${silverSmokeColor}`} flexShrink={0} flexGrow={0} p={1}>
         <Typography.Body4 children={mapTitle} />

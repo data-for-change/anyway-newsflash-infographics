@@ -42,6 +42,9 @@ export default class RootStore {
       runInAction(() => {
         if (initData.newsFlashCollection) {
           this.newsFlashStore.newsFlashCollection = initData.newsFlashCollection;
+          this.newsFlashStore.newsFlashLastNextPage = initData.newsFlashCollection.pagination.pageNumber;
+          this.newsFlashStore.newsFlashLastPrevPage = initData.newsFlashCollection.pagination.pageNumber;
+          this.newsFlashStore.newsFlashPageNumber = initData.newsFlashCollection.pagination.pageNumber;
         }
         if (initData.newsFlashWidgetsData) {
           this.widgetsStore.newsFlashWidgetsData = initData.newsFlashWidgetsData.widgets;

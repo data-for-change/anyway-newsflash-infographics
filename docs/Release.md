@@ -25,7 +25,7 @@ so if last release was `v0.2.0`, next release should be `v0.3.0`.
 
 #### Step 2: Publish a Release on `master` branch
 
-Go to [create a new release](https://github.com/hasadna/anyway-newsflash-infographics/releases/new) and create a release with the version number and `Target:master`.
+Go to [create a new release](https://github.com/data-for-change/anyway-newsflash-infographics/releases/new) and create a release with the version number and `Target:master`.
 
 If you're new to github releases, follow [Creating a release](https://help.github.com/en/github/administering-a-repository/managing-releases-in-a-repository#creating-a-release) steps 1 - 6.
 

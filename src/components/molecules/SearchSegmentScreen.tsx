@@ -37,8 +37,8 @@ const  SearchSegmentScreen : FC<ISearchSegmentScreen>  = ({onLocationChange, roa
             <LocationSelect onLocationChange={onLocationChange} />
           </Box>
           <div className={classes.chosenSection}>
-            <Typography.Body1 bold>{t('mapDialog.chosenSegment')}</Typography.Body1>
-            <Typography.Body1>
+            <Typography.Body1 bold defaultTheme>{t('mapDialog.chosenSegment')}</Typography.Body1>
+            <Typography.Body1 defaultTheme>
               {roadNumber && section && ` ${t('mapDialog.road')} ${roadNumber} - ${section}`}
             </Typography.Body1>
           </div>

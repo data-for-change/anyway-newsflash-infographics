@@ -2,7 +2,7 @@ import { useEffect, FC } from 'react';
 import { Box } from '@material-ui/core';
 import SideBar from 'components/organisms/SideBar';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import { silverSmokeColor } from '../style';
+import { silverSmokeColor } from 'style';
 import FilterBar from 'components/organisms/FilterBar';
 import OverlayLoader from 'components/molecules/OverlayLoader';
 import { observer } from 'mobx-react-lite';
@@ -61,7 +61,7 @@ const HomePage: FC<IProps> = () => {
 
   return (
     <Box display="flex" flexGrow={1} className={classes.mainBox}>
-      <Box flexGrow={1} width={319} display="flex" className={classes.sideBarWrapper}>
+      <Box flexGrow={1} width={380} display="flex" className={classes.sideBarWrapper}>
         <SideBar />
       </Box>
       <Box flexGrow={5} className={classes.widgetBox} position="relative">

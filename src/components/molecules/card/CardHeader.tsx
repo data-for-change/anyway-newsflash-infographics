@@ -5,10 +5,9 @@ import RoadNumberImage from './RoadNumberImage';
 import LamasImage from 'assets/cbs.png';
 import AnywayImage from 'assets/anyway.png';
 import { Typography, Logo } from 'components/atoms';
-import { silverSmokeColor, opacity80percent } from 'style/';
-import { splitTextHeader } from 'utils/string.utils';
+import {ColorScheme, opacity80percent, silverSmokeColor} from 'style/';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   wrapper: {
     width: '100%',
     height: '100%',
@@ -19,6 +18,13 @@ const useStyles = makeStyles({
   roadImageWrapper: {
     position: 'relative',
     top: '40%',
+  },
+  titlesContainer: {
+    backgroundColor: (theme.palette.primary as ColorScheme).titleContainerColor,
+    paddingRight: '25px',
+    paddingLeft: '25px',
+    paddingBottom: '15px',
+    paddingTop: '5px',
   },
   logosContainer: {
     height: '100%',
@@ -33,18 +39,18 @@ const useStyles = makeStyles({
   label: {
     maxWidth: 'min-content',
   },
-});
+}));
 
 interface IProps {
   variant: HeaderVariant;
-  text: string | undefined;
+  title: string | undefined;
+  subtitle: string | undefined;
   road: number;
   orgIconPath?: string;
 }
-const CardHeader: FC<IProps> = ({ variant, text, road,orgIconPath }) => {
+const CardHeader: FC<IProps> = ({ variant, title, subtitle, road,orgIconPath }) => {
   const classes = useStyles();
   let headerContent = null;
-  const headerText = splitTextHeader(text);
   const roadNumberComp: JSX.Element | null = road ? <RoadNumberImage roadNumber={road} /> : null;
 
   switch (variant) {
@@ -56,10 +62,10 @@ const CardHeader: FC<IProps> = ({ variant, text, road,orgIconPath }) => {
           <Box display="flex" justifyContent="center" px={2} className={classes.textWrapper}>
             <Box display="flex" flexDirection="column">
               { variant === HeaderVariant.Centered &&
-                <>
-                <Typography.Body1>{headerText?.textLine1}</Typography.Body1>
-                <Typography.Body1>{headerText?.textLine2}</Typography.Body1>
-                </>
+                <Box textAlign="center" className={classes.titlesContainer} >
+                  <Typography.Title2 bold>{title}</Typography.Title2>
+                  <Typography.Body2>{subtitle}</Typography.Body2>
+                </Box>
               }
             </Box>
           </Box>
@@ -73,7 +79,7 @@ const CardHeader: FC<IProps> = ({ variant, text, road,orgIconPath }) => {
             {roadNumberComp}
           </Box>
           <Box textAlign="center" px={2} className={classes.label}>
-            <Typography.Body1>{text}</Typography.Body1>
+            <Typography.Body1>{subtitle ? `${title} ${subtitle}` : title}</Typography.Body1>
           </Box>
         </Box>
       );

@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '@material-ui/core/styles';
 import PopUpRedirect from './components/atoms/PopUpRedirect';
 import WidgetsTemplate from './components/organisms/WidgetsTemplate';
+import { observer } from 'mobx-react-lite';
 // main components height - must add up to 100
 
 const headerHeight = '5vh';
@@ -30,7 +31,6 @@ const App: FC = () => {
   const classes = useStyles();
   const store = useStore();
   const theme = useTheme();
-
   const appDir = i18n.dir();
 
   useEffect(() => {
@@ -70,4 +70,4 @@ const App: FC = () => {
     </StoreContext.Provider>
   );
 };
-export default App;
+export default observer(App);

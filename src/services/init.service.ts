@@ -2,12 +2,14 @@ import axios from 'axios';
 import { fetchNews } from './news.data.service';
 import L from 'leaflet';
 import { serverUrl } from 'const/generalConst';
+import { getNewsIdFromUrl } from 'utils/url.utils';
 
 export function initService(): Promise<any> {
   setAxiosDefaults();
   setLocationMapDefaults();
 
-  const promiseArray = [fetchNews()];
+  const queryParams = getNewsIdFromUrl();
+  const promiseArray = [fetchNews(queryParams)];
 
   return Promise.all(promiseArray).then((promiseCollection) => ({
     newsFlashCollection: promiseCollection[0],

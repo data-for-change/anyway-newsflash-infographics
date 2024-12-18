@@ -1,13 +1,13 @@
 import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import logoHasdna from 'assets/hasadna.png';
+import logoNatun from 'assets/NATUN-LOGO-FINAL-COLOR.png';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import { Typography } from 'components/atoms';
 import { silverSmokeColor, oceanBlueColor, skyBlueColor } from 'style';
 import ThankYouDialog from './ThankYouDialog';
 import AboutDialog from './AboutDialog';
-import { version } from '../../../package.json'; // eslint-disable-line
+import packageInfo from '../../../package.json'; // eslint-disable-line
 
 interface IProps {}
 const useStyles = makeStyles({
@@ -54,13 +54,13 @@ export const Footer: FC<IProps> = () => {
     <footer className={classes.footer}>
       <Box className={classes.items}>
         <Box pr={1}>
-          <a href="https://www.hasadna.org.il/" target="_blank" rel="noopener noreferrer">
-            <img src={logoHasdna} alt="logo-hasadna" className={classes.logo} />
+          <a href="https://www.paypal.com/paypalme/dataforchange" target="_blank" rel="noopener noreferrer">
+            <img src={logoNatun} alt="logo-natun" className={classes.logo} />
           </a>
         </Box>
         <Box px={2} className={classes.infoItem}>
           <Typography.Body5>
-            {t('footer.version')} {version}
+            {t('footer.version')} {packageInfo.version}
           </Typography.Body5>
         </Box>
         <Box px={2} className={classes.linkItem} onClick={toggleAbout}>

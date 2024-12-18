@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
     color: `${oceanBlueColor}`,
     textDecoration: 'none',
+    fontFamily: 'Rubik',
     '&:hover': {
       color: `${skyBlueColor}`,
     },

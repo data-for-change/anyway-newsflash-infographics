@@ -13,6 +13,8 @@ export enum WidgetName {
   head_on_collisions_comparison = 'head_on_collisions_comparison',
   head_on_collisions_comparison_percentage = 'head_on_collisions_comparison_percentage',
   vision_zero_2_plus_1 = 'vision_zero_2_plus_1',
+  vision_zero_10_50_90 = 'vision_zero_10_50_90',
+  vision_zero_bike = 'vision_zero_bike',
   top_road_segments_accidents_per_km = 'top_road_segments_accidents_per_km',
   accident_count_by_road_light = 'accident_count_by_road_light',
   accident_count_by_driver_type = 'accident_count_by_driver_type',
@@ -20,4 +22,5 @@ export enum WidgetName {
   injured_accidents_with_pedestrians = 'injured_accidents_with_pedestrians',
   injured_count_by_severity = 'injured_count_by_severity',
   killed_and_injured_count_per_age_group = 'killed_and_injured_count_per_age_group',
+  killed_and_injured_count_per_age_group_stacked = 'killed_and_injured_count_per_age_group_stacked',
 }

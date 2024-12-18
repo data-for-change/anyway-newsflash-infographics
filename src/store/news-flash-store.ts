@@ -1,18 +1,25 @@
 import { runInAction, makeAutoObservable } from 'mobx';
 import { SourceFilterEnum } from 'models/SourceFilter';
-import { fetchNews } from 'services/news.data.service';
-import { INewsFlash } from 'models/NewFlash';
+import { fetchNews, IFetchNewsQueryParams } from 'services/news.data.service';
+import { INewsFlash, INewsFlashCollection } from 'models/NewFlash';
 import { IPoint } from 'models/Point';
 import RootStore from './root.store';
+import { Direction } from 'models/ScrollObserver.model';
 
 const DEFAULT_TIME_FILTER = 5;
 const DEFAULT_LOCATION = { latitude: 32.0853, longitude: 34.7818 };
+const LOCAL_FILTERS: { [key in SourceFilterEnum]?: (newsFlashCollection: Array<INewsFlash>) => Array<INewsFlash> } = {};
 
 export default class NewsFlashStore {
   rootStore: RootStore;
-  newsFlashCollection: Array<INewsFlash> = [];
+  newsFlashCollection: INewsFlashCollection = {
+    data: [] as INewsFlash[],
+    pagination: { pageNumber: 1, pageSize: 100, totalRecords: 0, totalPages: 0 },
+  };
   activeNewsFlashId: number = 0; // active newsflash id
-  newsFlashFetchOffSet = 0;
+  newsFlashPageNumber = 1;
+  newsFlashLastNextPage = 1;
+  newsFlashLastPrevPage = 1;
   newsFlashActiveFilter: SourceFilterEnum = SourceFilterEnum.all;
   newsFlashLoading: boolean = false;
   newsFlashWidgetsTimerFilter = DEFAULT_TIME_FILTER; // newsflash time filter (in years ago, 5 is the default)
@@ -23,7 +30,7 @@ export default class NewsFlashStore {
   }
 
   get activeNewsFlash(): INewsFlash | undefined {
-    return this.newsFlashCollection.find((item) => item.id === this.activeNewsFlashId);
+    return this.newsFlashCollection?.data.find((item) => item.id === this.activeNewsFlashId);
   }
 
   selectNewsFlash(id: number): void {
@@ -88,28 +95,63 @@ export default class NewsFlashStore {
     if (filter !== this.newsFlashActiveFilter) {
       runInAction(() => {
         this.newsFlashActiveFilter = filter;
-        this.newsFlashCollection = [];
-        this.newsFlashFetchOffSet = 0;
+        this.newsFlashPageNumber = 1;
       });
+      if (!(filter in LOCAL_FILTERS)) {
+        runInAction(() => {
+          this.newsFlashCollection.data = [];
+        });
+      }
       this.filterNewsFlashCollection();
     }
   }
 
-  filterNewsFlashCollection(): void {
+  async filterNewsFlashCollection(direction: Direction = Direction.NEXT) {
     runInAction(() => (this.newsFlashLoading = true));
-    fetchNews(this.newsFlashActiveFilter, this.newsFlashFetchOffSet).then((data: any) => {
-      runInAction(() => (this.newsFlashLoading = false));
-      if (data) {
-        runInAction(() => (this.newsFlashCollection = [...this.newsFlashCollection, ...data]));
+
+    if (this.newsFlashActiveFilter in LOCAL_FILTERS) {
+      const filterMethod = LOCAL_FILTERS[this.newsFlashActiveFilter];
+      const filtered = filterMethod && filterMethod(this.newsFlashCollection.data);
+      runInAction(() => {
+        this.newsFlashCollection.data = [...(filtered || [])];
+        this.newsFlashLoading = false;
+      });
+    } else {
+      const queryParams: IFetchNewsQueryParams = {
+        pageNumber:
+          direction === Direction.NEXT ? this.newsFlashLastNextPage + 1 : Math.max(this.newsFlashLastPrevPage - 1, 1),
+      };
+
+      if (this.newsFlashActiveFilter === 'critical') {
+        queryParams['critical'] = true;
       } else {
-        console.error(`filterNewsFlashCollection(filter:${this.newsFlashActiveFilter}) invalid data:`, data);
+        queryParams['source'] = this.newsFlashActiveFilter;
       }
-    });
-  }
-  infiniteFetchLimit(fetchSize: number): void {
-    runInAction(() => (this.newsFlashFetchOffSet += fetchSize));
-    if (this.newsFlashCollection.length >= this.newsFlashFetchOffSet - fetchSize) {
-      this.filterNewsFlashCollection();
+
+      fetchNews(queryParams).then((res: any) => {
+        runInAction(() => (this.newsFlashLoading = false));
+        if (res) {
+          runInAction(() => {
+            this.newsFlashCollection = {
+              data:
+                direction === Direction.NEXT
+                  ? [...this.newsFlashCollection.data, ...res.data]
+                  : [...res.data, ...this.newsFlashCollection.data],
+              pagination: res.pagination,
+            };
+            if (direction === Direction.NEXT) {
+              this.newsFlashLastNextPage = res.pagination.pageNumber;
+            } else {
+              this.newsFlashLastPrevPage = res.pagination.pageNumber;
+            }
+            this.newsFlashPageNumber = res.pagination.pageNumber;
+            this.newsFlashLoading = false;
+          });
+        } else {
+          console.error(`filterNewsFlashCollection(filter:${this.newsFlashActiveFilter}) invalid data:`, res);
+          runInAction(() => (this.newsFlashLoading = false));
+        }
+      });
     }
   }
 

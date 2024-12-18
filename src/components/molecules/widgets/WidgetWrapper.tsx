@@ -18,7 +18,11 @@ import {
   IWidgetAccidentCountByCarType,
   IWidgetInjuredAccidentsWithPedestrians,
   IWidgetKilledAndInjuredCountPerAgeGroup,
+  IWidgetStreetViewData,
 } from 'models/WidgetData';
+import visionZeroImage from 'assets/vision_zero_2_plus_1.png';
+import vision_zero_10_50_90 from 'assets/vision_zero_10_50_90.png';
+import vision_zero_bike from 'assets/vision_zero_bike.png';
 import AccidentsCountByHourBarWidget from './AccidentsCountByHourBarWidget';
 import MostSevereAccidentsMapWidget from './MostSevereAccidentsMapWidget';
 import MostSevereAccidentsTableWidget from './MostSevereAccidentsTableWidget';
@@ -39,6 +43,8 @@ import { IPoint } from 'models/Point';
 import { WidgetName } from 'models/WidgetName';
 import KilledAndInjuredCountPerAgeGroupWidget from './KilledAndInjuredCountPerAgeGroupWidget';
 import { getInjuredBySeverityVerbLabel } from 'utils/text.utils';
+import KilledAndInjuredCountPerAgeGroupStackedWidget from './KilledAndInjuredCountPerAgeGroupStackedWidget';
+import StreetViewWidget from './StreetViewWidget';
 
 interface IProps {
   widget: IWidgetBase;
@@ -76,11 +82,10 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, editorBa
       widgetComponent = <HeatMap data={data.items as IPoint[]} />;
       break;
     }
-    // remove street_view until fixed
-    // case WidgetName.street_view: {
-    //   widgetComponent = <StreetViewWidget data={data as IWidgetStreetViewData} />;
-    //   break;
-    // }
+    case WidgetName.street_view: {
+       widgetComponent = <StreetViewWidget data={data as IWidgetStreetViewData} />;
+       break;
+   }
     case WidgetName.accident_count_by_severity: {
       widgetComponent = (
         <CountBySeverityTextWidget
@@ -146,6 +151,10 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, editorBa
       widgetComponent = <CountInjuredByYearBarWidget data={data as IWidgetMultiBarData} editorBarOptions={editorBarOptions} />;
       break;
     }
+    case WidgetName.killed_and_injured_count_per_age_group_stacked: {
+      widgetComponent = <KilledAndInjuredCountPerAgeGroupStackedWidget data={data as IWidgetMultiBarData} editorBarOptions={editorBarOptions} />;
+      break;
+    }
     case WidgetName.accident_count_by_day_night: {
       widgetComponent = <CountAccidentsByDayNightPieWidget data={data as IWidgetAccidentsByDayNightData} />;
       break;
@@ -169,8 +178,18 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, editorBa
       );
       break;
     }
+//  the wiget is called as props from another comp
+
     case WidgetName.vision_zero_2_plus_1: {
-      widgetComponent = <StaticImageViewWidget data={data as IWidgetVisionZeroImageData} />;
+      widgetComponent = <StaticImageViewWidget data={{items:{image_src:visionZeroImage},text:{}} as IWidgetVisionZeroImageData} />;
+      break;
+    }
+    case WidgetName.vision_zero_10_50_90: {
+      widgetComponent = <StaticImageViewWidget data={{items:{image_src:vision_zero_10_50_90},text:{}} as IWidgetVisionZeroImageData} />;
+      break;
+    }
+    case WidgetName.vision_zero_bike: {
+      widgetComponent = <StaticImageViewWidget data={{items:{image_src:vision_zero_bike},text:{}} as IWidgetVisionZeroImageData} />;
       break;
     }
     case WidgetName.top_road_segments_accidents_per_km: {
@@ -180,9 +199,7 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, editorBa
       break;
     }
     case WidgetName.accident_count_by_road_light: {
-      widgetComponent = (
-        <AccidentCountByRoadLight data={data as IWidgetAccidentCountByRoadLight} segmentText={locationText} />
-      );
+      widgetComponent = <AccidentCountByRoadLight data={data as IWidgetAccidentCountByRoadLight} />;
       break;
     }
     case WidgetName.accident_count_by_driver_type: {

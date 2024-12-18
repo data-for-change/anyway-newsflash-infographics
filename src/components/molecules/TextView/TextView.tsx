@@ -52,11 +52,13 @@ const useStyles = makeStyles(() => ({
   headerBase: {
     width: '80%',
     height: '25%',
+    marginBottom: '20px'
   },
   list: {
     width: '80%',
     height: '100%',
     alignSelf: 'flex-end',
+    marginTop: '25px',
   },
   singleTypeImage: {
     height: '40%',
@@ -122,7 +124,7 @@ const TextView: FC<IProps> = ({
       {isSingleType ? (
         <SeverityImage severity={getSingleType(countBySeverity)!} />
       ) : (
-        <Box color="text.secondary" className={classes.list}>
+        <Box className={classes.list}>
           <TextViewList data={countBySeverity} labels={labels} largeNumbers={largeNumbers}/>
         </Box>
       )}
