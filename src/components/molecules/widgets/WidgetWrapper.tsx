@@ -199,7 +199,9 @@ const WidgetWrapper: FC<IProps> = ({ widget, locationText, sizeOptions, editorBa
       break;
     }
     case WidgetName.accident_count_by_road_light: {
-      widgetComponent = <AccidentCountByRoadLight data={data as IWidgetAccidentCountByRoadLight} />;
+      widgetComponent = (
+        <AccidentCountByRoadLight data={data as IWidgetAccidentCountByRoadLight} segmentText={locationText} />
+      );
       break;
     }
     case WidgetName.accident_count_by_driver_type: {

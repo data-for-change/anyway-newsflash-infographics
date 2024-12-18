@@ -157,10 +157,7 @@ export interface IWidgetTopRoadSegmentsAccidentsPerKm extends IWidgetDataBase {
   items: {}[];
 }
 export interface IWidgetAccidentCountByRoadLight extends IWidgetDataBase {
-  items: {
-    count: number;
-    road_light: string;
-  }[];
+  items: {}[];
 }
 export interface IWidgetAccidentCountByDriverType extends IWidgetDataBase {
   items: {
