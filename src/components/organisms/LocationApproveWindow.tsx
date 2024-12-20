@@ -58,8 +58,9 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
   const { userStore } = store;
   const [shouldApprove, setApproveStatus] = useState(true);
   const [locationChanged, setLocationChanged] = useState(false);
-  const [newStreetLoc, setNewStreetLoc] = useState<IStreetData|null>(null);
-  const [newGpsLoc, setNewGpsLoc] = useState<IGpsData|null>(null);
+  const [newStreetLoc, setNewStreetLoc] = useState<IStreetData|undefined>(undefined);
+  const [newGpsLoc, setNewGpsLoc] = useState<IGpsData|undefined>(undefined);
+  const [newPointLoc, setNewPointLoc] = useState<IPoint|undefined>(undefined);
   const [locationToDisplay, setLocationToDisplay] = useState(news.curr_cbs_location_text);
   // Unauthorized user shouldn't be able to open the window in the first place
   const userInfo = userStore.userInfo && userStore.userInfo.data && userStore.userInfo.data.firstName ?
@@ -68,14 +69,23 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
   function handleApproveButton () {
     if (shouldApprove && locationChanged) {
       if (newStreetLoc) {
-        updateNews(news.id, locationQualificationOptions.MANUAL, newStreetLoc, null);
+        updateNews({
+          newsId: news.id,
+          newLocationQualification: locationQualificationOptions.MANUAL,
+          streetLocation: newStreetLoc,
+        });
       } else {
-        updateNews(news.id, locationQualificationOptions.MANUAL, null, newGpsLoc);
+        updateNews({
+          newsId: news.id,
+          newLocationQualification: locationQualificationOptions.MANUAL,
+          gpsLocation: newGpsLoc,
+          pointLocation: newPointLoc,
+        });
       }
     } else if (shouldApprove) {
-      updateNews(news.id, locationQualificationOptions.VERIFIED, null, null);
+      updateNews({newsId: news.id, newLocationQualification: locationQualificationOptions.VERIFIED});
     } else {
-      updateNews(news.id, locationQualificationOptions.REJECTED, null, null);
+      updateNews({newsId: news.id, newLocationQualification: locationQualificationOptions.REJECTED});
     }
     onCloseInitValues();
     window.location.reload();
@@ -94,13 +104,14 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
 
   const onMapLocationChange = useCallback(
     (location: IPoint) => {
-      setLocationChanged(true);
+      setNewPointLoc(location);
       store.fetchGpsLocation(location);
       if (store.gpsLocationData) {
         setNewGpsLoc(store.gpsLocationData);
         setLocationToDisplay(t('mapDialog.road') + " " + store.gpsLocationData.road1 + " - " +
           store.gpsLocationData.road_segment_name);
       }
+      setLocationChanged(true);
     },
     [t, store],
   );
