@@ -12,12 +12,13 @@ import { useStore } from 'store/storeConfig';
 import { SourceFilterEnum } from 'models/SourceFilter';
 import { Typography } from 'components/atoms';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles({
   image: {
     maxWidth: '50px',
     maxHeight: '35px',
-    mixBlendMode: "multiply"
+    mixBlendMode: 'multiply',
   },
   button: {
     height: '50px',
@@ -48,6 +49,7 @@ const NewsFlashFilterPanel: FC<IProps> = () => {
   const classes = useStyles();
   const { t } = useTranslation();
   const store: RootStore = useStore();
+  const navigate = useNavigate();
   const { newsFlashStore } = store;
 
   const getLogoByFilter = (type: SourceFilterEnum) => {
@@ -76,7 +78,10 @@ const NewsFlashFilterPanel: FC<IProps> = () => {
             className={classnames(classes.button, {
               [classes.active]: newsFlashStore.newsFlashActiveFilter === filter,
             })}
-            onClick={() => newsFlashStore.setActiveNewsFlashFilter(filter)}
+            onClick={() => {
+              newsFlashStore.setActiveNewsFlashFilter(filter);
+              navigate('');
+            }}
             key={filter}
           >
             {filter === SourceFilterEnum.all ? (
