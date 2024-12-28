@@ -102,11 +102,11 @@ export default class NewsFlashStore {
           this.newsFlashCollection.data = [];
         });
       }
-      this.filterNewsFlashCollection();
+      this.filterNewsFlashCollection(undefined,true);
     }
   }
 
-  async filterNewsFlashCollection(direction: Direction = Direction.NEXT) {
+  async filterNewsFlashCollection (direction: Direction = Direction.NEXT, isFiltering: boolean = false) {
     runInAction(() => (this.newsFlashLoading = true));
 
     if (this.newsFlashActiveFilter in LOCAL_FILTERS) {
@@ -117,11 +117,18 @@ export default class NewsFlashStore {
         this.newsFlashLoading = false;
       });
     } else {
-      const queryParams: IFetchNewsQueryParams = {
-        pageNumber:
-          direction === Direction.NEXT ? this.newsFlashLastNextPage + 1 : Math.max(this.newsFlashLastPrevPage - 1, 1),
-      };
-
+      const queryParams: IFetchNewsQueryParams = {};
+      if (!isFiltering) {
+        queryParams.pageNumber =
+          direction === Direction.NEXT ? this.newsFlashLastNextPage + 1 : Math.max(this.newsFlashLastPrevPage - 1, 1);
+      } else {
+        queryParams.pageNumber = 1;
+        runInAction(() => {
+          this.newsFlashPageNumber = 1;
+          this.newsFlashLastNextPage = 1;
+          this.newsFlashLastPrevPage = 1;
+        });
+      }
       if (this.newsFlashActiveFilter === 'critical') {
         queryParams['critical'] = true;
       } else {
