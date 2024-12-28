@@ -1,4 +1,4 @@
-import { FC, useRef } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import { Typography } from 'components/atoms';
 import { Box, makeStyles } from '@material-ui/core';
 import { useStore } from 'store/storeConfig';
@@ -41,10 +41,26 @@ const News: FC<InfiniteScrollProps> = ({ onScroll }) => {
     newsLoading: newsFlashStore.newsFlashLoading,
   });
 
+  const isNotFirstPage = newsFlashStore.newsFlashLastPrevPage > 1;
+  const selectedItemIsFirst = newsId && newsFlashStore.newsFlashCollection.data[0]?.id === +newsId;
+  const shouldShowSpacer = isNotFirstPage && selectedItemIsFirst;
+
+  useEffect(() => {
+    if (shouldShowSpacer && containerRef.current) {
+      // Use setTimeout to ensure DOM has updated
+      setTimeout(() => {
+        if (containerRef.current) {
+          containerRef.current.scrollTop = 100;
+        }
+      }, 0);
+    }
+  }, [shouldShowSpacer, newsFlashStore.newsFlashCollection.data]);
+
   return (
     <div ref={containerRef} className={classes.newsFeed}>
       {gpsId && <LocationSearchIndicator searchType={'gps'} />}
       {street && city && <LocationSearchIndicator searchType={'cityAndStreet'} />}
+      {shouldShowSpacer && <div ref={firstItemRef} style={{ height: '100px', flexShrink: 0 }} />}
       {newsFlashStore.newsFlashCollection.data.length > 0 ? (
         newsFlashStore.newsFlashCollection.data.map((news, index) => {
           const isFirst = index === 0;
@@ -52,12 +68,18 @@ const News: FC<InfiniteScrollProps> = ({ onScroll }) => {
           const selectedItem = news.id === +newsId ? selectedItemRef : undefined;
 
           return (
-            <div
-              key={news.id}
-              ref={combineRefs(isFirst ? firstItemRef : undefined, isLast ? lastItemRef : undefined, selectedItem)}
-            >
-              <NewsFlashComp news={news} />
-            </div>
+            <>
+              <div
+                key={news.id}
+                ref={combineRefs(
+                  !shouldShowSpacer && isFirst ? firstItemRef : undefined,
+                  isLast ? lastItemRef : undefined,
+                  selectedItem,
+                )}
+              >
+                <NewsFlashComp news={news} />
+              </div>
+            </>
           );
         })
       ) : (
