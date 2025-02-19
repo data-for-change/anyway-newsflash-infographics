@@ -68,6 +68,9 @@ export default class WidgetsStore {
         if (response && response.widgets && response.meta) {
           this.newsFlashWidgetsMeta = response.meta;
           this.newsFlashWidgetsData = response.widgets;
+        } else if (response === null) {
+          this.newsFlashWidgetsMeta = DEFAULT_LOCATION_META;
+          this.newsFlashWidgetsData = [];
         } else {
           console.error(`fetchWidgets(id:${newsId || gpsId}) invalid response:`, response);
         }

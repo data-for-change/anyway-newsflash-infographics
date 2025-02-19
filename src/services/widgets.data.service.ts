@@ -44,13 +44,17 @@ export const fetchWidgets = async ({
   gpsId,
   city,
   street,
-}: IWidgetInput): Promise<ILocationData | undefined> => {
+}: IWidgetInput): Promise<ILocationData | null | undefined> => {
   try {
     const widgetsUrl = getWidgetUrl({ lang, newsId, yearAgo, gpsId, city, street });
     console.log(widgetsUrl);
     const response = await axios.get(widgetsUrl);
     return processWidgetsFetchResponse(response);
   } catch (error) {
+    if (error.response.status === 404) {
+      console.log(`No widgets for newsId ${newsId}`);
+      return null;
+    }
     console.error(error);
   }
 };
