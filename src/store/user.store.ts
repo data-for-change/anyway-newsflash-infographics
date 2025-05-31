@@ -9,6 +9,7 @@ import {
   getUsersList,
   getOrganizationsDataList,
   updateUserOrganization,
+  removeUsersCall
 } from 'services/user.service';
 import { IUserInfo } from 'models/user/IUserInfo';
 import { ROLE_ADMIN_NAME, ROLE_LOCATION_APPROVER_NAME } from 'const/generalConst';
@@ -83,6 +84,19 @@ export default class UserStore {
       });
   }
 
+  async removeUser (email:string) {
+    try{
+      await  removeUsersCall(email)
+      if(this.usersInfoList !== null && this.usersInfoList.length >= 1){
+        this.usersInfoList = this.usersInfoList.filter(p =>{
+          return p.email !== email
+        })
+      }
+    }
+    catch(e){
+      console.log(e);
+    }
+  }
   getUserLoginDetails() {
     fetchUserInfo()
       .then((userData) => {
