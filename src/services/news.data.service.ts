@@ -74,22 +74,30 @@ export const updateNews = async (
   streetLocation: IStreetData | null,
   gpsLocation: IGpsData | null
 ): Promise<any> => {
-  const payload: any = {
+  // Construct query params
+  const queryParams: any = {
     newsflash_location_qualification: newLocationQualification,
   };
 
   if (gpsLocation) {
-    payload.road_segment_id = gpsLocation.road_segment_id;
-    payload.road1 = gpsLocation.road1;
+    queryParams.road_segment_id = gpsLocation.road_segment_id;
+    queryParams.road1 = gpsLocation.road1;
   } else if (streetLocation) {
-    payload.yishuv_name = streetLocation.city.yishuv_name;
-    payload.street1_hebrew = streetLocation.street.street_hebrew;
+    queryParams.yishuv_name = streetLocation.city.yishuv_name;
+    queryParams.street1_hebrew = streetLocation.street.street_hebrew;
   }
 
   const url = `${NEWS_FLASH_API}/${newsId}`;
 
   try {
-    const response = await axios.patch(url, payload, { withCredentials: true });
+    const response = await axios.patch(
+      url,
+      {},
+      {
+        params: queryParams, 
+        withCredentials: true,
+      }
+    );
     return response.data;
   } catch (error) {
     console.error('Error updating newsflash:', error);
