@@ -65,21 +65,21 @@ const LocationApprove: FC<IProps> = ({ isOpen, onClose, news, newFlashTitle }) =
   const userInfo = userStore.userInfo && userStore.userInfo.data && userStore.userInfo.data.firstName ?
     userStore.userInfo.data.firstName.concat(userStore.userInfo.data.lastName) : null;
 
-  function handleApproveButton () {
-    if (shouldApprove && locationChanged) {
-      if (newStreetLoc) {
-        updateNews(news.id, locationQualificationOptions.MANUAL, newStreetLoc, null);
-      } else {
-        updateNews(news.id, locationQualificationOptions.MANUAL, null, newGpsLoc);
-      }
-    } else if (shouldApprove) {
-      updateNews(news.id, locationQualificationOptions.VERIFIED, null, null);
+async function handleApproveButton() {
+  if (shouldApprove && locationChanged) {
+    if (newStreetLoc) {
+      await updateNews(news.id, locationQualificationOptions.MANUAL, newStreetLoc, null);
     } else {
-      updateNews(news.id, locationQualificationOptions.REJECTED, null, null);
+      await updateNews(news.id, locationQualificationOptions.MANUAL, null, newGpsLoc);
     }
-    onCloseInitValues();
-    window.location.reload();
+  } else if (shouldApprove) {
+    await updateNews(news.id, locationQualificationOptions.VERIFIED, null, null);
+  } else {
+    await updateNews(news.id, locationQualificationOptions.REJECTED, null, null);
   }
+  onCloseInitValues();
+  window.location.reload();
+}
 
   const handleCloseButton = () => onCloseInitValues();
 
