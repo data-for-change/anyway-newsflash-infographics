@@ -68,12 +68,12 @@ function onErrorFetchNewsFlash() {
   return errorArr;
 }
 
-export function updateNews(
+export const updateNews = async (
   newsId: number,
   newLocationQualification: any,
   streetLocation: IStreetData | null,
   gpsLocation: IGpsData | null
-) {
+): Promise<any> => {
   const payload: any = {
     newsflash_location_qualification: newLocationQualification,
   };
@@ -87,8 +87,12 @@ export function updateNews(
   }
 
   const url = `${NEWS_FLASH_API}/${newsId}`;
-  return axios
-    .patch(url, payload, { withCredentials: true })
-    .then((res) => res.data)
-    .catch(onErrorFetchNewsFlash);
-}
+
+  try {
+    const response = await axios.patch(url, payload, { withCredentials: true });
+    return response.data;
+  } catch (error) {
+    console.error('Error updating newsflash:', error);
+    return onErrorFetchNewsFlash();
+  }
+};
