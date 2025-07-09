@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
-import { IPoint, IPointAccident } from 'models/Point';
+import { IPoint, IPointAccidentWithPosition } from 'models/Point';
 import { MostSevereAccidentsMarker } from 'components/atoms';
-import { ClockPosition } from 'models/ClockPosition';
 import Map from './map/Map';
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
 
@@ -11,9 +10,9 @@ interface IProps {
 }
 
 const LocationMap: FC<IProps> = ({ items }) => {
-  const markers = items.map((x: IPointAccident, i: number) => {
+  const markers = items.map((x: IPointAccidentWithPosition, i: number) => {
     if (x.latitude !== null && x.longitude !== null) {
-      const tooltipOffset = i % 2 === 0 ? ClockPosition.RIGHT : ClockPosition.LEFT;
+      const tooltipOffset = x.labelClockPosition;
       return (
         <div key={i}>
           <MostSevereAccidentsMarker data={x} tooltipOffset={tooltipOffset} />
